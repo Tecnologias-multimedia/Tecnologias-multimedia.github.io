@@ -10,7 +10,7 @@
 </br>
 
 1. Transducción de señales.
-    1. [Sistemas de audio](../../Apuntes/Transduction/Audio/index.html).
+    1. [Audio transduction systems](https://cdn.rawgit.com/vicente-gonzalez-ruiz/audio_systems/master/index.html).
     2. [Sistemas de vídeo](../../Apuntes/Transduction/Video/index.html).
 </br></br>
 
