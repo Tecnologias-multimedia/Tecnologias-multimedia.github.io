@@ -9,9 +9,9 @@
     * [Human light perception](https://cdn.rawgit.com/vicente-gonzalez-ruiz/Human_Light_Perception/master/index.html).
 </br>
 
-1. Transducción de señales.
+1. Audio-visual transduction.
     1. [Audio transduction systems](https://cdn.rawgit.com/vicente-gonzalez-ruiz/audio_systems/master/index.html).
-    2. [Sistemas de vídeo](../../Apuntes/Transduction/Video/index.html).
+    2. [Video transduction systems](https://cdn.rawgit.com/vicente-gonzalez-ruiz/video_transduction_systems/master/index.html).
 </br></br>
 
 2. Digitalizando: desde la dimensión analógica a la digital.
