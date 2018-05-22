@@ -1,24 +1,24 @@
 # Contents
 
-* Audio-visual perception.
-    * [The sound](https://cdn.rawgit.com/vicente-gonzalez-ruiz/The_Sound/master/index.html).
-    * [The humman auditory system](https://cdn.rawgit.com/vicente-gonzalez-ruiz/The_Human_Auditory_System/master/index.html).
-    * [Human sound perception](https://cdn.rawgit.com/vicente-gonzalez-ruiz/Human_Sound_Perception/master/index.html).
-    * [The light](https://cdn.rawgit.com/vicente-gonzalez-ruiz/the_light/master/index.html).
-    * [The human visual system](https://cdn.rawgit.com/vicente-gonzalez-ruiz/the_human_visual_system/master/index.html).
-    * [Human light perception](https://cdn.rawgit.com/vicente-gonzalez-ruiz/Human_Light_Perception/master/index.html).
+1. Audio-visual perception.
+    1. [The sound](https://cdn.rawgit.com/vicente-gonzalez-ruiz/The_Sound/master/index.html).
+    2. [The humman auditory system](https://cdn.rawgit.com/vicente-gonzalez-ruiz/The_Human_Auditory_System/master/index.html).
+    3. [Human sound perception](https://cdn.rawgit.com/vicente-gonzalez-ruiz/Human_Sound_Perception/master/index.html).
+    4. [The light](https://cdn.rawgit.com/vicente-gonzalez-ruiz/the_light/master/index.html).
+    5. [The human visual system](https://cdn.rawgit.com/vicente-gonzalez-ruiz/the_human_visual_system/master/index.html).
+    6. [Human light perception](https://cdn.rawgit.com/vicente-gonzalez-ruiz/Human_Light_Perception/master/index.html).
 </br>
 
-1. Transducción de señales.
+2. Audio-visual transduction.
     1. [Audio transduction systems](https://cdn.rawgit.com/vicente-gonzalez-ruiz/audio_transduction_systems/master/index.html).
-    2. [Sistemas de vídeo](../../Apuntes/Transduction/Video/index.html).
+    2. [Video transduction systems](https://cdn.rawgit.com/vicente-gonzalez-ruiz/video_transduction_systems/master/index.html).
+
 </br></br>
 
-2. Digitalizando: desde la dimensión analógica a la digital.
-    * [Análisis de Fourier (C)](../../Apuntes/Signals/Fourier_Analysis/index.html).
-    * [Teoría de señanes (C)](../../Apuntes/Signals/Theory/index.html).
-    1. [Muestreo](../../Apuntes/Signals/Sampling/index.html).
-    2. [Cuantificación](../../Apuntes/Signals/Quantization/index.html).
+3. Signal digitization.
+    1. [Harmonic analysis](https://cdn.rawgit.com/vicente-gonzalez-ruiz/Harmonic_Analysis/master/index.html).
+    1. [Sampling](https://cdn.rawgit.com/vicente-gonzalez-ruiz/Sampling/master/index.html).
+    2. [Quantization](https://cdn.rawgit.com/vicente-gonzalez-ruiz/Sampling/master/index.html).
     * [Digitalización y reproducción de audio (C)](../../Apuntes/Multimedia/Record_and_play/index.html).
     3. [Modulación digital](../../Apuntes/Signals/Digital_modulation/index.html).
     4. [DPCM (Differential Pulse Code Modulation) (P)](../../Apuntes/Coding/Audio/DPCM/index.html).
