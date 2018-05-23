@@ -20,10 +20,13 @@
     3. [Quantization](https://cdn.rawgit.com/vicente-gonzalez-ruiz/Sampling/master/index.html).
 	
 4. Encoding.
-    1. [Probabilistic models](https://cdn.rawgit.com/vicente-gonzalez-ruiz/Probabilistic_Models/master/index.html).
-    2. [Huffman coding](https://rawgit.com/vicente-gonzalez-ruiz/Huffman_Coding/master/index.html).
-    3. [Arithmetic coding](https://cdn.rawgit.com/vicente-gonzalez-ruiz/Arithmetic_Coding/master/index.html).
-    4. [Differential coding](https://cdn.rawgit.com/vicente-gonzalez-ruiz/differential_coding/master/index.html).
-    2. [Transform coding](https://cdn.rawgit.com/vicente-gonzalez-ruiz/transform_coding/master/index.html).
-
+   1. [Probabilistic models](https://cdn.rawgit.com/vicente-gonzalez-ruiz/Probabilistic_Models/master/index.html).
+   2. [Huffman coding](https://rawgit.com/vicente-gonzalez-ruiz/Huffman_Coding/master/index.html).
+   3. [Arithmetic coding](https://cdn.rawgit.com/vicente-gonzalez-ruiz/Arithmetic_Coding/master/index.html).
+   4. [Differential coding](https://cdn.rawgit.com/vicente-gonzalez-ruiz/differential_coding/master/index.html).
+   5. [Transform coding](https://cdn.rawgit.com/vicente-gonzalez-ruiz/transform_coding/master/index.html).
+   6. [Media encoding models](https://cdn.rawgit.com/vicente-gonzalez-ruiz/media_encoding_models/master/index.html).
+   
 5. Transmission.
+   1. [Data service models](https://cdn.rawgit.com/vicente-gonzalez-ruiz/data_service_models/master/index.html).
+   
