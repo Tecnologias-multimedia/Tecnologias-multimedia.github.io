@@ -15,9 +15,9 @@
     2. [Video transduction systems](https://cdn.rawgit.com/vicente-gonzalez-ruiz/video_transduction_systems/master/index.html).
 
 3. Signal digitization.
-    1. [Harmonic analysis](https://cdn.rawgit.com/vicente-gonzalez-ruiz/Harmonic_Analysis/master/index.html).
-    2. [Sampling](https://cdn.rawgit.com/vicente-gonzalez-ruiz/Sampling/master/index.html).
-    3. [Quantization](https://cdn.rawgit.com/vicente-gonzalez-ruiz/Sampling/master/index.html).
+    1. [Harmonic analysis](https://cdn.rawgit.com/vicente-gonzalez-ruiz/harmonic_analysis/master/index.html).
+    2. [Sampling](https://cdn.rawgit.com/vicente-gonzalez-ruiz/sampling/master/index.html).
+    3. [Quantization](https://cdn.rawgit.com/vicente-gonzalez-ruiz/quantization/master/index.html).
 	
 4. Encoding.
    1. [Probabilistic models](https://cdn.rawgit.com/vicente-gonzalez-ruiz/Probabilistic_Models/master/index.html).
