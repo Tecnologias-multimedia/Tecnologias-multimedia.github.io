@@ -5,6 +5,7 @@
 0. Backgroud.
    1. [The fork and branch `git` workflow](https://github.com/vicente-gonzalez-ruiz/fork_and_branch_git_workflow).
    2. [Yet another Python tutorial](https://github.com/vicente-gonzalez-ruiz/YAPT).
+   3. [Pyramids and wavelets](https://cdn.rawgit.com/vicente-gonzalez-ruiz/pyramids-and-wavelets/master/index.html).
    
 1. Audio-visual perception.
 	1. [The sound](https://cdn.rawgit.com/vicente-gonzalez-ruiz/The_Sound/master/index.html).
