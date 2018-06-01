@@ -4,8 +4,16 @@
 
 0. Backgroud.
    1. [The fork and branch `git` workflow](https://github.com/vicente-gonzalez-ruiz/fork_and_branch_git_workflow).
-   2. [Yet another Python tutorial](https://github.com/vicente-gonzalez-ruiz/YAPT).
-   3. [Pyramids and wavelets](https://cdn.rawgit.com/vicente-gonzalez-ruiz/pyramids-and-wavelets/master/index.html).
+   1. [Yet another Python tutorial](https://github.com/vicente-gonzalez-ruiz/YAPT).
+   1. [Pyramids and wavelets](https://cdn.rawgit.com/vicente-gonzalez-ruiz/pyramids-and-wavelets/master/index.html).
+   1. [Advanced Linux Sound Architecture (ALSA)](https://cdn.rawgit.com/vicente-gonzalez-ruiz/ALSA/master/index.html).
+   1. [JACK (JACK Audio Connection Kit)](https://cdn.rawgit.com/vicente-gonzalez-ruiz/JACK/master/index.html).
+   1. [MilkyTracker](https://cdn.rawgit.com/vicente-gonzalez-ruiz/milky_tracker/master/index.html).
+   1. [FFMPEG](https://cdn.rawgit.com/vicente-gonzalez-ruiz/FFMPEG/master/index.html).
+   1. [Blender](https://cdn.rawgit.com/vicente-gonzalez-ruiz/blender/master/index.html).
+   1. [LaTeX](https://cdn.rawgit.com/vicente-gonzalez-ruiz/latex_tutorial/master/index.html).
+   1. [Audacity](https://cdn.rawgit.com/vicente-gonzalez-ruiz/audacity/master/index.html).
+   1. [Pure Data](https://cdn.rawgit.com/vicente-gonzalez-ruiz/pure_data/master/index.html).
    
 1. Audio-visual perception.
 	1. [The sound](https://cdn.rawgit.com/vicente-gonzalez-ruiz/The_Sound/master/index.html).
