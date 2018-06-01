@@ -43,4 +43,5 @@
 5. Transmission.
    1. [Business model on the Internet](https://cdn.rawgit.com/vicente-gonzalez-ruiz/Intenet_business_model/master/index.html).
    2. [Data service models](https://cdn.rawgit.com/vicente-gonzalez-ruiz/data_service_models/master/index.html).
+   3. [Quality of Service](https://cdn.rawgit.com/vicente-gonzalez-ruiz/quality_of_service/master/index.html).
    
