@@ -2,7 +2,7 @@
 
 ## Contents
 
-0. Backgroud.
+0. Background.
    1. [The fork and branch `git` workflow](https://github.com/vicente-gonzalez-ruiz/fork_and_branch_git_workflow).
    1. [Yet another Python tutorial](https://github.com/vicente-gonzalez-ruiz/YAPT).
    1. [Pyramids and wavelets](https://cdn.rawgit.com/vicente-gonzalez-ruiz/pyramids-and-wavelets/master/index.html).
