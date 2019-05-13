@@ -48,5 +48,5 @@
    3. [Quality of Service](https://cdn.rawgit.com/vicente-gonzalez-ruiz/quality_of_service/master/index.html).
    4. [Icecast](https://cdn.rawgit.com/vicente-gonzalez-ruiz/icecast/master/index.html).
 
-## Bibliograpy
+## Bibliography
 
