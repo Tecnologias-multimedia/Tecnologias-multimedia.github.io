@@ -1,4 +1,4 @@
 # Tecnologias-Multimedia.github.io
-Web page of the subject Tecnologías Multimedia (University of Almería)
+Theory of Tecnologías Multimedia.
 
 [Click me](http://Tecnologias-multimedia.github.io)
