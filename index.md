@@ -17,7 +17,7 @@
    
 1. Audio-visual perception.
 	1. [The sound](https://cdn.rawgit.com/vicente-gonzalez-ruiz/The_Sound/master/index.html).
-    2. [The humman auditory system](https://cdn.rawgit.com/vicente-gonzalez-ruiz/The_Human_Auditory_System/master/index.html).
+    2. [The human auditory system](https://cdn.rawgit.com/vicente-gonzalez-ruiz/The_Human_Auditory_System/master/index.html).
     3. [Human sound perception](https://cdn.rawgit.com/vicente-gonzalez-ruiz/Human_Sound_Perception/master/index.html).
     4. [The light](https://cdn.rawgit.com/vicente-gonzalez-ruiz/the_light/master/index.html).
     5. [The human visual system](https://cdn.rawgit.com/vicente-gonzalez-ruiz/the_human_visual_system/master/index.html).
