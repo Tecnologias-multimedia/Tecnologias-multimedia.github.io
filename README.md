@@ -1,4 +1,4 @@
 # Tecnologias-Multimedia.github.io
-Theory of Tecnologías Multimedia.
+Study guide for Tecnologías Multimedia.
 
 [Click me](http://Tecnologias-multimedia.github.io)
