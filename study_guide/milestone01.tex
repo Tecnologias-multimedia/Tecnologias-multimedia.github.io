@@ -1,0 +1,52 @@
+\title{Multimedia Technology - Study Guide - Milestone 1: ``wiring'' the ADC with the DAC}
+\author{Vicente González Ruiz - Depto Informática - UAL}
+
+\section{Description}
+Let's start the development of InterCom with a simple program that
+inputs audio (through
+the \href{https://en.wikipedia.org/wiki/Analog-to-digital_converter}{ADC}
+of our computer) and inmediatelly outputs it (through
+the \href{https://en.wikipedia.org/wiki/Digital-to-analog_converter}{DAC}). You
+can download this program (a \href{https://www.python.org}{Python}
+module)
+from \href{https://github.com/Tecnologias-multimedia/intercom/blob/master/test/sounddevice/wire3.py}{here}. If
+you are planning to run this module right now, decrease first the
+output volume of your computer to avoid an audio coupling (a feedback)
+between the mic(rophone) and the speakers.
+
+As you can see in the code, we use
+the \href{https://python-sounddevice.readthedocs.io/en/latest/}{python-sounddevice}
+module to access to the sound hardware, using
+
+\begin{lstlisting}[language=Python]
+import sounddevice as sd
+\end{lstlisting}
+
+Next, we create a I/O raw audio stream
+using \href{https://python-sounddevice.readthedocs.io/en/latest/api/raw-streams.html#sounddevice.RawStream}{sounddevice.RawStream()}
+\begin{lstlisting}[language=Python]
+stream = sd.RawStream(samplerate=44100, channels=2, dtype='int16')
+\end{lstlisting}
+As you can see in the documentation of `python-sounddevice`, this
+constructor method has several parameters. In our example we have used
+only the most relevants for our InterCom:
+\begin{enumerate}
+\item The samling rate.
+\item The number of channels.
+\item The number of bits of each sample.
+\end{enumerate}
+Please, review the modules of documentation 
+
+Next, we define a chunk size
+\begin{lstlisting}[language=Python]
+CHUNK_SIZE = 1024
+\end{lstlisting}
+for the block of data we are going to capture in the loop that will
+be defined just below.
+
+The loop is an infinite loop
+
+\section{What you have to do?}
+
+\section{Resources}
+
