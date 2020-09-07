@@ -26,23 +26,81 @@ better to use our own interpreter because:
 \end{enumerate}
 In Windows you need to install Python, yes or yes.
 
-Alternatively, and this is the option that I (the teacher) recommend
-if you need to ask (to me) some question about the installation of
-Python, is to use a dedicated installation (in an external
-\href{https://en.wikipedia.org/wiki/USB_flash_drive}{USB drive}) of
-Xubuntu (Linux) \cite{xubuntu} for this subject. In any case, keep in
-mind that this is up to you.
+Alternatively, and this is the option that I (as the teacher)
+recommend is to use a dedicated Xubuntu 20.04 (Focal Fossa)
+\cite{xubuntu} installation (in an external
+\href{https://en.wikipedia.org/wiki/USB_flash_drive}{USB drive} with
+at least 8GB of capacity) of for this subject. Notice that you will
+need also another USB drive with at least 4GB to hold the disk
+installation image.
+
+The advantage of using Xubuntu is that if you need to ask (to
+me) some question about Python or the OS, I'll be able to answer
+fast. In any case, keep in mind that this is up to you (use the OS
+that you prefeer).
 
 \section{What do you have to do?}
 
+Supposing that you have decided to use Xubuntu 20.04, these are the steps
+you should perform:
+
 \begin{enumerate}
-\item Have a look the Git \cite{Git, Git-book} and the GitHub
-  \cite{GitHub} websites. If you don't have a GitHub account, please,
-  create one.
-\item Create a test project at GitHub using your account. See
-  \cite{GitHub-HW}.
-\item See The Fork and Branch Git Workflow \cite{Git-workflow}.
-\item Make a fork of the InterCom \cite{intercom} project. 
+  \item Download the installation image from
+    \href{https://xubuntu.org/download/}{here}.
+    
+  \item ``Burn'' the (at least) 4GB USB drive with the
+    image. Depending on your current OS, use the following
+    instructions for
+    \href{https://ubuntu.com/tutorials/create-a-usb-stick-on-windows#1-overview}{Windows},
+    \href{https://ubuntu.com/tutorials/create-a-usb-stick-on-macos#1-overview}{OSX},
+    or
+    \href{https://askubuntu.com/questions/372607/how-to-create-a-bootable-ubuntu-usb-flash-drive-from-terminal}{Linux and OSX}.
+
+\item Boot the installer from the USB port. This step depends on your
+  computer type. Most of PCs can chose the boat device by pressing the
+  F12 key when the PC is booting. On a Mac, you need to keep pressed
+  the alt key when it is booting.
+  
+\item Select the option \texttt{Try Xubuntu without installing}.
+\item When the OS is running, configure the network.
+\item Insert also the 8GB USB drive where Xubuntu will be installed.
+\item Select \texttt{Install Xubuntu 20.04 LTS}.
+\item Select English as the language used during the install and the
+  installed system.
+\item Select your keyboard layout (probably \texttt{Spanish}).
+\item Chose \texttt{Download updates while installing Xubuntu} and
+  \texttt{Install third-party software for graphics and Wi-Fi hardware
+    and additional media formats}.
+\item Chose \texttt{Erase disk and install Xubuntu}. Wait for a couple
+  of minutes :-/
+\item Chose \texttt{Erase disk and install Xubuntu}.
+\item Select the drive corresponding to the 8GB USB drive. It's
+  difficult to guess the letter associated to this drive, but, it is
+  very likely not \texttt{sda}.
+\item At this point of the installation you should consider (depending
+  on the amount of RAM memory in your computer and the size of the USB
+  drive) to create an especific partition for doing swapping. The rule
+  of the thumb is to create a partition with the same size that the
+  RAM. However, probably you cannot do that in a 8GB USB drive because
+  at least 5GB are needed for a Xubuntu installation. Anyway, keep in
+  mind that this step is optional because you can always perform
+  swapping on a file (a process slightly slower than using the
+  dedicated partition).
+\item Chose your time zone.
+\item Configure you personal account, hostname and logging process.
+\item Wait for the end of the installation and boot your new Xubuntu.
+\item Go to
+  \href{https://github.com/vicente-gonzalez-ruiz/YAPT/blob/master/01-hello_world/02-installation.ipynb}{YAPT/01-hello\_world/02-installation.ipynb}
+  \cite{YAPY} and follow the instructions to install CPython 3.8.5.
+\item Following also these instructions, create a new virtual
+  environment called \texttt{tm}.
+\item Remember that you will need to active it when you want to work
+  in this project. It is a good idea to append:
+  \lstlisting{language=Bash}{
+    pyenv activate tm
+  }
+  to the \texttt{~/.bashrc} file.
+\item Install an IDE for programming with Python. I recommend Thonny.
 \end{enumerate}
 
 \section{Timming}
@@ -55,4 +113,4 @@ None.
 
 \section{Resources}
 
-\bibliography{git, intercom}
+\bibliography{intercom, python, linux}
