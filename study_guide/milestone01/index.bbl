@@ -1,13 +1,21 @@
 \begin{thebibliography}{1}
 
-\bibitem{python-tutorial}
-\href{https://docs.python.org/3/tutorial/}{The Python Tutorial}.
+\bibitem{GitHub-HW}
+Github - \href{https://guides.github.com/activities/hello-world}{the Hello
+  World guide}.
 
-\bibitem{YAPT}
-\href{https://github.com/vicente-gonzalez-ruiz/YAPT/}{YAPT}.
+\bibitem{Git-book}
+\href{https://git-scm.com/book/en/v2}{Git - Book}.
 
-\bibitem{Python}
-\href{https://www.python.org/}{Python} website.
+\bibitem{Git}
+\href{https://git-scm.com}{Git}.
+
+\bibitem{GitHub}
+\href{https://github.com}{GitHub}.
+
+\bibitem{Git-workflow}
+\href{https://github.com/vicente-gonzalez-ruiz/fork_and_branch_git_workflow}{The
+  Fork and Branch Git Workflow}.
 
 \bibitem{intercom}
 The students of

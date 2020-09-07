@@ -2,50 +2,52 @@ This is BibTeX, Version 0.99d (TeX Live 2020/Arch Linux)
 Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: index.aux
 The style file: plain.bst
-Database file #1: python.bib
+Database file #1: git.bib
 Database file #2: intercom.bib
-Warning--to sort, need author or key in Python
-Warning--to sort, need author or key in python-tutorial
-Warning--to sort, need author or key in YAPT
-You've used 4 entries,
+Warning--to sort, need author or key in Git
+Warning--to sort, need author or key in Git-book
+Warning--to sort, need author or key in GitHub
+Warning--to sort, need author or key in GitHub-HW
+Warning--to sort, need author or key in Git-workflow
+You've used 6 entries,
             2118 wiz_defined-function locations,
-            507 strings with 4432 characters,
-and the built_in function-call counts, 659 in all, are:
-= -- 52
-> -- 10
+            514 strings with 4615 characters,
+and the built_in function-call counts, 955 in all, are:
+= -- 76
+> -- 12
 < -- 0
-+ -- 7
++ -- 9
 - -- 2
-* -- 22
-:= -- 82
-add.period$ -- 5
-call.type$ -- 4
-change.case$ -- 13
+* -- 32
+:= -- 110
+add.period$ -- 7
+call.type$ -- 6
+change.case$ -- 19
 chr.to.int$ -- 0
-cite$ -- 7
-duplicate$ -- 28
-empty$ -- 92
+cite$ -- 11
+duplicate$ -- 42
+empty$ -- 138
 format.name$ -- 2
-if$ -- 154
+if$ -- 228
 int.to.chr$ -- 0
-int.to.str$ -- 4
+int.to.str$ -- 6
 missing$ -- 0
-newline$ -- 16
+newline$ -- 22
 num.names$ -- 2
-pop$ -- 32
+pop$ -- 48
 preamble$ -- 1
-purify$ -- 9
+purify$ -- 13
 quote$ -- 0
-skip$ -- 40
+skip$ -- 60
 stack$ -- 0
-substring$ -- 21
-swap$ -- 4
+substring$ -- 31
+swap$ -- 6
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 16
-warning$ -- 3
+type$ -- 24
+warning$ -- 5
 while$ -- 2
-width$ -- 5
-write$ -- 24
-(There were 3 warnings)
+width$ -- 7
+write$ -- 34
+(There were 5 warnings)
