@@ -1,0 +1,57 @@
+\title{\href{https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN}{Tecnologías Multimedia} - Study Guide - Milestone 1: ``wiring'' the ADC with the DAC}
+
+\maketitle
+
+\section{Description}
+
+Let's start the development of InterCom with a simple program that
+inputs digital audio (through
+the \href{https://en.wikipedia.org/wiki/Analog-to-digital_converter}{ADC}
+of our computer) and as soon as possible outputs it (through
+the \href{https://en.wikipedia.org/wiki/Digital-to-analog_converter}{DAC}). You
+can download an example program (which in the world of Python is
+called a \emph{module})
+from \href{https://github.com/Tecnologias-multimedia/intercom/blob/master/test/sounddevice/wire3.py}{here}. If
+you are planning to run this module right now, check first that the
+output volumen of your speakers is not too high (an audio coupling (a
+feedback) between the mic(rophone) and the speakers could happen).
+
+As you can see in the code the module, we use the
+\href{https://python-sounddevice.readthedocs.io/en/latest/}{python-sounddevice}
+\cite{sounddevice} module to access to the sound hardware, through
+\begin{lstlisting}[language=Python]
+import sounddevice as sd
+\end{lstlisting}
+
+Next, we create a I/O raw audio stream
+using \href{https://python-sounddevice.readthedocs.io/en/latest/api/raw-streams.html#sounddevice.RawStream}{sounddevice.RawStream()}, using
+\begin{lstlisting}[language=Python]
+stream = sd.RawStream(samplerate=44100, channels=2, dtype='int16')
+\end{lstlisting}
+
+As you can see in \cite{sounddevice}, this constructor method accepts
+several parameters. In our example we have used only the most
+relevants for us right now:
+\begin{enumerate}
+\item The samling rate.
+\item The number of channels.
+\item The number of bits of each sample.
+\end{enumerate}
+Please, refeer \cite{harmonic-analysis} for knowing more detailed
+information about these parameters.
+
+Please, review the modules of documentation 
+
+Next, we define a chunk size
+\begin{lstlisting}[language=Python]
+CHUNK_SIZE = 1024
+\end{lstlisting}
+for the block of data we are going to capture in the loop that will
+be defined just below.
+
+The loop is an infinite loop
+
+\section{What you have to do?}
+
+\section{Resources}
+
