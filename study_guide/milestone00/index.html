@@ -1,6 +1,7 @@
 <!DOCTYPE html> 
 <html> 
-<head> <title>TechnologÃŋas Multimedia - Study Guide - Milestone 0: Git and GitHub</title> 
+<head> <title>TecnologÃŋas Multimedia - Study Guide - Milestone 0: OS (Operating System)
+Provisioning</title> 
 <meta charset="UTF-8" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <link rel="stylesheet" type="text/css" href="index.css" /> 
@@ -21,8 +22,9 @@ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLor
                                                                   
 
 <h2 class="titleHead"><a 
-href="https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN" >Technologías Multimedia</a> - Study Guide -
-Milestone 0: Git and GitHub</h2>
+href="https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN" >Tecnologías Multimedia</a> - Study Guide -
+Milestone 0: OS (Operating System)
+Provisioning</h2>
  <div class="author" ><a 
 href="https://cms.ual.es/UAL/personas/persona.htm?id=515256515553484875" ><span 
 class="ecrm-1200">Vicente Gonz</span><span 
@@ -37,82 +39,163 @@ class="ecrm-1200">- </span><a
 href="https://www.ual.es" ><span 
 class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
-class="ecrm-1200">September 6, 2020</span></div>
+class="ecrm-1200">September 8, 2020</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
-<!--l. 7--><p class="noindent" >To work in the InterCom project <span class="cite">[<a 
-href="#Xintercom">6</a>]</span> you will need to understand the basics of Git
-and GitHub.
-</p><!--l. 10--><p class="noindent" >
+<!--l. 7--><p class="noindent" >The InterCom project <span class="cite">[<a 
+href="#Xintercom">3</a>]</span> is a real-time application with a high computational
+(specially in terms of CPU) demand. It is written in Python <span class="cite">[<a 
+href="#XPython">1</a>]</span>, an interpreted
+languaje that has been ported <a 
+href="https://www.python.org/download/other/" >almost to all</a> the current OS, including mobile
+<a 
+href="https://kivy.org/#home" >devices</a>.
+</p><!--l. 14--><p class="indent" >   This milestone (the installation of a dedicated Linux distribution for running
+InterCom) is optional , but I (as the teacher) highly recommend to do it because I’ll
+give technical support in a reasonable time when you are in trouble. For this reason, I
+recommend you to run InterCom in a Xubuntu 20.04 (Focal Fossa) <span class="cite">[<a 
+href="#Xxubuntu">2</a>]</span> machine,
+running natively (no <a 
+href="https://en.wikipedia.org/wiki/Virtualization" >virtualization</a>).
+</p><!--l. 22--><p class="indent" >   Therefore, the following “guide” helps you to install Xubuntu in an external <a 
+href="https://en.wikipedia.org/wiki/USB_flash_drive" >USB
+drive</a>, which must have at least 8GB of capacity (the minimal installation of Xubuntu
+20.04 needs about 5GB). You will need also a temporal external USB disk with at
+leas 4GB to boot from it the installation Xubuntu image (or to burn an <a 
+href="https://en.wikipedia.org/wiki/Optical_disc" >optical
+disk</a>).
+</p><!--l. 30--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
- id="x1-20002"></a>What you have to do?</h3>
-<!--l. 12--><p class="noindent" >
-     </p><ol  class="enumerate1" >
-     <li 
-  class="enumerate" id="x1-2002x1">Have a look the Git <span class="cite">[<a 
-href="#XGit">3</a>, <a 
-href="#XGit-book">2</a>]</span> and the GitHub <span class="cite">[<a 
-href="#XGitHub">4</a>]</span> websites. If you don’t have
-     a GitHub account, please, create one.
-     </li>
-     <li 
-  class="enumerate" id="x1-2004x2">Create a test project at GitHub using your account. See <span class="cite">[<a 
-href="#XGitHub-HW">1</a>]</span>.
-     </li>
-     <li 
-  class="enumerate" id="x1-2006x3">See The Fork and Branch Git Workﬂow <span class="cite">[<a 
-href="#XGit-workflow">5</a>]</span>.
-     </li>
-     <li 
-  class="enumerate" id="x1-2008x4">Make a fork of the InterCom <span class="cite">[<a 
-href="#Xintercom">6</a>]</span> project.</li></ol>
+ id="x1-20002"></a>What do you have to do?</h3>
+<!--l. 32--><p class="noindent" >Supposing that you have decided to use Xubuntu 20.04 in a USB disk, these are the
+steps you should perform (to install Xubuntu in a disk partition of your computer the
+instructions are almost the same):
                                                                   
 
                                                                   
-<!--l. 22--><p class="noindent" >
+</p><!--l. 36--><p class="indent" >
+     </p><ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x1-2002x1">Download the installation <a 
+href="https://en.wikipedia.org/wiki/Disk_image" >image</a> from <a 
+href="https://xubuntu.org/download/" >here</a>.
+     </li>
+     <li 
+  class="enumerate" id="x1-2004x2">“Burn” the 4GB USB drive with the image. Depending on your current
+     OS,  use  the  following  instructions  for  <a 
+href="https://ubuntu.com/tutorials/create-a-usb-stick-on-windows#1-overview" >Windows</a>,  <a 
+href="https://ubuntu.com/tutorials/create-a-usb-stick-on-macos#1-overview" >OSX</a>,  <a 
+href="https://ubuntu.com/tutorials/create-a-usb-stick-on-ubuntu#1-overview" >Ubuntu  (and
+     derivatives)</a>, or <a 
+href="https://askubuntu.com/questions/372607/how-to-create-a-bootable-ubuntu-usb-flash-drive-from-terminal" >the console</a>.
+     </li>
+     <li 
+  class="enumerate" id="x1-2006x3">Boot the image from the USB port. This step depends on your computer.
+     Most of PCs can chose the boot device by pressing the F12-key when the
+     PC is booting. On a Mac, you need to keep pressed the alt-key when it is
+     booting.
+     </li>
+     <li 
+  class="enumerate" id="x1-2008x4">Select the option <span 
+class="ectt-1000">Try Xubuntu without installing</span>.
+     </li>
+     <li 
+  class="enumerate" id="x1-2010x5">When the OS is running, conﬁgure the network.
+     </li>
+     <li 
+  class="enumerate" id="x1-2012x6">Insert also the 8GB USB drive where Xubuntu will be installed.
+     </li>
+     <li 
+  class="enumerate" id="x1-2014x7">Select <span 
+class="ectt-1000">Install Xubuntu 20.04 LTS</span>.
+     </li>
+     <li 
+  class="enumerate" id="x1-2016x8">Select  English  as  the  language  used  during  the  installation  and  the
+     installed system. This will help in the case you need to search information
+     in the Internet, providing the error descriptions in English.
+     </li>
+     <li 
+  class="enumerate" id="x1-2018x9">Select your keyboard layout (probably <span 
+class="ectt-1000">Spanish</span>).
+     </li>
+     <li 
+  class="enumerate" id="x1-2020x10">Chose   <span 
+class="ectt-1000">Download updates while installing Xubuntu  </span>and   <span 
+class="ectt-1000">Install</span>
+     <span 
+class="ectt-1000">third-party software for graphics and Wi-Fi hardware</span>
+     <span 
+class="ectt-1000">and additional media formats</span>, in order to have access to the ultimate
+     software available for Ubuntu (and derivatives).
+     </li>
+     <li 
+  class="enumerate" id="x1-2022x11">Chose <span 
+class="ectt-1000">Erase disk and install Xubuntu</span>. Wait for a couple of minutes
+     :-/
+     </li>
+     <li 
+  class="enumerate" id="x1-2024x12">Select the drive corresponding to the 8GB USB drive. It’s diﬃcult to guess
+     for me now the letter associated to this drive, but, it is very likely not
+     <span 
+class="ectt-1000">sda</span>.
+                                                                  
+
+                                                                  
+     </li>
+     <li 
+  class="enumerate" id="x1-2026x13">At this point of the installation you should consider (depending on the
+     amount of RAM memory in your computer and the size of the USB drive)
+     to create an especiﬁc partition for doing swapping. The rule of the thumb is
+     to create a partition with the same size that the installed RAM. However,
+     probably you cannot do that in a 8GB USB drive because at least 5GB
+     are needed for a Xubuntu installation. Anyway, keep in mind that this
+     step is optional because you can always perform swapping on a ﬁle (a
+     process slightly slower than using the dedicated partition). Consider also
+     tha InterCom requires only some MB of memory for running and therefore,
+     probably you are not going to need to swap any <a 
+href="https://en.wikipedia.org/wiki/Page_(computer_memory)" >memory page</a> at all.
+     </li>
+     <li 
+  class="enumerate" id="x1-2028x14">Chose your time zone.
+     </li>
+     <li 
+  class="enumerate" id="x1-2030x15">Conﬁgure you personal account, hostname and logging process.
+     </li>
+     <li 
+  class="enumerate" id="x1-2032x16">Wait for the end of the installation and boot your new Xubuntu.
+     </li></ol>
+<!--l. 102--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-30003"></a>Timming</h3>
-<!--l. 24--><p class="noindent" >You should reach this milestone at most in one week.
-</p><!--l. 26--><p class="noindent" >
+<!--l. 104--><p class="noindent" >You should reach this milestone at most in one week.
+</p><!--l. 106--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-40004"></a>Deliverables</h3>
-<!--l. 28--><p class="noindent" >None.
-</p><!--l. 30--><p class="noindent" >
+<!--l. 108--><p class="noindent" >None.
+</p><!--l. 110--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-50005"></a>Resources</h3>
    <div class="thebibliography">
    <p class="bibitem" ><span class="biblabel">
  [1]<span class="bibsp">   </span></span><a 
- id="XGitHub-HW"></a>Github - <a 
-href="https://guides.github.com/activities/hello-world" >the Hello World guide</a>.
+ id="XPython"></a><a 
+href="https://www.python.org/" >Python</a> website.
+                                                                  
+
+                                                                  
    </p>
    <p class="bibitem" ><span class="biblabel">
  [2]<span class="bibsp">   </span></span><a 
- id="XGit-book"></a><a 
-href="https://git-scm.com/book/en/v2" >Git - Book</a>.
+ id="Xxubuntu"></a>Canonical Ltd. <a 
+href="https://xubuntu.org/" >xubuntu</a>.
    </p>
    <p class="bibitem" ><span class="biblabel">
  [3]<span class="bibsp">   </span></span><a 
- id="XGit"></a><a 
-href="https://git-scm.com" >Git</a>.
-   </p>
-   <p class="bibitem" ><span class="biblabel">
- [4]<span class="bibsp">   </span></span><a 
- id="XGitHub"></a><a 
-href="https://github.com" >GitHub</a>.
-   </p>
-   <p class="bibitem" ><span class="biblabel">
- [5]<span class="bibsp">   </span></span><a 
- id="XGit-workflow"></a><a 
-href="https://github.com/vicente-gonzalez-ruiz/fork_and_branch_git_workflow" >The Fork and Branch Git Workﬂow</a>.
-   </p>
-   <p class="bibitem" ><span class="biblabel">
- [6]<span class="bibsp">   </span></span><a 
  id="Xintercom"></a>The students of <a 
 href="https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN" >Tecnologías Multimedia</a> at the UAL.  The <a 
 href="https://github.com/Tecnologias-multimedia/intercom" >InterCom</a>
