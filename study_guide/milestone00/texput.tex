@@ -1,54 +1,41 @@
-\title{\href{https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN}{Tecnologías Multimedia} - Study Guide - Milestone 0: Provisioning}
+\title{\href{https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN}{Tecnologías Multimedia} - Study Guide - Milestone 0: OS (Operating System) Provisioning}
 
 \maketitle
 
 \section{Description}
 
-InterCom \cite{intercom} is a collection of
-\href{https://docs.python.org/3/tutorial/modules.html#}{Python
-  modules} \cite{python}. Therefore, you will need Python
-\href{https://www.python.org/downloads/}{installed} in your computer
-in order to run it.
+The InterCom project \cite{intercom} is a real-time application with
+a high computational (specially in terms of CPU) demand. It is written
+in Python \cite{Python}, an interpreted languaje that has been
+ported \href{https://www.python.org/download/other/}{almost to all}
+the current OS, including
+mobile \href{https://kivy.org/#home}{devices}.
 
-Most of the current Unix-based operating systems (Linux, FreeBSD and
-OSX) use Python for running some of their ``daily tasks'', which means
-that a Python interpreter is already available. However, usually it is
-better to use our own interpreter because:
-\begin{enumerate}
-\item We can chose the version of Python and the
-  \href{https://docs.python.org/3/tutorial/modules.html#packages}{packages}.
-\item We can optimize the compilation of the interpreter depending on
-  our needs (for example, including
-  \href{https://wiki.python.org/moin/TkInter}{Tk support} or not).
-\item By default, all the Python packages will be installed in a
-  different repository of the system packages, which eases the
-  system/user Python-isolation and the removal of the interpreter.
-\end{enumerate}
-In Windows you need to install Python, yes or yes.
+This is an optional milestone, but I (as the teacher) highly recommend
+to do it because I'll give technical support in a reasonable time when
+you are in trouble. For this reason, I recommend you to run InterCom
+in a Xubuntu 20.04 (Focal Fossa) \cite{xubuntu} machine, running
+natively
+(no \href{https://en.wikipedia.org/wiki/Virtualization}{virtualization}).
 
-Alternatively, and this is the option that I (as the teacher)
-recommend is to use a dedicated Xubuntu 20.04 (Focal Fossa)
-\cite{xubuntu} installation (in an external
-\href{https://en.wikipedia.org/wiki/USB_flash_drive}{USB drive} with
-at least 8GB of capacity) of for this subject. Notice that you will
-need also another USB drive with at least 4GB to hold the disk
-installation image.
-
-The advantage of using Xubuntu is that if you need to ask (to
-me) some question about Python or the OS, I'll be able to answer
-fast. In any case, keep in mind that this is up to you (use the OS
-that you prefeer).
+Therefore, the following ``guide'' install Xubuntu in an
+external \href{https://en.wikipedia.org/wiki/USB_flash_drive}{USB
+drive}, which must have at least 8GB of capacity (the minimal
+installation of Xubuntu 20.04 need about 5GB). You will need also a
+temporal external USB disk with at leas 4GB to boot from it the
+installation Xubuntu image (or burn
+an \href{https://en.wikipedia.org/wiki/Optical_disc}{optical disk}).
 
 \section{What do you have to do?}
 
-Supposing that you have decided to use Xubuntu 20.04, these are the steps
-you should perform:
+Supposing that you have decided to use Xubuntu 20.04, these are the
+steps you should perform:
 
 \begin{enumerate}
   \item Download the installation image from
     \href{https://xubuntu.org/download/}{here}.
     
-  \item ``Burn'' the (at least) 4GB USB drive with the
+  \item ``Burn'' the 4GB-drive/disk drive with the
     image. Depending on your current OS, use the following
     instructions for
     \href{https://ubuntu.com/tutorials/create-a-usb-stick-on-windows#1-overview}{Windows},
@@ -57,38 +44,54 @@ you should perform:
     \href{https://askubuntu.com/questions/372607/how-to-create-a-bootable-ubuntu-usb-flash-drive-from-terminal}{Linux and OSX}.
 
 \item Boot the installer from the USB port. This step depends on your
-  computer type. Most of PCs can chose the boat device by pressing the
-  F12 key when the PC is booting. On a Mac, you need to keep pressed
-  the alt key when it is booting.
+  computer. Most of PCs can chose the boot device by pressing the
+  F12-key when the PC is booting. On a Mac, you need to keep pressed
+  the alt-key when it is booting.
   
 \item Select the option \texttt{Try Xubuntu without installing}.
+  
 \item When the OS is running, configure the network.
+  
 \item Insert also the 8GB USB drive where Xubuntu will be installed.
+  
 \item Select \texttt{Install Xubuntu 20.04 LTS}.
+  
 \item Select English as the language used during the install and the
-  installed system.
+  installed system. This will help in the case you need to search
+  information in the Internet, providing the error descriptions in
+  English.
+  
 \item Select your keyboard layout (probably \texttt{Spanish}).
+
 \item Chose \texttt{Download updates while installing Xubuntu} and
   \texttt{Install third-party software for graphics and Wi-Fi hardware
     and additional media formats}.
+
 \item Chose \texttt{Erase disk and install Xubuntu}. Wait for a couple
   of minutes :-/
-\item Chose \texttt{Erase disk and install Xubuntu}.
+
 \item Select the drive corresponding to the 8GB USB drive. It's
-  difficult to guess the letter associated to this drive, but, it is
-  very likely not \texttt{sda}.
+  difficult to guess for me now the letter associated to this drive,
+  but, it is very likely not \texttt{sda}.
+
 \item At this point of the installation you should consider (depending
   on the amount of RAM memory in your computer and the size of the USB
   drive) to create an especific partition for doing swapping. The rule
   of the thumb is to create a partition with the same size that the
-  RAM. However, probably you cannot do that in a 8GB USB drive because
-  at least 5GB are needed for a Xubuntu installation. Anyway, keep in
-  mind that this step is optional because you can always perform
-  swapping on a file (a process slightly slower than using the
-  dedicated partition).
+  installed RAM. However, probably you cannot do that in a 8GB USB
+  drive because at least 5GB are needed for a Xubuntu
+  installation. Anyway, keep in mind that this step is optional
+  because you can always perform swapping on a file (a process
+  slightly slower than using the dedicated partition). Consider also
+  tha InterCom requires only some MB of memory for running and
+  therefore, probably you are not going to perform swapping.
+
 \item Chose your time zone.
+  
 \item Configure you personal account, hostname and logging process.
+  
 \item Wait for the end of the installation and boot your new Xubuntu.
+  
 \item Go to
   \href{https://github.com/vicente-gonzalez-ruiz/YAPT/blob/master/01-hello_world/02-installation.ipynb}{YAPT/01-hello\_world/02-installation.ipynb}
   \cite{YAPY} and follow the instructions to install CPython 3.8.5.
