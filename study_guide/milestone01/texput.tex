@@ -1,22 +1,155 @@
-\title{\href{https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN}{Tecnologías Multimedia} - Study Guide - Milestone 1: Git and GitHub}
+\title{\href{https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN}{Tecnologías Multimedia} - Study Guide - Milestone 1: Git, GitHub and the Fork-and-Branch Git Workflow}
 
 \maketitle
 
 \section{Description}
 
 To work in the InterCom project \cite{intercom} you will need to
-understand the basics of Git and GitHub.
+understand the basics of Git and GitHub, and how to make a copy of a
+repo(sitory) (by forking it) to know how to ask for changes in the
+parent repo (by performing pull-requests).
 
 \section{What you have to do?}
 
 \begin{enumerate}
 \item Have a look the Git \cite{Git, Git-book} and the GitHub
   \cite{GitHub} websites. If you don't have a GitHub account, please,
-  create one.
+  create one. Otherwise, you will not be able to contribute to the
+  Intercom project.
+\item Install Git with:
+  \begin{lstlisting}[language=bash]
+    sudo apt install git
+  \end{lstlisting}
 \item Create a test project at GitHub using your account. See
   \cite{GitHub-HW}.
-\item See The Fork and Branch Git Workflow \cite{Git-workflow}.
-\item Make a fork of the InterCom \cite{intercom} project. 
+\item Revise
+  \href{https://github.com/vicente-gonzalez-ruiz/fork_and_branch_git_workflow}{The
+    Fork and Branch Git Workflow} \cite{Git-workflow}. Basically, this
+  ``protocol'' explains that to contribute to a repo hosted by GitHub
+  you need to do:
+  \begin{enumerate}
+    \item A fork, which is basically a copy of the original
+      (``parent'') repo. Such repo is yours and the one thing that
+      distinguish it from a repo created by youself is that there is a
+      link to the parent repo.
+    \item Use branches (that can be understand like parallel states or
+      views of your repo) to keep always stable the \emph{master}
+      branch of your repo. Such branches can be:
+      \begin{enumerate}
+        \item \emph{Feature branches}, that use to be quite short in
+          time and they are aimed to develop new functionality or to
+          debug.
+        \item \emph{Developing branches}, which are used exactly for
+          the same objetives that the feature branches, but usually
+          live forever (like the master branch). If you are
+          continuosly working on a repo, probably you will use a
+          develping branches.
+      \end{enumerate}
+  \end{enumerate}
+\item Make a fork of the \href{https://github.com/Tecnologias-multimedia/intercom}{InterCom} project.
+\item Download (clone) your copy of Intercom (select the Git protocol,
+  not https nor download a zip file).
+\item Do some modification to your local repo. For example, create and
+  add a file named \texttt{deleteme} or something similar (you can
+  also propose some more useful modification).
+\item Commit the changes. In your first commit you will be prompted with:
+
+  \begin{lstlisting}[language=bash]
+    git config --global user.email "you@example.com"
+  \end{lstlisting}
+
+\item Push the changes. If you have not upoaded a public
+  SSH key (and the private key is not properly installed in your
+  computer), the GitHub server should have requested your username and
+  password, and this is something that will happen with every push.
+\item To avoid this repetitive input of your login information at
+  GitHub, you need
+  \href{https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh}{to
+    identify you at GitHub} using
+  \href{https://en.wikipedia.org/wiki/Public-key_cryptography}{public-key
+    criptography}. You need to own (as said before) a pair of keys,
+  one public and other private, and upload the public one to GitHub.
+  
+\item The first step in this process is to check whether you already
+  have a pair of keys (if your are using the just installed Xubuntu
+  distribution, obviously you don't and go directly to the next
+  step). Simply revise your \texttt{\$HOME/.ssh} directory with:
+
+  \begin{lstlisting}[language=bash]
+    ls -l ~/.ssh
+  \end{lstlisting}
+
+  and if you find a pair of file with almost the same name, but one of
+  them finising in \texttt{.pub}, you have a pair of SSH keys.
+
+\item Let's create a pair of keys. Open a terminal and write:
+
+  \begin{lstlisting}[language=bash]
+    ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+  \end{lstlisting}
+
+  using your email address. Then you are prompted with:
+
+  \begin{lstlisting}[language=bash]
+    Enter a file in which to save the key (/home/you/.ssh/id_rsa):
+  \end{lstlisting}
+
+  just press the Enter-key, to select such output prefix. Otherwise,
+  write a different one, but don't change the path to the
+  \texttt{.ssh} directory.
+
+\item Now SSH should request you for a passphrase. If you write one,
+  you will be asked for it each time you push your commits to
+  GitHub. There are two options to avoid this:
+
+  \begin{enumerate}
+  \item Input no passphrase (just by pressing the Enter-key
+    again). This has the drawback that if somebody has your keys, he
+    can access to GitHub as he were you.
+  \item Input a passphrase and configure \texttt{ssh-agent} to send it
+    to GitHub by you.
+  \end{enumerate}
+
+\item It is probable that the \texttt{ssh-agent} is already
+  running in your computer. This can be checked with:
+
+  \begin{lstlisting}[language=bash]
+    ps aux | grep ssh-agent
+  \end{lstlisting}
+
+  and in the case of Xubuntu, you should get something similar to:
+
+  \begin{lstlisting}[language=bash]
+    989 ?        Ss     0:00 /usr/bin/ssh-agent /usr/bin/im-launch startxfce4
+   1433 pts/0    S+     0:00 grep --color=auto ssh-agent
+  \end{lstlisting}
+
+  This means that there are two processes in whose description there
+  exists the string \texttt{ssh-agent}. The first entry is the
+  agent. The second one is only out \texttt{grep} command.
+
+\item If the \texttt{ssh-agent} were not running, it can be launched to
+  run in the background with:
+
+  \begin{lstlisting}[language=bash]
+    eval "$(ssh-agent -s)"
+  \end{lstlisting}
+
+  but you don't need to do that in your Xubuntu installation.
+
+\item ssh-add ~/.ssh/id_rsa the passphrase will be prompt.
+  
+\item Settings -> SSH and GPG keys -> New SSH key
+  Open a terminal and write:
+  cat .ssh/id_rsa.pub
+  give a title (something such as ``tec-multimedia'')
+  copy and paste the content of such file (which ends with your email address) inside of the space where you can read ``Begins with 'ssh-rsa', ...''.
+
+  \item When you use the key for the first time (clonning a repo or
+    pushing a commit), the SSH client will warn you that the
+    autenticity of \texttt{github.com} cannot be established. This is
+    normal and should happen only once. Type \texttt{yes}.
+  
 \end{enumerate}
 
 \section{Timming}

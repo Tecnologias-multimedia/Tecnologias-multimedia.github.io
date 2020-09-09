@@ -1,6 +1,7 @@
 <!DOCTYPE html> 
 <html> 
-<head> <title>TecnologÃŋas Multimedia - Study Guide - Milestone 1: Git and GitHub</title> 
+<head> <title>TecnologÃŋas Multimedia - Study Guide - Milestone 1: Git, GitHub and the
+Fork-and-Branch Git Workﬂow</title> 
 <meta charset="UTF-8" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <link rel="stylesheet" type="text/css" href="index.css" /> 
@@ -22,7 +23,8 @@ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLor
 
 <h2 class="titleHead"><a 
 href="https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN" >Tecnologías Multimedia</a> - Study Guide -
-Milestone 1: Git and GitHub</h2>
+Milestone 1: Git, GitHub and the
+Fork-and-Branch Git Workﬂow</h2>
  <div class="author" ><a 
 href="https://cms.ual.es/UAL/personas/persona.htm?id=515256515553484875" ><span 
 class="ecrm-1200">Vicente Gonz</span><span 
@@ -37,51 +39,129 @@ class="ecrm-1200">- </span><a
 href="https://www.ual.es" ><span 
 class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
-class="ecrm-1200">September 7, 2020</span></div>
+class="ecrm-1200">September 9, 2020</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
 <!--l. 7--><p class="noindent" >To work in the InterCom project <span class="cite">[<a 
 href="#Xintercom">6</a>]</span> you will need to understand the basics of Git
-and GitHub.
-</p><!--l. 10--><p class="noindent" >
+and GitHub, and how to make a copy of a repo(sitory) (by forking it) to know how to
+ask for changes in the parent repo (by performing pull-requests).
+</p><!--l. 12--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
  id="x1-20002"></a>What you have to do?</h3>
-<!--l. 12--><p class="noindent" >
+<!--l. 14--><p class="noindent" >
      </p><ol  class="enumerate1" >
      <li 
   class="enumerate" id="x1-2002x1">Have a look the Git <span class="cite">[<a 
 href="#XGit">3</a>, <a 
 href="#XGit-book">2</a>]</span> and the GitHub <span class="cite">[<a 
 href="#XGitHub">4</a>]</span> websites. If you don’t have
-     a GitHub account, please, create one.
+     a GitHub account, please, create one. Otherwise, you will not be able to
+     contribute to the Intercom project.
      </li>
      <li 
   class="enumerate" id="x1-2004x2">Create a test project at GitHub using your account. See <span class="cite">[<a 
 href="#XGitHub-HW">1</a>]</span>.
      </li>
      <li 
-  class="enumerate" id="x1-2006x3">See The Fork and Branch Git Workﬂow <span class="cite">[<a 
-href="#XGit-workflow">5</a>]</span>.
-     </li>
-     <li 
-  class="enumerate" id="x1-2008x4">Make a fork of the InterCom <span class="cite">[<a 
-href="#Xintercom">6</a>]</span> project.</li></ol>
+  class="enumerate" id="x1-2006x3">Revise <a 
+href="https://github.com/vicente-gonzalez-ruiz/fork_and_branch_git_workflow" >The Fork and Branch Git Workﬂow</a> <span class="cite">[<a 
+href="#XGit-workflow">5</a>]</span>. Basically, this “protocol”
+     explains that to contribute to a repo hosted by GitHub you need to
+     do:
                                                                   
 
                                                                   
-<!--l. 22--><p class="noindent" >
+         <ol  class="enumerate2" >
+         <li 
+  class="enumerate" id="x1-2008x1">A fork, which is basically a copy of the original (“parent”) repo. Such
+         repo is yours and the one thing that distinguish it from a repo created
+         by youself is that there is a link to the parent repo.
+         </li>
+         <li 
+  class="enumerate" id="x1-2010x2">Use branches (that can be understand like parallel states or views of your
+         repo) to keep always stable the <span 
+class="ecti-1000">master </span>branch of your repo. Such branches
+         can be:
+             <ol  class="enumerate3" >
+             <li 
+  class="enumerate" id="x1-2012x1"><span 
+class="ecti-1000">Feature branches</span>, that use to be quite short in time and they are
+             aimed to develop new functionality or to debug.
+             </li>
+             <li 
+  class="enumerate" id="x1-2014x2"><span 
+class="ecti-1000">Developing  branches</span>,  which  are  used  exactly  for  the  same
+             objetives that the feature branches, but usually live forever (like
+             the master branch). If you are continuosly working on a repo,
+             probably you will use a develping branches.</li></ol>
+         </li></ol>
+     </li>
+     <li 
+  class="enumerate" id="x1-2016x4">Make a fork of the <a 
+href="https://github.com/Tecnologias-multimedia/intercom" >InterCom</a> project.
+     </li>
+     <li 
+  class="enumerate" id="x1-2018x5">Download (clone) your copy of Intercom (select the Git protocol, not https nor
+     download a zip ﬁle).
+     </li>
+     <li 
+  class="enumerate" id="x1-2020x6">Do some modiﬁcation to your local repo. For example, create and add a ﬁle
+     named <span 
+class="ectt-1000">deleteme </span>or something similar (you can also propose some more useful
+     modiﬁcation).
+     </li>
+     <li 
+  class="enumerate" id="x1-2022x7">Commit and push the changes. If you have not upoaded a public SSH key (and
+     the private key is not properly installed in your computer), the GitHub server
+     should have requested your username and password, and this is something that
+     will happen with every push.
+     </li>
+     <li 
+  class="enumerate" id="x1-2024x8">To avoid this repetitive input of your login information at GitHub, you need <a 
+href="https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh" >to
+     identify you at GitHub</a> using <a 
+href="https://en.wikipedia.org/wiki/Public-key_cryptography" >public-key criptography</a>. You need to own (as said
+     before) a pair of keys, one public and other private, and upload the public one
+     to GitHub.
+     </li>
+     <li 
+  class="enumerate" id="x1-2026x9">The ﬁrst step in this process is to check whether you already have a pair of keys
+     (if your are using the just installed Xubuntu distribution, obviously you don’t).
+     Simply revise your <span 
+class="ectt-1000">$HOME/.ssh </span>directory with
+     <!--l. 67-->
+                                                                  
+
+                                                                  
+     <div class="lstlisting" id="listing-1"><span class="label"><a 
+ id="x1-2027r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">ls</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">-</span><span 
+class="ectt-1000">l</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">~/.</span><span 
+class="ectt-1000">ssh</span>
+     
+     </div>
+     </li></ol>
+<!--l. 73--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-30003"></a>Timming</h3>
-<!--l. 24--><p class="noindent" >You should reach this milestone at most in one week.
-</p><!--l. 26--><p class="noindent" >
+<!--l. 75--><p class="noindent" >You should reach this milestone at most in one week.
+</p><!--l. 77--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-40004"></a>Deliverables</h3>
-<!--l. 28--><p class="noindent" >None.
-</p><!--l. 30--><p class="noindent" >
+<!--l. 79--><p class="noindent" >None.
+</p><!--l. 81--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-50005"></a>Resources</h3>
@@ -110,6 +190,9 @@ href="https://github.com" >GitHub</a>.
  [5]<span class="bibsp">   </span></span><a 
  id="XGit-workflow"></a><a 
 href="https://github.com/vicente-gonzalez-ruiz/fork_and_branch_git_workflow" >The Fork and Branch Git Workﬂow</a>.
+                                                                  
+
+                                                                  
    </p>
    <p class="bibitem" ><span class="biblabel">
  [6]<span class="bibsp">   </span></span><a 
