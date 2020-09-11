@@ -15,10 +15,14 @@ but GitHub is the most used one.}. We wil use
 
 \begin{enumerate}
 \item If you want to contribute to a repo (that we will call
-  \emph{upstream}) and you don't belong to the team of developers
-  (such as in InterCom), the first action that you must do is to
+  \emph{upstream}) \cite{Git-workflow} and you don't belong to the
+  team of developers (such as in InterCom), the first action that you
+  must do is to
   \href{https://docs.github.com/en/github/getting-started-with-github/fork-a-repo}{fork}
-  the \emph{upstream} repo.
+  the \emph{upstream} repo. This will create a copy in your GitHub
+  space that is yours, and the one thing that distinguish it from a
+  repo created by youself is that there is a link to the
+  \emph{upstream} repo.
 \item You can do a lot of work in a repo hosted by GitHub using the Web
   interface, but it is much more convenient if you
   \href{https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository}{clone}
@@ -48,56 +52,36 @@ but GitHub is the most used one.}. We wil use
   \href{https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests}{pull-request}.
 \end{enumerate}
 
-You should master also what is a branch in the context of Git. You
-must know that:
+You should also understand what is a
+Git \href{https://docs.gitlab.com/ee/topics/gitlab_flow.html}{branch}:
 \begin{enumerate}
-\item A fork, which is basically a copy of the original (``parent'')
-  repo. Such repo is yours and the one thing that distinguish it from
-  a repo created by youself is that there is a link to the parent
-  repo.
-\item Use branches (that can be understand like parallel states or
-      views of your repo) to keep always stable the \emph{master}
-      branch of your repo. The most common
-      \href{https://docs.gitlab.com/ee/topics/gitlab_flow.html}{types
-        of branches} are:
-      \begin{enumerate}
-        \item \emph{Main branches}, that have infinite lifetime. All
-          repos have a \emph{master} branch, which should be always
-          deployable. Some have a \emph{testing} branch, in which the
-          code is tested before it is included in the master (stable)
-          branch.
-        \item \emph{Feature/debug branches}, which are aimed to
-          develop a new functionality or to debug. Feature branches
-          are also called topic branches. These type of branches have
-          usually a short life.
-      \end{enumerate}
-  \end{enumerate}
-
+\item \emph{Main branches}, that have infinite lifetime. All repos
+  have a \emph{master} branch, which should be always deployable. Some
+  have a \emph{testing} branch, in which the code is tested before it
+  is included in the master (stable) branch.
+\item \emph{Feature/debug branches}, which are aimed to develop a new
+  functionality or to debug. Feature branches are also called topic
+  branches. These type of branches have usually a short life.
+\end{enumerate}
 
 \section{What you have to do?}
 
 \begin{enumerate}
+  
 \item Have a look the Git \cite{Git, Git-book} and the GitHub
   \cite{GitHub} websites. If you don't have a GitHub account, please,
   create one. Otherwise, you will not be able to contribute to the
   Intercom project.
+
+\item Create a test project at GitHub using your account. See
+  \cite{GitHub-HW}.
+
 \item Install Git with:
   \begin{lstlisting}[language=bash]
     sudo apt install git
   \end{lstlisting}
-\item Create a test project at GitHub using your account. See
-  \cite{GitHub-HW}.
-  
-\item Revise
-  \href{https://github.com/vicente-gonzalez-ruiz/fork_and_branch_git_workflow}{The
-    Fork and Branch Git Workflow} \cite{Git-workflow}. Basically, this
-  ``protocol'' explains that to contribute to an open-source repo
-  hosted by GitHub with belonging to the develop team.
-  
-\item Make a fork of the
-  \href{https://github.com/Tecnologias-multimedia/intercom}{InterCom}
-  project.
-  
+  if it is not already installed.
+    
 \item Download (clone) your copy of Intercom (select the Git protocol,
   not https nor download a zip file).
 
@@ -208,6 +192,17 @@ performed in your \emph{working copy} (of your local repo) to the
     normal and should happen only once. Type \texttt{yes}.
 
 The ssh-agent will ask for the passphrase the first time you use the keys after a rebooting.
+  
+\item Revise
+  \href{https://github.com/vicente-gonzalez-ruiz/fork_and_branch_git_workflow}{The
+    Fork and Branch Git Workflow} \cite{Git-workflow}. Basically, this
+  ``protocol'' explains that to contribute to an open-source repo
+  hosted by GitHub with belonging to the develop team.
+
+\item Make a fork of the
+  \href{https://github.com/Tecnologias-multimedia/intercom}{InterCom}
+  project.
+  
   
 \end{enumerate}
 
