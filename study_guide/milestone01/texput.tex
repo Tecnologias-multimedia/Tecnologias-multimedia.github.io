@@ -4,21 +4,22 @@
 
 \begin{figure}
 \begin{verbatim}
-               Local Host                    Remote Host
++-------------------------------------------+   +-----------+
+|              Local Host                   |   |Remote Host|
 ---------------------------------------------   -------------
 +-----------+   +-----------+   +-----------+   +-----------+
-|  Working  |   |  Staging  |   |           |   |           |
-|   Tree    |   |   Area    |   |           |   |           |
+|  Working  |   |  Staging  |   |   Local   |   |   Origin  |
+|   Tree    |   |   Area    |   |   Repo    |   |    Repo   |
 +-----------+   +-----------+   +-----------+   +-----------+
       |               |               |               |
-      +- git add ---->|               |               |
-      |               +- git commit ->|               |
-      |               |               +- git push --->|
-      |               |               |<--- git pull -+
-      |<--------- git checkout -------+               |
-      |<---------- git merge ---------+               |
+      +----- add ---->|               |               |
+      |               +----commit --->|               |
+      |               |               +---- push ---->|
+      |               |               |<--- pull -----+
+      |<----------- checkout ---------+               |
+      |<------------ merge -----------+               |
 \end{verbatim}
-\caption{Understanding the parts of a Git repo.}
+\caption{Structure-of and actions-on a Git repo.}
 \label{fig:local_repo_structure_and_actions}
 \end{figure}
 
@@ -57,15 +58,23 @@ upstream repo} or simply \emph{upstream}) \cite{Git-workflow} and you
   \emph{origin}(al one) or any of the rest of developer's repos, by
   simply adding the right \emph{Git remotes}.}
 
-\item When you have a copy of the \emph{origin} in your local disk,
-  its time to modificate/debug/improve what you want. To update your
-  local repo (also called as the \emph{staging area}) with such
-  changes carried on the \emph{working directory} of your repo (see
-  Fig.~\ref{fig:local_repo_structure_and_actions}), you must perform a
-  \href{https://docs.github.com/en/github/getting-started-with-github/github-glossary#commit}{commit}\footnote{Technically,
-  a commit copies the modifications performed in your \emph{working
-  directory} (of your local repo) to the \emph{staging area} (of your
-  local repo).} of the changes.
+\item When you copy the \emph{origin} in your local disk, you create
+  the data structure shown in the
+  Figure~\ref{fig:local_repo_structure_and_actions}. Such structure
+  has 3 main parts: (1) The \emph{working tree}, (2) the \emph{staging
+  area}, and (3) the \emph{local repo}. The modifications are carried
+  on the \emph{working tree}, which can contain files and directories
+  that \emph{untracked} (probably temporal files that never should be
+  included in the repo). The \emph{staging area} (also called
+  \emph{index}) is form by the subset of tracked files of the
+  \emph{working tree}. The \emph{local repo} is the data structure
+  that holds all the history of the repo. When the \emph{local repo}
+  and the \emph{origin} are synchonized, their contents are the same.
+
+\item To update your \emph{local repo} with the modifications carried
+  on the \emph{working tree}, you must perform a
+  \href{https://docs.github.com/en/github/getting-started-with-github/github-glossary#commit}{commit}.
+  
 \item At any moment, you can decide to synchronize your local repo
   with the \emph{origin} or any other \emph{remote}. This action is
   called a
