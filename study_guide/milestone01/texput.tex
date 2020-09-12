@@ -1,6 +1,26 @@
-\title{\href{https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN}{Tecnologías Multimedia} - Study Guide - Milestone 1: Git, GitHub and the Workflow with Branches}
+\title{\href{https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN}{Tecnologías Multimedia} - Study Guide - Milestone 1: Git, GitHub and the Workflow}
 
 \maketitle
+
+\begin{figure}
+\begin{verbatim}
+               Local Host                    Remote Host
+---------------------------------------------   -------------
++-----------+   +-----------+   +-----------+   +-----------+
+|  Working  |   |  Staging  |   |           |   |           |
+|   Tree    |   |   Area    |   |           |   |           |
++-----------+   +-----------+   +-----------+   +-----------+
+      |               |               |               |
+      +- git add ---->|               |               |
+      |               +- git commit ->|               |
+      |               |               +- git push --->|
+      |               |               |<--- git pull -+
+      |<--------- git checkout -------+               |
+      |<---------- git merge ---------+               |
+\end{verbatim}
+\caption{Understanding the parts of a Git repo.}
+\label{fig:local_repo_structure_and_actions}
+\end{figure}
 
 \section{Description}
 
@@ -9,35 +29,39 @@ understand the basics of Git and GitHub\footnote{There are other
 Git-based hosting services such as
 \href{https://about.gitlab.com/}{GitLab} and
 \href{https://www.atlassian.com/git}{Altassian}/\href{https://bitbucket.org/product}{BitBucket},
-but GitHub is the most used one.}. We wil use
+but GitHub is the most used one.}, and how to use the
 \href{https://guides.github.com/introduction/flow/index.html}{The
-  GitHub Flow}. You need to understand that:
+  GitHub (Work)Flow}. You should know that:
 
 \begin{enumerate}
-\item If you want to contribute to a repo (that we will call
-  \emph{upstream}) \cite{Git-workflow} and you don't belong to the
-  team of developers (such as in InterCom), the first action that you
-  must do is to
+
+\item If you want to contribute to a repo (that we will call \emph{the
+upstream repo} or simply \emph{upstream}) \cite{Git-workflow} and you
+  don't belong to the team of developers (such as it happens in he
+  InterCom project), the first action that you must do is to
   \href{https://docs.github.com/en/github/getting-started-with-github/fork-a-repo}{fork}
-  the \emph{upstream} repo. This will create a copy in your GitHub
-  space that is yours, and the one thing that distinguish it from a
-  repo created by youself is that there is a link to the
-  \emph{upstream} repo.
-\item You can do a lot of work in a repo hosted by GitHub using the Web
-  interface, but it is much more convenient if you
+  the \emph{upstream}. This will create a copy of the repo in your
+  GitHub space, and the one thing that distinguish it from a repo
+  directly created by youself is that there is a link to the
+  \emph{upstream}.
+
+\item You can do a lot of work in a repo hosted by GitHub using the
+  Web interface, but it is much more convenient to
   \href{https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository}{clone}
   the repo.\footnote{Git is a
   \href{https://nvie.com/posts/a-successful-git-branching-model/}{decentralized
     control system for source code}. Decentralization means that every
-  developer have a copy of the \emph{origin} repo (the first instance
-  of the repo), and that thus, developers can synchromize their local
-  repos with the origin(al one) or any of the rest of developer's
-  repos, by simply adding \emph{Git remotes}.}
+  developer has a copy of the \emph{origin repo} (or simply
+  \emph{origin}, the first instance of the repo), and that thus, the
+  developers can synchromize their local repos with the
+  \emph{origin}(al one) or any of the rest of developer's repos, by
+  simply adding the right \emph{Git remotes}.}
+
 \item When you have a copy of the \emph{origin} in your local disk,
-  its time of the modifications/debuggings/improvements that you want
-  to perform. To update your local repo (also called as the
-  \emph{staging area}) with such changes carried on the \emph{working
-  directory}, you must perform a
+  its time to modificate/debug/improve what you want. To update your
+  local repo (also called as the \emph{staging area}) with such
+  changes carried on the \emph{working directory} of your repo (see
+  Fig.~\ref{fig:local_repo_structure_and_actions}), you must perform a
   \href{https://docs.github.com/en/github/getting-started-with-github/github-glossary#commit}{commit}\footnote{Technically,
   a commit copies the modifications performed in your \emph{working
   directory} (of your local repo) to the \emph{staging area} (of your
