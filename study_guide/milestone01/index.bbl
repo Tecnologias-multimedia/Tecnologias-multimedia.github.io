@@ -1,21 +1,16 @@
 \begin{thebibliography}{1}
 
-\bibitem{GitHub-HW}
-Github - \href{https://guides.github.com/activities/hello-world}{the Hello
-  World guide}.
-
-\bibitem{Git-book}
-\href{https://git-scm.com/book/en/v2}{Git - Book}.
-
-\bibitem{Git}
-\href{https://git-scm.com}{Git}.
-
 \bibitem{GitHub}
 \href{https://github.com}{GitHub}.
 
-\bibitem{Git-workflow}
+\bibitem{fork-and-branch-git-workflow}
 \href{https://github.com/vicente-gonzalez-ruiz/fork_and_branch_git_workflow}{The
   Fork and Branch Git Workflow}.
+
+\bibitem{Git-book}
+Scott Chacon and Ben Straub.
+\newblock {\em \href{https://git-scm.com/book/en/v2}{Pro Git}}.
+\newblock Apress, 2020.
 
 \bibitem{intercom}
 The students of

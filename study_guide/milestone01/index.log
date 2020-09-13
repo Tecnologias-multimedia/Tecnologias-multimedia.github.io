@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Arch Linux) (preloaded format=latex 2020.7.26)  9 SEP 2020 09:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Arch Linux) (preloaded format=latex 2020.9.9)  13 SEP 2020 20:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1474,33 +1474,58 @@ Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: End \AtBeginDocument code.
 --- file index.css ---
 )
-(/home/vruiz/LaTeX_templates/definitions.tex) (./texput.tex [1] [2]
-LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 5
-.
+(/home/vruiz/LaTeX_templates/definitions.tex) (./texput.tex [1] [2] [3]
+[4
 
-(/usr/share/texmf-dist/tex/latex/base/t1cmtt.fd
+]
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 6
+.
+ (/usr/share/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
-) [3]
-(/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
+) [5
+
+]
+--- file index2.html ---
+--- file index3.html ---
+
+
+LaTeX Warning: Citation `Git-workflow' on page 6 undefined on input line 51.
+
+--- file index4.html ---
+[6
+
+
+
+] (/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
 )
 (/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
-) [4] (./index.bbl
-[5]))
+) [7]
+LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 143.
+ [8] [9] [10]
+
+LaTeX Warning: Citation `Git-workflow' on page 11 undefined on input line 318.
+
+[11] [12] (./index.bbl [13]))
 
 Package glossaries Warning: No \printglossary or \printglossaries found. 
 (Remove \makeglossaries if you don't want any glossaries.) 
 This document will not have a glossary.
 
-[6] (./index.aux) ) 
-Here is how much of TeX's memory you used:
- 19824 strings out of 480479
- 288462 string characters out of 5905985
- 831759 words of memory out of 5000000
- 35118 multiletter control sequences out of 15000+600000
- 546276 words of font info for 66 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 62i,6n,104p,1483b,2079s stack positions out of 5000i,500n,10000p,200000b,80000s
+[14] (./index.aux)
 
-Output written on index.dvi (263 pages, 88296 bytes).
+LaTeX Warning: There were undefined references.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 19972 strings out of 480479
+ 290228 string characters out of 5905986
+ 835325 words of memory out of 5000000
+ 35262 multiletter control sequences out of 15000+600000
+ 549267 words of font info for 70 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 62i,6n,104p,1483b,1363s stack positions out of 5000i,500n,10000p,200000b,80000s
+
+Output written on index.dvi (271 pages, 127464 bytes).

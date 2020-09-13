@@ -47,28 +47,6 @@ performed in your \emph{working copy} (of your local repo) to the
 
 \begin{enumerate}
 
-\item If you want to contribute to a repo (that we will call \emph{the
-upstream repo} or simply \emph{upstream}) \cite{Git-workflow} and you
-  don't belong to the team of developers (such as it happens in he
-  InterCom project), the first action that you must do is to
-  \href{https://docs.github.com/en/github/getting-started-with-github/fork-a-repo}{fork}
-  the \emph{upstream}. This will create a copy of the repo in your
-  GitHub space, and the one thing that distinguish it from a repo
-  directly created by youself is that there is a link to the
-  \emph{upstream}.
-
-\item You can do a lot of work in a repo hosted by GitHub using the
-  Web interface, but it is much more convenient to
-  \href{https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository}{clone}
-  the repo.\footnote{Git is a
-  \href{https://nvie.com/posts/a-successful-git-branching-model/}{decentralized
-    control system for source code}. Decentralization means that every
-  developer has a copy of the \emph{origin repo} (or simply
-  \emph{origin}, the first instance of the repo), and that thus, the
-  developers can synchromize their local repos with the
-  \emph{origin}(al one) or any of the rest of developer's repos, by
-  simply adding the right \emph{Git remotes}.}
-
 \item When you copy the \emph{origin} in your local disk, you create
   the data structure shown in the
   Figure~\ref{fig:local_repo_structure_and_actions}. Such structure
@@ -139,7 +117,7 @@ Git \href{https://docs.gitlab.com/ee/topics/gitlab_flow.html}{branch}:
   button (select ``the Git protocol'', not ``https'' nor ``download a
   zip file'').
 
-  \begin{lstlisting}[language=bash}
+  \begin{lstlisting}[language=bash]
     cd hello_world
   \end{lstlisting}
 
@@ -150,9 +128,9 @@ Git \href{https://docs.gitlab.com/ee/topics/gitlab_flow.html}{branch}:
 
 \item \href{https://docs.github.com/en/github/getting-started-with-github/github-glossary#checkout}{Create (and switch to)} a
   \href{https://docs.github.com/en/github/getting-started-with-github/github-glossary#feature-branch}{feature
-    branch} called \texttt{improving_readme}. In your terminal write:
+    branch} called \texttt{improving\_readme}. In your terminal write:
   
-  \begin{lstlisting}[language=bash}
+  \begin{lstlisting}[language=bash]
     git checkout -b improving_readme
   \end{lstlisting}
   
@@ -166,7 +144,7 @@ Git \href{https://docs.gitlab.com/ee/topics/gitlab_flow.html}{branch}:
 
   And write:
   
-  \begin{lstlisting}[language=markdown}
+  \begin{lstlisting}
     See the [Hello World](https://guides.github.com/activities/hello-world/) guide at GitHub.
   \end{lstlisting}
   
@@ -326,13 +304,16 @@ Git \href{https://docs.gitlab.com/ee/topics/gitlab_flow.html}{branch}:
 \begin{verbatim}
   git@github.com:Tecnologias-multimedia/intercom.git
 \end{verbatim}        
-  This info can be found when you clone the InterCom. Notice however,
-  that clonning the InterCom is a waste of time because you cannot
-  contribute directly to it.
+  This info can be found when you
+  \href{https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository}{clone}
+  the InterCom. Notice however, that clonning the InterCom is a waste
+  of time because you cannot contribute directly to it.
 
-\item Add the remote \emph{upstream} with:
+\item Add the
+  \href{https://docs.github.com/en/github/getting-started-with-github/github-glossary#remote}{remote}
+  \emph{upstream} with:
 
-  \begin{lstlisting}[language=bash]  
+  \begin{lstlisting}[language=bash]
     git remote add upstream git@github.com:Tecnologias-multimedia/intercom.git
   \end{lstlisting}
 
@@ -343,6 +324,13 @@ Git \href{https://docs.gitlab.com/ee/topics/gitlab_flow.html}{branch}:
   \end{lstlisting}
 
   where you should see two remotes: \emph{origin} and \emph{upstream}.
+
+  Git is
+  a \href{https://nvie.com/posts/a-successful-git-branching-model/}{decentralized
+  control system for source code}. Decentralization means that every
+  developer has a copy of the \emph{origin}, and that thus, the
+  developers can synchronize their \emph{locals} with any of
+  the \emph{remotes}.
 
 \end{enumerate}
 

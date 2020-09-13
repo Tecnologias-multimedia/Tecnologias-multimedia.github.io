@@ -30,6 +30,38 @@ htfcss: ecss  font-family: sans-serif;
 htfcss: ecff  font-family: fantasy;
 htfcss: ecti  font-style: italic;
 htfcss: ectt  font-family: monospace,monospace;
+htfcss: ecbx  font-weight: bold;
+htfcss: ecsx  font-weight: bold;
+htfcss: ecbi  font-weight: bold;   font-style: italic;
+htfcss: ecit  font-style: italic; font-family: monospace,monospace;
+htfcss: ecss  font-family: sans-serif;
+htfcss: ecff  font-family: fantasy;
+htfcss: ecti  font-style: italic;
+htfcss: ectt  font-family: monospace,monospace;
+htfcss: ecbx  font-weight: bold;
+htfcss: ecsx  font-weight: bold;
+htfcss: ecbi  font-weight: bold;   font-style: italic;
+htfcss: ecit  font-style: italic; font-family: monospace,monospace;
+htfcss: ecss  font-family: sans-serif;
+htfcss: ecff  font-family: fantasy;
+htfcss: ecti  font-style: italic;
+htfcss: ectt  font-family: monospace,monospace;
+htfcss: ecbx  font-weight: bold;
+htfcss: ecsx  font-weight: bold;
+htfcss: ecbi  font-weight: bold;   font-style: italic;
+htfcss: ecit  font-style: italic; font-family: monospace,monospace;
+htfcss: ecss  font-family: sans-serif;
+htfcss: ecff  font-family: fantasy;
+htfcss: ecti  font-style: italic;
+htfcss: ectt  font-family: monospace,monospace;
+htfcss: ecbx  font-weight: bold;
+htfcss: ecsx  font-weight: bold;
+htfcss: ecbi  font-weight: bold;   font-style: italic;
+htfcss: ecit  font-style: italic; font-family: monospace,monospace;
+htfcss: ecss  font-family: sans-serif;
+htfcss: ecff  font-family: fantasy;
+htfcss: ecti  font-style: italic;
+htfcss: ectt  font-family: monospace,monospace;
 htfcss: cmbsy font-weight: bold;
 htfcss: cmbsy font-weight: bold;
 htfcss: cmbsy font-weight: bold;
@@ -46,6 +78,9 @@ htfcss: cmmib font-style: italic; font-weight: bold;
 File: index.html
 File: index.css
 File: index.tmp
+File: index2.html
+File: index3.html
+File: index4.html
 Css: p{margin-top:0;margin-bottom:0}
 Css: p.indent{text-indent:0;}
 Css: p + p{margin-top:1em;}
@@ -215,4 +250,8 @@ Font("msbm","5","5","100")
 Font("ecrm","1728","17","100")
 Font("ecrm","1200","12","100")
 Font("ectt","1000","10","100")
+Font("ecrm","0900","9","100")
+Font("ecrm","0800","8","100")
+Font("ecti","0800","8","100")
 Font("ecti","1000","10","100")
+Font("ecbx","1000","10","100")
