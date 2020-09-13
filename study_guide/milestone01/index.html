@@ -1,7 +1,7 @@
 <!DOCTYPE html> 
 <html> 
-<head> <title>TecnologÃŋas Multimedia - Study Guide - Milestone 1: Git, GitHub and the
-Workﬂow</title> 
+<head> <title>TecnologÃŋas Multimedia - Study Guide - Milestone 2: Installation and basic
+programming with Python</title> 
 <meta charset="UTF-8" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <link rel="stylesheet" type="text/css" href="index.css" /> 
@@ -23,7 +23,8 @@ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLor
 
 <h2 class="titleHead"><a 
 href="https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN" >Tecnologías Multimedia</a> - Study Guide -
-Milestone 1: Git, GitHub and the Workﬂow</h2>
+Milestone 2: Installation and basic programming
+with Python</h2>
  <div class="author" ><a 
 href="https://cms.ual.es/UAL/personas/persona.htm?id=515256515553484875" ><span 
 class="ecrm-1200">Vicente Gonz</span><span 
@@ -40,815 +41,141 @@ class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
 class="ecrm-1200">September 13, 2020</span></div>
    </div>
-   <hr class="figure" /><div class="figure" 
->
-                                                                  
-
-                                                                  
-                                                                  
-
-                                                                  
-<pre class="verbatim" id="verbatim-1">
-+-------------------------------------------+   +-----------+
-|              Local Host                   |   |Remote Host|
----------------------------------------------   -------------
-+-----------+   +-----------+   +-----------+   +-----------+
-|  Working  |   |  Staging  |   |   Local   |   |   Origin  |
-|   Tree    |   |   Area    |   |   Repo    |   |    Repo   |
-+-----------+   +-----------+   +-----------+   +-----------+
-      |               |               |               |
-      +----- add ----&#x003E;|               |               |
-      |               +----commit ---&#x003E;|               |
-      |               |               +---- push ----&#x003E;|
-      |               |               |&#x003C;--- pull -----+
-      |&#x003C;----------- checkout ---------+               |
-      |&#x003C;------------ merge -----------+               |
-</pre>
-<!--l. 21--><p class="nopar" > <a 
- id="x1-2r1"></a>
-<a 
- id="x1-3"></a>
-<br />                                                                  </p><div class="caption" 
-><span class="id">
-Figure 1: : </span><span  
-class="content">Structure-of and actions-on a Git repo.
-</span></div><!--tex4ht:label?: x1-2r -->
-                                                                  
-
-                                                                  
-   </div><hr class="endfigure" />
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
-<!--l. 28--><p class="noindent" >To work in <a 
-href="https://github.com/Tecnologias-multimedia/intercom" >the InterCom project</a> <span class="cite">[<a 
-href="#Xintercom">4</a>]</span> you will need to understand the basics of Git <span class="cite">[<a 
-href="#XGit-book">3</a>]</span> and
-<a 
-href="https://github.com/" >GitHub</a><span class="footnote-mark"><a 
-href="index2.html#fn1x0"><sup class="textsuperscript">1</sup></a></span><a 
- id="x1-1001f1"></a> 
-<span class="cite">[<a 
-href="#XGitHub">1</a>]</span>, and how to use the <a 
-href="https://guides.github.com/introduction/flow/index.html" >The GitHub (Work)Flow</a> and the <a 
-href="https://github.com/vicente-gonzalez-ruiz/fork_and_branch_git_workflow" >Fork-and-Branch Git
-Workﬂow</a> <span class="cite">[<a 
-href="#Xfork-and-branch-git-workflow">2</a>]</span>.
-</p><!--l. 42--><p class="indent" >   You should know that:
-</p><!--l. 44--><p class="indent" >   <span class="footnote-mark"><a 
-href="index3.html#fn2x0"><sup class="textsuperscript">2</sup></a></span><a 
- id="x1-1002f2"></a>
+<!--l. 7--><p class="noindent" >The InterCom project <span class="cite">[<a 
+href="#Xintercom">4</a>]</span> are a collection of <a 
+href="https://docs.python.org/3/tutorial/modules.html" >Python modules</a> written in Python <span class="cite">[<a 
+href="#XPython">3</a>]</span>.
+Therefore, you will need an interpreter and know how to develop/run Python
+programs (<a 
+href="https://docs.python.org/3/tutorial/modules.html#modules" >modules</a> and <a 
+href="https://docs.python.org/3/tutorial/modules.html#packages" >packages</a>).
+</p><!--l. 15--><p class="indent" >   Most of the current Unix-based operating systems (Linux, FreeBSD and OSX) use
+Python for running some of their “daily tasks”, which means that a Python
+interpreter is already available. However, usually it is better to use our own
+interpreter because:
+</p><!--l. 20--><p class="indent" >
      </p><ol  class="enumerate1" >
      <li 
-  class="enumerate" id="x1-1004x1">If you want to contribute to a repo (that we will call <span 
-class="ecti-1000">the upstream repo </span>or
-     simply <span 
-class="ecti-1000">upstream</span>) <span class="cite">[<span 
-class="ecbx-1000">?</span>]</span> and you don’t belong to the team of developers (such
-     as it happens in he InterCom project), the ﬁrst action that you must do is
-     to <a 
-href="https://docs.github.com/en/github/getting-started-with-github/fork-a-repo" >fork</a> the <span 
-class="ecti-1000">upstream</span>. This will create a copy of the repo in your GitHub
-     space, and the one thing that distinguish it from a repo directly created
-     by youself is that there is a link to the <span 
-class="ecti-1000">upstream</span>.
+  class="enumerate" id="x1-1002x1">We can chose the version of Python and the <a 
+href="https://docs.python.org/3/tutorial/modules.html#packages" >packages</a>.
      </li>
      <li 
-  class="enumerate" id="x1-1006x2">You can do a lot of work in a repo hosted by GitHub using the Web
-     interface, but it is much more convenient to <a 
-href="https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository" >clone</a> the repo.<span class="footnote-mark"><a 
-href="index4.html#fn3x0"><sup class="textsuperscript">3</sup></a></span><a 
- id="x1-1007f3"></a> 
+  class="enumerate" id="x1-1004x2">We can optimize the compilation of the interpreter depending on our needs
+     (for example, including <a 
+href="https://wiki.python.org/moin/TkInter" >Tk support</a> or not).
      </li>
      <li 
-  class="enumerate" id="x1-1009x3">When you copy the <span 
-class="ecti-1000">origin </span>in your local disk, you create the data structure
-     shown in the Figure <a 
-href="#x1-2r1">1<!--tex4ht:ref: fig:local_repo_structure_and_actions --></a>. Such structure has 3 main parts: (1) The <span 
-class="ecti-1000">working</span>
-     <span 
-class="ecti-1000">tree</span>, (2) the <span 
-class="ecti-1000">staging area</span>, and (3) the <span 
-class="ecti-1000">local repo</span>. The modiﬁcations are
-     carried on the <span 
-class="ecti-1000">working tree</span>, which can contain ﬁles and directories that
-     <span 
-class="ecti-1000">untracked </span>(probably temporal ﬁles that never should be included in the
-     repo). The <span 
-class="ecti-1000">staging area </span>(also called <span 
-class="ecti-1000">index</span>) is form by the subset of tracked
-     ﬁles of the <span 
-class="ecti-1000">working tree</span>. The <span 
-class="ecti-1000">local repo </span>is the data structure that holds all
-     the history of the repo. When the <span 
-class="ecti-1000">local repo </span>and the <span 
-class="ecti-1000">origin </span>are synchonized,
-     their contents are the same.
-     </li>
-     <li 
-  class="enumerate" id="x1-1011x4">To update your <span 
-class="ecti-1000">local repo </span>with the modiﬁcations carried on the <span 
-class="ecti-1000">working</span>
-     <span 
-class="ecti-1000">tree</span>, you must perform a <a 
-href="https://docs.github.com/en/github/getting-started-with-github/github-glossary#commit" >commit</a>.
+  class="enumerate" id="x1-1006x3">By  default,  all  the  Python  packages  will  be  installed  in  a  diﬀerent
+     repository   of   the   system   packages,   which   eases   the   system/user
+     Python-isolation and the removal of the interpreter.
+     </li></ol>
                                                                   
 
                                                                   
-     </li>
-     <li 
-  class="enumerate" id="x1-1013x5">At any moment, you can decide to synchronize your local repo with the
-     <span 
-class="ecti-1000">origin </span>or any other <span 
-class="ecti-1000">remote</span>. This action is called a <a 
-href="https://docs.github.com/en/github/using-git/pushing-commits-to-a-remote-repository" >push</a>.
-     </li>
-     <li 
-  class="enumerate" id="x1-1015x6">Also, at any moment, you can decide to share your modiﬁcations (or even
-     only your thoughts) with the <span 
-class="ecti-1000">upstream </span>(developers). For that, you can do
-     a <a 
-href="https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests" >pull-request</a>.</li></ol>
-<!--l. 99--><p class="indent" >   You should also understand what is a Git <a 
-href="https://docs.gitlab.com/ee/topics/gitlab_flow.html" >branch</a>:
-     </p><ol  class="enumerate1" >
-     <li 
-  class="enumerate" id="x1-1017x1"><span 
-class="ecti-1000">Main branches</span>, that have inﬁnite lifetime. All repos have a <span 
-class="ecti-1000">master </span>branch,
-     which should be always deployable. Some have a <span 
-class="ecti-1000">testing </span>branch, in which
-     the code is tested before it is included in the master (stable) branch.
-     </li>
-     <li 
-  class="enumerate" id="x1-1019x2"><span 
-class="ecti-1000">Feature/debug branches</span>, which are aimed to develop a new functionality
-     or to debug. Feature branches are also called topic branches. These type
-     of branches have usually a short life.</li></ol>
+<!--l. 35--><p class="indent" >   In Windows you need to install Python, yes or yes, from the oﬃcial <a 
+href="https://www.python.org/downloads/" >website</a>.
+However, notice that this “guide” only contemplates the installation of Python in
+Unix-based OS machines.
+</p><!--l. 40--><p class="noindent" >
+</p>
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
  id="x1-20002"></a>What you have to do?</h3>
-<!--l. 113--><p class="noindent" >
+<!--l. 42--><p class="noindent" >
      </p><ol  class="enumerate1" >
      <li 
-  class="enumerate" id="x1-2002x1">Have a look to <a 
-href="https://git-scm.com/book/en/v2" >the Pro Git book</a> <span class="cite">[<a 
-href="#XGit-book">3</a>]</span>, what as the main source of information
-     for Git.
-     </li>
-     <li 
-  class="enumerate" id="x1-2004x2">If you don’t have an GitHub account, please, do the <a 
-href="https://guides.github.com/activities/hello-world/" >the Hello World guide
-     at GitHub</a> and create one. Be aware that to contribute to InterCom an
-     GitHub account is required. Notice that in the Hello World guide, the
-     <span 
-class="ectt-1000">master </span>branch is named the <span 
-class="ectt-1000">main </span>branch. Please, create a <span 
-class="ectt-1000">README.md </span>ﬁle
-     for the Hello World repo, as the guide suggests.
-     </li>
-     <li 
-  class="enumerate" id="x1-2006x3">Now, we are going to to the same that we have done using the GitHub web
-     interface (except the Step 1: Create a Repo), but now using the terminal which
-     will be the most used interface for dealing with Git. First, if Git is not
-     installed in your host (try to run <span 
-class="ectt-1000">git </span>in a terminal), install it with
-     <!--l. 132-->
-     <div class="lstlisting" id="listing-1"><span class="label"><a 
- id="x1-2007r1"></a></span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">sudo</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">apt</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">install</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">git</span>
-     
-     </div>
-                                                                  
-
-                                                                  
-     </li>
-     <li 
-  class="enumerate" id="x1-2009x4"><a 
-href="https://docs.github.com/en/github/getting-started-with-github/github-glossary#clone" >Clone</a> (download) the Hello World repo. You need to click on the “Code” button
-     (select “the Git protocol”, not “https” nor “download a zip ﬁle”).
-     <!--l. 142-->
-     <div class="lstlisting" id="listing-2"><span class="label"><a 
- id="x1-2010r1"></a></span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">cd</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">hello_world</span>
-     
-     </div>
-     <!--l. 146--><p class="noindent" >Notice that a new directory named as the repo’s name at GitHub has
-     been created and that inside you can ﬁnd the <span 
-class="ectt-1000">README.md </span><a 
-href="https://daringfireball.net/projects/markdown/" >Markdown</a>
-     ﬁle.
-     </p></li>
-     <li 
-  class="enumerate" id="x1-2012x5"><a 
-href="https://docs.github.com/en/github/getting-started-with-github/github-glossary#checkout" >Create (and switch to)</a> a <a 
-href="https://docs.github.com/en/github/getting-started-with-github/github-glossary#feature-branch" >feature branch</a> called <span 
-class="ectt-1000">improving_readme</span>. In your
-     terminal write:
-     <!--l. 155-->
-     <div class="lstlisting" id="listing-3"><span class="label"><a 
- id="x1-2013r1"></a></span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">git</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">checkout</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">-</span><span 
-class="ectt-1000">b</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">improving_readme</span>
-     
-     </div>
-     </li>
-     <li 
-  class="enumerate" id="x1-2015x6">Modify the ﬁle <span 
-class="ectt-1000">README.md</span>. Append to it, for example, a link to the Hello World
-     guide. Use an ASCII editor (<span 
-class="ectt-1000">nano</span>, for example):
-     <!--l. 163-->
-     <div class="lstlisting" id="listing-4"><span class="label"><a 
- id="x1-2016r1"></a></span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">nano</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">README</span>
-     
-     </div>
-     <!--l. 167--><p class="noindent" >And write:
-</p>
-     <!--l. 169-->
-     <div class="lstlisting" id="listing-5"><span class="label"><a 
- id="x1-2017r1"></a></span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">See</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">the</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">[</span><span 
-class="ectt-1000">Hello</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">World</span><span 
-class="ectt-1000">](</span><span 
-class="ectt-1000">https</span><span 
-class="ectt-1000">://</span><span 
-class="ectt-1000">guides</span><span 
-class="ectt-1000">.</span><span 
-class="ectt-1000">github</span><span 
-class="ectt-1000">.</span><span 
-class="ectt-1000">com</span><span 
-class="ectt-1000">/</span><span 
-class="ectt-1000">activities</span><span 
-class="ectt-1000">/</span><span 
-class="ectt-1000">hello</span><span 
-class="ectt-1000">-</span><span 
-class="ectt-1000">world</span><span 
-class="ectt-1000">/)</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">guide</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">at</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">GitHub</span><span 
-class="ectt-1000">.</span>
-     
-     </div>
-     </li>
-     <li 
-  class="enumerate" id="x1-2019x7"><a 
-href="https://docs.github.com/en/github/getting-started-with-github/github-glossary#commit" >Commit</a> your modiﬁcation(s):
-     <!--l. 177-->
-     <div class="lstlisting" id="listing-6"><span class="label"><a 
- id="x1-2020r1"></a></span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">git</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">commit</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">-</span><span 
-class="ectt-1000">am</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">&#x0022;</span><span 
-class="ectt-1000">Providing</span><span 
-class="ectt-1000">␣</span><span 
-class="ectt-1000">the</span><span 
-class="ectt-1000">␣</span><span 
-class="ectt-1000">Hello</span><span 
-class="ectt-1000">␣</span><span 
-class="ectt-1000">World</span><span 
-class="ectt-1000">␣</span><span 
-class="ectt-1000">link</span><span 
-class="ectt-1000">&#x0022;</span>
-     
-                                                                  
-
-                                                                  
-     </div>
-     <!--l. 181--><p class="noindent" >In your ﬁrst commit you will be prompted with:
-</p>
-     <!--l. 183-->
-     <div class="lstlisting" id="listing-7"><span class="label"><a 
- id="x1-2021r1"></a></span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">git</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">config</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">--</span><span 
-class="ectt-1000">global</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">user</span><span 
-class="ectt-1000">.</span><span 
-class="ectt-1000">email</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">&#x0022;</span><span 
-class="ectt-1000">you@example</span><span 
-class="ectt-1000">.</span><span 
-class="ectt-1000">com</span><span 
-class="ectt-1000">&#x0022;</span>
-     
-     </div>
-     <!--l. 187--><p class="noindent" >Plase, input such information.
-     </p><!--l. 189--><p class="noindent" >After the <span 
-class="ectt-1000">commit</span>, your <span 
-class="ecti-1000">local </span>repo is <span 
-class="ecti-1000">ahead </span>of your <a 
-href="https://docs.github.com/en/github/getting-started-with-github/github-glossary#origin" ><span 
-class="ecti-1000">origin</span></a> (copy at GitHub of
-     the) remote repo. This means that your <span 
-class="ecti-1000">local </span>has modiﬁcations that the <span 
-class="ecti-1000">origin</span>
-     doesn’t have.
-     </p></li>
-     <li 
-  class="enumerate" id="x1-2023x8">Synchronize your <span 
-class="ecti-1000">local </span>and the <span 
-class="ecti-1000">origin </span>using <a 
-href="https://docs.github.com/en/github/getting-started-with-github/github-glossary#push" >push</a>.
-     <!--l. 198--><p class="noindent" >Notice that if you have not upoaded a public <a 
-href="https://www.ssh.com/" >SSH</a> <a 
-href="https://www.ssh.com/ssh/identity-key" >key</a> (or the corresponding
-     private key is not properly installed in your computer), the GitHub server
-     requests your username and password, and this is something that is goint to
-     happen with every push. To avoid this repetitive input of your GitHub login
-     information, you need <a 
-href="https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh" >to identify you at GitHub</a> using <a 
-href="https://en.wikipedia.org/wiki/Public-key_cryptography" >public-key criptography</a>.
-     You need to own a pair of keys, one public and other private, and upload the
-     public one to GitHub.
-     </p></li>
-     <li 
-  class="enumerate" id="x1-2025x9">The ﬁrst step to solve this drawback is to check whether you already have a
-     pair of keys (if your are using the just installed Xubuntu distribution, obviously
-     you don’t need to check anything and can go directly to the next step). Simply
-     revise your <span 
-class="ectt-1000">$HOME/.ssh </span>directory with:
-     <!--l. 218-->
-     <div class="lstlisting" id="listing-8"><span class="label"><a 
- id="x1-2026r1"></a></span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">ls</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">-</span><span 
-class="ectt-1000">l</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">~/.</span><span 
-class="ectt-1000">ssh</span>
-     
-     </div>
-     <!--l. 222--><p class="noindent" >and if you ﬁnd a pair of ﬁles with almost the same name, and one of they
-     ﬁnished with <span 
-class="ectt-1000">.pub</span>, you have a pair of SSH keys.
-     </p></li>
-     <li 
-  class="enumerate" id="x1-2028x10">Let’s create a pair of keys (if you don’t have one or if you prefeer to create a
-     new one). Open a terminal and write:
-     <!--l. 228-->
-     <div class="lstlisting" id="listing-9"><span class="label"><a 
- id="x1-2029r1"></a></span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">ssh</span><span 
-class="ectt-1000">-</span><span 
-class="ectt-1000">keygen</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">-</span><span 
-class="ectt-1000">t</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">rsa</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">-</span><span 
-class="ectt-1000">b</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">4096</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">-</span><span 
-class="ectt-1000">C</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">&#x0022;</span><span 
-class="ectt-1000">your_email@example</span><span 
-class="ectt-1000">.</span><span 
-class="ectt-1000">com</span><span 
-class="ectt-1000">&#x0022;</span>
-     
-                                                                  
-
-                                                                  
-     </div>
-     <!--l. 232--><p class="noindent" >using the email address you provided when you created the GitHub account.
-     Then you are prompted with:
-</p>
-     <!--l. 235-->
-     <div class="lstlisting" id="listing-10"><span class="label"><a 
- id="x1-2030r1"></a></span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">Enter</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">a</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">file</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">in</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">which</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">to</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">save</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">the</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">key</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">(/</span><span 
-class="ectt-1000">home</span><span 
-class="ectt-1000">/</span><span 
-class="ectt-1000">you</span><span 
-class="ectt-1000">/.</span><span 
-class="ectt-1000">ssh</span><span 
-class="ectt-1000">/</span><span 
-class="ectt-1000">id_rsa</span><span 
-class="ectt-1000">):</span>
-     
-     </div>
-     <!--l. 239--><p class="noindent" >just press the Enter-key, to select such output preﬁx. Otherwise, write a
-     diﬀerent one, but don’t change the path to the <span 
-class="ectt-1000">.ssh </span>directory.
-     </p></li>
-     <li 
-  class="enumerate" id="x1-2032x11">Now SSH should request you for a passphrase. If you write one, you will be
-     asked for it each time you push your commits to GitHub. There are two options
-     to avoid this:
-     <!--l. 247--><p class="noindent" >
+  class="enumerate" id="x1-2002x1">Installation of Python.
+     <!--l. 46--><p class="noindent" >
          </p><ol  class="enumerate2" >
          <li 
-  class="enumerate" id="x1-2034x1">Input no passphrase (just by pressing the Enter-key again). This has
-         the drawback that if somebody has your keys, he could access to
-         GitHub as he were you.
+  class="enumerate" id="x1-2004x1">Go to <a 
+href="https://github.com/vicente-gonzalez-ruiz/YAPT/blob/master/01-hello_world/02-installation.ipynb" >YAPT/01-hello_world/02-installation.ipynb</a> <span class="cite">[<span 
+class="ecbx-1000">?</span>]</span> and follow the
+         instructions to install CPython 3.8.5.
          </li>
          <li 
-  class="enumerate" id="x1-2036x2">Input a passphrase and conﬁgure <span 
-class="ectt-1000">ssh-agent </span>to send it to GitHub by
-         you. This option is the preferable one becase you will be asked for
-         the passphrase only when the <span 
-class="ectt-1000">ssh-agent </span>is started.</li></ol>
+  class="enumerate" id="x1-2006x2">Following also these instructions, create a new virtual environment
+         called <span 
+class="ectt-1000">tm</span>.
+         </li>
+         <li 
+  class="enumerate" id="x1-2008x3">Remember that you will need to active it when you want to work in
+         this project. It is a good idea to append:
+         <!--l. 58-->
+         <div class="lstlisting" id="listing-1"><span class="label"><a 
+ id="x1-2009r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">pyenv</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">activate</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">tm</span>
+         
+         </div>
+         <!--l. 62--><p class="noindent" >to the <span 
+class="ectt-1000"> /.bashrc </span>ﬁle.
+         </p></li>
+         <li 
+  class="enumerate" id="x1-2011x4">Install an <a 
+href="https://en.wikipedia.org/wiki/Integrated_development_environment" >IDE</a> for programming with Python. I recommend <a 
+href="https://thonny.org/" >Thonny</a> if you
+         are not used to any other.
+         </li></ol>
      </li>
      <li 
-  class="enumerate" id="x1-2038x12">Now it’s time to check whether the <span 
-class="ectt-1000">ssh-agent </span>is already running in your
-     computer. This can be checked with:
-     <!--l. 260-->
-     <div class="lstlisting" id="listing-11"><span class="label"><a 
- id="x1-2039r1"></a></span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">ps</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">aux</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">|</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">grep</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">ssh</span><span 
-class="ectt-1000">-</span><span 
-class="ectt-1000">agent</span>
-     
-     </div>
-     <!--l. 264--><p class="noindent" >and in the case of Xubuntu, you should get something similar to:
-</p>
-     <!--l. 266-->
-     <div class="lstlisting" id="listing-12"><span class="label"><a 
- id="x1-2040r1"></a></span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">989</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">?</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">Ss</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">0:00</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">/</span><span 
-class="ectt-1000">usr</span><span 
-class="ectt-1000">/</span><span 
-class="ectt-1000">bin</span><span 
-class="ectt-1000">/</span><span 
-class="ectt-1000">ssh</span><span 
-class="ectt-1000">-</span><span 
-class="ectt-1000">agent</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">/</span><span 
-class="ectt-1000">usr</span><span 
-class="ectt-1000">/</span><span 
-class="ectt-1000">bin</span><span 
-class="ectt-1000">/</span><span 
-class="ectt-1000">im</span><span 
-class="ectt-1000">-</span><span 
-class="ectt-1000">launch</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">startxfce4</span><span 
-class="ectt-1000"> </span><br /><span class="label"><a 
- id="x1-2041r2"></a></span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">1433</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">pts</span><span 
-class="ectt-1000">/0</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">S</span><span 
-class="ectt-1000">+</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">0:00</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">grep</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">--</span><span 
-class="ectt-1000">color</span><span 
-class="ectt-1000">=</span><span 
-class="ectt-1000">auto</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">ssh</span><span 
-class="ectt-1000">-</span><span 
-class="ectt-1000">agent</span>
-     
-     </div>
-     <!--l. 271--><p class="noindent" >This means that there are two processes in whose description there exists the
-     string <span 
-class="ectt-1000">ssh-agent</span>. The ﬁrst entry is the agent process. The second one is the
-     <span 
-class="ectt-1000">grep </span>running at the same time that the <span 
-class="ectt-1000">ps</span>.
+  class="enumerate" id="x1-2013x2">Python programming.
+     <!--l. 74--><p class="noindent" >
+         </p><ol  class="enumerate2" >
+         <li 
+  class="enumerate" id="x1-2015x1">You don’t need to master Python to follow this course, but it is
+         convenient for you to follow some Python programming tutorial, such
+         as  <a 
+href="https://docs.python.org/3/tutorial/" >The  Python  Tutorial</a>  <span class="cite">[<a 
+href="#Xpython-tutorial">1</a>]</span>  if  you  realize  that  the  language  is  a
+         setback for you. If you need to start with Python from scratch, an
+         introduction to Python such as <a 
+href="https://github.com/vicente-gonzalez-ruiz/YAPT/tree/master/workshops/programacion_python_ESO" >this one</a> <span class="cite">[<a 
+href="#XYAPT">2</a>]</span> could be helpful.
+         </li></ol>
                                                                   
 
                                                                   
-     </p></li>
-     <li 
-  class="enumerate" id="x1-2043x13">If the <a 
-href="https://www.ssh.com/ssh/agent" ><span 
-class="ectt-1000">ssh-agent</span></a> were not running, it can be launched to run in the
-     background with:
-     <!--l. 279-->
-     <div class="lstlisting" id="listing-13"><span class="label"><a 
- id="x1-2044r1"></a></span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">eval</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">&#x0022;</span><span 
-class="ectt-1000">$</span><span 
-class="ectt-1000">(</span><span 
-class="ectt-1000">ssh</span><span 
-class="ectt-1000">-</span><span 
-class="ectt-1000">agent</span><span 
-class="ectt-1000">␣</span><span 
-class="ectt-1000">-</span><span 
-class="ectt-1000">s</span><span 
-class="ectt-1000">)</span><span 
-class="ectt-1000">&#x0022;</span>
-     
-     </div>
-     <!--l. 283--><p class="noindent" >but you don’t need to do that in your Xubuntu installation, because the
-     <span 
-class="ectt-1000">ssh-agent </span>the <a 
-href="https://www.xfce.org/" >XFCE</a> lauches it.
-     </p></li>
-     <li 
-  class="enumerate" id="x1-2046x14">With your keys, run:
-     <!--l. 289-->
-     <div class="lstlisting" id="listing-14"><span class="label"><a 
- id="x1-2047r1"></a></span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">ssh</span><span 
-class="ectt-1000">-</span><span 
-class="ectt-1000">add</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">~/.</span><span 
-class="ectt-1000">ssh</span><span 
-class="ectt-1000">/</span><span 
-class="ectt-1000">id_rsa</span>
-     
-     </div>
-     <!--l. 293--><p class="noindent" >and the passphrase will be prompt.
-     </p></li>
-     <li 
-  class="enumerate" id="x1-2049x15">Go now to GitHub <span 
-class="ectt-1000">-&#x003E; </span>Settings <span 
-class="ectt-1000">-&#x003E; </span>SSH and GPG keys <span 
-class="ectt-1000">-&#x003E; </span>New SSH
-     key.
-     <!--l. 297--><p class="noindent" >Open a terminal and write:
-</p>
-     <!--l. 299-->
-     <div class="lstlisting" id="listing-15"><span class="label"><a 
- id="x1-2050r1"></a></span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">cat</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">.</span><span 
-class="ectt-1000">ssh</span><span 
-class="ectt-1000">/</span><span 
-class="ectt-1000">id_rsa</span><span 
-class="ectt-1000">.</span><span 
-class="ectt-1000">pub</span>
-     
-     </div>
-     <!--l. 303--><p class="noindent" >and copy and paste the content of such ﬁle (which ends with your email
-     address) inside of the space where you can read “Begins with ’ssh-rsa’, ...”.
-     Don’t forget to give a title (something such as “tec-multimedia”) to the key
-     pair.
-     </p></li>
-     <li 
-  class="enumerate" id="x1-2052x16">When you use the key for the ﬁrst time (clonning a repo or pushing a commit),
-     the SSH client will warn you that the autenticity of <span 
-class="ectt-1000">github.com </span>cannot be
-     established. This is normal and should happen only once. Type <span 
-class="ectt-1000">yes</span>. If this
-     problem persists, then you could be suﬀering a <a 
-href="https://en.wikipedia.org/wiki/Man-in-the-middle_attack" >man-in-the-middle
-     attack</a>.
-                                                                  
-
-                                                                  
-     </li>
-     <li 
-  class="enumerate" id="x1-2054x17">Revise <a 
-href="https://github.com/vicente-gonzalez-ruiz/fork_and_branch_git_workflow" >The Fork and Branch Git Workﬂow</a> <span class="cite">[<span 
-class="ecbx-1000">?</span>]</span>. Basically, this “protocol”
-     explains that to contribute to an open-source repo hosted by GitHub without
-     belonging to the develop team.
-     </li>
-     <li 
-  class="enumerate" id="x1-2056x18">Make a fork of the <a 
-href="https://github.com/Tecnologias-multimedia/intercom" >InterCom</a> project. We will call to this repo the <a 
-href="https://docs.github.com/en/github/getting-started-with-github/github-glossary#upstream" ><span 
-class="ecti-1000">upstream</span></a>,
-     whose URL is
-                                                                  
-
-                                                                  
-     <pre class="verbatim" id="verbatim-2">
-       git@github.com:Tecnologias-multimedia/intercom.git
-</pre>
-     <!--l. 328--><p class="nopar" > This info can be found when you clone the InterCom. Notice however, that
-     clonning the InterCom is a waste of time because you cannot contribute
-     directly to it.
-     </p></li>
-     <li 
-  class="enumerate" id="x1-2058x19">Add the remote <span 
-class="ecti-1000">upstream </span>with:
-     <!--l. 335-->
-     <div class="lstlisting" id="listing-16"><span class="label"><a 
- id="x1-2059r1"></a></span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">git</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">remote</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">add</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">upstream</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">git@github</span><span 
-class="ectt-1000">.</span><span 
-class="ectt-1000">com</span><span 
-class="ectt-1000">:</span><span 
-class="ectt-1000">Tecnologias</span><span 
-class="ectt-1000">-</span><span 
-class="ectt-1000">multimedia</span><span 
-class="ectt-1000">/</span><span 
-class="ectt-1000">intercom</span><span 
-class="ectt-1000">.</span><span 
-class="ectt-1000">git</span>
-     
-     </div>
-     <!--l. 339--><p class="noindent" >Check that everything has worked with:
-</p>
-     <!--l. 341-->
-     <div class="lstlisting" id="listing-17"><span class="label"><a 
- id="x1-2060r1"></a></span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">git</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">remote</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">-</span><span 
-class="ectt-1000">v</span>
-     
-     </div>
-     <!--l. 345--><p class="noindent" >where you should see two remotes: <span 
-class="ecti-1000">origin </span>and <span 
-class="ecti-1000">upstream</span>.
-</p>
      </li></ol>
-<!--l. 349--><p class="noindent" >
+<!--l. 89--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-30003"></a>Timming</h3>
-<!--l. 351--><p class="noindent" >You should reach this milestone at most in one week.
-</p><!--l. 353--><p class="noindent" >
+<!--l. 91--><p class="noindent" >There is not time limit for ﬁnishing this milestone. Develop it at your own
+pace.
+</p><!--l. 94--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-40004"></a>Deliverables</h3>
-<!--l. 355--><p class="noindent" >None.
-                                                                  
-
-                                                                  
-</p><!--l. 357--><p class="noindent" >
+<!--l. 96--><p class="noindent" >None.
+</p><!--l. 98--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-50005"></a>Resources</h3>
    <div class="thebibliography">
    <p class="bibitem" ><span class="biblabel">
  [1]<span class="bibsp">   </span></span><a 
- id="XGitHub"></a><a 
-href="https://github.com" >GitHub</a>.
+ id="Xpython-tutorial"></a><a 
+href="https://docs.python.org/3/tutorial/" >The Python Tutorial</a>.
    </p>
    <p class="bibitem" ><span class="biblabel">
  [2]<span class="bibsp">   </span></span><a 
- id="Xfork-and-branch-git-workflow"></a><a 
-href="https://github.com/vicente-gonzalez-ruiz/fork_and_branch_git_workflow" >The Fork and Branch Git Workﬂow</a>.
+ id="XYAPT"></a><a 
+href="https://github.com/vicente-gonzalez-ruiz/YAPT/" >YAPT</a>.
    </p>
    <p class="bibitem" ><span class="biblabel">
  [3]<span class="bibsp">   </span></span><a 
- id="XGit-book"></a>Scott Chacon and Ben Straub. <a 
-href="https://git-scm.com/book/en/v2" ><span 
-class="ecti-1000">Pro Git</span></a>. Apress, 2020.
+ id="XPython"></a><a 
+href="https://www.python.org/" >Python</a> website.
    </p>
    <p class="bibitem" ><span class="biblabel">
  [4]<span class="bibsp">   </span></span><a 
