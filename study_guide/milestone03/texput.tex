@@ -7,7 +7,7 @@
 Let's start the development of InterCom with a simple program that
 inputs digital audio (through
 the \href{https://en.wikipedia.org/wiki/Analog-to-digital_converter}{ADC}
-of our computer) and as soon as possible outputs it (through
+of your computer) and, as soon as possible, outputs it (through
 the \href{https://en.wikipedia.org/wiki/Digital-to-analog_converter}{DAC}). You
 can download an example program (which in the world of Python is
 called a \emph{module})
@@ -16,15 +16,19 @@ you are planning to run this module right now, check first that the
 output volumen of your speakers is not too high (an audio coupling (a
 feedback) between the mic(rophone) and the speakers could happen).
 
-As you can see in the code the module, we use the
-\href{https://python-sounddevice.readthedocs.io/en/latest/}{python-sounddevice}
-\cite{sounddevice} module to access to the sound hardware, through
+As you can see in the code of \texttt{wire3.py}:
+
 \begin{lstlisting}[language=Python]
 import sounddevice as sd
 \end{lstlisting}
 
+we are using the
+\href{https://python-sounddevice.readthedocs.io/en/latest/}{python-sounddevice}
+\cite{sounddevice} module to access to the sound hardware.
+
 Next, we create a I/O raw audio stream
-using \href{https://python-sounddevice.readthedocs.io/en/latest/api/raw-streams.html#sounddevice.RawStream}{sounddevice.RawStream()}, using
+using \href{https://python-sounddevice.readthedocs.io/en/latest/api/raw-streams.html#sounddevice.RawStream}{sounddevice.RawStream()},
+using
 \begin{lstlisting}[language=Python]
 stream = sd.RawStream(samplerate=44100, channels=2, dtype='int16')
 \end{lstlisting}
@@ -52,6 +56,24 @@ be defined just below.
 The loop is an infinite loop
 
 \section{What you have to do?}
+
+\begin{enumerate}
+
+\item Measure the theoretical latency.
+
+\item Write a pulse generator that periodically plays a very short
+  sound, and where we can control the period.
+
+\item Capture this sound with \texttt{wire3.py} and modify the period
+  until you hear that the input and the output are synchronized.
+
+\item Compute the period in secods, this is also the latency of
+  \texttt{wire3.py}.
+
+\item Compute the difference between this latency and the theoretical
+  one.
+
+\end{enumerate}
 
 \section{Resources}
 
