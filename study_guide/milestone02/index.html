@@ -1,0 +1,751 @@
+<!DOCTYPE html> 
+<html> 
+<head> <title>TecnologÃŋas Multimedia - Study Guide - Milestone 3: Git, GitHub and the
+Fork-and-Branch Git Workﬂow</title> 
+<meta charset="UTF-8" /> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
+<link rel="stylesheet" type="text/css" href="index.css" /> 
+<script type="text/javascript" 
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" 
+></script> 
+<style type="text/css"> 
+.MathJax_MathML {text-indent: 0;} 
+</style> 
+</head><body 
+>
+   <div class="maketitle">
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+
+<h2 class="titleHead"><a 
+href="https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN" >Tecnologías Multimedia</a> - Study Guide -
+Milestone 3: Git, GitHub and the
+Fork-and-Branch Git Workﬂow</h2>
+ <div class="author" ><a 
+href="https://cms.ual.es/UAL/personas/persona.htm?id=515256515553484875" ><span 
+class="ecrm-1200">Vicente Gonz</span><span 
+class="ecrm-1200">á</span><span 
+class="ecrm-1200">lez Ruiz</span></a> <span 
+class="ecrm-1200">- </span><a 
+href="https://cms.ual.es/UAL/universidad/departamentos/informatica/index.htm" ><span 
+class="ecrm-1200">Depto Inform</span><span 
+class="ecrm-1200">á</span><span 
+class="ecrm-1200">tica</span></a> <span 
+class="ecrm-1200">- </span><a 
+href="https://www.ual.es" ><span 
+class="ecrm-1200">UAL</span></a></div><br />
+<div class="date" ><span 
+class="ecrm-1200">September 14, 2020</span></div>
+   </div>
+   <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
+ id="x1-10001"></a>Description</h3>
+<!--l. 7--><p class="noindent" >To work in <a 
+href="https://github.com/Tecnologias-multimedia/intercom" >the InterCom project</a> <span class="cite">[<a 
+href="#Xintercom">4</a>]</span> you will need to understand the basics of Git <span class="cite">[<a 
+href="#XGit-book">3</a>]</span> and
+<a 
+href="https://github.com/" >GitHub</a><span class="footnote-mark"><a 
+href="index2.html#fn1x0"><sup class="textsuperscript">1</sup></a></span><a 
+ id="x1-1001f1"></a> 
+<span class="cite">[<a 
+href="#XGitHub">1</a>]</span>, and how to use the <a 
+href="https://guides.github.com/introduction/flow/index.html" >The GitHub (Work)Flow</a> and the <a 
+href="https://github.com/vicente-gonzalez-ruiz/fork_and_branch_git_workflow" >Fork-and-Branch Git
+Workﬂow</a> <span class="cite">[<a 
+href="#Xfork-and-branch-git-workflow">2</a>]</span>.
+</p>
+   <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
+ id="x1-20002"></a>What you have to do?</h3>
+<!--l. 22--><p class="noindent" >
+     </p><ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x1-2002x1">Have a look to <a 
+href="https://git-scm.com/book/en/v2" >the Pro Git book</a> <span class="cite">[<a 
+href="#XGit-book">3</a>]</span>, what as the main source of information
+     for Git.
+     </li>
+     <li 
+  class="enumerate" id="x1-2004x2">If you don’t have an GitHub account, please, do the <a 
+href="https://guides.github.com/activities/hello-world/" >the Hello World guide
+     at GitHub</a> and create one. Be aware that to contribute to InterCom an
+     GitHub account is required. Notice that in the Hello World guide, the
+     <span 
+class="ectt-1000">master </span>branch is named the <span 
+class="ectt-1000">main </span>branch. Please, create a <span 
+class="ectt-1000">README.md </span>ﬁle
+     for the Hello World repo, as the guide suggests.
+                                                                  
+
+                                                                  
+     </li>
+     <li 
+  class="enumerate" id="x1-2006x3">Now, we are going to to the same that we have done using the GitHub web
+     interface (except the Step 1: Create a Repo), but now using the terminal which
+     will be the most used interface for dealing with Git. First, if Git is not
+     installed in your host (try to run <span 
+class="ectt-1000">git </span>in a terminal), install it with
+     <!--l. 41-->
+     <div class="lstlisting" id="listing-1"><span class="label"><a 
+ id="x1-2007r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">sudo</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">apt</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">install</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">git</span>
+     
+     </div>
+     </li>
+     <li 
+  class="enumerate" id="x1-2009x4"><a 
+href="https://docs.github.com/en/github/getting-started-with-github/github-glossary#clone" >Clone</a> (download) the Hello World repo. You need to click on the “Code” button
+     (select “the Git protocol”, not “https” nor “download a zip ﬁle”).
+     <!--l. 51-->
+     <div class="lstlisting" id="listing-2"><span class="label"><a 
+ id="x1-2010r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">cd</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">hello_world</span>
+     
+     </div>
+     <!--l. 55--><p class="noindent" >Notice that a new directory named as the repo’s name at GitHub has
+     been created and that inside you can ﬁnd the <span 
+class="ectt-1000">README.md </span><a 
+href="https://daringfireball.net/projects/markdown/" >Markdown</a>
+     ﬁle.
+     </p></li>
+     <li 
+  class="enumerate" id="x1-2012x5"><a 
+href="https://docs.github.com/en/github/getting-started-with-github/github-glossary#checkout" >Create (and switch to)</a> a <a 
+href="https://docs.github.com/en/github/getting-started-with-github/github-glossary#feature-branch" >feature branch</a> called <span 
+class="ectt-1000">improving_readme</span>. In your
+     terminal write:
+     <!--l. 64-->
+     <div class="lstlisting" id="listing-3"><span class="label"><a 
+ id="x1-2013r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">git</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">checkout</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">-</span><span 
+class="ectt-1000">b</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">improving_readme</span>
+     
+     </div>
+     </li>
+     <li 
+  class="enumerate" id="x1-2015x6">Modify the ﬁle <span 
+class="ectt-1000">README.md</span>. Append to it, for example, a link to the Hello World
+     guide. Use an ASCII editor (<span 
+class="ectt-1000">nano</span>, for example):
+     <!--l. 72-->
+     <div class="lstlisting" id="listing-4"><span class="label"><a 
+ id="x1-2016r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">nano</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">README</span>
+     
+     </div>
+     <!--l. 76--><p class="noindent" >And write:
+</p>
+     <!--l. 78-->
+                                                                  
+
+                                                                  
+     <div class="lstlisting" id="listing-5"><span class="label"><a 
+ id="x1-2017r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">See</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">the</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">[</span><span 
+class="ectt-1000">Hello</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">World</span><span 
+class="ectt-1000">](</span><span 
+class="ectt-1000">https</span><span 
+class="ectt-1000">://</span><span 
+class="ectt-1000">guides</span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">github</span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">com</span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">activities</span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">hello</span><span 
+class="ectt-1000">-</span><span 
+class="ectt-1000">world</span><span 
+class="ectt-1000">/)</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">guide</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">at</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">GitHub</span><span 
+class="ectt-1000">.</span>
+     
+     </div>
+     </li>
+     <li 
+  class="enumerate" id="x1-2019x7"><a 
+href="https://docs.github.com/en/github/getting-started-with-github/github-glossary#commit" >Commit</a> your modiﬁcation(s):
+     <!--l. 86-->
+     <div class="lstlisting" id="listing-6"><span class="label"><a 
+ id="x1-2020r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">git</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">commit</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">-</span><span 
+class="ectt-1000">am</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">&#x0022;</span><span 
+class="ectt-1000">Providing</span><span 
+class="ectt-1000">␣</span><span 
+class="ectt-1000">the</span><span 
+class="ectt-1000">␣</span><span 
+class="ectt-1000">Hello</span><span 
+class="ectt-1000">␣</span><span 
+class="ectt-1000">World</span><span 
+class="ectt-1000">␣</span><span 
+class="ectt-1000">link</span><span 
+class="ectt-1000">&#x0022;</span>
+     
+     </div>
+     <!--l. 90--><p class="noindent" >In your ﬁrst commit you will be prompted with:
+</p>
+     <!--l. 92-->
+     <div class="lstlisting" id="listing-7"><span class="label"><a 
+ id="x1-2021r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">git</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">config</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">--</span><span 
+class="ectt-1000">global</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">user</span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">email</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">&#x0022;</span><span 
+class="ectt-1000">you@example</span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">com</span><span 
+class="ectt-1000">&#x0022;</span>
+     
+     </div>
+     <!--l. 96--><p class="noindent" >Plase, input such information.
+     </p><!--l. 98--><p class="noindent" >After the <span 
+class="ectt-1000">commit</span>, your <span 
+class="ecti-1000">local </span>repo is <span 
+class="ecti-1000">ahead </span>of your <a 
+href="https://docs.github.com/en/github/getting-started-with-github/github-glossary#origin" ><span 
+class="ecti-1000">origin</span></a> (copy at GitHub of
+     the) remote repo. This means that your <span 
+class="ecti-1000">local </span>has modiﬁcations that the <span 
+class="ecti-1000">origin</span>
+     doesn’t have.
+     </p></li>
+     <li 
+  class="enumerate" id="x1-2023x8">Synchronize your <span 
+class="ecti-1000">local </span>and the <span 
+class="ecti-1000">origin </span>using <a 
+href="https://docs.github.com/en/github/getting-started-with-github/github-glossary#push" >push</a>.
+     <!--l. 107--><p class="noindent" >Notice that if you have not upoaded a public <a 
+href="https://www.ssh.com/" >SSH</a> <a 
+href="https://www.ssh.com/ssh/identity-key" >key</a> (or the corresponding
+     private key is not properly installed in your computer), the GitHub server
+     requests your username and password, and this is something that is goint to
+     happen with every push. To avoid this repetitive input of your GitHub login
+     information, you need <a 
+href="https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh" >to identify you at GitHub</a> using <a 
+href="https://en.wikipedia.org/wiki/Public-key_cryptography" >public-key criptography</a>.
+     You need to own a pair of keys, one public and other private, and upload the
+     public one to GitHub.
+     </p></li>
+     <li 
+  class="enumerate" id="x1-2025x9">The ﬁrst step to solve this drawback is to check whether you already have a
+     pair of keys (if your are using the just installed Xubuntu distribution, obviously
+     you don’t need to check anything and can go directly to the next step). Simply
+     revise your <span 
+class="ectt-1000">$HOME/.ssh </span>directory with:
+     <!--l. 127-->
+     <div class="lstlisting" id="listing-8"><span class="label"><a 
+ id="x1-2026r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">ls</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">-</span><span 
+class="ectt-1000">l</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">~/.</span><span 
+class="ectt-1000">ssh</span>
+     
+                                                                  
+
+                                                                  
+     </div>
+     <!--l. 131--><p class="noindent" >and if you ﬁnd a pair of ﬁles with almost the same name, and one of they
+     ﬁnished with <span 
+class="ectt-1000">.pub</span>, you have a pair of SSH keys.
+     </p></li>
+     <li 
+  class="enumerate" id="x1-2028x10">Let’s create a pair of keys (if you don’t have one or if you prefeer to create a
+     new one). Open a terminal and write:
+     <!--l. 137-->
+     <div class="lstlisting" id="listing-9"><span class="label"><a 
+ id="x1-2029r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">ssh</span><span 
+class="ectt-1000">-</span><span 
+class="ectt-1000">keygen</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">-</span><span 
+class="ectt-1000">t</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">rsa</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">-</span><span 
+class="ectt-1000">b</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">4096</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">-</span><span 
+class="ectt-1000">C</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">&#x0022;</span><span 
+class="ectt-1000">your_email@example</span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">com</span><span 
+class="ectt-1000">&#x0022;</span>
+     
+     </div>
+     <!--l. 141--><p class="noindent" >using the email address you provided when you created the GitHub account.
+     Then you are prompted with:
+</p>
+     <!--l. 144-->
+     <div class="lstlisting" id="listing-10"><span class="label"><a 
+ id="x1-2030r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">Enter</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">a</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">file</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">in</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">which</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">to</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">save</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">the</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">key</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">(/</span><span 
+class="ectt-1000">home</span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">you</span><span 
+class="ectt-1000">/.</span><span 
+class="ectt-1000">ssh</span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">id_rsa</span><span 
+class="ectt-1000">):</span>
+     
+     </div>
+     <!--l. 148--><p class="noindent" >just press the Enter-key, to select such output preﬁx. Otherwise, write a
+     diﬀerent one, but don’t change the path to the <span 
+class="ectt-1000">.ssh </span>directory.
+     </p></li>
+     <li 
+  class="enumerate" id="x1-2032x11">Now SSH should request you for a passphrase. If you write one, you will be
+     asked for it each time you push your commits to GitHub. There are two options
+     to avoid this:
+     <!--l. 156--><p class="noindent" >
+         </p><ol  class="enumerate2" >
+         <li 
+  class="enumerate" id="x1-2034x1">Input no passphrase (just by pressing the Enter-key again). This has
+         the drawback that if somebody has your keys, he could access to
+         GitHub as he were you.
+         </li>
+         <li 
+  class="enumerate" id="x1-2036x2">Input a passphrase and conﬁgure <span 
+class="ectt-1000">ssh-agent </span>to send it to GitHub by
+         you. This option is the preferable one becase you will be asked for
+         the passphrase only when the <span 
+class="ectt-1000">ssh-agent </span>is started.</li></ol>
+     </li>
+     <li 
+  class="enumerate" id="x1-2038x12">Now it’s time to check whether the <span 
+class="ectt-1000">ssh-agent </span>is already running in your
+     computer. This can be checked with:
+     <!--l. 169-->
+     <div class="lstlisting" id="listing-11"><span class="label"><a 
+ id="x1-2039r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">ps</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">aux</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">|</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">grep</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">ssh</span><span 
+class="ectt-1000">-</span><span 
+class="ectt-1000">agent</span>
+     
+                                                                  
+
+                                                                  
+     </div>
+     <!--l. 173--><p class="noindent" >and in the case of Xubuntu, you should get something similar to:
+</p>
+     <!--l. 175-->
+     <div class="lstlisting" id="listing-12"><span class="label"><a 
+ id="x1-2040r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">989</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">?</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">Ss</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">0:00</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">usr</span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">bin</span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">ssh</span><span 
+class="ectt-1000">-</span><span 
+class="ectt-1000">agent</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">usr</span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">bin</span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">im</span><span 
+class="ectt-1000">-</span><span 
+class="ectt-1000">launch</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">startxfce4</span><span 
+class="ectt-1000"> </span><br /><span class="label"><a 
+ id="x1-2041r2"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">1433</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">pts</span><span 
+class="ectt-1000">/0</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">S</span><span 
+class="ectt-1000">+</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">0:00</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">grep</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">--</span><span 
+class="ectt-1000">color</span><span 
+class="ectt-1000">=</span><span 
+class="ectt-1000">auto</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">ssh</span><span 
+class="ectt-1000">-</span><span 
+class="ectt-1000">agent</span>
+     
+     </div>
+     <!--l. 180--><p class="noindent" >This means that there are two processes in whose description there exists the
+     string <span 
+class="ectt-1000">ssh-agent</span>. The ﬁrst entry is the agent process. The second one is the
+     <span 
+class="ectt-1000">grep </span>running at the same time that the <span 
+class="ectt-1000">ps</span>.
+     </p></li>
+     <li 
+  class="enumerate" id="x1-2043x13">If the <a 
+href="https://www.ssh.com/ssh/agent" ><span 
+class="ectt-1000">ssh-agent</span></a> were not running, it can be launched to run in the
+     background with:
+     <!--l. 188-->
+     <div class="lstlisting" id="listing-13"><span class="label"><a 
+ id="x1-2044r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">eval</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">&#x0022;</span><span 
+class="ectt-1000">$</span><span 
+class="ectt-1000">(</span><span 
+class="ectt-1000">ssh</span><span 
+class="ectt-1000">-</span><span 
+class="ectt-1000">agent</span><span 
+class="ectt-1000">␣</span><span 
+class="ectt-1000">-</span><span 
+class="ectt-1000">s</span><span 
+class="ectt-1000">)</span><span 
+class="ectt-1000">&#x0022;</span>
+     
+     </div>
+     <!--l. 192--><p class="noindent" >but you don’t need to do that in your Xubuntu installation, because the
+     <span 
+class="ectt-1000">ssh-agent </span>the <a 
+href="https://www.xfce.org/" >XFCE</a> lauches it.
+     </p></li>
+     <li 
+  class="enumerate" id="x1-2046x14">With your keys, run:
+     <!--l. 198-->
+     <div class="lstlisting" id="listing-14"><span class="label"><a 
+ id="x1-2047r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">ssh</span><span 
+class="ectt-1000">-</span><span 
+class="ectt-1000">add</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">~/.</span><span 
+class="ectt-1000">ssh</span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">id_rsa</span>
+     
+     </div>
+     <!--l. 202--><p class="noindent" >and the passphrase will be prompt.
+     </p></li>
+     <li 
+  class="enumerate" id="x1-2049x15">Go now to GitHub <span 
+class="ectt-1000">-&#x003E; </span>Settings <span 
+class="ectt-1000">-&#x003E; </span>SSH and GPG keys <span 
+class="ectt-1000">-&#x003E; </span>New SSH
+     key.
+     <!--l. 206--><p class="noindent" >Open a terminal and write:
+</p>
+     <!--l. 208-->
+     <div class="lstlisting" id="listing-15"><span class="label"><a 
+ id="x1-2050r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">cat</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">ssh</span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">id_rsa</span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">pub</span>
+     
+                                                                  
+
+                                                                  
+     </div>
+     <!--l. 212--><p class="noindent" >and copy and paste the content of such ﬁle (which ends with your email
+     address) inside of the space where you can read “Begins with ’ssh-rsa’, ...”.
+     Don’t forget to give a title (something such as “tec-multimedia”) to the key
+     pair.
+     </p></li>
+     <li 
+  class="enumerate" id="x1-2052x16">When you use the key for the ﬁrst time (clonning a repo or pushing a commit),
+     the SSH client will warn you that the autenticity of <span 
+class="ectt-1000">github.com </span>cannot be
+     established. This is normal and should happen only once. Type <span 
+class="ectt-1000">yes</span>. If this
+     problem persists, then you could be suﬀering a <a 
+href="https://en.wikipedia.org/wiki/Man-in-the-middle_attack" >man-in-the-middle
+     attack</a>.
+     </li>
+     <li 
+  class="enumerate" id="x1-2054x17">Revise <a 
+href="https://github.com/vicente-gonzalez-ruiz/fork_and_branch_git_workflow" >The Fork and Branch Git Workﬂow</a> <span class="cite">[<span 
+class="ecbx-1000">?</span>]</span>. Basically, this “protocol”
+     explains that to contribute to an open-source repo hosted by GitHub without
+     belonging to the develop team.
+     </li>
+     <li 
+  class="enumerate" id="x1-2056x18">Make a fork of the <a 
+href="https://github.com/Tecnologias-multimedia/intercom" >InterCom</a> project. We will call to this repo the <a 
+href="https://docs.github.com/en/github/getting-started-with-github/github-glossary#upstream" ><span 
+class="ecti-1000">upstream</span></a>,
+     whose URL is
+                                                                  
+
+                                                                  
+     <pre class="verbatim" id="verbatim-1">
+       git@github.com:Tecnologias-multimedia/intercom.git
+</pre>
+     <!--l. 237--><p class="nopar" > This info can be found when you <a 
+href="https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository" >clone</a> the InterCom. Notice however, that
+     clonning the InterCom is a waste of time because you cannot contribute
+     directly to it.
+     </p></li>
+     <li 
+  class="enumerate" id="x1-2058x19">Add the <a 
+href="https://docs.github.com/en/github/getting-started-with-github/github-glossary#remote" >remote</a> <span 
+class="ecti-1000">upstream </span>with:
+     <!--l. 247-->
+     <div class="lstlisting" id="listing-16"><span class="label"><a 
+ id="x1-2059r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">git</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">remote</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">add</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">upstream</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">git@github</span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">com</span><span 
+class="ectt-1000">:</span><span 
+class="ectt-1000">Tecnologias</span><span 
+class="ectt-1000">-</span><span 
+class="ectt-1000">multimedia</span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">intercom</span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">git</span>
+     
+     </div>
+     <!--l. 251--><p class="noindent" >Check that everything has worked with:
+</p>
+     <!--l. 253-->
+     <div class="lstlisting" id="listing-17"><span class="label"><a 
+ id="x1-2060r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">git</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">remote</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">-</span><span 
+class="ectt-1000">v</span>
+     
+     </div>
+     <!--l. 257--><p class="noindent" >where you should see two remotes: <span 
+class="ecti-1000">origin </span>and <span 
+class="ecti-1000">upstream</span>.
+     </p><!--l. 259--><p class="noindent" >Git is a <a 
+href="https://nvie.com/posts/a-successful-git-branching-model/" >decentralized control system for source code</a>. Decentralization means
+     that every developer has a copy of the <span 
+class="ecti-1000">origin</span>, and that thus, the developers can
+     synchronize their <span 
+class="ecti-1000">locals </span>with any of the <span 
+class="ecti-1000">remotes</span>.
+</p>
+     </li></ol>
+<!--l. 268--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
+ id="x1-30003"></a>Timming</h3>
+<!--l. 270--><p class="noindent" >You should reach this milestone at most in one week.
+</p><!--l. 272--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
+ id="x1-40004"></a>Deliverables</h3>
+<!--l. 274--><p class="noindent" >None.
+                                                                  
+
+                                                                  
+</p><!--l. 276--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
+ id="x1-50005"></a>Resources</h3>
+   <div class="thebibliography">
+   <p class="bibitem" ><span class="biblabel">
+ [1]<span class="bibsp">   </span></span><a 
+ id="XGitHub"></a><a 
+href="https://github.com" >GitHub</a>.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [2]<span class="bibsp">   </span></span><a 
+ id="Xfork-and-branch-git-workflow"></a><a 
+href="https://github.com/vicente-gonzalez-ruiz/fork_and_branch_git_workflow" >The Fork and Branch Git Workﬂow</a>.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [3]<span class="bibsp">   </span></span><a 
+ id="XGit-book"></a>Scott Chacon and Ben Straub. <a 
+href="https://git-scm.com/book/en/v2" ><span 
+class="ecti-1000">Pro Git</span></a>. Apress, 2020.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [4]<span class="bibsp">   </span></span><a 
+ id="Xintercom"></a>The students of <a 
+href="https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN" >Tecnologías Multimedia</a> at the UAL.  The <a 
+href="https://github.com/Tecnologias-multimedia/intercom" >InterCom</a>
+   project.
+</p>
+   </div>
+<a 
+ id="Q1-1-6"></a>
+    
+</body> 
+</html>
+                                                                  
+
+
