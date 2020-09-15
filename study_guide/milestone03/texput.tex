@@ -4,17 +4,27 @@
 
 \section{Description}
 
-Let's start the development of InterCom with a simple program that
-inputs digital audio (through
-the \href{https://en.wikipedia.org/wiki/Analog-to-digital_converter}{ADC}
-of your computer) and, as soon as possible, outputs it (through
-the \href{https://en.wikipedia.org/wiki/Digital-to-analog_converter}{DAC}). You
-can download an example program (which in the world of Python is
-called a \emph{module})
-from \href{https://github.com/Tecnologias-multimedia/intercom/blob/master/test/sounddevice/wire3.py}{here}. If
-you are planning to run this module right now, check first that the
-output volumen of your speakers is not too high (an audio coupling (a
-feedback) between the mic(rophone) and the speakers could happen).
+Let's start our development of InterCom with a simple program that
+inputs digital audio (through the
+\href{https://en.wikipedia.org/wiki/Analog-to-digital_converter}{ADC}
+of your computer) and, as soon as possible, outputs it (through the
+\href{https://en.wikipedia.org/wiki/Digital-to-analog_converter}{DAC}). We
+are going to download a minimal audio-wire program and to measure its
+latency. To handle the audio hardware we use
+\href{https://python-sounddevice.readthedocs.io}{\texttt{sounddevice}}
+\cite{sounddevice}, that is wrapper for the
+\href{http://www.portaudio.com/}{PortAudio} library.
+
+\section{What you have to do?}
+
+\begin{enumerate}
+
+\item Download the Python \href{https://docs.python.org/3/tutorial/modules.html}{module} \href{https://github.com/Tecnologias-multimedia/intercom/blob/master/test/sounddevice/wire3.py}{wire3.py}.
+
+\item If you want to run this module right now, check first that the
+  output volumen of your speakers is not too high (an audio coupling
+  (a feedback) between the mic(rophone) and the speakers could
+  happen).
 
 As you can see in the code of \texttt{wire3.py}:
 
@@ -55,10 +65,6 @@ be defined just below.
 
 The loop is an infinite loop
 
-\section{What you have to do?}
-
-\begin{enumerate}
-
 \item Measure the theoretical latency.
 
 \item Write a pulse generator that periodically plays a very short
@@ -77,3 +83,4 @@ The loop is an infinite loop
 
 \section{Resources}
 
+\bibliography{python}
