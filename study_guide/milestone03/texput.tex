@@ -76,7 +76,7 @@ handle the audio hardware we use
     nose
   \end{lstlisting}
 
-  This is solved intalling the
+  This is solved by intalling the
   \href{https://python-sounddevice.readthedocs.io/en/latest/}{python-sounddevice}
   \cite{sounddevice} module with:
 
@@ -87,7 +87,7 @@ handle the audio hardware we use
 \item Now, lets compute, experimentally, the \texttt{wire3.py}
   latency.
 
-  \begin{enumerate} \item First, we will need the
+  \begin{enumerate} \item First, we need the
   tools \href{http://sox.sourceforge.net/}{SoX}, \href{https://www.audacityteam.org/}{Audacity}
   and \href{https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire3.py}{wire3.py}:
   
@@ -104,8 +104,8 @@ handle the audio hardware we use
     \end{lstlisting}
 
     and check that the gain of the mic does not
-    \href{https://en.wikipedia.org/wiki/Clipping_(audio)}{clip} the
-    sound recording.
+    produce \href{https://en.wikipedia.org/wiki/Clipping_(audio)}{clipping}
+    during the sound recording.
 
   \item Run:
 
@@ -113,23 +113,56 @@ handle the audio hardware we use
       sox -t alsa default test.wav
     \end{lstlisting}
 
-    and in a different terminal, run:
+    to save the ADC's output to a file, and in a different terminal,
+    run:
 
     \begin{lstlisting}[language=Bash]
-      python plot_input.py
+      python wire3.py
     \end{lstlisting}
 
     while you control the output volume of the speakers to produce a
-    decaying couple between both devices (the speaker(s) and the
-    mic). If your desktop has not these
-    \href{https://en.wikipedia.org/wiki/Transducer}{transducers}, we
-    can use a
-    \href{https://www.google.com/search?q=male+to+male+audio+jack+cable&client=firefox-b-d&sxsrf=ALeKk00GZUDGqiOfc0D8xkA_MIYgCuZmSA:1600270049146&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjdvsu-_u3rAhXl0eAKHS90DUoQ_AUoAXoECA0QAw&biw=4288&bih=972}{male-to-male
-      jack audio cable} and wire the input and the output of your
+    decaying coupling effect between both devices (the speaker(s) and
+    the mic). If your desktop has not
+    these \href{https://en.wikipedia.org/wiki/Transducer}{transducers},
+    we can use
+    a \href{https://www.google.com/search?q=male+to+male+audio+jack+cable&client=firefox-b-d&sxsrf=ALeKk00GZUDGqiOfc0D8xkA_MIYgCuZmSA:1600270049146&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjdvsu-_u3rAhXl0eAKHS90DUoQ_AUoAXoECA0QAw&biw=4288&bih=972}{male-to-male
+    jack audio cable} and connect the input and the output of your
     sound card.
 
+  \item While \texttt{sox} is recording, produce some short sound (for
+    example, hit your laptop or your micro with one or your nails). Do
+    this at least a couple of times more, to be sure that you record
+    the sound and the feedback of such sound. It's important the sound
+    to be short (a few miliseconds) in order to recognize it and it's
+    replicas.
+
+  \item Stop \texttt{sox} with CTRL+C keys.
+
+  \item Load the sound file into Audacity:
     
-As you can see in the code of \texttt{wire3.py}:
+    \begin{lstlisting}[language=Bash]
+      audacity test.wav
+    \end{lstlisting}
+
+    and localize one of your sounds.
+
+  \item Now, move the Audacity's audio-cursor and localize the first
+    replica (there could be more than 1).
+
+  \item Measure the time between the ocurrence of the short sound and
+    it's first replica. This time is the real latency of your computer
+    runing \texttt{wire3.py}.
+
+  \item Modify the ``constant'' $\mathtt{CHUNK\_SIZE}$ and repeat this
+    process starting at the Step X.Y. Which percentaje (or ratio)
+    between the physical latency and $\mathtt{CHUNK\_SIZE}$ holds?
+
+  \end{enumerate}
+
+\item At this point, we know the real physical latency of the
+  $\mathtmodule. Let's compute now the teoretical latency. Consider the basic audio configuration
+
+A you can see in the code of \texttt{wire3.py}:
 
 \begin{lstlisting}[language=Python]
 import sounddevice as sd
