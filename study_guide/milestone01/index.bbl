@@ -1,3 +1,19 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{1}
+
+\bibitem{python-tutorial}
+\href{https://docs.python.org/3/tutorial/}{The Python Tutorial}.
+
+\bibitem{YAPT}
+\href{https://github.com/vicente-gonzalez-ruiz/YAPT/}{YAPT}.
+
+\bibitem{Python}
+\href{https://www.python.org/}{Python} website.
+
+\bibitem{intercom}
+The students of
+  \href{https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN}{Tecnologías
+  Multimedia} at~the UAL.
+\newblock The
+  \href{https://github.com/Tecnologias-multimedia/intercom}{InterCom} project.
 
 \end{thebibliography}
