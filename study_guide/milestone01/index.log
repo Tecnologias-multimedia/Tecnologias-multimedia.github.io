@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Arch Linux) (preloaded format=latex 2020.9.9)  13 SEP 2020 22:57
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Arch Linux) (preloaded format=latex 2020.9.9)  15 SEP 2020 22:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1481,9 +1481,6 @@ LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 5
 (/usr/share/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 ) [3]
-
-LaTeX Warning: Citation `YAPY' on page 4 undefined on input line 50.
-
 (/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
 )
@@ -1495,18 +1492,14 @@ Package glossaries Warning: No \printglossary or \printglossaries found.
 (Remove \makeglossaries if you don't want any glossaries.) 
 This document will not have a glossary.
 
-[5] (./index.aux)
-
-LaTeX Warning: There were undefined references.
-
- ) 
+[5] (./index.aux) ) 
 Here is how much of TeX's memory you used:
- 19816 strings out of 480479
- 288378 string characters out of 5905986
- 829855 words of memory out of 5000000
+ 19815 strings out of 480479
+ 288360 string characters out of 5905986
+ 829853 words of memory out of 5000000
  35110 multiletter control sequences out of 15000+600000
- 546366 words of font info for 66 fonts, out of 8000000 for 9000
+ 545590 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,6n,104p,1483b,1484s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on index.dvi (262 pages, 87452 bytes).
+Output written on index.dvi (262 pages, 87496 bytes).

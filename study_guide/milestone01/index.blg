@@ -4,13 +4,12 @@ The top-level auxiliary file: index.aux
 The style file: plain.bst
 Database file #1: python.bib
 Database file #2: intercom.bib
-Warning--I didn't find a database entry for "YAPY"
 Warning--to sort, need author or key in Python
-Warning--to sort, need author or key in python-tutorial
 Warning--to sort, need author or key in YAPT
+Warning--to sort, need author or key in python-tutorial
 You've used 4 entries,
             2118 wiz_defined-function locations,
-            509 strings with 4440 characters,
+            507 strings with 4432 characters,
 and the built_in function-call counts, 659 in all, are:
 = -- 52
 > -- 10
@@ -49,4 +48,4 @@ warning$ -- 3
 while$ -- 2
 width$ -- 5
 write$ -- 24
-(There were 4 warnings)
+(There were 3 warnings)
