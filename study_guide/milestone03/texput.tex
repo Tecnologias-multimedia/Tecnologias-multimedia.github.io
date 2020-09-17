@@ -1,4 +1,4 @@
-\title{\href{https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN}{Tecnologías Multimedia} - Study Guide - Milestone 3: ``wiring'' the ADC with the DAC}
+\title{\href{https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN}{Tecnologías Multimedia} - Study Guide - Milestone 4: ``wiring'' the ADC with the DAC and measuring latencies}
 
 \maketitle
 
@@ -76,7 +76,7 @@ handle the audio hardware we use
     nose
   \end{lstlisting}
 
-  This is solved by intalling the
+  This is solved by installing the
   \href{https://python-sounddevice.readthedocs.io/en/latest/}{python-sounddevice}
   \cite{sounddevice} module with:
 
@@ -107,14 +107,7 @@ handle the audio hardware we use
     produce \href{https://en.wikipedia.org/wiki/Clipping_(audio)}{clipping}
     during the sound recording.
 
-  \item Run:
-
-    \begin{lstlisting}[language=Bash]
-      sox -t alsa default test.wav
-    \end{lstlisting}
-
-    to save the ADC's output to a file, and in a different terminal,
-    run:
+  \item \label{start_point} In a terminal, run:
 
     \begin{lstlisting}[language=Bash]
       python wire3.py
@@ -129,6 +122,15 @@ handle the audio hardware we use
     jack audio cable} and connect the input and the output of your
     sound card.
 
+  \item In a different terminal (keep \texttt{python wire3.py}
+    running), run:
+
+    \begin{lstlisting}[language=Bash]
+      sox -t alsa default test.wav
+    \end{lstlisting}
+
+    to save the ADC's output to a file.
+
   \item While \texttt{sox} is recording, produce some short sound (for
     example, hit your laptop or your micro with one or your nails). Do
     this at least a couple of times more, to be sure that you record
@@ -136,7 +138,10 @@ handle the audio hardware we use
     to be short (a few miliseconds) in order to recognize it and it's
     replicas.
 
-  \item Stop \texttt{sox} with CTRL+C keys.
+  \item Stop \texttt{sox} by pressing the CTRL and C keys (CTRL+C) at
+    the same time. This kills \texttt{sox}.
+
+  \item Stop \texttt{python wire3.pt} with CTRL+C.
 
   \item Load the sound file into Audacity:
     
@@ -144,77 +149,82 @@ handle the audio hardware we use
       audacity test.wav
     \end{lstlisting}
 
-    and localize one of your sounds.
+  \item Localize the first one of your nail-hitting-the-mic sounds in
+    the
+    \href{https://manual.audacityteam.org/man/audio_tracks.html}{audio
+      track}.
 
-  \item Now, move the Audacity's audio-cursor and localize the first
-    replica (there could be more than 1).
+  \item Select the region with your sound and a replica using our
+    mouse.
 
-  \item Measure the time between the ocurrence of the short sound and
+  \item Use the
+    \href{https://manual.audacityteam.org/man/edit_toolbar.html#zoom_to_selection}{zoom
+      to selection buttom} to zoom-in the selected area.
+
+  \item Measure the time between the ocurrence of the sound and
     it's first replica. This time is the real latency of your computer
     runing \texttt{wire3.py}.
 
-  \item Modify the ``constant'' $\mathtt{CHUNK\_SIZE}$ and repeat this
-    process starting at the Step X.Y. Which percentaje (or ratio)
-    between the physical latency and $\mathtt{CHUNK\_SIZE}$ holds?
+  \item Modify the constant $\mathtt{CHUNK\_SIZE}$ and repeat this
+    process, starting at the Step \ref{start_point}. Create an ASCII
+    file (\texttt{latency\_vs\_chunk\_size.txt}) with the content (use
+    tabulators to space the columns):
+\begin{verbatim}
+# CHUNK_SIZE    real
+32              ...
+64              ...
+128             ...
+256             ...
+512             ...
+1024            ...
+2048            ...
+4096            ...
+8192            ...
+\end{verbatim}
 
   \end{enumerate}
 
-\item At this point, we know the real physical latency of the
-  $\mathtmodule. Let's compute now the teoretical latency. Consider the basic audio configuration
+\item At this point, we know the real latency of \texttt{wire3.py} as
+  a function of $\mathtt{CHUNK\_SIZE}$. Plot the file
+  \texttt{latency\_vs\_chunk\_size.txt} with:
 
-A you can see in the code of \texttt{wire3.py}:
+  \begin{lstlisting}[language=Bash]
+     echo "set terminal pdf; set output 'latency_vs_chunk_size.pdf'; set xlabel 'CHUNK\_SIZE (frames)'; set ylabel 'Latency (seconds)'; plot 'latency_vs_chunk_size.txt' title '' with linespoints" | gnuplot
+  \end{lstlisting}
 
-\begin{lstlisting}[language=Python]
-import sounddevice as sd
-\end{lstlisting}
+\item Let's compute now the buffering latency. If
+  $\mathtt{sampling\_rate}$ is the number of frames per second, it holds
+  that:
+  
+  \begin{equation}
+    \mathtt{buffering\_latency} = \mathtt{CHUNK\_SIZE} / \mathtt{sampling\_rate}
+  \end{equation}
 
-we are using the
- to access to the sound hardware.
+  Add these calculations to \texttt{latency\_vs\_chunk\_size.txt} using
+  a third column (remember to use TABs).
+\begin{verbatim}
+# CHUNK_SIZE    real    minimal
+:               :       :
+\end{verbatim}
 
-Next, we create a I/O raw audio stream
-using \href{https://python-sounddevice.readthedocs.io/en/latest/api/raw-streams.html#sounddevice.RawStream}{sounddevice.RawStream()},
-using
-\begin{lstlisting}[language=Python]
-stream = sd.RawStream(samplerate=44100, channels=2, dtype='int16')
-\end{lstlisting}
+\item Plot both latencies:
 
-As you can see in \cite{sounddevice}, this constructor method accepts
-several parameters. In our example we have used only the most
-relevants for us right now:
-\begin{enumerate}
-\item The samling rate.
-\item The number of channels.
-\item The number of bits of each sample.
-\end{enumerate}
-Please, refeer \cite{harmonic-analysis} for knowing more detailed
-information about these parameters.
-
-Please, review the modules of documentation 
-
-Next, we define a chunk size
-\begin{lstlisting}[language=Python]
-CHUNK_SIZE = 1024
-\end{lstlisting}
-for the block of data we are going to capture in the loop that will
-be defined just below.
-
-The loop is an infinite loop
-
-\item Measure the theoretical latency.
-
-\item Write a pulse generator that periodically plays a very short
-  sound, and where we can control the period.
-
-\item Capture this sound with \texttt{wire3.py} and modify the period
-  until you hear that the input and the output are synchronized.
-
-\item Compute the period in secods, this is also the latency of
-  \texttt{wire3.py}.
-
-\item Compute the difference between this latency and the theoretical
-  one.
+  \begin{lstlisting}[language=Bash]
+    echo "set terminal pdf; set output 'latency_vs_chunk_size.pdf'; set xlabel 'CHUNK\_SIZE (frames)'; set ylabel 'Latency (seconds)'; set key left; plot 'latency_vs_chunk_size.txt' using 1:2 title 'Real' with linespoints, 'latency_vs_chunk_size.txt' using 1:3 title 'Minimal' with linespoints" | gnuplot
+  \end{lstlisting}
+  
+\item Which seems to be the minimal absolute latency (the obtained one
+  when $\mathtt{CHUNK\_SIZE}=1$)?
 
 \end{enumerate}
+
+\section{Timming}
+
+You should reach this milestone at most in one week.
+
+\section{Deliverables}
+
+None.
 
 \section{Resources}
 
