@@ -1,0 +1,96 @@
+\title{\href{https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN}{Tecnologías Multimedia} - Study Guide - Milestone 5: Minimal InterCom}
+
+\maketitle
+
+\section{Description}
+
+\subsection{Sequential model}
+
+InterCom can be divided into 6 steps:
+
+\begin{pseudocode}[display]{}{}
+  \BEGIN
+    \mathtt{chunk} \GETS \mathtt{record()}\\
+    \mathtt{packet} \GETS \mathtt{pack(chunk)}\\
+    \mathtt{send(packet)}\\
+    \mathtt{packet} \GETS \mathtt{receive()}\\
+    \mathtt{chunk} \GETS \mathtt{unpack(packet)}\\
+    \mathtt{play(chunk)}
+  \END
+\end{pseudocode}
+
+Where:
+
+\begin{enumerate}
+\item $\mathtt{record()}$ captures a chunk of frames. This is a
+  \href{https://en.wikipedia.org/wiki/I/O_bound}{I/O-bound} blocking
+  operation.
+\item $\mathtt{pack(chunk)}$ process the chunk to create a
+  $\mathtt{packet}$, a structure that can be transmitted through the
+  Internet using the
+  \href{https://en.wikipedia.org/wiki/Datagram}{Datagram} Model. This
+  is a non-blocking operation and
+  (\href{https://en.wikipedia.org/wiki/CPU-bound}{CPU-bound}.
+\item $\mathtt{send(packet)}$, sends the packet to the interlocutor's
+  InterCom. When datagrams are used, this step is non-blocking,
+  although it cannot considered CPU-bound.
+\item $\mathtt{receive()}$, waits (blocking the task) for a incoming
+  packet. This operation is IO-bound.
+\item $\mathtt{unpack(packet)}$ is a non-blocking CPU-intensive
+  (CPU-bound) step that transforms a packet into a chunk of audio.
+\item $\mathtt{play(chunk)}$ renders the chunk, reproducint it. A
+  I/O-bound blocking action.
+\end{enumerate}
+  
+Notice that the execution of these steps, in this order, in two
+different InterCom instances has a problem: if a packet is lost, a
+deadlock is generated.
+
+\subsection{Parallel model}
+
+The \href{https://en.wikipedia.org/wiki/Parallel_computing}{parallel}
+model supposes that there is at least two Processing Units (or PUs,
+typically
+\href{https://en.wikipedia.org/wiki/Multi-core_processor}{cores}),
+that are able to work in parallel. Thus, the sequential model is
+divided into two
+\href{https://en.wikipedia.org/wiki/Concurrency_(computer_science)}{concurrent}
+tasks that should run in parallel.
+
+\begin{pseudocode}[display]{}{}
+  \PROCEDURE{Send}{~}\\
+  \BEGIN
+    \mathtt{chunk} \GETS \mathtt{record()}\\
+    \mathtt{packet} \GETS \mathtt{pack(chunk)}\\
+    \mathtt{send(packet)}
+  \END
+  \ENDPROCEDURE
+%\end{pseudocode}
+%\begin{pseudocode}[display]{}{}
+  \BEGIN
+    \mathtt{packet} \GETS \mathtt{receive()}\\
+    \mathtt{chunk} \GETS \mathtt{unpack(packet)}\\
+    \mathtt{play(chunk)}
+  \END
+\end{pseudocode}
+
+In this case, the loss of a chunk does not generates a deadlock
+between the concurrent tasks.
+
+\section{What you have to do?}
+
+\begin{enumerate}
+
+\item
+  
+\end{enumerate}
+
+\section{Timming}
+
+You should reach this milestone at most in one week.
+
+\section{Deliverables}
+
+\section{Resources}
+
+\bibliography{python}
