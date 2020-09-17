@@ -1,0 +1,934 @@
+<!DOCTYPE html> 
+<html> 
+<head> <title>TecnologÃŋas Multimedia - Study Guide - Milestone 4: “wiring” the ADC with
+the DAC and measuring latencies</title> 
+<meta charset="UTF-8" /> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
+<link rel="stylesheet" type="text/css" href="index.css" /> 
+<script type="text/javascript" 
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" 
+></script> 
+<style type="text/css"> 
+.MathJax_MathML {text-indent: 0;} 
+</style> 
+</head><body 
+>
+   <div class="maketitle">
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+
+<h2 class="titleHead"><a 
+href="https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN" >Tecnologías Multimedia</a> - Study Guide -
+Milestone 4: “wiring” the ADC with the DAC
+and measuring latencies</h2>
+ <div class="author" ><a 
+href="https://cms.ual.es/UAL/personas/persona.htm?id=515256515553484875" ><span 
+class="ecrm-1200">Vicente Gonz</span><span 
+class="ecrm-1200">á</span><span 
+class="ecrm-1200">lez Ruiz</span></a> <span 
+class="ecrm-1200">- </span><a 
+href="https://cms.ual.es/UAL/universidad/departamentos/informatica/index.htm" ><span 
+class="ecrm-1200">Depto Inform</span><span 
+class="ecrm-1200">á</span><span 
+class="ecrm-1200">tica</span></a> <span 
+class="ecrm-1200">- </span><a 
+href="https://www.ual.es" ><span 
+class="ecrm-1200">UAL</span></a></div><br />
+<div class="date" ><span 
+class="ecrm-1200">September 17, 2020</span></div>
+   </div>
+   <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
+ id="x1-10001"></a>Description</h3>
+<!--l. 7--><p class="noindent" >Let’s start our development of InterCom with a simple program that inputs digital
+audio (through the <a 
+href="https://en.wikipedia.org/wiki/Analog-to-digital_converter" >ADC</a> of your computer) and, as soon as possible, outputs it
+(through the <a 
+href="https://en.wikipedia.org/wiki/Digital-to-analog_converter" >DAC</a>). We are going to use a minimal “wiring” program, that when it is
+run and we feed back the audio output with the audio input of our computer, allows
+us to measure its <a 
+href="https://en.wikipedia.org/wiki/Latency_(engineering)" >latency</a>. To handle the audio hardware we use <a 
+href="https://python-sounddevice.readthedocs.io" ><span 
+class="ectt-1000">sounddevice</span></a> <span class="cite">[<a 
+href="#Xsounddevice">1</a>]</span>,
+that is wrapper for the <a 
+href="http://www.portaudio.com/" >PortAudio</a> library.
+</p><!--l. 21--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
+ id="x1-20002"></a>What you have to do?</h3>
+<!--l. 23--><p class="noindent" >
+     </p><ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x1-2002x1">Refresh some (probably high-school) ideas about <a 
+href="https://vicente-gonzalez-ruiz.github.io/the_sound/" >The Sound</a>, <a 
+href="https://vicente-gonzalez-ruiz.github.io/human_auditory_system/" >The Human
+     Auditory System</a>, and <a 
+href="https://vicente-gonzalez-ruiz.github.io/human_sound_perception/" >The Human Sound Perception</a>. Notice that we are
+     able to perceive sounds whose frequency ranges between 20 Hz and 20
+     KHz (approximately), and that a speaker is basically a microphone, and
+     viceversa.
+     </li>
+     <li 
+  class="enumerate" id="x1-2004x2">Download the Python <a 
+href="https://docs.python.org/3/tutorial/modules.html" >module</a> <a 
+href="https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire3.py" >wire3.py</a> with:
+                                                                  
+
+                                                                  
+     <!--l. 39-->
+     <div class="lstlisting" id="listing-1"><span class="label"><a 
+ id="x1-2005r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">sudo</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">apt</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">install</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">curl</span><span 
+class="ectt-1000"> </span><br /><span class="label"><a 
+ id="x1-2006r2"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">curl</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">https</span><span 
+class="ectt-1000">://</span><span 
+class="ectt-1000">raw</span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">githubusercontent</span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">com</span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">Tecnologias</span><span 
+class="ectt-1000">-</span><span 
+class="ectt-1000">multimedia</span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">intercom</span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">master</span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">test</span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">sounddevice</span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">wire3</span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">py</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">&#x003E;</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">wire3</span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">py</span>
+     
+     </div>
+     <!--l. 44--><p class="noindent" >This module implements the algorithm:
+<a 
+ id="x1-2007r1"></a>
+     </p><!--l. 46--><p class="noindent" ><!--l. 46--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" > <mfenced separators="" 
+open="{"  close="" ><mrow> <mtable  align="axis" style=""  
+equalrows="false" columnlines="none" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
+>C</mi><mi 
+>H</mi><mi 
+>U</mi><mi 
+>N</mi><mi 
+>K</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>S</mi><mi 
+>I</mi><mi 
+>Z</mi><mi 
+>E</mi></mstyle> <mo 
+class="MathClass-rel">←</mo> <mn>1</mn><mn>0</mn><mn>2</mn><mn>4</mn>                                                                                                 </mtd>
+</mtr>  <mtr><mtd 
+class="array"  columnalign="left"><mstyle 
+class="mbox"><mtext  >while </mtext></mstyle><mstyle 
+class="mbox"><mtext  > true </mtext></mstyle> <mfenced separators="" 
+open="{"  close="" ><mrow> <mtable  align="axis" style=""  
+equalrows="false" columnlines="none" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi></mstyle> <mo 
+class="MathClass-rel">←</mo><mstyle mathvariant="monospace"><mi 
+>s</mi><mi 
+>t</mi><mi 
+>r</mi><mi 
+>e</mi><mi 
+>a</mi><mi 
+>m</mi></mstyle><mo 
+class="MathClass-punc">.</mo><mstyle mathvariant="monospace"><mi 
+>r</mi><mi 
+>e</mi><mi 
+>a</mi><mi 
+>d</mi></mstyle><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mstyle mathvariant="monospace"><mi 
+>C</mi><mi 
+>H</mi><mi 
+>U</mi><mi 
+>N</mi><mi 
+>K</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>S</mi><mi 
+>I</mi><mi 
+>Z</mi><mi 
+>E</mi></mstyle></mrow><mo 
+class="MathClass-close">)</mo></mrow></mtd><mtd 
+class="array"  columnalign="right"> <mstyle 
+   id="x1-2008r1"  class="label" ></mstyle><!--endlabel--><mspace width="72.26999pt"/>                      <mstyle 
+class="mbox"><mtext  >(1)</mtext></mstyle></mtd>
+</mtr>  <mtr><mtd 
+class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
+>s</mi><mi 
+>t</mi><mi 
+>r</mi><mi 
+>e</mi><mi 
+>a</mi><mi 
+>m</mi></mstyle><mo 
+class="MathClass-punc">.</mo><mstyle mathvariant="monospace"><mi 
+>w</mi><mi 
+>r</mi><mi 
+>i</mi><mi 
+>t</mi><mi 
+>e</mi></mstyle><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mstyle mathvariant="monospace"><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi></mstyle></mrow><mo 
+class="MathClass-close">)</mo></mrow>                   </mtd><mtd 
+class="array"  columnalign="right"><mstyle 
+   id="x1-2009r2"  class="label" ></mstyle><!--endlabel--><mspace width="74.438pt"/>                      <mstyle 
+class="mbox"><mtext  >(2)</mtext></mstyle></mtd></mtr><!--@{}lr@{}--></mtable>                            </mrow></mfenced>  </mtd></mtr>
+<!--@{}lr@{}--></mtable>                                                                                                                              </mrow></mfenced></math>
+     </p><!--l. 57--><p class="noindent" >where (1) captures <!--l. 57--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>C</mi><mi 
+>H</mi><mi 
+>U</mi><mi 
+>N</mi><mi 
+>K</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>S</mi><mi 
+>I</mi><mi 
+>Z</mi><mi 
+>E</mi></mstyle></math>
+     frames from the sound card, and (2) plays the chunk of frames
+     <!--l. 59--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi></mstyle></math>.
+     In <span 
+class="ectt-1000">sounddevice </span>a frame is a collection of one or more samples (typically, a
+     frame is a single sample if the number of channels is 1, or two samples if the
+     number of channels is 2).
+     </p></li>
+     <li 
+  class="enumerate" id="x1-2011x3">If you want to run this module right now, check ﬁrst that the output volumen
+     of your speakers is not too high, otherwise you could “couple” the speaker and
+     the mic(rophone) of your computer, producing a loud and annoying sound. In
+     order to mitigate this eﬀect, you can also control the record gain of your mic (if
+     the gain is 0, no feedback between the speaker and the mic will be possible). In
+     Xubuntu, these controls are available by clicking in the speaker icon
+     (situated in the top right corner of your screen) of the XFCE window
+     manager.
+     </li>
+     <li 
+  class="enumerate" id="x1-2013x4">OK, run it (remember to activate ﬁrst the virtual environment <span 
+class="ectt-1000">tm </span>before using
+     Python), with:
+     <!--l. 77-->
+     <div class="lstlisting" id="listing-2"><span class="label"><a 
+ id="x1-2014r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">pip</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">install</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">sounddevice</span><span 
+class="ectt-1000"> </span><br /><span class="label"><a 
+ id="x1-2015r2"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">python</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">wire3</span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">py</span>
+     
+     </div>
+     <!--l. 82--><p class="noindent" >If you obtain the message <span 
+class="ectt-1000">ALSA lib pcm.c:8526:(snd_pcm_recover)</span>
+     <span 
+class="ectt-1000">underrun occurred</span>, ignore it (this is a consequence of that you are using
+     <a 
+href="https://www.freedesktop.org/wiki/Software/PulseAudio/" >PulseAudio</a> instead of <a 
+href="https://alsa-project.org/wiki/Main_Page" >ALSA</a> directly, and the used <a 
+href="https://www.kernel.org/" >kernel</a> has been compiled
+     without <a 
+href="https://en.wikipedia.org/wiki/RTLinux" >real-time process scheduling</a>).
+     </p></li>
+     <li 
+  class="enumerate" id="x1-2017x5">Now, lets compute, experimentally, the <span 
+class="ectt-1000">wire3.py </span>latency.
+     <!--l. 95--><p class="noindent" >
+                                                                  
+
+                                                                  
+         </p><ol  class="enumerate2" >
+         <li 
+  class="enumerate" id="x1-2019x1">First, we need the tools <a 
+href="http://sox.sourceforge.net/" >SoX</a>, <a 
+href="https://www.audacityteam.org/" >Audacity</a> and <a 
+href="https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire3.py" >wire3.py</a>:
+         <!--l. 99-->
+         <div class="lstlisting" id="listing-3"><span class="label"><a 
+ id="x1-2020r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">sudo</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">apt</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">install</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">sox</span><span 
+class="ectt-1000"> </span><br /><span class="label"><a 
+ id="x1-2021r2"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">sudo</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">apt</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">install</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">audacity</span><span 
+class="ectt-1000"> </span><br /><span class="label"><a 
+ id="x1-2022r3"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">sudo</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">apt</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">install</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">curl</span><span 
+class="ectt-1000"> </span><br /><span class="label"><a 
+ id="x1-2023r4"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">curl</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">https</span><span 
+class="ectt-1000">://</span><span 
+class="ectt-1000">raw</span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">githubusercontent</span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">com</span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">Tecnologias</span><span 
+class="ectt-1000">-</span><span 
+class="ectt-1000">multimedia</span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">intercom</span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">master</span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">test</span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">sounddevice</span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">plot_input</span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">py</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">&#x003E;</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">plot_input</span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">py</span>
+         
+         </div>
+         </li>
+         <li 
+  class="enumerate" id="x1-2025x2">Run:
+         <!--l. 108-->
+         <div class="lstlisting" id="listing-4"><span class="label"><a 
+ id="x1-2026r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">pip</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">install</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">matplotlib</span><span 
+class="ectt-1000"> </span><br /><span class="label"><a 
+ id="x1-2027r2"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">python</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">plot_input</span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">py</span>
+         
+         </div>
+         <!--l. 113--><p class="noindent" >and check that the gain of the mic does not produce <a 
+href="https://en.wikipedia.org/wiki/Clipping_(audio)" >clipping</a> during the
+         sound recording.
+         </p></li>
+         <li 
+  class="enumerate" id="x1-2029x3"><a 
+ id="x1-20283"></a> In a terminal, run:
+         <!--l. 119-->
+         <div class="lstlisting" id="listing-5"><span class="label"><a 
+ id="x1-2030r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">python</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">wire3</span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">py</span>
+         
+         </div>
+         <!--l. 123--><p class="noindent" >while you control the output volume of the speakers to produce a decaying
+         coupling eﬀect between both devices (the speaker(s) and the mic). If your
+         desktop has not these <a 
+href="https://en.wikipedia.org/wiki/Transducer" >transducers</a>, we can use a <a 
+href="https://www.google.com/search?q=male+to+male+audio+jack+cable&client=firefox-b-d&sxsrf=ALeKk00GZUDGqiOfc0D8xkA_MIYgCuZmSA:1600270049146&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjdvsu-_u3rAhXl0eAKHS90DUoQ_AUoAXoECA0QAw&biw=4288&bih=972" >male-to-male jack
+         audio cable</a> and connect the input and the output of your sound
+         card.
+         </p></li>
+         <li 
+  class="enumerate" id="x1-2032x4">In a diﬀerent terminal (keep <span 
+class="ectt-1000">python wire3.py </span>running), run:
+         <!--l. 135-->
+         <div class="lstlisting" id="listing-6"><span class="label"><a 
+ id="x1-2033r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">sox</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">-</span><span 
+class="ectt-1000">t</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">alsa</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">default</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">test</span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">wav</span>
+         
+         </div>
+         <!--l. 139--><p class="noindent" >to save the ADC’s output to a ﬁle.
+         </p></li>
+         <li 
+  class="enumerate" id="x1-2035x5">While <span 
+class="ectt-1000">sox </span>is recording, produce some short sound (for example,
+         hit your laptop or your micro with one or your nails). Do this
+         at least a couple of times more, to be sure that you record the
+         sound and the feedback of such sound. It’s important the sound
+         to be short (a few miliseconds) in order to recognize it and it’s
+         replicas.
+                                                                  
+
+                                                                  
+         </li>
+         <li 
+  class="enumerate" id="x1-2037x6">Stop <span 
+class="ectt-1000">sox </span>by pressing the CTRL and C keys (CTRL+C) at the same time.
+         This kills <span 
+class="ectt-1000">sox</span>.
+         </li>
+         <li 
+  class="enumerate" id="x1-2039x7">Stop <span 
+class="ectt-1000">python wire3.pt </span>with CTRL+C.
+         </li>
+         <li 
+  class="enumerate" id="x1-2041x8">Load the sound ﬁle into Audacity:
+         <!--l. 155-->
+         <div class="lstlisting" id="listing-7"><span class="label"><a 
+ id="x1-2042r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">audacity</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">test</span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">wav</span>
+         
+         </div>
+         </li>
+         <li 
+  class="enumerate" id="x1-2044x9">Localize the ﬁrst one of your nail-hitting-the-mic sounds in the <a 
+href="https://manual.audacityteam.org/man/audio_tracks.html" >audio
+         track</a>.
+         </li>
+         <li 
+  class="enumerate" id="x1-2046x10">Select the region with your sound and a replica using our mouse.
+         </li>
+         <li 
+  class="enumerate" id="x1-2048x11">Use the <a 
+href="https://manual.audacityteam.org/man/edit_toolbar.html#zoom_to_selection" >zoom to selection buttom</a> to zoom-in the selected area.
+         </li>
+         <li 
+  class="enumerate" id="x1-2050x12">Measure the time between the ocurrence of the sound and it’s ﬁrst
+         replica. This time is the real latency of your computer runing
+         <span 
+class="ectt-1000">wire3.py</span>.
+         </li>
+         <li 
+  class="enumerate" id="x1-2052x13">Modify the constant <!--l. 175--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>C</mi><mi 
+>H</mi><mi 
+>U</mi><mi 
+>N</mi><mi 
+>K</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>S</mi><mi 
+>I</mi><mi 
+>Z</mi><mi 
+>E</mi></mstyle></math>
+         and repeat this process, starting at the Step <a 
+href="#x1-20283">5c<!--tex4ht:ref: start_point --></a>. Create an ASCII ﬁle
+         (<span 
+class="ectt-1000">latency_vs_chunk_size.txt</span>) with the content (use tabulators to space
+         the columns):
+                                                                  
+
+                                                                  
+         <div class="verbatim" id="verbatim-1">
+         # CHUNK_SIZE    real
+          <br />32              ...
+          <br />64              ...
+          <br />128             ...
+          <br />256             ...
+          <br />512             ...
+          <br />1024            ...
+          <br />2048            ...
+          <br />4096            ...
+          <br />8192            ...
+</div>
+         <!--l. 190--><p class="nopar" >
+</p>
+         </li></ol>
+     </li>
+     <li 
+  class="enumerate" id="x1-2054x6">At this point, we know the real latency of <span 
+class="ectt-1000">wire3.py </span>as a function of
+     <!--l. 195--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>C</mi><mi 
+>H</mi><mi 
+>U</mi><mi 
+>N</mi><mi 
+>K</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>S</mi><mi 
+>I</mi><mi 
+>Z</mi><mi 
+>E</mi></mstyle></math>.
+     Plot the ﬁle <span 
+class="ectt-1000">latency_vs_chunk_size.txt </span>with:
+     <!--l. 198-->
+     <div class="lstlisting" id="listing-8"><span class="label"><a 
+ id="x1-2055r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">sudo</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">apt</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">install</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">gnuplot</span><span 
+class="ectt-1000"> </span><br /><span class="label"><a 
+ id="x1-2056r2"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">echo</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">&#x0022;</span><span 
+class="ectt-1000">set</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">terminal</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">pdf</span><span 
+class="ectt-1000">;</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">set</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">output</span><span 
+class="ectt-1000"> </span><span 
+class="tctt-1000">&#x0027;</span><span 
+class="ectt-1000">latency_vs_chunk_size</span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">pdf</span><span 
+class="tctt-1000">&#x0027;</span><span 
+class="ectt-1000">;</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">set</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">xlabel</span><span 
+class="ectt-1000"> </span><span 
+class="tctt-1000">&#x0027;</span><span 
+class="ectt-1000">CHUNK</span><span 
+class="ectt-1000">\</span><span 
+class="ectt-1000">_SIZE</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">(</span><span 
+class="ectt-1000">frames</span><span 
+class="ectt-1000">)</span><span 
+class="tctt-1000">&#x0027;</span><span 
+class="ectt-1000">;</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">set</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">ylabel</span><span 
+class="ectt-1000"> </span><span 
+class="tctt-1000">&#x0027;</span><span 
+class="ectt-1000">Latency</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">(</span><span 
+class="ectt-1000">seconds</span><span 
+class="ectt-1000">)</span><span 
+class="tctt-1000">&#x0027;</span><span 
+class="ectt-1000">;</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">plot</span><span 
+class="ectt-1000"> </span><span 
+class="tctt-1000">&#x0027;</span><span 
+class="ectt-1000">latency_vs_chunk_size</span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">txt</span><span 
+class="tctt-1000">&#x0027;</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">title</span><span 
+class="ectt-1000"> </span><span 
+class="tctt-1000">&#x0027;&#x0027;</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">with</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">linespoints</span><span 
+class="ectt-1000">&#x0022;</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">|</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">gnuplot</span>
+     
+     </div>
+     </li>
+     <li 
+  class="enumerate" id="x1-2058x7">Let’s compute now the buﬀering latency. If
+     <!--l. 204--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>s</mi><mi 
+>a</mi><mi 
+>m</mi><mi 
+>p</mi><mi 
+>l</mi><mi 
+>i</mi><mi 
+>n</mi><mi 
+>g</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>r</mi><mi 
+>a</mi><mi 
+>t</mi><mi 
+>e</mi></mstyle></math>
+     is the number of frames per second, it holds that:
+     <table class="equation"><tr><td> <a 
+ id="x1-2059r1"></a>
+     <!--l. 207--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="block" class="equation">
+                 <mstyle mathvariant="monospace"><mi 
+>b</mi><mi 
+>u</mi><mi 
+>f</mi><mi 
+>f</mi><mi 
+>e</mi><mi 
+>r</mi><mi 
+>i</mi><mi 
+>n</mi><mi 
+>g</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>l</mi><mi 
+>a</mi><mi 
+>t</mi><mi 
+>e</mi><mi 
+>n</mi><mi 
+>c</mi><mi 
+>y</mi></mstyle> <mo 
+class="MathClass-rel">=</mo> <mstyle mathvariant="monospace"><mi 
+>C</mi><mi 
+>H</mi><mi 
+>U</mi><mi 
+>N</mi><mi 
+>K</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>S</mi><mi 
+>I</mi><mi 
+>Z</mi><mi 
+>E</mi></mstyle><mo 
+class="MathClass-bin">∕</mo><mstyle mathvariant="monospace"><mi 
+>s</mi><mi 
+>a</mi><mi 
+>m</mi><mi 
+>p</mi><mi 
+>l</mi><mi 
+>i</mi><mi 
+>n</mi><mi 
+>g</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>r</mi><mi 
+>a</mi><mi 
+>t</mi><mi 
+>e</mi></mstyle>
+</math></td><td class="eq-no">(1)</td></tr></table>
+                                                                  
+
+                                                                  
+     <!--l. 211--><p class="noindent" >Add these calculations to <span 
+class="ectt-1000">latency_vs_chunk_size.txt </span>using a third column
+     (remember to use TABs).
+                                                                  
+
+                                                                  
+</p>
+     <div class="verbatim" id="verbatim-2">
+     # CHUNK_SIZE    real    minimal
+      <br />:               :       :
+</div>
+     <!--l. 216--><p class="nopar" >
+     </p></li>
+     <li 
+  class="enumerate" id="x1-2061x8">Plot both latencies:
+     <!--l. 220-->
+     <div class="lstlisting" id="listing-9"><span class="label"><a 
+ id="x1-2062r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">echo</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">&#x0022;</span><span 
+class="ectt-1000">set</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">terminal</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">pdf</span><span 
+class="ectt-1000">;</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">set</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">output</span><span 
+class="ectt-1000"> </span><span 
+class="tctt-1000">&#x0027;</span><span 
+class="ectt-1000">latency_vs_chunk_size</span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">pdf</span><span 
+class="tctt-1000">&#x0027;</span><span 
+class="ectt-1000">;</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">set</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">xlabel</span><span 
+class="ectt-1000"> </span><span 
+class="tctt-1000">&#x0027;</span><span 
+class="ectt-1000">CHUNK</span><span 
+class="ectt-1000">\</span><span 
+class="ectt-1000">_SIZE</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">(</span><span 
+class="ectt-1000">frames</span><span 
+class="ectt-1000">)</span><span 
+class="tctt-1000">&#x0027;</span><span 
+class="ectt-1000">;</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">set</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">ylabel</span><span 
+class="ectt-1000"> </span><span 
+class="tctt-1000">&#x0027;</span><span 
+class="ectt-1000">Latency</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">(</span><span 
+class="ectt-1000">seconds</span><span 
+class="ectt-1000">)</span><span 
+class="tctt-1000">&#x0027;</span><span 
+class="ectt-1000">;</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">set</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">key</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">left</span><span 
+class="ectt-1000">;</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">plot</span><span 
+class="ectt-1000"> </span><span 
+class="tctt-1000">&#x0027;</span><span 
+class="ectt-1000">latency_vs_chunk_size</span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">txt</span><span 
+class="tctt-1000">&#x0027;</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">using</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">1:2</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">title</span><span 
+class="ectt-1000"> </span><span 
+class="tctt-1000">&#x0027;</span><span 
+class="ectt-1000">Real</span><span 
+class="tctt-1000">&#x0027;</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">with</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">linespoints</span><span 
+class="ectt-1000">,</span><span 
+class="ectt-1000"> </span><span 
+class="tctt-1000">&#x0027;</span><span 
+class="ectt-1000">latency_vs_chunk_size</span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">txt</span><span 
+class="tctt-1000">&#x0027;</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">using</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">1:3</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">title</span><span 
+class="ectt-1000"> </span><span 
+class="tctt-1000">&#x0027;</span><span 
+class="ectt-1000">Minimal</span><span 
+class="tctt-1000">&#x0027;</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">with</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">linespoints</span><span 
+class="ectt-1000">&#x0022;</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">|</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">gnuplot</span>
+     
+     </div>
+     </li>
+     <li 
+  class="enumerate" id="x1-2064x9">Which seems to be the minimal absolute latency (the obtained one when
+     <!--l. 225--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>C</mi><mi 
+>H</mi><mi 
+>U</mi><mi 
+>N</mi><mi 
+>K</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>S</mi><mi 
+>I</mi><mi 
+>Z</mi><mi 
+>E</mi></mstyle> <mo 
+class="MathClass-rel">=</mo> <mn>1</mn></math>)?
+     Justify your answer. <a 
+ id="x1-20639"></a>
+     </li></ol>
+<!--l. 229--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
+ id="x1-30003"></a>Timming</h3>
+<!--l. 231--><p class="noindent" >You should reach this milestone at most in one week.
+</p><!--l. 233--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
+ id="x1-40004"></a>Deliverables</h3>
+<!--l. 235--><p class="noindent" >Answer the question enunciated in the Step  <a 
+href="#x1-20639">9<!--tex4ht:ref: question --></a>.
+</p><!--l. 237--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
+ id="x1-50005"></a>Resources</h3>
+                                                                  
+
+                                                                  
+   <div class="thebibliography">
+   <p class="bibitem" ><span class="biblabel">
+ [1]<span class="bibsp">   </span></span><a 
+ id="Xsounddevice"></a><a 
+href="https://python-sounddevice.readthedocs.io/en/latest/" >python-sounddevice</a>.
+</p>
+   </div>
+<a 
+ id="Q1-1-6"></a>
+    
+</body> 
+</html>
+                                                                  
+
+
