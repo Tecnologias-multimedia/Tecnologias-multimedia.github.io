@@ -221,8 +221,9 @@ handle the audio hardware we use
     echo "set terminal pdf; set output 'latency_vs_chunk_size.pdf'; set xlabel 'CHUNK\_SIZE (frames)'; set ylabel 'Latency (seconds)'; set key left; plot 'latency_vs_chunk_size.txt' using 1:2 title 'Real' with linespoints, 'latency_vs_chunk_size.txt' using 1:3 title 'Minimal' with linespoints" | gnuplot
   \end{lstlisting}
   
-\item Which seems to be the minimal absolute latency (the obtained one
-  when $\mathtt{CHUNK\_SIZE}=1$)? Justify your answer. \label{question}
+\item Which seems to be the minimal latency (the obtained one
+  when $\mathtt{CHUNK\_SIZE}=1$)? Justify your
+  answer. \label{question}
 
 \end{enumerate}
 
