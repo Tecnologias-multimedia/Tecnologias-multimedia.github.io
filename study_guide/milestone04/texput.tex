@@ -8,45 +8,54 @@
 
 InterCom can be divided into 6 steps:
 
-\begin{pseudocode}[display]{}{}
+\begin{pseudocode}{Sequential\_InterCom}{~}
   \BEGIN
-    \mathtt{chunk} \GETS \mathtt{record()}\\
-    \mathtt{packet} \GETS \mathtt{pack(chunk)}\\
-    \mathtt{send(packet)}\\
-    \mathtt{packet} \GETS \mathtt{receive()}\\
-    \mathtt{chunk} \GETS \mathtt{unpack(packet)}\\
-    \mathtt{play(chunk)}
+    \mathtt{recorded\_chunk} \GETS \mathtt{record()}\\
+    \mathtt{outgoing\_packet} \GETS \mathtt{pack(recorded\_chunk)}\\
+    \mathtt{send(outgoing\_packet)}\\
+    \mathtt{incoming\_packet} \GETS \mathtt{receive()}\\
+    \mathtt{chunk\_to\_play} \GETS \mathtt{unpack(incoming\_packet)}\\
+    \mathtt{play(chunk\_to\_play)}
   \END
 \end{pseudocode}
 
 Where:
 
 \begin{enumerate}
-\item $\mathtt{record()}$ captures a chunk of frames. This is a
-  \href{https://en.wikipedia.org/wiki/I/O_bound}{I/O-bound} blocking
-  operation.
+\item $\mathtt{record()}$ captures a chunk of frames. In general, this
+  is a \href{https://en.wikipedia.org/wiki/I/O_bound}{I/O-bound}
+  blocking operation, depending or not on the availability of frames
+  in the ADC.
 \item $\mathtt{pack(chunk)}$ process the chunk to create a
   $\mathtt{packet}$, a structure that can be transmitted through the
   Internet using the
   \href{https://en.wikipedia.org/wiki/Datagram}{Datagram} Model. This
   is a non-blocking operation and
   (\href{https://en.wikipedia.org/wiki/CPU-bound}{CPU-bound}.
-\item $\mathtt{send(packet)}$, sends the packet to the interlocutor's
-  InterCom. When datagrams are used, this step is non-blocking,
-  although it cannot considered CPU-bound.
+\item $\mathtt{send(packet)}$, sends the packet to the
+  interlocutor's InterCom. When datagrams are used, this step is
+  non-blocking, although it cannot considered CPU-bound because the
+  CPU usage is very low.
 \item $\mathtt{receive()}$, waits (blocking the task) for a incoming
   packet. This operation is IO-bound.
-\item $\mathtt{unpack(packet)}$ is a non-blocking CPU-intensive
-  (CPU-bound) step that transforms a packet into a chunk of audio.
+\item $\mathtt{unpack(packet)}$ is a non-blocking
+  CPU-intensive (CPU-bound) step that transforms a packet into a chunk
+  of audio.
 \item $\mathtt{play(chunk)}$ renders the chunk, reproducint it. A
   I/O-bound blocking action.
 \end{enumerate}
   
 Notice that the execution of these steps, in this order, in two
-different InterCom instances has a problem: if a packet is lost, a
-deadlock is generated.
+different InterCom instances has at least two problems:
+\begin{enumerate}
+\item If a packet is lost, a deadlock is generated, because the
+  $\mathtt{receive()}$ never returns.
+\item If the time required by $\mathtt{pack(chunk)}$ and
+  $\mathtt{unpack(packet)}$ is largest than the chunk-time, a glich
+  will be generated.
+\end{enumerate}
 
-\subsection{Parallel model}
+\subsection{Concurrent model}
 
 The \href{https://en.wikipedia.org/wiki/Parallel_computing}{parallel}
 model supposes that there is at least two Processing Units (or PUs,
@@ -57,25 +66,58 @@ divided into two
 \href{https://en.wikipedia.org/wiki/Concurrency_(computer_science)}{concurrent}
 tasks that should run in parallel.
 
-\begin{pseudocode}[display]{}{}
-  \PROCEDURE{Send}{~}\\
+\begin{pseudocode}{Concurrent\_InterCom}{~}
+  \PROCEDURE{Record\_Pack\_and\_Send}{~}
   \BEGIN
     \mathtt{chunk} \GETS \mathtt{record()}\\
     \mathtt{packet} \GETS \mathtt{pack(chunk)}\\
     \mathtt{send(packet)}
   \END
   \ENDPROCEDURE
-%\end{pseudocode}
-%\begin{pseudocode}[display]{}{}
+  \PROCEDURE{Receive\_Unpack\_and\_Play}{~}
   \BEGIN
     \mathtt{packet} \GETS \mathtt{receive()}\\
     \mathtt{chunk} \GETS \mathtt{unpack(packet)}\\
     \mathtt{play(chunk)}
   \END
+  \ENDPROCEDURE
 \end{pseudocode}
 
 In this case, the loss of a chunk does not generates a deadlock
-between the concurrent tasks.
+between the concurrent tasks, because even if the
+$\mathrm{Receive\_Unpack\_Play}$ is blocked waiting for a block in the
+$\mathtt{receive()}$, the $\mathtt{Record\_Pack\_and\_Send}$ task will
+continue sendind chunks.
+
+Unfortunatelly, gliches can still happen in this model if the packets
+are lost or delayed, or if $\mathtt{unpack(packet)}$ needs more than a
+chunk-time to be completed.
+
+\subsection{Timer-based model}
+
+In this model, a task is called periodically (probably, using some
+timer provided by the sound hardware).
+
+\begin{pseudocode}{Timer-based\_InterCom}{~}
+  \PROCEDURE{Record\_and\_Play}{\mathtt{recorded\_chunk}, \mathtt{chunk\_to\_play}, \mathtt{chunk\_size}}
+  \BEGIN
+    \mathtt{recorded\_chunk} \GETS \mathtt{record(chunk\_size)}\\
+    
+    \mathtt{send(outgoing\_packet)}\\
+    \mathtt{play}(\mathtt{chunk\_to\_play})\\
+  \END
+  \ENDPROCEDURE
+\end{pseudocode}
+
+where:
+\begin{enumerate}
+\item $\mathtt{indata}$ points to the last chunk of audio recorded.
+\item $\mathtt{outdata}$ points to the chunk of audio that is going to be played.
+\item $\mathtt{chunk\_size}$ is the number of frames processed in each iteration of the callback.
+\end{enumerate}
+
+The advantage of this alternative compared to the Concurrent Model is
+that we can control the size of the buffers, which in the end controls the latency.
 
 \section{What you have to do?}
 
