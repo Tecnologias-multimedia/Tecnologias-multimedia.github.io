@@ -67,6 +67,13 @@ Where:
   $\mathtt{play()}$ method needs to complete is exactly the same time
   that the $\mathtt{record()}$ method also requires.
 \end{enumerate}
+
+After analyzing these steps, we can see that only $\mathtt{pack(chunk)}$ and $\mathtt{unpack(packet)}$ deserve to be parallelized.
+
+Now is a good moment to think about the computing resources that can
+be available: in general, more than one PU (Processing Unit) or core is available.
+
+Using non-blocking I/O 
   
 Notice that the execution of these steps, in this order, in two
 different InterCom instances has at least two problems:
