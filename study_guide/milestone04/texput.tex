@@ -24,25 +24,48 @@ Where:
 \begin{enumerate}
 \item $\mathtt{record()}$ captures a chunk of frames. In general, this
   is a \href{https://en.wikipedia.org/wiki/I/O_bound}{I/O-bound}
-  blocking operation, depending or not on the availability of frames
-  in the ADC.
+  \href{https://python-sounddevice.readthedocs.io/en/0.4.0/api/streams.html#sounddevice.Stream.read}{blocking
+    operation}, depending or not on the availability of frames in the
+  ADC. This can be checked in
+  \href{https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire4.py}{wire4.py},
+  where the $\mathtt{read()}$ method always returns inmediately
+  because only the available frames are returned in each call (whose
+  variability depends on the instant of time in which this method is
+  call).
 \item $\mathtt{pack(chunk)}$ process the chunk to create a
-  $\mathtt{packet}$, a structure that can be transmitted through the
-  Internet using the
-  \href{https://en.wikipedia.org/wiki/Datagram}{Datagram} Model. This
-  is a non-blocking operation and
-  (\href{https://en.wikipedia.org/wiki/CPU-bound}{CPU-bound}.
+  \href{https://en.wikipedia.org/wiki/Network_packet}{packet} (or a
+  sequence of packets), a structure that can be transmitted through
+  the Internet using the
+  \href{https://en.wikipedia.org/wiki/Datagram}{Datagram} Model. In
+  general, this is a
+  (\href{https://en.wikipedia.org/wiki/CPU-bound}{CPU-bounded}
+  (CPU-intensive) operation, and therefore, ``blocks'' the execution
+  main thread until the packing has not been finithed.
 \item $\mathtt{send(packet)}$, sends the packet to the
   interlocutor's InterCom. When datagrams are used, this step is
-  non-blocking, although it cannot considered CPU-bound because the
+  non-blocking neither CPU-bounding because the
   CPU usage is very low.
 \item $\mathtt{receive()}$, waits (blocking the task) for a incoming
-  packet. This operation is IO-bound.
-\item $\mathtt{unpack(packet)}$ is a non-blocking
-  CPU-intensive (CPU-bound) step that transforms a packet into a chunk
-  of audio.
-\item $\mathtt{play(chunk)}$ renders the chunk, reproducint it. A
-  I/O-bound blocking action.
+  packet, and therefore, this operation is IO-bound. However, most
+  socket APIs offeer a
+  \href{https://docs.python.org/3.8/library/socket.html#socket.socket.setblocking}{non-blocking
+    behaviour} where when a packet is not available in the kernel's
+  buffer associanted to the corresponding socket, some kind of
+  exception is generated and in this case, it is resposabability of
+  the programmer to generate a ``alternative'' chunk in our case (for
+  example, a chunk filled with zeros will not produce any sound).
+\item $\mathtt{unpack(packet)}$ is, as $\mathtt{pack(chunk)}$, a
+  CPU-intensive step that transforms a packet (or several packets)
+  into a chunk of audio.
+\item $\mathtt{play(chunk)}$ renders the chunk, reproducing it. In
+  general, this is an I/O-bound
+  \href{https://python-sounddevice.readthedocs.io/en/0.4.0/api/streams.html#sounddevice.Stream.write}{blocking}
+  action. However, if $\mathtt{play()}$ is called at the same pace
+  than $\mathtt{record()}$ and the record and play parameters are
+  exactely the same (as happens in our model), the playing of the
+  chunk will never blocks the main thread because the time that the
+  $\mathtt{play()}$ method needs to complete is exactly the same time
+  that the $\mathtt{record()}$ method also requires.
 \end{enumerate}
   
 Notice that the execution of these steps, in this order, in two
@@ -90,19 +113,29 @@ $\mathtt{receive()}$, the $\mathtt{Record\_Pack\_and\_Send}$ task will
 continue sendind chunks.
 
 Unfortunatelly, gliches can still happen in this model if the packets
-are lost or delayed, or if $\mathtt{unpack(packet)}$ needs more than a
-chunk-time to be completed.
+are lost or delayed, or if $\mathtt{pack(chunk)}$ or if
+$\mathtt{unpack(packet)}$ needs more than a chunk-time to be
+completed.
+
+Most of the socket APIs offeer a version of 
 
 \subsection{Timer-based model}
 
-In this model, a task is called periodically (probably, using some
-timer provided by the sound hardware).
+In this model, the task dedicated to record and play the chunks of
+audio is called periodically (probably, using some timer provided by
+the sound hardware). This procedure guarantees a smoother audio-IO
+when constant chunk sizes are used because the timer interruption
+matches with the instant of time in which the $\mathtt{record()}$ and
+the $\mathtt{play()}$ methods need to be run to guarantee that are
+going to handle a chunk of audio of a known size without blocking.
+
 
 \begin{pseudocode}{Timer-based\_InterCom}{~}
   \PROCEDURE{Record\_and\_Play}{\mathtt{recorded\_chunk}, \mathtt{chunk\_to\_play}, \mathtt{chunk\_size}}
   \BEGIN
     \mathtt{recorded\_chunk} \GETS \mathtt{record(chunk\_size)}\\
-    
+    \mathtt{(recorded\_chunk)}\\
+    \mathtt{
     \mathtt{send(outgoing\_packet)}\\
     \mathtt{play}(\mathtt{chunk\_to\_play})\\
   \END
