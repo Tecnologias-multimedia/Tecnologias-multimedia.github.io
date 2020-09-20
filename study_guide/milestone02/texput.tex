@@ -6,7 +6,7 @@
 
 To work in
 \href{https://github.com/Tecnologias-multimedia/intercom}{the InterCom
-  project} \cite{intercom} you will need to understand the basics of
+  project} \cite{intercom} you must understand the basics of
 Git \cite{Git-book} and
 \href{https://github.com/}{GitHub}\footnote{There are other Git-based
 hosting services such as \href{https://about.gitlab.com/}{GitLab} and
@@ -22,7 +22,7 @@ but GitHub is the most used one.} \cite{GitHub}, and how to use the
 \begin{enumerate}
   
 \item Have a look to the \href{https://git-scm.com/book/en/v2}{Pro Git} 
-  book \cite{Git-book}, what is the main source of information for
+  book \cite{Git-book}, what is the main source of information about
   Git.
 
 \item If you don't have an GitHub account, please, do the
@@ -33,11 +33,12 @@ but GitHub is the most used one.} \cite{GitHub}, and how to use the
   branch. Please, create a \texttt{README.md} file for the Hello World
   repo, as the guide suggests.
 
-\item Now, we are going to to the same that we have done using the
-  GitHub web interface (except the Step 1: Create a Repo), but now
+\item Now, we are going to to the same that we would have done using
+  the GitHub web interface (except the Step 1: Create a Repo), but now
   using the terminal which will be the most used interface for dealing
   with Git. First, if Git is not installed in your host (try to run
-  \texttt{git} in a terminal), install it with
+  \texttt{git} in a terminal), install it with:
+
   \begin{lstlisting}[language=bash]
     sudo apt install git
   \end{lstlisting}
@@ -46,16 +47,16 @@ but GitHub is the most used one.} \cite{GitHub}, and how to use the
   \href{https://docs.github.com/en/github/getting-started-with-github/github-glossary#clone}{Clone}
   (download) the Hello World repo. You need to click on the ``Code''
   button (select ``the Git protocol'', not ``https'' nor ``download a
-  zip file'').
+  zip file''). Then run:
 
   \begin{lstlisting}[language=bash]
     cd hello_world
   \end{lstlisting}
 
-  Notice that a new directory named as the repo's name at
-  GitHub has been created and that inside you can find the
-  \texttt{README.md}
-  \href{https://daringfireball.net/projects/markdown/}{Markdown} file.
+  Notice that a new directory named as the repo's name at GitHub has
+  been created, and that inside you can find the \texttt{README.md}
+  file written in
+  \href{https://daringfireball.net/projects/markdown/}{Markdown}.
 
 \item \href{https://docs.github.com/en/github/getting-started-with-github/github-glossary#checkout}{Create (and switch to)} a
   \href{https://docs.github.com/en/github/getting-started-with-github/github-glossary#feature-branch}{feature
@@ -83,7 +84,7 @@ but GitHub is the most used one.} \cite{GitHub}, and how to use the
   \href{https://docs.github.com/en/github/getting-started-with-github/github-glossary#commit}{Commit}
   your modification(s):
 
-  \begin{lstlisting}[language=bash]
+  \begin{lstlisting}[language=bash, showstringspaces=false, upquote=true]
     git commit -am "Providing the Hello World link"
   \end{lstlisting}
 
@@ -93,9 +94,9 @@ but GitHub is the most used one.} \cite{GitHub}, and how to use the
     git config --global user.email "you@example.com"
   \end{lstlisting}
 
-  Plase, input such information.
+  Please, input such information.
   
-  After the \texttt{commit}, your \emph{local} repo is \emph{ahead} of
+  After the \texttt{commit}, your \href{https://docs.github.com/en/github/getting-started-with-github/github-glossary#fetch}{\emph{local}} repo is \emph{ahead} of
   your
   \href{https://docs.github.com/en/github/getting-started-with-github/github-glossary#origin}{\emph{origin}}
   (copy at GitHub of the) remote repo. This means that your
