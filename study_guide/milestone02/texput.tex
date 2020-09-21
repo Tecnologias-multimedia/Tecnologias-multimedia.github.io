@@ -2,6 +2,11 @@
 
 \maketitle
 
+\lstset{
+  showstringspaces=false,
+  upquote=true
+}
+
 \section{Description}
 
 To work in
@@ -103,34 +108,39 @@ but GitHub is the most used one.} \cite{GitHub}, and how to use the
   \emph{local} has modifications that the \emph{origin} doesn't have.
 
 \item Synchronize your \emph{local} and the \emph{origin} using
-  \href{https://docs.github.com/en/github/getting-started-with-github/github-glossary#push}{push}.
+  \href{https://docs.github.com/en/github/getting-started-with-github/github-glossary#push}{push}:
+
+  \begin{lstlisting}[language=bash]
+    git push
+  \end{lstlisting}
 
   Notice that if you have not upoaded a public
   \href{https://www.ssh.com/}{SSH}
   \href{https://www.ssh.com/ssh/identity-key}{key} (or the
   corresponding private key is not properly installed in your
   computer), the GitHub server requests your username and password,
-  and this is something that is goint to happen with every push. To
-  avoid this repetitive input of your GitHub login information, you
-  need
+  and this is something that is going to happen with every
+  \texttt{push}. To avoid this repetitive input of your GitHub login
+  information, you need
   \href{https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh}{to
-    identify you at GitHub} using
+    login at GitHub} using
   \href{https://en.wikipedia.org/wiki/Public-key_cryptography}{public-key
-    criptography}. You need to own a pair of keys, one public and
-  other private, and upload the public one to GitHub.
+    criptography}. For that, you must own a pair of keys, one public
+  and other private, and upload the public one to GitHub.
   
-\item The first step to solve this drawback is to check whether you
-  already have a pair of keys (if your are using the just installed
-  Xubuntu distribution, obviously you don't need to check anything and
-  can go directly to the next step). Simply revise your
-  \texttt{\$HOME/.ssh} directory with:
+\item The first step is to check whether you already have a pair of
+  keys (if your are using the just installed Xubuntu distribution,
+  obviously you don't need to check anything and can go directly to
+  the next step). Simply revise your \texttt{\$HOME/.ssh} directory
+  with:
 
   \begin{lstlisting}[language=bash]
     ls -l ~/.ssh
   \end{lstlisting}
 
   and if you find a pair of files with almost the same name, and one
-  of they finished with \texttt{.pub}, you have a pair of SSH keys.
+  of they finising in \texttt{.pub}, you probably own a pair of SSH
+  keys.
 
 \item Let's create a pair of keys (if you don't have one or if you
   prefeer to create a new one). Open a terminal and write:
@@ -139,8 +149,8 @@ but GitHub is the most used one.} \cite{GitHub}, and how to use the
     ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
   \end{lstlisting}
 
-  using the email address you provided when you created the GitHub
-  account. Then you are prompted with:
+  using the email address you provided when you created your GitHub
+  account. Then, when you are prompted with:
 
   \begin{lstlisting}[language=bash]
     Enter a file in which to save the key (/home/you/.ssh/id_rsa):
@@ -155,17 +165,18 @@ but GitHub is the most used one.} \cite{GitHub}, and how to use the
   GitHub. There are two options to avoid this:
 
   \begin{enumerate}
-  \item Input no passphrase (just by pressing the Enter-key
-    again). This has the drawback that if somebody has your keys, he
-    could access to GitHub as he were you.
-  \item Input a passphrase and configure \texttt{ssh-agent} to send it
-    to GitHub by you. This option is the preferable one becase you
+  \item Input no passphrase (just by pressing the Enter-key again in
+    the previous step). This has the drawback that if somebody steals
+    your keys, he could access to GitHub as he were you.
+  \item Input a passphrase and configure
+    \href{https://www.ssh.com/ssh/agent}{\texttt{ssh-agent}} to send
+    it to GitHub by you. This option is the preferable one becase you
     will be asked for the passphrase only when the \texttt{ssh-agent}
-    is started.
+    is started (\href{https://www.xfce.org/}{Xfce} does that by you).
   \end{enumerate}
 
 \item Now it's time to check whether the \texttt{ssh-agent} is already
-  running in your computer. This can be checked with:
+  running in your computer. This can be done with:
 
   \begin{lstlisting}[language=bash]
     ps aux | grep ssh-agent
@@ -173,26 +184,27 @@ but GitHub is the most used one.} \cite{GitHub}, and how to use the
 
   and in the case of Xubuntu, you should get something similar to:
 
-  \begin{lstlisting}[language=bash]
-    989 ?        Ss     0:00 /usr/bin/ssh-agent /usr/bin/im-launch startxfce4
-   1433 pts/0    S+     0:00 grep --color=auto ssh-agent
-  \end{lstlisting}
+\begin{verbatim}
+ 989 ?        Ss     0:00 /usr/bin/ssh-agent /usr/bin/im-launch startxfce4
+1433 pts/0    S+     0:00 grep --color=auto ssh-agent
+\end{verbatim}
 
   This means that there are two processes in whose description there
   exists the string \texttt{ssh-agent}. The first entry is the agent
   process. The second one is the \texttt{grep} running at the same
-  time that the \texttt{ps}.
+  time that the
+  \href{https://man7.org/linux/man-pages/man1/ps.1.html}{\texttt{ps}}.
 
-\item If the \href{https://www.ssh.com/ssh/agent}{\texttt{ssh-agent}}
-  were not running, it can be launched to run in the background with:
+\item If the \texttt{ssh-agent} were not running, it can be launched
+  to run in the background with:
 
   \begin{lstlisting}[language=bash]
     eval "$(ssh-agent -s)"
   \end{lstlisting}
 
   but you don't need to do that in your Xubuntu installation, because
-  the \texttt{ssh-agent} the \href{https://www.xfce.org/}{XFCE}
-  lauches it.
+  (remember) the \texttt{ssh-agent} the
+  Xfce desktop environment lauches it.
 
 \item With your keys, run:
 
@@ -202,18 +214,18 @@ but GitHub is the most used one.} \cite{GitHub}, and how to use the
 
   and the passphrase will be prompt.
   
-\item Go now to GitHub \texttt{->} Settings \texttt{->} SSH and GPG keys \texttt{->} New SSH key.
-
-  Open a terminal and write:
+\item Go now to GitHub \texttt{->} Settings \texttt{->} SSH and GPG
+  keys \texttt{->} New SSH key. Open a terminal and write:
   
   \begin{lstlisting}[language=bash]  
     cat .ssh/id_rsa.pub
   \end{lstlisting}
 
   and copy and paste the content of such file (which ends with your
-  email address) inside of the space where you can read ``Begins with
-  'ssh-rsa', ...''. Don't forget to give a title (something such as
-  ``tec-multimedia'') to the key pair.
+  email address) inside of the space where you can read
+  ``\texttt{Begins with 'ssh-rsa', ...}''. Don't forget to give a
+  title (something such as ``\texttt{tm}'' (tecnonogías multimedia))
+  to the key pair.
   
 \item When you use the key for the first time (clonning a repo or
   pushing a commit), the SSH client will warn you that the autenticity
@@ -225,9 +237,10 @@ but GitHub is the most used one.} \cite{GitHub}, and how to use the
 
 \item Revise
   \href{https://github.com/vicente-gonzalez-ruiz/fork_and_branch_git_workflow}{The
-    Fork and Branch Git Workflow} \cite{Git-workflow}. Basically, this
-  ``protocol'' explains that to contribute to an open-source repo
-  hosted by GitHub without belonging to the develop team.
+    Fork and Branch Git Workflow}. Basically, this ``protocol''
+  explains that to contribute to an open-source repo hosted by GitHub
+  without belonging to the develop team, you must do some
+  \texttt{git}-steps (and some of them are below).
 
 \item Make a fork of the
   \href{https://github.com/Tecnologias-multimedia/intercom}{InterCom}
@@ -238,12 +251,18 @@ but GitHub is the most used one.} \cite{GitHub}, and how to use the
 \end{verbatim}        
   This info can be found when you
   \href{https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository}{clone}
-  the InterCom. Notice however, that clonning the InterCom is a waste
-  of time because you cannot contribute directly to it.
+  the InterCom. Notice however, that action of clonning the InterCom
+  is a waste of time because you cannot contribute directly to it
+  (remember, you must \texttt{clone} your own repo).
 
 \item Add the
-  \href{https://docs.github.com/en/github/getting-started-with-github/github-glossary#remote}{remote}
-  \emph{upstream} with:
+  \href{https://docs.github.com/en/github/getting-started-with-github/github-glossary#remote}{remote}\footnote{Git
+  is a
+  \href{https://nvie.com/posts/a-successful-git-branching-model/}{decentralized
+    control system for source code}. Decentralization means that every
+  developer has a copy of the \emph{origin}, and that thus, the
+  developers can synchronize their \emph{locals} with any of the
+  \emph{remotes}.}  \emph{upstream} with:
 
   \begin{lstlisting}[language=bash]
     git remote add upstream git@github.com:Tecnologias-multimedia/intercom.git
@@ -255,14 +274,14 @@ but GitHub is the most used one.} \cite{GitHub}, and how to use the
     git remote -v
   \end{lstlisting}
 
-  where you should see two remotes: \emph{origin} and \emph{upstream}.
+  where you should see two remotes: \emph{origin} and \emph{upstream}. Something similar to:
 
-  Git is
-  a \href{https://nvie.com/posts/a-successful-git-branching-model/}{decentralized
-  control system for source code}. Decentralization means that every
-  developer has a copy of the \emph{origin}, and that thus, the
-  developers can synchronize their \emph{locals} with any of
-  the \emph{remotes}.
+\begin{verbatim}
+origin   git@github.com:Tecnologias-multimedia/intercom.git (fetch)
+origin   git@github.com:Tecnologias-multimedia/intercom.git (push)
+upstream git@github.com:you_at_GitHub/intercom.git (fetch)
+upstream git@github.com:you_at_GitHub/intercom.git (push)
+\end{verbatim}
 
 \end{enumerate}
 
