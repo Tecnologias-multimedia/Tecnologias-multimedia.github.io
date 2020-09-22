@@ -39,7 +39,7 @@ class="ecrm-1200">- </span><a
 href="https://www.ual.es" ><span 
 class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
-class="ecrm-1200">September 17, 2020</span></div>
+class="ecrm-1200">September 22, 2020</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
@@ -252,7 +252,7 @@ class="ectt-1000">sounddevice </span>a frame is a collection of one or more samp
      order to mitigate this eﬀect, you can also control the record gain of your mic (if
      the gain is 0, no feedback between the speaker and the mic will be possible). In
      Xubuntu, these controls are available by clicking in the speaker icon
-     (situated in the top right corner of your screen) of the XFCE window
+     (situated in the top right corner of your screen) of the Xfce window
      manager.
      </li>
      <li 
@@ -282,24 +282,11 @@ class="ectt-1000">.</span><span
 class="ectt-1000">py</span>
      
      </div>
-     <!--l. 82--><p class="noindent" >If you obtain the message <span 
-class="ectt-1000">ALSA lib pcm.c:8526:(snd_pcm_recover)</span>
-     <span 
-class="ectt-1000">underrun occurred</span>, ignore it (this is a consequence of that you are using
-     <a 
-href="https://www.freedesktop.org/wiki/Software/PulseAudio/" >PulseAudio</a> instead of <a 
-href="https://alsa-project.org/wiki/Main_Page" >ALSA</a> directly, and the used <a 
-href="https://www.kernel.org/" >kernel</a> has been compiled
-     without <a 
-href="https://en.wikipedia.org/wiki/RTLinux" >real-time process scheduling</a>).
-     </p></li>
+     </li>
      <li 
   class="enumerate" id="x1-2017x5">Now, lets compute, experimentally, the <span 
 class="ectt-1000">wire3.py </span>latency.
      <!--l. 95--><p class="noindent" >
-                                                                  
-
-                                                                  
          </p><ol  class="enumerate2" >
          <li 
   class="enumerate" id="x1-2019x1">First, we need the tools <a 
@@ -307,6 +294,9 @@ href="http://sox.sourceforge.net/" >SoX</a>, <a
 href="https://www.audacityteam.org/" >Audacity</a> and <a 
 href="https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire3.py" >wire3.py</a>:
          <!--l. 99-->
+                                                                  
+
+                                                                  
          <div class="lstlisting" id="listing-3"><span class="label"><a 
  id="x1-2020r1"></a></span><span 
 class="ectt-1000"> </span><span 
@@ -484,15 +474,15 @@ class="ectt-1000">sox </span>is recording, produce some short sound (for example
          sound and the feedback of such sound. It’s important the sound
          to be short (a few miliseconds) in order to recognize it and it’s
          replicas.
-                                                                  
-
-                                                                  
          </li>
          <li 
   class="enumerate" id="x1-2037x6">Stop <span 
 class="ectt-1000">sox </span>by pressing the CTRL and C keys (CTRL+C) at the same time.
          This kills <span 
 class="ectt-1000">sox</span>.
+                                                                  
+
+                                                                  
          </li>
          <li 
   class="enumerate" id="x1-2039x7">Stop <span 
@@ -881,7 +871,7 @@ class="ectt-1000">gnuplot</span>
      </div>
      </li>
      <li 
-  class="enumerate" id="x1-2064x9">Which seems to be the minimal latency (the obtained one when
+  class="enumerate" id="x1-2064x9">Which seems to be the minimal latency (the one obtained when
      <!--l. 225--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mi 
@@ -896,21 +886,22 @@ class="text"><mtext  >_</mtext></mstyle><mi
 >Z</mi><mi 
 >E</mi></mstyle> <mo 
 class="MathClass-rel">=</mo> <mn>1</mn></math>)?
-     Justify your answer. <a 
+     Which is the chunk-time (the time required to play or record a chunk)? Justify
+     your answers. <a 
  id="x1-20639"></a>
      </li></ol>
-<!--l. 230--><p class="noindent" >
+<!--l. 231--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-30003"></a>Timming</h3>
-<!--l. 232--><p class="noindent" >You should reach this milestone at most in one week.
-</p><!--l. 234--><p class="noindent" >
+<!--l. 233--><p class="noindent" >You should reach this milestone at most in one week.
+</p><!--l. 235--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-40004"></a>Deliverables</h3>
-<!--l. 236--><p class="noindent" >Answer the question enunciated in the Step  <a 
+<!--l. 237--><p class="noindent" >Answer the question enunciated in the Step  <a 
 href="#x1-20639">9<!--tex4ht:ref: question --></a>.
-</p><!--l. 238--><p class="noindent" >
+</p><!--l. 239--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-50005"></a>Resources</h3>

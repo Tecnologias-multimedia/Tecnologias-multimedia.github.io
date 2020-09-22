@@ -69,7 +69,7 @@ handle the audio hardware we use
   gain is 0, no feedback between the speaker and the mic will be
   possible). In Xubuntu, these controls are available by clicking in
   the speaker icon (situated in the top right corner of your screen)
-  of the XFCE window manager.
+  of the Xfce window manager.
 
 \item OK, run it (remember to activate first the virtual environment
   \texttt{tm} before using Python), with:
@@ -79,15 +79,15 @@ handle the audio hardware we use
     python wire3.py
   \end{lstlisting}
 
-  If you obtain the message \texttt{ALSA lib
-    pcm.c:8526:(snd\_pcm\_recover) underrun occurred}, ignore it (this
-  is a consequence of that you are using
-  \href{https://www.freedesktop.org/wiki/Software/PulseAudio/}{PulseAudio}
-  instead of \href{https://alsa-project.org/wiki/Main_Page}{ALSA}
-  directly, and the used \href{https://www.kernel.org/}{kernel} has
-  been compiled without
-  \href{https://en.wikipedia.org/wiki/RTLinux}{real-time process
-    scheduling}).
+  %If you obtain the message \texttt{ALSA lib
+  %  pcm.c:8526:(snd\_pcm\_recover) underrun occurred}, ignore it (this
+  %is a consequence of that you are using
+  %\href{https://www.freedesktop.org/wiki/Software/PulseAudio/}{PulseAudio}
+  %instead of \href{https://alsa-project.org/wiki/Main_Page}{ALSA}
+  %directly, and the used \href{https://www.kernel.org/}{kernel} has
+  %been compiled without
+  %\href{https://en.wikipedia.org/wiki/RTLinux}{real-time process
+  %  scheduling}).
 
 \item Now, lets compute, experimentally, the \texttt{wire3.py}
   latency.
