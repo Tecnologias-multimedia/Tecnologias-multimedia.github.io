@@ -119,11 +119,15 @@ controlled.
 
 \item Implement a timer-based InterCom. Use as reference
   \href{https://github.com/Tecnologias-multimedia/intercom/blob/master/test/sounddevice/wire.py}{wire.py}\footnote{
-    \texttt{curl https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire.py > wire.py}
-  }. Your
-  implementation should be able to record,
+  \texttt{curl
+    https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire.py
+    > wire.py} }. Your implementation should be able to record,
   \href{https://github.com/vicente-gonzalez-ruiz/YAPT/blob/master/03-IO/networking/sockets.ipynb}{transmit}~\cite{YAPT}
-  (using \href{https://en.wikipedia.org/wiki/User_Datagram_Protocol}{UDP}~\cite{UDP}) and play raw audio data between two computers.
+  (using
+  \href{https://en.wikipedia.org/wiki/User_Datagram_Protocol}{UDP}~\cite{UDP})
+  and play raw (this means that the
+  $\mathtt{pack()}$/$\mathtt{unpack()}$ operations are not required for
+    this milestone) audio data between two computers.
   
 \end{enumerate}
 
