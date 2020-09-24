@@ -6,7 +6,7 @@
 
 \subsection{Sequential model}
 
-InterCom can be divided roughtky in 6 steps:
+InterCom can be divided roughtly in 6 steps:
 
 \begin{pseudocode}{Sequential\_InterCom}{~}
   \PROCEDURE{Record\_IO\_and\_Play}{~}
@@ -24,18 +24,22 @@ InterCom can be divided roughtky in 6 steps:
 Where:
 
 \begin{enumerate}
-\item $\mathtt{record()}$ captures a chunk of frames. In general, this
-  is a \href{https://en.wikipedia.org/wiki/I/O_bound}{I/O-bound}
-  \href{https://python-sounddevice.readthedocs.io/en/0.4.0/api/streams.html#sounddevice.Stream.read}{blocking
-    operation}~\cite{sounddevice}, depending on the availability of
-  frames in the ADC's buffer. This can be checked in
+\item $\mathtt{record()}$ captures a chunk of frames. In
+  \texttt{sounddevice}, this operation is carried on by the
+  \href{https://python-sounddevice.readthedocs.io/en/0.4.0/api/streams.html#sounddevice.Stream.read}{$\mathtt{read()}$
+    method}. As it can be seen in
   \href{https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire4.py}{wire4.py}\footnote{
-    \texttt{curl https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire4.py > wire4.py}
-  },
-  where the $\mathtt{read()}$ method always returns inmediately
-  because only the available frames are returned in each call (the
-  chunk-size depends on the instant of time in which this method is
-  called).
+  \texttt{curl
+    https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire4.py
+    > wire4.py}} and also in the documentation of
+  \texttt{sounddevice}, if we read only the frames that are available
+  in the ADC's buffer, this in non-blocking operation and the chunk
+  size depends on the instant of time in which thi method is
+  called. Otherwise, if we especify a number of frames different to
+  the number of available frames, the operation is blocking and
+  \href{https://en.wikipedia.org/wiki/I/O_bound}{I/O-bound} (the
+  calling process sleeps until the required chunk size is returned).
+
 \item $\mathtt{pack(chunk)}$ process the chunk to create a
   \href{https://en.wikipedia.org/wiki/Network_packet}{packet} (or a
   sequence of packets), a structure that can be transmitted through
@@ -43,13 +47,15 @@ Where:
   \href{https://en.wikipedia.org/wiki/Datagram}{Datagram} Model. In
   general, this is a
   \href{https://en.wikipedia.org/wiki/CPU-bound}{CPU-bounded}
-  (CPU-intensive) operation, and therefore, reduces the number of
-  cycles/second that the main thread can reach.
+  (CPU-intensive) operation, and therefore, it reduces the number of
+  cycles/second that the Record\_IO\_and\_Play's loop can reach.
+
 \item $\mathtt{send(packet)}$, sends the packet to the interlocutor's
   InterCom. When datagrams are used, this step is non-blocking neither
-  CPU-bounding (the CPU usage is very low), if the number of
-  packets/second is small and the size of the payloads is also small,
-  as it is expected in the InterCom.
+  CPU-bounding (the CPU usage is very low), as long as the number of
+  packets/second is small and the sizes of the payloads are also
+  small, as it is expected in the InterCom.
+
 \item $\mathtt{receive()}$, waits (blocking) for a incoming packet,
   and therefore, this operation is IO-bound. However, most
   \href{https://docs.python.org/3/library/socket.html}{socket
@@ -58,11 +64,13 @@ Where:
     option} where when a packet is not available in the kernel's
   buffer associanted to the corresponding socket, some kind of
   exception is generated and, in this case, it is resposabability of
-  the programmer to generate a ``alternative'' chunk (in our case, for
+  the programmer to generate an ``alternative'' chunk (in our case, for
   example, a chunk filled with zeros will not produce any sound).
+
 \item $\mathtt{unpack(packet)}$ is (as $\mathtt{pack(chunk)}$) a
   CPU-intensive step that transforms a packet (or several packets)
   into a chunk of audio.
+
 \item $\mathtt{play(chunk)}$ renders the chunk. In general, this is an
   I/O-bound
   \href{https://python-sounddevice.readthedocs.io/en/0.4.0/api/streams.html#sounddevice.Stream.write}{blocking}
