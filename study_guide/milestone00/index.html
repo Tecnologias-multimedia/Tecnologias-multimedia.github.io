@@ -1,0 +1,263 @@
+<!DOCTYPE html> 
+<html> 
+<head> <title>Tecnologıas Multimedia - Study Guide - Milestone 0: OS (Operating System)
+Provisioning</title> 
+<meta charset="UTF-8" /> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
+<link rel="stylesheet" type="text/css" href="index.css" /> 
+<script type="text/javascript" 
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" 
+></script> 
+<style type="text/css"> 
+.MathJax_MathML {text-indent: 0;} 
+</style> 
+</head><body 
+>
+   <div class="maketitle">
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+
+<h2 class="titleHead"><a 
+href="https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN" >Tecnologías Multimedia</a> - Study Guide -
+Milestone 0: OS (Operating System)
+Provisioning</h2>
+ <div class="author" ><a 
+href="https://cms.ual.es/UAL/personas/persona.htm?id=515256515553484875" ><span 
+class="ecrm-1200">Vicente Gonz</span><span 
+class="ecrm-1200">á</span><span 
+class="ecrm-1200">lez Ruiz</span></a> <span 
+class="ecrm-1200">- </span><a 
+href="https://cms.ual.es/UAL/universidad/departamentos/informatica/index.htm" ><span 
+class="ecrm-1200">Depto Inform</span><span 
+class="ecrm-1200">á</span><span 
+class="ecrm-1200">tica</span></a> <span 
+class="ecrm-1200">- </span><a 
+href="https://www.ual.es" ><span 
+class="ecrm-1200">UAL</span></a></div><br />
+<div class="date" ><span 
+class="ecrm-1200">September 24, 2020</span></div>
+   </div>
+   <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
+ id="x1-10001"></a>Description</h3>
+<!--l. 7--><p class="noindent" >The InterCom project <span class="cite">[<a 
+href="#Xintercom">3</a>]</span> is a real-time application with a high computational
+(specially in terms of CPU) demand. It is written in Python <span class="cite">[<a 
+href="#XPython">1</a>]</span>, an interpreted
+languaje that has been ported <a 
+href="https://www.python.org/download/other/" >almost to all</a> the current OS, including mobile
+<a 
+href="https://kivy.org/#home" >devices</a>.
+</p><!--l. 14--><p class="indent" >   This milestone (the installation of a dedicated Linux distribution for running
+InterCom) is optional , but I (as the teacher) highly recommend to do it because I&#x2019;ll
+give technical support in a reasonable time when you are in trouble. For this reason, I
+recommend you to run InterCom in a Xubuntu 20.04 (Focal Fossa) <span class="cite">[<a 
+href="#Xxubuntu">2</a>]</span> machine,
+running natively (no <a 
+href="https://en.wikipedia.org/wiki/Virtualization" >virtualization</a>).
+</p><!--l. 22--><p class="indent" >   Therefore, the following “guide” helps you to install Xubuntu in an external <a 
+href="https://en.wikipedia.org/wiki/USB_flash_drive" >USB
+drive</a>, which must have at least 8GB of capacity (the minimal installation of Xubuntu
+20.04 needs about 5GB). You will need also a temporal external USB disk with at
+leas 4GB to boot from it the installation Xubuntu image (or to burn an <a 
+href="https://en.wikipedia.org/wiki/Optical_disc" >optical
+disk</a>).
+</p><!--l. 30--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
+ id="x1-20002"></a>What do you have to do?</h3>
+<!--l. 32--><p class="noindent" >Supposing that you have decided to use Xubuntu 20.04 in a USB disk, these are the
+steps you should perform (to install Xubuntu in a disk partition of your computer the
+instructions are almost the same):
+                                                                  
+
+                                                                  
+</p><!--l. 36--><p class="indent" >
+     </p><ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x1-2002x1">Download the installation <a 
+href="https://en.wikipedia.org/wiki/Disk_image" >image</a> from <a 
+href="https://xubuntu.org/download/" >here</a>.
+     </li>
+     <li 
+  class="enumerate" id="x1-2004x2">“Burn” the 4GB USB drive with the image. Depending on your current
+     OS,  use  the  following  instructions  for  <a 
+href="https://ubuntu.com/tutorials/create-a-usb-stick-on-windows#1-overview" >Windows</a>,  <a 
+href="https://ubuntu.com/tutorials/create-a-usb-stick-on-macos#1-overview" >OSX</a>,  <a 
+href="https://ubuntu.com/tutorials/create-a-usb-stick-on-ubuntu#1-overview" >Ubuntu  (and
+     derivatives)</a>, or <a 
+href="https://askubuntu.com/questions/372607/how-to-create-a-bootable-ubuntu-usb-flash-drive-from-terminal" >the console</a>.
+     </li>
+     <li 
+  class="enumerate" id="x1-2006x3">Boot the image from the USB port. This step depends on your computer.
+     Most of PCs can chose the boot device by pressing the F12-key when the
+     PC is booting. On a Mac, you need to keep pressed the alt-key when it is
+     booting.
+     </li>
+     <li 
+  class="enumerate" id="x1-2008x4">Select the option <span 
+class="ectt-1000">Try Xubuntu without installing</span>.
+     </li>
+     <li 
+  class="enumerate" id="x1-2010x5">When the OS is running, conﬁgure the network.
+     </li>
+     <li 
+  class="enumerate" id="x1-2012x6">Insert also the 8GB USB drive where Xubuntu will be installed.
+     </li>
+     <li 
+  class="enumerate" id="x1-2014x7">Select <span 
+class="ectt-1000">Install Xubuntu 20.04 LTS</span>.
+     </li>
+     <li 
+  class="enumerate" id="x1-2016x8">Select  English  as  the  language  used  during  the  installation  and  the
+     installed system. This will help in the case you need to search information
+     in the Internet, providing the error descriptions in English.
+     </li>
+     <li 
+  class="enumerate" id="x1-2018x9">Select your keyboard layout (probably <span 
+class="ectt-1000">Spanish</span>).
+     </li>
+     <li 
+  class="enumerate" id="x1-2020x10">Open a terminal and write:
+     <!--l. 70-->
+     <div class="lstlisting" id="listing-1"><span class="label"><a 
+ id="x1-2021r1"></a></span>    df <span 
+class="cmsy-10">−</span>h
+     
+     </div>
+     <!--l. 74--><p class="noindent" >to see all the mounted disk partitions and their capacity. Notice that no
+     partition of <span 
+class="ectt-1000">/dev/sda </span>(the hard disk) should not be mounted (although you
+     can do that, you don&#x2019;t need to mount any partition of the hard disk), the
+     partition <span 
+class="ectt-1000">/dev/sdb1 </span>(with the Xubuntu image) should be mounted, and ﬁnally,
+     if the ﬁrst partition of the second external USB drive has been recognized by
+                                                                  
+
+                                                                  
+     <a 
+href="https://gitlab.xfce.org/xfce/thunar" >Thunar</a> (the default ﬁle manager in Xubuntu), it should appear as <span 
+class="ectt-1000">/dev/sdc1</span>.
+     This partition should be unmounted to install on it Xubuntu. Anyway, if you
+     continue the installation process without unmounting it, the installer will ask
+     you to do it. In this description, it has been supposed that your computer only
+     has one hard disk.
+     </p></li>
+     <li 
+  class="enumerate" id="x1-2023x11">Chose <span 
+class="ectt-1000">Download updates while installing Xubuntu </span>and <span 
+class="ectt-1000">Install</span>
+     <span 
+class="ectt-1000">third-party software for graphics and Wi-Fi hardware and</span>
+     <span 
+class="ectt-1000">additional media formats</span>, in order to have access to the ultimate software
+     available for Ubuntu (and derivatives).
+     </li>
+     <li 
+  class="enumerate" id="x1-2025x12">Chose <span 
+class="ectt-1000">Erase disk and install Xubuntu</span>. Ignore the Advanced features. Wait
+     for a couple of minutes :-/
+     </li>
+     <li 
+  class="enumerate" id="x1-2027x13">Select the drive corresponding to the 8GB USB drive (<span 
+class="ectt-1000">/dev/sdc</span>). Don&#x2019;t chose
+     <span 
+class="ectt-1000">/dev/sda </span>(the main disk of your computer)! Select <span 
+class="ectt-1000">/dev/sdc</span>!!
+     </li>
+     <li 
+  class="enumerate" id="x1-2029x14">At this point of the installation you should consider (depending on the amount
+     of RAM memory installed in your computer and the size of the USB drive) to
+     create an especiﬁc partition for doing swapping. The rule of the thumb
+     is to create a partition with the same size that the RAM. However,
+     probably you cannot do that in a 8GB USB drive because at least 5GB
+     are needed for a Xubuntu installation. Anyway, keep in mind that
+     this step is optional because you can always perform swapping on
+     a ﬁle (a process slightly slower than using the dedicated partition).
+     Consider also that InterCom requires only some MB of memory for
+     running and therefore, probably you are not going to need to swap any
+     <a 
+href="https://en.wikipedia.org/wiki/Page_(computer_memory)" >memory page</a> at all. If you decide to create a speciﬁc swap partition,
+     click on “advanced partitioning tool” and do the modiﬁcations you
+     want, and also check that the boot loader (<a 
+href="https://www.gnu.org/software/grub/" >GRUB</a>) will be installed in
+     <span 
+class="ectt-1000">/dev/sdc1</span>. But remember, all the actions described in this point are
+     optional.
+     </li>
+     <li 
+  class="enumerate" id="x1-2031x15">Click on Install Now. Something similar to:
+                                                                  
+
+                                                                  
+     <div class="verbatim" id="verbatim-1">
+     If you continue, the changes listed below will be written to the disks. Otherwise, you will be able to make further changes manually.
+      <br />
+      <br />WARNING: This will destroy all data on any partitions you have removed as well as on the partitions that are going to be formatted.
+      <br />
+      <br />The partition tables of the following devices are changed:
+      <br /> SCSI8 (0,0,0) (sdc)
+      <br />
+      <br />The following partitions are going to be formatted:
+      <br /> partition #1 of SCSI8 (0,0,0) (sdc) as ESP
+      <br /> partition #2 of SCSI8 (0,0,0) (sdc) as ext4
+</div>
+     <!--l. 131--><p class="nopar" >
+     </p></li>
+     <li 
+  class="enumerate" id="x1-2033x16">Chose your time zone.
+     </li>
+     <li 
+  class="enumerate" id="x1-2035x17">Conﬁgure you personal account, hostname and logging process.
+     </li>
+     <li 
+  class="enumerate" id="x1-2037x18">Wait for the end of the installation and boot your new Xubuntu. Don&#x2019;t worry if
+     grub labels Xubuntu as Ubuntu. This is normal.
+     </li></ol>
+<!--l. 143--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
+ id="x1-30003"></a>Timming</h3>
+<!--l. 145--><p class="noindent" >You should reach this milestone at most in one week.
+</p><!--l. 147--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
+ id="x1-40004"></a>Deliverables</h3>
+<!--l. 149--><p class="noindent" >None.
+                                                                  
+
+                                                                  
+</p><!--l. 151--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
+ id="x1-50005"></a>Resources</h3>
+   <div class="thebibliography">
+   <p class="bibitem" ><span class="biblabel">
+ [1]<span class="bibsp">   </span></span><a 
+ id="XPython"></a><a 
+href="https://www.python.org/" >Python</a> website.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [2]<span class="bibsp">   </span></span><a 
+ id="Xxubuntu"></a>Canonical Ltd. <a 
+href="https://xubuntu.org/" >xubuntu</a>.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [3]<span class="bibsp">   </span></span><a 
+ id="Xintercom"></a>The students of <a 
+href="https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN" >Tecnologías Multimedia</a> at the UAL.  The <a 
+href="https://github.com/Tecnologias-multimedia/intercom" >InterCom</a>
+   project.
+</p>
+   </div>
+<a 
+ id="Q1-1-6"></a>
+    
+</body> 
+</html>
+                                                                  
+
+
