@@ -65,17 +65,36 @@ partition of your computer the instructions are almost the same):
   
 \item Select your keyboard layout (probably \texttt{Spanish}).
 
+\item Open a terminal and write:
+
+  \begin{lstlisting}[language=bash]
+    df -h
+  \end{lstlisting}
+
+  to see all the mounted disk partitions and their capacity. Notice
+  that no partition of \texttt{/dev/sda} (the hard disk) should not be
+  mounted (although you can do that, you don't need to mount any
+  partition of the hard disk), the partition \texttt{/dev/sdb1} (with
+  the Xubuntu image) should be mounted, and finally, if the first
+  partition of the second external USB drive has been recognized by
+  \href{https://gitlab.xfce.org/xfce/thunar}{Thunar} (the default file
+  manager in Xubuntu), it should be appear as \texttt{/dev/sdc1}. This
+  partition should be unmounted to install on it Xubuntu. Anuway, if
+  you continue the installation process without unmounting it, the
+  install will ask you to do it. In this description, it has been
+  supposed that your computer only has one hard disk.
+
 \item Chose \texttt{Download updates while installing Xubuntu} and
   \texttt{Install third-party software for graphics and Wi-Fi hardware
     and additional media formats}, in order to have access to the
     ultimate software available for Ubuntu (and derivatives).
 
-\item Chose \texttt{Erase disk and install Xubuntu}. Wait for a couple
-  of minutes :-/
+\item Chose \texttt{Erase disk and install Xubuntu}. Ignore the
+  Advanced features. Wait for a couple of minutes :-/
 
-\item Select the drive corresponding to the 8GB USB drive. It's
-  difficult to guess for me now the letter associated to this drive,
-  but, it is very likely not \texttt{sda}.
+\item Select the drive corresponding to the 8GB USB drive
+  (\texttt{/dev/sdc}). Don't chose \texttt{/dev/sda} (the main disk of
+  your computer)! Select \texttt{/dev/sdc}!!
 
 \item At this point of the installation you should consider (depending
   on the amount of RAM memory installed in your computer and the size
@@ -87,14 +106,29 @@ partition of your computer the instructions are almost the same):
   because you can always perform swapping on a file (a process
   slightly slower than using the dedicated partition). Consider also
   that InterCom requires only some MB of memory for running and
-  therefore, probably you are not going to need to swap
-  any \href{https://en.wikipedia.org/wiki/Page_(computer_memory)}{memory
-  page} at all.
+  therefore, probably you are not going to need to swap any
+  \href{https://en.wikipedia.org/wiki/Page_(computer_memory)}{memory
+    page} at all. If you decide to create a specific swap partition,
+  click on ``advanced partitioning tool'' and do the modifications you
+  want, and also check that the boot loader
+  (\href{https://www.gnu.org/software/grub/}{GRUB}) will be installed
+  in \texttt{/dev/sdc1}. But remember, all the actions described in
+  this point are optional.
 
-\item A very important step here is to select the disk where Grub (the
-  program that start the loading of the OS in your computer) will be
-  installed. Don't chose \texttt{/dev/sda} (the main disk of your
-  computer)!
+\item Click on Install Now. Something similar to:
+
+\begin{verbatim}
+If you continue, the changes listed below will be written to the disks. Otherwise, you will be able to make further changes manually.
+
+WARNING: This will destroy all data on any partitions you have removed as well as on the partitions that are going to be formatted.
+
+The partition tables of the following devices are changed:
+ SCSI8 (0,0,0) (sdc)
+
+The following partitions are going to be formatted:
+ partition #1 of SCSI8 (0,0,0) (sdc) as ESP
+ partition #2 of SCSI8 (0,0,0) (sdc) as ext4
+\end{verbatim}
 
 \item Chose your time zone.
   
