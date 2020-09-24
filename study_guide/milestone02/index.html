@@ -1,6 +1,6 @@
 <!DOCTYPE html> 
 <html> 
-<head> <title>Tecnologıas Multimedia - Study Guide - Milestone 3: Git, GitHub and the
+<head> <title>TecnologÃŋas Multimedia - Study Guide - Milestone 3: Git, GitHub and the
 Fork-and-Branch Git Workﬂow</title> 
 <meta charset="UTF-8" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
@@ -45,18 +45,18 @@ class="ecrm-1200">September 24, 2020</span></div>
  id="x1-10001"></a>Description</h3>
 <!--l. 12--><p class="noindent" >To work in <a 
 href="https://github.com/Tecnologias-multimedia/intercom" >the InterCom project</a> <span class="cite">[<a 
-href="#Xintercom">4</a>]</span> you must understand the basics of Git <span class="cite">[<a 
-href="#XGit-book">3</a>]</span> and
+href="#Xintercom">3</a>]</span> you must understand the basics of Git <span class="cite">[<a 
+href="#XGit-book">1</a>]</span> and
 <a 
 href="https://github.com/" >GitHub</a><span class="footnote-mark"><a 
 href="index2.html#fn1x0"><sup class="textsuperscript">1</sup></a></span><a 
  id="x1-1001f1"></a> 
 <span class="cite">[<a 
-href="#XGitHub">1</a>]</span>, and how to use the <a 
+href="#XGitHub">2</a>]</span>, and how to use the <a 
 href="https://guides.github.com/introduction/flow/index.html" >The GitHub (Work)Flow</a> and the <a 
 href="https://github.com/vicente-gonzalez-ruiz/fork_and_branch_git_workflow" >Fork-and-Branch Git
-Workﬂow</a> <span class="cite">[<a 
-href="#Xfork-and-branch-git-workflow">2</a>]</span>.
+Workﬂow</a> <span class="cite">[<span 
+class="ecbx-1000">?</span>]</span>.
 </p>
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
  id="x1-20002"></a>What you have to do?</h3>
@@ -65,11 +65,11 @@ href="#Xfork-and-branch-git-workflow">2</a>]</span>.
      <li 
   class="enumerate" id="x1-2002x1">Have a look to the <a 
 href="https://git-scm.com/book/en/v2" >Pro Git</a> book <span class="cite">[<a 
-href="#XGit-book">3</a>]</span>, what is the main source of information
+href="#XGit-book">1</a>]</span>, what is the main source of information
      about Git.
      </li>
      <li 
-  class="enumerate" id="x1-2004x2">If you don&#x2019;t have an GitHub account, please, do the <a 
+  class="enumerate" id="x1-2004x2">If you don’t have an GitHub account, please, do the <a 
 href="https://guides.github.com/activities/hello-world/" >the Hello World guide
      at GitHub</a> and create one. Be aware that to contribute to InterCom an
      GitHub account is required. Notice that in the Hello World guide, the
@@ -91,7 +91,17 @@ class="ectt-1000">git </span>in a terminal),
      install it with:
      <!--l. 47-->
      <div class="lstlisting" id="listing-1"><span class="label"><a 
- id="x1-2007r1"></a></span>    sudo apt install git
+ id="x1-2007r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">sudo</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">apt</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">install</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">git</span>
      
      </div>
      </li>
@@ -101,11 +111,16 @@ href="https://docs.github.com/en/github/getting-started-with-github/github-gloss
      (select “https”, not “download a zip ﬁle”). Then run:
      <!--l. 57-->
      <div class="lstlisting" id="listing-2"><span class="label"><a 
- id="x1-2010r1"></a></span>    <span 
-class="ecbx-1000">cd</span> hello_world
+ id="x1-2010r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">cd</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">hello_world</span>
      
      </div>
-     <!--l. 61--><p class="noindent" >Notice that a new directory named as the repo&#x2019;s name at GitHub has been
+     <!--l. 61--><p class="noindent" >Notice that a new directory named as the repo’s name at GitHub has been
      created, and that inside you can ﬁnd the <span 
 class="ectt-1000">README.md </span>ﬁle written in
      <a 
@@ -119,8 +134,18 @@ class="ectt-1000">improving_readme</span>. In your
      terminal write:
      <!--l. 70-->
      <div class="lstlisting" id="listing-3"><span class="label"><a 
- id="x1-2013r1"></a></span>    git checkout <span 
-class="cmsy-10">−</span>b improving_readme
+ id="x1-2013r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">git</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">checkout</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">-</span><span 
+class="ectt-1000">b</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">improving_readme</span>
      
      </div>
      </li>
@@ -131,7 +156,13 @@ class="ectt-1000">README.md</span>. Append to it, for example, a link to the Hel
 class="ectt-1000">nano</span>, for example):
      <!--l. 78-->
      <div class="lstlisting" id="listing-4"><span class="label"><a 
- id="x1-2016r1"></a></span>    nano README
+ id="x1-2016r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">nano</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">README</span>
      
      </div>
      <!--l. 82--><p class="noindent" >And write:
@@ -141,8 +172,40 @@ class="ectt-1000">nano</span>, for example):
 
                                                                   
      <div class="lstlisting" id="listing-5"><span class="label"><a 
- id="x1-2017r1"></a></span>    See the [Hello World](https://guides.github.com/activities/hello<span 
-class="cmsy-10">−</span>world/) guide at GitHub.
+ id="x1-2017r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">See</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">the</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">[</span><span 
+class="ectt-1000">Hello</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">World</span><span 
+class="ectt-1000">](</span><span 
+class="ectt-1000">https</span><span 
+class="ectt-1000">://</span><span 
+class="ectt-1000">guides</span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">github</span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">com</span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">activities</span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">hello</span><span 
+class="ectt-1000">-</span><span 
+class="ectt-1000">world</span><span 
+class="ectt-1000">/)</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">guide</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">at</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">GitHub</span><span 
+class="ectt-1000">.</span>
      
      </div>
      </li>
@@ -151,17 +214,54 @@ class="cmsy-10">−</span>world/) guide at GitHub.
 href="https://docs.github.com/en/github/getting-started-with-github/github-glossary#commit" >Commit</a> your modiﬁcation(s):
      <!--l. 92-->
      <div class="lstlisting" id="listing-6"><span class="label"><a 
- id="x1-2020r1"></a></span>    git commit <span 
-class="cmsy-10">−</span>am &#x0022;Providing the Hello World link&#x0022;
+ id="x1-2020r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">git</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">commit</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">-</span><span 
+class="ectt-1000">am</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">&#x0022;</span><span 
+class="ectt-1000">Providing</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">the</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">Hello</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">World</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">link</span><span 
+class="ectt-1000">&#x0022;</span>
      
      </div>
      <!--l. 96--><p class="noindent" >In your ﬁrst commit you will be prompted with:
 </p>
      <!--l. 98-->
      <div class="lstlisting" id="listing-7"><span class="label"><a 
- id="x1-2021r1"></a></span>    git config <span 
-class="cmsy-10">−</span><span 
-class="cmsy-10">−</span>global user.email &#x0022;your_email@example.com&#x0022;
+ id="x1-2021r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">git</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">config</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">--</span><span 
+class="ectt-1000">global</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">user</span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">email</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">&#x0022;</span><span 
+class="ectt-1000">your_email@example</span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">com</span><span 
+class="ectt-1000">&#x0022;</span>
      
      </div>
      <!--l. 102--><p class="noindent" >Please, input such information.
@@ -175,7 +275,7 @@ class="ecti-1000">origin</span></a> (copy at GitHub of
      the) remote repo. This means that your <span 
 class="ecti-1000">local </span>has modiﬁcations that the <span 
 class="ecti-1000">origin</span>
-     doesn&#x2019;t have.
+     doesn’t have.
      </p></li>
      <li 
   class="enumerate" id="x1-2023x8">Synchronize your <span 
@@ -184,7 +284,13 @@ class="ecti-1000">origin </span>using <a
 href="https://docs.github.com/en/github/getting-started-with-github/github-glossary#push" >push</a>:
      <!--l. 113-->
      <div class="lstlisting" id="listing-8"><span class="label"><a 
- id="x1-2024r1"></a></span>    git push
+ id="x1-2024r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">git</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">push</span>
      
      </div>
      <!--l. 117--><p class="noindent" >Notice that if you have not upoaded a public <a 
@@ -202,7 +308,7 @@ href="https://en.wikipedia.org/wiki/Public-key_cryptography" >public-key criptog
      </p></li>
      <li 
   class="enumerate" id="x1-2026x9">The ﬁrst step is to check whether you already have a pair of keys (if your are
-     using the just installed Xubuntu distribution, obviously you don&#x2019;t need to check
+     using the just installed Xubuntu distribution, obviously you don’t need to check
      anything and can go directly to the next step). Simply revise your <span 
 class="ectt-1000">$HOME/.ssh</span>
      directory with:
@@ -211,8 +317,17 @@ class="ectt-1000">$HOME/.ssh</span>
 
                                                                   
      <div class="lstlisting" id="listing-9"><span class="label"><a 
- id="x1-2027r1"></a></span>    ls <span 
-class="cmsy-10">−</span>l ~/.ssh
+ id="x1-2027r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">ls</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">-</span><span 
+class="ectt-1000">l</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">~/.</span><span 
+class="ectt-1000">ssh</span>
      
      </div>
      <!--l. 141--><p class="noindent" >and if you ﬁnd a pair of ﬁles with almost the same name, and one of they
@@ -220,15 +335,36 @@ class="cmsy-10">−</span>l ~/.ssh
 class="ectt-1000">.pub</span>, you probably own a pair of SSH keys.
      </p></li>
      <li 
-  class="enumerate" id="x1-2029x10">Let&#x2019;s create a pair of keys (if you don&#x2019;t have one or if you prefeer to create a
+  class="enumerate" id="x1-2029x10">Let’s create a pair of keys (if you don’t have one or if you prefeer to create a
      new one). Open a terminal and write:
      <!--l. 148-->
      <div class="lstlisting" id="listing-10"><span class="label"><a 
- id="x1-2030r1"></a></span>    ssh<span 
-class="cmsy-10">−</span>keygen <span 
-class="cmsy-10">−</span>t rsa <span 
-class="cmsy-10">−</span>b 4096 <span 
-class="cmsy-10">−</span>C &#x0022;your_email@example.com&#x0022;
+ id="x1-2030r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">ssh</span><span 
+class="ectt-1000">-</span><span 
+class="ectt-1000">keygen</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">-</span><span 
+class="ectt-1000">t</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">rsa</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">-</span><span 
+class="ectt-1000">b</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">4096</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">-</span><span 
+class="ectt-1000">C</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">&#x0022;</span><span 
+class="ectt-1000">your_email@example</span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">com</span><span 
+class="ectt-1000">&#x0022;</span>
      
      </div>
      <!--l. 152--><p class="noindent" >using the email address you provided when you created your GitHub account.
@@ -236,12 +372,41 @@ class="cmsy-10">−</span>C &#x0022;your_email@example.com&#x0022;
 </p>
      <!--l. 155-->
      <div class="lstlisting" id="listing-11"><span class="label"><a 
- id="x1-2031r1"></a></span>    Enter a file <span 
-class="ecbx-1000">in</span> which to save the key (/home/you/.ssh/id_rsa):
+ id="x1-2031r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">Enter</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">a</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">file</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">in</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">which</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">to</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">save</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">the</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">key</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">(/</span><span 
+class="ectt-1000">home</span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">you</span><span 
+class="ectt-1000">/.</span><span 
+class="ectt-1000">ssh</span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">id_rsa</span><span 
+class="ectt-1000">):</span>
      
      </div>
      <!--l. 159--><p class="noindent" >just press the Enter-key, to select such output preﬁx. Otherwise, write a
-     diﬀerent one, but don&#x2019;t change the path to the <span 
+     diﬀerent one, but don’t change the path to the <span 
 class="ectt-1000">.ssh </span>directory.
      </p></li>
      <li 
@@ -266,7 +431,7 @@ href="https://www.xfce.org/" >Xfce</a> does that
          by you).</li></ol>
      </li>
      <li 
-  class="enumerate" id="x1-2039x12">Now it&#x2019;s time to check whether the <span 
+  class="enumerate" id="x1-2039x12">Now it’s time to check whether the <span 
 class="ectt-1000">ssh-agent </span>is already running in your
      computer. This can be done with:
      <!--l. 181-->
@@ -274,9 +439,21 @@ class="ectt-1000">ssh-agent </span>is already running in your
 
                                                                   
      <div class="lstlisting" id="listing-12"><span class="label"><a 
- id="x1-2040r1"></a></span>    <span 
-class="ecbx-1000">ps</span> aux | grep ssh<span 
-class="cmsy-10">−</span>agent
+ id="x1-2040r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">ps</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">aux</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">|</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">grep</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">ssh</span><span 
+class="ectt-1000">-</span><span 
+class="ectt-1000">agent</span>
      
      </div>
      <!--l. 185--><p class="noindent" >and in the case of Xubuntu, you should get something similar to:
@@ -284,10 +461,10 @@ class="cmsy-10">−</span>agent
 
                                                                   
 </p>
-     <div class="verbatim" id="verbatim-1">
+     <pre class="verbatim" id="verbatim-1">
       989 ?        Ss     0:00 /usr/bin/ssh-agent /usr/bin/im-launch startxfce4
-      <br />1433 pts/0    S+     0:00 grep --color=auto ssh-agent
-</div>
+     1433 pts/0    S+     0:00 grep --color=auto ssh-agent
+</pre>
      <!--l. 190--><p class="nopar" >
      </p><!--l. 192--><p class="noindent" >This means that there are two processes in whose description there exists the
      string <span 
@@ -304,13 +481,26 @@ class="ectt-1000">ssh-agent </span>were not running, it can be launched to run i
 href="https://en.wikipedia.org/wiki/Background_process" >background</a> with:
      <!--l. 203-->
      <div class="lstlisting" id="listing-13"><span class="label"><a 
- id="x1-2043r1"></a></span>    <span 
-class="ecbx-1000">eval</span> &#x0022;$(ssh<span 
-class="cmsy-10">−</span>agent <span 
-class="cmsy-10">−</span>s)&#x0022;
+ id="x1-2043r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">eval</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">&#x0022;</span><span 
+class="ectt-1000">$</span><span 
+class="ectt-1000">(</span><span 
+class="ectt-1000">ssh</span><span 
+class="ectt-1000">-</span><span 
+class="ectt-1000">agent</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">-</span><span 
+class="ectt-1000">s</span><span 
+class="ectt-1000">)</span><span 
+class="ectt-1000">&#x0022;</span>
      
      </div>
-     <!--l. 207--><p class="noindent" >but you don&#x2019;t need to do that in your Xubuntu installation, because
+     <!--l. 207--><p class="noindent" >but you don’t need to do that in your Xubuntu installation, because
      (remember) the <span 
 class="ectt-1000">ssh-agent </span>the Xfce desktop environment lauches it.
      </p></li>
@@ -318,8 +508,18 @@ class="ectt-1000">ssh-agent </span>the Xfce desktop environment lauches it.
   class="enumerate" id="x1-2045x14">With your keys, run:
      <!--l. 213-->
      <div class="lstlisting" id="listing-14"><span class="label"><a 
- id="x1-2046r1"></a></span>    ssh<span 
-class="cmsy-10">−</span>add ~/.ssh/id_rsa
+ id="x1-2046r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">ssh</span><span 
+class="ectt-1000">-</span><span 
+class="ectt-1000">add</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">~/.</span><span 
+class="ectt-1000">ssh</span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">id_rsa</span>
      
      </div>
      <!--l. 217--><p class="noindent" >and the passphrase will be prompt.
@@ -332,15 +532,25 @@ class="ectt-1000">-&#x003E; </span>New SSH key. Open a
      terminal and write:
      <!--l. 222-->
      <div class="lstlisting" id="listing-15"><span class="label"><a 
- id="x1-2049r1"></a></span>    <span 
-class="ecbx-1000">cat</span> .ssh/id_rsa.pub
+ id="x1-2049r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">cat</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">ssh</span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">id_rsa</span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">pub</span>
      
      </div>
      <!--l. 226--><p class="noindent" >and copy and paste the content of such ﬁle (which ends with your email
      address) inside of the space where you can read “<span 
-class="ectt-1000">Begins with &#x2019;ssh-rsa&#x2019;,</span>
+class="ectt-1000">Begins with ’ssh-rsa’,</span>
      <span 
-class="ectt-1000">...</span>”. Don&#x2019;t forget to give a title (something such as “<span 
+class="ectt-1000">...</span>”. Don’t forget to give a title (something such as “<span 
 class="ectt-1000">tm</span>” (tecnonogías
      multimedia)) to the key pair.
                                                                   
@@ -374,9 +584,9 @@ class="ecti-1000">upstream</span></a>,
                                                                   
 
                                                                   
-     <div class="verbatim" id="verbatim-2">
+     <pre class="verbatim" id="verbatim-2">
        git@github.com:Tecnologias-multimedia/intercom.git
-</div>
+</pre>
      <!--l. 253--><p class="nopar" > This info can be found when you <a 
 href="https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository" >clone</a> the InterCom. Notice however,
      that action of clonning the InterCom is a waste of time because you
@@ -393,16 +603,45 @@ href="index3.html#fn2x0"><sup class="textsuperscript">2</sup></a></span><a
 class="ecti-1000">upstream </span>with:
      <!--l. 269-->
      <div class="lstlisting" id="listing-16"><span class="label"><a 
- id="x1-2059r1"></a></span>    git remote add upstream git@github.com:Tecnologias<span 
-class="cmsy-10">−</span>multimedia/intercom.git
+ id="x1-2059r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">git</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">remote</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">add</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">upstream</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">git@github</span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">com</span><span 
+class="ectt-1000">:</span><span 
+class="ectt-1000">Tecnologias</span><span 
+class="ectt-1000">-</span><span 
+class="ectt-1000">multimedia</span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">intercom</span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">git</span>
      
      </div>
      <!--l. 273--><p class="noindent" >Check that everything has worked with:
 </p>
      <!--l. 275-->
      <div class="lstlisting" id="listing-17"><span class="label"><a 
- id="x1-2060r1"></a></span>    git remote <span 
-class="cmsy-10">−</span>v
+ id="x1-2060r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">git</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">remote</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">-</span><span 
+class="ectt-1000">v</span>
      
      </div>
      <!--l. 279--><p class="noindent" >where you should see two remotes: <span 
@@ -413,12 +652,12 @@ class="ecti-1000">upstream</span>. Something similar
 
                                                                   
 </p>
-     <div class="verbatim" id="verbatim-3">
-     origin   git@github.com:Tecnologias-multimedia/intercom.git (fetch)
-      <br />origin   git@github.com:Tecnologias-multimedia/intercom.git (push)
-      <br />upstream git@github.com:you_at_GitHub/intercom.git (fetch)
-      <br />upstream git@github.com:you_at_GitHub/intercom.git (push)
-</div>
+     <pre class="verbatim" id="verbatim-3">
+     origin   git@github.com:you_at_GitHub/intercom.git (fetch)
+     origin   git@github.com:you_at_GitHub/intercom.git (push)
+     upstream git@github.com:Tecnologias-multimedia/intercom.git (fetch)
+     upstream git@github.com:Tecnologias-multimedia/intercom.git (push)
+</pre>
      <!--l. 286--><p class="nopar" >
 </p>
      </li></ol>
@@ -439,25 +678,19 @@ class="ecti-1000">upstream</span>. Something similar
    <div class="thebibliography">
    <p class="bibitem" ><span class="biblabel">
  [1]<span class="bibsp">   </span></span><a 
- id="XGitHub"></a><a 
-href="https://github.com" >GitHub</a>.
+ id="XGit-book"></a><a 
+href="https://git-scm.com/book/en/v2" >Git - Book</a>.
    </p>
    <p class="bibitem" ><span class="biblabel">
  [2]<span class="bibsp">   </span></span><a 
- id="Xfork-and-branch-git-workflow"></a><a 
-href="https://github.com/vicente-gonzalez-ruiz/fork_and_branch_git_workflow" >The Fork and Branch Git Workﬂow</a>.
-   </p>
-   <p class="bibitem" ><span class="biblabel">
- [3]<span class="bibsp">   </span></span><a 
- id="XGit-book"></a>Scott Chacon and Ben Straub. <a 
-href="https://git-scm.com/book/en/v2" ><span 
-class="ecti-1000">Pro Git</span></a>. Apress, 2020.
+ id="XGitHub"></a><a 
+href="https://github.com" >GitHub</a>.
                                                                   
 
                                                                   
    </p>
    <p class="bibitem" ><span class="biblabel">
- [4]<span class="bibsp">   </span></span><a 
+ [3]<span class="bibsp">   </span></span><a 
  id="Xintercom"></a>The students of <a 
 href="https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN" >Tecnologías Multimedia</a> at the UAL.  The <a 
 href="https://github.com/Tecnologias-multimedia/intercom" >InterCom</a>
