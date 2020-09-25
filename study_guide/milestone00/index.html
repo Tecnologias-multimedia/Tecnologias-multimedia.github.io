@@ -39,7 +39,7 @@ class="ecrm-1200">- </span><a
 href="https://www.ual.es" ><span 
 class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
-class="ecrm-1200">September 13, 2020</span></div>
+class="ecrm-1200">September 24, 2020</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
@@ -121,73 +121,119 @@ class="ectt-1000">Install Xubuntu 20.04 LTS</span>.
 class="ectt-1000">Spanish</span>).
      </li>
      <li 
-  class="enumerate" id="x1-2020x10">Chose   <span 
-class="ectt-1000">Download updates while installing Xubuntu  </span>and   <span 
-class="ectt-1000">Install</span>
-     <span 
-class="ectt-1000">third-party software for graphics and Wi-Fi hardware</span>
-     <span 
-class="ectt-1000">and additional media formats</span>, in order to have access to the ultimate
-     software available for Ubuntu (and derivatives).
-     </li>
-     <li 
-  class="enumerate" id="x1-2022x11">Chose <span 
-class="ectt-1000">Erase disk and install Xubuntu</span>. Wait for a couple of minutes
-     :-/
-     </li>
-     <li 
-  class="enumerate" id="x1-2024x12">Select the drive corresponding to the 8GB USB drive. It’s diﬃcult to guess
-     for me now the letter associated to this drive, but, it is very likely not
-     <span 
-class="ectt-1000">sda</span>.
+  class="enumerate" id="x1-2020x10">Open a terminal and write:
+     <!--l. 70-->
+     <div class="lstlisting" id="listing-1"><span class="label"><a 
+ id="x1-2021r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">df</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">-</span><span 
+class="ectt-1000">h</span>
+     
+     </div>
+     <!--l. 74--><p class="noindent" >to see all the mounted disk partitions and their capacity. Notice that no
+     partition of <span 
+class="ectt-1000">/dev/sda </span>(the hard disk) should not be mounted (although you
+     can do that, you don’t need to mount any partition of the hard disk), the
+     partition <span 
+class="ectt-1000">/dev/sdb1 </span>(with the Xubuntu image) should be mounted, and ﬁnally,
+     if the ﬁrst partition of the second external USB drive has been recognized by
                                                                   
 
                                                                   
+     <a 
+href="https://gitlab.xfce.org/xfce/thunar" >Thunar</a> (the default ﬁle manager in Xubuntu), it should be appear as
+     <span 
+class="ectt-1000">/dev/sdc1</span>. This partition should be unmounted to install on it Xubuntu.
+     Anuway, if you continue the installation process without unmounting it, the
+     install will ask you to do it. In this description, it has been supposed that your
+     computer only has one hard disk.
+     </p></li>
+     <li 
+  class="enumerate" id="x1-2023x11">Chose <span 
+class="ectt-1000">Download updates while installing Xubuntu </span>and <span 
+class="ectt-1000">Install</span>
+     <span 
+class="ectt-1000">third-party software for graphics and Wi-Fi hardware and</span>
+     <span 
+class="ectt-1000">additional media formats</span>, in order to have access to the ultimate software
+     available for Ubuntu (and derivatives).
      </li>
      <li 
-  class="enumerate" id="x1-2026x13">At this point of the installation you should consider (depending on the
-     amount of RAM memory installed in your computer and the size of the
-     USB drive) to create an especiﬁc partition for doing swapping. The rule
-     of the thumb is to create a partition with the same size that the RAM.
-     However, probably you cannot do that in a 8GB USB drive because at
-     least 5GB are needed for a Xubuntu installation. Anyway, keep in mind
-     that this step is optional because you can always perform swapping on a
-     ﬁle (a process slightly slower than using the dedicated partition). Consider
-     also that InterCom requires only some MB of memory for running and
-     therefore, probably you are not going to need to swap any <a 
-href="https://en.wikipedia.org/wiki/Page_(computer_memory)" >memory page</a>
-     at all.
+  class="enumerate" id="x1-2025x12">Chose <span 
+class="ectt-1000">Erase disk and install Xubuntu</span>. Ignore the Advanced features. Wait
+     for a couple of minutes :-/
      </li>
      <li 
-  class="enumerate" id="x1-2028x14">A very important step here is to select the disk where Grub (the program
-     that start the loading of the OS in your computer) will be installed. Don’t
-     chose <span 
-class="ectt-1000">/dev/sda </span>(the main disk of your computer)!
+  class="enumerate" id="x1-2027x13">Select the drive corresponding to the 8GB USB drive (<span 
+class="ectt-1000">/dev/sdc</span>). Don’t chose
+     <span 
+class="ectt-1000">/dev/sda </span>(the main disk of your computer)! Select <span 
+class="ectt-1000">/dev/sdc</span>!!
      </li>
      <li 
-  class="enumerate" id="x1-2030x15">Chose your time zone.
+  class="enumerate" id="x1-2029x14">At this point of the installation you should consider (depending on the amount
+     of RAM memory installed in your computer and the size of the USB drive) to
+     create an especiﬁc partition for doing swapping. The rule of the thumb
+     is to create a partition with the same size that the RAM. However,
+     probably you cannot do that in a 8GB USB drive because at least 5GB
+     are needed for a Xubuntu installation. Anyway, keep in mind that
+     this step is optional because you can always perform swapping on
+     a ﬁle (a process slightly slower than using the dedicated partition).
+     Consider also that InterCom requires only some MB of memory for
+     running and therefore, probably you are not going to need to swap any
+     <a 
+href="https://en.wikipedia.org/wiki/Page_(computer_memory)" >memory page</a> at all. If you decide to create a speciﬁc swap partition,
+     click on “advanced partitioning tool” and do the modiﬁcations you
+     want, and also check that the boot loader (<a 
+href="https://www.gnu.org/software/grub/" >GRUB</a>) will be installed in
+     <span 
+class="ectt-1000">/dev/sdc1</span>. But remember, all the actions described in this point are
+     optional.
      </li>
      <li 
-  class="enumerate" id="x1-2032x16">Conﬁgure you personal account, hostname and logging process.
+  class="enumerate" id="x1-2031x15">Click on Install Now. Something similar to:
+                                                                  
+
+                                                                  
+     <pre class="verbatim" id="verbatim-1">
+     If you continue, the changes listed below will be written to the disks. Otherwise, you will be able to make further changes manually.
+     WARNING: This will destroy all data on any partitions you have removed as well as on the partitions that are going to be formatted.
+     The partition tables of the following devices are changed:
+      SCSI8 (0,0,0) (sdc)
+     The following partitions are going to be formatted:
+      partition #1 of SCSI8 (0,0,0) (sdc) as ESP
+      partition #2 of SCSI8 (0,0,0) (sdc) as ext4
+</pre>
+     <!--l. 131--><p class="nopar" >
+     </p></li>
+     <li 
+  class="enumerate" id="x1-2033x16">Chose your time zone.
      </li>
      <li 
-  class="enumerate" id="x1-2034x17">Wait for the end of the installation and boot your new Xubuntu. Don’t
-     worry if grub labels Xubuntu as Ubuntu. This is normal.
+  class="enumerate" id="x1-2035x17">Conﬁgure you personal account, hostname and logging process.
+     </li>
+     <li 
+  class="enumerate" id="x1-2037x18">Wait for the end of the installation and boot your new Xubuntu. Don’t worry if
+     grub labels Xubuntu as Ubuntu. This is normal.
      </li></ol>
-<!--l. 109--><p class="noindent" >
+<!--l. 143--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-30003"></a>Timming</h3>
-<!--l. 111--><p class="noindent" >You should reach this milestone at most in one week.
-</p><!--l. 113--><p class="noindent" >
+<!--l. 145--><p class="noindent" >You should reach this milestone at most in one week.
+</p><!--l. 147--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-40004"></a>Deliverables</h3>
-<!--l. 115--><p class="noindent" >None.
+<!--l. 149--><p class="noindent" >None.
                                                                   
 
                                                                   
-</p><!--l. 117--><p class="noindent" >
+</p><!--l. 151--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-50005"></a>Resources</h3>
