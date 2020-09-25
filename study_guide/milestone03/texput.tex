@@ -195,12 +195,12 @@ handle the audio hardware we use
   a function of $\mathtt{CHUNK\_SIZE}$. Plot the file
   \texttt{latency\_vs\_chunk\_size.txt} with:
 
-  \begin{lstlisting}[language=Bash, showstringspaces=false, upquote=true]
+  \begin{lstlisting}[language=Bash]
      sudo apt install gnuplot
      echo "set terminal pdf; set output 'latency_vs_chunk_size.pdf'; set xlabel 'CHUNK\_SIZE (frames)'; set ylabel 'Latency (seconds)'; plot 'latency_vs_chunk_size.txt' title '' with linespoints" | gnuplot
   \end{lstlisting}
 
-\item Let's compute now the buffering latency. If
+\item Let's compute now the buffering latency of a chunk (the chunk-time). If
   $\mathtt{sampling\_rate}$ is the number of frames per second, it holds
   that:
   
@@ -221,9 +221,8 @@ handle the audio hardware we use
     echo "set terminal pdf; set output 'latency_vs_chunk_size.pdf'; set xlabel 'CHUNK\_SIZE (frames)'; set ylabel 'Latency (seconds)'; set key left; plot 'latency_vs_chunk_size.txt' using 1:2 title 'Real' with linespoints, 'latency_vs_chunk_size.txt' using 1:3 title 'Minimal' with linespoints" | gnuplot
   \end{lstlisting}
   
-\item Which seems to be the minimal latency (the one obtained
-  when $\mathtt{CHUNK\_SIZE}=1$)? Which is the chunk-time (the time
-  required to play or record a chunk)? Justify your
+\item Which seems to be the minimal practical latency (the latency obtained
+  when $\mathtt{CHUNK\_SIZE}=1$) in your computer? Justify your
   answers. \label{question}
 
 \end{enumerate}

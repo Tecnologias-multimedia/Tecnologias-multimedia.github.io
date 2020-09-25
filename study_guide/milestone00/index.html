@@ -1,6 +1,6 @@
 <!DOCTYPE html> 
 <html> 
-<head> <title>TecnologÃŋas Multimedia - Study Guide - Milestone 0: OS (Operating System)
+<head> <title>Tecnologıas Multimedia - Study Guide - Milestone 0: OS (Operating System)
 Provisioning</title> 
 <meta charset="UTF-8" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
@@ -52,7 +52,7 @@ href="https://www.python.org/download/other/" >almost to all</a> the current OS,
 <a 
 href="https://kivy.org/#home" >devices</a>.
 </p><!--l. 14--><p class="indent" >   This milestone (the installation of a dedicated Linux distribution for running
-InterCom) is optional , but I (as the teacher) highly recommend to do it because I’ll
+InterCom) is optional , but I (as the teacher) highly recommend to do it because I&#x2019;ll
 give technical support in a reasonable time when you are in trouble. For this reason, I
 recommend you to run InterCom in a Xubuntu 20.04 (Focal Fossa) <span class="cite">[<a 
 href="#Xxubuntu">2</a>]</span> machine,
@@ -124,6 +124,7 @@ class="ectt-1000">Spanish</span>).
   class="enumerate" id="x1-2020x10">Open a terminal and write:
      <!--l. 70-->
      <div class="lstlisting" id="listing-1"><span class="label"><a 
+<<<<<<< HEAD
  id="x1-2021r1"></a></span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
@@ -132,12 +133,20 @@ class="ectt-1000">df</span><span
 class="ectt-1000"> </span><span 
 class="ectt-1000">-</span><span 
 class="ectt-1000">h</span>
+=======
+ id="x1-2021r1"></a></span>    df <span 
+class="cmsy-10">−</span>h
+>>>>>>> 53995ef9732216f0d51253880db0c55342b63eb9
      
      </div>
      <!--l. 74--><p class="noindent" >to see all the mounted disk partitions and their capacity. Notice that no
      partition of <span 
 class="ectt-1000">/dev/sda </span>(the hard disk) should not be mounted (although you
+<<<<<<< HEAD
      can do that, you don’t need to mount any partition of the hard disk), the
+=======
+     can do that, you don&#x2019;t need to mount any partition of the hard disk), the
+>>>>>>> 53995ef9732216f0d51253880db0c55342b63eb9
      partition <span 
 class="ectt-1000">/dev/sdb1 </span>(with the Xubuntu image) should be mounted, and ﬁnally,
      if the ﬁrst partition of the second external USB drive has been recognized by
@@ -145,12 +154,21 @@ class="ectt-1000">/dev/sdb1 </span>(with the Xubuntu image) should be mounted, a
 
                                                                   
      <a 
+<<<<<<< HEAD
 href="https://gitlab.xfce.org/xfce/thunar" >Thunar</a> (the default ﬁle manager in Xubuntu), it should be appear as
      <span 
 class="ectt-1000">/dev/sdc1</span>. This partition should be unmounted to install on it Xubuntu.
      Anuway, if you continue the installation process without unmounting it, the
      install will ask you to do it. In this description, it has been supposed that your
      computer only has one hard disk.
+=======
+href="https://gitlab.xfce.org/xfce/thunar" >Thunar</a> (the default ﬁle manager in Xubuntu), it should appear as <span 
+class="ectt-1000">/dev/sdc1</span>.
+     This partition should be unmounted to install on it Xubuntu. Anyway, if you
+     continue the installation process without unmounting it, the installer will ask
+     you to do it. In this description, it has been supposed that your computer only
+     has one hard disk.
+>>>>>>> 53995ef9732216f0d51253880db0c55342b63eb9
      </p></li>
      <li 
   class="enumerate" id="x1-2023x11">Chose <span 
@@ -169,7 +187,11 @@ class="ectt-1000">Erase disk and install Xubuntu</span>. Ignore the Advanced fea
      </li>
      <li 
   class="enumerate" id="x1-2027x13">Select the drive corresponding to the 8GB USB drive (<span 
+<<<<<<< HEAD
 class="ectt-1000">/dev/sdc</span>). Don’t chose
+=======
+class="ectt-1000">/dev/sdc</span>). Don&#x2019;t chose
+>>>>>>> 53995ef9732216f0d51253880db0c55342b63eb9
      <span 
 class="ectt-1000">/dev/sda </span>(the main disk of your computer)! Select <span 
 class="ectt-1000">/dev/sdc</span>!!
@@ -199,6 +221,7 @@ class="ectt-1000">/dev/sdc1</span>. But remember, all the actions described in t
                                                                   
 
                                                                   
+<<<<<<< HEAD
      <pre class="verbatim" id="verbatim-1">
      If you continue, the changes listed below will be written to the disks. Otherwise, you will be able to make further changes manually.
      WARNING: This will destroy all data on any partitions you have removed as well as on the partitions that are going to be formatted.
@@ -208,6 +231,20 @@ class="ectt-1000">/dev/sdc1</span>. But remember, all the actions described in t
       partition #1 of SCSI8 (0,0,0) (sdc) as ESP
       partition #2 of SCSI8 (0,0,0) (sdc) as ext4
 </pre>
+=======
+     <div class="verbatim" id="verbatim-1">
+     If you continue, the changes listed below will be written to the disks. Otherwise, you will be able to make further changes manually.
+      <br />
+      <br />WARNING: This will destroy all data on any partitions you have removed as well as on the partitions that are going to be formatted.
+      <br />
+      <br />The partition tables of the following devices are changed:
+      <br /> SCSI8 (0,0,0) (sdc)
+      <br />
+      <br />The following partitions are going to be formatted:
+      <br /> partition #1 of SCSI8 (0,0,0) (sdc) as ESP
+      <br /> partition #2 of SCSI8 (0,0,0) (sdc) as ext4
+</div>
+>>>>>>> 53995ef9732216f0d51253880db0c55342b63eb9
      <!--l. 131--><p class="nopar" >
      </p></li>
      <li 
@@ -217,7 +254,11 @@ class="ectt-1000">/dev/sdc1</span>. But remember, all the actions described in t
   class="enumerate" id="x1-2035x17">Conﬁgure you personal account, hostname and logging process.
      </li>
      <li 
+<<<<<<< HEAD
   class="enumerate" id="x1-2037x18">Wait for the end of the installation and boot your new Xubuntu. Don’t worry if
+=======
+  class="enumerate" id="x1-2037x18">Wait for the end of the installation and boot your new Xubuntu. Don&#x2019;t worry if
+>>>>>>> 53995ef9732216f0d51253880db0c55342b63eb9
      grub labels Xubuntu as Ubuntu. This is normal.
      </li></ol>
 <!--l. 143--><p class="noindent" >

@@ -39,7 +39,7 @@ class="ecrm-1200">- </span><a
 href="https://www.ual.es" ><span 
 class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
-class="ecrm-1200">September 22, 2020</span></div>
+class="ecrm-1200">September 24, 2020</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
@@ -604,65 +604,60 @@ class="ectt-1000">echo</span><span
 class="ectt-1000"> </span><span 
 class="ectt-1000">&#x0022;</span><span 
 class="ectt-1000">set</span><span 
-class="ectt-1000"> </span><span 
+class="ectt-1000">␣</span><span 
 class="ectt-1000">terminal</span><span 
-class="ectt-1000"> </span><span 
+class="ectt-1000">␣</span><span 
 class="ectt-1000">pdf</span><span 
 class="ectt-1000">;</span><span 
-class="ectt-1000"> </span><span 
+class="ectt-1000">␣</span><span 
 class="ectt-1000">set</span><span 
-class="ectt-1000"> </span><span 
+class="ectt-1000">␣</span><span 
 class="ectt-1000">output</span><span 
-class="ectt-1000"> </span><span 
-class="tctt-1000">&#x0027;</span><span 
+class="ectt-1000">␣</span><span 
+class="ectt-1000">’</span><span 
 class="ectt-1000">latency_vs_chunk_size</span><span 
 class="ectt-1000">.</span><span 
 class="ectt-1000">pdf</span><span 
-class="tctt-1000">&#x0027;</span><span 
-class="ectt-1000">;</span><span 
-class="ectt-1000"> </span><span 
+class="ectt-1000">’;</span><span 
+class="ectt-1000">␣</span><span 
 class="ectt-1000">set</span><span 
-class="ectt-1000"> </span><span 
+class="ectt-1000">␣</span><span 
 class="ectt-1000">xlabel</span><span 
-class="ectt-1000"> </span><span 
-class="tctt-1000">&#x0027;</span><span 
+class="ectt-1000">␣</span><span 
+class="ectt-1000">’</span><span 
 class="ectt-1000">CHUNK</span><span 
 class="ectt-1000">\</span><span 
 class="ectt-1000">_SIZE</span><span 
-class="ectt-1000"> </span><span 
+class="ectt-1000">␣</span><span 
 class="ectt-1000">(</span><span 
 class="ectt-1000">frames</span><span 
-class="ectt-1000">)</span><span 
-class="tctt-1000">&#x0027;</span><span 
-class="ectt-1000">;</span><span 
-class="ectt-1000"> </span><span 
+class="ectt-1000">)’;</span><span 
+class="ectt-1000">␣</span><span 
 class="ectt-1000">set</span><span 
-class="ectt-1000"> </span><span 
+class="ectt-1000">␣</span><span 
 class="ectt-1000">ylabel</span><span 
-class="ectt-1000"> </span><span 
-class="tctt-1000">&#x0027;</span><span 
+class="ectt-1000">␣</span><span 
+class="ectt-1000">’</span><span 
 class="ectt-1000">Latency</span><span 
-class="ectt-1000"> </span><span 
+class="ectt-1000">␣</span><span 
 class="ectt-1000">(</span><span 
 class="ectt-1000">seconds</span><span 
-class="ectt-1000">)</span><span 
-class="tctt-1000">&#x0027;</span><span 
-class="ectt-1000">;</span><span 
-class="ectt-1000"> </span><span 
+class="ectt-1000">)’;</span><span 
+class="ectt-1000">␣</span><span 
 class="ectt-1000">plot</span><span 
-class="ectt-1000"> </span><span 
-class="tctt-1000">&#x0027;</span><span 
+class="ectt-1000">␣</span><span 
+class="ectt-1000">’</span><span 
 class="ectt-1000">latency_vs_chunk_size</span><span 
 class="ectt-1000">.</span><span 
 class="ectt-1000">txt</span><span 
-class="tctt-1000">&#x0027;</span><span 
-class="ectt-1000"> </span><span 
+class="ectt-1000">’</span><span 
+class="ectt-1000">␣</span><span 
 class="ectt-1000">title</span><span 
-class="ectt-1000"> </span><span 
-class="tctt-1000">&#x0027;&#x0027;</span><span 
-class="ectt-1000"> </span><span 
+class="ectt-1000">␣</span><span 
+class="ectt-1000">’’</span><span 
+class="ectt-1000">␣</span><span 
 class="ectt-1000">with</span><span 
-class="ectt-1000"> </span><span 
+class="ectt-1000">␣</span><span 
 class="ectt-1000">linespoints</span><span 
 class="ectt-1000">&#x0022;</span><span 
 class="ectt-1000"> </span><span 
@@ -673,7 +668,7 @@ class="ectt-1000">gnuplot</span>
      </div>
      </li>
      <li 
-  class="enumerate" id="x1-2058x7">Let’s compute now the buﬀering latency. If
+  class="enumerate" id="x1-2058x7">Let’s compute now the buﬀering latency of a chunk (the chunk-time). If
      <!--l. 204--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mi 
@@ -871,7 +866,7 @@ class="ectt-1000">gnuplot</span>
      </div>
      </li>
      <li 
-  class="enumerate" id="x1-2064x9">Which seems to be the minimal latency (the one obtained when
+  class="enumerate" id="x1-2064x9">Which seems to be the minimal practical latency (the latency obtained when
      <!--l. 225--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mi 
@@ -885,23 +880,22 @@ class="text"><mtext  >_</mtext></mstyle><mi
 >I</mi><mi 
 >Z</mi><mi 
 >E</mi></mstyle> <mo 
-class="MathClass-rel">=</mo> <mn>1</mn></math>)?
-     Which is the chunk-time (the time required to play or record a chunk)? Justify
-     your answers. <a 
+class="MathClass-rel">=</mo> <mn>1</mn></math>)
+     in your computer? Justify your answers. <a 
  id="x1-20639"></a>
      </li></ol>
-<!--l. 231--><p class="noindent" >
+<!--l. 230--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-30003"></a>Timming</h3>
-<!--l. 233--><p class="noindent" >You should reach this milestone at most in one week.
-</p><!--l. 235--><p class="noindent" >
+<!--l. 232--><p class="noindent" >You should reach this milestone at most in one week.
+</p><!--l. 234--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-40004"></a>Deliverables</h3>
-<!--l. 237--><p class="noindent" >Answer the question enunciated in the Step  <a 
+<!--l. 236--><p class="noindent" >Answer the question enunciated in the Step  <a 
 href="#x1-20639">9<!--tex4ht:ref: question --></a>.
-</p><!--l. 239--><p class="noindent" >
+</p><!--l. 238--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-50005"></a>Resources</h3>

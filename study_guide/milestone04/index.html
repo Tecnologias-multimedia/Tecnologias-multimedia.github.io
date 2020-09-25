@@ -37,7 +37,7 @@ class="ecrm-1200">- </span><a
 href="https://www.ual.es" ><span 
 class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
-class="ecrm-1200">September 23, 2020</span></div>
+class="ecrm-1200">September 24, 2020</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
@@ -45,7 +45,7 @@ class="ecrm-1200">September 23, 2020</span></div>
 </p>
    <h4 class="subsectionHead"><span class="titlemark">1.1   </span> <a 
  id="x1-20001.1"></a>Sequential model</h4>
-<!--l. 9--><p class="noindent" >InterCom can be divided roughtky in 6 steps:
+<!--l. 9--><p class="noindent" >InterCom can be divided roughtly in 6 steps:
 <a 
  id="x1-2001r1"></a>
 <!--l. 22--><p class="noindent" ></p><div class="minipage"><span 
@@ -284,16 +284,10 @@ display="inline" ><mstyle mathvariant="monospace"><mi
 >d</mi><mrow ><mo 
 class="MathClass-open">(</mo><mrow></mrow><mo 
 class="MathClass-close">)</mo></mrow></mstyle></math>
-     captures  a  chunk  of  frames.  In  general,  this  is  a  <a 
-href="https://en.wikipedia.org/wiki/I/O_bound" >I/O-bound</a>  <a 
-href="https://python-sounddevice.readthedocs.io/en/0.4.0/api/streams.html#sounddevice.Stream.read" >blocking
-     operation</a> <span class="cite">[<a 
-href="#Xsounddevice">2</a>]</span>, depending on the availability of frames in the ADC’s buﬀer.
-     This can be checked in <a 
-href="https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire4.py" >wire4.py</a><span class="footnote-mark"><a 
-href="index2.html#fn1x0"><sup class="textsuperscript">1</sup></a></span><a 
- id="x1-2004f1"></a> ,
-     where the <!--l. 35--><math 
+     captures a chunk of frames. In <span 
+class="ectt-1000">sounddevice</span>, this operation is carried on by
+     the <a 
+href="https://python-sounddevice.readthedocs.io/en/0.4.0/api/streams.html#sounddevice.Stream.read" ><!--l. 30--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mi 
 >r</mi><mi 
@@ -302,12 +296,21 @@ display="inline" ><mstyle mathvariant="monospace"><mi
 >d</mi><mrow ><mo 
 class="MathClass-open">(</mo><mrow></mrow><mo 
 class="MathClass-close">)</mo></mrow></mstyle></math>
-     method always returns inmediately because only the available frames are
-     returned in each call (the chunk-size depends on the instant of time in
-     which this method is called).
+     method</a>. As it can be seen in <a 
+href="https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire4.py" >wire4.py</a><span class="footnote-mark"><a 
+href="index2.html#fn1x0"><sup class="textsuperscript">1</sup></a></span><a 
+ id="x1-2004f1"></a> 
+     and also in the documentation of <span 
+class="ectt-1000">sounddevice</span>, if we read only the frames
+     that are available in the ADC’s buﬀer, this in non-blocking operation and
+     the chunk size depends on the instant of time in which thi method is called.
+     Otherwise, if we especify a number of frames diﬀerent to the number of
+     available frames, the operation is blocking and <a 
+href="https://en.wikipedia.org/wiki/I/O_bound" >I/O-bound</a> (the calling
+     process sleeps until the required chunk size is returned).
      </li>
      <li 
-  class="enumerate" id="x1-2006x2"><!--l. 39--><math 
+  class="enumerate" id="x1-2006x2"><!--l. 43--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mi 
 >p</mi><mi 
@@ -327,10 +330,11 @@ href="https://en.wikipedia.org/wiki/Network_packet" >packet</a> (or a sequence o
 href="https://en.wikipedia.org/wiki/Datagram" >Datagram</a> Model.
      In general, this is a <a 
 href="https://en.wikipedia.org/wiki/CPU-bound" >CPU-bounded</a> (CPU-intensive) operation, and therefore,
-     reduces the number of cycles/second that the main thread can reach.
+     it reduces the number of cycles/second that the Record_IO_and_Play’s
+     loop can reach.
      </li>
      <li 
-  class="enumerate" id="x1-2008x3"><!--l. 48--><math 
+  class="enumerate" id="x1-2008x3"><!--l. 53--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mi 
 >s</mi><mi 
@@ -345,13 +349,13 @@ class="MathClass-open">(</mo><mrow><mi
 >e</mi><mi 
 >t</mi></mrow><mo 
 class="MathClass-close">)</mo></mrow></mstyle></math>,
-     sends the packet to the interlocutor’s InterCom. When datagrams are used,
-     this step is non-blocking neither CPU-bounding (the CPU usage is very
-     low), if the number of packets/second is small and the size of the payloads
-     is also small, as it is expected in the InterCom.
+     sends the packet to the interlocutor’s InterCom. When datagrams are
+     used, this step is non-blocking neither CPU-bounding (the CPU usage is
+     very low), as long as the number of packets/second is small and the sizes
+     of the payloads are also small, as it is expected in the InterCom.
      </li>
      <li 
-  class="enumerate" id="x1-2010x4"><!--l. 53--><math 
+  class="enumerate" id="x1-2010x4"><!--l. 59--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mi 
 >r</mi><mi 
@@ -366,16 +370,16 @@ class="MathClass-close">)</mo></mrow></mstyle></math>,
      waits (blocking) for a incoming packet, and therefore, this operation is
      IO-bound. However, most <a 
 href="https://docs.python.org/3/library/socket.html" >socket API</a>s <span class="cite">[<a 
-href="#Xpython">3</a>]</span> oﬀeer a <a 
+href="#Xpython">2</a>]</span> oﬀeer a <a 
 href="https://docs.python.org/3.8/library/socket.html#socket.socket.setblocking" >non-blocking option</a>
      where when a packet is not available in the kernel’s buﬀer associanted to
      the corresponding socket, some kind of exception is generated and, in this
-     case, it is resposabability of the programmer to generate a “alternative”
+     case, it is resposabability of the programmer to generate an “alternative”
      chunk (in our case, for example, a chunk ﬁlled with zeros will not produce
      any sound).
      </li>
      <li 
-  class="enumerate" id="x1-2012x5"><!--l. 63--><math 
+  class="enumerate" id="x1-2012x5"><!--l. 70--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mi 
 >u</mi><mi 
@@ -392,7 +396,7 @@ class="MathClass-open">(</mo><mrow><mi
 >e</mi><mi 
 >t</mi></mrow><mo 
 class="MathClass-close">)</mo></mrow></mstyle></math>
-     is (as <!--l. 63--><math 
+     is (as <!--l. 70--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mi 
 >p</mi><mi 
@@ -410,7 +414,7 @@ class="MathClass-close">)</mo></mrow></mstyle></math>)
      chunk of audio.
      </li>
      <li 
-  class="enumerate" id="x1-2014x6"><!--l. 66--><math 
+  class="enumerate" id="x1-2014x6"><!--l. 74--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mi 
 >p</mi><mi 
@@ -424,9 +428,12 @@ class="MathClass-open">(</mo><mrow><mi
 >n</mi><mi 
 >k</mi></mrow><mo 
 class="MathClass-close">)</mo></mrow></mstyle></math>
+                                                                  
+
+                                                                  
      renders the chunk. In general, this is an I/O-bound <a 
 href="https://python-sounddevice.readthedocs.io/en/0.4.0/api/streams.html#sounddevice.Stream.write" >blocking</a> action. However,
-     if <!--l. 69--><math 
+     if <!--l. 77--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mi 
 >p</mi><mi 
@@ -435,7 +442,7 @@ display="inline" ><mstyle mathvariant="monospace"><mi
 >y</mi><mrow ><mo 
 class="MathClass-open">(</mo><mrow></mrow><mo 
 class="MathClass-close">)</mo></mrow></mstyle></math>
-     is called at the same pace than <!--l. 70--><math 
+     is called at the same pace than <!--l. 78--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mi 
 >r</mi><mi 
@@ -446,12 +453,9 @@ display="inline" ><mstyle mathvariant="monospace"><mi
 >d</mi><mrow ><mo 
 class="MathClass-open">(</mo><mrow></mrow><mo 
 class="MathClass-close">)</mo></mrow></mstyle></math>
-                                                                  
-
-                                                                  
      and the record and play parameters are exactely the same (as happens in
      our model), the playing of the chunk will return inmediately because the
-     time that the <!--l. 73--><math 
+     time that the <!--l. 81--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mi 
 >p</mi><mi 
@@ -460,7 +464,7 @@ display="inline" ><mstyle mathvariant="monospace"><mi
 >y</mi><mrow ><mo 
 class="MathClass-open">(</mo><mrow></mrow><mo 
 class="MathClass-close">)</mo></mrow></mstyle></math>
-     method needs to complete would exactly match the time that the <!--l. 74--><math 
+     method needs to complete would exactly match the time that the <!--l. 82--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mi 
 >r</mi><mi 
@@ -473,12 +477,12 @@ class="MathClass-open">(</mo><mrow></mrow><mo
 class="MathClass-close">)</mo></mrow></mstyle></math>
      method requires (see <span 
 class="ectt-1000">wire4.py</span>).</li></ol>
-<!--l. 78--><p class="indent" >   This model works ﬁne if the chunk size is controlled by
+<!--l. 86--><p class="indent" >   This model works ﬁne if the chunk size is controlled by
 <a 
-href="http://www.portaudio.com/" >PortAudio</a> <span class="cite">[<span 
-class="ecbx-1000">?</span>]</span> (<span 
+href="http://www.portaudio.com/" >PortAudio</a> <span class="cite">[<a 
+href="#Xportaudio">3</a>]</span> (<span 
 class="ectt-1000">sounddevice</span>) and also, the run-time required by
-<!--l. 81--><math 
+<!--l. 89--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mi 
 >p</mi><mi 
@@ -492,7 +496,7 @@ class="MathClass-open">(</mo><mrow><mi
 >n</mi><mi 
 >k</mi></mrow><mo 
 class="MathClass-close">)</mo></mrow></mstyle></math> and
-<!--l. 81--><math 
+<!--l. 89--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mi 
 >u</mi><mi 
@@ -516,15 +520,15 @@ complicates the control of the latency (the chunk size is variable). However, th
 real problem appears when our computer is not able to satisfy the second
 requirement. This only can be addressed through optimizing and parallelizing the
 code.
-</p><!--l. 90--><p class="noindent" >
+</p><!--l. 98--><p class="noindent" >
 </p>
    <h4 class="subsectionHead"><span class="titlemark">1.2   </span> <a 
  id="x1-30001.2"></a>Timer-based model</h4>
-<!--l. 92--><p class="noindent" >In this model, the task dedicated to record and play the chunks of audio is called
+<!--l. 100--><p class="noindent" >In this model, the task dedicated to record and play the chunks of audio is called
 periodically (probably, using some timer provided by the sound hardware). This
 procedure guarantees a gliches-free audio-IO when constant chunk sizes are used
 because the timer interruption coincides exactly with the instant of time in which the
-<!--l. 97--><math 
+<!--l. 105--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mi 
 >r</mi><mi 
@@ -535,7 +539,7 @@ display="inline" ><mstyle mathvariant="monospace"><mi
 >d</mi><mrow ><mo 
 class="MathClass-open">(</mo><mrow></mrow><mo 
 class="MathClass-close">)</mo></mrow></mstyle></math> and
-the <!--l. 97--><math 
+the <!--l. 105--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mi 
 >p</mi><mi 
@@ -550,7 +554,10 @@ new model that is basically the previous one, except that the chunk size is
 controlled.
 <a 
  id="x1-3001r2"></a>
-<!--l. 114--><p class="noindent" ></p><div class="minipage"><span 
+                                                                  
+
+                                                                  
+<!--l. 122--><p class="noindent" ></p><div class="minipage"><span 
 class="ecbx-1000">Algorithm</span>
 <span 
 class="ecbx-1000">1.2:</span> <span 
@@ -574,11 +581,11 @@ class="small-caps">e</span><span
 class="small-caps">r</span><span 
 class="small-caps">C</span><span 
 class="small-caps">o</span><span 
-class="small-caps">m</span></span>(<!--l. 103--><math 
+class="small-caps">m</span></span>(<!--l. 111--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 > </mi></math>)<br 
-class="newline" /> <!--l. 103--><math 
+class="newline" /> <!--l. 111--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" > <mtable  align="axis" style=""  
 equalrows="false" columnlines="none" equalcolumns="false" class="array"> <mtr><mtd 
@@ -794,14 +801,11 @@ class="MathClass-close">)</mo></mrow></mstyle>                                  
  </mtr><!--@{\pcode@tab {1}}l@{}--></mtable>                                                                                                  </mtd>
 </mtr>  <mtr><mtd 
 class="array"  columnalign="left"><mspace width="4.3045pt"/>                                                                                                   </mtd></mtr><!--@{\pcode@tab {1}}lr@{}--></mtable></math></div>
-                                                                  
-
-                                                                  
-</p><!--l. 116--><p class="noindent" >
+</p><!--l. 124--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
  id="x1-40002"></a>What you have to do?</h3>
-<!--l. 118--><p class="noindent" >
+<!--l. 126--><p class="noindent" >
      </p><ol  class="enumerate1" >
      <li 
   class="enumerate" id="x1-4002x1">Implement a timer-based InterCom. Use as reference <a 
@@ -813,7 +817,7 @@ href="https://github.com/vicente-gonzalez-ruiz/YAPT/blob/master/03-IO/networking
 href="#XYAPT">1</a>]</span> (using <a 
 href="https://en.wikipedia.org/wiki/User_Datagram_Protocol" >UDP</a> <span class="cite">[<a 
 href="#XUDP">4</a>]</span>)
-     and play raw (this means that the <!--l. 129--><math 
+     and play raw (this means that the <!--l. 137--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mi 
 >p</mi><mi 
@@ -821,7 +825,7 @@ display="inline" ><mstyle mathvariant="monospace"><mi
 >c</mi><mi 
 >k</mi><mrow ><mo 
 class="MathClass-open">(</mo><mrow></mrow><mo 
-class="MathClass-close">)</mo></mrow></mstyle></math>/<!--l. 129--><math 
+class="MathClass-close">)</mo></mrow></mstyle></math>/<!--l. 137--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mi 
 >u</mi><mi 
@@ -835,34 +839,29 @@ class="MathClass-close">)</mo></mrow></mstyle></math>
      operations are not required for this milestone) audio data between two
      computers.
      </li></ol>
-<!--l. 134--><p class="noindent" >
+<!--l. 142--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-50003"></a>Timming</h3>
-<!--l. 136--><p class="noindent" >You should reach this milestone at most in two weeks.
-</p><!--l. 138--><p class="noindent" >
+<!--l. 144--><p class="noindent" >You should reach this milestone at most in two weeks.
+</p><!--l. 146--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-60004"></a>Deliverables</h3>
-<!--l. 140--><p class="noindent" >A Python module with the implementation of the minimal InterCom. Name it
+<!--l. 148--><p class="noindent" >A Python module with the implementation of the minimal InterCom. Name it
 <span 
 class="ectt-1000">intercom_minimal.py</span>. Store it at the <a 
 href="https://github.com/Tecnologias-multimedia/intercom" >root directory</a> of your <span 
 class="ectt-1000">intercom</span>’s
 repo.
-</p><!--l. 145--><p class="noindent" >
-</p>
-   <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
- id="x1-70005"></a>Resources</h3>
-<!--l. 1--><p class="noindent" >
-</p>
-   <h3 class="likesectionHead"><a 
- id="x1-80005"></a>References</h3>
-<!--l. 1--><p class="noindent" >
                                                                   
 
                                                                   
-   </p><div class="thebibliography">
+</p><!--l. 153--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
+ id="x1-70005"></a>Resources</h3>
+   <div class="thebibliography">
    <p class="bibitem" ><span class="biblabel">
  [1]<span class="bibsp">   </span></span><a 
  id="XYAPT"></a><a 
@@ -870,13 +869,13 @@ href="https://github.com/vicente-gonzalez-ruiz/YAPT/" >YAPT</a>.
    </p>
    <p class="bibitem" ><span class="biblabel">
  [2]<span class="bibsp">   </span></span><a 
- id="Xsounddevice"></a><a 
-href="https://python-sounddevice.readthedocs.io/en/latest/" >python-sounddevice</a>.
+ id="Xpython"></a><a 
+href="https://www.python.org/" >Python</a> website.
    </p>
    <p class="bibitem" ><span class="biblabel">
  [3]<span class="bibsp">   </span></span><a 
- id="Xpython"></a><a 
-href="https://www.python.org/" >Python</a> website.
+ id="Xportaudio"></a><a 
+href="http://www.portaudio.com/" >PortAudio</a>.
    </p>
    <p class="bibitem" ><span class="biblabel">
  [4]<span class="bibsp">   </span></span><a 
@@ -889,7 +888,7 @@ class="ectt-1000">http://www.rfc-editor.org/rfc/rfc768.txt</span></a>, 1980.
 </p>
    </div>
 <a 
- id="Q1-1-9"></a>
+ id="Q1-1-8"></a>
     
 </body> 
 </html>
