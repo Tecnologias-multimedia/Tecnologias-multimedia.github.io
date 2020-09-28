@@ -1,0 +1,1258 @@
+<!DOCTYPE html> 
+<html> 
+<head> <title>TecnologÃŋas Multimedia - Study Guide - Milestone 6: Buﬀering chunks</title> 
+<meta charset="UTF-8" /> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
+<link rel="stylesheet" type="text/css" href="index.css" /> 
+<script type="text/javascript" 
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" 
+></script> 
+<style type="text/css"> 
+.MathJax_MathML {text-indent: 0;} 
+</style> 
+</head><body 
+>
+   <div class="maketitle">
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+
+<h2 class="titleHead"><a 
+href="https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN" >Tecnologías Multimedia</a> - Study Guide -
+Milestone 6: Buﬀering chunks</h2>
+ <div class="author" ><a 
+href="https://cms.ual.es/UAL/personas/persona.htm?id=515256515553484875" ><span 
+class="ecrm-1200">Vicente Gonz</span><span 
+class="ecrm-1200">á</span><span 
+class="ecrm-1200">lez Ruiz</span></a> <span 
+class="ecrm-1200">- </span><a 
+href="https://cms.ual.es/UAL/universidad/departamentos/informatica/index.htm" ><span 
+class="ecrm-1200">Depto Inform</span><span 
+class="ecrm-1200">á</span><span 
+class="ecrm-1200">tica</span></a> <span 
+class="ecrm-1200">- </span><a 
+href="https://www.ual.es" ><span 
+class="ecrm-1200">UAL</span></a></div><br />
+<div class="date" ><span 
+class="ecrm-1200">September 24, 2020</span></div>
+   </div>
+   <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
+ id="x1-10001"></a>Description</h3>
+<!--l. 7--><p class="noindent" >
+</p>
+   <h4 class="subsectionHead"><span class="titlemark">1.1   </span> <a 
+ id="x1-20001.1"></a>Sequential model</h4>
+<!--l. 9--><p class="noindent" >InterCom can be divided roughtky in 6 steps:
+<a 
+ id="x1-2001r1"></a>
+<!--l. 20--><p class="noindent" ></p><div class="minipage"><span 
+class="ecbx-1000">Algorithm</span>
+<span 
+class="ecbx-1000">1.1:</span> <span 
+class="eccc1000-"><span 
+class="small-caps">S</span><span 
+class="small-caps">e</span><span 
+class="small-caps">q</span><span 
+class="small-caps">u</span><span 
+class="small-caps">e</span><span 
+class="small-caps">n</span><span 
+class="small-caps">t</span><span 
+class="small-caps">i</span><span 
+class="small-caps">a</span><span 
+class="small-caps">l</span><span 
+class="small-caps">_</span><span 
+class="small-caps">I</span><span 
+class="small-caps">n</span><span 
+class="small-caps">t</span><span 
+class="small-caps">e</span><span 
+class="small-caps">r</span><span 
+class="small-caps">C</span><span 
+class="small-caps">o</span><span 
+class="small-caps">m</span></span>(<!--l. 11--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+> </mi></math>)<br 
+class="newline" /> <!--l. 11--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" > <mtable  align="axis" style=""  
+equalrows="false" columnlines="none" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="left"><mspace width="4.3045pt"/>  <mfenced separators="" 
+open="{"  close="" ><mrow> <mtable  align="axis" style=""  
+equalrows="false" columnlines="none" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
+>r</mi><mi 
+>e</mi><mi 
+>c</mi><mi 
+>o</mi><mi 
+>r</mi><mi 
+>d</mi><mi 
+>e</mi><mi 
+>d</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi></mstyle> <mo 
+class="MathClass-rel">←</mo><mstyle mathvariant="monospace"><mi 
+>r</mi><mi 
+>e</mi><mi 
+>c</mi><mi 
+>o</mi><mi 
+>r</mi><mi 
+>d</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle>                      </mtd>
+</mtr>  <mtr><mtd 
+class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
+>o</mi><mi 
+>u</mi><mi 
+>t</mi><mi 
+>g</mi><mi 
+>o</mi><mi 
+>i</mi><mi 
+>n</mi><mi 
+>g</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mi 
+>e</mi><mi 
+>t</mi></mstyle> <mo 
+class="MathClass-rel">←</mo><mstyle mathvariant="monospace"><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mi 
+>r</mi><mi 
+>e</mi><mi 
+>c</mi><mi 
+>o</mi><mi 
+>r</mi><mi 
+>d</mi><mi 
+>e</mi><mi 
+>d</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle>  </mtd>
+</mtr>  <mtr><mtd 
+class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
+>s</mi><mi 
+>e</mi><mi 
+>n</mi><mi 
+>d</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mi 
+>o</mi><mi 
+>u</mi><mi 
+>t</mi><mi 
+>g</mi><mi 
+>o</mi><mi 
+>i</mi><mi 
+>n</mi><mi 
+>g</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mi 
+>e</mi><mi 
+>t</mi></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle>                            </mtd>
+</mtr>  <mtr><mtd 
+class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
+>i</mi><mi 
+>n</mi><mi 
+>c</mi><mi 
+>o</mi><mi 
+>m</mi><mi 
+>i</mi><mi 
+>n</mi><mi 
+>g</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mi 
+>e</mi><mi 
+>t</mi></mstyle> <mo 
+class="MathClass-rel">←</mo><mstyle mathvariant="monospace"><mi 
+>r</mi><mi 
+>e</mi><mi 
+>c</mi><mi 
+>e</mi><mi 
+>i</mi><mi 
+>v</mi><mi 
+>e</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle>                   </mtd>
+</mtr>  <mtr><mtd 
+class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>t</mi><mi 
+>o</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>p</mi><mi 
+>l</mi><mi 
+>a</mi><mi 
+>y</mi></mstyle> <mo 
+class="MathClass-rel">←</mo><mstyle mathvariant="monospace"><mi 
+>u</mi><mi 
+>n</mi><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mi 
+>i</mi><mi 
+>n</mi><mi 
+>c</mi><mi 
+>o</mi><mi 
+>m</mi><mi 
+>i</mi><mi 
+>n</mi><mi 
+>g</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mi 
+>e</mi><mi 
+>t</mi></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle></mtd>
+</mtr>  <mtr><mtd 
+class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
+>p</mi><mi 
+>l</mi><mi 
+>a</mi><mi 
+>y</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>t</mi><mi 
+>o</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>p</mi><mi 
+>l</mi><mi 
+>a</mi><mi 
+>y</mi></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle>                               </mtd></mtr><!--@{}lr@{}--></mtable>                             </mrow></mfenced> </mtd>
+</mtr><!--@{\pcode@tab {1}}lr@{}--></mtable>                                                                                                  </math></div>
+</p><!--l. 22--><p class="indent" >   Where:
+</p><!--l. 24--><p class="indent" >
+     </p><ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x1-2003x1"><!--l. 25--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>r</mi><mi 
+>e</mi><mi 
+>c</mi><mi 
+>o</mi><mi 
+>r</mi><mi 
+>d</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle></math>
+     captures a chunk of frames. In general, this is a <a 
+href="https://en.wikipedia.org/wiki/I/O_bound" >I/O-bound</a> <a 
+href="https://python-sounddevice.readthedocs.io/en/0.4.0/api/streams.html#sounddevice.Stream.read" >blocking operation</a>,
+                                                                  
+
+                                                                  
+     depending on the availability of frames in the ADC’s buﬀer. This can be
+     checked in <a 
+href="https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire4.py" >wire4.py</a>, <!--l. 31-->
+     <div class="lstlisting" id="listing-1"><span class="label"><a 
+ id="x1-2004r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">curl</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">https</span><span 
+class="ectt-1000">://</span><span 
+class="ectt-1000">raw</span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">githubusercontent</span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">com</span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">Tecnologias</span><span 
+class="ectt-1000">-</span><span 
+class="ectt-1000">multimedia</span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">intercom</span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">master</span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">test</span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">sounddevice</span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">wire4</span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">py</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">&#x003E;</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">wire4</span><span 
+class="ectt-1000">.</span><span 
+class="ectt-1000">py</span>
+     
+     </div>
+     <!--l. 34--><p class="noindent" >where the <!--l. 34--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>r</mi><mi 
+>e</mi><mi 
+>a</mi><mi 
+>d</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle></math>
+     method always returns inmediately because only the available frames are
+     returned in each call (the chunk-size depends on the instant of time in which
+     this method is called).
+     </p></li>
+     <li 
+  class="enumerate" id="x1-2006x2"><!--l. 38--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle></math>
+     process the chunk to create a <a 
+href="https://en.wikipedia.org/wiki/Network_packet" >packet</a> (or a sequence of packets), a structure that
+     can be transmitted through the Internet using the <a 
+href="https://en.wikipedia.org/wiki/Datagram" >Datagram</a> Model.
+     In general, this is a (<a 
+href="https://en.wikipedia.org/wiki/CPU-bound" >CPU-bounded</a> (CPU-intensive) operation, and
+     therefore, reduces the number of cycles/second that the main thread can
+     reach.
+     </li>
+     <li 
+  class="enumerate" id="x1-2008x3"><!--l. 47--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>s</mi><mi 
+>e</mi><mi 
+>n</mi><mi 
+>d</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mi 
+>e</mi><mi 
+>t</mi></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle></math>,
+     sends the packet to the interlocutor’s InterCom. When datagrams are used, this
+     step is non-blocking neither CPU-bounding (the CPU usage is very low), if the
+     number of packets/second is small and the size of the payloads is also small, as
+     it is expected in the InterCom.
+     </li>
+     <li 
+  class="enumerate" id="x1-2010x4"><!--l. 52--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>r</mi><mi 
+>e</mi><mi 
+>c</mi><mi 
+>e</mi><mi 
+>i</mi><mi 
+>v</mi><mi 
+>e</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle></math>,
+     waits (blocking) for a incoming packet, and therefore, this operation is
+     IO-bound. However, most socket APIs oﬀeer a <a 
+href="https://docs.python.org/3.8/library/socket.html#socket.socket.setblocking" >non-blocking option</a> where
+     when a packet is not available in the kernel’s buﬀer associanted to the
+     corresponding socket, some kind of exception is generated and, in this case, it is
+     resposabability of the programmer to generate a “alternative” chunk (in
+     our case, for example, a chunk ﬁlled with zeros will not produce any
+     sound).
+     </li>
+     <li 
+  class="enumerate" id="x1-2012x5"><!--l. 61--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>u</mi><mi 
+>n</mi><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mi 
+>e</mi><mi 
+>t</mi></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle></math> is
+     (as <!--l. 61--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle></math>)
+     a CPU-intensive step that transforms a packet (or several packets) into a chunk
+     of audio.
+     </li>
+     <li 
+  class="enumerate" id="x1-2014x6"><!--l. 64--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>p</mi><mi 
+>l</mi><mi 
+>a</mi><mi 
+>y</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle></math>
+     renders the chunk. In general, this is an I/O-bound <a 
+href="https://python-sounddevice.readthedocs.io/en/0.4.0/api/streams.html#sounddevice.Stream.write" >blocking</a> action. However, if
+     <!--l. 67--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>p</mi><mi 
+>l</mi><mi 
+>a</mi><mi 
+>y</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle></math> is called at the
+     same pace than <!--l. 68--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>r</mi><mi 
+>e</mi><mi 
+>c</mi><mi 
+>o</mi><mi 
+>r</mi><mi 
+>d</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle></math>
+                                                                  
+
+                                                                  
+     and the record and play parameters are exactely the same (as happens in our
+     model), the playing of the chunk will return inmediately because the time that the
+     <!--l. 71--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>p</mi><mi 
+>l</mi><mi 
+>a</mi><mi 
+>y</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle></math>
+     method needs to complete would exactly match the time that the
+     <!--l. 72--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>r</mi><mi 
+>e</mi><mi 
+>c</mi><mi 
+>o</mi><mi 
+>r</mi><mi 
+>d</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle></math>
+     method requires.</li></ol>
+<!--l. 75--><p class="indent" >   This model works ﬁne if the chunk size is controlled by PortAudio and also, the run-time
+required by <!--l. 76--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle></math>
+and <!--l. 77--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>u</mi><mi 
+>n</mi><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mi 
+>e</mi><mi 
+>t</mi></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle></math>
+operations is smaller than the chunk-time. The ﬁrst issue is complicates slightly
+the implementation because we need to work with chunks of constantly
+changing lenghts (that as you can see, most of the time are 0). This also
+complicates the control of the latency (the chunk size is variable). However, the
+real problem appears when our computer is not able to satisfy the second
+requirement. This only can be addressed through optimizing and parallelizing the
+code.
+</p><!--l. 86--><p class="noindent" >
+</p>
+   <h4 class="subsectionHead"><span class="titlemark">1.2   </span> <a 
+ id="x1-30001.2"></a>Timer-based model</h4>
+<!--l. 88--><p class="noindent" >In this model, the task dedicated to record and play the chunks of audio is called
+periodically (probably, using some timer provided by the sound hardware). This
+procedure guarantees a gliches-free audio-IO when constant chunk sizes are used
+because the timer interruption coincides exactly with the instant of time in which the
+<!--l. 93--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>r</mi><mi 
+>e</mi><mi 
+>c</mi><mi 
+>o</mi><mi 
+>r</mi><mi 
+>d</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle></math> and
+the <!--l. 93--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>p</mi><mi 
+>l</mi><mi 
+>a</mi><mi 
+>y</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle></math>
+methods need to be run to guarantee that we are going to handle a chunk of audio of
+a known size without blocking.
+<a 
+ id="x1-3001r2"></a>
+<!--l. 108--><p class="noindent" ></p><div class="minipage"><span 
+class="ecbx-1000">Algorithm</span>
+<span 
+class="ecbx-1000">1.2:</span> <span 
+class="eccc1000-"><span 
+class="small-caps">T</span><span 
+class="small-caps">i</span><span 
+class="small-caps">m</span><span 
+class="small-caps">e</span><span 
+class="small-caps">r</span><span 
+class="small-caps">-</span><span 
+class="small-caps">b</span><span 
+class="small-caps">a</span><span 
+class="small-caps">s</span><span 
+class="small-caps">e</span><span 
+class="small-caps">d</span><span 
+class="small-caps">_</span><span 
+class="small-caps">I</span><span 
+class="small-caps">n</span><span 
+class="small-caps">t</span><span 
+class="small-caps">e</span><span 
+class="small-caps">r</span><span 
+class="small-caps">C</span><span 
+class="small-caps">o</span><span 
+class="small-caps">m</span></span>(<!--l. 97--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+> </mi></math>)<br 
+class="newline" /> <!--l. 97--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" > <mtable  align="axis" style=""  
+equalrows="false" columnlines="none" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="left"><mspace width="4.3045pt"/> <mstyle 
+class="mbox"><mtext  >procedure </mtext></mstyle><mstyle 
+class="mbox"><mtext  ></mtext><mtext class="textsc" mathvariant="normal" >Record_IO_and_Play</mtext></mstyle><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mstyle mathvariant="monospace"><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>s</mi><mi 
+>i</mi><mi 
+>z</mi><mi 
+>e</mi></mstyle></mrow><mo 
+class="MathClass-close">)</mo></mrow>                            </mtd>
+</mtr>  <mtr><mtd 
+class="array"  columnalign="left"><mspace width="4.3045pt"/>  <mtable  align="axis" style=""  
+equalrows="false" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="left"><mspace width="4.3045pt"/>  <mfenced separators="" 
+open="{"  close="" ><mrow> <mtable  align="axis" style=""  
+equalrows="false" columnlines="none" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
+>r</mi><mi 
+>e</mi><mi 
+>c</mi><mi 
+>o</mi><mi 
+>r</mi><mi 
+>d</mi><mi 
+>e</mi><mi 
+>d</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi></mstyle> <mo 
+class="MathClass-rel">←</mo><mstyle mathvariant="monospace"><mi 
+>r</mi><mi 
+>e</mi><mi 
+>c</mi><mi 
+>o</mi><mi 
+>r</mi><mi 
+>d</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>s</mi><mi 
+>i</mi><mi 
+>z</mi><mi 
+>e</mi></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle>             </mtd>
+</mtr>  <mtr><mtd 
+class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
+>s</mi><mi 
+>e</mi><mi 
+>n</mi><mi 
+>d</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mi 
+>o</mi><mi 
+>u</mi><mi 
+>t</mi><mi 
+>g</mi><mi 
+>o</mi><mi 
+>i</mi><mi 
+>n</mi><mi 
+>g</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mi 
+>e</mi><mi 
+>t</mi></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle> <mo 
+class="MathClass-rel">←</mo><mstyle mathvariant="monospace"><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mi 
+>r</mi><mi 
+>e</mi><mi 
+>c</mi><mi 
+>o</mi><mi 
+>r</mi><mi 
+>d</mi><mi 
+>e</mi><mi 
+>d</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle></mtd>
+</mtr>  <mtr><mtd 
+class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
+>s</mi><mi 
+>e</mi><mi 
+>n</mi><mi 
+>d</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mi 
+>o</mi><mi 
+>u</mi><mi 
+>t</mi><mi 
+>g</mi><mi 
+>o</mi><mi 
+>i</mi><mi 
+>n</mi><mi 
+>g</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mi 
+>e</mi><mi 
+>t</mi></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle>                                   </mtd>
+</mtr>  <mtr><mtd 
+class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
+>i</mi><mi 
+>n</mi><mi 
+>c</mi><mi 
+>o</mi><mi 
+>m</mi><mi 
+>i</mi><mi 
+>n</mi><mi 
+>g</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mi 
+>e</mi><mi 
+>t</mi></mstyle> <mo 
+class="MathClass-rel">←</mo><mstyle mathvariant="monospace"><mi 
+>r</mi><mi 
+>e</mi><mi 
+>c</mi><mi 
+>e</mi><mi 
+>i</mi><mi 
+>v</mi><mi 
+>e</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle>                          </mtd>
+</mtr>  <mtr><mtd 
+class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>t</mi><mi 
+>o</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>p</mi><mi 
+>l</mi><mi 
+>a</mi><mi 
+>y</mi></mstyle> <mo 
+class="MathClass-rel">←</mo><mstyle mathvariant="monospace"><mi 
+>u</mi><mi 
+>n</mi><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mi 
+>i</mi><mi 
+>n</mi><mi 
+>c</mi><mi 
+>o</mi><mi 
+>m</mi><mi 
+>i</mi><mi 
+>n</mi><mi 
+>g</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mi 
+>e</mi><mi 
+>t</mi></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle>       </mtd>
+</mtr>  <mtr><mtd 
+class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
+>p</mi><mi 
+>l</mi><mi 
+>a</mi><mi 
+>y</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>t</mi><mi 
+>o</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>p</mi><mi 
+>l</mi><mi 
+>a</mi><mi 
+>y</mi></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle>                                      </mtd></mtr><!--@{}lr@{}--></mtable>                      </mrow></mfenced></mtd>
+ </mtr><!--@{\pcode@tab {1}}l@{}--></mtable>                                                                                                  </mtd>
+</mtr>  <mtr><mtd 
+class="array"  columnalign="left"><mspace width="4.3045pt"/>                                                                                                   </mtd></mtr><!--@{\pcode@tab {1}}lr@{}--></mtable></math></div>
+</p><!--l. 110--><p class="indent" >   where:
+                                                                  
+
+                                                                  
+     </p><ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x1-3003x1"><!--l. 112--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>i</mi><mi 
+>n</mi><mi 
+>d</mi><mi 
+>a</mi><mi 
+>t</mi><mi 
+>a</mi></mstyle></math>
+     points to the last chunk of audio recorded.
+     </li>
+     <li 
+  class="enumerate" id="x1-3005x2"><!--l. 113--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>o</mi><mi 
+>u</mi><mi 
+>t</mi><mi 
+>d</mi><mi 
+>a</mi><mi 
+>t</mi><mi 
+>a</mi></mstyle></math>
+     points to the chunk of audio that is going to be played.
+     </li>
+     <li 
+  class="enumerate" id="x1-3007x3"><!--l. 114--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>s</mi><mi 
+>i</mi><mi 
+>z</mi><mi 
+>e</mi></mstyle></math>
+     is the number of frames processed in each iteration of the callback.</li></ol>
+<!--l. 117--><p class="indent" >   The advantage of this alternative compared to the Concurrent Model is
+that we can control the size of the buﬀers, which in the end controls the
+latency.
+</p><!--l. 121--><p class="indent" >   ——————-
+</p><!--l. 123--><p class="indent" >   After analyzing these steps, we can see that only
+<!--l. 123--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle></math> and
+<!--l. 123--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>u</mi><mi 
+>n</mi><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mi 
+>e</mi><mi 
+>t</mi></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle></math>
+deserve to be parallelized.
+</p><!--l. 125--><p class="indent" >   Now is a good moment to think about the computing resources that
+can be available: in general, more than one PU (Processing Unit) or core is
+available.
+</p><!--l. 128--><p class="indent" >   Using non-blocking I/O
+</p><!--l. 130--><p class="indent" >   Notice that the execution of these steps, in this order, in two diﬀerent InterCom
+instances has at least two problems:
+     </p><ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x1-3009x1">If a packet is lost, a deadlock is generated, because the <!--l. 134--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>r</mi><mi 
+>e</mi><mi 
+>c</mi><mi 
+>e</mi><mi 
+>i</mi><mi 
+>v</mi><mi 
+>e</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle></math>
+     never returns.
+     </li>
+     <li 
+  class="enumerate" id="x1-3011x2">If the time required by <!--l. 135--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle></math>
+     and <!--l. 136--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>u</mi><mi 
+>n</mi><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mi 
+>e</mi><mi 
+>t</mi></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle></math>
+     is largest than the chunk-time, a glich will be generated.</li></ol>
+<!--l. 140--><p class="indent" >   The Sequential Model is straightforward. However, we cannot control the chunk
+size without generating a blocking in the record and play steps. This can produce
+<a 
+href="https://en.wikipedia.org/wiki/Glitch_(music)" >gliches</a>.
+</p><!--l. 145--><p class="noindent" >
+</p>
+   <h4 class="subsectionHead"><span class="titlemark">1.3   </span> <a 
+ id="x1-40001.3"></a>Concurrent model</h4>
+<!--l. 147--><p class="noindent" >The <a 
+href="https://en.wikipedia.org/wiki/Parallel_computing" >parallel</a> model supposes that there is at least two Processing Units (or PUs,
+typically <a 
+href="https://en.wikipedia.org/wiki/Multi-core_processor" >cores</a>), that are able to work in parallel. Thus, the sequential model is
+divided into two <a 
+href="https://en.wikipedia.org/wiki/Concurrency_(computer_science)" >concurrent</a> tasks that should run in parallel.
+<a 
+ id="x1-4001r3"></a>
+                                                                  
+
+                                                                  
+<!--l. 171--><p class="noindent" ></p><div class="minipage"><span 
+class="ecbx-1000">Algorithm</span>
+<span 
+class="ecbx-1000">1.3:</span> <span 
+class="eccc1000-"><span 
+class="small-caps">C</span><span 
+class="small-caps">o</span><span 
+class="small-caps">n</span><span 
+class="small-caps">c</span><span 
+class="small-caps">u</span><span 
+class="small-caps">r</span><span 
+class="small-caps">r</span><span 
+class="small-caps">e</span><span 
+class="small-caps">n</span><span 
+class="small-caps">t</span><span 
+class="small-caps">_</span><span 
+class="small-caps">I</span><span 
+class="small-caps">n</span><span 
+class="small-caps">t</span><span 
+class="small-caps">e</span><span 
+class="small-caps">r</span><span 
+class="small-caps">C</span><span 
+class="small-caps">o</span><span 
+class="small-caps">m</span></span>(<!--l. 156--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+> </mi></math>)<br 
+class="newline" /> <!--l. 156--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" > <mtable  align="axis" style=""  
+equalrows="false" columnlines="none" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="left"><mspace width="4.3045pt"/> <mstyle 
+class="mbox"><mtext  >procedure </mtext></mstyle><mstyle 
+class="mbox"><mtext  ></mtext><mtext class="textsc" mathvariant="normal" >Record_Pack_and_Send</mtext></mstyle><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mi 
+> </mi></mrow><mo 
+class="MathClass-close">)</mo></mrow>                                      </mtd>
+</mtr>  <mtr><mtd 
+class="array"  columnalign="left"><mspace width="4.3045pt"/>  <mtable  align="axis" style=""  
+equalrows="false" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="left"><mspace width="4.3045pt"/>  <mfenced separators="" 
+open="{"  close="" ><mrow> <mtable  align="axis" style=""  
+equalrows="false" columnlines="none" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi></mstyle> <mo 
+class="MathClass-rel">←</mo><mstyle mathvariant="monospace"><mi 
+>r</mi><mi 
+>e</mi><mi 
+>c</mi><mi 
+>o</mi><mi 
+>r</mi><mi 
+>d</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle>      </mtd>
+</mtr>  <mtr><mtd 
+class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mi 
+>e</mi><mi 
+>t</mi></mstyle> <mo 
+class="MathClass-rel">←</mo><mstyle mathvariant="monospace"><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle></mtd>
+</mtr>  <mtr><mtd 
+class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
+>s</mi><mi 
+>e</mi><mi 
+>n</mi><mi 
+>d</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mi 
+>e</mi><mi 
+>t</mi></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle>             </mtd></mtr><!--@{}lr@{}--></mtable>                                                           </mrow></mfenced></mtd>
+ </mtr><!--@{\pcode@tab {1}}l@{}--></mtable>                                                                                                  </mtd>
+</mtr>  <mtr><mtd 
+class="array"  columnalign="left"><mspace width="4.3045pt"/> <mstyle 
+class="mbox"><mtext  >procedure </mtext></mstyle><mstyle 
+class="mbox"><mtext  ></mtext><mtext class="textsc" mathvariant="normal" >Receive_Unpack_and_Play</mtext></mstyle><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mi 
+> </mi></mrow><mo 
+class="MathClass-close">)</mo></mrow>                                  </mtd>
+</mtr>  <mtr><mtd 
+class="array"  columnalign="left"><mspace width="4.3045pt"/>  <mtable  align="axis" style=""  
+equalrows="false" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="left"><mspace width="4.3045pt"/>  <mfenced separators="" 
+open="{"  close="" ><mrow> <mtable  align="axis" style=""  
+equalrows="false" columnlines="none" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mi 
+>e</mi><mi 
+>t</mi></mstyle> <mo 
+class="MathClass-rel">←</mo><mstyle mathvariant="monospace"><mi 
+>r</mi><mi 
+>e</mi><mi 
+>c</mi><mi 
+>e</mi><mi 
+>i</mi><mi 
+>v</mi><mi 
+>e</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle>      </mtd>
+</mtr>  <mtr><mtd 
+class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi></mstyle> <mo 
+class="MathClass-rel">←</mo><mstyle mathvariant="monospace"><mi 
+>u</mi><mi 
+>n</mi><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mi 
+>e</mi><mi 
+>t</mi></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle></mtd>
+</mtr>  <mtr><mtd 
+class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
+>p</mi><mi 
+>l</mi><mi 
+>a</mi><mi 
+>y</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle>                 </mtd></mtr><!--@{}lr@{}--></mtable>                                                        </mrow></mfenced></mtd>
+ </mtr><!--@{\pcode@tab {1}}l@{}--></mtable>                                                                                                  </mtd>
+</mtr>  <mtr><mtd 
+class="array"  columnalign="left"><mspace width="4.3045pt"/>                                                                                                   </mtd></mtr><!--@{\pcode@tab {1}}lr@{}--></mtable></math></div>
+</p><!--l. 173--><p class="indent" >   In this case, the loss of a chunk does not generates a
+deadlock between the concurrent tasks, because even if the
+<!--l. 175--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="normal"><mi 
+>R</mi><mi 
+>e</mi><mi 
+>c</mi><mi 
+>e</mi><mi 
+>i</mi><mi 
+>v</mi><mi 
+>e</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>U</mi><mi 
+>n</mi><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>P</mi><mi 
+>l</mi><mi 
+>a</mi><mi 
+>y</mi></mstyle></math> is blocked waiting
+for a block in the <!--l. 176--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>r</mi><mi 
+>e</mi><mi 
+>c</mi><mi 
+>e</mi><mi 
+>i</mi><mi 
+>v</mi><mi 
+>e</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle></math>,
+the <!--l. 176--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>R</mi><mi 
+>e</mi><mi 
+>c</mi><mi 
+>o</mi><mi 
+>r</mi><mi 
+>d</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>P</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>a</mi><mi 
+>n</mi><mi 
+>d</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>S</mi><mi 
+>e</mi><mi 
+>n</mi><mi 
+>d</mi></mstyle></math>
+task will continue sendind chunks.
+</p><!--l. 179--><p class="indent" >   Unfortunatelly, gliches can still happen in this model if the packets are lost or delayed,
+or if <!--l. 180--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle></math>
+or if <!--l. 181--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>u</mi><mi 
+>n</mi><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mi 
+>e</mi><mi 
+>t</mi></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle></math>
+needs more than a chunk-time to be completed.
+</p><!--l. 184--><p class="indent" >   Most of the socket APIs oﬀeer a version of
+</p><!--l. 187--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
+ id="x1-50002"></a>What you have to do?</h3>
+<!--l. 189--><p class="noindent" >
+     </p><ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x1-5002x1">Implement a timer-based InterCom. Use as reference <a 
+href="https://github.com/Tecnologias-multimedia/intercom/blob/master/test/sounddevice/wire.py" >wire.py</a>.
+     </li></ol>
+<!--l. 195--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
+ id="x1-60003"></a>Timming</h3>
+<!--l. 197--><p class="noindent" >You should reach this milestone at most in one week.
+                                                                  
+
+                                                                  
+</p><!--l. 199--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
+ id="x1-70004"></a>Deliverables</h3>
+<!--l. 201--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
+ id="x1-80005"></a>Resources</h3>
+<a 
+ id="Q1-1-9"></a>
+    
+</body> 
+</html>
+                                                                  
+
+
