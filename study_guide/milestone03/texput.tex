@@ -195,7 +195,7 @@ handle the audio hardware we use
   a function of $\mathtt{CHUNK\_SIZE}$. Plot the file
   \texttt{latency\_vs\_chunk\_size.txt} with:
 
-  \begin{lstlisting}[language=Bash]
+  \begin{lstlisting}[language=Bash, showstringspaces=false, upquote=true]
      sudo apt install gnuplot
      echo "set terminal pdf; set output 'latency_vs_chunk_size.pdf'; set xlabel 'CHUNK\_SIZE (frames)'; set ylabel 'Latency (seconds)'; plot 'latency_vs_chunk_size.txt' title '' with linespoints" | gnuplot
   \end{lstlisting}
