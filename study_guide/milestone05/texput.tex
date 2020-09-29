@@ -4,12 +4,64 @@
 
 \section{Description}
 
-\href{https://en.wikipedia.org/wiki/Correlation_and_dependence}{Correlation} is the term used in statistics for refering to the interdependency between \href{https://en.wikipedia.org/wiki/Random_variable}{random variables}. It can be measured by the \href{https://www.mathsisfun.com/data/correlation.html}{correlation coefficient}~\cite{thinkstats}.
+\href{https://en.wikipedia.org/wiki/Correlation_and_dependence}{Correlation}
+is the term used in statistics for refering to the interdependency
+between \href{https://en.wikipedia.org/wiki/Random_variable}{random
+  variables}. It can be measured by the
+\href{https://www.mathsisfun.com/data/correlation.html}{correlation
+  coefficient}~\cite{thinkstats}.
 
+In the case of InterCom, the random variables are the two channels
+(left and right) of the
+\href{https://en.wikipedia.org/wiki/Stereophonic_sound}{stereo
+  signal}. In most cases, both channels are going to be
+\href{https://en.wikipedia.org/wiki/Binaural_recording}{highly
+  correlated}, which means that we can represent one of them (for
+example, the right channel) with respect to the other (the left
+channel). From a mathematical point of view, this process can be seen
+as a
 \href{https://en.wikipedia.org/wiki/Decorrelation}{decorrelation}~\cite{sayood2017introduction}
-\href{https://en.wikipedia.org/wiki/Binaural_recording}{binaural recording}~\cite{}
+process.
 
-\subsection{Concurrent model}
+To perform this inter-channel decorrelation, we are going to use an
+orthogonal transform
+\begin{equation}
+  y = Kx = \frac{1}{\sqrt{2}}\[\begin{array}{cc} 1 & 1 \\ 1 & -1 \end{array}\]x,
+\end{equation}
+where $x$ stands for a frame (a tuple or L and R samples), $K$ the
+$2\times 2$ KLT transform matrix (closely
+related with the Haar transform and the S+P transform), and $y$ are
+the transform coefficients (in our case, a couple of
+coefficients). Notice that this transform is orthonormal because
+it holds that,
+\begin{equation}
+  \sum y_i^2 \neq \sum x_i^2.
+\end{equation}
+
+This linear transform can also be viewed 
+To perform this inter-channel decorrelation, we are going to suppose
+that the left and the right channels are going to transport similar
+signals (most of the information that the R channel transports can be
+considered redundant). Therefore, the right channel will be
+represented as the sample-by-sample difference between the left and
+the right channels. Moreover, in order to have also a basic audio
+signalIn other words:
+
+\begin{pseudocode}{Inter-channel\_decorrelation}{~}
+  \PROCEDURE{Decorrelate}{\mathtt{chunk}}
+  \BEGIN
+    
+    \mathtt{recorded\_chunk} \GETS \mathtt{record()}\\
+    \mathtt{outgoing\_packet} \GETS \mathtt{pack(recorded\_chunk)}\\
+    \mathtt{send(outgoing\_packet)}\\
+    \mathtt{incoming\_packet} \GETS \mathtt{receive()}\\
+    \mathtt{chunk\_to\_play} \GETS \mathtt{unpack(incoming\_packet)}\\
+    \mathtt{play(chunk\_to\_play)}
+  \END
+  \ENDPROCEDURE
+\end{pseudocode}
+
+Notice that in the case of mono signals, where L and R are identical, 
 
 
 \section{What you have to do?}
