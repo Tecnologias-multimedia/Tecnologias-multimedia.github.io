@@ -11,12 +11,12 @@ InterCom can be divided roughtly in 6 steps:
 \begin{pseudocode}{Sequential\_InterCom}{~}
   \PROCEDURE{Record\_IO\_and\_Play}{~}
   \BEGIN
-    \mathtt{recorded\_chunk} \GETS \mathtt{record()}\\
-    \mathtt{outgoing\_packet} \GETS \mathtt{pack(recorded\_chunk)}\\
-    \mathtt{send(outgoing\_packet)}\\
-    \mathtt{incoming\_packet} \GETS \mathtt{receive()}\\
-    \mathtt{chunk\_to\_play} \GETS \mathtt{unpack(incoming\_packet)}\\
-    \mathtt{play(chunk\_to\_play)}
+    \mathtt{chunk} \GETS \mathtt{record()}\\
+    \mathtt{packed\_chunk} \GETS \mathtt{pack(chunk)}\\
+    \mathtt{send(packed\_chunk)}\\
+    \mathtt{packed\_chunk} \GETS \mathtt{receive()}\\
+    \mathtt{chunk} \GETS \mathtt{unpack(packed\_chunk)}\\
+    \mathtt{play(chunk)}
   \END
   \ENDPROCEDURE
 \end{pseudocode}
@@ -50,11 +50,11 @@ Where:
   (CPU-intensive) operation, and therefore, it reduces the number of
   cycles/second that the Record\_IO\_and\_Play's loop can reach.
 
-\item $\mathtt{send(packet)}$, sends the packet to the interlocutor's
-  InterCom. When datagrams are used, this step is non-blocking neither
-  CPU-bounding (the CPU usage is very low), as long as the number of
-  packets/second is small and the sizes of the payloads are also
-  small, as it is expected in the InterCom.
+\item $\mathtt{send(packed\_chunk)}$, sends the packet to the
+  interlocutor's InterCom. When datagrams are used, this step is
+  non-blocking neither CPU-bounding (the CPU usage is very low), as
+  long as the number of packets/second is small and the sizes of the
+  payloads are also small, as it is expected in the InterCom.
 
 \item $\mathtt{receive()}$, waits (blocking) for a incoming packet,
   and therefore, this operation is IO-bound. However, most
@@ -67,9 +67,9 @@ Where:
   the programmer to generate an ``alternative'' chunk (in our case, for
   example, a chunk filled with zeros will not produce any sound).
 
-\item $\mathtt{unpack(packet)}$ is (as $\mathtt{pack(chunk)}$) a
-  CPU-intensive step that transforms a packet (or several packets)
-  into a chunk of audio.
+\item $\mathtt{unpack(packed\_chunk)}$ is (as $\mathtt{pack(chunk)}$)
+  a CPU-intensive step that transforms a packed\_chunk into a chunk of
+  audio.
 
 \item $\mathtt{play(chunk)}$ renders the chunk. In general, this is an
   I/O-bound
@@ -111,12 +111,12 @@ controlled.
 \begin{pseudocode}{Timer-based\_InterCom}{~}
   \PROCEDURE{Record\_IO\_and\_Play}{\mathtt{chunk\_size}}
   \BEGIN
-    \mathtt{recorded\_chunk} \GETS \mathtt{record(chunk\_size)}\\
-    \mathtt{send(outgoing\_packet)} \GETS \mathtt{pack(recorded\_chunk)}\\
-    \mathtt{send(outgoing\_packet)}\\
-    \mathtt{incoming\_packet} \GETS \mathtt{receive()}\\
-    \mathtt{chunk\_to\_play} \GETS \mathtt{unpack(incoming\_packet)}\\
-    \mathtt{play(chunk\_to\_play)}
+    \mathtt{chunk} \GETS \mathtt{record(chunk\_size)}\\
+    \mathtt{packed\_chunk} \GETS \mathtt{pack(chunk)}\\
+    \mathtt{send(packed\_chunk)}\\
+    \mathtt{packed\_chunk} \GETS \mathtt{receive()}\\
+    \mathtt{chunk} \GETS \mathtt{unpack(packed\_chunk)}\\
+    \mathtt{play(chunk)}
   \END
   \ENDPROCEDURE
 \end{pseudocode}
