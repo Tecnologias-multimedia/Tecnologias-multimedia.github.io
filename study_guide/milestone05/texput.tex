@@ -20,8 +20,9 @@ In the case of InterCom, the random variables are the two channels
 we can represent one of them (for example, the $R$ channel) with
 respect to the other (the $L$ channel). From a mathematical point
 of view, this process can be seen as a
-\href{https://en.wikipedia.org/wiki/Decorrelation}{decorrelation}~\cite{sayood2017introduction}
-process.
+\href{https://en.wikipedia.org/wiki/Decorrelation}{decorrelation}
+process. From a physical perspective, decorrelating implies energy
+accumulation~\cite{sayood2017introduction}.
 
 To perform this inter-channel decorrelation, we use an orthogonal
 transform
@@ -43,7 +44,10 @@ preserving in the transform domain) because
 although both subbands $y[0]$ and $y[1]$ have the same gain
 ($1/\sqrt{2}$). This will simplify the
 \href{https://en.wikipedia.org/wiki/Quantization_(signal_processing)}{quantization}
-of $y$.
+of $y$. The described transform is similar to the so
+called \href{https://en.wikipedia.org/wiki/Joint_encoding#M/S_stereo_coding}{M/S
+stereo coding}, but in our case, the división by 2 is carried on on
+the forward transform, instead of the backward (inverse) transform.
 
 This transform can be implemented \emph{in-place} using the following
 algorithm:
