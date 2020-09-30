@@ -1,31 +1,48 @@
-\title{\href{https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN}{Tecnologías Multimedia} - Study Guide - Milestone 7: Intra-channel decorrelation in audio signals}
+\title{\href{https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN}{Tecnologías Multimedia} - Study Guide - Milestone 7: Compressing the audio data with \href{https://zlib.net/}{zlib}}
 
 \maketitle
 
 \section{Description}
 
-\cite{kahrs2002applications}.
+It's time to reduce bandwidth comsumption. The $\mathtt{pack()}$ and
+the $\mathtt{unpack()}$ methods can compress and decompress,
+respectively, the chunks that are handled. To compress and decompress,
+we will use a free codec named
+\href{https://en.wikipedia.org/wiki/DEFLATE}{DEFLATE}, which is based
+on LZSS and Huffman Coding~\cite{nelson96datacompression}.
 
 \section{What you have to do?}
 
 \begin{enumerate}
-\item Inherit the class \texttt{Intercom\_intra-channel\_decorrelation}.
-\item Implement in this method the procedures Analyze() and
-  Synthesize(). \href{https://www.oreilly.com/library/view/python-for-data/9781449323592/ch04.html}{Vectorized
-    operations} should be used.
+\item Create a class named \texttt{Intercom\_minimal\_zlib}, that
+  inherits from \texttt{Intercom\_minimal}, in which the methods
+  $\mathtt{pack()}$ and $\mathtt{unpack()}$ are overriden to compress
+  and decompress the chunks. Use the Python's standard library
+  \href{https://docs.python.org/3/library/zlib.html}{\texttt{zlib}}. Store
+  this class in a module named \texttt{intercom\_minimal\_zlib.py}.
+\item Create a class named \texttt{Intercom\_inter\_zlib}, that
+  inherits from \texttt{Intercom\_inter} and
+  \texttt{Intercom\_minimal\_zlib}, to allow the compression of the
+  decorrelated channels.
+\item Notice that, in general, the compression ratio provided by
+  DEFLATE is higher when the samples (in the case of
+  \texttt{Intercom\_minimal}) or the coefficients (in the case of
+  \texttt{Intercom\_inter}) are not interleaved (first placing all the
+  samples of the first channel/subband, and next, placing all the
+  samples of the second channel/subband).
 \end{enumerate}
 
 \section{Timming}
 
-You should reach this milestone at most in two weeks.
+You should reach this milestone at most in one week.
 
 \section{Deliverables}
 
-The module \texttt{intercom\_inter-channel\_decorrelation.py}. Store
-it at the
+The modules \texttt{intercom\_minimal\_zlib.py} and
+\texttt{intercom\_inter\_zlib}. Store them at the
 \href{https://github.com/Tecnologias-multimedia/intercom}{root
   directory} of your \texttt{intercom}'s repo.
 
 \section{Resources}
 
-\bibliography{maths,data-compression,DWT}
+\bibliography{data-compression}
