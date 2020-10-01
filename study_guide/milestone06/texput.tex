@@ -23,26 +23,26 @@ on LZSS and Huffman Coding~\cite{nelson96datacompression}.
 \item Create a class named \texttt{Intercom\_inter\_zlib}, that
   inherits from \texttt{Intercom\_inter} and
   \texttt{Intercom\_minimal\_zlib}, to allow the compression of the
-  decorrelated channels.
+  inter-decorrelated subbands.
 \item Notice that, in general, the compression ratio provided by
-  DEFLATE is higher when the samples (in the case of
-  \texttt{Intercom\_minimal}) or the coefficients (in the case of
-  \texttt{Intercom\_inter}) are not interleaved (first placing all the
-  samples of the first channel/subband, and next, placing all the
-  samples of the second channel/subband).
+  DEFLATE is higher when the samples of the channels (in the case of
+  \texttt{Intercom\_minimal}) or the coefficients of the subbands (in
+  the case of \texttt{Intercom\_inter}) are not interleaved (all the
+  samples/coefficients of the first channel/subband first, and next,
+  placing all the samples/coefficients of the second channel/subband).
 \end{enumerate}
 
 \section{Timming}
 
-You should reach this milestone at most in one week.
+You should finish this milestone at most in two weeks.
 
 \section{Deliverables}
 
 The modules \texttt{intercom\_minimal\_zlib.py} and
-\texttt{intercom\_inter\_zlib}. Store them at the
+\texttt{intercom\_inter\_zlib.py}. Store them at the
 \href{https://github.com/Tecnologias-multimedia/intercom}{root
   directory} of your \texttt{intercom}'s repo.
 
 \section{Resources}
 
-\bibliography{data-compression}
+\bibliography{text-compression}
