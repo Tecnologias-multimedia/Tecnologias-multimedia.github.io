@@ -1,4 +1,4 @@
-\title{\href{https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN}{Tecnologías Multimedia} - Study Guide - Milestone 6: Inter-channel decorrelation in stereo audio signals}
+\title{\href{https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN}{Tecnologías Multimedia} - Study Guide - Milestone 6: Inter-channel decorrelation in stereo audio signals (mid/side stereo coding)}
 
 \maketitle
 
@@ -14,17 +14,18 @@ between \href{https://en.wikipedia.org/wiki/Random_variable}{random
 In the case of InterCom, the random variables are the two channels
 (left $L$ and right $R$) of the
 \href{https://en.wikipedia.org/wiki/Stereophonic_sound}{stereo
-  signal}. In most cases, both channels are going to be
-\href{https://en.wikipedia.org/wiki/Binaural_recording}{highly
+  \href{https://en.wikipedia.org/wiki/Pulse-code_modulation}{PCM}
+  signal}~\cite{bosi2003intro}. In most cases, both channels are going
+to be \href{https://en.wikipedia.org/wiki/Binaural_recording}{highly
   correlated} (especially if the microphone is mono), which means that
 we can represent one of them (for example, the $R$ channel) with
-respect to the other (the $L$ channel). From a mathematical point
-of view, this process can be seen as a
+respect to the other (the $L$ channel). From a mathematical point of
+view, this process can be seen as a
 \href{https://en.wikipedia.org/wiki/Decorrelation}{decorrelation}
 process. From a physical perspective, decorrelating implies energy
 accumulation~\cite{sayood2017introduction}.
 
-To perform this inter-channel decorrelation, we use an orthogonal
+To perform this inter-channel decorrelation, we use an \href{https://en.wikipedia.org/wiki/Orthogonal_transformation}{orthogonal}
 transform
 \begin{equation}
   y = Kx = \frac{1}{2}\begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}x,
@@ -36,8 +37,10 @@ $x[1]$), $K$ is the $2\times 2$ KLT
 related with the \href{http://wavelets.pybytes.com/wavelet/haar/}{Haar
   transform}~\cite{vetterli1995wavelets}), and $y$ represents the
 transform coefficients (in our case, a couple of coefficients $y[0]$
-and $y[1]$). Notice that this transform is not orthonormal (energy
-preserving in the transform domain) because
+with the \href{https://en.wikipedia.org/wiki/Arithmetic_mean}{mean}
+and $y[1]$ with the difference). Notice that this transform is not
+\href{https://en.wikipedia.org/wiki/Orthonormal_basis}{orthonormal}
+(energy preserving in the transform domain) because
 \begin{equation}
   \sum y[i]^2 = \frac{1}{\sqrt{2}}\sum x[i]^2,
 \end{equation}
@@ -49,8 +52,9 @@ called \href{https://en.wikipedia.org/wiki/Joint_encoding#M/S_stereo_coding}{M/S
 stereo coding}, but in our case, the división by 2 is carried on on
 the forward transform, instead of the backward (inverse) transform.
 
-This transform can be implemented \emph{in-place} using the following
-algorithm:
+This transform can be implemented
+\href{https://en.wikipedia.org/wiki/In-place_algorithm}{\emph{in-place}}
+using the following algorithm:
 
 \begin{pseudocode}{Inter-channel\_decorrelation}{~}
   \PROCEDURE{Analyze}{\mathtt{frame}}

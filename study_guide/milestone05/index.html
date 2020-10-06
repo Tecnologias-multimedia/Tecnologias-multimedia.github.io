@@ -1,7 +1,7 @@
 <!DOCTYPE html> 
 <html> 
 <head> <title>TecnologÃŋas Multimedia - Study Guide - Milestone 6: Inter-channel
-decorrelation in stereo audio signals</title> 
+decorrelation in stereo audio signals (mid/side stereo coding)</title> 
 <meta charset="UTF-8" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <link rel="stylesheet" type="text/css" href="index.css" /> 
@@ -24,7 +24,7 @@ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLor
 <h2 class="titleHead"><a 
 href="https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN" >Tecnologías Multimedia</a> - Study Guide -
 Milestone 6: Inter-channel decorrelation in
-stereo audio signals</h2>
+stereo audio signals (mid/side stereo coding)</h2>
  <div class="author" ><a 
 href="https://cms.ual.es/UAL/personas/persona.htm?id=515256515553484875" ><span 
 class="ecrm-1200">Vicente Gonz</span><span 
@@ -39,7 +39,7 @@ class="ecrm-1200">- </span><a
 href="https://www.ual.es" ><span 
 class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
-class="ecrm-1200">September 30, 2020</span></div>
+class="ecrm-1200">October 6, 2020</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
@@ -53,20 +53,23 @@ href="#Xthinkstats">1</a>]</span>.
 <!--l. 15--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
->L</mi></math> and right
-<!--l. 15--><math 
+>L</mi></math> and
+right <!--l. 15--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
->R</mi></math>) of the
-<a 
-href="https://en.wikipedia.org/wiki/Stereophonic_sound" >stereo signal</a>. In most cases, both channels are going to be <a 
-href="https://en.wikipedia.org/wiki/Binaural_recording" >highly correlated</a> (especially if the
-microphone is mono), which means that we can represent one of them (for example, the
-<!--l. 20--><math 
+>R</mi></math>)
+of the <a 
+href="https://en.wikipedia.org/wiki/Stereophonic_sound" >stereo <a 
+href="https://en.wikipedia.org/wiki/Pulse-code_modulation" >PCM</a> signal</a> <span class="cite">[<span 
+class="ecbx-1000">?</span>]</span>. In most cases, both channels are
+going to be <a 
+href="https://en.wikipedia.org/wiki/Binaural_recording" >highly correlated</a> (especially if the microphone is mono),
+which means that we can represent one of them (for example, the
+<!--l. 21--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >R</mi></math> channel) with respect
-to the other (the <!--l. 21--><math 
+to the other (the <!--l. 22--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >L</mi></math>
@@ -75,13 +78,14 @@ channel). From a mathematical point of view, this process can be seen as a
 href="https://en.wikipedia.org/wiki/Decorrelation" >decorrelation</a> process. From a physical perspective, decorrelating implies energy
 accumulation <span class="cite">[<a 
 href="#Xsayood2017introduction">2</a>]</span>.
-</p><!--l. 27--><p class="indent" >   To perform this inter-channel decorrelation, we use an orthogonal transform </p><table class="equation"><tr><td>
+</p><!--l. 28--><p class="indent" >   To perform this inter-channel decorrelation, we use an <a 
+href="https://en.wikipedia.org/wiki/Orthogonal_transformation" >orthogonal</a> transform </p><table class="equation"><tr><td>
 <a 
  id="x1-1001r1"></a>
                                                                   
 
                                                                   
-<!--l. 29--><math 
+<!--l. 30--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
 <mi 
@@ -103,61 +107,63 @@ class="MathClass-bin">−</mo><mn>1</mn></mtd></mtr> <!--*\c@MaxMatrixCols c--><
 >x</mi><mo 
 class="MathClass-punc">,</mo>
 </math></td><td class="eq-no">(1)</td></tr></table>
-<!--l. 32--><p class="indent" >   where <!--l. 32--><math 
+<!--l. 33--><p class="indent" >   where <!--l. 33--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >x</mi></math>
 represents a frame (a tuple or L and R samples,
-<!--l. 32--><math 
+<!--l. 33--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >x</mi><mrow ><mo 
 class="MathClass-open">[</mo><mrow><mn>0</mn></mrow><mo 
 class="MathClass-close">]</mo></mrow></math> and
-<!--l. 33--><math 
+<!--l. 34--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >x</mi><mrow ><mo 
 class="MathClass-open">[</mo><mrow><mn>1</mn></mrow><mo 
 class="MathClass-close">]</mo></mrow></math>),
-<!--l. 33--><math 
+<!--l. 34--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >K</mi></math> is the
-<!--l. 33--><math 
+<!--l. 34--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mn>2</mn> <mo 
 class="MathClass-bin">×</mo> <mn>2</mn></math>
 KLT <a 
 href="http://fourier.eng.hmc.edu/e161/lectures/klt/node3.html" >(Karhunen-Loève Transform)</a> matrix multiplied by
-<!--l. 35--><math 
+<!--l. 36--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mn>1</mn><mo 
 class="MathClass-bin">∕</mo><msqrt><mrow><mn>2</mn></mrow></msqrt></math>
 (which is closely related with the <a 
 href="http://wavelets.pybytes.com/wavelet/haar/" >Haar transform</a> <span class="cite">[<a 
 href="#Xvetterli1995wavelets">4</a>]</span>), and
-<!--l. 37--><math 
+<!--l. 38--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >y</mi></math>
 represents the transform coeﬃcients (in our case, a couple of coeﬃcients
-<!--l. 38--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->y</mi><mrow ><mo 
-class="MathClass-open">[</mo><mrow><mn>0</mn></mrow><mo 
-class="MathClass-close">]</mo></mrow></math> and
 <!--l. 39--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >y</mi><mrow ><mo 
+class="MathClass-open">[</mo><mrow><mn>0</mn></mrow><mo 
+class="MathClass-close">]</mo></mrow></math> with the
+<a 
+href="https://en.wikipedia.org/wiki/Arithmetic_mean" >mean</a> and <!--l. 41--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>y</mi><mrow ><mo 
 class="MathClass-open">[</mo><mrow><mn>1</mn></mrow><mo 
-class="MathClass-close">]</mo></mrow></math>).
-Notice that this transform is not orthonormal (energy preserving in the transform
-domain) because </p><table class="equation"><tr><td> <a 
+class="MathClass-close">]</mo></mrow></math>
+with the diﬀerence). Notice that this transform is not <a 
+href="https://en.wikipedia.org/wiki/Orthonormal_basis" >orthonormal</a> (energy preserving
+in the transform domain) because </p><table class="equation"><tr><td> <a 
  id="x1-1002r2"></a>
-<!--l. 41--><math 
+<!--l. 44--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
                        <mo  
@@ -185,24 +191,24 @@ class="MathClass-close">]</mo></mrow></mrow><mrow
 ><mo 
 class="MathClass-punc">,</mo>
 </math></td><td class="eq-no">(2)</td></tr></table>
-<!--l. 44--><p class="indent" >   although both subbands <!--l. 44--><math 
+<!--l. 47--><p class="indent" >   although both subbands <!--l. 47--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >y</mi><mrow ><mo 
 class="MathClass-open">[</mo><mrow><mn>0</mn></mrow><mo 
 class="MathClass-close">]</mo></mrow></math>
-and <!--l. 44--><math 
+and <!--l. 47--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >y</mi><mrow ><mo 
 class="MathClass-open">[</mo><mrow><mn>1</mn></mrow><mo 
 class="MathClass-close">]</mo></mrow></math> have the same gain
-(<!--l. 45--><math 
+(<!--l. 48--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mn>1</mn><mo 
 class="MathClass-bin">∕</mo><msqrt><mrow><mn>2</mn></mrow></msqrt></math>). This will simplify
 the <a 
-href="https://en.wikipedia.org/wiki/Quantization_(signal_processing)" >quantization</a> of <!--l. 47--><math 
+href="https://en.wikipedia.org/wiki/Quantization_(signal_processing)" >quantization</a> of <!--l. 50--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >y</mi></math>.
@@ -210,14 +216,15 @@ The described transform is similar to the so called <a
 href="https://en.wikipedia.org/wiki/Joint_encoding#M/S_stereo_coding" >M/S stereo coding</a>, but in our
 case, the división by 2 is carried on on the forward transform, instead of the
 backward (inverse) transform.
-</p><!--l. 52--><p class="indent" >   This transform can be implemented <span 
-class="ecti-1000">in-place </span>using the following algorithm:
+</p><!--l. 55--><p class="indent" >   This transform can be implemented <a 
+href="https://en.wikipedia.org/wiki/In-place_algorithm" ><span 
+class="ecti-1000">in-place</span></a> using the following algorithm:
 <a 
  id="x1-1003r1"></a>
                                                                   
 
                                                                   
-<!--l. 70--><p class="noindent" ></p><div class="minipage"><span 
+<!--l. 74--><p class="noindent" ></p><div class="minipage"><span 
 class="ecbx-1000">Algorithm</span>
 <span 
 class="ecbx-1000">1.1:</span> <span 
@@ -248,11 +255,11 @@ class="small-caps">a</span><span
 class="small-caps">t</span><span 
 class="small-caps">i</span><span 
 class="small-caps">o</span><span 
-class="small-caps">n</span></span>(<!--l. 55--><math 
+class="small-caps">n</span></span>(<!--l. 59--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 > </mi></math>)<br 
-class="newline" /> <!--l. 55--><math 
+class="newline" /> <!--l. 59--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" > <mtable  align="axis" style=""  
 equalrows="false" columnlines="none" equalcolumns="false" class="array"> <mtr><mtd 
@@ -409,14 +416,14 @@ class="MathClass-close">]</mo></mrow></mstyle>          </mtd></mtr><!--@{}lr@{}
  </mtr><!--@{\pcode@tab {1}}l@{}--></mtable>                                                                                                  </mtd>
 </mtr>  <mtr><mtd 
 class="array"  columnalign="left"><mspace width="4.3045pt"/>                                                                                                   </mtd></mtr><!--@{\pcode@tab {1}}lr@{}--></mtable></math></div>
-</p><!--l. 72--><p class="indent" >   where <!--l. 72--><math 
+</p><!--l. 76--><p class="indent" >   where <!--l. 76--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mi 
 >a</mi><mo 
 class="MathClass-bin">−</mo> <mo 
 class="MathClass-rel">=</mo> <mi 
 >b</mi></mstyle></math> is a shorter
-representation of the operation <!--l. 73--><math 
+representation of the operation <!--l. 77--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mi 
 >a</mi> <mo 
@@ -424,12 +431,12 @@ class="MathClass-rel">=</mo> <mi
 >a</mi><mo 
 class="MathClass-bin">−</mo><mi 
 >b</mi></mstyle></math>,
-and <!--l. 73--><math 
+and <!--l. 77--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mo 
 class="MathClass-rel">&#x003E;</mo><mo 
 class="MathClass-rel">&#x003E;</mo></mstyle></math>
-and <!--l. 73--><math 
+and <!--l. 77--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mo 
 class="MathClass-rel">&#x003C;</mo><mo 
@@ -440,11 +447,11 @@ type of in-place computations are commonly used in the implementation of DWTs
 href="https://en.wikipedia.org/wiki/Discrete_wavelet_transform" >Dicrete Wavelet Transform</a>s) using <a 
 href="https://cm-bell-labs.github.io/who/wim/papers/athome/athome.pdf" >the Lifting Scheme</a> <span class="cite">[<a 
 href="#X2006.sweldens">3</a>]</span>.
-</p><!--l. 82--><p class="noindent" >
+</p><!--l. 86--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
  id="x1-20002"></a>What you have to do?</h3>
-<!--l. 84--><p class="noindent" >
+<!--l. 88--><p class="noindent" >
      </p><ol  class="enumerate1" >
      <li 
   class="enumerate" id="x1-2002x1">Inherit            the            class            <span 
@@ -458,24 +465,24 @@ class="ectt-1000">intercom_intra-channel_decorrelation.py</span>.
   class="enumerate" id="x1-2004x2">Implement in this method the procedures Analyze() and Synthesize().
      <a 
 href="https://www.oreilly.com/library/view/python-for-data/9781449323592/ch04.html" >Vectorized operations</a> should be used.</li></ol>
-<!--l. 93--><p class="noindent" >
+<!--l. 97--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-30003"></a>Timming</h3>
-<!--l. 95--><p class="noindent" >You should reach this milestone at most in two weeks.
+<!--l. 99--><p class="noindent" >You should reach this milestone at most in two weeks.
                                                                   
 
                                                                   
-</p><!--l. 97--><p class="noindent" >
+</p><!--l. 101--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-40004"></a>Deliverables</h3>
-<!--l. 99--><p class="noindent" >The module <span 
+<!--l. 103--><p class="noindent" >The module <span 
 class="ectt-1000">intercom_inter.py</span>. Store it at the <a 
 href="https://github.com/Tecnologias-multimedia/intercom" >root directory</a> of your <span 
 class="ectt-1000">intercom</span>’s
 repo.
-</p><!--l. 104--><p class="noindent" >
+</p><!--l. 108--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-50005"></a>Resources</h3>
