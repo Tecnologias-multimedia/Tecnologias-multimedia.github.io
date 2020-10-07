@@ -80,9 +80,9 @@ href="#Xnelson96datacompression">1</a>]</span>.
      </p><ol  class="enumerate1" >
      <li 
   class="enumerate" id="x1-2002x1">Create a class named <span 
-class="ectt-1000">Intercom_minimal_zlib</span>, that inherits from <span 
-class="ectt-1000">Intercom_minimal</span>,
-     in which the methods <!--l. 20--><math 
+class="ectt-1000">Compress</span>, that inherits from <span 
+class="ectt-1000">Minimal </span>(the class
+     implemented in the previous milestone), in which the methods <!--l. 20--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mi 
 >p</mi><mi 
@@ -106,44 +106,26 @@ class="MathClass-close">)</mo></mrow></mstyle></math>
      standard library <a 
 href="https://docs.python.org/3/library/zlib.html" ><span 
 class="ectt-1000">zlib</span></a>. Store this class in a module named <span 
-class="ectt-1000">intercom_minimal_zlib.py</span>.
-     </li>
-     <li 
-  class="enumerate" id="x1-2004x2">Create   a   class   named   <span 
-class="ectt-1000">Intercom_inter_zlib</span>,   that   inherits   from
+class="ectt-1000">compress.py</span>.</li></ol>
                                                                   
 
                                                                   
-     <span 
-class="ectt-1000">Intercom_inter </span>and <span 
-class="ectt-1000">Intercom_minimal_zlib</span>, to allow the compression
-     of the inter-decorrelated subbands.
-     </li>
-     <li 
-  class="enumerate" id="x1-2006x3">Notice that,  in general,  the compression ratio provided by DEFLATE
-     is   higher   when   the   samples   of   the   channels   (in   the   case   of
-     <span 
-class="ectt-1000">Intercom_minimal</span>) or the coeﬃcients of the subbands (in the case of
-     <span 
-class="ectt-1000">Intercom_inter</span>) are not interleaved (all the samples/coeﬃcients of the
-     ﬁrst channel/subband go ﬁrst, and next, all the samples/coeﬃcients of the
-     second channel/subband are placed).</li></ol>
-<!--l. 37--><p class="noindent" >
+<!--l. 27--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-30003"></a>Timming</h3>
-<!--l. 39--><p class="noindent" >You should ﬁnish this milestone at most in two weeks.
-</p><!--l. 41--><p class="noindent" >
+<!--l. 29--><p class="noindent" >You should ﬁnish this milestone at most in two weeks.
+</p><!--l. 31--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-40004"></a>Deliverables</h3>
-<!--l. 43--><p class="noindent" >The modules <span 
+<!--l. 33--><p class="noindent" >The modules <span 
 class="ectt-1000">intercom_minimal_zlib.py </span>and <span 
 class="ectt-1000">intercom_inter_zlib.py</span>. Store
 them at the <a 
 href="https://github.com/Tecnologias-multimedia/intercom" >root directory</a> of your <span 
 class="ectt-1000">intercom</span>’s repo.
-</p><!--l. 48--><p class="noindent" >
+</p><!--l. 38--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-50005"></a>Resources</h3>

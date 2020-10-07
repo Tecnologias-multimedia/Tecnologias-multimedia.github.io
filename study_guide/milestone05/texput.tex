@@ -15,23 +15,13 @@ and \href{https://en.wikipedia.org/wiki/Huffman_coding}{Huffman Coding}~\cite{ne
 \section{What you have to do?}
 
 \begin{enumerate}
-\item Create a class named \texttt{Intercom\_minimal\_zlib}, that
-  inherits from \texttt{Intercom\_minimal}, in which the methods
-  $\mathtt{pack()}$ and $\mathtt{unpack()}$ are overriden to compress
-  and decompress the chunks. Use the Python's standard library
+\item Create a class named \texttt{Compress}, that inherits from
+  \texttt{Minimal} (the class implemented in the previous milestone),
+  in which the methods $\mathtt{pack()}$ and $\mathtt{unpack()}$ are
+  overriden to compress and decompress the chunks. Use the Python's
+  standard library
   \href{https://docs.python.org/3/library/zlib.html}{\texttt{zlib}}. Store
-  this class in a module named \texttt{intercom\_minimal\_zlib.py}.
-\item Create a class named \texttt{Intercom\_inter\_zlib}, that
-  inherits from \texttt{Intercom\_inter} and
-  \texttt{Intercom\_minimal\_zlib}, to allow the compression of the
-  inter-decorrelated subbands.
-\item Notice that, in general, the compression ratio provided by
-  DEFLATE is higher when the samples of the channels (in the case of
-  \texttt{Intercom\_minimal}) or the coefficients of the subbands (in
-  the case of \texttt{Intercom\_inter}) are not interleaved (all the
-  samples/coefficients of the first channel/subband go first, and
-  next, all the samples/coefficients of the second channel/subband are
-  placed).
+  this class in a module named \texttt{compress.py}.
 \end{enumerate}
 
 \section{Timming}

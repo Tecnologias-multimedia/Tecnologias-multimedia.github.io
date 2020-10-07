@@ -92,6 +92,13 @@ implementation of DWTs
 \item Implement in this method the procedures Analyze() and
   Synthesize(). \href{https://www.oreilly.com/library/view/python-for-data/9781449323592/ch04.html}{Vectorized
     operations} should be used.
+\item Notice that, in general, the compression ratio provided by
+  DEFLATE is higher when the samples of the channels (in the case of
+  \texttt{Minimal}) or the coefficients of the subbands (in
+  the case of \texttt{Intercom\_inter}) are not interleaved (all the
+  samples/coefficients of the first channel/subband go first, and
+  next, all the samples/coefficients of the second channel/subband are
+  placed).
 \end{enumerate}
 
 \section{Timming}
