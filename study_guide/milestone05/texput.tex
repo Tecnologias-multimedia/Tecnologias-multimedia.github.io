@@ -1,110 +1,49 @@
-\title{\href{https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN}{Tecnologías Multimedia} - Study Guide - Milestone 6: Inter-channel decorrelation in stereo audio signals (mid/side stereo coding)}
+\title{\href{https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN}{Tecnologías Multimedia} - Study Guide - Milestone 7: Compressing the audio data with \href{https://zlib.net/}{zlib}}
 
 \maketitle
 
 \section{Description}
 
-\href{https://en.wikipedia.org/wiki/Correlation_and_dependence}{Correlation}
-is the term used in statistics for refering to the interdependency
-between \href{https://en.wikipedia.org/wiki/Random_variable}{random
-  variables}. It can be measured by the
-\href{https://www.mathsisfun.com/data/correlation.html}{correlation
-  coefficient}~\cite{thinkstats}.
-
-In the case of InterCom, the random variables are the two channels
-(left $L$ and right $R$) of the
-\href{https://en.wikipedia.org/wiki/Stereophonic_sound}{stereo
-  \href{https://en.wikipedia.org/wiki/Pulse-code_modulation}{PCM}
-  signal}~\cite{bosi2003intro}. In most cases, both channels are going
-to be \href{https://en.wikipedia.org/wiki/Binaural_recording}{highly
-  correlated} (especially if the microphone is mono), which means that
-we can represent one of them (for example, the $R$ channel) with
-respect to the other (the $L$ channel). From a mathematical point of
-view, this process can be seen as a
-\href{https://en.wikipedia.org/wiki/Decorrelation}{decorrelation}
-process. From a physical perspective, decorrelating implies energy
-accumulation~\cite{sayood2017introduction}.
-
-To perform this inter-channel decorrelation, we use an \href{https://en.wikipedia.org/wiki/Orthogonal_transformation}{orthogonal}
-transform
-\begin{equation}
-  y = Kx = \frac{1}{2}\begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}x,
-\end{equation}
-where $x$ represents a frame (a tuple or L and R samples, $x[0]$ and
-$x[1]$), $K$ is the $2\times 2$ KLT
-\href{http://fourier.eng.hmc.edu/e161/lectures/klt/node3.html}{(Karhunen-Lo\`eve
-  Transform)} matrix multiplied by $1/\sqrt{2}$ (which is closely
-related with the \href{http://wavelets.pybytes.com/wavelet/haar/}{Haar
-  transform}~\cite{vetterli1995wavelets}), and $y$ represents the
-transform coefficients (in our case, a couple of coefficients $y[0]$
-with the \href{https://en.wikipedia.org/wiki/Arithmetic_mean}{mean}
-and $y[1]$ with the difference). Notice that this transform is not
-\href{https://en.wikipedia.org/wiki/Orthonormal_basis}{orthonormal}
-(energy preserving in the transform domain) because
-\begin{equation}
-  \sum y[i]^2 = \frac{1}{\sqrt{2}}\sum x[i]^2,
-\end{equation}
-although both subbands $y[0]$ and $y[1]$ have the same gain
-($1/\sqrt{2}$). This will simplify the
-\href{https://en.wikipedia.org/wiki/Quantization_(signal_processing)}{quantization}
-of $y$. The described transform is similar to the so
-called \href{https://en.wikipedia.org/wiki/Joint_encoding#M/S_stereo_coding}{M/S
-stereo coding}, but in our case, the división by 2 is carried on on
-the forward transform, instead of the backward (inverse) transform.
-
-This transform can be implemented
-\href{https://en.wikipedia.org/wiki/In-place_algorithm}{\emph{in-place}}
-using the following algorithm:
-
-\begin{pseudocode}{Inter-channel\_decorrelation}{~}
-  \PROCEDURE{Analyze}{\mathtt{frame}}
-  \BEGIN
-    \mathtt{frame[0] -= frame[1]} \\
-    \mathtt{frame[1] += (frame[0] >> 1)} \\
-    \mathtt{frame[0] >>= 1}
-  \END
-  \ENDPROCEDURE
-  \PROCEDURE{Synthesize}{\mathtt{frame}}
-  \BEGIN
-    \mathtt{frame[0] <<= 1} \\
-    \mathtt{frame[1] -= (frame[0] >> 1)} \\
-    \mathtt{frame[0] += frame[1]}
-  \END
-  \ENDPROCEDURE
-\end{pseudocode}
-
-where $\mathtt{a -= b}$ is a shorter representation of the operation
-$\mathtt{a = a - b}$, and $\mathtt{>>}$ and $\mathtt{<<}$ represent
-the bit-wise left and right shift operations, respectively. Notice
-that this type of in-place computations are commonly used in the
-implementation of DWTs
-(\href{https://en.wikipedia.org/wiki/Discrete_wavelet_transform}{Dicrete
-  Wavelet Transform}s) using
-\href{https://cm-bell-labs.github.io/who/wim/papers/athome/athome.pdf}{the
-  Lifting Scheme}~\cite{2006.sweldens}.
+It's time to reduce bandwidth comsumption. The $\mathtt{pack()}$ and
+the $\mathtt{unpack()}$ methods can compress and decompress,
+respectively, the chunks that are handled. To compress and decompress,
+we will use a free codec named
+\href{https://en.wikipedia.org/wiki/DEFLATE}{DEFLATE}, which is based
+on LZSS and Huffman Coding~\cite{nelson96datacompression}.
 
 \section{What you have to do?}
 
 \begin{enumerate}
-\item Inherit the class \texttt{Intercom\_minimal} and override the
-  method \texttt{record\_io\_and\_play()}. Do this in a module named
-  \texttt{intercom\_intra-channel\_decorrelation.py}.
-\item Implement in this method the procedures Analyze() and
-  Synthesize(). \href{https://www.oreilly.com/library/view/python-for-data/9781449323592/ch04.html}{Vectorized
-    operations} should be used.
+\item Create a class named \texttt{Intercom\_minimal\_zlib}, that
+  inherits from \texttt{Intercom\_minimal}, in which the methods
+  $\mathtt{pack()}$ and $\mathtt{unpack()}$ are overriden to compress
+  and decompress the chunks. Use the Python's standard library
+  \href{https://docs.python.org/3/library/zlib.html}{\texttt{zlib}}. Store
+  this class in a module named \texttt{intercom\_minimal\_zlib.py}.
+\item Create a class named \texttt{Intercom\_inter\_zlib}, that
+  inherits from \texttt{Intercom\_inter} and
+  \texttt{Intercom\_minimal\_zlib}, to allow the compression of the
+  inter-decorrelated subbands.
+\item Notice that, in general, the compression ratio provided by
+  DEFLATE is higher when the samples of the channels (in the case of
+  \texttt{Intercom\_minimal}) or the coefficients of the subbands (in
+  the case of \texttt{Intercom\_inter}) are not interleaved (all the
+  samples/coefficients of the first channel/subband go first, and
+  next, all the samples/coefficients of the second channel/subband are
+  placed).
 \end{enumerate}
 
 \section{Timming}
 
-You should reach this milestone at most in two weeks.
+You should finish this milestone at most in two weeks.
 
 \section{Deliverables}
 
-The module \texttt{intercom\_inter.py}. Store
-it at the
+The modules \texttt{intercom\_minimal\_zlib.py} and
+\texttt{intercom\_inter\_zlib.py}. Store them at the
 \href{https://github.com/Tecnologias-multimedia/intercom}{root
   directory} of your \texttt{intercom}'s repo.
 
 \section{Resources}
 
-\bibliography{maths,data-compression,DWT}
+\bibliography{text-compression}

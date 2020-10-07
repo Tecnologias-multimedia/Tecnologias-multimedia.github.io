@@ -1,7 +1,7 @@
 <!DOCTYPE html> 
 <html> 
-<head> <title>TecnologÃŋas Multimedia - Study Guide - Milestone 6: Inter-channel
-decorrelation in stereo audio signals (mid/side stereo coding)</title> 
+<head> <title>TecnologÃŋas Multimedia - Study Guide - Milestone 7: Compressing the audio
+data with zlib</title> 
 <meta charset="UTF-8" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <link rel="stylesheet" type="text/css" href="index.css" /> 
@@ -23,8 +23,9 @@ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLor
 
 <h2 class="titleHead"><a 
 href="https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN" >Tecnologías Multimedia</a> - Study Guide -
-Milestone 6: Inter-channel decorrelation in
-stereo audio signals (mid/side stereo coding)</h2>
+Milestone 7: Compressing the audio data with
+<a 
+href="https://zlib.net/" >zlib</a></h2>
  <div class="author" ><a 
 href="https://cms.ual.es/UAL/personas/persona.htm?id=515256515553484875" ><span 
 class="ecrm-1200">Vicente Gonz</span><span 
@@ -39,483 +40,118 @@ class="ecrm-1200">- </span><a
 href="https://www.ual.es" ><span 
 class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
-class="ecrm-1200">October 6, 2020</span></div>
+class="ecrm-1200">October 5, 2020</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
-<!--l. 7--><p class="noindent" ><a 
-href="https://en.wikipedia.org/wiki/Correlation_and_dependence" >Correlation</a> is the term used in statistics for refering to the interdependency between
-<a 
-href="https://en.wikipedia.org/wiki/Random_variable" >random variables</a>. It can be measured by the <a 
-href="https://www.mathsisfun.com/data/correlation.html" >correlation coeﬃcient</a> <span class="cite">[<a 
-href="#Xthinkstats">1</a>]</span>.
-</p><!--l. 14--><p class="indent" >   In the case of InterCom, the random variables are the two channels (left
-<!--l. 15--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->L</mi></math> and
-right <!--l. 15--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->R</mi></math>)
-of the <a 
-href="https://en.wikipedia.org/wiki/Stereophonic_sound" >stereo <a 
-href="https://en.wikipedia.org/wiki/Pulse-code_modulation" >PCM</a> signal</a> <span class="cite">[<span 
-class="ecbx-1000">?</span>]</span>. In most cases, both channels are
-going to be <a 
-href="https://en.wikipedia.org/wiki/Binaural_recording" >highly correlated</a> (especially if the microphone is mono),
-which means that we can represent one of them (for example, the
-<!--l. 21--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->R</mi></math> channel) with respect
-to the other (the <!--l. 22--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->L</mi></math>
-channel). From a mathematical point of view, this process can be seen as a
-<a 
-href="https://en.wikipedia.org/wiki/Decorrelation" >decorrelation</a> process. From a physical perspective, decorrelating implies energy
-accumulation <span class="cite">[<a 
-href="#Xsayood2017introduction">2</a>]</span>.
-</p><!--l. 28--><p class="indent" >   To perform this inter-channel decorrelation, we use an <a 
-href="https://en.wikipedia.org/wiki/Orthogonal_transformation" >orthogonal</a> transform </p><table class="equation"><tr><td>
-<a 
- id="x1-1001r1"></a>
-                                                                  
-
-                                                                  
-<!--l. 30--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="block" class="equation">
-<mi 
->y</mi> <mo 
-class="MathClass-rel">=</mo> <mi 
->K</mi><mi 
->x</mi> <mo 
-class="MathClass-rel">=</mo> <mfrac><mrow 
-><mn>1</mn></mrow> 
-<mrow 
-><mn>2</mn></mrow></mfrac> <mfenced separators="" 
-open="["  close="]" ><mrow><mtable  align="axis" style=""  
-equalrows="false" columnlines="none none none none none none none none none" equalcolumns="false" class="array"><mtr><mtd 
-class="array"  columnalign="center"> <mn>1</mn> </mtd><mtd 
-class="array"  columnalign="center">   <mn>1</mn>   </mtd></mtr> <mtr><mtd 
-class="array"  columnalign="center"> <mn>1</mn> </mtd> <mtd 
-class="array"  columnalign="center"> <mo 
-class="MathClass-bin">−</mo><mn>1</mn></mtd></mtr> <!--*\c@MaxMatrixCols c--></mtable>                                                                                         </mrow></mfenced><mi 
->x</mi><mo 
-class="MathClass-punc">,</mo>
-</math></td><td class="eq-no">(1)</td></tr></table>
-<!--l. 33--><p class="indent" >   where <!--l. 33--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->x</mi></math>
-represents a frame (a tuple or L and R samples,
-<!--l. 33--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->x</mi><mrow ><mo 
-class="MathClass-open">[</mo><mrow><mn>0</mn></mrow><mo 
-class="MathClass-close">]</mo></mrow></math> and
-<!--l. 34--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->x</mi><mrow ><mo 
-class="MathClass-open">[</mo><mrow><mn>1</mn></mrow><mo 
-class="MathClass-close">]</mo></mrow></math>),
-<!--l. 34--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->K</mi></math> is the
-<!--l. 34--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mn>2</mn> <mo 
-class="MathClass-bin">×</mo> <mn>2</mn></math>
-KLT <a 
-href="http://fourier.eng.hmc.edu/e161/lectures/klt/node3.html" >(Karhunen-Loève Transform)</a> matrix multiplied by
-<!--l. 36--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mn>1</mn><mo 
-class="MathClass-bin">∕</mo><msqrt><mrow><mn>2</mn></mrow></msqrt></math>
-(which is closely related with the <a 
-href="http://wavelets.pybytes.com/wavelet/haar/" >Haar transform</a> <span class="cite">[<a 
-href="#Xvetterli1995wavelets">4</a>]</span>), and
-<!--l. 38--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->y</mi></math>
-represents the transform coeﬃcients (in our case, a couple of coeﬃcients
-<!--l. 39--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->y</mi><mrow ><mo 
-class="MathClass-open">[</mo><mrow><mn>0</mn></mrow><mo 
-class="MathClass-close">]</mo></mrow></math> with the
-<a 
-href="https://en.wikipedia.org/wiki/Arithmetic_mean" >mean</a> and <!--l. 41--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->y</mi><mrow ><mo 
-class="MathClass-open">[</mo><mrow><mn>1</mn></mrow><mo 
-class="MathClass-close">]</mo></mrow></math>
-with the diﬀerence). Notice that this transform is not <a 
-href="https://en.wikipedia.org/wiki/Orthonormal_basis" >orthonormal</a> (energy preserving
-in the transform domain) because </p><table class="equation"><tr><td> <a 
- id="x1-1002r2"></a>
-<!--l. 44--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="block" class="equation">
-                       <mo  
->∑</mo>
-  <mi 
->y</mi><msup><mrow 
-><mrow ><mo 
-class="MathClass-open">[</mo><mrow><mi 
->i</mi></mrow><mo 
-class="MathClass-close">]</mo></mrow></mrow><mrow 
-><mn>2</mn></mrow></msup 
-> <mo 
-class="MathClass-rel">=</mo>  <mfrac><mrow 
-><mn>1</mn></mrow> 
-<mrow 
-><msqrt><mrow><mn>2</mn></mrow></msqrt></mrow></mfrac><mo  
->∑</mo>
-   <mi 
->x</mi><msup><mrow 
-><mrow ><mo 
-class="MathClass-open">[</mo><mrow><mi 
->i</mi></mrow><mo 
-class="MathClass-close">]</mo></mrow></mrow><mrow 
-><mn>2</mn></mrow></msup 
-><mo 
-class="MathClass-punc">,</mo>
-</math></td><td class="eq-no">(2)</td></tr></table>
-<!--l. 47--><p class="indent" >   although both subbands <!--l. 47--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->y</mi><mrow ><mo 
-class="MathClass-open">[</mo><mrow><mn>0</mn></mrow><mo 
-class="MathClass-close">]</mo></mrow></math>
-and <!--l. 47--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->y</mi><mrow ><mo 
-class="MathClass-open">[</mo><mrow><mn>1</mn></mrow><mo 
-class="MathClass-close">]</mo></mrow></math> have the same gain
-(<!--l. 48--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mn>1</mn><mo 
-class="MathClass-bin">∕</mo><msqrt><mrow><mn>2</mn></mrow></msqrt></math>). This will simplify
-the <a 
-href="https://en.wikipedia.org/wiki/Quantization_(signal_processing)" >quantization</a> of <!--l. 50--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->y</mi></math>.
-The described transform is similar to the so called <a 
-href="https://en.wikipedia.org/wiki/Joint_encoding#M/S_stereo_coding" >M/S stereo coding</a>, but in our
-case, the división by 2 is carried on on the forward transform, instead of the
-backward (inverse) transform.
-</p><!--l. 55--><p class="indent" >   This transform can be implemented <a 
-href="https://en.wikipedia.org/wiki/In-place_algorithm" ><span 
-class="ecti-1000">in-place</span></a> using the following algorithm:
-<a 
- id="x1-1003r1"></a>
-                                                                  
-
-                                                                  
-<!--l. 74--><p class="noindent" ></p><div class="minipage"><span 
-class="ecbx-1000">Algorithm</span>
-<span 
-class="ecbx-1000">1.1:</span> <span 
-class="eccc1000-"><span 
-class="small-caps">I</span><span 
-class="small-caps">n</span><span 
-class="small-caps">t</span><span 
-class="small-caps">e</span><span 
-class="small-caps">r</span><span 
-class="small-caps">-</span><span 
-class="small-caps">c</span><span 
-class="small-caps">h</span><span 
-class="small-caps">a</span><span 
-class="small-caps">n</span><span 
-class="small-caps">n</span><span 
-class="small-caps">e</span><span 
-class="small-caps">l</span><span 
-class="small-caps">_</span><span 
-class="small-caps">d</span><span 
-class="small-caps">e</span><span 
-class="small-caps">c</span><span 
-class="small-caps">o</span><span 
-class="small-caps">r</span><span 
-class="small-caps">r</span><span 
-class="small-caps">e</span><span 
-class="small-caps">l</span><span 
-class="small-caps">a</span><span 
-class="small-caps">t</span><span 
-class="small-caps">i</span><span 
-class="small-caps">o</span><span 
-class="small-caps">n</span></span>(<!--l. 59--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
-> </mi></math>)<br 
-class="newline" /> <!--l. 59--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" > <mtable  align="axis" style=""  
-equalrows="false" columnlines="none" equalcolumns="false" class="array"> <mtr><mtd 
-class="array"  columnalign="left"><mspace width="4.3045pt"/> <mstyle 
-class="mbox"><mtext  >procedure </mtext></mstyle><mstyle 
-class="mbox"><mtext  ></mtext><mtext class="textsc" mathvariant="normal" >Analyze</mtext></mstyle><mrow ><mo 
-class="MathClass-open">(</mo><mrow><mstyle mathvariant="monospace"><mi 
->f</mi><mi 
->r</mi><mi 
->a</mi><mi 
->m</mi><mi 
->e</mi></mstyle></mrow><mo 
-class="MathClass-close">)</mo></mrow>                                                           </mtd>
-</mtr>  <mtr><mtd 
-class="array"  columnalign="left"><mspace width="4.3045pt"/>  <mtable  align="axis" style=""  
-equalrows="false" equalcolumns="false" class="array"> <mtr><mtd 
-class="array"  columnalign="left"><mspace width="4.3045pt"/>  <mfenced separators="" 
-open="{"  close="" ><mrow> <mtable  align="axis" style=""  
-equalrows="false" columnlines="none" equalcolumns="false" class="array"> <mtr><mtd 
-class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
->f</mi><mi 
->r</mi><mi 
->a</mi><mi 
->m</mi><mi 
->e</mi><mrow ><mo 
-class="MathClass-open">[</mo><mrow><mi 
->0</mi></mrow><mo 
-class="MathClass-close">]</mo></mrow><mo 
-class="MathClass-bin">−</mo> <mo 
-class="MathClass-rel">=</mo> <mi 
->f</mi><mi 
->r</mi><mi 
->a</mi><mi 
->m</mi><mi 
->e</mi><mrow ><mo 
-class="MathClass-open">[</mo><mrow><mi 
->1</mi></mrow><mo 
-class="MathClass-close">]</mo></mrow></mstyle>          </mtd>
-</mtr>  <mtr><mtd 
-class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
->f</mi><mi 
->r</mi><mi 
->a</mi><mi 
->m</mi><mi 
->e</mi><mrow ><mo 
-class="MathClass-open">[</mo><mrow><mi 
->1</mi></mrow><mo 
-class="MathClass-close">]</mo></mrow><mo 
-class="MathClass-bin">+</mo> <mo 
-class="MathClass-rel">=</mo> <mrow ><mo 
-class="MathClass-open">(</mo><mrow><mi 
->f</mi><mi 
->r</mi><mi 
->a</mi><mi 
->m</mi><mi 
->e</mi><mrow ><mo 
-class="MathClass-open">[</mo><mrow><mi 
->0</mi></mrow><mo 
-class="MathClass-close">]</mo></mrow> <mo 
-class="MathClass-rel">&#x003E;</mo><mo 
-class="MathClass-rel">&#x003E;</mo> <mi 
->1</mi></mrow><mo 
-class="MathClass-close">)</mo></mrow></mstyle></mtd>
-</mtr>  <mtr><mtd 
-class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
->f</mi><mi 
->r</mi><mi 
->a</mi><mi 
->m</mi><mi 
->e</mi><mrow ><mo 
-class="MathClass-open">[</mo><mrow><mi 
->0</mi></mrow><mo 
-class="MathClass-close">]</mo></mrow> <mo 
-class="MathClass-rel">&#x003E;</mo><mo 
-class="MathClass-rel">&#x003E;</mo><mo 
-class="MathClass-rel">=</mo> <mi 
->1</mi></mstyle>           </mtd></mtr><!--@{}lr@{}--></mtable>                                </mrow></mfenced></mtd>
- </mtr><!--@{\pcode@tab {1}}l@{}--></mtable>                                                              </mtd>
-</mtr>  <mtr><mtd 
-class="array"  columnalign="left"><mspace width="4.3045pt"/> <mstyle 
-class="mbox"><mtext  >procedure </mtext></mstyle><mstyle 
-class="mbox"><mtext  ></mtext><mtext class="textsc" mathvariant="normal" >Synthesize</mtext></mstyle><mrow ><mo 
-class="MathClass-open">(</mo><mrow><mstyle mathvariant="monospace"><mi 
->f</mi><mi 
->r</mi><mi 
->a</mi><mi 
->m</mi><mi 
->e</mi></mstyle></mrow><mo 
-class="MathClass-close">)</mo></mrow>                                                       </mtd>
-</mtr>  <mtr><mtd 
-class="array"  columnalign="left"><mspace width="4.3045pt"/>  <mtable  align="axis" style=""  
-equalrows="false" equalcolumns="false" class="array"> <mtr><mtd 
-class="array"  columnalign="left"><mspace width="4.3045pt"/>  <mfenced separators="" 
-open="{"  close="" ><mrow> <mtable  align="axis" style=""  
-equalrows="false" columnlines="none" equalcolumns="false" class="array"> <mtr><mtd 
-class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
->f</mi><mi 
->r</mi><mi 
->a</mi><mi 
->m</mi><mi 
->e</mi><mrow ><mo 
-class="MathClass-open">[</mo><mrow><mi 
->0</mi></mrow><mo 
-class="MathClass-close">]</mo></mrow> <mo 
-class="MathClass-rel">&#x003C;</mo><mo 
-class="MathClass-rel">&#x003C;</mo><mo 
-class="MathClass-rel">=</mo> <mi 
->1</mi></mstyle>           </mtd>
-</mtr>  <mtr><mtd 
-class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
->f</mi><mi 
->r</mi><mi 
->a</mi><mi 
->m</mi><mi 
->e</mi><mrow ><mo 
-class="MathClass-open">[</mo><mrow><mi 
->1</mi></mrow><mo 
-class="MathClass-close">]</mo></mrow><mo 
-class="MathClass-bin">−</mo> <mo 
-class="MathClass-rel">=</mo> <mrow ><mo 
-class="MathClass-open">(</mo><mrow><mi 
->f</mi><mi 
->r</mi><mi 
->a</mi><mi 
->m</mi><mi 
->e</mi><mrow ><mo 
-class="MathClass-open">[</mo><mrow><mi 
->0</mi></mrow><mo 
-class="MathClass-close">]</mo></mrow> <mo 
-class="MathClass-rel">&#x003E;</mo><mo 
-class="MathClass-rel">&#x003E;</mo> <mi 
->1</mi></mrow><mo 
-class="MathClass-close">)</mo></mrow></mstyle></mtd>
-</mtr>  <mtr><mtd 
-class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
->f</mi><mi 
->r</mi><mi 
->a</mi><mi 
->m</mi><mi 
->e</mi><mrow ><mo 
-class="MathClass-open">[</mo><mrow><mi 
->0</mi></mrow><mo 
-class="MathClass-close">]</mo></mrow><mo 
-class="MathClass-bin">+</mo> <mo 
-class="MathClass-rel">=</mo> <mi 
->f</mi><mi 
->r</mi><mi 
->a</mi><mi 
->m</mi><mi 
->e</mi><mrow ><mo 
-class="MathClass-open">[</mo><mrow><mi 
->1</mi></mrow><mo 
-class="MathClass-close">]</mo></mrow></mstyle>          </mtd></mtr><!--@{}lr@{}--></mtable>                                                   </mrow></mfenced></mtd>
- </mtr><!--@{\pcode@tab {1}}l@{}--></mtable>                                                                                                  </mtd>
-</mtr>  <mtr><mtd 
-class="array"  columnalign="left"><mspace width="4.3045pt"/>                                                                                                   </mtd></mtr><!--@{\pcode@tab {1}}lr@{}--></mtable></math></div>
-</p><!--l. 76--><p class="indent" >   where <!--l. 76--><math 
+<!--l. 7--><p class="noindent" >It’s time to reduce bandwidth comsumption. The
+<!--l. 7--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mi 
->a</mi><mo 
-class="MathClass-bin">−</mo> <mo 
-class="MathClass-rel">=</mo> <mi 
->b</mi></mstyle></math> is a shorter
-representation of the operation <!--l. 77--><math 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle></math> and
+the <!--l. 8--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mi 
->a</mi> <mo 
-class="MathClass-rel">=</mo> <mi 
->a</mi><mo 
-class="MathClass-bin">−</mo><mi 
->b</mi></mstyle></math>,
-and <!--l. 77--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mstyle mathvariant="monospace"><mo 
-class="MathClass-rel">&#x003E;</mo><mo 
-class="MathClass-rel">&#x003E;</mo></mstyle></math>
-and <!--l. 77--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mstyle mathvariant="monospace"><mo 
-class="MathClass-rel">&#x003C;</mo><mo 
-class="MathClass-rel">&#x003C;</mo></mstyle></math>
-represent the bit-wise left and right shift operations, respectively. Notice that this
-type of in-place computations are commonly used in the implementation of DWTs
-(<a 
-href="https://en.wikipedia.org/wiki/Discrete_wavelet_transform" >Dicrete Wavelet Transform</a>s) using <a 
-href="https://cm-bell-labs.github.io/who/wim/papers/athome/athome.pdf" >the Lifting Scheme</a> <span class="cite">[<a 
-href="#X2006.sweldens">3</a>]</span>.
-</p><!--l. 86--><p class="noindent" >
+>u</mi><mi 
+>n</mi><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle></math>
+methods can compress and decompress, respectively, the chunks that are handled. To
+compress and decompress, we will use a free codec named <a 
+href="https://en.wikipedia.org/wiki/DEFLATE" >DEFLATE</a>, which is based
+on LZSS and Huﬀman Coding <span class="cite">[<a 
+href="#Xnelson96datacompression">1</a>]</span>.
+</p><!--l. 14--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
  id="x1-20002"></a>What you have to do?</h3>
-<!--l. 88--><p class="noindent" >
+<!--l. 16--><p class="noindent" >
      </p><ol  class="enumerate1" >
      <li 
-  class="enumerate" id="x1-2002x1">Inherit            the            class            <span 
-class="ectt-1000">Intercom_minimal       </span>and
-     override the method <span 
-class="ectt-1000">record_io_and_play()</span>. Do this in a module named
-     <span 
-class="ectt-1000">intercom_intra-channel_decorrelation.py</span>.
+  class="enumerate" id="x1-2002x1">Create a class named <span 
+class="ectt-1000">Intercom_minimal_zlib</span>, that inherits from <span 
+class="ectt-1000">Intercom_minimal</span>,
+     in which the methods <!--l. 19--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle></math>
+     and <!--l. 19--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>u</mi><mi 
+>n</mi><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow></mrow><mo 
+class="MathClass-close">)</mo></mrow></mstyle></math>
+     are overriden to compress and decompress the chunks. Use the Python’s
+     standard library <a 
+href="https://docs.python.org/3/library/zlib.html" ><span 
+class="ectt-1000">zlib</span></a>. Store this class in a module named <span 
+class="ectt-1000">intercom_minimal_zlib.py</span>.
      </li>
      <li 
-  class="enumerate" id="x1-2004x2">Implement in this method the procedures Analyze() and Synthesize().
-     <a 
-href="https://www.oreilly.com/library/view/python-for-data/9781449323592/ch04.html" >Vectorized operations</a> should be used.</li></ol>
-<!--l. 97--><p class="noindent" >
-</p>
-   <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
- id="x1-30003"></a>Timming</h3>
-<!--l. 99--><p class="noindent" >You should reach this milestone at most in two weeks.
+  class="enumerate" id="x1-2004x2">Create   a   class   named   <span 
+class="ectt-1000">Intercom_inter_zlib</span>,   that   inherits   from
                                                                   
 
                                                                   
-</p><!--l. 101--><p class="noindent" >
+     <span 
+class="ectt-1000">Intercom_inter </span>and <span 
+class="ectt-1000">Intercom_minimal_zlib</span>, to allow the compression
+     of the inter-decorrelated subbands.
+     </li>
+     <li 
+  class="enumerate" id="x1-2006x3">Notice that,  in general,  the compression ratio provided by DEFLATE
+     is   higher   when   the   samples   of   the   channels   (in   the   case   of
+     <span 
+class="ectt-1000">Intercom_minimal</span>) or the coeﬃcients of the subbands (in the case of
+     <span 
+class="ectt-1000">Intercom_inter</span>) are not interleaved (all the samples/coeﬃcients of the
+     ﬁrst channel/subband go ﬁrst, and next, all the samples/coeﬃcients of the
+     second channel/subband are placed).</li></ol>
+<!--l. 36--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
+ id="x1-30003"></a>Timming</h3>
+<!--l. 38--><p class="noindent" >You should ﬁnish this milestone at most in two weeks.
+</p><!--l. 40--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-40004"></a>Deliverables</h3>
-<!--l. 103--><p class="noindent" >The module <span 
-class="ectt-1000">intercom_inter.py</span>. Store it at the <a 
+<!--l. 42--><p class="noindent" >The modules <span 
+class="ectt-1000">intercom_minimal_zlib.py </span>and <span 
+class="ectt-1000">intercom_inter_zlib.py</span>. Store
+them at the <a 
 href="https://github.com/Tecnologias-multimedia/intercom" >root directory</a> of your <span 
-class="ectt-1000">intercom</span>’s
-repo.
-</p><!--l. 108--><p class="noindent" >
+class="ectt-1000">intercom</span>’s repo.
+</p><!--l. 47--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-50005"></a>Resources</h3>
    <div class="thebibliography">
    <p class="bibitem" ><span class="biblabel">
  [1]<span class="bibsp">   </span></span><a 
- id="Xthinkstats"></a>Allen B.   Downey.       <a 
-href="https://greenteapress.com/thinkstats/thinkstats.pdf" ><span 
-class="ecti-1000">Think   Stats   Probability   and   Statistics   for</span>
-   <span 
-class="ecti-1000">Programmers</span></a>. O’Reilly, 2011.
-   </p>
-   <p class="bibitem" ><span class="biblabel">
- [2]<span class="bibsp">   </span></span><a 
- id="Xsayood2017introduction"></a>Khalid Sayood.  <a 
-href="http://rahilshaikh.weebly.com/uploads/1/1/6/3/11635894/data_compression.pdf" ><span 
-class="ecti-1000">Introduction to data compression</span></a>.  Morgan Kaufmann,
-   2017.
-   </p>
-   <p class="bibitem" ><span class="biblabel">
- [3]<span class="bibsp">   </span></span><a 
- id="X2006.sweldens"></a>Wim Sweldens.  <a 
-href="http://cm.bell-labs.com/who/wim/papers/lift1.pdf" >The Liﬁng Scheme: A Custom-Desing Constuction of
-   Biorthogonal  Wavelets</a>.   <span 
-class="ecti-1000">Applied and Computational Harmonic Analysis</span>,
-   3(2):186–200, 1996.
-   </p>
-   <p class="bibitem" ><span class="biblabel">
- [4]<span class="bibsp">   </span></span><a 
- id="Xvetterli1995wavelets"></a>Martin Vetterli and Jelena Kovacevic.  <a 
-href="http://waveletsandsubbandcoding.org/Repository/VetterliKovacevic95_Manuscript.pdf" ><span 
-class="ecti-1000">Wavelets and Subband Coding</span></a>.
-   Prentice-hall, 1995.
+ id="Xnelson96datacompression"></a>Nelson M. and Gailly J.  <a 
+href="http://index-of.co.uk/Information-Theory/The%20Data%20Compression%20Book%202nd%20Ed%20-%20Mark%20Nelson.pdf" ><span 
+class="ecti-1000">The Data Compression Book</span></a>.  M&#x0026;T Books,
+   1996.
 </p>
    </div>
 <a 
