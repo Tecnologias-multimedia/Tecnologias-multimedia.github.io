@@ -58,102 +58,60 @@ Each option has pros and cons, from which we can highlight that:
   \href{https://en.wikipedia.org/wiki/Process_(computing)}{processes}. Fortunately,
   in Linux we can control the latency (and the
   \href{https://en.wikipedia.org/wiki/Bit_rate}{bit-rate}) of the
-  outgoing (packets) traffic using
+  outgoing (packets) traffic using the command
   \href{https://man7.org/linux/man-pages/man8/tc.8.html}{$\mathtt{tc}$}.
 \end{enumerate}
 
-
-
-The InterCom project \cite{intercom} are a collection of
-\href{https://docs.python.org/3/tutorial/modules.html#}{Python
-  modules} written in Python \cite{Python}. Therefore, you will need
-an interpreter and know how to develop/run Python programs
-(\href{https://docs.python.org/3/tutorial/modules.html#modules}{modules}
-and
-\href{https://docs.python.org/3/tutorial/modules.html#packages}{packages}).
-
-Most of the current Unix-based operating systems (Linux, FreeBSD and
-OSX) use Python for running some of their ``daily tasks'', which means
-that a Python interpreter is already available. However, usually it is
-better to use our own interpreter because:
-
-\begin{enumerate}
-
-\item We can chose the version of Python and the packages.
-
-\item We can optimize the compilation of the interpreter depending on
-  our needs (for example, including
-  \href{https://wiki.python.org/moin/TkInter}{Tk support} or not).
-
-\item By default, all the Python packages will be installed in a
-  different repository of the system packages, which eases the
-  system/user Python-isolation and the removal of the interpreter.
-
-\end{enumerate}
-
-In Windows you need to install Python, yes or yes, from the official
-\href{https://www.python.org/downloads/}{website}. However, notice
-that this ``guide'' only contemplates the installation of Python in
-Unix-based OS machines.
-
 \section{What you have to do?}
 
+\subsection{Characterize the latency in different scenarios}
+
+\subsubsection{In your host}
+
+\subsubsection{In your home network}
+
+\subsubsection{In the Internet}
+
+Let's suppose that at least one of the InterCom users is not able to
+redirect ports in his/her router (which implements NAT). In this case:
+
+\begin{enumerate}
+\item Ask to your interlocutor the public IP address of the router.
+\item Ping the router:
+  \begin{lstlisting}{language=bash}
+    ping the_IP_address_of_the_router -c 100 > /tmp/ping.dat
+  \end{lstlisting}
+\item Compute the expected latency to the host of your interlocutor:
+  \begin{lstlisting}{language=bash}
+    grep from < /tmp/ping.dat | cut -f 4 -d "=" | cut -f 1 -d " " | awk '{print $1/2}' > /tmp/internet.dat
+  \end{lstlisting}
+
+\subsection{Measure the QoE of InterCom}
+
+Let's quantify the QoE using the following classification:
+\begin{itemize}
+\item [Perfect]: no loss or delay can be distinguish.
+\item [Good]: if you detect some minimal distortion in the rendering
+  of the sound.
+\item [Acceptable]: when the effects of the latency are apreciable, but
+  you can communicate with your interlocutor.
+\item [Bad]: you are able to recognize only small parts of the
+  received audio.
+\item [No way]: when most of the time only silence is heard.
+\end{itemize}
+
+\subsubsection{In your host}
+
+You don't need to control the network traffic in your host because it
+is already shapped when InterCom uses the loopback network device.
+
 \begin{enumerate}
   
-\item Installation of Python.
-  
-  \begin{enumerate}
-    
-  \item Go to
-    \href{https://github.com/vicente-gonzalez-ruiz/YAPT/blob/master/01-hello_world/02-installation.ipynb}{YAPT/01-hello\_world/02-installation.ipynb}
-    \cite{YAPT} and follow the instructions to install CPython 3.8.5,
-    and create a new virtual environment called \texttt{tm}. Basically:
-
-    \begin{lstlisting}[language=Bash]
-      sudo apt-get install -y build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl git
-      pyenv install -v 3.8.5
-      pyenv virtualenv 3.8.5 tm
-    \end{lstlisting}
-
-  \item Remember that you will need to active it when you want to
-    work in this project:
-
-    \begin{lstlisting}[language=Bash]
-      pyenv activate tm
-    \end{lstlisting}
-
-    It is a good idea to append this to the \verb|~/.bashrc| file.
-    
-  \item Install an
-    \href{https://en.wikipedia.org/wiki/Integrated_development_environment}{IDE}
-    for programming with Python. I recommend
-    \href{https://thonny.org/}{Thonny} if you are not used to any
-    other.
-    
-    \begin{lstlisting}[language=Bash]
-      pip install thonny
-    \end{lstlisting}
-
-  \end{enumerate}
-  
-\item Python programming.
-  
-  \begin{enumerate}
-    
-  \item You don't need to master Python to follow this course, but it
-    is convenient for you to follow some Python programming tutorial,
-    such as \href{https://docs.python.org/3/tutorial/}{The Python
-    Tutorial} \cite{python-tutorial} if you realize that the language
-    is a setback for you. If you need to start with Python from
-    scratch, an introduction to Python such as
-    this \href{https://github.com/vicente-gonzalez-ruiz/YAPT/tree/master/workshops/programacion_python_ESO}{workshop
-    of YAPT} \cite{YAPT} could also be helpful. See
-    also \href{http://zetcode.com/lang/python/}{ZetCode's Python
-    Tutorial}.
-    
-  \end{enumerate}
+\item 
 
 \end{enumerate}
+
+\subsubsection{In your home network}
 
 \section{Timming}
 
