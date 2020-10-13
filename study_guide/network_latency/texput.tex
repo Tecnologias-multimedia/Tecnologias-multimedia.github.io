@@ -82,7 +82,12 @@ Compute the expected (considering that the
   \href{https://en.wikipedia.org/wiki/Round-trip_delay}{RTT} should
   double the) latency to the host of your interlocutor:\\
 \texttt{~~~~grep from < /tmp/ping.dat | cut -f 4 -d "=" | cut -f 1 -d " " | awk
-\textquotesingle\{print \$1/2\}\textquotesingle > /tmp/localhost\_latencies.dat}
+  \textquotesingle\{print \$1/2\}\textquotesingle > /tmp/localhost\_latencies.dat}
+
+\lstset{literate={\$}{{\textcolor{blue}{\$}}}1}
+\begin{lstlisting}[language=tex, mathescape]
+  grep from < /tmp/ping.dat | cut -f 4 -d "=" | cut -f 1 -d " " | awk '{print $\mbox{\textdollar}$1/2}' > /tmp/localhost\_latencies.dat
+\end{lstlisting}
 
 \item Find the histogram of the expected latencies:
   \begin{lstlisting}{language=python}
