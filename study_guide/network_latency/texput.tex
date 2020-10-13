@@ -83,7 +83,23 @@ Compute the expected (considering that the
   \begin{lstlisting}{language=bash}
     grep from < /tmp/ping.dat | cut -f 4 -d "=" | cut -f 1 -d " " | awk '{print $1/2}' > /tmp/localhost_latencies.dat
   \end{lstlisting}
-\item Characterize the expected latency:
+
+\item Find the histogram of the expected latencies:
+  \begin{lstlisting}{language=python}
+    cat << EOF | python -
+    import numpy as np
+    latencies = np.loadtxt("/tmp/localhost_latencies.dat")
+    histogram = np.histogram(latencies)
+    np.savetxt("/tmp/localhost_histogram.dat", histogram[0])
+    EOF
+  \end{lstlisting}
+
+\item Plot the histogram:
+  \begin{lstlisting}{language=bash}
+    gnuplot plot "/tmp/localhost_histogram.dat" with histogram
+  \end{lstlisting}
+  
+\item Characterize statistically the latency:
 \end{enumerate}
 
 \subsubsection{In the Internet}
@@ -102,7 +118,6 @@ networks. For doing that:
   network and send this data to you. Save this info in
   \texttt{/tmp/<router\_private\_IP\_address>}.
 
-\item Characterize the expected latency:
 \end{enumerate}
 
 \subsection{Quantification of the QoE}
