@@ -89,6 +89,12 @@ Compute the expected (considering that the
     cat << EOF | python -
     import numpy as np
     latencies = np.loadtxt("/tmp/localhost_latencies.dat")
+    average_latency = np.average(latencies)
+    print("average latency =", average_latency)
+    max_latency = np.max(latencies)
+    min_latency = np.min(latencies)
+    maximum_absolute_deviation = max(max_latency - average_latency, average_latency - min_latency)
+    print("maximum absolute deviation =", maximum_absolute_deviation)
     histogram = np.histogram(latencies)
     np.savetxt("/tmp/localhost_histogram.dat", histogram[0])
     EOF
@@ -99,7 +105,8 @@ Compute the expected (considering that the
     gnuplot plot "/tmp/localhost_histogram.dat" with histogram
   \end{lstlisting}
   
-\item Characterize statistically the latency:
+\item Characterize statistically the latency: which statistical
+  distribution is more close to your experimental data?
 \end{enumerate}
 
 \subsubsection{In the Internet}
@@ -109,18 +116,28 @@ simulating a real connection between hosts in different home
 networks. For doing that:
 
 \begin{enumerate}
+  
 \item Repeat the previous experiment (the characterization of the
   latencies returned by the \texttt{ping} tool) but using your
   interlocutor's \texttt{<router\_public\_IP\_address>} instead of
-  \texttt{localhost}. Call the generated file
-  \texttt{/tmp/<router\_public\_IP\_address>}.
-\item Request to your interlocutor to ping its router from the private
-  network and send this data to you. Save this info in
-  \texttt{/tmp/<router\_private\_IP\_address>}.
+  \texttt{localhost}. Call the generated file as
+  \texttt{/tmp/<router\_public\_IP\_address>.dat}.
+  
+\item Request to your interlocutor to ping its router from his/her private
+  network, and to send this data to you. Save this info in
+  \texttt{/tmp/<router\_private\_IP\_address>.dat} and characterize it.
+
+\item Supposing that the latencies are symmetric (the direction of the
+  packes does not affect to the latency) and that the overall network
+  latency of the link between you a your interlocutor is the sum of
+  the latency from your host to the router of your interlocutor and
+  the latency from your interlocutor's host to that router, find a
+  characterization for the full link: average latency, maximum average
+  deviation and statistical distribution.
 
 \end{enumerate}
 
-\subsection{Quantification of the QoE}
+\subsection{Quantification of the QoE without packed loss}
 
 Let's measure the QoE using the following classification:
 \begin{itemize}
@@ -136,25 +153,37 @@ Let's measure the QoE using the following classification:
 
 \subsubsection{In your host}
 
-You don't need to control the network traffic in your host because it
-is already shapped when InterCom uses the loopback network
-device. Therefore, simply quantify your QoE in this scenario that
-should be always Perfect.
+You don't need to control the network traffic in this scenario because
+it is already shapped when InterCom uses the loopback network
+device. Therefore, simply quantify your QoE when you run InterCom in
+your host.
 
 \subsubsection{In the Internet}
 
 \begin{enumerate}
   
-\item 
+\item Using the characterization of the Internet link previously
+  obtained, use the command \texttt{tc} to simulate this link locally:
+
+  \begin{lstlisting}{language=bash}
+    sudo tc qdisc add dev lo root netem delay <average_dalay_in_miliseconds> <maximum_average_deviation_in_miliseconds> 25% distribution <uniform|normal|pareto|...>
+  \end{lstlisting}  
 
 \end{enumerate}
 
-\subsubsection{In your home network}
+\subsection{QoE considering the packet loss}
+
+For our application, InterCom, a chunk is lost when it arrives too
+late or it never arrives. Therefore, the results of a packet loss or a
+packet delay are almost indistinguishable, except by the average
+latency experimented by the user (the higher the network latency, the
+higher the perceived latency).
+
+
 
 \section{Timming}
 
-There is not time limit for finishing this milestone. Develop it at
-your own pace.
+Please, finish this milestone in one week.
 
 \section{Deliverables}
 
