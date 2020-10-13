@@ -68,26 +68,44 @@ Each option has pros and cons, from which we can highlight that:
 
 \subsubsection{In your host}
 
-\subsubsection{In the Internet}
-
-Let's suppose that at least one of the InterCom users is not able to
-redirect ports in his/her router (which implements NAT). In this case:
+In most cases we will test InterCom in your host. Therefore, it can be
+useful to have an idea of how the latencies are distributed, at least
+from a statistical point of view.
 
 \begin{enumerate}
-\item Ask to your interlocutor the public IP address of the router.
-\item Ping the router:
-  \begin{lstlisting}{language=bash}
-    ping the_IP_address_of_the_router -c 100 > /tmp/ping.dat
+\item Ping \texttt{localhost}:
+   \begin{lstlisting}{language=bash}
+    ping localhost -c 100 > /tmp/ping.dat
   \end{lstlisting}
-\item Compute the expected (considering that the
+Compute the expected (considering that the
   \href{https://en.wikipedia.org/wiki/Round-trip_delay}{RTT} should
   double the) latency to the host of your interlocutor:
   \begin{lstlisting}{language=bash}
-    grep from < /tmp/ping.dat | cut -f 4 -d "=" | cut -f 1 -d " " | awk '{print $1/2}' > /tmp/internet.dat
+    grep from < /tmp/ping.dat | cut -f 4 -d "=" | cut -f 1 -d " " | awk '{print $1/2}' > /tmp/localhost_latencies.dat
   \end{lstlisting}
 \item Characterize the expected latency:
+\end{enumerate}
 
-\subsection{Quantify QoE}
+\subsubsection{In the Internet}
+
+This scenario can be useful to test InterCom in your host but
+simulating a real connection between hosts in different home
+networks. For doing that:
+
+\begin{enumerate}
+\item Repeat the previous experiment (the characterization of the
+  latencies returned by the \texttt{ping} tool) but using your
+  interlocutor's \texttt{<router\_public\_IP\_address>} instead of
+  \texttt{localhost}. Call the generated file
+  \texttt{/tmp/<router\_public\_IP\_address>}.
+\item Request to your interlocutor to ping its router from the private
+  network and send this data to you. Save this info in
+  \texttt{/tmp/<router\_private\_IP\_address>}.
+
+\item Characterize the expected latency:
+\end{enumerate}
+
+\subsection{Quantification of the QoE}
 
 Let's measure the QoE using the following classification:
 \begin{itemize}
@@ -104,7 +122,9 @@ Let's measure the QoE using the following classification:
 \subsubsection{In your host}
 
 You don't need to control the network traffic in your host because it
-is already shapped when InterCom uses the loopback network device.
+is already shapped when InterCom uses the loopback network
+device. Therefore, simply quantify your QoE in this scenario that
+should be always Perfect.
 
 \subsubsection{In the Internet}
 
