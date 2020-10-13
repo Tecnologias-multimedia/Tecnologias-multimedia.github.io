@@ -81,14 +81,17 @@ redirect ports in his/her router (which implements NAT). In this case:
   \begin{lstlisting}{language=bash}
     ping the_IP_address_of_the_router -c 100 > /tmp/ping.dat
   \end{lstlisting}
-\item Compute the expected latency to the host of your interlocutor:
+\item Compute the expected (considering that the
+  \href{https://en.wikipedia.org/wiki/Round-trip_delay}{RTT} should
+  double the) latency to the host of your interlocutor:
   \begin{lstlisting}{language=bash}
     grep from < /tmp/ping.dat | cut -f 4 -d "=" | cut -f 1 -d " " | awk '{print $1/2}' > /tmp/internet.dat
   \end{lstlisting}
+\item Characterize the expected latency:
 
-\subsection{Measure the QoE of InterCom}
+\subsection{Quantify QoE}
 
-Let's quantify the QoE using the following classification:
+Let's measure the QoE using the following classification:
 \begin{itemize}
 \item [Perfect]: no loss or delay can be distinguish.
 \item [Good]: if you detect some minimal distortion in the rendering
