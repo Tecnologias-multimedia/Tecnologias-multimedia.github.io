@@ -201,7 +201,7 @@ your host.
 \item (Optional) You can see the current rules with:
 
   \begin{lstlisting}{language=bash}
-    sudo tc show
+    tc qdisc show
   \end{lstlisting}
 
 \item (Optional) It's possible to change a working rule with:
@@ -212,13 +212,20 @@ your host.
   
 \end{enumerate}
 
-\subsection{QoE considering the packet loss}
+\subsection{(Optional) QoE considering the packet loss}
 
 For our application, InterCom, a chunk is lost when it arrives too
 late or it never arrives. Therefore, the results of a packet loss or a
 packet delay are almost indistinguishable, except by the average
 latency experimented by the user (the higher the network latency, the
 higher the perceived latency).
+
+For example, the packet loss ratio of $10\%$ can be controlled with
+\texttt{tc} by running:
+
+  \begin{lstlisting}{language=bash}
+    sudo tc qdisc add dev lo root netem loss 10%
+  \end{lstlisting}
 
 \section{Timming}
 
