@@ -1,3 +1,4 @@
+\input{../definitions}
 \title{\TM - Study Guide - Milestone 5: Impact of the Communication Latency}
 
 \maketitle
@@ -79,10 +80,9 @@ from a statistical point of view.
   \end{lstlisting}
 Compute the expected (considering that the
   \href{https://en.wikipedia.org/wiki/Round-trip_delay}{RTT} should
-  double the) latency to the host of your interlocutor:
-  \begin{lstlisting}{language=bash}
-    grep from < /tmp/ping.dat | cut -f 4 -d "=" | cut -f 1 -d " " | awk '{print $1/2}' > /tmp/localhost_latencies.dat
-  \end{lstlisting}
+  double the) latency to the host of your interlocutor:\\
+\texttt{~~~~grep from < /tmp/ping.dat | cut -f 4 -d "=" | cut -f 1 -d " " | awk
+\textquotesingle\{print \$1/2\}\textquotesingle > /tmp/localhost\_latencies.dat}
 
 \item Find the histogram of the expected latencies:
   \begin{lstlisting}{language=python}
@@ -95,7 +95,7 @@ Compute the expected (considering that the
     max_latency = np.max(latencies)
     min_latency = np.min(latencies)
     maximum_absolute_deviation = max(max_latency - average_latency, average_latency - min_latency)
-    print("maximum absolute deviation =", maximum_absolute_deviation)
+    print("maximum absolute deviation (jitter)=", maximum_absolute_deviation)
     print("Pearson correlation coefficient =", stats.pearsonr(latencies, np.roll(latencies, 1)[0])
     histogram = np.histogram(latencies)
     np.savetxt("/tmp/localhost_histogram.dat", histogram[0])
@@ -134,9 +134,13 @@ networks. For doing that:
   latency of the link between you a your interlocutor is the sum of
   the latency from your host to the router of your interlocutor and
   the latency from your interlocutor's host to that router, find a
-  characterization for the full link: average latency, maximum average
-  deviation, Pearson correlation coefficient, and statistical
-  distribution.
+  characterization for the full link:
+  \href{https://en.wikipedia.org/wiki/Average}{average} (arithmetic
+  mean) latency, \href{https://en.wikipedia.org/wiki/Jitter}{jitter},
+  \href{https://en.wikipedia.org/wiki/Pearson_correlation_coefficient}{Pearson
+    correlation coefficient}, and
+  \href{https://en.wikipedia.org/wiki/List_of_probability_distributions}{probability
+    distribution}.
 
 \end{enumerate}
 
@@ -144,14 +148,14 @@ networks. For doing that:
 
 Let's measure the QoE using the following classification:
 \begin{itemize}
-\item [Perfect]: no loss or delay can be distinguish.
-\item [Good]: if you detect some minimal distortion in the rendering
+\item Perfect: no loss or delay can be distinguish.
+\item Good: if you detect some minimal distortion in the rendering
   of the sound.
-\item [Acceptable]: when the effects of the latency are apreciable, but
+\item Acceptable: when the effects of the latency are apreciable, but
   you can communicate with your interlocutor.
-\item [Bad]: you are able to recognize only small parts of the
+\item Bad: you are able to recognize only small parts of the
   received audio.
-\item [No way]: when most of the time only silence is heard.
+\item No way: when most of the time only silence is heard.
 \end{itemize}
 
 \subsubsection{In your host}
