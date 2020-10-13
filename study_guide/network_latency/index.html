@@ -1,6 +1,6 @@
 <!DOCTYPE html> 
 <html> 
-<head> <title>TecnologÃŋas Multimedia- Study Guide - Milestone 5: Impact of the
+<head> <title>TecnologÃŋas Multimedia- Study Guide - Milestone 6: Impact of the
 Communication Latency</title> 
 <meta charset="UTF-8" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
@@ -23,7 +23,7 @@ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLor
 
 <h2 class="titleHead"><a 
 href="https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN" >Tecnologías Multimedia</a>- Study Guide -
-Milestone 5: Impact of the Communication
+Milestone 6: Impact of the Communication
 Latency</h2>
  <div class="author" ><a 
 href="https://cms.ual.es/UAL/personas/persona.htm?id=515256515553484875" ><span 
@@ -118,7 +118,8 @@ display="inline" ><msub><mrow
 ></math> is
 time-variying, and cannot be controlled without using <a 
 href="https://en.wikipedia.org/wiki/Quality_of_service" >Quality of Service (QoS)</a>,
-something that is not accesible to normal network users. On the contrary,
+something that is not accesible to normal network users <span class="cite">[<a 
+href="#Xdordal2020intro">1</a>]</span>. On the contrary,
 <!--l. 30--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
@@ -150,7 +151,8 @@ href="https://en.wikipedia.org/wiki/Network_congestion" >network  congestion</a>
      diﬀerent hosts we will need to establish a direct communication between
      them  and  it  is  very  likely  that  we  will  have  to  redirect  ports  in  the
      corresponding <a 
-href="https://en.wikipedia.org/wiki/Network_address_translation" >NAT</a> devices <span class="cite">[]</span>.
+href="https://en.wikipedia.org/wiki/Network_address_translation" >NAT</a> devices <span class="cite">[<a 
+href="#Xsrisuresh1999nat">3</a>]</span>.
      </li>
      <li 
   class="enumerate" id="x1-1009x2">(Pro) The simulation of the link latency is much more straightforward
@@ -166,30 +168,32 @@ href="https://man7.org/linux/man-pages/man8/tc.8.html" ><!--l. 63--><math
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mi 
 >t</mi><mi 
->c</mi></mstyle></math></a>.</li></ol>
-<!--l. 66--><p class="noindent" >
+>c</mi></mstyle></math></a>
+     <span class="cite">[<a 
+href="#Xbert2012lartc">2</a>]</span>.</li></ol>
+<!--l. 67--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
  id="x1-20002"></a>What you have to do?</h3>
-<!--l. 68--><p class="noindent" >
-</p>
-   <h4 class="subsectionHead"><span class="titlemark">2.1   </span> <a 
- id="x1-30002.1"></a>Characterize the latency in diﬀerent scenarios</h4>
                                                                   
 
                                                                   
-<!--l. 70--><p class="noindent" >
+<!--l. 69--><p class="noindent" >
+</p>
+   <h4 class="subsectionHead"><span class="titlemark">2.1   </span> <a 
+ id="x1-30002.1"></a>Characterize the latency in diﬀerent scenarios</h4>
+<!--l. 71--><p class="noindent" >
 </p>
    <h5 class="subsubsectionHead"><span class="titlemark">2.1.1   </span> <a 
  id="x1-40002.1.1"></a>In your host</h5>
-<!--l. 72--><p class="noindent" >In most cases we will test InterCom in your host. Therefore, it can be useful to have
+<!--l. 73--><p class="noindent" >In most cases we will test InterCom in your host. Therefore, it can be useful to have
 an idea of how the latencies are distributed, at least from a statistical point of
 view.
-</p><!--l. 76--><p class="indent" >
+</p><!--l. 77--><p class="indent" >
      </p><ol  class="enumerate1" >
      <li 
   class="enumerate" id="x1-4002x1">Ping <span 
-class="ectt-1000">localhost</span>: <!--l. 78-->
+class="ectt-1000">localhost</span>: <!--l. 79-->
 <a 
  id="x1-4003"></a>
      <div class="lstlisting" id="listing-1"><span class="label"><a 
@@ -216,7 +220,7 @@ class="ectt-1000">.</span><span
 class="ectt-1000">dat</span>
      
      </div>
-     <!--l. 81--><p class="noindent" >Compute the expected (considering that the <a 
+     <!--l. 82--><p class="noindent" >Compute the expected (considering that the <a 
 href="https://en.wikipedia.org/wiki/Round-trip_delay" >RTT</a> should double the) latency to
      the host of your interlocutor:<br 
 class="newline" /><span 
@@ -230,74 +234,13 @@ class="tctt-1000">&#x0027;</span><span
 class="ectt-1000">{print $1/2}</span><span 
 class="tctt-1000">&#x0027;</span><span 
 class="ectt-1000">&#x003E; /tmp/localhost_latencies.dat</span>
-</p>
-     <!--l. 88-->
-     <div class="lstlisting" id="listing-2"><span class="label"><a 
- id="x1-4005r1"></a></span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">grep</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">from</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">&#x003C;</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">/</span><span 
-class="ectt-1000">tmp</span><span 
-class="ectt-1000">/</span><span 
-class="ectt-1000">ping</span><span 
-class="ectt-1000">.</span><span 
-class="ectt-1000">dat</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">|</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">cut</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">-</span><span 
-class="ectt-1000">f</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">4</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">-</span><span 
-class="ectt-1000">d</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">&#x0022;=&#x0022;</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">|</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">cut</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">-</span><span 
-class="ectt-1000">f</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">1</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">-</span><span 
-class="ectt-1000">d</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">&#x0022;</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">&#x0022;</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">|</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">awk</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">’{</span><span 
-class="ectt-1000">print</span><span 
-class="ectt-1000"> </span><!--l. 89--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mstyle 
-class="mbox"><mtext  >$</mtext></mstyle></math>1/2}’ &#x003E; /tmp/localhost\_latencies.dat
-     
-     </div>
-     </li>
+     </p></li>
      <li 
-  class="enumerate" id="x1-4007x2">Find the histogram of the expected latencies: <!--l. 93-->
+  class="enumerate" id="x1-4006x2">Find the histogram of the expected latencies: <!--l. 89-->
 <a 
- id="x1-4008"></a>
-     <div class="lstlisting" id="listing-3"><span class="label"><a 
- id="x1-4009r1"></a></span><span 
+ id="x1-4007"></a>
+     <div class="lstlisting" id="listing-2"><span class="label"><a 
+ id="x1-4008r1"></a></span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
@@ -313,7 +256,7 @@ class="ectt-1000">python</span><span
 class="ectt-1000"> </span><span 
 class="ectt-1000">-</span><span 
 class="ectt-1000"> </span><br /><span class="label"><a 
- id="x1-4010r2"></a></span><span 
+ id="x1-4009r2"></a></span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
@@ -325,7 +268,7 @@ class="ectt-1000">as</span><span
 class="ectt-1000"> </span><span 
 class="ectt-1000">np</span><span 
 class="ectt-1000"> </span><br /><span class="label"><a 
- id="x1-4011r3"></a></span><span 
+ id="x1-4010r3"></a></span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
@@ -337,7 +280,7 @@ class="ectt-1000">import</span><span
 class="ectt-1000"> </span><span 
 class="ectt-1000">stats</span><span 
 class="ectt-1000"> </span><br /><span class="label"><a 
- id="x1-4012r4"></a></span><span 
+ id="x1-4011r4"></a></span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
@@ -356,7 +299,7 @@ class="ectt-1000">.</span><span
 class="ectt-1000">dat</span><span 
 class="ectt-1000">&#x0022;)</span><span 
 class="ectt-1000"> </span><br /><span class="label"><a 
- id="x1-4013r5"></a></span><span 
+ id="x1-4012r5"></a></span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
@@ -371,7 +314,7 @@ class="ectt-1000">(</span><span
 class="ectt-1000">latencies</span><span 
 class="ectt-1000">)</span><span 
 class="ectt-1000"> </span><br /><span class="label"><a 
- id="x1-4014r6"></a></span><span 
+ id="x1-4013r6"></a></span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
@@ -386,7 +329,7 @@ class="ectt-1000"> </span><span
 class="ectt-1000">average_latency</span><span 
 class="ectt-1000">)</span><span 
 class="ectt-1000"> </span><br /><span class="label"><a 
- id="x1-4015r7"></a></span><span 
+ id="x1-4014r7"></a></span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
@@ -401,7 +344,7 @@ class="ectt-1000">(</span><span
 class="ectt-1000">latencies</span><span 
 class="ectt-1000">)</span><span 
 class="ectt-1000"> </span><br /><span class="label"><a 
- id="x1-4016r8"></a></span><span 
+ id="x1-4015r8"></a></span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
@@ -416,7 +359,7 @@ class="ectt-1000">(</span><span
 class="ectt-1000">latencies</span><span 
 class="ectt-1000">)</span><span 
 class="ectt-1000"> </span><br /><span class="label"><a 
- id="x1-4017r9"></a></span><span 
+ id="x1-4016r9"></a></span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
@@ -440,7 +383,7 @@ class="ectt-1000"> </span><span
 class="ectt-1000">min_latency</span><span 
 class="ectt-1000">)</span><span 
 class="ectt-1000"> </span><br /><span class="label"><a 
- id="x1-4018r10"></a></span><span 
+ id="x1-4017r10"></a></span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
@@ -459,7 +402,7 @@ class="ectt-1000"> </span><span
 class="ectt-1000">maximum_absolute_deviation</span><span 
 class="ectt-1000">)</span><span 
 class="ectt-1000"> </span><br /><span class="label"><a 
- id="x1-4019r11"></a></span><span 
+ id="x1-4018r11"></a></span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
@@ -489,7 +432,7 @@ class="ectt-1000">,</span><span
 class="ectt-1000"> </span><span 
 class="ectt-1000">1)[0])</span><span 
 class="ectt-1000"> </span><br /><span class="label"><a 
- id="x1-4020r12"></a></span><span 
+ id="x1-4019r12"></a></span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
@@ -504,7 +447,7 @@ class="ectt-1000">(</span><span
 class="ectt-1000">latencies</span><span 
 class="ectt-1000">)</span><span 
 class="ectt-1000"> </span><br /><span class="label"><a 
- id="x1-4021r13"></a></span><span 
+ id="x1-4020r13"></a></span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
@@ -522,7 +465,7 @@ class="ectt-1000"> </span><span
 class="ectt-1000">histogram</span><span 
 class="ectt-1000">[0])</span><span 
 class="ectt-1000"> </span><br /><span class="label"><a 
- id="x1-4022r14"></a></span><span 
+ id="x1-4021r14"></a></span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
@@ -531,9 +474,9 @@ class="ectt-1000">EOF</span>
      </div>
      </li>
      <li 
-  class="enumerate" id="x1-4024x3">Plot the histogram: <!--l. 111-->
-     <div class="lstlisting" id="listing-4"><span class="label"><a 
- id="x1-4025r2"></a></span><span 
+  class="enumerate" id="x1-4023x3">Plot the histogram: <!--l. 107-->
+     <div class="lstlisting" id="listing-3"><span class="label"><a 
+ id="x1-4024r2"></a></span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
@@ -556,18 +499,18 @@ class="ectt-1000">histogram</span>
      </div>
      </li>
      <li 
-  class="enumerate" id="x1-4027x4">Characterize statistically the latency: which statistical distribution is more close
+  class="enumerate" id="x1-4026x4">Characterize statistically the latency: which statistical distribution is more close
      to your experimental data?</li></ol>
                                                                   
 
                                                                   
-<!--l. 119--><p class="noindent" >
+<!--l. 115--><p class="noindent" >
 </p>
    <h5 class="subsubsectionHead"><span class="titlemark">2.1.2   </span> <a 
  id="x1-50002.1.2"></a>In the Internet</h5>
-<!--l. 121--><p class="noindent" >This scenario can be useful to test InterCom in your host but simulating a real
+<!--l. 117--><p class="noindent" >This scenario can be useful to test InterCom in your host but simulating a real
 connection between hosts in diﬀerent home networks. For doing that:
-</p><!--l. 125--><p class="indent" >
+</p><!--l. 121--><p class="indent" >
      </p><ol  class="enumerate1" >
      <li 
   class="enumerate" id="x1-5002x1">Repeat      the      previous      experiment      (the      characterization
@@ -598,11 +541,11 @@ href="https://en.wikipedia.org/wiki/Pearson_correlation_coefficient" >Pearson co
      and <a 
 href="https://en.wikipedia.org/wiki/List_of_probability_distributions" >probability distribution</a>.
      </li></ol>
-<!--l. 152--><p class="noindent" >
+<!--l. 148--><p class="noindent" >
 </p>
    <h4 class="subsectionHead"><span class="titlemark">2.2   </span> <a 
  id="x1-60002.2"></a>Quantiﬁcation of the QoE without packed loss</h4>
-<!--l. 154--><p class="noindent" >Let’s measure the QoE using the following classiﬁcation: </p>
+<!--l. 150--><p class="noindent" >Let’s measure the QoE using the following classiﬁcation: </p>
      <ul class="itemize1">
      <li class="itemize">Perfect: no loss or delay can be distinguish.
      </li>
@@ -617,18 +560,18 @@ href="https://en.wikipedia.org/wiki/List_of_probability_distributions" >probabil
                                                                   
      </li>
      <li class="itemize">No way: when most of the time only silence is heard.</li></ul>
-<!--l. 166--><p class="noindent" >
+<!--l. 162--><p class="noindent" >
 </p>
    <h5 class="subsubsectionHead"><span class="titlemark">2.2.1   </span> <a 
  id="x1-70002.2.1"></a>In your host</h5>
-<!--l. 168--><p class="noindent" >You don’t need to control the network traﬃc in this scenario because it is already
+<!--l. 164--><p class="noindent" >You don’t need to control the network traﬃc in this scenario because it is already
 shapped when InterCom uses the loopback network device. Therefore, simply
 quantify your QoE when you run InterCom in your host.
-</p><!--l. 173--><p class="noindent" >
+</p><!--l. 169--><p class="noindent" >
 </p>
    <h5 class="subsubsectionHead"><span class="titlemark">2.2.2   </span> <a 
  id="x1-80002.2.2"></a>In the Internet</h5>
-<!--l. 175--><p class="noindent" >
+<!--l. 171--><p class="noindent" >
      </p><ol  class="enumerate1" >
      <li 
   class="enumerate" id="x1-8002x1">Using the characterization of the Internet link previously obtained, use
@@ -636,8 +579,8 @@ quantify your QoE when you run InterCom in your host.
 href="https://man7.org/linux/man-pages/man8/tc.8.html" ><span 
 class="ectt-1000">tc</span></a> to simulate this link locally using <a 
 href="https://man7.org/linux/man-pages/man8/tc-netem.8.html" >netem</a>:
-     <!--l. 183-->
-     <div class="lstlisting" id="listing-5"><span class="label"><a 
+     <!--l. 179-->
+     <div class="lstlisting" id="listing-4"><span class="label"><a 
  id="x1-8003r3"></a></span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
@@ -685,7 +628,7 @@ class="ectt-1000">paretonormal</span><span
 class="ectt-1000">&#x003E;</span>
      
      </div>
-     <!--l. 186--><p class="noindent" >where:
+     <!--l. 182--><p class="noindent" >where:
          </p><dl class="description"><dt class="description">
      <span 
 class="ectt-1000">qdisc</span><span 
@@ -724,11 +667,11 @@ href="https://wiki.linuxfoundation.org/networking/netem" >network emulator</a> t
      <li 
   class="enumerate" id="x1-8007x3">Remove the <span 
 class="ectt-1000">tc </span>rule with.
-     <!--l. 206-->
+     <!--l. 202-->
                                                                   
 
                                                                   
-     <div class="lstlisting" id="listing-6"><span class="label"><a 
+     <div class="lstlisting" id="listing-5"><span class="label"><a 
  id="x1-8008r4"></a></span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
@@ -779,8 +722,8 @@ class="ectt-1000">&#x003E;</span>
      </li>
      <li 
   class="enumerate" id="x1-8010x4">(Optional) You can see the current rules with:
-     <!--l. 212-->
-     <div class="lstlisting" id="listing-7"><span class="label"><a 
+     <!--l. 208-->
+     <div class="lstlisting" id="listing-6"><span class="label"><a 
  id="x1-8011r5"></a></span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
@@ -795,8 +738,8 @@ class="ectt-1000">show</span>
      </li>
      <li 
   class="enumerate" id="x1-8013x5">(Optional) It’s possible to change a working rule with:
-     <!--l. 218-->
-     <div class="lstlisting" id="listing-8"><span class="label"><a 
+     <!--l. 214-->
+     <div class="lstlisting" id="listing-7"><span class="label"><a 
  id="x1-8014r6"></a></span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
@@ -845,24 +788,24 @@ class="ectt-1000">&#x003E;</span>
      
      </div>
      </li></ol>
-<!--l. 224--><p class="noindent" >
+<!--l. 220--><p class="noindent" >
 </p>
    <h4 class="subsectionHead"><span class="titlemark">2.3   </span> <a 
  id="x1-90002.3"></a>(Optional) QoE considering the packet loss</h4>
-<!--l. 226--><p class="noindent" >For our application, InterCom, a chunk is lost when it arrives too late or it never
+<!--l. 222--><p class="noindent" >For our application, InterCom, a chunk is lost when it arrives too late or it never
 arrives. Therefore, the results of a packet loss or a packet delay are almost
 indistinguishable, except by the average latency experimented by the user (the higher
 the network latency, the higher the perceived latency).
-</p><!--l. 232--><p class="indent" >   For example, the packet loss ratio of
-<!--l. 232--><math 
+</p><!--l. 228--><p class="indent" >   For example, the packet loss ratio of
+<!--l. 228--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mn>1</mn><mn>0</mn><mi 
 >%</mi></math> can
 be controlled with <span 
 class="ectt-1000">tc </span>by running:
 </p>
-   <!--l. 235-->
-   <div class="lstlisting" id="listing-9"><span class="label"><a 
+   <!--l. 231-->
+   <div class="lstlisting" id="listing-8"><span class="label"><a 
  id="x1-9001r7"></a></span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
@@ -891,22 +834,50 @@ class="ectt-1000">10%</span>
                                                                   
 
                                                                   
-<!--l. 239--><p class="noindent" >
+<!--l. 235--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-100003"></a>Timming</h3>
-<!--l. 241--><p class="noindent" >Please, ﬁnish this milestone in one week.
-</p><!--l. 243--><p class="noindent" >
+<!--l. 237--><p class="noindent" >Please, ﬁnish this milestone in one week.
+</p><!--l. 239--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-110004"></a>Deliverables</h3>
-<!--l. 245--><p class="noindent" >A report showing your results.
-</p><!--l. 247--><p class="noindent" >
+<!--l. 241--><p class="noindent" >A report showing your results.
+</p><!--l. 243--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-120005"></a>Resources</h3>
+<!--l. 1--><p class="noindent" >
+</p>
+   <h3 class="likesectionHead"><a 
+ id="x1-130005"></a>References</h3>
+<!--l. 1--><p class="noindent" >
+   </p><div class="thebibliography">
+   <p class="bibitem" ><span class="biblabel">
+ [1]<span class="bibsp">   </span></span><a 
+ id="Xdordal2020intro"></a>Peter L. Dordal. <a 
+href="http://intronetworks.cs.luc.edu/current/ComputerNetworks.pdf" ><span 
+class="ecti-1000">An Introduction to Computer Networks</span></a>. Dordal, Peter
+   L., 2020.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [2]<span class="bibsp">   </span></span><a 
+ id="Xbert2012lartc"></a>Bert Hubert, Thomas Graf, Greg Maxwell, Remco van Mook, Martijn
+   van Oosterhout, Paul B Schroeder, Jasper Spaans, and Pedro Larroy. <a 
+href="https://lartc.org/" ><span 
+class="ecti-1000">Linux</span>
+   <span 
+class="ecti-1000">Advanced Routing &#x0026; Traﬃc Control</span></a>. Bert Humbert et al., 2012.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [3]<span class="bibsp">   </span></span><a 
+ id="Xsrisuresh1999nat"></a>P. Srisuresh  and  M. Holdrege.   Ip  network  address  translator  (nat)
+   terminology and considerations. 1999.
+</p>
+   </div>
 <a 
- id="Q1-1-15"></a>
+ id="Q1-1-16"></a>
     
 </body> 
 </html>

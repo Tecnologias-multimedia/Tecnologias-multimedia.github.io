@@ -1,5 +1,5 @@
 \input{../definitions}
-\title{\TM - Study Guide - Milestone 5: Impact of the Communication Latency}
+\title{\TM - Study Guide - Milestone 6: Impact of the Communication Latency}
 
 \maketitle
 
@@ -27,8 +27,8 @@ is shared on demand by the users of the network) $t_l$ is
 time-variying, and cannot be controlled without using
 \href{https://en.wikipedia.org/wiki/Quality_of_service}{Quality of
   Service (QoS)}, something that is not accesible to normal network
-users. On the contrary, $t_i$ is constant for a given intercom's
-configuration/implementation.
+users~\cite{dordal2020intro}. On the contrary, $t_i$ is constant for a
+given intercom's configuration/implementation.
 
 In this milestone we are going to measure the
 \href{https://en.wikipedia.org/wiki/Quality_of_experience}{Quality of
@@ -50,7 +50,7 @@ Each option has pros and cons, from which we can highlight that:
   need to establish a direct communication between them and it is very
   likely that we will have to redirect ports in the corresponding
   \href{https://en.wikipedia.org/wiki/Network_address_translation}{NAT}
-  devices~\cite{}.
+  devices~\cite{srisuresh1999nat}.
 \item (Pro) The simulation of the link latency is much more
   straightforward than the opening ports in our routers and (pro) will
   allow us to run InterCom in situations that are difficult to achieve
@@ -60,7 +60,8 @@ Each option has pros and cons, from which we can highlight that:
   in Linux we can control the latency (and the
   \href{https://en.wikipedia.org/wiki/Bit_rate}{bit-rate}) of the
   outgoing (packets) traffic using the command
-  \href{https://man7.org/linux/man-pages/man8/tc.8.html}{$\mathtt{tc}$}.
+  \href{https://man7.org/linux/man-pages/man8/tc.8.html}{$\mathtt{tc}$}
+  \cite{bert2012lartc}.
 \end{enumerate}
 
 \section{What you have to do?}
@@ -83,11 +84,6 @@ Compute the expected (considering that the
   double the) latency to the host of your interlocutor:\\
 \texttt{~~~~grep from < /tmp/ping.dat | cut -f 4 -d "=" | cut -f 1 -d " " | awk
   \textquotesingle\{print \$1/2\}\textquotesingle > /tmp/localhost\_latencies.dat}
-
-\lstset{literate={\$}{{\textcolor{blue}{\$}}}1}
-\begin{lstlisting}[language=tex, mathescape]
-  grep from < /tmp/ping.dat | cut -f 4 -d "=" | cut -f 1 -d " " | awk '{print $\mbox{\textdollar}$1/2}' > /tmp/localhost\_latencies.dat
-\end{lstlisting}
 
 \item Find the histogram of the expected latencies:
   \begin{lstlisting}{language=python}
@@ -246,4 +242,4 @@ A report showing your results.
 
 \section{Resources}
 
-\bibliography{python,intercom}
+\bibliography{networking,nat}
