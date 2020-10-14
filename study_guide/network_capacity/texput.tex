@@ -1,0 +1,145 @@
+\input{../definitions}
+\title{\TM - Study Guide - Milestone 7: Impact of the transmission bit-rate}
+
+\maketitle
+
+\section{Description}
+
+Along with latency and its variation (jitter), another main aspect to
+consider about the transmission link used in an InterCom session is
+the transmission bit-rate (bit per second) that it can provide. This
+bit-rate depend on the maximum capacity (a characteristic closely
+related with the available bandwidth) and its congestion level (that
+basically depends on the load) of the link. In general, we can suppose
+that the capacity is constant along the time (the bandwidth provided
+by the link does not vary with the time). On the contrary, the
+congestion level is time-variying and quite unpredictable.
+
+In this milestone we are going to measure the impact of the variation
+of the transmission bit-rate on the QoE. Similarly to the procedure
+used for measuring the impact of the jitter, we are
+going to use
+\href{https://man7.org/linux/man-pages/man8/tc.8.html}{\testtt{tc}} to
+bound the amount of data that a instance of InterCom will be allowed
+to send in a local environment. Notice that this limitation will also
+affect to the loss of chunks because if the transmission bit-rate is
+smaller than the audio bit-rate, sooner of later the link will discard
+those chunk that can not be buffered in the retranmission nodes
+(routers and switches).
+
+\section{What you have to do?}
+
+\subsection{Estimate the bit-rate in an Internet link}
+
+Usually, we need to use a tool such as \href{https://iperf.fr/}{iPerf}
+to measure the transmission bit-rate between two end-points in the
+Internet. This proceduce implies that we must have access to both
+hosts to install and run this program, privileges that are not always
+allowed.
+
+Alternatively, we can estimate such bandwidth using
+\href{https://github.com/torvalds/linux/blob/master/net/ipv4/ping.c}{\texttt{ping}}. This
+tool
+\href{https://en.wikipedia.org/wiki/Ping_(networking_utility)}{sends}
+(one or more)
+\href{https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol}{ICMP}
+Echo Request messages
+
+\subsection{Quantification of the QoE without packed loss}
+
+Let's measure the QoE using the following classification:
+\begin{itemize}
+\item Perfect: no loss or delay can be distinguish.
+\item Good: if you detect some minimal distortion in the rendering
+  of the sound.
+\item Acceptable: when the effects of the latency are apreciable, but
+  you can communicate with your interlocutor.
+\item Bad: you are able to recognize only small parts of the
+  received audio.
+\item No way: when most of the time only silence is heard.
+\end{itemize}
+
+\subsubsection{In your host}
+
+You don't need to control the network traffic in this scenario because
+it is already shapped when InterCom uses the loopback network
+device. Therefore, simply quantify your QoE when you run InterCom in
+your host.
+
+\subsubsection{In the Internet}
+
+\begin{enumerate}
+  
+\item Using the characterization of the Internet link previously
+  obtained, use the command
+  \href{https://man7.org/linux/man-pages/man8/tc.8.html}{\texttt{tc}}
+  to simulate this link locally using
+  \href{https://man7.org/linux/man-pages/man8/tc-netem.8.html}{netem}:
+
+  \begin{lstlisting}{language=bash}
+    sudo tc qdisc add dev lo root netem delay <average_dalay_in_miliseconds> <maximum_average_deviation_in_miliseconds> <Pearson_correlation_coefficient_expressed_as_a_percentage> distribution <uniform|normal|pareto|paretonormal>
+  \end{lstlisting}
+  where:
+  \begin{description}
+  \item [\texttt{qdisc}:] Use the default
+    \href{https://en.wikipedia.org/wiki/FIFO_(computing_and_electronics)}{FIFO}
+    \href{https://wiki.debian.org/TrafficControl}{Queueing DISCipline}
+    for the outgoing traffic.
+  \item [\texttt{add}:] Add a new traffic control rule.
+  \item [\texttt{dev lo}:] The device affected by the
+    rule. \texttt{lo} means \texttt{loopback}.
+  \item [\texttt{root}:] The rule will be applied to all the outbound
+    traffic (it's the root rule of the possible tree of rules).
+  \item [\texttt{netem}:] Use the
+    \href{https://wiki.linuxfoundation.org/networking/netem}{network
+      emulator} to emulate a WAN property.
+  \end{description}
+
+\item Measure the QoE.
+
+\item Remove the \texttt{tc} rule with.
+  
+  \begin{lstlisting}{language=bash}
+    sudo tc qdisc delete dev lo root netem delay <average_dalay_in_miliseconds> <maximum_average_deviation_in_miliseconds> <Pearson_correlation_coefficient_expressed_as_a_percentage> distribution <uniform|normal|pareto|paretonormal>
+  \end{lstlisting}
+
+\item (Optional) You can see the current rules with:
+
+  \begin{lstlisting}{language=bash}
+    tc qdisc show
+  \end{lstlisting}
+
+\item (Optional) It's possible to change a working rule with:
+
+  \begin{lstlisting}{language=bash}
+    sudo tc qdisc change dev lo root netem delay <average_dalay_in_miliseconds> <maximum_average_deviation_in_miliseconds> <Pearson_correlation_coefficient_expressed_as_a_percentage> distribution <uniform|normal|pareto|paretonormal>
+  \end{lstlisting}
+  
+\end{enumerate}
+
+\subsection{(Optional) QoE considering the packet loss}
+
+For our application, InterCom, a chunk is lost when it arrives too
+late or it never arrives. Therefore, the results of a packet loss or a
+packet delay are almost indistinguishable, except by the average
+latency experimented by the user (the higher the network latency, the
+higher the perceived latency).
+
+For example, the packet loss ratio of $10\%$ can be controlled with
+\texttt{tc} by running:
+
+  \begin{lstlisting}{language=bash}
+    sudo tc qdisc add dev lo root netem loss 10%
+  \end{lstlisting}
+
+\section{Timming}
+
+Please, finish this milestone in one week.
+
+\section{Deliverables}
+
+A report showing your results.
+
+\section{Resources}
+
+\bibliography{python,intercom}
