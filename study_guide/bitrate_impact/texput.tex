@@ -6,44 +6,56 @@
 \section{Description}
 
 Along with latency and its variation (jitter), another main aspect to
-consider about the transmission link used in an InterCom session is
-the transmission bit-rate (bit per second) that it can provide. This
-bit-rate depend on the maximum capacity (a characteristic closely
-related with the available bandwidth) and its congestion level (that
-basically depends on the load) of the link. In general, we can suppose
-that the capacity is constant along the time (the bandwidth provided
-by the link does not vary with the time). On the contrary, the
-congestion level is time-variying and quite unpredictable.
+consider about the
+\href{https://en.wikipedia.org/wiki/Telecommunications_link}{transmission
+  link} used in an InterCom session is the
+\href{https://en.wikipedia.org/wiki/Bit_rate}{transmission bit-rate}
+(bits per second) that it can provide. This bit-rate depend on the
+maximum
+\href{https://en.wikipedia.org/wiki/Bandwidth_(computing)}{capacity}
+(a characteristic closely related with the available bandwidth) and
+its congestion level (that basically depends on the load) of the
+link. In general, we can suppose that the capacity is constant along
+the time (the bandwidth provided by the link does not vary with the
+time). On the contrary, the
+\href{https://en.wikipedia.org/wiki/Network_congestion}{congestion}
+level is time-variying and quite unpredictable.
 
-In this milestone we are going to measure the impact of the variation
-of the transmission bit-rate on the QoE. Similarly to the procedure
-used for measuring the impact of the jitter, we are
+In this milestone we are going to measure the impact of the
+transmission bit-rate on the
+\href{https://en.wikipedia.org/wiki/Quality_of_experience}{QoE}. Similarly
+to the procedure used for measuring the impact of the jitter, we are
 going to use
 \href{https://man7.org/linux/man-pages/man8/tc.8.html}{\testtt{tc}} to
-bound the amount of data that a instance of InterCom will be allowed
-to send in a local environment. Notice that this limitation will also
-affect to the loss of chunks because if the transmission bit-rate is
-smaller than the audio bit-rate, sooner of later the link will discard
-those chunk that can not be buffered in the retranmission nodes
-(routers and switches).
+control the amount of data that a instance of InterCom will be allowed
+to send in a local environment, with the aim of simulating a real
+one. Notice that this limitation will also affect to the loss of
+chunks because if the transmission bit-rate is smaller than the audio
+bit-rate, sooner of later the link will discard those chunk that can
+not be buffered in the retranmission nodes (routers and
+switches)\footnote{Notice that, in this case, we would be at least
+  contributing, if not causing, the link congestion.}.
 
 \section{What you have to do?}
 
 \subsection{Estimate the bit-rate in an Internet link}
 
 Usually, we need to use a tool such as \href{https://iperf.fr/}{iPerf}
-to measure the transmission bit-rate between two end-points in the
+to
+\href{https://en.wikipedia.org/wiki/Measuring_network_throughput}{measure
+  the transmission bit-rate} between two end-points in the
 Internet. This proceduce implies that we must have access to both
 hosts to install and run this program, privileges that are not always
-allowed.
+available.
 
-Alternatively, we can estimate such bandwidth using
+Alternatively, we can estimate the
+\href{https://en.wikipedia.org/wiki/Throughput}{link throughput} using
 \href{https://github.com/torvalds/linux/blob/master/net/ipv4/ping.c}{\texttt{ping}}. This
 tool
 \href{https://en.wikipedia.org/wiki/Ping_(networking_utility)}{sends}
 (one or more)
 \href{https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol}{ICMP}
-Echo Request messages
+Echo Request messages (see
 
 \subsection{Quantification of the QoE without packed loss}
 
