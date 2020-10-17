@@ -27,18 +27,17 @@ In this milestone we are going to measure the impact of the
 transmission bit-rate on the
 \href{https://en.wikipedia.org/wiki/Quality_of_experience}{QoE}\footnote{Follow
   the same rubric than in the case of the measurement of the impact of
-  the latency.} provided by the minimal implementation of InterCom to
-the users. Similarly to the procedure used for measuring the impact of
+  the latency.} provided by the minimal implementation of InterCom. Similarly to the procedure used for measuring the impact of
 the latency and the jitter, we will use
 \href{https://man7.org/linux/man-pages/man8/tc.8.html}{\texttt{tc}}~\cite{bert2012lartc}
 to control the amount of data that an InterCom instance will be
 allowed to send in a local environment, with the aim of simulating a
-real running context. Notice that this limitation will also affect to
-the loss of chunks because if the transmission bit-rate is smaller
-than the audio bit-rate, sooner of later the link will discard those
-chunk that can not be buffered in the retranmission nodes (routers and
-switches)\footnote{Notice that, in this case, we would be at least
-  contributing, if not causing, the link congestion.}.
+real running context. Notice that this upper bound in the bit-rate
+will also affect to the loss of chunks because if the transmission
+bit-rate is smaller than the audio bit-rate, sooner of later the link
+will discard those chunks that can not be buffered in the retranmission
+nodes (routers and switches)\footnote{Notice that, in this case, we
+would be at least contributing, if not causing, the link congestion.}.
 
 \section{What you have to do?}
 
@@ -55,20 +54,22 @@ available.
 Alternatively, we can estimate the
 \href{https://en.wikipedia.org/wiki/Throughput}{link throughput} using
 \href{https://github.com/torvalds/linux/blob/master/net/ipv4/ping.c}{\texttt{ping}}
-(see the previous milestone). The reader should understand that
+(see the previous milestone). At this point is important to realize
+ that
 \texttt{ping} has been designed for measure latencies, not bit-rates,
 and that for this reason, we will be able to estimate throughputs
 rougtly.
 
-The transmission bitrate avaiable between two directly reachable IP
+The transmission bitrate available between two directly reachable IP
 devices can be estimated as
 \begin{equation}
   b=\frac{B}{t_t},
   \label{eq:b}
 \end{equation}
-where $B$ the number of bits sent in a \texttt{ping}'s payload. Now,
-if we revisite the \texttt{ping}'s timeline of the previous milestone
-and the Equation~(2), we can see that
+where $B$ is the number of bits sent in a \texttt{ping}'s payload.
+
+If we revisite the \texttt{ping}'s timeline and the Equation~(2) of
+the previous milestone, we can see that
 \begin{equation}
   t_t = \frac{\text{RTT}-2t_p}{2}.
   \label{eq:tt}
@@ -79,30 +80,32 @@ near future.
 
 So, for determining $b$ we can:
 \begin{enumerate}
-\item Run \texttt{ping} using the smallest possible payload. In this
+\item Run \texttt{ping} using the smallest possible payload that
+  provides RTTs values.\footnote{The minimal payload for a
+  \texttt{ping} message can be 0, but depending on the implementation
+  of \texttt{ping} you may be forzed to use a larger value.} In this
   situation we can suppose that
   \begin{equation}
     t_p \approx \frac{\text{RTT}}{2}.
     \label{eq:tp}
   \end{equation}
-  You should use the smaller RTT of a \texttt{ping} session for such
-  approximation because the real link latency is a constant and the
-  congestion of the link always increases it. The minimal payload for
-  a \texttt{ping} message can be 0, but depending on the
-  implementation of \texttt{ping} you may be forzed to use a larger
-  value.
+  Notice that we should use the smaller RTT of a \texttt{ping} session
+  of measurements for such approximation because the real link latency
+  is a constant and the congestion of the link always increases
+  it.
 \item Run \texttt{ping} using the largest possible payload to achieve
   that most part of the average RTT provided by \texttt{ping}
   corresponds to $t_t$. This is necessary because the accuracy of the
   cronometer used by \texttt{ping}, in general, is not high enough to
-  measure $t_t$.
-\item Apply the Equation~\ref{eq:tt} to find $t_t$ as a function of
+  measure $t_t$ for small values of the payload size.
+\item Use the Equation~\ref{eq:tt} to find $t_t$ as a function of
   the average RTT and the minimal $t_p$.
 \item Finally, use the Equation~\ref{eq:b} to determine $b$.
 \end{enumerate}
 
-In order to measure your bandwith with different \texttt{ping}
-servers, try to compute the transmission bit-rate:
+(Optional) In order to gain experience with all this stuff, measure
+your bandwith with different \texttt{ping} servers, try to compute the
+transmission bit-rate:
 \begin{enumerate}
 \item In \texttt{localhost}.
 \item Between two hosts in your local network (your host and your
@@ -112,13 +115,14 @@ servers, try to compute the transmission bit-rate:
   \texttt{www.meter.net} for example.
 \end{enumerate}
 
-If the devices cannot \texttt{ping} each other, and supposing that
-there is only one point in the communication link that is filtering
-the ICMP Echo Request traffic in each direction, then we can apply the
-same technique that was used in the previous milestone, which
-basically consists in compute the total RTT as the sum of the RTT from
-the devices that we want to connect (where the InterCom is it supposed
-to be run) to the filter (possiblely, one of your home routers).
+(Not optional) If the devices cannot \texttt{ping} each other, and
+supposing that there is only one point in the communication link that
+is filtering the ICMP Echo Request traffic in each direction, then we
+can apply the same technique that was used in the previous milestone,
+which basically consists in compute the total RTT as the sum of the
+RTT from the devices that we want to connect (where the InterCom is it
+supposed to be run) to the filter (possiblely, one of your home
+routers).
 
 \subsection{Simulate the link}
 
@@ -145,13 +149,13 @@ Example:
     qdisc noqueue 0: root refcnt 2
   \end{lstlisting}
   
-\item Define the rule for the bit-rate control.
+\item Define the rule for the bit-rate control (example):
   
   \begin{lstlisting}{language=bash}
     sudo tc qdisc add dev lo root handle 1: tbf rate 200kbit burst 32kbit limit 32kbit
   \end{lstlisting}
   
-\item Define the rule for the latency control (see previous milestone).
+\item Define the rule for the latency control (see previous milestone) (example):
   
   \begin{lstlisting}{language=bash}
     sudo tc qdisc add dev lo parent 1:1 handle 10: netem delay 100ms 10ms 25% distribution normal
@@ -172,7 +176,7 @@ Example:
 
 \end{enumerate}
 
-Remember to delete the rules after their are unnecessary. Example:
+Remember to delete the rules after their are unnecessary (example):
 
 \begin{lstlisting}{language=bash}
   sudo tc qdisc delete dev lo parent 1:1 handle 10: netem delay 100ms 10ms 25% distribution normal
