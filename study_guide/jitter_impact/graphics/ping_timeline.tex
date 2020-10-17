@@ -44,7 +44,7 @@
   \coordinate (B receives last bit at A) at ($(Host A) + (0, -12ex)$);
   \draw[dashed] (B receives last bit) -- (B receives last bit at A);
 
-  % Respose
+  % Response
   \coordinate (A receives first bit) at ($(Host A) + (0, -16ex)$);
   \coordinate (A receives last bit) at ($(Host A) + (0, -22ex)$);
   \coordinate (B sends last bit) at ($(Host B) + (0, -18ex)$);
@@ -54,7 +54,46 @@
   \coordinate (A receives last bit at B) at ($(Host B) + (0, -22ex)$);
   \draw[dashed] (A receives last bit) -- (A receives last bit at B);
 
+  % For host A
+  
+  % t_t = transmission delay
+  \coordinate (center sent A) at ($(Host A) + (0, -5ex)$);
+  \node[left=0 of center sent A] (tt) {$t_t$};
+
+  % t_p = propagation delay
+  \coordinate (half minimum RTT A) at ($(Host A) + (0, -10ex)$);
+  \node[left=0 of half minimum RTT A] (tp) {$t_p$};
+  
+  % t_p = propagation delay
+  \coordinate (second half minimum RTT A) at ($(Host A) + (0, -14ex)$);
+  \node[left=0 of second half minimum RTT A] (tp) {$t_p$};
+  
+  % t_t = transmission delay
+  \coordinate (center received A) at ($(Host A) + (0, -19ex)$);
+  \node[left=0 of center received A] (tt) {$t_t$};
+
+  % For host B
+  
+  % t_p = propagation delay
+  \coordinate (half minimum RTT B) at ($(Host B) + (0, -4ex)$);
+  \node[right=0 of half minimum RTT B] (tp) {$t_p$};
+  
+  % t_t = transmission delay
+  \coordinate (center sent B) at ($(Host B) + (0, -9ex)$);
+  \node[right=0 of center sent B] (tt) {$t_t$};
+
+  % t_t = transmission delay
+  \coordinate (center received B) at ($(Host B) + (0, -15ex)$);
+  \node[right=0 of center received B] (tt) {$t_t$};
+  % t_p = propagation delay
+  \coordinate (second half minimum RTT B) at ($(Host B) + (0, -20ex)$);
+  \node[right=0 of second half minimum RTT B] (tp) {$t_p$};
+  
+  % line RTT
+  \draw[dashed] (A sends first bit) -- ($(A sends first bit) + (-4ex, 0)$) -- ($(A receives last bit) + (-4ex, 0)$) -- (A receives last bit);
+
   % RTT
+  \node[right=-10ex of B receives last bit at A] (rtt) {RTT};
 
 \end{tikzpicture}
 
