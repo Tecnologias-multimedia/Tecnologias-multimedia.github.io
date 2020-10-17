@@ -85,7 +85,10 @@ So, for determining $b$ we can:
   \end{equation}
   You should use the smaller RTT of a \texttt{ping} session for such
   approximation because the real link latency is a constant and the
-  congestion of the link always increases it.
+  congestion of the link always increases it. The minimal payload for
+  a \texttt{ping} message can be 0, but depending on the
+  implementation of \texttt{ping} you may be forzed to use a larger
+  value.
 \item Run \texttt{ping} using the largest possible payload to achieve
   that most part of the average RTT provided by \texttt{ping}
   corresponds to $t_t$. This is necessary because the accuracy of the
@@ -96,15 +99,29 @@ So, for determining $b$ we can:
 \item Finally, use the Equation~\ref{eq:b} to determine $b$.
 \end{enumerate}
 
+In order to measure your bandwith with different \texttt{ping}
+servers, try to compute the transmission bit-rate:
+\begin{enumerate}
+\item In \texttt{localhost}.
+\item Between two hosts in your local network (your host and your
+  router, for example). Notice that in this case, you should not
+  obtain a bit-rate higher than the capacity of your network adapter.
+\item Between your host and a public host of the Internet. Try
+  \texttt{www.meter.net} for example.
+\end{enumerate}
+
 If the devices cannot \texttt{ping} each other, and supposing that
 there is only one point in the communication link that is filtering
-the ICMP Echo Request traffic, then we can apply the same technique
-that was used in the previous milestone, which basically consists in
-compute the total RTT as the sum of the RTT from the devices that we
-want to connect (where the InterCom is it supposed to be run) to the
-filter (possiblely, one of your home routers).
+the ICMP Echo Request traffic in each direction, then we can apply the
+same technique that was used in the previous milestone, which
+basically consists in compute the total RTT as the sum of the RTT from
+the devices that we want to connect (where the InterCom is it supposed
+to be run) to the filter (possiblely, one of your home routers).
 
 \subsection{Simulate the link}
+
+With the bit-rate vaule computed from the previous section, simulate
+such link locally with:
 
 \section{Timming}
 
