@@ -92,8 +92,13 @@ stands for \emph{transmission time}, and $t_p$ for \emph{propagation
   time}. A simple link (a cable, for example) has been supposed. For
 that reason, the propagation and transmission time are identical in
 both hosts. Notice that when the payload of the ping message has ony
-64 bytes and the bit-rate of the link is high, $t_p>>t_t$.
-
+64 bytes and the bit-rate of the link is high, $t_p>>t_t$. For this
+type of link, it also holds that
+\begin{equation}
+  \text{RTT} = 2t_p + 2t_t.
+  \label{eq:RTT}
+\end{equation}
+  
 \begin{figure}
   \begin{center}
     \myfig{graphics/ping_timeline}{5cm}{500}

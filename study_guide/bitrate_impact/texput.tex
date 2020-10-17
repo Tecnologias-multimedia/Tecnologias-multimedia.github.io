@@ -5,13 +5,13 @@
 
 \section{Description}
 
-Along with latency and its variation (jitter), another main aspect to
-consider about the
+Along with the latency and its variation (jitter), another main aspect
+to consider about the
 \href{https://en.wikipedia.org/wiki/Telecommunications_link}{transmission
   link} used in an InterCom session is the
 \href{https://en.wikipedia.org/wiki/Bit_rate}{transmission bit-rate}
-(bits per second) that it can provide. This bit-rate depend on the
-maximum
+(measured in bits per second or a multiple of this transmission
+capacity) that it can provide. This bit-rate depend on the maximum
 \href{https://en.wikipedia.org/wiki/Bandwidth_(computing)}{capacity}
 (a characteristic closely related with the available bandwidth) and
 its congestion level (that basically depends on the load) of the
@@ -19,17 +19,19 @@ link. In general, we can suppose that the capacity is constant along
 the time (the bandwidth provided by the link does not vary with the
 time). On the contrary, the
 \href{https://en.wikipedia.org/wiki/Network_congestion}{congestion}
-level is time-variying and quite unpredictable.
+level is time-variying and quite unpredictable, because it depends on
+the behaviour of the network users.
 
 In this milestone we are going to measure the impact of the
 transmission bit-rate on the
-\href{https://en.wikipedia.org/wiki/Quality_of_experience}{QoE}. Similarly
-to the procedure used for measuring the impact of the jitter, we are
-going to use
+\href{https://en.wikipedia.org/wiki/Quality_of_experience}{QoE}
+provided by the minimal implementation of InterCom to the
+users. Similarly to the procedure used for measuring the impact of the
+latency and the jitter, we will use
 \href{https://man7.org/linux/man-pages/man8/tc.8.html}{\testtt{tc}} to
-control the amount of data that a instance of InterCom will be allowed
+control the amount of data that an InterCom instance will be allowed
 to send in a local environment, with the aim of simulating a real
-one. Notice that this limitation will also affect to the loss of
+running context. Notice that this limitation will also affect to the loss of
 chunks because if the transmission bit-rate is smaller than the audio
 bit-rate, sooner of later the link will discard those chunk that can
 not be buffered in the retranmission nodes (routers and
@@ -50,99 +52,59 @@ available.
 
 Alternatively, we can estimate the
 \href{https://en.wikipedia.org/wiki/Throughput}{link throughput} using
-\href{https://github.com/torvalds/linux/blob/master/net/ipv4/ping.c}{\texttt{ping}}. This
-tool
-\href{https://en.wikipedia.org/wiki/Ping_(networking_utility)}{sends}
-(one or more)
-\href{https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol}{ICMP}
-Echo Request messages (see
+\href{https://github.com/torvalds/linux/blob/master/net/ipv4/ping.c}{\texttt{ping}}
+(see the previous milestone). The reader should understand that
+\texttt{ping} has been designed for measure latencies, not bit-rates,
+and that for this reason, we will be able to estimate throughputs
+rougtly.
 
-\subsection{Quantification of the QoE without packed loss}
+The transmission bitrate avaiable between two directly reachable IP
+devices can be estimated as
+\begin{equation}
+  b=\frac{B}{t_t},
+  \label{eq:b}
+\end{equation}
+where $B$ the number of bits sent in a \texttt{ping}'s payload. Now,
+if we revisite the \texttt{ping}'s timeline of the previous milestone
+and the Equation~(2), we can see that
+\begin{equation}
+  t_t = \frac{\text{RTT}-2t_p}{2}.
+  \label{eq:tt}
+\end{equation}
+Therefore, supposing that $t_p$ is constant between pings and using
+the average RTT, $b$ can be considered as a good estimation of the
+near future.
 
-Let's measure the QoE using the following classification:
-\begin{itemize}
-\item Perfect: no loss or delay can be distinguish.
-\item Good: if you detect some minimal distortion in the rendering
-  of the sound.
-\item Acceptable: when the effects of the latency are apreciable, but
-  you can communicate with your interlocutor.
-\item Bad: you are able to recognize only small parts of the
-  received audio.
-\item No way: when most of the time only silence is heard.
-\end{itemize}
-
-\subsubsection{In your host}
-
-You don't need to control the network traffic in this scenario because
-it is already shapped when InterCom uses the loopback network
-device. Therefore, simply quantify your QoE when you run InterCom in
-your host.
-
-\subsubsection{In the Internet}
-
+So, for determining $b$ we can:
 \begin{enumerate}
-  
-\item Using the characterization of the Internet link previously
-  obtained, use the command
-  \href{https://man7.org/linux/man-pages/man8/tc.8.html}{\texttt{tc}}
-  to simulate this link locally using
-  \href{https://man7.org/linux/man-pages/man8/tc-netem.8.html}{netem}:
-
-  \begin{lstlisting}{language=bash}
-    sudo tc qdisc add dev lo root netem delay <average_dalay_in_miliseconds> <maximum_average_deviation_in_miliseconds> <Pearson_correlation_coefficient_expressed_as_a_percentage> distribution <uniform|normal|pareto|paretonormal>
-  \end{lstlisting}
-  where:
-  \begin{description}
-  \item [\texttt{qdisc}:] Use the default
-    \href{https://en.wikipedia.org/wiki/FIFO_(computing_and_electronics)}{FIFO}
-    \href{https://wiki.debian.org/TrafficControl}{Queueing DISCipline}
-    for the outgoing traffic.
-  \item [\texttt{add}:] Add a new traffic control rule.
-  \item [\texttt{dev lo}:] The device affected by the
-    rule. \texttt{lo} means \texttt{loopback}.
-  \item [\texttt{root}:] The rule will be applied to all the outbound
-    traffic (it's the root rule of the possible tree of rules).
-  \item [\texttt{netem}:] Use the
-    \href{https://wiki.linuxfoundation.org/networking/netem}{network
-      emulator} to emulate a WAN property.
-  \end{description}
-
-\item Measure the QoE.
-
-\item Remove the \texttt{tc} rule with.
-  
-  \begin{lstlisting}{language=bash}
-    sudo tc qdisc delete dev lo root netem delay <average_dalay_in_miliseconds> <maximum_average_deviation_in_miliseconds> <Pearson_correlation_coefficient_expressed_as_a_percentage> distribution <uniform|normal|pareto|paretonormal>
-  \end{lstlisting}
-
-\item (Optional) You can see the current rules with:
-
-  \begin{lstlisting}{language=bash}
-    tc qdisc show
-  \end{lstlisting}
-
-\item (Optional) It's possible to change a working rule with:
-
-  \begin{lstlisting}{language=bash}
-    sudo tc qdisc change dev lo root netem delay <average_dalay_in_miliseconds> <maximum_average_deviation_in_miliseconds> <Pearson_correlation_coefficient_expressed_as_a_percentage> distribution <uniform|normal|pareto|paretonormal>
-  \end{lstlisting}
-  
+\item Run \texttt{ping} using the smallest possible payload. In this
+  situation we can suppose that
+  \begin{equation}
+    t_p \approx \frac{\text{RTT}}{2}.
+    \label{eq:tp}
+  \end{equation}
+  You should use the smaller RTT of a \texttt{ping} session for such
+  approximation because the real link latency is a constant and the
+  congestion of the link always increases it.
+\item Run \texttt{ping} using the largest possible payload to achieve
+  that most part of the average RTT provided by \texttt{ping}
+  corresponds to $t_t$. This is necessary because the accuracy of the
+  cronometer used by \texttt{ping}, in general, is not high enough to
+  measure $t_t$.
+\item Apply the Equation~\ref{eq:tt} to find $t_t$ as a function of
+  the average RTT and the minimal $t_p$.
+\item Finally, use the Equation~\ref{eq:b} to determine $b$.
 \end{enumerate}
 
-\subsection{(Optional) QoE considering the packet loss}
+If the devices cannot \texttt{ping} each other, and supposing that
+there is only one point in the communication link that is filtering
+the ICMP Echo Request traffic, then we can apply the same technique
+that was used in the previous milestone, which basically consists in
+compute the total RTT as the sum of the RTT from the devices that we
+want to connect (where the InterCom is it supposed to be run) to the
+filter (possiblely, one of your home routers).
 
-For our application, InterCom, a chunk is lost when it arrives too
-late or it never arrives. Therefore, the results of a packet loss or a
-packet delay are almost indistinguishable, except by the average
-latency experimented by the user (the higher the network latency, the
-higher the perceived latency).
-
-For example, the packet loss ratio of $10\%$ can be controlled with
-\texttt{tc} by running:
-
-  \begin{lstlisting}{language=bash}
-    sudo tc qdisc add dev lo root netem loss 10%
-  \end{lstlisting}
+\subsection{Simulate the link}
 
 \section{Timming}
 
