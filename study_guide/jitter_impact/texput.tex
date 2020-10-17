@@ -111,7 +111,7 @@ type of link, it also holds that
 \begin{enumerate}
 \item Ping \texttt{localhost}:
    \begin{lstlisting}{language=bash}
-    ping localhost -c 100 > /tmp/ping.dat
+    ping localhost -c 100 -s <chunk_length_in_bytes> /tmp/ping.dat
   \end{lstlisting}
 Compute the expected (considering that the
   \href{https://en.wikipedia.org/wiki/Round-trip_delay}{RTT} should
@@ -168,7 +168,7 @@ networks. For doing that:
   private network, for example, using\footnote{Notice that the private
   IP addres of your router could be different.}:
   \begin{lstlisting}{language=bash}
-    ping 192.168.1.1
+    ping -s <chunk_length_in_bytes> 192.168.1.1
   \end{lstlisting}
   and to send this data to you. Save this info in
   \texttt{/tmp/<router\_private\_IP\_address>.dat} and characterize
