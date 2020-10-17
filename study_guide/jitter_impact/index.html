@@ -234,7 +234,7 @@ class="MathClass-rel">&#x003E;</mo> <msub><mrow
 ><mi 
 >t</mi></mrow></msub 
 ></math>.
-It also holds that </p><table class="equation"><tr><td> <a 
+For this type of link, it also holds that </p><table class="equation"><tr><td> <a 
  id="x1-4001r2"></a>
 <!--l. 97--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
@@ -691,14 +691,55 @@ quantify your QoE when you run InterCom in your host.
 <!--l. 215--><p class="noindent" >
      </p><ol  class="enumerate1" >
      <li 
-  class="enumerate" id="x1-8002x1">Using the characterization of the Internet link previously obtained, use
-     the command <a 
+  class="enumerate" id="x1-8002x1">Check the current conﬁguration:
+     <!--l. 219-->
+     <div class="lstlisting" id="listing-6"><span class="label"><a 
+ id="x1-8003r5"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">tc</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">qdisc</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">show</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">dev</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">lo</span>
+     
+     </div>
+     <!--l. 223--><p class="noindent" >The output should be something like:
+</p>
+     <!--l. 225-->
+     <div class="lstlisting" id="listing-7"><span class="label"><a 
+ id="x1-8004r6"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">qdisc</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">noqueue</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">0:</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">root</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">refcnt</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">2</span>
+     
+     </div>
+     </li>
+     <li 
+  class="enumerate" id="x1-8006x2">Using the characterization of the Internet link previously obtained, use the
+     command <a 
 href="https://man7.org/linux/man-pages/man8/tc.8.html" ><span 
 class="ectt-1000">tc</span></a> to simulate this link locally using <a 
 href="https://man7.org/linux/man-pages/man8/tc-netem.8.html" >netem</a>:
-     <!--l. 223-->
-     <div class="lstlisting" id="listing-6"><span class="label"><a 
- id="x1-8003r5"></a></span><span 
+     <!--l. 235-->
+     <div class="lstlisting" id="listing-8"><span class="label"><a 
+ id="x1-8007r7"></a></span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
@@ -723,12 +764,14 @@ class="ectt-1000"> </span><span
 class="ectt-1000">&#x003C;</span><span 
 class="ectt-1000">average_delay_in_miliseconds</span><span 
 class="ectt-1000">&#x003E;</span><span 
+class="ectt-1000">ms</span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000">&#x003C;</span><span 
 class="ectt-1000">maximum_average_deviation_in_miliseconds</span><span 
 class="ectt-1000">&#x003E;</span><span 
+class="ectt-1000">ms</span><span 
 class="ectt-1000"> </span><span 
-class="ectt-1000">&#x003C;</span><span 
+class="ectt-1000">%&#x003C;</span><span 
 class="ectt-1000">Pearson_correlation_coefficient_expressed_as_a_percentage</span><span 
 class="ectt-1000">&#x003E;</span><span 
 class="ectt-1000"> </span><span 
@@ -745,7 +788,7 @@ class="ectt-1000">paretonormal</span><span
 class="ectt-1000">&#x003E;</span>
      
      </div>
-     <!--l. 226--><p class="noindent" >where:
+     <!--l. 238--><p class="noindent" >where:
          </p><dl class="description"><dt class="description">
      <span 
 class="ectt-1000">qdisc</span><span 
@@ -765,6 +808,9 @@ class="ecbx-1000">:</span> </dt><dd
 class="description">The device aﬀected by the rule. <span 
 class="ectt-1000">lo </span>means <span 
 class="ectt-1000">loopback</span>.
+                                                                  
+
+                                                                  
          </dd><dt class="description">
      <span 
 class="ectt-1000">root</span><span 
@@ -777,16 +823,121 @@ class="ectt-1000">netem</span><span
 class="ecbx-1000">:</span> </dt><dd 
 class="description">Use the <a 
 href="https://wiki.linuxfoundation.org/networking/netem" >network emulator</a> to emulate a WAN property.</dd></dl>
+     <!--l. 254--><p class="noindent" >Example:
+     </p><!--l. 256--><p class="noindent" >
+         </p><ol  class="enumerate2" >
+         <li 
+  class="enumerate" id="x1-8009x1">Add the rule:
+         <!--l. 259-->
+         <div class="lstlisting" id="listing-9"><span class="label"><a 
+ id="x1-8010r8"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">sudo</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">tc</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">qdisc</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">add</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">dev</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">lo</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">root</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">netem</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">delay</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">100</span><span 
+class="ectt-1000">ms</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">10</span><span 
+class="ectt-1000">ms</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">25%</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">distribution</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">normal</span>
+         
+         </div>
+         </li>
+         <li 
+  class="enumerate" id="x1-8012x2">Check that the rule has been installed with the command:
+         <!--l. 265-->
+         <div class="lstlisting" id="listing-10"><span class="label"><a 
+ id="x1-8013r9"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">tc</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">qdisc</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">show</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">dev</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">lo</span>
+         
+         </div>
+         <!--l. 269--><p class="noindent" >hat should output:
+</p>
+         <!--l. 271-->
+         <div class="lstlisting" id="listing-11"><span class="label"><a 
+ id="x1-8014r10"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">qdisc</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">netem</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">8009:</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">root</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">refcnt</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">2</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">limit</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">1000</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">delay</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">100</span><span 
+class="ectt-1000">ms</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">10</span><span 
+class="ectt-1000">ms</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">25%</span>
+         
+         </div>
+         </li></ol>
      </li>
      <li 
-  class="enumerate" id="x1-8005x2">Measure the QoE.
+  class="enumerate" id="x1-8016x3">Measure the QoE.
      </li>
      <li 
-  class="enumerate" id="x1-8007x3">Remove the <span 
-class="ectt-1000">tc </span>rule with.
-     <!--l. 246-->
-     <div class="lstlisting" id="listing-7"><span class="label"><a 
- id="x1-8008r6"></a></span><span 
+  class="enumerate" id="x1-8018x4">Delete the <span 
+class="ectt-1000">tc </span>rule with:
+     <!--l. 280-->
+     <div class="lstlisting" id="listing-12"><span class="label"><a 
+ id="x1-8019r11"></a></span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
@@ -811,14 +962,16 @@ class="ectt-1000"> </span><span
 class="ectt-1000">&#x003C;</span><span 
 class="ectt-1000">average_dalay_in_miliseconds</span><span 
 class="ectt-1000">&#x003E;</span><span 
+class="ectt-1000">ms</span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000">&#x003C;</span><span 
 class="ectt-1000">maximum_average_deviation_in_miliseconds</span><span 
 class="ectt-1000">&#x003E;</span><span 
+class="ectt-1000">ms</span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000">&#x003C;</span><span 
 class="ectt-1000">Pearson_correlation_coefficient_expressed_as_a_percentage</span><span 
-class="ectt-1000">&#x003E;</span><span 
+class="ectt-1000">&#x003E;%</span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000">distribution</span><span 
 class="ectt-1000"> </span><span 
@@ -833,31 +986,15 @@ class="ectt-1000">paretonormal</span><span
 class="ectt-1000">&#x003E;</span>
      
      </div>
+     </li>
+     <li 
+  class="enumerate" id="x1-8021x5">(Optional) It’s possible to change a working rule with:
+     <!--l. 286-->
                                                                   
 
                                                                   
-     </li>
-     <li 
-  class="enumerate" id="x1-8010x4">(Optional) You can see the current rules with:
-     <!--l. 252-->
-     <div class="lstlisting" id="listing-8"><span class="label"><a 
- id="x1-8011r7"></a></span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">tc</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">qdisc</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">show</span>
-     
-     </div>
-     </li>
-     <li 
-  class="enumerate" id="x1-8013x5">(Optional) It’s possible to change a working rule with:
-     <!--l. 258-->
-     <div class="lstlisting" id="listing-9"><span class="label"><a 
- id="x1-8014r8"></a></span><span 
+     <div class="lstlisting" id="listing-13"><span class="label"><a 
+ id="x1-8022r12"></a></span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
@@ -882,14 +1019,16 @@ class="ectt-1000"> </span><span
 class="ectt-1000">&#x003C;</span><span 
 class="ectt-1000">average_dalay_in_miliseconds</span><span 
 class="ectt-1000">&#x003E;</span><span 
+class="ectt-1000">ms</span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000">&#x003C;</span><span 
 class="ectt-1000">maximum_average_deviation_in_miliseconds</span><span 
 class="ectt-1000">&#x003E;</span><span 
+class="ectt-1000">ms</span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000">&#x003C;</span><span 
 class="ectt-1000">Pearson_correlation_coefficient_expressed_as_a_percentage</span><span 
-class="ectt-1000">&#x003E;</span><span 
+class="ectt-1000">&#x003E;%</span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000">distribution</span><span 
 class="ectt-1000"> </span><span 
@@ -905,25 +1044,25 @@ class="ectt-1000">&#x003E;</span>
      
      </div>
      </li></ol>
-<!--l. 264--><p class="noindent" >
+<!--l. 292--><p class="noindent" >
 </p>
    <h4 class="subsectionHead"><span class="titlemark">2.3   </span> <a 
  id="x1-90002.3"></a>(Optional) QoE considering the packet loss</h4>
-<!--l. 266--><p class="noindent" >For our application, InterCom, a chunk is lost when it arrives too late or it never
+<!--l. 294--><p class="noindent" >For our application, InterCom, a chunk is lost when it arrives too late or it never
 arrives. Therefore, the results of a packet loss or a packet delay are almost
 indistinguishable, except by the average latency experimented by the user (the higher
 the network latency, the higher the perceived latency).
-</p><!--l. 272--><p class="indent" >   For example, the packet loss ratio of
-<!--l. 272--><math 
+</p><!--l. 300--><p class="indent" >   For example, the packet loss ratio of
+<!--l. 300--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mn>1</mn><mn>0</mn><mi 
 >%</mi></math> can
 be controlled with <span 
 class="ectt-1000">tc </span>by running:
 </p>
-   <!--l. 275-->
-   <div class="lstlisting" id="listing-10"><span class="label"><a 
- id="x1-9001r9"></a></span><span 
+   <!--l. 303-->
+   <div class="lstlisting" id="listing-14"><span class="label"><a 
+ id="x1-9001r13"></a></span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
@@ -948,23 +1087,23 @@ class="ectt-1000"> </span><span
 class="ectt-1000">10%</span>
    
    </div>
-<!--l. 279--><p class="noindent" >
+<!--l. 307--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-100003"></a>Timming</h3>
-<!--l. 281--><p class="noindent" >Please, ﬁnish this milestone in one week.
-                                                                  
-
-                                                                  
-</p><!--l. 283--><p class="noindent" >
+<!--l. 309--><p class="noindent" >Please, ﬁnish this milestone in one week.
+</p><!--l. 311--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-110004"></a>Deliverables</h3>
-<!--l. 285--><p class="noindent" >A report showing your results.
-</p><!--l. 287--><p class="noindent" >
+<!--l. 313--><p class="noindent" >A report showing your results.
+</p><!--l. 315--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-120005"></a>Resources</h3>
+                                                                  
+
+                                                                  
    <div class="thebibliography">
    <p class="bibitem" ><span class="biblabel">
  [1]<span class="bibsp">   </span></span><a 
@@ -1017,9 +1156,6 @@ class="ecti-1000">Data and Computer Communications</span></a>. Pearson/Prentice
  id="XTanenbaum"></a>Andrew S. Tanenbaum. <a 
 href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwj9857DgLvsAhUTA2MBHTJfCZ4QFjAAegQIBBAC&url=https%3A%2F%2Fdocs.google.com%2Fviewer%3Fa%3Dv%26pid%3Dsites%26srcid%3DZGVmYXVsdGRvbWFpbnxza21pbmh8Z3g6NjQxMTI2MmYxMTAwZmNjZQ&usg=AOvVaw3m5WEH7H2923_hOFl1e-W-" ><span 
 class="ecti-1000">Computer Networks</span></a>. Prentice Hall, 2011.
-                                                                  
-
-                                                                  
 </p>
    </div>
 <a 

@@ -213,6 +213,18 @@ your host.
 \subsubsection{In the Internet}
 
 \begin{enumerate}
+
+\item Check the current configuration:
+  
+  \begin{lstlisting}{language=bash}
+    tc qdisc show dev lo
+  \end{lstlisting}
+  
+  The output should be something like:
+  
+  \begin{lstlisting}{language=bash}
+    qdisc noqueue 0: root refcnt 2
+  \end{lstlisting}
   
 \item Using the characterization of the Internet link previously
   obtained, use the command
@@ -221,7 +233,7 @@ your host.
   \href{https://man7.org/linux/man-pages/man8/tc-netem.8.html}{netem}:
 
   \begin{lstlisting}{language=bash}
-    sudo tc qdisc add dev lo root netem delay <average_delay_in_miliseconds> <maximum_average_deviation_in_miliseconds> <Pearson_correlation_coefficient_expressed_as_a_percentage> distribution <uniform|normal|pareto|paretonormal>
+    sudo tc qdisc add dev lo root netem delay <average_delay_in_miliseconds>ms <maximum_average_deviation_in_miliseconds>ms %<Pearson_correlation_coefficient_expressed_as_a_percentage> distribution <uniform|normal|pareto|paretonormal>
   \end{lstlisting}
   where:
   \begin{description}
@@ -239,24 +251,40 @@ your host.
       emulator} to emulate a WAN property.
   \end{description}
 
+  Example:
+
+  \begin{enumerate}
+  \item Add the rule:
+    
+    \begin{lstlisting}{language=bash}
+      sudo tc qdisc add dev lo root netem delay 100ms 10ms 25% distribution normal
+    \end{lstlisting}
+    
+  \item Check that the rule has been installed with the command:
+    
+    \begin{lstlisting}{language=bash}
+      tc qdisc show dev lo
+    \end{lstlisting}
+    
+    hat should output:
+    
+    \begin{lstlisting}{language=bash}
+      qdisc netem 8009: root refcnt 2 limit 1000 delay 100ms  10ms 25%
+    \end{lstlisting}
+  \end{enumerate}
+
 \item Measure the QoE.
 
-\item Remove the \texttt{tc} rule with.
+\item Delete the \texttt{tc} rule with:
   
   \begin{lstlisting}{language=bash}
-    sudo tc qdisc delete dev lo root netem delay <average_dalay_in_miliseconds> <maximum_average_deviation_in_miliseconds> <Pearson_correlation_coefficient_expressed_as_a_percentage> distribution <uniform|normal|pareto|paretonormal>
-  \end{lstlisting}
-
-\item (Optional) You can see the current rules with:
-
-  \begin{lstlisting}{language=bash}
-    tc qdisc show
+    sudo tc qdisc delete dev lo root netem delay <average_dalay_in_miliseconds>ms <maximum_average_deviation_in_miliseconds>ms <Pearson_correlation_coefficient_expressed_as_a_percentage>% distribution <uniform|normal|pareto|paretonormal>
   \end{lstlisting}
 
 \item (Optional) It's possible to change a working rule with:
 
   \begin{lstlisting}{language=bash}
-    sudo tc qdisc change dev lo root netem delay <average_dalay_in_miliseconds> <maximum_average_deviation_in_miliseconds> <Pearson_correlation_coefficient_expressed_as_a_percentage> distribution <uniform|normal|pareto|paretonormal>
+    sudo tc qdisc change dev lo root netem delay <average_dalay_in_miliseconds>ms <maximum_average_deviation_in_miliseconds>ms <Pearson_correlation_coefficient_expressed_as_a_percentage>% distribution <uniform|normal|pareto|paretonormal>
   \end{lstlisting}
   
 \end{enumerate}
