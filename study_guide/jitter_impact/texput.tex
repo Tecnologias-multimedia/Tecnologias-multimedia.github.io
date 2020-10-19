@@ -10,7 +10,7 @@
 \href{https://en.wikipedia.org/wiki/Network_delay}{network delay} and
 \href{https://en.wikipedia.org/wiki/End-to-end_delay}{end-to-end
   delay}) is the time that a piece of data (a
-\href{https://en.wikipedia.org/wiki/Network_packet}{packed} in the
+\href{https://en.wikipedia.org/wiki/Network_packet}{packet} in the
 case of the Internet) takes to travel from one point of the network to
 another. This time is relevant for an intercom because the total
 latency $t_u$ that an user experiments is
@@ -36,29 +36,29 @@ In this milestone we are going to measure the
 \href{https://en.wikipedia.org/wiki/Quality_of_experience}{Quality of
   Experience (QoE)} provided by our minimal intercom when the network
 latency varies \href{https://en.wikipedia.org/wiki/Randomness}{at
-  random}. At this point, we have basically two alternatives:
+  random}. In this point, we have basically two alternatives:
 \begin{enumerate}
 \item Run two instances of InterCom in two different
   \href{https://en.wikipedia.org/wiki/Host_(network)}{host}s separated
   by a shared link.
-\item Run one instance of Intercom and simulate the network latency.
+\item Run one instance of InterCom and simulate the network latency.
 \end{enumerate}
 Each option has pros and cons, from which we can highlight that:
 \begin{enumerate}
-\item (Pro) The use of real latency is going to show the definitive
-  behaviour of InterCom between the used hosts, which is quite
-  impredictable (depend basically of the
+\item \textbf{Using a real link:} (Pro) The use of real latency is
+  going to show the definitive behaviour of InterCom between the used
+  hosts, which is quite impredictable (depend basically on the
   \href{https://en.wikipedia.org/wiki/Network_congestion}{network
     congestion}). (Con) To run InterCom in two different hosts we will
   need to establish a direct communication between them and it is very
   likely that we will have to redirect ports in the corresponding
   \href{https://en.wikipedia.org/wiki/Network_address_translation}{NAT}
   devices~\cite{srisuresh1999nat}.
-\item (Pro) The simulation of the link latency is much more
-  straightforward than the opening ports in our routers and (pro) will
-  allow us to run InterCom in situations that are difficult to achieve
-  in a real network. (Con) The running environment must provide a way
-  of controlling the latency between
+\item \textbf{Using a simulated link:} (Pro) The simulation of the
+  link latency is much more straightforward than the opening ports in
+  our routers and (pro) will allow us to run InterCom in situations
+  that are difficult to achieve in a real network. (Con) The running
+  environment must provide a way of controlling the latency between
   \href{https://en.wikipedia.org/wiki/Process_(computing)}{processes}. Fortunately,
   in Linux we can control the latency (and the
   \href{https://en.wikipedia.org/wiki/Bit_rate}{bit-rate}) of the
