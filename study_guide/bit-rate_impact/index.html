@@ -1,0 +1,754 @@
+<!DOCTYPE html> 
+<html> 
+<head> <title>TecnologÃŋas Multimedia- Study Guide - Milestone 7: Impact of the
+Bit-rate</title> 
+<meta charset="UTF-8" /> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
+<link rel="stylesheet" type="text/css" href="index.css" /> 
+<script type="text/javascript" 
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" 
+></script> 
+<style type="text/css"> 
+.MathJax_MathML {text-indent: 0;} 
+</style> 
+</head><body 
+>
+   <div class="maketitle">
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+
+<h2 class="titleHead"><a 
+href="https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN" >Tecnologías Multimedia</a>- Study Guide -
+Milestone 7: Impact of the Bit-rate</h2>
+ <div class="author" ><a 
+href="https://cms.ual.es/UAL/personas/persona.htm?id=515256515553484875" ><span 
+class="ecrm-1200">Vicente Gonz</span><span 
+class="ecrm-1200">á</span><span 
+class="ecrm-1200">lez Ruiz</span></a> <span 
+class="ecrm-1200">- </span><a 
+href="https://cms.ual.es/UAL/universidad/departamentos/informatica/index.htm" ><span 
+class="ecrm-1200">Depto Inform</span><span 
+class="ecrm-1200">á</span><span 
+class="ecrm-1200">tica</span></a> <span 
+class="ecrm-1200">- </span><a 
+href="https://www.ual.es" ><span 
+class="ecrm-1200">UAL</span></a></div><br />
+<div class="date" ><span 
+class="ecrm-1200">October 20, 2020</span></div>
+   </div>
+   <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
+ id="x1-10001"></a>Description</h3>
+<!--l. 8--><p class="noindent" >Along with the latency and its variation (jitter), another main aspect to consider
+about the <a 
+href="https://en.wikipedia.org/wiki/Telecommunications_link" >transmission link</a> used in an InterCom session is the <a 
+href="https://en.wikipedia.org/wiki/Bit_rate" >transmission bit-rate</a>
+(measured in bits per second or a multiple of this transmission capacity) that it can
+provide <span class="cite">[<a 
+href="#XForouzan">1</a>, <a 
+href="#XTanenbaum">3</a>]</span>. This bit-rate depend on the maximum <a 
+href="https://en.wikipedia.org/wiki/Bandwidth_(computing)" >capacity</a> (a characteristic
+closely related with the available bandwidth) and its <a 
+href="https://en.wikipedia.org/wiki/Network_congestion" >congestion level</a> (that basically
+depends on the load) of the link. In general, we can suppose that the capacity is
+constant along the time (the bandwidth provided by the link does not vary
+with the time). On the contrary, the congestion level is time-variying and
+quite unpredictable, because it depends on the behaviour of the network
+users.
+</p><!--l. 26--><p class="indent" >   In this milestone we are going to measure the impact of the transmission bit-rate on
+the <a 
+href="https://en.wikipedia.org/wiki/Quality_of_experience" >QoE</a><span class="footnote-mark"><a 
+href="index2.html#fn1x0"><sup class="textsuperscript">1</sup></a></span><a 
+ id="x1-1001f1"></a> 
+provided by the minimal implementation of InterCom. Similarly to the procedure
+used for measuring the impact of the latency and the jitter, we will use <a 
+href="https://man7.org/linux/man-pages/man8/tc.8.html" ><span 
+class="ectt-1000">tc</span></a> <span class="cite">[<a 
+href="#Xbert2012lartc">2</a>]</span> to
+control the amount of data that an InterCom instance will be allowed to send in a
+local environment, with the aim of simulating a real running context. Notice that this
+upper bound in the bit-rate will also aﬀect to the loss of chunks because if the
+transmission bit-rate is smaller than the audio bit-rate, sooner of later the link will
+discard those chunks that can not be buﬀered in the retranmission nodes (routers and
+                                                                  
+
+                                                                  
+switches)<span class="footnote-mark"><a 
+href="index3.html#fn2x0"><sup class="textsuperscript">2</sup></a></span><a 
+ id="x1-1002f2"></a> .
+</p>
+   <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
+ id="x1-20002"></a>What you have to do?</h3>
+<!--l. 44--><p class="noindent" >
+</p>
+   <h4 class="subsectionHead"><span class="titlemark">2.1   </span> <a 
+ id="x1-30002.1"></a>Estimate the bit-rate in an Internet link</h4>
+<!--l. 46--><p class="noindent" >Usually, we need to use a tool such as <a 
+href="https://iperf.fr/" >iPerf</a> to <a 
+href="https://en.wikipedia.org/wiki/Measuring_network_throughput" >measure the transmission bit-rate</a>
+between two end-points in the Internet. This proceduce implies that we must have
+access to both hosts to install and run this program, privileges that are not always
+available.
+</p><!--l. 54--><p class="indent" >   Alternatively, we can estimate the <a 
+href="https://en.wikipedia.org/wiki/Throughput" >link throughput</a> using <a 
+href="https://github.com/torvalds/linux/blob/master/net/ipv4/ping.c" ><span 
+class="ectt-1000">ping</span></a> (see the previous
+milestone). At this point is important to realize that <span 
+class="ectt-1000">ping </span>has been designed for
+measure latencies, not bit-rates, and that for this reason, we will be able to estimate
+throughputs rougtly.
+</p><!--l. 63--><p class="indent" >   The transmission bitrate available between two directly reachable IP devices can
+be estimated as </p><table class="equation"><tr><td> <a 
+ id="x1-3001r1"></a>
+<!--l. 65--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="block" class="equation">
+                              <mi 
+>b</mi> <mo 
+class="MathClass-rel">=</mo> <mfrac><mrow 
+><mi 
+>B</mi></mrow> 
+<mrow 
+><msub><mrow 
+><mi 
+>t</mi></mrow><mrow 
+><mi 
+>t</mi></mrow></msub 
+></mrow></mfrac> <mo 
+class="MathClass-punc">,</mo>
+</math></td><td class="eq-no">(1)</td></tr></table>
+<!--l. 69--><p class="indent" >   where <!--l. 69--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>B</mi></math>
+is the number of bits sent in a <span 
+class="ectt-1000">ping</span>’s payload.
+</p><!--l. 71--><p class="indent" >   If we revisite the <span 
+class="ectt-1000">ping</span>’s timeline and the Equation (2) of the previous milestone,
+we can see that </p><table class="equation"><tr><td> <a 
+ id="x1-3002r2"></a>
+                                                                  
+
+                                                                  
+<!--l. 73--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="block" class="equation">
+                          <msub><mrow 
+><mi 
+>t</mi></mrow><mrow 
+><mi 
+>t</mi></mrow></msub 
+> <mo 
+class="MathClass-rel">=</mo> <mfrac><mrow 
+><mstyle 
+class="text"><mtext  >RTT</mtext></mstyle> <mo 
+class="MathClass-bin">−</mo> <mn>2</mn><msub><mrow 
+><mi 
+>t</mi></mrow><mrow 
+><mi 
+>p</mi></mrow></msub 
+></mrow> 
+      <mrow 
+><mn>2</mn></mrow></mfrac>       <mo 
+class="MathClass-punc">.</mo>
+</math></td><td class="eq-no">(2)</td></tr></table>
+<!--l. 77--><p class="indent" >   Therefore, supposing that <!--l. 77--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mi 
+>t</mi></mrow><mrow 
+><mi 
+>p</mi></mrow></msub 
+></math>
+is constant between pings and using the average RTT,
+<!--l. 78--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>b</mi></math> can
+be considered as a good estimation of the near future.
+</p><!--l. 81--><p class="indent" >   So, for determining <!--l. 81--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>b</mi></math>
+we can:
+     </p><ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x1-3004x1">Run <span 
+class="ectt-1000">ping </span>using the smallest possible payload that provides RTTs
+     values.<span class="footnote-mark"><a 
+href="index4.html#fn3x0"><sup class="textsuperscript">3</sup></a></span><a 
+ id="x1-3005f3"></a> 
+     In this situation we can suppose that <table class="equation"><tr><td> <a 
+ id="x1-3006r3"></a>
+     <!--l. 88--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="block" class="equation">
+                                             <msub><mrow 
+><mi 
+>t</mi></mrow><mrow 
+><mi 
+>p</mi></mrow></msub 
+> <mo 
+class="MathClass-rel">≈</mo> <mfrac><mrow 
+><mstyle 
+class="text"><mtext  >RTT</mtext></mstyle></mrow> 
+  <mrow 
+><mn>2</mn></mrow></mfrac>   <mo 
+class="MathClass-punc">.</mo>
+</math></td><td class="eq-no">(3)</td></tr></table>
+     <!--l. 92--><p class="noindent" >Notice that we should use the smaller RTT of a <span 
+class="ectt-1000">ping </span>session of measurements
+     for such approximation because the real link latency is a constant and the
+     congestion of the link always increases it.
+     </p></li>
+     <li 
+  class="enumerate" id="x1-3008x2">Run <span 
+class="ectt-1000">ping </span>using the largest possible payload to achieve that
+     most part of the average RTT provided by <span 
+class="ectt-1000">ping </span>corresponds to
+     <!--l. 98--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mi 
+>t</mi></mrow><mrow 
+><mi 
+>t</mi></mrow></msub 
+></math>.
+     This is necessary because the accuracy of the cronometer
+     used by <span 
+class="ectt-1000">ping</span>, in general, is not high enough to measure
+     <!--l. 100--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mi 
+>t</mi></mrow><mrow 
+><mi 
+>t</mi></mrow></msub 
+></math>
+     for small values of the payload size.
+                                                                  
+
+                                                                  
+     </li>
+     <li 
+  class="enumerate" id="x1-3010x3">Use the Equation <a 
+href="#x1-3002r2">2<!--tex4ht:ref: eq:tt --></a> to ﬁnd <!--l. 101--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mi 
+>t</mi></mrow><mrow 
+><mi 
+>t</mi></mrow></msub 
+></math>
+     as a function of the average RTT and the minimal
+     <!--l. 102--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mi 
+>t</mi></mrow><mrow 
+><mi 
+>p</mi></mrow></msub 
+></math>.
+     </li>
+     <li 
+  class="enumerate" id="x1-3012x4">Finally, use the Equation <a 
+href="#x1-3001r1">1<!--tex4ht:ref: eq:b --></a> to determine
+     <!--l. 103--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>b</mi></math>.</li></ol>
+<!--l. 106--><p class="indent" >   (Optional) In order to gain experience with all this stuﬀ, measure your bandwith
+with diﬀerent <span 
+class="ectt-1000">ping </span>servers, try to compute the transmission bit-rate:
+     </p><ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x1-3014x1">In <span 
+class="ectt-1000">localhost</span>.
+     </li>
+     <li 
+  class="enumerate" id="x1-3016x2">Between two hosts in your local network (your host and your router, for
+     example). Notice that in this case, you should not obtain a bit-rate higher
+     than the capacity of your network adapter.
+     </li>
+     <li 
+  class="enumerate" id="x1-3018x3">Between your host and a public host of the Internet. Try <span 
+class="ectt-1000">www.meter.net</span>
+     for example.</li></ol>
+<!--l. 118--><p class="indent" >   (Not optional) If the devices cannot <span 
+class="ectt-1000">ping </span>each other, and supposing that there is
+only one point in the communication link that is ﬁltering the ICMP Echo Request
+traﬃc in each direction, then we can apply the same technique that was used in the
+previous milestone, which basically consists in compute the total RTT as
+the sum of the RTT from the devices that we want to connect (where the
+InterCom is it supposed to be run) to the ﬁlter (possiblely, one of your home
+routers).
+</p><!--l. 127--><p class="noindent" >
+</p>
+   <h4 class="subsectionHead"><span class="titlemark">2.2   </span> <a 
+ id="x1-40002.2"></a>Simulate the link</h4>
+<!--l. 129--><p class="noindent" >With the bit-rate vaule computed from the previous section, simulate such link
+locally with:
+</p>
+   <!--l. 132-->
+<a 
+ id="x1-4001"></a>
+   <div class="lstlisting" id="listing-1"><span class="label"><a 
+ id="x1-4002r1"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">sudo</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">tc</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">qdisc</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">add</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">dev</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">lo</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">root</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">handle</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">1:</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">tbf</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">rate</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">&#x003C;</span><span 
+class="ectt-1000">bit</span><span 
+class="ectt-1000">-</span><span 
+class="ectt-1000">rate_in_kbps</span><span 
+class="ectt-1000">&#x003E;</span><span 
+class="ectt-1000">kbit</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">burst</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">32</span><span 
+class="ectt-1000">kbit</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">limit</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">32</span><span 
+class="ectt-1000">kbit</span><span 
+class="ectt-1000"> </span><br /><span class="label"><a 
+ id="x1-4003r2"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">sudo</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">tc</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">qdisc</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">add</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">dev</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">lo</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">root</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">parent</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">1:1</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">handle</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">10:</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">netem</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">delay</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">&#x003C;</span><span 
+class="ectt-1000">average_delay_in_miliseconds</span><span 
+class="ectt-1000">&#x003E;</span><span 
+class="ectt-1000">ms</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">&#x003C;</span><span 
+class="ectt-1000">maximum_average_deviation_in_miliseconds</span><span 
+class="ectt-1000">&#x003E;</span><span 
+class="ectt-1000">ms</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">&#x003C;</span><span 
+class="ectt-1000">Pearson_correlation_coefficient_expressed_as_a_percentage</span><span 
+class="ectt-1000">&#x003E;%</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">distribution</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">&#x003C;</span><span 
+class="ectt-1000">uniform</span><span 
+class="ectt-1000">|</span><span 
+class="ectt-1000">normal</span><span 
+class="ectt-1000">|</span><span 
+class="ectt-1000">pareto</span><span 
+class="ectt-1000">|</span><span 
+class="ectt-1000">paretonormal</span><span 
+class="ectt-1000">&#x003E;</span>
+   
+   </div>
+<!--l. 137--><p class="indent" >   Example:
+</p><!--l. 139--><p class="indent" >
+                                                                  
+
+                                                                  
+     </p><ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x1-4005x1">Check the current conﬁguration:
+     <!--l. 142-->
+     <div class="lstlisting" id="listing-2"><span class="label"><a 
+ id="x1-4006r3"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">tc</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">qdisc</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">show</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">dev</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">lo</span>
+     
+     </div>
+     <!--l. 146--><p class="noindent" >The output should be something like:
+</p>
+     <!--l. 148-->
+     <div class="lstlisting" id="listing-3"><span class="label"><a 
+ id="x1-4007r4"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">qdisc</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">noqueue</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">0:</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">root</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">refcnt</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">2</span>
+     
+     </div>
+     </li>
+     <li 
+  class="enumerate" id="x1-4009x2">Deﬁne the rule for the bit-rate control (example):
+     <!--l. 154-->
+     <div class="lstlisting" id="listing-4"><span class="label"><a 
+ id="x1-4010r5"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">sudo</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">tc</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">qdisc</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">add</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">dev</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">lo</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">root</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">handle</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">1:</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">tbf</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">rate</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">200</span><span 
+class="ectt-1000">kbit</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">burst</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">32</span><span 
+class="ectt-1000">kbit</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">limit</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">32</span><span 
+class="ectt-1000">kbit</span>
+     
+     </div>
+     </li>
+     <li 
+  class="enumerate" id="x1-4012x3">Deﬁne the rule for the latency control (see previous milestone) (example):
+     <!--l. 160-->
+     <div class="lstlisting" id="listing-5"><span class="label"><a 
+ id="x1-4013r6"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">sudo</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">tc</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">qdisc</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">add</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">dev</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">lo</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">parent</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">1:1</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">handle</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">10:</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">netem</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">delay</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">100</span><span 
+class="ectt-1000">ms</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">10</span><span 
+class="ectt-1000">ms</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">25%</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">distribution</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">normal</span>
+     
+     </div>
+     </li>
+     <li 
+  class="enumerate" id="x1-4015x4">After adding these rules, this should be the conﬁguration:
+     <!--l. 166-->
+     <div class="lstlisting" id="listing-6"><span class="label"><a 
+ id="x1-4016r7"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">tc</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">qdisc</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">show</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">dev</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">lo</span>
+     
+     </div>
+     <!--l. 170--><p class="noindent" >The output should be something like:
+</p>
+     <!--l. 172-->
+     <div class="lstlisting" id="listing-7"><span class="label"><a 
+ id="x1-4017r8"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">qdisc</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">tbf</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">1:</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">root</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">refcnt</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">2</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">rate</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">200</span><span 
+class="ectt-1000">Kbit</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">burst</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">4</span><span 
+class="ectt-1000">Kb</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">lat</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">0</span><span 
+class="ectt-1000">us</span><span 
+class="ectt-1000"> </span><br /><span class="label"><a 
+ id="x1-4018r9"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">qdisc</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">netem</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">10:</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">parent</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">1:1</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">limit</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">1000</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">delay</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">100</span><span 
+class="ectt-1000">ms</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">10</span><span 
+class="ectt-1000">ms</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">25%</span>
+     
+                                                                  
+
+                                                                  
+     </div>
+     </li></ol>
+<!--l. 179--><p class="indent" >   Remember to delete the rules after their are unnecessary (example):
+</p>
+   <!--l. 181-->
+   <div class="lstlisting" id="listing-8"><span class="label"><a 
+ id="x1-4019r10"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">sudo</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">tc</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">qdisc</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">delete</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">dev</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">lo</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">parent</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">1:1</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">handle</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">10:</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">netem</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">delay</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">100</span><span 
+class="ectt-1000">ms</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">10</span><span 
+class="ectt-1000">ms</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">25%</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">distribution</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">normal</span><span 
+class="ectt-1000"> </span><br /><span class="label"><a 
+ id="x1-4020r11"></a></span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">sudo</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">tc</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">qdisc</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">delete</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">dev</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">lo</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">root</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">handle</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">1:</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">tbf</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">rate</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">200</span><span 
+class="ectt-1000">kbit</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">burst</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">32</span><span 
+class="ectt-1000">kbit</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">limit</span><span 
+class="ectt-1000"> </span><span 
+class="ectt-1000">32</span><span 
+class="ectt-1000">kbit</span>
+   
+   </div>
+<!--l. 186--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
+ id="x1-50003"></a>Timming</h3>
+<!--l. 188--><p class="noindent" >Please, ﬁnish this milestone in one week.
+</p><!--l. 190--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
+ id="x1-60004"></a>Deliverables</h3>
+<!--l. 192--><p class="noindent" >A report showing your results.
+</p><!--l. 194--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
+ id="x1-70005"></a>Resources</h3>
+   <div class="thebibliography">
+   <p class="bibitem" ><span class="biblabel">
+ [1]<span class="bibsp">   </span></span><a 
+ id="XForouzan"></a>Behrouz   Forouzan.      <a 
+href="https://docs.google.com/viewer?a=v&pid=sites&srcid=ZWNjaGFuZ2EuYWMuaW58Y2hpbnRhbnxneDo4MDNlMGUwZmQ0ZmU1YmI" ><span 
+class="ecti-1000">Introduction  to  Data  Communications  and</span>
+   <span 
+class="ecti-1000">Networking</span></a>. McGraw-Hill, 2007.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [2]<span class="bibsp">   </span></span><a 
+ id="Xbert2012lartc"></a>Bert Hubert, Thomas Graf, Greg Maxwell, Remco van Mook, Martijn
+   van Oosterhout, Paul B. Schroeder, Jasper Spaans, and Pedro Larroy. <a 
+href="https://lartc.org/" ><span 
+class="ecti-1000">Linux</span>
+   <span 
+class="ecti-1000">Advanced Routing &#x0026; Traﬃc Control</span></a>. Bert Humbert et al., 2012.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [3]<span class="bibsp">   </span></span><a 
+ id="XTanenbaum"></a>Andrew S. Tanenbaum. <a 
+href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwj9857DgLvsAhUTA2MBHTJfCZ4QFjAAegQIBBAC&url=https%3A%2F%2Fdocs.google.com%2Fviewer%3Fa%3Dv%26pid%3Dsites%26srcid%3DZGVmYXVsdGRvbWFpbnxza21pbmh8Z3g6NjQxMTI2MmYxMTAwZmNjZQ&usg=AOvVaw3m5WEH7H2923_hOFl1e-W-" ><span 
+class="ecti-1000">Computer Networks</span></a>. Prentice Hall, 2011.
+</p>
+                                                                  
+
+                                                                  
+   </div>
+<a 
+ id="Q1-1-9"></a>
+    
+</body> 
+</html>
+                                                                  
+
+
