@@ -251,7 +251,7 @@ qdisc noqueue 0: root refcnt 2
   \href{https://man7.org/linux/man-pages/man8/tc-netem.8.html}{netem}:
 
   \begin{lstlisting}{language=bash}
-sudo tc qdisc add dev lo root netem delay <average_delay_in_miliseconds>ms <maximum_average_deviation_in_miliseconds>ms %<Pearson_correlation_coefficient_expressed_as_a_percentage> distribution <uniform|normal|pareto|paretonormal>
+sudo tc qdisc add dev lo root netem delay <average_delay_in_miliseconds>ms <maximum_average_deviation_in_miliseconds>ms <Pearson_correlation_coefficient_expressed_as_a_percentage>% distribution <uniform|normal|pareto|paretonormal>
   \end{lstlisting}
   where:
   \begin{description}

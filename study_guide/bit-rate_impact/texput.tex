@@ -57,10 +57,9 @@ Alternatively, we can estimate the
 \href{https://en.wikipedia.org/wiki/Throughput}{link throughput} using
 \href{https://github.com/torvalds/linux/blob/master/net/ipv4/ping.c}{\texttt{ping}}
 (see the previous milestone). At this point is important to realize
- that
-\texttt{ping} has been designed for measure latencies, not bit-rates,
-and that for this reason, we will be able to estimate throughputs
-rougtly.
+that \texttt{ping} has been designed for measure latencies, not
+bit-rates, and that for this reason, we will be able only to estimate
+throughputs, rougtly.
 
 The transmission bitrate available between two directly reachable IP
 devices can be estimated as
@@ -70,7 +69,7 @@ devices can be estimated as
 \end{equation}
 where $B$ is the number of bits sent in a \texttt{ping}'s payload.
 
-If we revisite the \texttt{ping}'s timeline and the Equation~(2) of
+If we revisite the \texttt{ping}'s timeline and the Equation~2 of
 the previous milestone, we can see that
 \begin{equation}
   t_t = \frac{\text{RTT}-2t_p}{2}.
@@ -96,7 +95,7 @@ So, for determining $b$ we can:
   is a constant and the congestion of the link always increases
   it.
 \item Run \texttt{ping} using the largest possible payload to achieve
-  that most part of the average RTT provided by \texttt{ping}
+  that the most part of the average RTT provided by \texttt{ping}
   corresponds to $t_t$. This is necessary because the accuracy of the
   cronometer used by \texttt{ping}, in general, is not high enough to
   measure $t_t$ for small values of the payload size.
