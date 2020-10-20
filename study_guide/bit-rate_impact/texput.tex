@@ -14,8 +14,10 @@ to consider about the
 capacity) that it can provide~\cite{Forouzan,Tanenbaum}. This bit-rate
 depend on the maximum
 \href{https://en.wikipedia.org/wiki/Bandwidth_(computing)}{capacity}
-(a characteristic closely related with the available bandwidth) and
-its \href{https://en.wikipedia.org/wiki/Network_congestion}{congestion
+(a characteristic closely related with the available
+\href{https://en.wikipedia.org/wiki/Bandwidth_(signal_processing)}{bandwidth})
+and its
+\href{https://en.wikipedia.org/wiki/Network_congestion}{congestion
   level} (that basically depends on the load) of the link. In general,
 we can suppose that the capacity is constant along the time (the
 bandwidth provided by the link does not vary with the time). On the
@@ -35,7 +37,7 @@ allowed to send in a local environment, with the aim of simulating a
 real running context. Notice that this upper bound in the bit-rate
 will also affect to the loss of chunks because if the transmission
 bit-rate is smaller than the audio bit-rate, sooner of later the link
-will discard those chunks that can not be buffered in the retranmission
+will discard those chunks that can not be buffered in the retransmission
 nodes (routers and switches)\footnote{Notice that, in this case, we
 would be at least contributing, if not causing, the link congestion.}.
 
