@@ -22,11 +22,30 @@ and \href{https://en.wikipedia.org/wiki/Huffman_coding}{Huffman Coding}~\cite{ne
   standard library
   \href{https://docs.python.org/3/library/zlib.html}{\texttt{zlib}}. Store
   this class in a module named \texttt{compress.py}.
+\item Compress (and decompress) each chunk as a unit (each compressed
+  chunk will be transmitted in a different UDP packet). In order to
+  increase slightly the
+  \href{https://en.wikipedia.org/wiki/Data_compression_ratio}{(data)
+    compression ratio}, reorder (re-sort) as:
+\begin{pseudocode}{packing\_instructions\_before\_compression}{~}
+  \PROCEDURE{Record\_IO\_and\_Play}{~}
+  \BEGIN
+    \mathtt{chunk} \GETS \mathtt{record()}\\
+    \mathtt{packed\_chunk} \GETS \mathtt{pack(chunk)}\\
+    \mathtt{send(packed\_chunk)}\\
+    \mathtt{packed\_chunk} \GETS \mathtt{receive()}\\
+    \mathtt{chunk} \GETS \mathtt{unpack(packed\_chunk)}\\
+    \mathtt{play(chunk)}
+  \END
+  \ENDPROCEDURE
+\end{pseudocode}
+
+  the chunk data to put consecutive 
 \end{enumerate}
 
 \section{Timming}
 
-You should finish this milestone at most in two weeks.
+Please, finish this milestone at most in one week.
 
 \section{Deliverables}
 

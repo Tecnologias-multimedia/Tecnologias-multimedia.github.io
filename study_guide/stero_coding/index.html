@@ -39,7 +39,7 @@ class="ecrm-1200">- </span><a
 href="https://www.ual.es" ><span 
 class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
-class="ecrm-1200">October 7, 2020</span></div>
+class="ecrm-1200">October 21, 2020</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
@@ -48,7 +48,7 @@ href="https://en.wikipedia.org/wiki/Correlation_and_dependence" >Correlation</a>
 <a 
 href="https://en.wikipedia.org/wiki/Random_variable" >random variables</a>. It can be measured by the <a 
 href="https://www.mathsisfun.com/data/correlation.html" >correlation coeﬃcient</a> <span class="cite">[<a 
-href="#Xthinkstats">1</a>]</span>.
+href="#Xthinkstats">2</a>]</span>.
 </p><!--l. 14--><p class="indent" >   In the case of InterCom, the random variables are the two channels (left
 <!--l. 15--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
@@ -60,8 +60,8 @@ display="inline" ><mi
 >R</mi></math>)
 of the <a 
 href="https://en.wikipedia.org/wiki/Stereophonic_sound" >stereo <a 
-href="https://en.wikipedia.org/wiki/Pulse-code_modulation" >PCM</a> signal</a> <span class="cite">[<span 
-class="ecbx-1000">?</span>]</span>. In most cases, both channels are
+href="https://en.wikipedia.org/wiki/Pulse-code_modulation" >PCM</a> signal</a> <span class="cite">[<a 
+href="#Xbosi2003intro">1</a>]</span>. In most cases, both channels are
 going to be <a 
 href="https://en.wikipedia.org/wiki/Binaural_recording" >highly correlated</a> (especially if the microphone is mono),
 which means that we can represent one of them (for example, the
@@ -77,7 +77,7 @@ channel). From a mathematical point of view, this process can be seen as a
 <a 
 href="https://en.wikipedia.org/wiki/Decorrelation" >decorrelation</a> process. From a physical perspective, decorrelating implies energy
 accumulation <span class="cite">[<a 
-href="#Xsayood2017introduction">2</a>]</span>.
+href="#Xsayood2017introduction">3</a>]</span>.
 </p><!--l. 28--><p class="indent" >   To perform this inter-channel decorrelation, we use an <a 
 href="https://en.wikipedia.org/wiki/Orthogonal_transformation" >orthogonal</a> transform </p><table class="equation"><tr><td>
 <a 
@@ -140,7 +140,7 @@ display="inline" ><mn>1</mn><mo
 class="MathClass-bin">∕</mo><msqrt><mrow><mn>2</mn></mrow></msqrt></math>
 (which is closely related with the <a 
 href="http://wavelets.pybytes.com/wavelet/haar/" >Haar transform</a> <span class="cite">[<a 
-href="#Xvetterli1995wavelets">4</a>]</span>), and
+href="#Xvetterli1995wavelets">5</a>]</span>), and
 <!--l. 38--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
@@ -446,7 +446,7 @@ type of in-place computations are commonly used in the implementation of DWTs
 (<a 
 href="https://en.wikipedia.org/wiki/Discrete_wavelet_transform" >Dicrete Wavelet Transform</a>s) using <a 
 href="https://cm-bell-labs.github.io/who/wim/papers/athome/athome.pdf" >the Lifting Scheme</a> <span class="cite">[<a 
-href="#X2006.sweldens">3</a>]</span>.
+href="#X2006.sweldens">4</a>]</span>.
 </p><!--l. 86--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
@@ -499,6 +499,15 @@ repo.
    <div class="thebibliography">
    <p class="bibitem" ><span class="biblabel">
  [1]<span class="bibsp">   </span></span><a 
+ id="Xbosi2003intro"></a>Marina Bosi and Richard E. Goldberd.  <a 
+href="http://www.pce-fet.com/common/library/books/34/1314_[Marina_Bosi,__Richard_E._Goldberg__(auth.)#_" id="I" ><span 
+class="ecti-1000">ntro(b-ok.org).pdf]</span><span 
+class="ecti-1000">Introduction</span>
+   <span 
+class="ecti-1000">to Digital Audio Coding and Standards</span></a>. Kluwer Academic Publishers, 2003.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [2]<span class="bibsp">   </span></span><a 
  id="Xthinkstats"></a>Allen B.   Downey.       <a 
 href="https://greenteapress.com/thinkstats/thinkstats.pdf" ><span 
 class="ecti-1000">Think   Stats   Probability   and   Statistics   for</span>
@@ -506,14 +515,14 @@ class="ecti-1000">Think   Stats   Probability   and   Statistics   for</span>
 class="ecti-1000">Programmers</span></a>. O’Reilly, 2011.
    </p>
    <p class="bibitem" ><span class="biblabel">
- [2]<span class="bibsp">   </span></span><a 
+ [3]<span class="bibsp">   </span></span><a 
  id="Xsayood2017introduction"></a>Khalid Sayood.  <a 
 href="http://rahilshaikh.weebly.com/uploads/1/1/6/3/11635894/data_compression.pdf" ><span 
 class="ecti-1000">Introduction to data compression</span></a>.  Morgan Kaufmann,
    2017.
    </p>
    <p class="bibitem" ><span class="biblabel">
- [3]<span class="bibsp">   </span></span><a 
+ [4]<span class="bibsp">   </span></span><a 
  id="X2006.sweldens"></a>Wim Sweldens.  <a 
 href="http://cm.bell-labs.com/who/wim/papers/lift1.pdf" >The Liﬁng Scheme: A Custom-Desing Constuction of
    Biorthogonal  Wavelets</a>.   <span 
@@ -521,13 +530,16 @@ class="ecti-1000">Applied and Computational Harmonic Analysis</span>,
    3(2):186–200, 1996.
    </p>
    <p class="bibitem" ><span class="biblabel">
- [4]<span class="bibsp">   </span></span><a 
+ [5]<span class="bibsp">   </span></span><a 
  id="Xvetterli1995wavelets"></a>Martin Vetterli and Jelena Kovacevic.  <a 
 href="http://waveletsandsubbandcoding.org/Repository/VetterliKovacevic95_Manuscript.pdf" ><span 
 class="ecti-1000">Wavelets and Subband Coding</span></a>.
    Prentice-hall, 1995.
 </p>
    </div>
+                                                                  
+
+                                                                  
 <a 
  id="Q1-1-6"></a>
     
