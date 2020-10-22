@@ -40,7 +40,7 @@ class="ecrm-1200">- </span><a
 href="https://www.ual.es" ><span 
 class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
-class="ecrm-1200">October 7, 2020</span></div>
+class="ecrm-1200">October 22, 2020</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
@@ -72,17 +72,41 @@ on <a
 href="https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Storer%E2%80%93Szymanski" >LZSS</a> and <a 
 href="https://en.wikipedia.org/wiki/Huffman_coding" >Huﬀman Coding</a> <span class="cite">[<a 
 href="#Xnelson96datacompression">1</a>]</span>.
-</p><!--l. 15--><p class="noindent" >
 </p>
+   <hr class="figure" /><div class="figure" 
+>
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+<div class="center" 
+>
+<!--l. 16--><p class="noindent" >
+</p><!--l. 17--><p class="noindent" ><div style="text-align:center;"> <img width=500 src="graphics/reordering.svg" /> </div>  </p></div>
+<a 
+ id="x1-1001r1"></a>
+<a 
+ id="x1-1002"></a>
+<br />                                                                  <div class="caption" 
+><span class="id">
+Figure 1: : </span><span  
+class="content">Sample reordering to create two independent channels.
+</span></div><!--tex4ht:label?: x1-1001r1 -->
+                                                                  
+
+                                                                  
+   </div><hr class="endfigure" />
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
  id="x1-20002"></a>What you have to do?</h3>
-<!--l. 17--><p class="noindent" >
+<!--l. 25--><p class="noindent" >
      </p><ol  class="enumerate1" >
      <li 
   class="enumerate" id="x1-2002x1">Create a class named <span 
 class="ectt-1000">Compress</span>, that inherits from <span 
 class="ectt-1000">Minimal </span>(the class
-     implemented in the previous milestone), in which the methods <!--l. 20--><math 
+     implemented in the previous milestone), in which the methods <!--l. 28--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mi 
 >p</mi><mi 
@@ -91,7 +115,7 @@ display="inline" ><mstyle mathvariant="monospace"><mi
 >k</mi><mrow ><mo 
 class="MathClass-open">(</mo><mrow></mrow><mo 
 class="MathClass-close">)</mo></mrow></mstyle></math>
-     and <!--l. 20--><math 
+     and <!--l. 28--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mi 
 >u</mi><mi 
@@ -106,26 +130,30 @@ class="MathClass-close">)</mo></mrow></mstyle></math>
      standard library <a 
 href="https://docs.python.org/3/library/zlib.html" ><span 
 class="ectt-1000">zlib</span></a>. Store this class in a module named <span 
-class="ectt-1000">compress.py</span>.</li></ol>
-                                                                  
-
-                                                                  
-<!--l. 27--><p class="noindent" >
+class="ectt-1000">compress.py</span>.
+     </li>
+     <li 
+  class="enumerate" id="x1-2004x2">Compress (and decompress) each chunk as a unit (each compressed chunk
+     will be transmitted in a diﬀerent UDP packet). In order to increase slightly
+     the <a 
+href="https://en.wikipedia.org/wiki/Data_compression_ratio" >(data) compression ratio</a>, reorder the samples as it is shown in the
+     Figure <a 
+href="#x1-1001r1">1<!--tex4ht:ref: fig:reordering --></a>.</li></ol>
+<!--l. 41--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-30003"></a>Timming</h3>
-<!--l. 29--><p class="noindent" >You should ﬁnish this milestone at most in two weeks.
-</p><!--l. 31--><p class="noindent" >
+<!--l. 43--><p class="noindent" >Please, ﬁnish this milestone at most in one week.
+</p><!--l. 45--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-40004"></a>Deliverables</h3>
-<!--l. 33--><p class="noindent" >The modules <span 
-class="ectt-1000">intercom_minimal_zlib.py </span>and <span 
-class="ectt-1000">intercom_inter_zlib.py</span>. Store
-them at the <a 
-href="https://github.com/Tecnologias-multimedia/intercom" >root directory</a> of your <span 
+<!--l. 47--><p class="noindent" >Create a Python module named <span 
+class="ectt-1000">compress.py </span>and store it in the <a 
+href="https://github.com/Tecnologias-multimedia/intercom" >root directory</a> of
+your <span 
 class="ectt-1000">intercom</span>’s repo.
-</p><!--l. 38--><p class="noindent" >
+</p><!--l. 51--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-50005"></a>Resources</h3>
@@ -137,6 +165,9 @@ href="http://index-of.co.uk/Information-Theory/The%20Data%20Compression%20Book%2
 class="ecti-1000">The Data Compression Book</span></a>.  M&#x0026;T Books,
    1996.
 </p>
+                                                                  
+
+                                                                  
    </div>
 <a 
  id="Q1-1-6"></a>
