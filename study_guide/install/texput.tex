@@ -51,6 +51,12 @@ Unix-based OS machines.
 
     \begin{lstlisting}[language=Bash]
       sudo apt-get install -y build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl git
+      curl https://pyenv.run | bash
+      cat << EOF >> ~/.bashrh
+      export PATH="$HOME/.pyenv/bin:$PATH"
+      eval "$(pyenv init -)"
+      EOF
+      source ~/.bashrc
       pyenv install -v 3.8.5
       pyenv virtualenv 3.8.5 tm
     \end{lstlisting}
