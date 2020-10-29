@@ -1,0 +1,172 @@
+<!DOCTYPE html> 
+<html> 
+<head> <title>TecnologÃŋas Multimedia- Study Guide - Milestone 6: Buﬀering for dejitterizing</title> 
+<meta charset="UTF-8" /> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
+<link rel="stylesheet" type="text/css" href="index.css" /> 
+<script type="text/javascript" 
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" 
+></script> 
+<style type="text/css"> 
+.MathJax_MathML {text-indent: 0;} 
+</style> 
+</head><body 
+>
+   <div class="maketitle">
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+
+<h2 class="titleHead"><a 
+href="https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN" >Tecnologías Multimedia</a>- Study Guide -
+Milestone 6: Buﬀering for dejitterizing</h2>
+ <div class="author" ><a 
+href="https://cms.ual.es/UAL/personas/persona.htm?id=515256515553484875" ><span 
+class="ecrm-1200">Vicente Gonz</span><span 
+class="ecrm-1200">á</span><span 
+class="ecrm-1200">lez Ruiz</span></a> <span 
+class="ecrm-1200">- </span><a 
+href="https://cms.ual.es/UAL/universidad/departamentos/informatica/index.htm" ><span 
+class="ecrm-1200">Depto Inform</span><span 
+class="ecrm-1200">á</span><span 
+class="ecrm-1200">tica</span></a> <span 
+class="ecrm-1200">- </span><a 
+href="https://www.ual.es" ><span 
+class="ecrm-1200">UAL</span></a></div><br />
+<div class="date" ><span 
+class="ecrm-1200">October 29, 2020</span></div>
+   </div>
+   <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
+ id="x1-10001"></a>Description</h3>
+<!--l. 8--><p class="noindent" >The QoE provided by InterCom is inversely proportional to the jitter. One solution
+to this drawback (see the Fig. <a 
+href="#x1-1001r1">1<!--tex4ht:ref: fig:timelines --></a>) is the use of a random access buﬀer at the receiver
+side, where the chunks are stored for a time large enough to hidden the jitter to the
+user.
+</p>
+   <hr class="figure" /><div class="figure" 
+>
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+<div class="center" 
+>
+<!--l. 15--><p class="noindent" >
+</p><!--l. 16--><p class="noindent" ><div style="text-align:center;"> <img width=1000 src="graphics/timelines.svg" /> </div>  </p></div>
+<a 
+ id="x1-1001r1"></a>
+<a 
+ id="x1-1002"></a>
+<br />                                                                  <div class="caption" 
+><span class="id">
+Figure 1:  :  </span><span  
+class="content">Timelines  of  two  sender/receiver  interactions.  On  the  left,  the
+playback is defective because some chunks are lost. On the right, the audio
+rendering is right because the playback has been delayed 2 chunk times.
+</span></div><!--tex4ht:label?: x1-1001r1 -->
+                                                                  
+
+                                                                  
+   </div><hr class="endfigure" />
+<!--l. 25--><p class="indent" >   Dejitterizing buﬀers are typically implemented with a circular buﬀer (see the
+Fig. <a 
+href="#x1-1003r2">2<!--tex4ht:ref: fig:circular_buffer --></a>). The size of the buﬀer is the double of the number of the chunks that can
+stored in the buﬀer during the buﬀering time. In an ideal transmission (without
+packed reordering in transit), the chunks in this example have arrived in order (ﬁrst
+the chunk 0, next the chunk 1, and ﬁnally, the chunk 2). After the buﬀering
+time, the chunk 0 must be played, and after this, the rest of chunks that
+will be found in the circular buﬀer during the playback of the rest of the
+stream.
+</p>
+   <hr class="figure" /><div class="figure" 
+>
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+<div class="center" 
+>
+<!--l. 36--><p class="noindent" >
+</p><!--l. 37--><p class="noindent" ><div style="text-align:center;"> <img width=300 src="graphics/circular_buffer.svg" /> </div>  </p></div>
+<a 
+ id="x1-1003r2"></a>
+<a 
+ id="x1-1004"></a>
+<br />                                                                  <div class="caption" 
+><span class="id">
+Figure 2: : </span><span  
+class="content">A circular buﬀer with 6 cells (space for 6 chunks). Half of the buﬀer
+is occupied because the buﬀering time is 3 chunk times and 3 chunks (with
+chunk number 0, 1 and 2) have been received. The ﬁrst chunk to be played is
+chunk 0.
+</span></div><!--tex4ht:label?: x1-1003r1 -->
+                                                                  
+
+                                                                  
+   </div><hr class="endfigure" />
+<!--l. 46--><p class="indent" >   For this new improved InterCom the parameter <span 
+class="ecti-1000">buﬀering time </span>must be provided
+by the users. This value (tipycally expressed in miliseconds) should be large enough
+to hide the network jitter, but small enough to minimize the end-to-end (user)
+latency.
+</p><!--l. 51--><p class="indent" >   Follow these basic guidelines to implement the <span 
+class="ecti-1000">buﬀered </span>version of InterCom:
+     </p><ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x1-1006x1">Extend (inherit from) the class Minimal to implement a new class Buﬀer.
+     </li>
+     <li 
+  class="enumerate" id="x1-1008x2">In the payload of the UDP packets a chunk number must be included in
+     order to provide to the receiver the information to decide where to store
+     the corresponding chunk in the circular buﬀer. Use an unsigned integer of
+     16 bits for representing the chunk numbers.
+     </li>
+     <li 
+  class="enumerate" id="x1-1010x3">Take into account that the critical part of InterCom is a task that could be
+     called <span 
+class="ecti-1000">record-send-and-play</span>, and this should be iterated each time a new chunk
+     is available in the ADC. More precisely:
+         <ol  class="enumerate2" >
+         <li 
+  class="enumerate" id="x1-1012x1">The recorded chunks must be sent to the interlocutor as soon as
+         possible in order to minimize the latency.
+         </li>
+         <li 
+  class="enumerate" id="x1-1014x2">The  playback  of  the  chunks  extracted  from  the  buﬀer  must  be
+         <span 
+class="ecti-1000">seamless </span>(without the ocurrence of silences) as long as the chunks
+         have been received on time.</li></ol>
+     </li></ol>
+   <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
+ id="x1-20002"></a>Timming</h3>
+<!--l. 77--><p class="noindent" >Please, ﬁnish this milestone in two weeks.
+</p><!--l. 79--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
+ id="x1-30003"></a>Deliverables</h3>
+<!--l. 81--><p class="noindent" >A python module called <span 
+class="ectt-1000">buffer.py </span>stored in the root directory of the intercom’s
+repo.
+                                                                  
+
+                                                                  
+</p><!--l. 84--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
+ id="x1-40004"></a>Resources</h3>
+<a 
+ id="Q1-1-5"></a>
+    
+</body> 
+</html>
+                                                                  
+
+
