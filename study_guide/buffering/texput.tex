@@ -1,9 +1,24 @@
 \input{../definitions}
-\title{\TM - Study Guide - Milestone 6: Impact of the Jitter}
+\title{\TM - Study Guide - Milestone 6: Buffering for dejitterizing}
 
 \maketitle
 
 \section{Description}
+
+The QoE provided by InterCom is inversely proportional to the
+jitter. One solution to this drawback (see the
+Fig.~\ref{fig:timelines}) is the use of a random access buffer an the
+receiver side, where the chunks are stored for a time large enough to
+hidden the jitter to user.
+
+\begin{figure}
+  \begin{center}
+    \myfig{graphics/timelines}{10cm}{1000}
+  \end{center}
+  \caption{Timelines of two sender/receiver interactions. On the left, the audio rendering is  of a ping interaction between two host A and B
+    interconnected by simple communication link.}
+  \label{fig:ping_timeline}
+\end{figure}
 
 \href{https://en.wikipedia.org/wiki/Latency_(engineering)#Communication_latency}{Communication
   latency} (also called
