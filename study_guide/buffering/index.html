@@ -44,9 +44,12 @@ class="ecrm-1200">October 30, 2020</span></div>
 <!--l. 8--><p class="noindent" >The QoE provided by InterCom is inversely proportional to the network jitter (see
 Fig. <a 
 href="#x1-1001r1">1<!--tex4ht:ref: fig:timelines --></a>-a). One solution to this drawback (Fig. <a 
-href="#x1-1001r1">1<!--tex4ht:ref: fig:timelines --></a>-b) is the use of a random access
-buﬀer at the receiver side, where the chunks are stored for a time large enough to
-hidden the jitter to the user.
+href="#x1-1001r1">1<!--tex4ht:ref: fig:timelines --></a>-b) is the use of a <a 
+href="https://en.wikipedia.org/wiki/Random_access" >random access</a>
+<a 
+href="https://en.wikipedia.org/wiki/Data_buffer" >buﬀer</a> at the receiver side, where the chunks are stored for a time large enough to
+hidden the jitter to the user <span class="cite">[<a 
+href="#XKurose-Ross">1</a>]</span>.
 </p>
    <hr class="figure" /><div class="figure" 
 >
@@ -58,8 +61,8 @@ hidden the jitter to the user.
                                                                   
 <div class="center" 
 >
-<!--l. 15--><p class="noindent" >
-</p><!--l. 16--><p class="noindent" ><div style="text-align:center;"> <img width=1000 src="graphics/timelines.svg" /> </div>  </p></div>
+<!--l. 17--><p class="noindent" >
+</p><!--l. 18--><p class="noindent" ><div style="text-align:center;"> <img width=1000 src="graphics/timelines.svg" /> </div>  </p></div>
 <a 
  id="x1-1001r1"></a>
 <a 
@@ -76,32 +79,32 @@ example).
 
                                                                   
    </div><hr class="endfigure" />
-<!--l. 26--><p class="indent" >   <a 
+<!--l. 28--><p class="indent" >   <a 
 href="https://en.wikipedia.org/wiki/Jitter#Jitter_buffers" ><span 
-class="ecti-1000">Dejitterizing </span>buﬀers</a> are typically implemented with a circular buﬀer (see the
-Fig. <a 
-href="#x1-1004r2">2<!--tex4ht:ref: fig:circular_buffer --></a>). In an ideal situation (as the depicted in the previous ﬁgure), the number of
-unplayed chunks available in the buﬀer is half of the number of cells, and
-the chunks arrive in order. In this example, the receiver (where the chunks
-are buﬀered) waits for 3 chunks before to start playing the chunk number
+class="ecti-1000">Dejitterizing </span>buﬀers</a> are typically implemented with a circular buﬀer structure
+(see the Fig. <a 
+href="#x1-1004r2">2<!--tex4ht:ref: fig:circular_buffer --></a>). In an ideal situation (as the depicted in the ﬁgure), the number of
+pending-to-be-played chunks available in the buﬀer is half of the number of cells in
+the buﬀer, and the chunks have arrived on time. In this example, the receiver (where
+the chunks are buﬀered) waits for 3 chunks before to start playing the chunk number
 0.<span class="footnote-mark"><a 
 href="index2.html#fn1x0"><sup class="textsuperscript">1</sup></a></span><a 
  id="x1-1003f1"></a>  Notice that the number
-of cells in the buﬀer <!--l. 36--><math 
+of cells in the buﬀer <!--l. 39--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mn>2</mn><mi 
 >N</mi></math>
 must be the double of the number of the chunks buﬀered during the buﬀering time
-<!--l. 38--><math 
+<!--l. 40--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >N</mi></math>, in order
-to hide a <!--l. 38--><math 
+to hide a <!--l. 40--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >N</mi></math>
 chunk-time jitter. Notice also that this technique introduces also a
-<!--l. 39--><math 
+<!--l. 41--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >N</mi></math>
@@ -122,9 +125,9 @@ id="TBL-2-1" /><col
 id="TBL-2-2" /><col 
 id="TBL-2-3" /></colgroup><tr  
  style="vertical-align:baseline;" id="TBL-2-1-"><td  style="text-align:center; white-space:nowrap;" id="TBL-2-1-1"  
-class="td11"> <!--l. 43--><p class="noindent" ><div style="text-align:center;"> <img width=200 src="graphics/circular_buffer1.svg" /> </div>                                                                    </p></td><td  style="text-align:center; white-space:nowrap;" id="TBL-2-1-2"  
-class="td11"> <!--l. 43--><p class="noindent" ><div style="text-align:center;"> <img width=200 src="graphics/circular_buffer2.svg" /> </div>                                                                    </p></td><td  style="text-align:center; white-space:nowrap;" id="TBL-2-1-3"  
-class="td11"> <!--l. 43--><p class="noindent" ><div style="text-align:center;"> <img width=200 src="graphics/circular_buffer3.svg" /> </div>                                                                    </p></td>
+class="td11"> <!--l. 46--><p class="noindent" ><div style="text-align:center;"> <img width=200 src="graphics/circular_buffer1.svg" /> </div>                                                                    </p></td><td  style="text-align:center; white-space:nowrap;" id="TBL-2-1-2"  
+class="td11"> <!--l. 46--><p class="noindent" ><div style="text-align:center;"> <img width=200 src="graphics/circular_buffer2.svg" /> </div>                                                                    </p></td><td  style="text-align:center; white-space:nowrap;" id="TBL-2-1-3"  
+class="td11"> <!--l. 46--><p class="noindent" ><div style="text-align:center;"> <img width=200 src="graphics/circular_buffer3.svg" /> </div>                                                                    </p></td>
 </tr><tr  
  style="vertical-align:baseline;" id="TBL-2-2-"><td  style="text-align:center; white-space:nowrap;" id="TBL-2-2-1"  
 class="td11">                                 (a)                                                    </td><td  style="text-align:center; white-space:nowrap;" id="TBL-2-2-2"  
@@ -147,17 +150,18 @@ Then, a new chunk (chunk number 3) is received and buﬀered (subﬁgure (c)).
 
                                                                   
    </div><hr class="endfigure" />
-<!--l. 64--><p class="indent" >   For this new improved InterCom the parameter <span 
-class="ecti-1000">buﬀering time </span>must be provided
-by the users. This value (typically expressed in miliseconds) should be large enough
-to hide the network jitter, but small enough to minimize the end-to-end (user)
-latency.
-</p><!--l. 69--><p class="indent" >   Use the following basic guidelines to implement the <span 
+<!--l. 58--><p class="indent" >   For this new improved InterCom a parameter with the <span 
+class="ecti-1000">buﬀering time </span>must be
+provided by the users. This value (typically expressed in miliseconds) should be large
+enough to hide the network jitter, but small enough to minimize the end-to-end
+(user) latency.
+</p><!--l. 63--><p class="indent" >   Use the following basic guidelines to implement the <span 
 class="ecti-1000">buﬀered </span>version of
 InterCom:
      </p><ol  class="enumerate1" >
      <li 
-  class="enumerate" id="x1-1007x1">Extend (inherit from) the class <span 
+  class="enumerate" id="x1-1007x1">Extend (<a 
+href="https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)" >inherit</a> from) the class <span 
 class="ectt-1000">Minimal </span>to implement a new class <span 
 class="ectt-1000">Buffer</span>.
      </li>
@@ -168,20 +172,23 @@ class="ectt-1000">Buffer</span>.
      integer of 16 bits for representing the chunk numbers.
      </li>
      <li 
-  class="enumerate" id="x1-1011x3">Take into account that the critical part of InterCom is a task that could be
+  class="enumerate" id="x1-1011x3">Take into account that the critical part of InterCom is a <a 
+href="https://en.wikipedia.org/wiki/Task_(computing)" >task</a> that could be
      called <span 
 class="ecti-1000">record-send-and-play</span>, and this should be iterated each time a new chunk
-     is available in the ADC. More precisely:
+     is available in the <a 
+href="https://en.wikipedia.org/wiki/Analog-to-digital_converter" >ADC</a>. More precisely:
          <ol  class="enumerate2" >
          <li 
-  class="enumerate" id="x1-1013x1">The recorded chunks must be sent to the interlocutor as soon as
-         possible in order to minimize the latency.
+  class="enumerate" id="x1-1013x1">In order to minimize the latency, the recorded chunks must be sent
+         to the interlocutor as soon as possible.
          </li>
          <li 
-  class="enumerate" id="x1-1015x2">The  playback  of  the  chunks  extracted  from  the  buﬀer  must  be
-         <span 
-class="ecti-1000">seamless </span>(without the ocurrence of silences) as long as the chunks
-         have been received on time.
+  class="enumerate" id="x1-1015x2">The playback of the chunks extracted from the buﬀer must be <a 
+href="https://en.wikipedia.org/wiki/Gapless_playback" ><span 
+class="ecti-1000">gapless</span></a>
+         (without the ocurrence of silences) as long as the chunks have been
+         received on time.
          </li>
          <li 
   class="enumerate" id="x1-1017x3">As always, the lost chunks should be replaced by zero-chunks in the
@@ -189,21 +196,25 @@ class="ecti-1000">seamless </span>(without the ocurrence of silences) as long as
      </li>
      <li 
   class="enumerate" id="x1-1019x4">A <span 
-class="ecti-1000">receive-and-buﬀer </span>task can be run now in a diﬀerent execution thread,
+class="ecti-1000">receive-and-buﬀer </span>task can be run now in a diﬀerent execution <a 
+href="https://en.wikipedia.org/wiki/Thread_(computing)" >thread</a>,
      decoupled from the <span 
 class="ecti-1000">record-send-and-play </span>task. But notice that using
      <span 
-class="ectt-1000">sounddevice </span>this can be achived without using the <span 
-class="ectt-1000">threading </span>nor
+class="ectt-1000">sounddevice </span>this can be achived without using the <a 
+href="https://docs.python.org/3/library/threading.html" ><span 
+class="ectt-1000">threading</span></a> nor
+     <a 
+href="https://docs.python.org/3/library/multiprocessing.html" ><span 
+class="ectt-1000">multiprocessing</span></a> libraries because the interruption handler (the so called
      <span 
-class="ectt-1000">multiprocessing </span>libraries because the interruption handler (the so called
-     callback function) already runs in parallel with the main thread.</li></ol>
+class="ectt-1000">callback </span>function) already runs in parallel with the main thread.</li></ol>
 <a 
  id="x1-1020r1"></a>
                                                                   
 
                                                                   
-<!--l. 118--><p class="noindent" ><div class="minipage"><span 
+<!--l. 122--><p class="noindent" ><div class="minipage"><span 
 class="ecbx-1000">Algorithm</span>
 <span 
 class="ecbx-1000">1.1:</span> <span 
@@ -222,11 +233,11 @@ class="small-caps">e</span><span
 class="small-caps">r</span><span 
 class="small-caps">C</span><span 
 class="small-caps">o</span><span 
-class="small-caps">m</span></span>(<!--l. 101--><math 
+class="small-caps">m</span></span>(<!--l. 105--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 > </mi></math>)<br 
-class="newline" /> <!--l. 101--><math 
+class="newline" /> <!--l. 105--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" > <mtable  align="axis" style=""  
 equalrows="false" columnlines="none" equalcolumns="false" class="array"> <mtr><mtd 
@@ -446,18 +457,28 @@ class="array"  columnalign="left"><mspace width="4.3045pt"/>                    
 </p>
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
  id="x1-20002"></a>Timming</h3>
-<!--l. 123--><p class="noindent" >Please, ﬁnish this milestone in two weeks.
-</p><!--l. 125--><p class="noindent" >
+<!--l. 127--><p class="noindent" >Please, ﬁnish this milestone in two weeks.
+</p><!--l. 129--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-30003"></a>Deliverables</h3>
-<!--l. 127--><p class="noindent" >A python module called <span 
+<!--l. 131--><p class="noindent" >A python module called <span 
 class="ectt-1000">buffer.py </span>stored in the root directory of the intercom’s
 repo.
-</p><!--l. 130--><p class="noindent" >
+</p><!--l. 134--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-40004"></a>Resources</h3>
+   <div class="thebibliography">
+   <p class="bibitem" ><span class="biblabel">
+ [1]<span class="bibsp">   </span></span><a 
+ id="XKurose-Ross"></a>James F.  Kurose  and  Keith W.  Ross.     <a 
+href="https://docs.google.com/viewer?a=v&pid=sites&srcid=Z2FyZGl2aWR5YXBpdGguYWMuaW58aXQyMDE0LTIwMTh8Z3g6OTY5ZDcxZjRmZDBkYzI3" ><span 
+class="ecti-1000">Computer  Networking:  A</span>
+   <span 
+class="ecti-1000">Top-Down Approach Featuring the Internet</span></a>. Pearson, 2013.
+</p>
+   </div>
 <a 
  id="Q1-1-5"></a>
     
