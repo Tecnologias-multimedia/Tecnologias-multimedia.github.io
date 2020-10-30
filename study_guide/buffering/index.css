@@ -29,11 +29,30 @@
 .ectt-1000{ font-family: monospace,monospace;}
 .ectt-1000{ font-family: monospace,monospace;}
 .ectt-1000{ font-family: monospace,monospace;}
+.ectt-1000{ font-family: monospace,monospace;}
+.ectt-1000{ font-family: monospace,monospace;}
+.ectt-1000{ font-family: monospace,monospace;}
 .ecti-1000{ font-style: italic;}
 .ecti-1000{ font-style: italic;}
 .ecti-1000{ font-style: italic;}
 .ecti-1000{ font-style: italic;}
 .ecti-1000{ font-style: italic;}
+.ecti-1000{ font-style: italic;}
+.ecti-1000{ font-style: italic;}
+.ecti-1000{ font-style: italic;}
+.ecrm-0900{font-size:90%;}
+.ecrm-0800{font-size:80%;}
+.ecbx-1000{ font-weight: bold;}
+.ecbx-1000{ font-weight: bold;}
+.ecbx-1000{ font-weight: bold;}
+.ecbx-1000{ font-weight: bold;}
+.ecbx-1000{ font-weight: bold;}
+.ecbx-1000{ font-weight: bold;}
+.ecbx-1000{ font-weight: bold;}
+.ecbx-1000{ font-weight: bold;}
+.eccc1000-{font-variant: small-caps;}
+.cmtt-10{font-family: monospace,monospace;}
+.small-caps{font-variant: small-caps; }
 p{margin-top:0;margin-bottom:0}
 p.indent{text-indent:0;}
 p + p{margin-top:1em;}
@@ -171,5 +190,9 @@ div.lstinputlisting{ font-family: monospace,monospace; white-space: nowrap; }
 table[rules] {border-left:solid black 0.4pt; border-right:solid black 0.4pt; }
 div.longtable{text-align:center;}
 table.longtable{margin-left:auto; margin-right: auto;}
+.ovalbox { padding-left:3pt; padding-right:3pt; border:solid thin; }
+.Ovalbox-thick { padding-left:3pt; padding-right:3pt; border:solid thick; }
+.shadowbox { padding-left:3pt; padding-right:3pt; border:solid thin; border-right:solid thick; border-bottom:solid thick; }
+.doublebox { padding-left:3pt; padding-right:3pt; border-style:double; border:solid thick; }
 /* end css.sty */
 

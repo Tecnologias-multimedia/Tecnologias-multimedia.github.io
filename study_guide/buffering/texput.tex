@@ -39,27 +39,39 @@ $N$, in order to hide a $N$ chunk-time jitter. Notice also that this
 technique introduces also a $N$ chunk-time delay in the playback.
 
 \begin{figure}
-  \begin{center}
-    \myfig{graphics/circular_buffer}{3cm}{300}
-  \end{center}
-  \caption{A circular buffer with 6 cells (space for 6 chunks). Half
-    of the buffer is occupied because the buffering time is 3 chunk
-    times and 3 chunks (with chunk number 0, 1 and 2) have been
-    received. The first chunk to be played is chunk 0.}
+  \begin{tabular}{ccc}
+    \vbox{\myfig{graphics/circular_buffer1}{2cm}{200}} & \vbox{\myfig{graphics/circular_buffer2}{2cm}{200}} & \vbox{\myfig{graphics/circular_buffer3}{2cm}{200}} \\
+    (a) & (b) & (c)
+  \end{tabular}
+  %\begin{center}
+  %  \myfig{graphics/circular_buffer1}{2cm}{200}
+  %  \myfig{graphics/circular_buffer2}{2cm}{200}
+    %\begin{tabular}{ccc}
+    %  \myfig{graphics/circular_buffer1}{2cm}{200} &
+    %  \myfig{graphics/circular_buffer2}{2cm}{200} &
+    %  \myfig{graphics/circular_buffer3}{2cm}{200}
+    %\end{tabular}   
+  %\end{center}
+  \caption{A circular buffer with 6 cells (space for 6 chunks). Up to
+    the half of the buffer is occupied (cells in gray) because the
+    buffering time is 3 chunk times and 3 chunks (with chunk number 0,
+    1 and 2 in the beginning, subfigure (a)) have been received. The
+    first chunk to be played is chunk 0 (subfigure (b)). Then, a new
+    chunk (chunk number 3) is received and buffered (subfigure (c)).}
   \label{fig:circular_buffer}
 \end{figure}
 
 For this new improved InterCom the parameter \emph{buffering time}
-must be provided by the users. This value (tipycally expressed in
+must be provided by the users. This value (typically expressed in
 miliseconds) should be large enough to hide the network jitter, but
 small enough to minimize the end-to-end (user) latency.
 
-Follow these basic guidelines to implement the \emph{buffered} version
-of InterCom:
+Use the following basic guidelines to implement the \emph{buffered}
+version of InterCom:
 
 \begin{enumerate}
-\item Extend (inherit from) the class Minimal to implement a new class
-  Buffer.
+\item Extend (inherit from) the class \texttt{Minimal} to implement a
+  new class \texttt{Buffer}.
 \item In the payload of the UDP packets a chunk number must be
   included in order to provide to the receiver the information to
   determine where to store the corresponding chunk in the circular
@@ -86,6 +98,24 @@ of InterCom:
   function) already runs in parallel with the main thread.
 \end{enumerate}
 
+\begin{pseudocode}{Buffer\_InterCom}{~}
+  \PROCEDURE{Record\_Send\_and\_Play}{~}
+  \BEGIN
+    \mathtt{chunk} \GETS \mathtt{record()}\\
+    \mathtt{packed\_chunk} \GETS \mathtt{pack(chunk)}\\
+    \mathtt{send(packed\_chunk)}\\
+    \mathtt{chunk} \GETS \mathtt{unbuffer()}\\
+    \mathtt{play(chunk)}
+  \END
+  \ENDPROCEDURE
+  \PROCEDURE{Receive\_and\_Buffer}{~}
+  \BEGIN
+    \mathtt{packed\_chunk} \GETS \mathtt{receive()}\\
+    \mathtt{chunk\_number}, \mathtt{chunk} \GETS \mathtt{unpack(packed\_chunk)}\\
+    \mathtt{buffer(chunk\_number, chunk)}
+  \END
+  \ENDPROCEDURE
+\end{pseudocode}
 
 
 \section{Timming}
