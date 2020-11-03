@@ -67,40 +67,51 @@ devices can be estimated as
   b=\frac{B}{t_t},
   \label{eq:b}
 \end{equation}
-where $B$ is the number of bits sent in a \texttt{ping}'s payload.
-
-If we revisite the \texttt{ping}'s timeline and the Equation~2 of
-the previous milestone, we can see that
+where $B$ is the number of bits sent in a \texttt{ping}'s payload, and
 \begin{equation}
-  t_t = \frac{\text{RTT}-2t_p}{2}.
+  t_t = \frac{\text{RTT}_{\text{avg}}^\infty-2t_p}{2},
   \label{eq:tt}
 \end{equation}
+an equation that can be determined by revisiting the \texttt{ping}'s
+timeline and the Equation~2 of the previous milestone.
+
+Notice that if the payload of the ping is small enough ($0$ bytes
+ideally), we can consider that
+\begin{equation}
+  t_p \approx \frac{\text{RTT}_{\text{min}}^0}{2},
+  \label{eq:tp}
+\end{equation}
+and that for measuring the $\text{RTT}_{\text{avg}}$ in
+Eq.~\ref{eq:tt}, we should use a payload as large as possible
+(ideally, infinite bytes), in order to make $t_t$ a significative
+amount of time, ease to measure. Notice also that we should use the
+smaller RTT value of a \texttt{ping} session of measurements in the
+Eq.~\ref{eq:tp} because the real link latency is a constant and the
+congestion of the link always increases it.
+
 Therefore, supposing that $t_p$ is constant between pings and using
-the average RTT, $b$ can be considered as a good estimation of the
-near future.
+the average $\text{RTT}_{\text{avg}}^\infty$ for transmitting $B$ bits ($B$
+as large as possible), the bit-rate value $b$ determined by
+Eq.~\ref{eq:b} can be considered as a good estimation for the link of
+the near future.
 
 So, for determining $b$ we can:
 \begin{enumerate}
 \item Run \texttt{ping} using the smallest possible payload that
   provides RTTs values.\footnote{The minimal payload for a
-  \texttt{ping} message can be 0, but depending on the implementation
-  of \texttt{ping} you may be forzed to use a larger value.} In this
-  situation we can suppose that
-  \begin{equation}
-    t_p \approx \frac{\text{RTT}}{2}.
-    \label{eq:tp}
-  \end{equation}
-  Notice that we should use the smaller RTT of a \texttt{ping} session
-  of measurements for such approximation because the real link latency
-  is a constant and the congestion of the link always increases
-  it.
+    \texttt{ping} message can be 0, but depending on the
+    implementation of \texttt{ping} you may be forzed to use a larger
+    value.} Use it for computing $t_p$.
+  
 \item Run \texttt{ping} using the largest possible payload to achieve
   that the most part of the average RTT provided by \texttt{ping}
   corresponds to $t_t$. This is necessary because the accuracy of the
   cronometer used by \texttt{ping}, in general, is not high enough to
   measure $t_t$ for small values of the payload size.
+  
 \item Use the Equation~\ref{eq:tt} to find $t_t$ as a function of
   the average RTT and the minimal $t_p$.
+  
 \item Finally, use the Equation~\ref{eq:b} to determine $b$.
 \end{enumerate}
 
@@ -127,7 +138,7 @@ routers).
 
 \subsection{Simulate the link}
 
-With the bit-rate vaule computed from the previous section, simulate
+With the bit-rate vaule $b$ computed from the previous section, simulate
 such link locally with:
 
 \begin{lstlisting}{language=bash}
