@@ -120,6 +120,7 @@ your bandwith with different \texttt{ping} servers, try to compute the
 transmission bit-rate:
 \begin{enumerate}
 \item In \texttt{localhost}.
+\item In \texttt{localhost}, limiting the bit-rate with \texttt{tc}.
 \item Between two hosts in your local network (your host and your
   router, for example). Notice that in this case, you should not
   obtain a bit-rate higher than the capacity of your network adapter.
@@ -134,7 +135,8 @@ can apply the same technique that was used in the previous milestone,
 which basically consists in compute the total RTT as the sum of the
 RTT from the devices that we want to connect (where the InterCom is it
 supposed to be run) to the filter (possiblely, one of your home
-routers).
+routers). A similar capacity estimation should be obtained considering
+only the slower part of the total link.
 
 \subsection{Simulate the link}
 
