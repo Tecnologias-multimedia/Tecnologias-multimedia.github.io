@@ -92,10 +92,11 @@ are commonly used in the implementation of DWTs
 \item In a module named \texttt{stereo\_coding.py}, inherit the class
   \texttt{Compress} and create a class named \texttt{Stereo\_coding}.
 \item Override the methods \texttt{pack()} and \texttt{unpack()}. In
-  \texttt{pack()} perform the Analyze(chunk) procedure previously
+  \texttt{pack()} perform the Analyze() procedure previously
   described, and in \texttt{unpack()} the
-  Synthesize(chunk). \href{https://www.oreilly.com/library/view/python-for-data/9781449323592/ch04.html}{Vectorized
-    operations} should be used.
+  Synthesize(). These procedures should be applied to
+  all the frames of a chunk using \href{https://www.oreilly.com/library/view/python-for-data/9781449323592/ch04.html}{vectorized
+    operations}.
 \item Has been the
   \href{https://en.wikipedia.org/wiki/Data_compression_ratio}{compression
     ratio} improved (on

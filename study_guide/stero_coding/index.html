@@ -454,77 +454,75 @@ class="ectt-1000">Stereo_coding</span>.
      </li>
      <li 
   class="enumerate" id="x1-2004x2">Override  the  methods  <span 
-class="ectt-1000">pack() </span>and  <span 
+class="ectt-1000">pack()  </span>and  <span 
 class="ectt-1000">unpack()</span>.  In  <span 
-class="ectt-1000">pack() </span>perform  the
-     Analyze(chunk)  procedure  previously  described,  and  in  <span 
+class="ectt-1000">pack()  </span>perform
+     the  Analyze()  procedure  previously  described,  and  in  <span 
 class="ectt-1000">unpack() </span>the
-     Synthesize(chunk). <a 
-href="https://www.oreilly.com/library/view/python-for-data/9781449323592/ch04.html" >Vectorized operations</a> should be used.
+     Synthesize(). These procedures should be applied to all the frames of a
+     chunk using <a 
+href="https://www.oreilly.com/library/view/python-for-data/9781449323592/ch04.html" >vectorized operations</a>.
      </li>
      <li 
   class="enumerate" id="x1-2006x3">Has been the <a 
 href="https://en.wikipedia.org/wiki/Data_compression_ratio" >compression ratio</a> improved (on <a 
 href="https://en.wikipedia.org/wiki/Average" >average</a>)? How much?</li></ol>
-<!--l. 105--><p class="noindent" >
+<!--l. 106--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-30003"></a>Timming</h3>
-<!--l. 107--><p class="noindent" >You should reach this milestone at most one week.
+<!--l. 108--><p class="noindent" >You should reach this milestone at most one week.
                                                                   
 
                                                                   
-</p><!--l. 109--><p class="noindent" >
+</p><!--l. 110--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-40004"></a>Deliverables</h3>
-<!--l. 111--><p class="noindent" >The module <span 
+<!--l. 112--><p class="noindent" >The module <span 
 class="ectt-1000">stereo_coding.py</span>. Store it at the <a 
 href="https://github.com/Tecnologias-multimedia/intercom" >root directory</a> of your <span 
 class="ectt-1000">intercom</span>’s
 repo.
-</p><!--l. 116--><p class="noindent" >
+</p><!--l. 117--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-50005"></a>Resources</h3>
    <div class="thebibliography">
    <p class="bibitem" ><span class="biblabel">
  [1]<span class="bibsp">   </span></span><a 
- id="Xbosi2003intro"></a>Marina Bosi and Richard E. Goldberd.  <a 
-href="http://www.pce-fet.com/common/library/books/34/1314_[Marina_Bosi,__Richard_E._Goldberg__(auth.)#_" id="I" ><span 
-class="ecti-1000">ntro(b-ok.org).pdf]</span><span 
-class="ecti-1000">Introduction</span>
+ id="Xbosi2003intro"></a>M. Bosi and R.E. Goldberd.  <a 
+href="https://last.hit.bme.hu/download/vidtechlab/fcc/literature/audio/audio_coding_standards_book.pdf" ><span 
+class="ecti-1000">Introduction to Digital Audio Coding and</span>
    <span 
-class="ecti-1000">to Digital Audio Coding and Standards</span></a>. Kluwer Academic Publishers, 2003.
+class="ecti-1000">Standards</span></a>. Kluwer Academic Publishers, 2003.
    </p>
    <p class="bibitem" ><span class="biblabel">
  [2]<span class="bibsp">   </span></span><a 
- id="Xthinkstats"></a>Allen B.   Downey.       <a 
+ id="Xthinkstats"></a>A.B. Downey.  <a 
 href="https://greenteapress.com/thinkstats/thinkstats.pdf" ><span 
-class="ecti-1000">Think   Stats   Probability   and   Statistics   for</span>
-   <span 
-class="ecti-1000">Programmers</span></a>. O’Reilly, 2011.
+class="ecti-1000">Think Stats Probability and Statistics for Programmers</span></a>.
+   O’Reilly, 2011.
    </p>
    <p class="bibitem" ><span class="biblabel">
  [3]<span class="bibsp">   </span></span><a 
- id="Xsayood2017introduction"></a>Khalid Sayood.  <a 
+ id="Xsayood2017introduction"></a>K. Sayood. <a 
 href="http://rahilshaikh.weebly.com/uploads/1/1/6/3/11635894/data_compression.pdf" ><span 
-class="ecti-1000">Introduction to data compression</span></a>.  Morgan Kaufmann,
-   2017.
+class="ecti-1000">Introduction to data compression</span></a>. Morgan Kaufmann, 2017.
    </p>
    <p class="bibitem" ><span class="biblabel">
  [4]<span class="bibsp">   </span></span><a 
- id="X2006.sweldens"></a>Wim Sweldens.  <a 
-href="http://cm.bell-labs.com/who/wim/papers/lift1.pdf" >The Liﬁng Scheme: A Custom-Desing Constuction of
+ id="X2006.sweldens"></a>W. Sweldens.   <a 
+href="http://cm.bell-labs.com/who/wim/papers/lift1.pdf" >The  Liﬁng  Scheme:  A  Custom-Desing  Constuction  of
    Biorthogonal  Wavelets</a>.   <span 
 class="ecti-1000">Applied and Computational Harmonic Analysis</span>,
    3(2):186–200, 1996.
    </p>
    <p class="bibitem" ><span class="biblabel">
  [5]<span class="bibsp">   </span></span><a 
- id="Xvetterli1995wavelets"></a>Martin Vetterli and Jelena Kovacevic.  <a 
+ id="Xvetterli1995wavelets"></a>M. Vetterli   and   J. Kovacevic.      <a 
 href="http://waveletsandsubbandcoding.org/Repository/VetterliKovacevic95_Manuscript.pdf" ><span 
-class="ecti-1000">Wavelets and Subband Coding</span></a>.
+class="ecti-1000">Wavelets  and  Subband  Coding</span></a>.
    Prentice-hall, 1995.
 </p>
    </div>
