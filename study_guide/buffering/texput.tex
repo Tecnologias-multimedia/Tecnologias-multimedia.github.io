@@ -108,7 +108,7 @@ version of InterCom:
     \mathtt{chunk} \GETS \mathtt{record()}\\
     \mathtt{packed\_chunk} \GETS \mathtt{pack(chunk)}\\
     \mathtt{send(packed\_chunk)}\\
-    \mathtt{chunk} \GETS \mathtt{unbuffer()}\\
+    \mathtt{chunk} \GETS \mathtt{unbuffer\_next\_chunk()}\\
     \mathtt{play(chunk)}
   \END
   \ENDPROCEDURE
