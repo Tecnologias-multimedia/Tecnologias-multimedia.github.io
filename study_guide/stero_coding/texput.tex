@@ -5,8 +5,8 @@
 \section{Description}
 
 \href{https://en.wikipedia.org/wiki/Correlation_and_dependence}{Correlation}
-is the term used in statistics for refering to the interdependency
-between \href{https://en.wikipedia.org/wiki/Random_variable}{random
+is a term used in statistics which refer to the interdependency
+between two \href{https://en.wikipedia.org/wiki/Random_variable}{random
   variables}. It can be measured by the
 \href{https://www.mathsisfun.com/data/correlation.html}{correlation
   coefficient}~\cite{thinkstats}.
@@ -25,12 +25,15 @@ view, this process can be seen as a
 process. From a physical perspective, decorrelating implies energy
 accumulation~\cite{sayood2017introduction}.
 
-To perform this inter-channel decorrelation, we use an \href{https://en.wikipedia.org/wiki/Orthogonal_transformation}{orthogonal}
+To perform this inter-channel decorrelation, we use an
+\href{https://en.wikipedia.org/wiki/Orthogonal_transformation}{orthogonal}\footnote{Orthogonality
+  of the transform is a important property because the correlation
+  between the coefficients (the output of the transform) is 0.}
 transform
 \begin{equation}
   y = Kx = \frac{1}{2}\begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}x,
 \end{equation}
-where $x$ represents a frame (a tuple or L and R samples, $x[0]$ and
+where $x$ represents a frame (a tuple of L and R samples, $x[0]$ and
 $x[1]$), $K$ is the $2\times 2$ KLT
 \href{http://fourier.eng.hmc.edu/e161/lectures/klt/node3.html}{(Karhunen-Lo\`eve
   Transform)} matrix multiplied by $1/\sqrt{2}$ (which is closely
@@ -38,18 +41,20 @@ related with the \href{http://wavelets.pybytes.com/wavelet/haar/}{Haar
   transform}~\cite{vetterli1995wavelets}), and $y$ represents the
 transform coefficients (in our case, a couple of coefficients $y[0]$
 with the \href{https://en.wikipedia.org/wiki/Arithmetic_mean}{mean}
-and $y[1]$ with the difference). Notice that this transform is not
+and $y[1]$ with the difference of the samples). Notice that this
+transform is not
 \href{https://en.wikipedia.org/wiki/Orthonormal_basis}{orthonormal}
 (energy preserving in the transform domain) because
 \begin{equation}
   \sum y[i]^2 = \frac{1}{\sqrt{2}}\sum x[i]^2,
 \end{equation}
 although both subbands $y[0]$ and $y[1]$ have the same gain
-($1/\sqrt{2}$). This will simplify the
+($\frac{1}{\sqrt{2}}$, and therefore the same ``importance'' for a
+future
 \href{https://en.wikipedia.org/wiki/Quantization_(signal_processing)}{quantization}
-of $y$. The described transform is similar to the so
-called \href{https://en.wikipedia.org/wiki/Joint_encoding#M/S_stereo_coding}{M/S
-stereo coding}, but in our case, the división by 2 is carried on on
+of $y$). The described transform is similar to the so called
+\href{https://en.wikipedia.org/wiki/Joint_encoding#M/S_stereo_coding}{M/S
+  stereo coding}, but in our case, the división by 2 is carried on
 the forward transform, instead of the backward (inverse) transform.
 
 This transform can be implemented
@@ -60,24 +65,22 @@ using the following algorithm:
   \PROCEDURE{Analyze}{\mathtt{frame}}
   \BEGIN
     \mathtt{frame[0] -= frame[1]} \\
-    \mathtt{frame[1] += (frame[0] >> 1)} \\
-    \mathtt{frame[0] >>= 1}
+    \mathtt{frame[1] += (frame[0] / 2)} \\
+    \mathtt{frame[0] /= 2}
   \END
   \ENDPROCEDURE
   \PROCEDURE{Synthesize}{\mathtt{frame}}
   \BEGIN
-    \mathtt{frame[0] <<= 1} \\
-    \mathtt{frame[1] -= (frame[0] >> 1)} \\
+    \mathtt{frame[0] *= 2} \\
+    \mathtt{frame[1] -= (frame[0] / 2)} \\
     \mathtt{frame[0] += frame[1]}
   \END
   \ENDPROCEDURE
 \end{pseudocode}
 
-where $\mathtt{a -= b}$ is a shorter representation of the operation
-$\mathtt{a = a - b}$, and $\mathtt{>>}$ and $\mathtt{<<}$ represent
-the bit-wise left and right shift operations, respectively. Notice
-that this type of in-place computations are commonly used in the
-implementation of DWTs
+where $\mathtt{a~-= b}$ is a shorter representation of the operation
+$\mathtt{a = a - b}$. Notice that this type of in-place computations
+are commonly used in the implementation of DWTs
 (\href{https://en.wikipedia.org/wiki/Discrete_wavelet_transform}{Dicrete
   Wavelet Transform}s) using
 \href{https://cm-bell-labs.github.io/who/wim/papers/athome/athome.pdf}{the
@@ -86,28 +89,26 @@ implementation of DWTs
 \section{What you have to do?}
 
 \begin{enumerate}
-\item Inherit the class \texttt{Intercom\_minimal} and override the
-  method \texttt{record\_io\_and\_play()}. Do this in a module named
-  \texttt{intercom\_intra-channel\_decorrelation.py}.
-\item Implement in this method the procedures Analyze() and
-  Synthesize(). \href{https://www.oreilly.com/library/view/python-for-data/9781449323592/ch04.html}{Vectorized
+\item In a module named \texttt{stereo\_coding.py}, inherit the class
+  \texttt{Compress} and create a class named \texttt{Stereo\_coding}.
+\item Override the methods \texttt{pack()} and \texttt{unpack()}. In
+  \texttt{pack()} perform the Analyze(chunk) procedure previously
+  described, and in \texttt{unpack()} the
+  Synthesize(chunk). \href{https://www.oreilly.com/library/view/python-for-data/9781449323592/ch04.html}{Vectorized
     operations} should be used.
-\item Notice that, in general, the compression ratio provided by
-  DEFLATE is higher when the samples of the channels (in the case of
-  \texttt{Minimal}) or the coefficients of the subbands (in
-  the case of \texttt{Intercom\_inter}) are not interleaved (all the
-  samples/coefficients of the first channel/subband go first, and
-  next, all the samples/coefficients of the second channel/subband are
-  placed).
+\item Has been
+  \href{https://en.wikipedia.org/wiki/Data_compression_ratio}{compression
+    ratio} improved (on
+  \href{https://en.wikipedia.org/wiki/Average}{average})? How much?
 \end{enumerate}
 
 \section{Timming}
 
-You should reach this milestone at most in two weeks.
+You should reach this milestone at most one week.
 
 \section{Deliverables}
 
-The module \texttt{intercom\_inter.py}. Store
+The module \texttt{stereo\_coding.py}. Store
 it at the
 \href{https://github.com/Tecnologias-multimedia/intercom}{root
   directory} of your \texttt{intercom}'s repo.
