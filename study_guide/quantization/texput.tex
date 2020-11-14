@@ -4,6 +4,37 @@
 
 \section{Description}
 
+The process of representing a large—possibly infinite—set of values with a much smaller
+set is called quantization.~\cite{sayood}. The set of inputs and outputs of a quantizer can be scalars or vectors. If they are
+scalars, we call the quantizers scalar quantizers. If they are vectors, we call the quantizers
+vector quantizers.
+
+Scalar Quantization. Digital computation and communication use discrete values rather than continuous
+values such as real numbers. ~\cite{foundationsofsignalprocessing} In lossy compression, mean approximation error is called distortion and code
+length in bits per scalar input is called rate. Uniform Quantization The simplest and most common form of quantization is
+uniform quantization. Typically, it either takes the form of rounding to the nearest
+integer multiple of a step size ∆, as in Figure 6.40(a), or using the integer multiples
+of the step size as threshold values at which the output jumps, as in Figure 6.40(b).
+
+some applications
+(such as certain medical imaging systems) require lossless compression,
+while other applications may tolerate some amount of distortion in the
+decompressed data in return for a smaller compressed representation.
+Quantization is the element of lossy compression systems responsible for
+reducing the precision of data in order to make them more compressible.
+In most lossy compression systems, it is the only source of distortion.~\cite{taubman}
+
+Quantization of Discrete Time
+Signals~\cite{digitalsignalprocessinghandbook}. Quantization is the process of approximating any discrete time, continuous
+amplitude signal into one of a finite set of discrete time, continuous amplitude signals based on a
+particular distortion or distance measure. A quantizer, Q, is mathematically defined as a mapping [3] Q : Rp → C. This means that the
+p-dimensional vectors in the vector space Rp are mapped into a finite collection C of vectors that are
+also in Rp. This collection C is called the codebook and the number of vectors in the codebook, N,
+is known as the codebook size. The entries of the codebook are known as codewords or codevectors.
+If p = 1, we have a scalar quantizer (SQ). If p > 1, we have a vector quantizer (VQ).
+
+--------
+
 It's time to reduce bandwidth comsumption. The $\mathtt{pack()}$ and
 the $\mathtt{unpack()}$ methods can compress and decompress,
 respectively, the chunks that are handled. To compress and decompress,
