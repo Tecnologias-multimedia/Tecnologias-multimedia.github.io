@@ -1,59 +1,75 @@
-\title{\href{https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN}{Tecnologías Multimedia} - Study Guide - Milestone 10: Quantizing}
+\title{\href{https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN}{Tecnologías Multimedia} - Study Guide - Milestone 10: Bit-rate Control through Quantization}
 
 \maketitle
 
 \section{Description}
 
-At the hardware level, the samples of audio are represented using \href{https://en.wikipedia.org/wiki/Pulse-code_modulation}{PCM
-(Pulse Code Modulation)}. In a PCM sample, the number of levels that
-the signal can take depends on the number of bits/sample (16 bits in
-our case). This discussion is reffered only to the \href{https://en.wikipedia.org/wiki/Quantization_(signal_processing)}{quantization} of
-digital signals.
+At the hardware level, the samples of audio are usually represented
+using \href{https://en.wikipedia.org/wiki/Pulse-code_modulation}{PCM
+  (Pulse Code Modulation)}. In a PCM sample, the number of levels that
+the signal can take depends on the
+\href{https://en.wikipedia.org/wiki/Audio_bit_depth}{number of
+  bits/sample} (16 bits in our case). This discussion is reffered only
+to the
+\href{https://en.wikipedia.org/wiki/Quantization_(signal_processing)}{quantization}
+of digital signals.
 
-Another key aspect to consider is that the processing that the Human
-Auditory System (HAS) performs to understand audio signals has several
-sources of psychic redundancy. One of these sources of redundancy is
-the finite number of different volumen levels that we can recognize.
+Another key aspect to consider is that the processing that the
+\href{https://en.wikipedia.org/wiki/Auditory_system}{Human Auditory
+  System (HAS)} performs to understand audio signals has several
+\href{https://en.wikipedia.org/wiki/Psychoacoustics}{sources of
+  perceptual redundancy}. One of these sources of redundancy is the
+\href{https://en.wikipedia.org/wiki/Equal-loudness_contour}{finite
+  number of different volumen levels that we can recognize}~\cite{bosi2003intro}.
 
-Scalar Quantization (SQ) is the process of decreasing the number of
-levels that a signal can take~\cite{sayood}.  Vector Quantization (VQ)
-is similar, but is applied tuples of
+\href{https://en.wikipedia.org/wiki/Quantization_(signal_processing}{Scalar
+  Quantization} (SQ) is the process of decreasing the number of levels
+that a signal can
+take~\cite{sayood2017introduction}. \href{https://en.wikipedia.org/wiki/Vector_quantization}{Vector
+  Quantization} (VQ) is similar, but is applied tuples of
 samples~\cite{foundationsofsignalprocessing}. SQ is used when the
-samples are decorrelated because is much faster to compute than VQ.
+samples are decorrelated because the
+\href{https://en.wikipedia.org/wiki/Quantization_(signal_processing)#Rate%E2%80%93distortion_optimization}{coding
+  efficiency} provided by VQ is
+marginal~\cite{vetterli2014foundations}. In most lossy compression
+systems, quantization is the only source of
+distortion~\cite{taubman2012jpeg2000}.
 
-Quantizers can be classified into uniform
-and \href{https://nptel.ac.in/content/storage2/courses/117104069/chapter_5/5_5.html}{non-uniform}. An
+Quantizers can be classified into
+\href{https://en.wikipedia.org/wiki/Quantization_(signal_processing)#Mid-riser_and_mid-tread_uniform_quantizers}{uniform}
+and
+\href{https://nptel.ac.in/content/storage2/courses/117104069/chapter_5/5_5.html}{non-uniform}~\cite{sayood2017introduction,vetterli2014foundations}. An
 uniform quantizator distributes the available representation levels
 uniformely over the range of input values. Non-uniform quantizers use
 different density of representation levels to those intervals of input
 values that, for example, occur more often. Non-uniform quantizers can
-also be classified into static and adaptive quantizers. In the first
-case, the distribution of the representation levels remain constant
-during the quantization stage, and in the second case, the densities
-are adapted dinamically to the characteristics of the input signal. In
-this milestone we will use an uniform Midtread scalar quantizer. See
-this Jupyter notebook for more information.
-
-In most lossy compression systems, Quantization is the only source of
-distortion~\cite{taubman}. This irreversible loss of information
-depends basically of how many bits are dedicated to represent any
-possible output (quantized) sample. The higher the number of output
-bits per sample, the lower the quantization errora and therefore, the
-distortion.
+also be classified into static and
+\href{https://en.wikipedia.org/wiki/Adaptive_differential_pulse-code_modulation}{adaptive
+  quantizers}. In the first case, the
+\href{https://en.wikipedia.org/wiki/Probability_distribution}{distribution}
+of the representation levels remain constant during the quantization
+stage, and in the second case, the densities are adapted dinamically
+to the characteristics of the input signal. In this milestone we will
+use an
+\href{https://en.wikipedia.org/wiki/Quantization_(signal_processing)#Dead-zone_quantizers}{uniform
+  dead-zone scalar static quantizer}, which can be implemented
+efficiently for digital signals and provides a good rate/distortion
+trade-off. See \href{}{this Jupyter notebook} for more information.
 
 The number of representation levels provided by a quantizer depends
-basically on the so called Quantization Step or $\Delta$. The higher
-the $\Delta$, the smaller the number of representation levels, and
-therefore, the higher the distortion. Obviously, the smaller the
-number of representation levels, the smaller the output bit
-bit-rate. The control of the bit-rate through the control of $\Delta$
-is a technique that can be used in transmission systems to minimize
-the jitter and the loss of packets.
+basically on the so called quantization step, typically denoted by
+$\Delta$. The higher the $\Delta$, the smaller the number of
+representation levels, and therefore, the higher the distortion
+generated by the quantization error. Obviously, the smaller the number
+of representation levels, the smaller the output bit-rate. The control
+of the bit-rate through the $\Delta$ values is a technique that
+can be used in transmission systems to minimize the jitter and the
+loss of packets.
 
 \section{What you have to do?}
 
 \begin{enumerate}
-\item Create a class named \texttt{Quantization}, that inherits from
+\item Create a class named \texttt{Quantization} that inherits from
   \texttt{Buffer} (the class implemented in the previous
   milestone). Store it in a file named \texttt{quantization.py}.
 \item Override the methods $\mathtt{pack()}$ and $\mathtt{unpack()}$,
@@ -91,10 +107,14 @@ Please, finish this milestone at most in two weeks.
 
 \section{Deliverables}
 
-Create a Python module named \texttt{quantization.py} and store it in
-the \href{https://github.com/Tecnologias-multimedia/intercom}{root
-  directory} of your \texttt{intercom}'s repo.
+\begin{enumerate}
+  \item The Python module named \texttt{quantization.py} stored in the
+    \href{https://github.com/Tecnologias-multimedia/intercom}{root
+      directory} of your \texttt{intercom}'s repo.
+  \item A video demonstration showing that \texttt{quantization.py}
+    adapts to the variations of the throughput of the link.
+\end{enumerate}
 
 \section{Resources}
 
-\bibliography{text-compression}
+\bibliography{JPEG2000,audio-coding,data-compression,signal-processing}
