@@ -4,10 +4,10 @@
 
 \section{Description}
 
-At the hardware level, the samples of audio are represented using PCM
-(Pulse Code Modulation). In a PCM sample, the number of levels that
+At the hardware level, the samples of audio are represented using \href{https://en.wikipedia.org/wiki/Pulse-code_modulation}{PCM
+(Pulse Code Modulation)}. In a PCM sample, the number of levels that
 the signal can take depends on the number of bits/sample (16 bits in
-our case). This discussion is reffered only to the Quantization of
+our case). This discussion is reffered only to the \href{https://en.wikipedia.org/wiki/Quantization_(signal_processing)}{quantization} of
 digital signals.
 
 Another key aspect to consider is that the processing that the Human
@@ -21,15 +21,16 @@ is similar, but is applied tuples of
 samples~\cite{foundationsofsignalprocessing}. SQ is used when the
 samples are decorrelated because is much faster to compute than VQ.
 
-Quantizers can be classified into uniform and non-uniform. An uniform
-quantizator distributes the available representation levels uniformely
-over the range of input values. Non-uniform quantizers use different
-density of representation levels to those intervals of input values
-that, for example, occur more often. Non-uniform quantizers can also
-be classified into static and adaptive quantizers. In the first case,
-the distribution of the representation levels remain constant during
-the quantization stage, and in the second case, the densities are
-adapted dinamically to the characteristics of the input signal. In
+Quantizers can be classified into uniform
+and \href{https://nptel.ac.in/content/storage2/courses/117104069/chapter_5/5_5.html}{non-uniform}. An
+uniform quantizator distributes the available representation levels
+uniformely over the range of input values. Non-uniform quantizers use
+different density of representation levels to those intervals of input
+values that, for example, occur more often. Non-uniform quantizers can
+also be classified into static and adaptive quantizers. In the first
+case, the distribution of the representation levels remain constant
+during the quantization stage, and in the second case, the densities
+are adapted dinamically to the characteristics of the input signal. In
 this milestone we will use an uniform Midtread scalar quantizer. See
 this Jupyter notebook for more information.
 
@@ -53,31 +54,45 @@ the jitter and the loss of packets.
 
 \begin{enumerate}
 \item Create a class named \texttt{Quantization}, that inherits from
-  \texttt{Buffer} (the class implemented in the previous milestone),
-  in which the methods $\mathtt{pack()}$ and $\mathtt{unpack()}$ are
-  overriden to compress and decompress the chunks. Use the Python's
-  standard library
-  \href{https://docs.python.org/3/library/zlib.html}{\texttt{zlib}}. Store
-  this class in a module named \texttt{compress.py}.
-\item Compress (and decompress) each chunk as a unit (each compressed
-  chunk will be transmitted in a different UDP packet). In order to
-  increase slightly the
-  \href{https://en.wikipedia.org/wiki/Data_compression_ratio}{(data)
-    compression ratio}, reorder the samples as it is shown in the
-  Figure~\ref{fig:reordering}.
-\item Describe the QoE as a function of the transmission bit-rate
-  (determine the transmission bit-rates that generate each possible
-  QoE clasiffication).
+  \texttt{Buffer} (the class implemented in the previous
+  milestone). Store it in a file named \texttt{quantization.py}.
+\item Override the methods $\mathtt{pack()}$ and $\mathtt{unpack()}$,
+  which should implement:
+
+\begin{pseudocode}{Quantization\_InterCom}{~}
+  \PROCEDURE{Pack}{\mathtt{chunk\_number}, \mathtt{chunk}}
+  \BEGIN
+    \mathtt{quantized\_chunk} \GETS quantize(\mathtt{chunk})\\
+    \mathtt{packed\_chunk} \GETS Buffer.pack(\mathtt{chunk_number}, \mathtt{quantized_chunk})\\
+    return \mathtt{packed\_chunk}\\
+  \END
+  \ENDPROCEDURE
+  \PROCEDURE{Unpack}{(\mathtt{packed\_chunk})}
+  \BEGIN
+    \mathtt{chunk\_number}, \mathtt{quantized\_chunk} \GETS Buffer.unpack(\mathtt{packed\_chunk})\\
+    \mathtt{chunk} \GETS dequantize(\mathtt{quantized\_chunk})\\
+    return \mathtt{chunk\_number}, \mathtt{chunk}
+  \END
+  \ENDPROCEDURE
+\end{pseudocode}
+
+\item Determine the quantization step $\Delta$ used in the
+  $\mathtt{quantize()}$ method as a function of the throughput $B$ of
+  the communication link. Take into consideration that in real
+  intercommunication scenario, $B$ is time-variying and therefore,
+  $\Delta = \mathtt{estimation}(B)$, where $\mathtt{estimation()}$
+  should use the previously $B$ measured values. Such estimation
+  should maximize the QoE.
 \end{enumerate}
 
 \section{Timming}
 
-Please, finish this milestone at most in one week.
+Please, finish this milestone at most in two weeks.
 
 \section{Deliverables}
 
-Create a Python module named \texttt{compress.py} and store it in the
-\href{https://github.com/Tecnologias-multimedia/intercom}{root
+Create a Python module named \texttt{quantization.py} and store it in
+the \href{https://github.com/Tecnologias-multimedia/intercom}{root
   directory} of your \texttt{intercom}'s repo.
 
 \section{Resources}
