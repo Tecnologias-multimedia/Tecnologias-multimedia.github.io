@@ -1,0 +1,595 @@
+<!DOCTYPE html> 
+<html> 
+<head> <title>TecnologÃŋas Multimedia - Study Guide - Milestone 10: Bit-rate Control through
+Quantization</title> 
+<meta charset="UTF-8" /> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
+<link rel="stylesheet" type="text/css" href="index.css" /> 
+<script type="text/javascript" 
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" 
+></script> 
+<style type="text/css"> 
+.MathJax_MathML {text-indent: 0;} 
+</style> 
+</head><body 
+>
+   <div class="maketitle">
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+
+<h2 class="titleHead"><a 
+href="https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN" >Tecnologías Multimedia</a> - Study Guide -
+Milestone 10: Bit-rate Control through
+Quantization</h2>
+ <div class="author" ><a 
+href="https://cms.ual.es/UAL/personas/persona.htm?id=515256515553484875" ><span 
+class="ecrm-1200">Vicente Gonz</span><span 
+class="ecrm-1200">á</span><span 
+class="ecrm-1200">lez Ruiz</span></a> <span 
+class="ecrm-1200">- </span><a 
+href="https://cms.ual.es/UAL/universidad/departamentos/informatica/index.htm" ><span 
+class="ecrm-1200">Depto Inform</span><span 
+class="ecrm-1200">á</span><span 
+class="ecrm-1200">tica</span></a> <span 
+class="ecrm-1200">- </span><a 
+href="https://www.ual.es" ><span 
+class="ecrm-1200">UAL</span></a></div><br />
+<div class="date" ><span 
+class="ecrm-1200">November 17, 2020</span></div>
+   </div>
+   <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
+ id="x1-10001"></a>Description</h3>
+<!--l. 7--><p class="noindent" >This discussion is reﬀered only to the <a 
+href="https://en.wikipedia.org/wiki/Quantization_(signal_processing)" >quantization</a> of digital signals.
+</p><!--l. 11--><p class="indent" >   At the hardware level, the samples of audio are usually represented using
+<a 
+href="https://en.wikipedia.org/wiki/Pulse-code_modulation" >PCM (Pulse Code Modulation)</a>. In a PCM sample, the number of levels that
+the signal can take depends on the <a 
+href="https://en.wikipedia.org/wiki/Audio_bit_depth" >number of bits/sample</a> (16 bits in our
+case).
+</p><!--l. 18--><p class="indent" >   Another key aspect to consider is that the processing that the <a 
+href="https://en.wikipedia.org/wiki/Auditory_system" >Human Auditory
+System (HAS)</a> performs to understand audio signals has several <a 
+href="https://en.wikipedia.org/wiki/Psychoacoustics" >sources of
+perceptual redundancy</a>. One of these sources is the <a 
+href="https://en.wikipedia.org/wiki/Equal-loudness_contour" >ﬁnite number of diﬀerent
+volumen levels that a human being can recognize</a> <span class="cite">[<a 
+href="#Xbosi2003intro">1</a>]</span>. In this milestone we
+will proﬁt of that fact to decrease the transmission bit-rate by sacriﬁcing
+quality. In most lossy compression systems, quantization is the only source of
+distortion <span class="cite">[<a 
+href="#Xtaubman2012jpeg2000">3</a>]</span>.
+</p><!--l. 31--><p class="indent" >   <a 
+href="https://en.wikipedia.org/wiki/Quantization_(signal_processing)" >Scalar Quantization</a> (SQ) is the process of decreasing the number of levels that a
+signal can take <span class="cite">[<a 
+href="#Xsayood2017introduction">2</a>]</span>. <a 
+href="https://en.wikipedia.org/wiki/Vector_quantization" >Vector Quantization</a> (VQ) is similar, but is applied tuples of
+samples at the same time <span class="cite">[<a 
+href="#Xvetterli2014foundations">4</a>]</span>. SQ is used when the samples are decorrelated (not in
+our case, now, this will be true in the future) because the <a 
+href="https://en.wikipedia.org/wiki/Quantization_(signal_processing)#Rate%E2%80%93distortion_optimization" >coding eﬃciency</a> provided
+by VQ is marginal in this context <span class="cite">[<a 
+href="#Xvetterli2014foundations">4</a>]</span>.
+</p><!--l. 42--><p class="indent" >   Quantizers can also be classiﬁed into <a 
+href="https://en.wikipedia.org/wiki/Quantization_(signal_processing)#Mid-riser_and_mid-tread_uniform_quantizers" >uniform</a> and <a 
+href="https://nptel.ac.in/content/storage2/courses/117104069/chapter_5/5_5.html" >non-uniform</a> <span class="cite">[<a 
+href="#Xsayood2017introduction">2</a>, <a 
+href="#Xvetterli2014foundations">4</a>]</span>. An
+uniform quantizer distributes the available representation levels uniformely
+over the range of input values. Non-uniform quantizers use higher density
+representation levels (more output levels per input levels) to those intervals of input
+values that occur more often. Non-uniform quantizers can also be classiﬁed
+                                                                  
+
+                                                                  
+into static and <a 
+href="https://en.wikipedia.org/wiki/Adaptive_differential_pulse-code_modulation" >adaptive quantizers</a>. In the ﬁrst case, the <a 
+href="https://en.wikipedia.org/wiki/Probability_distribution" >distribution</a> of the
+representation levels remain constant during the quantization stage, and in the
+second case, the densities are adapted dinamically to the characteristics of the
+input signal. In this milestone we will use an <a 
+href="https://en.wikipedia.org/wiki/Quantization_(signal_processing)#Dead-zone_quantizers" >uniform dead-zone scalar static
+quantizer</a>, which can be implemented eﬃciently for digital signals and that
+provides a good <a 
+href="https://en.wikipedia.org/wiki/Rate%E2%80%93distortion_theory" >rate/distortion</a> trade-oﬀ. See <a 
+href="https://github.com/vicente-gonzalez-ruiz/quantization/blob/master/digital_quantization.ipynb" >this Jupyter notebook</a> for more
+information.
+</p><!--l. 65--><p class="indent" >   The number of representation levels used by a quantizer depends
+basically on the so called quantization step, typically denoted by
+<!--l. 67--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>Δ</mi></math>. The
+higher the <!--l. 67--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>Δ</mi></math>,
+the smaller the number of representation levels, and therefore, the higher
+the distortion generated by the quantization error (see <a 
+href="https://github.com/vicente-gonzalez-ruiz/quantization/blob/master/digital_quantization.ipynb" >the notebook</a>), and
+lileky, the smaller the output bit-rate. The control of the bit-rate through the
+<!--l. 72--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>Δ</mi></math> values
+is a technique that can be used in real-time transmission systems to minimize the
+jitter and the loss of packets when <a 
+href="https://en.wikipedia.org/wiki/Network_congestion" >congestion</a> occurs.
+</p><!--l. 78--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
+ id="x1-20002"></a>What you have to do?</h3>
+<!--l. 80--><p class="noindent" >
+     </p><ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x1-2002x1">Create a class named <!--l. 81--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle 
+class="text"><mtext  >Quantization</mtext></mstyle></math>
+     that inherits from <!--l. 82--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle 
+class="text"><mtext  >Compress</mtext></mstyle></math>
+     (the class implemented in the previous milestone). Store it in a ﬁle named
+     <!--l. 83--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>q</mi><mi 
+>u</mi><mi 
+>a</mi><mi 
+>n</mi><mi 
+>t</mi><mi 
+>i</mi><mi 
+>z</mi><mi 
+>a</mi><mi 
+>t</mi><mi 
+>i</mi><mi 
+>o</mi><mi 
+>n</mi><mo 
+class="MathClass-punc">.</mo><mi 
+>p</mi><mi 
+>y</mi></mstyle></math>.
+     </li>
+     <li 
+  class="enumerate" id="x1-2004x2">Override the methods <!--l. 85--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle 
+class="text"><mtext  >pack</mtext></mstyle></math>()
+     and <!--l. 85--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle 
+class="text"><mtext  >unpack</mtext></mstyle></math>(),
+     which now hould implement:
+<a 
+ id="x1-2005r1"></a>
+                                                                  
+
+                                                                  
+     <!--l. 103--><p class="noindent" ><div class="minipage"><span 
+class="ecbx-1000">Algorithm</span>
+<span 
+class="ecbx-1000">2.1:</span> <span 
+class="eccc1000-"><span 
+class="small-caps">Q</span><span 
+class="small-caps">u</span><span 
+class="small-caps">a</span><span 
+class="small-caps">n</span><span 
+class="small-caps">t</span><span 
+class="small-caps">i</span><span 
+class="small-caps">z</span><span 
+class="small-caps">a</span><span 
+class="small-caps">t</span><span 
+class="small-caps">i</span><span 
+class="small-caps">o</span><span 
+class="small-caps">n</span><span 
+class="small-caps">_</span><span 
+class="small-caps">I</span><span 
+class="small-caps">n</span><span 
+class="small-caps">t</span><span 
+class="small-caps">e</span><span 
+class="small-caps">r</span><span 
+class="small-caps">C</span><span 
+class="small-caps">o</span><span 
+class="small-caps">m</span></span>(<!--l. 88--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+> </mi></math>)<br 
+class="newline" />  <!--l. 88--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" > <mtable  align="axis" style=""  
+equalrows="false" columnlines="none" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="left"><mspace width="4.3045pt"/> <mstyle 
+class="mbox"><mtext  >procedure </mtext></mstyle><mstyle 
+class="mbox"><mtext  ></mtext><mtext class="textsc" mathvariant="normal" >pack</mtext></mstyle><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mstyle mathvariant="monospace"><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>n</mi><mi 
+>u</mi><mi 
+>m</mi><mi 
+>b</mi><mi 
+>e</mi><mi 
+>r</mi></mstyle><mo 
+class="MathClass-punc">,</mo><mstyle mathvariant="monospace"><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi></mstyle></mrow><mo 
+class="MathClass-close">)</mo></mrow>                                            </mtd>
+</mtr>  <mtr><mtd 
+class="array"  columnalign="left"><mspace width="4.3045pt"/>  <mtable  align="axis" style=""  
+equalrows="false" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="left"><mspace width="4.3045pt"/>  <mfenced separators="" 
+open="{"  close="" ><mrow> <mtable  align="axis" style=""  
+equalrows="false" columnlines="none" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
+>q</mi><mi 
+>u</mi><mi 
+>a</mi><mi 
+>n</mi><mi 
+>t</mi><mi 
+>i</mi><mi 
+>z</mi><mi 
+>e</mi><mi 
+>d</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi></mstyle> <mo 
+class="MathClass-rel">←</mo><mstyle 
+class="text"><mtext  >quantize</mtext></mstyle><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mstyle mathvariant="monospace"><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi></mstyle></mrow><mo 
+class="MathClass-close">)</mo></mrow>                                   </mtd>
+</mtr>  <mtr><mtd 
+class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mi 
+>e</mi><mi 
+>d</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi></mstyle> <mo 
+class="MathClass-rel">←</mo><mstyle 
+class="text"><mtext  >Buﬀer.pack</mtext></mstyle><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mstyle mathvariant="monospace"><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>n</mi><mi 
+>u</mi><mi 
+>m</mi><mi 
+>b</mi><mi 
+>e</mi><mi 
+>r</mi></mstyle><mo 
+class="MathClass-punc">,</mo><mstyle mathvariant="monospace"><mi 
+>q</mi><mi 
+>u</mi><mi 
+>a</mi><mi 
+>n</mi><mi 
+>t</mi><mi 
+>i</mi><mi 
+>z</mi><mi 
+>e</mi><mi 
+>d</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi></mstyle></mrow><mo 
+class="MathClass-close">)</mo></mrow></mtd>
+</mtr>  <mtr><mtd 
+class="array"  columnalign="left"><mstyle 
+class="text"><mtext  >return</mtext></mstyle><mi 
+> </mi><mstyle mathvariant="monospace"><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mi 
+>e</mi><mi 
+>d</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi></mstyle>                                   </mtd></mtr><!--@{}lr@{}--></mtable>   </mrow></mfenced></mtd>
+ </mtr><!--@{\pcode@tab {1}}l@{}--></mtable>                                                              </mtd>
+</mtr>  <mtr><mtd 
+class="array"  columnalign="left"><mspace width="4.3045pt"/> <mstyle 
+class="mbox"><mtext  >procedure </mtext></mstyle><mstyle 
+class="mbox"><mtext  ></mtext><mtext class="textsc" mathvariant="normal" >unpack</mtext></mstyle><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mstyle mathvariant="monospace"><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mi 
+>e</mi><mi 
+>d</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi></mstyle></mrow><mo 
+class="MathClass-close">)</mo></mrow>                                                 </mtd>
+</mtr>  <mtr><mtd 
+class="array"  columnalign="left"><mspace width="4.3045pt"/>  <mtable  align="axis" style=""  
+equalrows="false" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="left"><mspace width="4.3045pt"/>  <mfenced separators="" 
+open="{"  close="" ><mrow> <mtable  align="axis" style=""  
+equalrows="false" columnlines="none" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>n</mi><mi 
+>u</mi><mi 
+>m</mi><mi 
+>b</mi><mi 
+>e</mi><mi 
+>r</mi></mstyle><mo 
+class="MathClass-punc">,</mo><mstyle mathvariant="monospace"><mi 
+>q</mi><mi 
+>u</mi><mi 
+>a</mi><mi 
+>n</mi><mi 
+>t</mi><mi 
+>i</mi><mi 
+>z</mi><mi 
+>e</mi><mi 
+>d</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi></mstyle> <mo 
+class="MathClass-rel">←</mo><mstyle 
+class="text"><mtext  >Buﬀer.unpack</mtext></mstyle><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mstyle mathvariant="monospace"><mi 
+>p</mi><mi 
+>a</mi><mi 
+>c</mi><mi 
+>k</mi><mi 
+>e</mi><mi 
+>d</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi></mstyle></mrow><mo 
+class="MathClass-close">)</mo></mrow></mtd>
+</mtr>  <mtr><mtd 
+class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi></mstyle> <mo 
+class="MathClass-rel">←</mo><mstyle 
+class="text"><mtext  >dequantize</mtext></mstyle><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mstyle mathvariant="monospace"><mi 
+>q</mi><mi 
+>u</mi><mi 
+>a</mi><mi 
+>n</mi><mi 
+>t</mi><mi 
+>i</mi><mi 
+>z</mi><mi 
+>e</mi><mi 
+>d</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi></mstyle></mrow><mo 
+class="MathClass-close">)</mo></mrow>                                   </mtd>
+</mtr>  <mtr><mtd 
+class="array"  columnalign="left"><mstyle 
+class="text"><mtext  >return</mtext></mstyle><mi 
+> </mi><mstyle mathvariant="monospace"><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi><mstyle 
+class="text"><mtext  >_</mtext></mstyle><mi 
+>n</mi><mi 
+>u</mi><mi 
+>m</mi><mi 
+>b</mi><mi 
+>e</mi><mi 
+>r</mi></mstyle><mo 
+class="MathClass-punc">,</mo><mstyle mathvariant="monospace"><mi 
+>c</mi><mi 
+>h</mi><mi 
+>u</mi><mi 
+>n</mi><mi 
+>k</mi></mstyle>                                </mtd></mtr><!--@{}lr@{}--></mtable> </mrow></mfenced></mtd>
+ </mtr><!--@{\pcode@tab {1}}l@{}--></mtable>                                                              </mtd>
+</mtr>  <mtr><mtd 
+class="array"  columnalign="left"><mspace width="4.3045pt"/>                                                               </mtd></mtr><!--@{\pcode@tab {1}}lr@{}--></mtable></math> </div>
+     </p></li>
+     <li 
+  class="enumerate" id="x1-2007x3">Determine the quantization step <!--l. 105--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>Δ</mi></math>
+     used in the <!--l. 106--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle 
+class="text"><mtext  >quantize()</mtext></mstyle></math>
+     method as a function of the <a 
+href="https://en.wikipedia.org/wiki/Throughput" >throughput</a>
+     <!--l. 107--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>B</mi></math> of the
+     communication link. Take into consideration that in a real intercommunication scenario,
+     <!--l. 109--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>B</mi></math> is time-variying
+     and therefore, <!--l. 110--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>Δ</mi> <mo 
+class="MathClass-rel">=</mo> <mstyle 
+class="text"><mtext  >estimation</mtext></mstyle><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mi 
+>B</mi></mrow><mo 
+class="MathClass-close">)</mo></mrow></math>,
+     where <!--l. 110--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle 
+class="text"><mtext  >estimation()</mtext></mstyle></math>
+     should use the previously measured values of
+     <!--l. 111--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>B</mi></math>.
+     Such estimation should maximize the QoE.</li></ol>
+<!--l. 115--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
+ id="x1-30003"></a>Timming</h3>
+<!--l. 117--><p class="noindent" >Please, ﬁnish this milestone at most in two weeks.
+</p><!--l. 119--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
+ id="x1-40004"></a>Deliverables</h3>
+<!--l. 121--><p class="noindent" >
+     </p><ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x1-4002x1">The Python module named <!--l. 122--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>q</mi><mi 
+>u</mi><mi 
+>a</mi><mi 
+>n</mi><mi 
+>t</mi><mi 
+>i</mi><mi 
+>z</mi><mi 
+>a</mi><mi 
+>t</mi><mi 
+>i</mi><mi 
+>o</mi><mi 
+>n</mi><mo 
+class="MathClass-punc">.</mo><mi 
+>p</mi><mi 
+>y</mi></mstyle></math>
+     stored in the <a 
+href="https://github.com/Tecnologias-multimedia/intercom" >root directory</a> of your <!--l. 124--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>i</mi><mi 
+>n</mi><mi 
+>t</mi><mi 
+>e</mi><mi 
+>r</mi><mi 
+>c</mi><mi 
+>o</mi><mi 
+>m</mi></mstyle></math>’s
+     repo.
+                                                                  
+
+                                                                  
+     </li>
+     <li 
+  class="enumerate" id="x1-4004x2">A video demonstration of 3 minutes (at most) showing how <!--l. 126--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>q</mi><mi 
+>u</mi><mi 
+>a</mi><mi 
+>n</mi><mi 
+>t</mi><mi 
+>i</mi><mi 
+>z</mi><mi 
+>a</mi><mi 
+>t</mi><mi 
+>i</mi><mi 
+>o</mi><mi 
+>n</mi><mo 
+class="MathClass-punc">.</mo><mi 
+>p</mi><mi 
+>y</mi></mstyle></math>
+     adapts to the variations of the throughput of the link (use <!--l. 127--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="monospace"><mi 
+>t</mi><mi 
+>c</mi></mstyle></math>).</li></ol>
+<!--l. 130--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
+ id="x1-50005"></a>Resources</h3>
+   <div class="thebibliography">
+   <p class="bibitem" ><span class="biblabel">
+ [1]<span class="bibsp">   </span></span><a 
+ id="Xbosi2003intro"></a>M. Bosi and R.E. Goldberd.  <a 
+href="https://last.hit.bme.hu/download/vidtechlab/fcc/literature/audio/audio_coding_standards_book.pdf" ><span 
+class="ecti-1000">Introduction to Digital Audio Coding and</span>
+   <span 
+class="ecti-1000">Standards</span></a>. Kluwer Academic Publishers, 2003.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [2]<span class="bibsp">   </span></span><a 
+ id="Xsayood2017introduction"></a>K. Sayood. <a 
+href="http://rahilshaikh.weebly.com/uploads/1/1/6/3/11635894/data_compression.pdf" ><span 
+class="ecti-1000">Introduction to data compression</span></a>. Morgan Kaufmann, 2017.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [3]<span class="bibsp">   </span></span><a 
+ id="Xtaubman2012jpeg2000"></a>D. Taubman   and   M. Marcellin.      <span 
+class="ecti-1000">JPEG2000  image  compression</span>
+   <span 
+class="ecti-1000">fundamentals,  standards  and  practice</span>,  volume  642.   Springer  Science  &#x0026;
+   Business Media, 2012.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [4]<span class="bibsp">   </span></span><a 
+ id="Xvetterli2014foundations"></a>M. Vetterli, J. Kovačević, and V.K. Goyal.  <span 
+class="ecti-1000">Foundations of Signal</span>
+   <span 
+class="ecti-1000">Processing</span>. Cambridge University Press, 2014.
+</p>
+   </div>
+<a 
+ id="Q1-1-6"></a>
+    
+</body> 
+</html>
+                                                                  
+
+
