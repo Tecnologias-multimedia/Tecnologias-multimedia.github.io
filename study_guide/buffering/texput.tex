@@ -67,7 +67,7 @@ version of InterCom:
 \item Extend
   (\href{https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)}{inherit}
   from) the class Minimal to implement a new class
-  Buffer.
+  Buffering.
 \item In the payload of the UDP packets a chunk number must be
   included in order to provide to the receiver the information to
   determine where to store the corresponding chunk in the circular
@@ -102,7 +102,7 @@ version of InterCom:
   thread.
 \end{enumerate}
 
-\begin{pseudocode}{Buffer\_InterCom}{~}
+\begin{pseudocode}{Buffering\_InterCom}{~}
   \PROCEDURE{record\_send\_and\_play}{~}
   \BEGIN
     \text{chunk} \GETS \text{record}()\\

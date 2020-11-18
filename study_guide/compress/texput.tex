@@ -4,13 +4,14 @@
 
 \section{Description}
 
-It's time to reduce bandwidth comsumption. The $\mathtt{pack()}$ and
-the $\mathtt{unpack()}$ methods can compress and decompress,
-respectively, the chunks that are handled. To compress and decompress,
-we will use a free codec named
+It's time to reduce bandwidth comsumption. The pack() and the unpack()
+methods can compress and decompress, respectively, the chunks that are
+handled. To compress and decompress, we will use a free codec named
 \href{https://en.wikipedia.org/wiki/DEFLATE}{DEFLATE}, which is based
-on \href{https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Storer%E2%80%93Szymanski}{LZSS}
-and \href{https://en.wikipedia.org/wiki/Huffman_coding}{Huffman Coding}~\cite{nelson96datacompression}.
+on
+\href{https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Storer%E2%80%93Szymanski}{LZSS}
+  and \href{https://en.wikipedia.org/wiki/Huffman_coding}{Huffman
+    Coding}~\cite{nelson96datacompression}.
 
 \begin{figure}
   \begin{center}
@@ -23,13 +24,15 @@ and \href{https://en.wikipedia.org/wiki/Huffman_coding}{Huffman Coding}~\cite{ne
 \section{What you have to do?}
 
 \begin{enumerate}
-\item Create a class named \texttt{Compress}, that inherits from
-  \texttt{Buffer} (the class implemented in the previous milestone),
-  in which the methods $\mathtt{pack()}$ and $\mathtt{unpack()}$ are
+  
+\item Create a class named Compression, that inherits from
+  Buffering (the class implemented in the previous milestone),
+  in which the methods pack() and unpack() are
   overriden to compress and decompress the chunks. Use the Python's
   standard library
   \href{https://docs.python.org/3/library/zlib.html}{\texttt{zlib}}. Store
-  this class in a module named \texttt{compress.py}.
+  this class in a module named compress.py.
+  
 \item Compress (and decompress) each chunk as a unit (each compressed
   chunk will be transmitted in a different UDP packet). In order to
   increase slightly the
@@ -47,9 +50,9 @@ Please, finish this milestone at most in one week.
 
 \section{Deliverables}
 
-Create a Python module named \texttt{compress.py} and store it in the
+Create a Python module named compress.py and store it in the
 \href{https://github.com/Tecnologias-multimedia/intercom}{root
-  directory} of your \texttt{intercom}'s repo.
+  directory} of your InterCom's repo.
 
 \section{Resources}
 

@@ -78,26 +78,26 @@ occurs.
 \section{What you have to do?}
 
 \begin{enumerate}
-\item Create a class named $\text{Quantization}$ that inherits from
-  $\text{Compress}$ (the class implemented in the previous
-  milestone). Store it in a file named $\mathtt{quantization.py}$.
+\item Create a class named Quantization that inherits from
+  Compression (the class implemented in the previous
+  milestone). Store it in a file named quantize.py.
   
-\item Override the methods $\text{pack}$() and $\text{unpack}$(),
+\item Override the methods pack() and unpack(),
   which now hould implement:
 
 \begin{pseudocode}{Quantization\_InterCom}{~}
-  \PROCEDURE{pack}{\mathtt{chunk\_number}, \mathtt{chunk}}
+  \PROCEDURE{pack}{\text{chunk\_number}, \text{chunk}}
   \BEGIN
-    \mathtt{quantized\_chunk} \GETS \text{quantize}(\mathtt{chunk})\\
-    \mathtt{packed\_chunk} \GETS \text{Buffer.pack}(\mathtt{chunk\_number}, \mathtt{quantized\_chunk})\\
-    \text{return}~ \mathtt{packed\_chunk}
+    \text{quantized\_chunk} \GETS \text{quantize}(\text{chunk})\\
+    \text{packed\_chunk} \GETS \text{Buffer.pack}(\text{chunk\_number}, \text{quantized\_chunk})\\
+    \text{return}~ \text{packed\_chunk}
   \END
   \ENDPROCEDURE
-  \PROCEDURE{unpack}{\mathtt{packed\_chunk}}
+  \PROCEDURE{unpack}{\text{packed\_chunk}}
   \BEGIN
-    \mathtt{chunk\_number}, \mathtt{quantized\_chunk} \GETS \text{Buffer.unpack}(\mathtt{packed\_chunk})\\
-    \mathtt{chunk} \GETS \text{dequantize}(\mathtt{quantized\_chunk})\\
-    \text{return}~ \mathtt{chunk\_number}, \mathtt{chunk}
+    \text{chunk\_number}, \text{quantized\_chunk} \GETS \text{Buffer.unpack}(\text{packed\_chunk})\\
+    \text{chunk} \GETS \text{dequantize}(\text{quantized\_chunk})\\
+    \text{return}~ \text{chunk\_number}, \text{chunk}
   \END
   \ENDPROCEDURE
 \end{pseudocode}
@@ -119,12 +119,12 @@ Please, finish this milestone at most in two weeks.
 \section{Deliverables}
 
 \begin{enumerate}
-  \item The Python module named $\mathtt{quantization.py}$ stored in
-    the \href{https://github.com/Tecnologias-multimedia/intercom}{root
-      directory} of your $\mathtt{intercom}$'s repo.
-  \item A video demonstration of 3 minutes (at most) showing how
-    $\mathtt{quantization.py}$ adapts to the variations of the
-    throughput of the link (use $\mathtt{tc}$).
+  \item The Python module named quantize.py stored in the
+    \href{https://github.com/Tecnologias-multimedia/intercom}{root
+      directory} of your InterCom's repo.  \item A video demonstration
+    of 3 minutes (at most) showing how quantize.py adapts to the
+    variations of the throughput of the link (use
+    \href{https://man7.org/linux/man-pages/man8/tc.8.html}{tc}).
 \end{enumerate}
 
 \section{Resources}

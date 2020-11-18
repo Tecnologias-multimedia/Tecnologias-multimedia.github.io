@@ -39,7 +39,7 @@ class="ecrm-1200">- </span><a
 href="https://www.ual.es" ><span 
 class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
-class="ecrm-1200">November 17, 2020</span></div>
+class="ecrm-1200">November 18, 2020</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
@@ -126,49 +126,14 @@ href="https://en.wikipedia.org/wiki/Network_congestion" >congestion</a> occurs.
 <!--l. 80--><p class="noindent" >
      </p><ol  class="enumerate1" >
      <li 
-  class="enumerate" id="x1-2002x1">Create a class named <!--l. 81--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mstyle 
-class="text"><mtext  >Quantization</mtext></mstyle></math>
-     that inherits from <!--l. 82--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mstyle 
-class="text"><mtext  >Compress</mtext></mstyle></math>
-     (the class implemented in the previous milestone). Store it in a ﬁle named
-     <!--l. 83--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mstyle mathvariant="monospace"><mi 
->q</mi><mi 
->u</mi><mi 
->a</mi><mi 
->n</mi><mi 
->t</mi><mi 
->i</mi><mi 
->z</mi><mi 
->a</mi><mi 
->t</mi><mi 
->i</mi><mi 
->o</mi><mi 
->n</mi><mo 
-class="MathClass-punc">.</mo><mi 
->p</mi><mi 
->y</mi></mstyle></math>.
+  class="enumerate" id="x1-2002x1">Create a class named Quantization that inherits from Compression (the
+     class implemented in the previous milestone). Store it in a ﬁle named
+     quantize.py.
      </li>
      <li 
-  class="enumerate" id="x1-2004x2">Override the methods <!--l. 85--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mstyle 
-class="text"><mtext  >pack</mtext></mstyle></math>()
-     and <!--l. 85--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mstyle 
-class="text"><mtext  >unpack</mtext></mstyle></math>(),
-     which now hould implement:
+  class="enumerate" id="x1-2004x2">Override the methods pack() and unpack(), which now hould implement:
 <a 
  id="x1-2005r1"></a>
-                                                                  
-
-                                                                  
      <!--l. 103--><p class="noindent" ><div class="minipage"><span 
 class="ecbx-1000">Algorithm</span>
 <span 
@@ -205,137 +170,46 @@ equalrows="false" columnlines="none" equalcolumns="false" class="array"> <mtr><m
 class="array"  columnalign="left"><mspace width="4.3045pt"/> <mstyle 
 class="mbox"><mtext  >procedure </mtext></mstyle><mstyle 
 class="mbox"><mtext  ></mtext><mtext class="textsc" mathvariant="normal" >pack</mtext></mstyle><mrow ><mo 
-class="MathClass-open">(</mo><mrow><mstyle mathvariant="monospace"><mi 
->c</mi><mi 
->h</mi><mi 
->u</mi><mi 
->n</mi><mi 
->k</mi><mstyle 
-class="text"><mtext  >_</mtext></mstyle><mi 
->n</mi><mi 
->u</mi><mi 
->m</mi><mi 
->b</mi><mi 
->e</mi><mi 
->r</mi></mstyle><mo 
-class="MathClass-punc">,</mo><mstyle mathvariant="monospace"><mi 
->c</mi><mi 
->h</mi><mi 
->u</mi><mi 
->n</mi><mi 
->k</mi></mstyle></mrow><mo 
-class="MathClass-close">)</mo></mrow>                                            </mtd>
+class="MathClass-open">(</mo><mrow><mstyle 
+class="text"><mtext  >chunk_number</mtext></mstyle><mo 
+class="MathClass-punc">,</mo><mstyle 
+class="text"><mtext  >chunk</mtext></mstyle></mrow><mo 
+class="MathClass-close">)</mo></mrow>                                           </mtd>
 </mtr>  <mtr><mtd 
 class="array"  columnalign="left"><mspace width="4.3045pt"/>  <mtable  align="axis" style=""  
 equalrows="false" equalcolumns="false" class="array"> <mtr><mtd 
 class="array"  columnalign="left"><mspace width="4.3045pt"/>  <mfenced separators="" 
 open="{"  close="" ><mrow> <mtable  align="axis" style=""  
 equalrows="false" columnlines="none" equalcolumns="false" class="array"> <mtr><mtd 
-class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
->q</mi><mi 
->u</mi><mi 
->a</mi><mi 
->n</mi><mi 
->t</mi><mi 
->i</mi><mi 
->z</mi><mi 
->e</mi><mi 
->d</mi><mstyle 
-class="text"><mtext  >_</mtext></mstyle><mi 
->c</mi><mi 
->h</mi><mi 
->u</mi><mi 
->n</mi><mi 
->k</mi></mstyle> <mo 
+class="array"  columnalign="left"><mstyle 
+class="text"><mtext  >quantized_chunk</mtext></mstyle> <mo 
 class="MathClass-rel">←</mo><mstyle 
 class="text"><mtext  >quantize</mtext></mstyle><mrow ><mo 
-class="MathClass-open">(</mo><mrow><mstyle mathvariant="monospace"><mi 
->c</mi><mi 
->h</mi><mi 
->u</mi><mi 
->n</mi><mi 
->k</mi></mstyle></mrow><mo 
-class="MathClass-close">)</mo></mrow>                                   </mtd>
+class="MathClass-open">(</mo><mrow><mstyle 
+class="text"><mtext  >chunk</mtext></mstyle></mrow><mo 
+class="MathClass-close">)</mo></mrow>                                    </mtd>
 </mtr>  <mtr><mtd 
-class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
->p</mi><mi 
->a</mi><mi 
->c</mi><mi 
->k</mi><mi 
->e</mi><mi 
->d</mi><mstyle 
-class="text"><mtext  >_</mtext></mstyle><mi 
->c</mi><mi 
->h</mi><mi 
->u</mi><mi 
->n</mi><mi 
->k</mi></mstyle> <mo 
+class="array"  columnalign="left"><mstyle 
+class="text"><mtext  >packed_chunk</mtext></mstyle> <mo 
 class="MathClass-rel">←</mo><mstyle 
 class="text"><mtext  >Buﬀer.pack</mtext></mstyle><mrow ><mo 
-class="MathClass-open">(</mo><mrow><mstyle mathvariant="monospace"><mi 
->c</mi><mi 
->h</mi><mi 
->u</mi><mi 
->n</mi><mi 
->k</mi><mstyle 
-class="text"><mtext  >_</mtext></mstyle><mi 
->n</mi><mi 
->u</mi><mi 
->m</mi><mi 
->b</mi><mi 
->e</mi><mi 
->r</mi></mstyle><mo 
-class="MathClass-punc">,</mo><mstyle mathvariant="monospace"><mi 
->q</mi><mi 
->u</mi><mi 
->a</mi><mi 
->n</mi><mi 
->t</mi><mi 
->i</mi><mi 
->z</mi><mi 
->e</mi><mi 
->d</mi><mstyle 
-class="text"><mtext  >_</mtext></mstyle><mi 
->c</mi><mi 
->h</mi><mi 
->u</mi><mi 
->n</mi><mi 
->k</mi></mstyle></mrow><mo 
+class="MathClass-open">(</mo><mrow><mstyle 
+class="text"><mtext  >chunk_number</mtext></mstyle><mo 
+class="MathClass-punc">,</mo><mstyle 
+class="text"><mtext  >quantized_chunk</mtext></mstyle></mrow><mo 
 class="MathClass-close">)</mo></mrow></mtd>
 </mtr>  <mtr><mtd 
 class="array"  columnalign="left"><mstyle 
 class="text"><mtext  >return</mtext></mstyle><mi 
-> </mi><mstyle mathvariant="monospace"><mi 
->p</mi><mi 
->a</mi><mi 
->c</mi><mi 
->k</mi><mi 
->e</mi><mi 
->d</mi><mstyle 
-class="text"><mtext  >_</mtext></mstyle><mi 
->c</mi><mi 
->h</mi><mi 
->u</mi><mi 
->n</mi><mi 
->k</mi></mstyle>                                   </mtd></mtr><!--@{}lr@{}--></mtable>   </mrow></mfenced></mtd>
- </mtr><!--@{\pcode@tab {1}}l@{}--></mtable>                                                              </mtd>
+> </mi><mstyle 
+class="text"><mtext  >packed_chunk</mtext></mstyle>                                                        </mtd></mtr><!--@{}lr@{}--></mtable>     </mrow></mfenced></mtd>
+ </mtr><!--@{\pcode@tab {1}}l@{}--></mtable>                                                                                                  </mtd>
 </mtr>  <mtr><mtd 
 class="array"  columnalign="left"><mspace width="4.3045pt"/> <mstyle 
 class="mbox"><mtext  >procedure </mtext></mstyle><mstyle 
 class="mbox"><mtext  ></mtext><mtext class="textsc" mathvariant="normal" >unpack</mtext></mstyle><mrow ><mo 
-class="MathClass-open">(</mo><mrow><mstyle mathvariant="monospace"><mi 
->p</mi><mi 
->a</mi><mi 
->c</mi><mi 
->k</mi><mi 
->e</mi><mi 
->d</mi><mstyle 
-class="text"><mtext  >_</mtext></mstyle><mi 
->c</mi><mi 
->h</mi><mi 
->u</mi><mi 
->n</mi><mi 
->k</mi></mstyle></mrow><mo 
+class="MathClass-open">(</mo><mrow><mstyle 
+class="text"><mtext  >packed_chunk</mtext></mstyle></mrow><mo 
 class="MathClass-close">)</mo></mrow>                                                 </mtd>
 </mtr>  <mtr><mtd 
 class="array"  columnalign="left"><mspace width="4.3045pt"/>  <mtable  align="axis" style=""  
@@ -343,102 +217,36 @@ equalrows="false" equalcolumns="false" class="array"> <mtr><mtd
 class="array"  columnalign="left"><mspace width="4.3045pt"/>  <mfenced separators="" 
 open="{"  close="" ><mrow> <mtable  align="axis" style=""  
 equalrows="false" columnlines="none" equalcolumns="false" class="array"> <mtr><mtd 
-class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
->c</mi><mi 
->h</mi><mi 
->u</mi><mi 
->n</mi><mi 
->k</mi><mstyle 
-class="text"><mtext  >_</mtext></mstyle><mi 
->n</mi><mi 
->u</mi><mi 
->m</mi><mi 
->b</mi><mi 
->e</mi><mi 
->r</mi></mstyle><mo 
-class="MathClass-punc">,</mo><mstyle mathvariant="monospace"><mi 
->q</mi><mi 
->u</mi><mi 
->a</mi><mi 
->n</mi><mi 
->t</mi><mi 
->i</mi><mi 
->z</mi><mi 
->e</mi><mi 
->d</mi><mstyle 
-class="text"><mtext  >_</mtext></mstyle><mi 
->c</mi><mi 
->h</mi><mi 
->u</mi><mi 
->n</mi><mi 
->k</mi></mstyle> <mo 
+class="array"  columnalign="left"><mstyle 
+class="text"><mtext  >chunk_number</mtext></mstyle><mo 
+class="MathClass-punc">,</mo><mstyle 
+class="text"><mtext  >quantized_chunk</mtext></mstyle> <mo 
 class="MathClass-rel">←</mo><mstyle 
 class="text"><mtext  >Buﬀer.unpack</mtext></mstyle><mrow ><mo 
-class="MathClass-open">(</mo><mrow><mstyle mathvariant="monospace"><mi 
->p</mi><mi 
->a</mi><mi 
->c</mi><mi 
->k</mi><mi 
->e</mi><mi 
->d</mi><mstyle 
-class="text"><mtext  >_</mtext></mstyle><mi 
->c</mi><mi 
->h</mi><mi 
->u</mi><mi 
->n</mi><mi 
->k</mi></mstyle></mrow><mo 
+class="MathClass-open">(</mo><mrow><mstyle 
+class="text"><mtext  >packed_chunk</mtext></mstyle></mrow><mo 
 class="MathClass-close">)</mo></mrow></mtd>
 </mtr>  <mtr><mtd 
-class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
->c</mi><mi 
->h</mi><mi 
->u</mi><mi 
->n</mi><mi 
->k</mi></mstyle> <mo 
+class="array"  columnalign="left"><mstyle 
+class="text"><mtext  >chunk</mtext></mstyle> <mo 
 class="MathClass-rel">←</mo><mstyle 
 class="text"><mtext  >dequantize</mtext></mstyle><mrow ><mo 
-class="MathClass-open">(</mo><mrow><mstyle mathvariant="monospace"><mi 
->q</mi><mi 
->u</mi><mi 
->a</mi><mi 
->n</mi><mi 
->t</mi><mi 
->i</mi><mi 
->z</mi><mi 
->e</mi><mi 
->d</mi><mstyle 
-class="text"><mtext  >_</mtext></mstyle><mi 
->c</mi><mi 
->h</mi><mi 
->u</mi><mi 
->n</mi><mi 
->k</mi></mstyle></mrow><mo 
-class="MathClass-close">)</mo></mrow>                                   </mtd>
+class="MathClass-open">(</mo><mrow><mstyle 
+class="text"><mtext  >quantized_chunk</mtext></mstyle></mrow><mo 
+class="MathClass-close">)</mo></mrow>                                     </mtd>
 </mtr>  <mtr><mtd 
 class="array"  columnalign="left"><mstyle 
 class="text"><mtext  >return</mtext></mstyle><mi 
-> </mi><mstyle mathvariant="monospace"><mi 
->c</mi><mi 
->h</mi><mi 
->u</mi><mi 
->n</mi><mi 
->k</mi><mstyle 
-class="text"><mtext  >_</mtext></mstyle><mi 
->n</mi><mi 
->u</mi><mi 
->m</mi><mi 
->b</mi><mi 
->e</mi><mi 
->r</mi></mstyle><mo 
-class="MathClass-punc">,</mo><mstyle mathvariant="monospace"><mi 
->c</mi><mi 
->h</mi><mi 
->u</mi><mi 
->n</mi><mi 
->k</mi></mstyle>                                </mtd></mtr><!--@{}lr@{}--></mtable> </mrow></mfenced></mtd>
- </mtr><!--@{\pcode@tab {1}}l@{}--></mtable>                                                              </mtd>
+> </mi><mstyle 
+class="text"><mtext  >chunk_number</mtext></mstyle><mo 
+class="MathClass-punc">,</mo><mstyle 
+class="text"><mtext  >chunk</mtext></mstyle>                                                 </mtd></mtr><!--@{}lr@{}--></mtable> </mrow></mfenced></mtd>
+ </mtr><!--@{\pcode@tab {1}}l@{}--></mtable>                                                                                                  </mtd>
 </mtr>  <mtr><mtd 
-class="array"  columnalign="left"><mspace width="4.3045pt"/>                                                               </mtd></mtr><!--@{\pcode@tab {1}}lr@{}--></mtable></math> </div>
+class="array"  columnalign="left"><mspace width="4.3045pt"/>                                                                                                   </mtd></mtr><!--@{\pcode@tab {1}}lr@{}--></mtable></math> </div>
+                                                                  
+
+                                                                  
      </p></li>
      <li 
   class="enumerate" id="x1-2007x3">Determine the quantization step <!--l. 105--><math 
@@ -491,69 +299,21 @@ display="inline" ><mi
 <!--l. 121--><p class="noindent" >
      </p><ol  class="enumerate1" >
      <li 
-  class="enumerate" id="x1-4002x1">The Python module named <!--l. 122--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mstyle mathvariant="monospace"><mi 
->q</mi><mi 
->u</mi><mi 
->a</mi><mi 
->n</mi><mi 
->t</mi><mi 
->i</mi><mi 
->z</mi><mi 
->a</mi><mi 
->t</mi><mi 
->i</mi><mi 
->o</mi><mi 
->n</mi><mo 
-class="MathClass-punc">.</mo><mi 
->p</mi><mi 
->y</mi></mstyle></math>
-     stored in the <a 
-href="https://github.com/Tecnologias-multimedia/intercom" >root directory</a> of your <!--l. 124--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mstyle mathvariant="monospace"><mi 
->i</mi><mi 
->n</mi><mi 
->t</mi><mi 
->e</mi><mi 
->r</mi><mi 
->c</mi><mi 
->o</mi><mi 
->m</mi></mstyle></math>’s
-     repo.
-                                                                  
-
-                                                                  
+  class="enumerate" id="x1-4002x1">The Python module named quantize.py stored in the <a 
+href="https://github.com/Tecnologias-multimedia/intercom" >root directory</a> of
+     your InterCom’s repo.
      </li>
      <li 
-  class="enumerate" id="x1-4004x2">A video demonstration of 3 minutes (at most) showing how <!--l. 126--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mstyle mathvariant="monospace"><mi 
->q</mi><mi 
->u</mi><mi 
->a</mi><mi 
->n</mi><mi 
->t</mi><mi 
->i</mi><mi 
->z</mi><mi 
->a</mi><mi 
->t</mi><mi 
->i</mi><mi 
->o</mi><mi 
->n</mi><mo 
-class="MathClass-punc">.</mo><mi 
->p</mi><mi 
->y</mi></mstyle></math>
-     adapts to the variations of the throughput of the link (use <!--l. 127--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mstyle mathvariant="monospace"><mi 
->t</mi><mi 
->c</mi></mstyle></math>).</li></ol>
+  class="enumerate" id="x1-4004x2">A video demonstration of 3 minutes (at most) showing how quantize.py
+     adapts to the variations of the throughput of the link (use <a 
+href="https://man7.org/linux/man-pages/man8/tc.8.html" >tc</a>).</li></ol>
 <!--l. 130--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-50005"></a>Resources</h3>
+                                                                  
+
+                                                                  
    <div class="thebibliography">
    <p class="bibitem" ><span class="biblabel">
  [1]<span class="bibsp">   </span></span><a 
