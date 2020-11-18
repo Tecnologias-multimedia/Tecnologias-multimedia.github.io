@@ -37,7 +37,7 @@ class="ecrm-1200">- </span><a
 href="https://www.ual.es" ><span 
 class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
-class="ecrm-1200">November 12, 2020</span></div>
+class="ecrm-1200">November 18, 2020</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
@@ -161,9 +161,7 @@ InterCom:
      </p><ol  class="enumerate1" >
      <li 
   class="enumerate" id="x1-1007x1">Extend (<a 
-href="https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)" >inherit</a> from) the class <span 
-class="ectt-1000">Minimal </span>to implement a new class <span 
-class="ectt-1000">Buffer</span>.
+href="https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)" >inherit</a> from) the class Minimal to implement a new class Buﬀer.
      </li>
      <li 
   class="enumerate" id="x1-1009x2">In the payload of the UDP packets a chunk number must be included
@@ -174,9 +172,8 @@ class="ectt-1000">Buffer</span>.
      <li 
   class="enumerate" id="x1-1011x3">Take into account that the critical part of InterCom is a <a 
 href="https://en.wikipedia.org/wiki/Task_(computing)" >task</a> that could be
-     called <span 
-class="ecti-1000">record-send-and-play</span>, and this should be iterated each time a new chunk
-     is available in the <a 
+     called record_send_and_play(), and this should be iterated each time a new
+     chunk is available in the <a 
 href="https://en.wikipedia.org/wiki/Analog-to-digital_converter" >ADC</a>. More precisely:
          <ol  class="enumerate2" >
          <li 
@@ -195,20 +192,16 @@ class="ecti-1000">gapless</span></a>
          playback.</li></ol>
      </li>
      <li 
-  class="enumerate" id="x1-1019x4">A <span 
-class="ecti-1000">receive-and-buﬀer </span>task can be run now in a diﬀerent execution <a 
+  class="enumerate" id="x1-1019x4">A receive_and_buﬀer() task can be run now in a diﬀerent execution <a 
 href="https://en.wikipedia.org/wiki/Thread_(computing)" >thread</a>,
-     decoupled from the <span 
-class="ecti-1000">record-send-and-play </span>task. But notice that using
-     <span 
-class="ectt-1000">sounddevice </span>this can be achived without using the <a 
-href="https://docs.python.org/3/library/threading.html" ><span 
-class="ectt-1000">threading</span></a> nor
-     <a 
-href="https://docs.python.org/3/library/multiprocessing.html" ><span 
-class="ectt-1000">multiprocessing</span></a> libraries because the interruption handler (the so called
-     <span 
-class="ectt-1000">callback </span>function) already runs in parallel with the main thread.</li></ol>
+     decoupled from the record_send_and_play() task. But notice that using the
+     sounddevice package this can be achived without using the <a 
+href="https://docs.python.org/3/library/threading.html" >threading</a>
+     nor <a 
+href="https://docs.python.org/3/library/multiprocessing.html" >multiprocessing</a> packages because the interruption handler (the
+     so called <span 
+class="ecti-1000">callback</span>() function) already runs in parallel with the main
+     thread.</li></ol>
 <a 
  id="x1-1020r1"></a>
                                                                   
@@ -243,238 +236,100 @@ display="inline" > <mtable  align="axis" style=""
 equalrows="false" columnlines="none" equalcolumns="false" class="array"> <mtr><mtd 
 class="array"  columnalign="left"><mspace width="4.3045pt"/> <mstyle 
 class="mbox"><mtext  >procedure </mtext></mstyle><mstyle 
-class="mbox"><mtext  ></mtext><mtext class="textsc" mathvariant="normal" >Record_Send_and_Play</mtext></mstyle><mrow ><mo 
+class="mbox"><mtext  ></mtext><mtext class="textsc" mathvariant="normal" >record_send_and_play</mtext></mstyle><mrow ><mo 
 class="MathClass-open">(</mo><mrow><mi 
 > </mi></mrow><mo 
-class="MathClass-close">)</mo></mrow>                                      </mtd>
+class="MathClass-close">)</mo></mrow>                                        </mtd>
 </mtr>  <mtr><mtd 
 class="array"  columnalign="left"><mspace width="4.3045pt"/>  <mtable  align="axis" style=""  
 equalrows="false" equalcolumns="false" class="array"> <mtr><mtd 
 class="array"  columnalign="left"><mspace width="4.3045pt"/>  <mfenced separators="" 
 open="{"  close="" ><mrow> <mtable  align="axis" style=""  
 equalrows="false" columnlines="none" equalcolumns="false" class="array"> <mtr><mtd 
-class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
->c</mi><mi 
->h</mi><mi 
->u</mi><mi 
->n</mi><mi 
->k</mi></mstyle> <mo 
-class="MathClass-rel">←</mo><mstyle mathvariant="monospace"><mi 
->r</mi><mi 
->e</mi><mi 
->c</mi><mi 
->o</mi><mi 
->r</mi><mi 
->d</mi><mrow ><mo 
+class="array"  columnalign="left"><mstyle 
+class="text"><mtext  >chunk</mtext></mstyle> <mo 
+class="MathClass-rel">←</mo><mstyle 
+class="text"><mtext  >record</mtext></mstyle><mrow ><mo 
 class="MathClass-open">(</mo><mrow></mrow><mo 
-class="MathClass-close">)</mo></mrow></mstyle>                    </mtd>
+class="MathClass-close">)</mo></mrow>                     </mtd>
 </mtr>  <mtr><mtd 
-class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
->p</mi><mi 
->a</mi><mi 
->c</mi><mi 
->k</mi><mi 
->e</mi><mi 
->d</mi><mstyle 
-class="text"><mtext  >_</mtext></mstyle><mi 
->c</mi><mi 
->h</mi><mi 
->u</mi><mi 
->n</mi><mi 
->k</mi></mstyle> <mo 
-class="MathClass-rel">←</mo><mstyle mathvariant="monospace"><mi 
->p</mi><mi 
->a</mi><mi 
->c</mi><mi 
->k</mi><mrow ><mo 
-class="MathClass-open">(</mo><mrow><mi 
->c</mi><mi 
->h</mi><mi 
->u</mi><mi 
->n</mi><mi 
->k</mi></mrow><mo 
-class="MathClass-close">)</mo></mrow></mstyle>     </mtd>
+class="array"  columnalign="left"><mstyle 
+class="text"><mtext  >packed_chunk</mtext></mstyle> <mo 
+class="MathClass-rel">←</mo><mstyle 
+class="text"><mtext  >pack</mtext></mstyle><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mstyle 
+class="text"><mtext  >chunk</mtext></mstyle></mrow><mo 
+class="MathClass-close">)</mo></mrow>    </mtd>
 </mtr>  <mtr><mtd 
-class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
->s</mi><mi 
->e</mi><mi 
->n</mi><mi 
->d</mi><mrow ><mo 
-class="MathClass-open">(</mo><mrow><mi 
->p</mi><mi 
->a</mi><mi 
->c</mi><mi 
->k</mi><mi 
->e</mi><mi 
->d</mi><mstyle 
-class="text"><mtext  >_</mtext></mstyle><mi 
->c</mi><mi 
->h</mi><mi 
->u</mi><mi 
->n</mi><mi 
->k</mi></mrow><mo 
-class="MathClass-close">)</mo></mrow></mstyle>                 </mtd>
+class="array"  columnalign="left"><mstyle 
+class="text"><mtext  >send</mtext></mstyle><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mstyle 
+class="text"><mtext  >packed_chunk</mtext></mstyle></mrow><mo 
+class="MathClass-close">)</mo></mrow>                 </mtd>
 </mtr>  <mtr><mtd 
-class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
->c</mi><mi 
->h</mi><mi 
->u</mi><mi 
->n</mi><mi 
->k</mi></mstyle> <mo 
-class="MathClass-rel">←</mo><mstyle mathvariant="monospace"><mi 
->u</mi><mi 
->n</mi><mi 
->b</mi><mi 
->u</mi><mi 
->f</mi><mi 
->f</mi><mi 
->e</mi><mi 
->r</mi><mstyle 
-class="text"><mtext  >_</mtext></mstyle><mi 
->n</mi><mi 
->e</mi><mi 
->x</mi><mi 
->t</mi><mstyle 
-class="text"><mtext  >_</mtext></mstyle><mi 
->c</mi><mi 
->h</mi><mi 
->u</mi><mi 
->n</mi><mi 
->k</mi><mrow ><mo 
+class="array"  columnalign="left"><mstyle 
+class="text"><mtext  >chunk</mtext></mstyle> <mo 
+class="MathClass-rel">←</mo><mstyle 
+class="text"><mtext  >unbuﬀer_next_chunk</mtext></mstyle><mrow ><mo 
 class="MathClass-open">(</mo><mrow></mrow><mo 
-class="MathClass-close">)</mo></mrow></mstyle></mtd>
+class="MathClass-close">)</mo></mrow></mtd>
 </mtr>  <mtr><mtd 
-class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
->p</mi><mi 
->l</mi><mi 
->a</mi><mi 
->y</mi><mrow ><mo 
-class="MathClass-open">(</mo><mrow><mi 
->c</mi><mi 
->h</mi><mi 
->u</mi><mi 
->n</mi><mi 
->k</mi></mrow><mo 
-class="MathClass-close">)</mo></mrow></mstyle>                            </mtd></mtr><!--@{}lr@{}--></mtable>                                             </mrow></mfenced></mtd>
+class="array"  columnalign="left"><mstyle 
+class="text"><mtext  >play</mtext></mstyle><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mstyle 
+class="text"><mtext  >chunk</mtext></mstyle></mrow><mo 
+class="MathClass-close">)</mo></mrow>                            </mtd></mtr><!--@{}lr@{}--></mtable>                                              </mrow></mfenced></mtd>
  </mtr><!--@{\pcode@tab {1}}l@{}--></mtable>                                                                                                  </mtd>
 </mtr>  <mtr><mtd 
 class="array"  columnalign="left"><mspace width="4.3045pt"/> <mstyle 
 class="mbox"><mtext  >procedure </mtext></mstyle><mstyle 
-class="mbox"><mtext  ></mtext><mtext class="textsc" mathvariant="normal" >Receive_and_Buffer</mtext></mstyle><mrow ><mo 
+class="mbox"><mtext  ></mtext><mtext class="textsc" mathvariant="normal" >receive_and_buffer</mtext></mstyle><mrow ><mo 
 class="MathClass-open">(</mo><mrow><mi 
 > </mi></mrow><mo 
-class="MathClass-close">)</mo></mrow>                                            </mtd>
+class="MathClass-close">)</mo></mrow>                                             </mtd>
 </mtr>  <mtr><mtd 
 class="array"  columnalign="left"><mspace width="4.3045pt"/>  <mtable  align="axis" style=""  
 equalrows="false" equalcolumns="false" class="array"> <mtr><mtd 
 class="array"  columnalign="left"><mspace width="4.3045pt"/>  <mfenced separators="" 
 open="{"  close="" ><mrow> <mtable  align="axis" style=""  
 equalrows="false" columnlines="none" equalcolumns="false" class="array"> <mtr><mtd 
-class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
->p</mi><mi 
->a</mi><mi 
->c</mi><mi 
->k</mi><mi 
->e</mi><mi 
->d</mi><mstyle 
-class="text"><mtext  >_</mtext></mstyle><mi 
->c</mi><mi 
->h</mi><mi 
->u</mi><mi 
->n</mi><mi 
->k</mi></mstyle> <mo 
-class="MathClass-rel">←</mo><mstyle mathvariant="monospace"><mi 
->r</mi><mi 
->e</mi><mi 
->c</mi><mi 
->e</mi><mi 
->i</mi><mi 
->v</mi><mi 
->e</mi><mrow ><mo 
+class="array"  columnalign="left"><mstyle 
+class="text"><mtext  >packed_chunk</mtext></mstyle> <mo 
+class="MathClass-rel">←</mo><mstyle 
+class="text"><mtext  >receive</mtext></mstyle><mrow ><mo 
 class="MathClass-open">(</mo><mrow></mrow><mo 
-class="MathClass-close">)</mo></mrow></mstyle>                           </mtd>
+class="MathClass-close">)</mo></mrow>                              </mtd>
 </mtr>  <mtr><mtd 
-class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
->c</mi><mi 
->h</mi><mi 
->u</mi><mi 
->n</mi><mi 
->k</mi><mstyle 
-class="text"><mtext  >_</mtext></mstyle><mi 
->n</mi><mi 
->u</mi><mi 
->m</mi><mi 
->b</mi><mi 
->e</mi><mi 
->r</mi></mstyle><mo 
-class="MathClass-punc">,</mo><mstyle mathvariant="monospace"><mi 
->c</mi><mi 
->h</mi><mi 
->u</mi><mi 
->n</mi><mi 
->k</mi></mstyle> <mo 
-class="MathClass-rel">←</mo><mstyle mathvariant="monospace"><mi 
->u</mi><mi 
->n</mi><mi 
->p</mi><mi 
->a</mi><mi 
->c</mi><mi 
->k</mi><mrow ><mo 
-class="MathClass-open">(</mo><mrow><mi 
->p</mi><mi 
->a</mi><mi 
->c</mi><mi 
->k</mi><mi 
->e</mi><mi 
->d</mi><mstyle 
-class="text"><mtext  >_</mtext></mstyle><mi 
->c</mi><mi 
->h</mi><mi 
->u</mi><mi 
->n</mi><mi 
->k</mi></mrow><mo 
-class="MathClass-close">)</mo></mrow></mstyle></mtd>
+class="array"  columnalign="left"><mstyle 
+class="text"><mtext  >chunk_number</mtext></mstyle><mo 
+class="MathClass-punc">,</mo><mstyle 
+class="text"><mtext  >chunk</mtext></mstyle> <mo 
+class="MathClass-rel">←</mo><mstyle 
+class="text"><mtext  >unpack</mtext></mstyle><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mstyle 
+class="text"><mtext  >packed_chunk</mtext></mstyle></mrow><mo 
+class="MathClass-close">)</mo></mrow></mtd>
 </mtr>  <mtr><mtd 
-class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
->b</mi><mi 
->u</mi><mi 
->f</mi><mi 
->f</mi><mi 
->e</mi><mi 
->r</mi><mrow ><mo 
-class="MathClass-open">(</mo><mrow><mi 
->c</mi><mi 
->h</mi><mi 
->u</mi><mi 
->n</mi><mi 
->k</mi><mstyle 
-class="text"><mtext  >_</mtext></mstyle><mi 
->n</mi><mi 
->u</mi><mi 
->m</mi><mi 
->b</mi><mi 
->e</mi><mi 
->r</mi><mo 
-class="MathClass-punc">,</mo><mi 
->c</mi><mi 
->h</mi><mi 
->u</mi><mi 
->n</mi><mi 
->k</mi></mrow><mo 
-class="MathClass-close">)</mo></mrow></mstyle>                        </mtd></mtr><!--@{}lr@{}--></mtable>                          </mrow></mfenced></mtd>
+class="array"  columnalign="left"><mstyle 
+class="text"><mtext  >buﬀer</mtext></mstyle><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mstyle 
+class="text"><mtext  >chunk_number</mtext></mstyle><mo 
+class="MathClass-punc">,</mo><mstyle 
+class="text"><mtext  >chunk</mtext></mstyle></mrow><mo 
+class="MathClass-close">)</mo></mrow>                         </mtd></mtr><!--@{}lr@{}--></mtable>                         </mrow></mfenced></mtd>
  </mtr><!--@{\pcode@tab {1}}l@{}--></mtable>                                                                                                  </mtd>
 </mtr>  <mtr><mtd 
 class="array"  columnalign="left"><mspace width="4.3045pt"/>                                                                                                   </mtd></mtr><!--@{\pcode@tab {1}}lr@{}--></mtable></math></div>
 </p>
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
  id="x1-20002"></a>Timming</h3>
-<!--l. 127--><p class="noindent" >Please, ﬁnish this milestone in two weeks.
-</p><!--l. 129--><p class="noindent" >
+<!--l. 126--><p class="noindent" >Please, ﬁnish this milestone in two weeks.
+</p><!--l. 128--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-30003"></a>Deliverables</h3>
-<!--l. 131--><p class="noindent" >A python module called <span 
-class="ectt-1000">buffer.py </span>stored in the root directory of the intercom’s
+<!--l. 130--><p class="noindent" >A python module named buﬀer.py stored in the <a 
+href="https://github.com/Tecnologias-multimedia/intercom" >root directory</a> of the InterCom’s
 repo.
 </p><!--l. 134--><p class="noindent" >
 </p>

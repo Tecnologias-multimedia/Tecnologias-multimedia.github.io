@@ -23,13 +23,13 @@ respect to the other (the $L$ channel). From a mathematical point of
 view, this process can be seen as a
 \href{https://en.wikipedia.org/wiki/Decorrelation}{decorrelation}
 process. From a physical perspective, decorrelating implies energy
-accumulation~\cite{sayood2017introduction}.
+accumulation in a few coefficients~\cite{sayood2017introduction}.
 
-To perform this inter-channel decorrelation, we use an
+To perform this inter-channel decorrelation, we can use an
 \href{https://en.wikipedia.org/wiki/Orthogonal_transformation}{orthogonal}\footnote{Orthogonality
   of the transform is a important property because the correlation
   between the coefficients (the output of the transform) is 0.}
-transform
+transform, that in our case will be
 \begin{equation}
   y = Kx = \frac{1}{2}\begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}x,
 \end{equation}
@@ -37,7 +37,7 @@ where $x$ represents a frame (a tuple of L and R samples, $x[0]$ and
 $x[1]$), $K$ is the $2\times 2$ KLT
 \href{http://fourier.eng.hmc.edu/e161/lectures/klt/node3.html}{(Karhunen-Lo\`eve
   Transform)} matrix multiplied by $1/\sqrt{2}$ (which is closely
-related with the \href{http://wavelets.pybytes.com/wavelet/haar/}{Haar
+related to the \href{http://wavelets.pybytes.com/wavelet/haar/}{Haar
   transform}~\cite{vetterli1995wavelets}), and $y$ represents the
 transform coefficients (in our case, a couple of coefficients $y[0]$
 with the \href{https://en.wikipedia.org/wiki/Arithmetic_mean}{mean}
@@ -62,24 +62,24 @@ This transform can be implemented
 using the following algorithm:
 
 \begin{pseudocode}{Inter-channel\_decorrelation}{~}
-  \PROCEDURE{Analyze}{\mathtt{frame}}
+  \PROCEDURE{analyze}{\text{frame}}
   \BEGIN
-    \mathtt{frame[0] -= frame[1]} \\
-    \mathtt{frame[1] += (frame[0] / 2)} \\
-    \mathtt{frame[0] /= 2}
+    \text{frame}[0] -= \text{frame}[1] \\
+    \text{frame}[1] += (\text{frame}[0] / 2) \\
+    \text{frame}[0] /= 2
   \END
   \ENDPROCEDURE
-  \PROCEDURE{Synthesize}{\mathtt{frame}}
+  \PROCEDURE{synthesize}{\text{frame}}
   \BEGIN
-    \mathtt{frame[0] *= 2} \\
-    \mathtt{frame[1] -= (frame[0] / 2)} \\
-    \mathtt{frame[0] += frame[1]}
+    \text{frame}[0] *= 2 \\
+    \text{frame}[1] -= (\text{frame}[0] / 2) \\
+    \text{frame}[0] += \text{frame}[1]
   \END
   \ENDPROCEDURE
 \end{pseudocode}
 
-where $\mathtt{a~-= b}$ is a shorter representation of the operation
-$\mathtt{a = a - b}$. Notice that this type of in-place computations
+where $\text{a}~\mathtt{OPER}= \text{b}$ is a shorter representation of the operation
+$\text{a} = \text{a}~\mathtt{OPER}~\text{b}$. Notice that this type of in-place computations
 are commonly used in the implementation of DWTs
 (\href{https://en.wikipedia.org/wiki/Discrete_wavelet_transform}{Dicrete
   Wavelet Transform}s) using
@@ -89,12 +89,12 @@ are commonly used in the implementation of DWTs
 \section{What you have to do?}
 
 \begin{enumerate}
-\item In a module named \texttt{stereo\_coding.py}, inherit the class
-  \texttt{Compress} and create a class named \texttt{Stereo\_coding}.
-\item Override the methods \texttt{pack()} and \texttt{unpack()}. In
-  \texttt{pack()} perform the Analyze() procedure previously
-  described, and in \texttt{unpack()} the
-  Synthesize(). These procedures should be applied to
+\item In a module named stereo.py, inherit the class
+  Quantization and create a class named Stereo\_decorrelation.
+\item Override the methods pack() and unpack(). In
+  pack() perform the procedure analyze() previously
+  described, and in unpack() the
+  synthesize(). These procedures should be applied to
   all the frames of a chunk using \href{https://www.oreilly.com/library/view/python-for-data/9781449323592/ch04.html}{vectorized
     operations}.
 \item Has been the
@@ -109,10 +109,9 @@ You should reach this milestone at most one week.
 
 \section{Deliverables}
 
-The module \texttt{stereo\_coding.py}. Store
-it at the
+The module stereo.py. Store it at the
 \href{https://github.com/Tecnologias-multimedia/intercom}{root
-  directory} of your \texttt{intercom}'s repo.
+  directory} of your InterCom's repo.
 
 \section{Resources}
 

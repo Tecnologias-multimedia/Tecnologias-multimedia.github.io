@@ -39,7 +39,7 @@ class="ecrm-1200">- </span><a
 href="https://www.ual.es" ><span 
 class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
-class="ecrm-1200">November 17, 2020</span></div>
+class="ecrm-1200">November 18, 2020</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
@@ -76,14 +76,14 @@ display="inline" ><mi
 channel). From a mathematical point of view, this process can be seen as a
 <a 
 href="https://en.wikipedia.org/wiki/Decorrelation" >decorrelation</a> process. From a physical perspective, decorrelating implies energy
-accumulation <span class="cite">[<a 
+accumulation in a few coeﬃcients <span class="cite">[<a 
 href="#Xsayood2017introduction">3</a>]</span>.
-</p><!--l. 28--><p class="indent" >   To perform this inter-channel decorrelation, we use an
+</p><!--l. 28--><p class="indent" >   To perform this inter-channel decorrelation, we can use an
 <a 
 href="https://en.wikipedia.org/wiki/Orthogonal_transformation" >orthogonal</a><span class="footnote-mark"><a 
 href="index2.html#fn1x0"><sup class="textsuperscript">1</sup></a></span><a 
  id="x1-1001f1"></a> 
-transform </p><table class="equation"><tr><td> <a 
+transform, that in our case will be </p><table class="equation"><tr><td> <a 
  id="x1-1002r1"></a>
                                                                   
 
@@ -141,7 +141,7 @@ href="http://fourier.eng.hmc.edu/e161/lectures/klt/node3.html" >(Karhunen-Loève
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mn>1</mn><mo 
 class="MathClass-bin">∕</mo><msqrt><mrow><mn>2</mn></mrow></msqrt></math>
-(which is closely related with the <a 
+(which is closely related to the <a 
 href="http://wavelets.pybytes.com/wavelet/haar/" >Haar transform</a> <span class="cite">[<a 
 href="#Xvetterli1995wavelets">5</a>]</span>), and
 <!--l. 41--><math 
@@ -271,169 +271,115 @@ display="inline" > <mtable  align="axis" style=""
 equalrows="false" columnlines="none" equalcolumns="false" class="array"> <mtr><mtd 
 class="array"  columnalign="left"><mspace width="4.3045pt"/> <mstyle 
 class="mbox"><mtext  >procedure </mtext></mstyle><mstyle 
-class="mbox"><mtext  ></mtext><mtext class="textsc" mathvariant="normal" >Analyze</mtext></mstyle><mrow ><mo 
-class="MathClass-open">(</mo><mrow><mstyle mathvariant="monospace"><mi 
->f</mi><mi 
->r</mi><mi 
->a</mi><mi 
->m</mi><mi 
->e</mi></mstyle></mrow><mo 
-class="MathClass-close">)</mo></mrow>                                                           </mtd>
+class="mbox"><mtext  ></mtext><mtext class="textsc" mathvariant="normal" >analyze</mtext></mstyle><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mstyle 
+class="text"><mtext  >frame</mtext></mstyle></mrow><mo 
+class="MathClass-close">)</mo></mrow>                                                            </mtd>
 </mtr>  <mtr><mtd 
 class="array"  columnalign="left"><mspace width="4.3045pt"/>  <mtable  align="axis" style=""  
 equalrows="false" equalcolumns="false" class="array"> <mtr><mtd 
 class="array"  columnalign="left"><mspace width="4.3045pt"/>  <mfenced separators="" 
 open="{"  close="" ><mrow> <mtable  align="axis" style=""  
 equalrows="false" columnlines="none" equalcolumns="false" class="array"> <mtr><mtd 
-class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
->f</mi><mi 
->r</mi><mi 
->a</mi><mi 
->m</mi><mi 
->e</mi><mrow ><mo 
-class="MathClass-open">[</mo><mrow><mi 
->0</mi></mrow><mo 
+class="array"  columnalign="left"><mstyle 
+class="text"><mtext  >frame</mtext></mstyle><mrow ><mo 
+class="MathClass-open">[</mo><mrow><mn>0</mn></mrow><mo 
 class="MathClass-close">]</mo></mrow><mo 
 class="MathClass-bin">−</mo> <mo 
-class="MathClass-rel">=</mo> <mi 
->f</mi><mi 
->r</mi><mi 
->a</mi><mi 
->m</mi><mi 
->e</mi><mrow ><mo 
-class="MathClass-open">[</mo><mrow><mi 
->1</mi></mrow><mo 
-class="MathClass-close">]</mo></mrow></mstyle>     </mtd>
+class="MathClass-rel">=</mo> <mstyle 
+class="text"><mtext  >frame</mtext></mstyle><mrow ><mo 
+class="MathClass-open">[</mo><mrow><mn>1</mn></mrow><mo 
+class="MathClass-close">]</mo></mrow>     </mtd>
 </mtr>  <mtr><mtd 
-class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
->f</mi><mi 
->r</mi><mi 
->a</mi><mi 
->m</mi><mi 
->e</mi><mrow ><mo 
-class="MathClass-open">[</mo><mrow><mi 
->1</mi></mrow><mo 
+class="array"  columnalign="left"><mstyle 
+class="text"><mtext  >frame</mtext></mstyle><mrow ><mo 
+class="MathClass-open">[</mo><mrow><mn>1</mn></mrow><mo 
 class="MathClass-close">]</mo></mrow><mo 
 class="MathClass-bin">+</mo> <mo 
 class="MathClass-rel">=</mo> <mrow ><mo 
-class="MathClass-open">(</mo><mrow><mi 
->f</mi><mi 
->r</mi><mi 
->a</mi><mi 
->m</mi><mi 
->e</mi><mrow ><mo 
-class="MathClass-open">[</mo><mrow><mi 
->0</mi></mrow><mo 
+class="MathClass-open">(</mo><mrow><mstyle 
+class="text"><mtext  >frame</mtext></mstyle><mrow ><mo 
+class="MathClass-open">[</mo><mrow><mn>0</mn></mrow><mo 
 class="MathClass-close">]</mo></mrow><mo 
-class="MathClass-bin">∕</mo><mi 
->2</mi></mrow><mo 
-class="MathClass-close">)</mo></mrow></mstyle></mtd>
+class="MathClass-bin">∕</mo><mn>2</mn></mrow><mo 
+class="MathClass-close">)</mo></mrow></mtd>
 </mtr>  <mtr><mtd 
-class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
->f</mi><mi 
->r</mi><mi 
->a</mi><mi 
->m</mi><mi 
->e</mi><mrow ><mo 
-class="MathClass-open">[</mo><mrow><mi 
->0</mi></mrow><mo 
+class="array"  columnalign="left"><mstyle 
+class="text"><mtext  >frame</mtext></mstyle><mrow ><mo 
+class="MathClass-open">[</mo><mrow><mn>0</mn></mrow><mo 
 class="MathClass-close">]</mo></mrow><mo 
 class="MathClass-bin">∕</mo> <mo 
-class="MathClass-rel">=</mo> <mi 
->2</mi></mstyle>          </mtd></mtr><!--@{}lr@{}--></mtable>                                   </mrow></mfenced></mtd>
- </mtr><!--@{\pcode@tab {1}}l@{}--></mtable>                                                              </mtd>
+class="MathClass-rel">=</mo> <mn>2</mn>               </mtd></mtr><!--@{}lr@{}--></mtable>                                                         </mrow></mfenced></mtd>
+ </mtr><!--@{\pcode@tab {1}}l@{}--></mtable>                                                                                                  </mtd>
 </mtr>  <mtr><mtd 
 class="array"  columnalign="left"><mspace width="4.3045pt"/> <mstyle 
 class="mbox"><mtext  >procedure </mtext></mstyle><mstyle 
-class="mbox"><mtext  ></mtext><mtext class="textsc" mathvariant="normal" >Synthesize</mtext></mstyle><mrow ><mo 
-class="MathClass-open">(</mo><mrow><mstyle mathvariant="monospace"><mi 
->f</mi><mi 
->r</mi><mi 
->a</mi><mi 
->m</mi><mi 
->e</mi></mstyle></mrow><mo 
-class="MathClass-close">)</mo></mrow>                                                       </mtd>
+class="mbox"><mtext  ></mtext><mtext class="textsc" mathvariant="normal" >synthesize</mtext></mstyle><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mstyle 
+class="text"><mtext  >frame</mtext></mstyle></mrow><mo 
+class="MathClass-close">)</mo></mrow>                                                        </mtd>
 </mtr>  <mtr><mtd 
 class="array"  columnalign="left"><mspace width="4.3045pt"/>  <mtable  align="axis" style=""  
 equalrows="false" equalcolumns="false" class="array"> <mtr><mtd 
 class="array"  columnalign="left"><mspace width="4.3045pt"/>  <mfenced separators="" 
 open="{"  close="" ><mrow> <mtable  align="axis" style=""  
 equalrows="false" columnlines="none" equalcolumns="false" class="array"> <mtr><mtd 
-class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
->f</mi><mi 
->r</mi><mi 
->a</mi><mi 
->m</mi><mi 
->e</mi><mrow ><mo 
-class="MathClass-open">[</mo><mrow><mi 
->0</mi></mrow><mo 
+class="array"  columnalign="left"><mstyle 
+class="text"><mtext  >frame</mtext></mstyle><mrow ><mo 
+class="MathClass-open">[</mo><mrow><mn>0</mn></mrow><mo 
 class="MathClass-close">]</mo></mrow><mo 
 class="MathClass-bin">∗</mo> <mo 
-class="MathClass-rel">=</mo> <mi 
->2</mi></mstyle>          </mtd>
+class="MathClass-rel">=</mo> <mn>2</mn>               </mtd>
 </mtr>  <mtr><mtd 
-class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
->f</mi><mi 
->r</mi><mi 
->a</mi><mi 
->m</mi><mi 
->e</mi><mrow ><mo 
-class="MathClass-open">[</mo><mrow><mi 
->1</mi></mrow><mo 
+class="array"  columnalign="left"><mstyle 
+class="text"><mtext  >frame</mtext></mstyle><mrow ><mo 
+class="MathClass-open">[</mo><mrow><mn>1</mn></mrow><mo 
 class="MathClass-close">]</mo></mrow><mo 
 class="MathClass-bin">−</mo> <mo 
 class="MathClass-rel">=</mo> <mrow ><mo 
-class="MathClass-open">(</mo><mrow><mi 
->f</mi><mi 
->r</mi><mi 
->a</mi><mi 
->m</mi><mi 
->e</mi><mrow ><mo 
-class="MathClass-open">[</mo><mrow><mi 
->0</mi></mrow><mo 
+class="MathClass-open">(</mo><mrow><mstyle 
+class="text"><mtext  >frame</mtext></mstyle><mrow ><mo 
+class="MathClass-open">[</mo><mrow><mn>0</mn></mrow><mo 
 class="MathClass-close">]</mo></mrow><mo 
-class="MathClass-bin">∕</mo><mi 
->2</mi></mrow><mo 
-class="MathClass-close">)</mo></mrow></mstyle></mtd>
+class="MathClass-bin">∕</mo><mn>2</mn></mrow><mo 
+class="MathClass-close">)</mo></mrow></mtd>
 </mtr>  <mtr><mtd 
-class="array"  columnalign="left"><mstyle mathvariant="monospace"><mi 
->f</mi><mi 
->r</mi><mi 
->a</mi><mi 
->m</mi><mi 
->e</mi><mrow ><mo 
-class="MathClass-open">[</mo><mrow><mi 
->0</mi></mrow><mo 
+class="array"  columnalign="left"><mstyle 
+class="text"><mtext  >frame</mtext></mstyle><mrow ><mo 
+class="MathClass-open">[</mo><mrow><mn>0</mn></mrow><mo 
 class="MathClass-close">]</mo></mrow><mo 
 class="MathClass-bin">+</mo> <mo 
-class="MathClass-rel">=</mo> <mi 
->f</mi><mi 
->r</mi><mi 
->a</mi><mi 
->m</mi><mi 
->e</mi><mrow ><mo 
-class="MathClass-open">[</mo><mrow><mi 
->1</mi></mrow><mo 
-class="MathClass-close">]</mo></mrow></mstyle>     </mtd></mtr><!--@{}lr@{}--></mtable>                                                        </mrow></mfenced></mtd>
+class="MathClass-rel">=</mo> <mstyle 
+class="text"><mtext  >frame</mtext></mstyle><mrow ><mo 
+class="MathClass-open">[</mo><mrow><mn>1</mn></mrow><mo 
+class="MathClass-close">]</mo></mrow>     </mtd></mtr><!--@{}lr@{}--></mtable>                                                         </mrow></mfenced></mtd>
  </mtr><!--@{\pcode@tab {1}}l@{}--></mtable>                                                                                                  </mtd>
 </mtr>  <mtr><mtd 
 class="array"  columnalign="left"><mspace width="4.3045pt"/>                                                                                                   </mtd></mtr><!--@{\pcode@tab {1}}lr@{}--></mtable></math></div>
 </p><!--l. 81--><p class="indent" >   where <!--l. 81--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mstyle mathvariant="monospace"><mi 
->a</mi><mi 
-> </mi><mo 
-class="MathClass-bin">−</mo> <mo 
-class="MathClass-rel">=</mo> <mi 
->b</mi></mstyle></math> is a shorter
+display="inline" ><mstyle 
+class="text"><mtext  >a</mtext></mstyle><mi 
+> </mi><mstyle mathvariant="monospace"><mi 
+>O</mi><mi 
+>P</mi><mi 
+>E</mi><mi 
+>R</mi></mstyle> <mo 
+class="MathClass-rel">=</mo> <mstyle 
+class="text"><mtext  >b</mtext></mstyle></math> is a shorter
 representation of the operation <!--l. 82--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mstyle mathvariant="monospace"><mi 
->a</mi> <mo 
-class="MathClass-rel">=</mo> <mi 
->a</mi><mo 
-class="MathClass-bin">−</mo><mi 
->b</mi></mstyle></math>.
+display="inline" ><mstyle 
+class="text"><mtext  >a</mtext></mstyle> <mo 
+class="MathClass-rel">=</mo> <mstyle 
+class="text"><mtext  >a</mtext></mstyle><mi 
+> </mi><mstyle mathvariant="monospace"><mi 
+>O</mi><mi 
+>P</mi><mi 
+>E</mi><mi 
+>R</mi></mstyle><mi 
+> </mi><mstyle 
+class="text"><mtext  >b</mtext></mstyle></math>.
 Notice that this type of in-place computations are commonly used in the
 implementation of DWTs (<a 
 href="https://en.wikipedia.org/wiki/Discrete_wavelet_transform" >Dicrete Wavelet Transform</a>s) using <a 
@@ -446,20 +392,13 @@ href="#X2006.sweldens">4</a>]</span>.
 <!--l. 91--><p class="noindent" >
      </p><ol  class="enumerate1" >
      <li 
-  class="enumerate" id="x1-2002x1">In a module named <span 
-class="ectt-1000">stereo_coding.py</span>, inherit the class <span 
-class="ectt-1000">Compress </span>and
-     create a class named <span 
-class="ectt-1000">Stereo_coding</span>.
+  class="enumerate" id="x1-2002x1">In a module named stereo.py, inherit the class Quantization and create a
+     class named Stereo_decorrelation.
      </li>
      <li 
-  class="enumerate" id="x1-2004x2">Override  the  methods  <span 
-class="ectt-1000">pack()  </span>and  <span 
-class="ectt-1000">unpack()</span>.  In  <span 
-class="ectt-1000">pack()  </span>perform
-     the  Analyze()  procedure  previously  described,  and  in  <span 
-class="ectt-1000">unpack() </span>the
-     Synthesize(). These procedures should be applied to all the frames of a
+  class="enumerate" id="x1-2004x2">Override   the   methods   pack()   and   unpack().   In   pack()   perform
+     the  procedure  analyze()  previously  described,  and  in  unpack()  the
+     synthesize(). These procedures should be applied to all the frames of a
      chunk using <a 
 href="https://www.oreilly.com/library/view/python-for-data/9781449323592/ch04.html" >vectorized operations</a>.
      </li>
@@ -479,12 +418,9 @@ href="https://en.wikipedia.org/wiki/Average" >average</a>)? How much?</li></ol>
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-40004"></a>Deliverables</h3>
-<!--l. 112--><p class="noindent" >The module <span 
-class="ectt-1000">stereo_coding.py</span>. Store it at the <a 
-href="https://github.com/Tecnologias-multimedia/intercom" >root directory</a> of your <span 
-class="ectt-1000">intercom</span>’s
-repo.
-</p><!--l. 117--><p class="noindent" >
+<!--l. 112--><p class="noindent" >The module stereo.py. Store it at the <a 
+href="https://github.com/Tecnologias-multimedia/intercom" >root directory</a> of your InterCom’s repo.
+</p><!--l. 116--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-50005"></a>Resources</h3>

@@ -66,8 +66,8 @@ version of InterCom:
 \begin{enumerate}
 \item Extend
   (\href{https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)}{inherit}
-  from) the class \texttt{Minimal} to implement a new class
-  \texttt{Buffer}.
+  from) the class Minimal to implement a new class
+  Buffer.
 \item In the payload of the UDP packets a chunk number must be
   included in order to provide to the receiver the information to
   determine where to store the corresponding chunk in the circular
@@ -75,7 +75,7 @@ version of InterCom:
   chunk numbers.
 \item Take into account that the critical part of InterCom is a
   \href{https://en.wikipedia.org/wiki/Task_(computing)}{task} that
-  could be called \emph{record-send-and-play}, and this should be
+  could be called record\_send\_and\_play(), and this should be
   iterated each time a new chunk is available in the
   \href{https://en.wikipedia.org/wiki/Analog-to-digital_converter}{ADC}. More
   precisely:
@@ -89,38 +89,37 @@ version of InterCom:
   \item As always, the lost chunks should be replaced by zero-chunks
     in the playback.
   \end{enumerate}
-\item A \emph{receive-and-buffer} task can be run now in a different
+\item A receive\_and\_buffer() task can be run now in a different
   execution
   \href{https://en.wikipedia.org/wiki/Thread_(computing)}{thread},
-  decoupled from the \emph{record-send-and-play} task. But notice that
-  using \texttt{sounddevice} this can be achived without using the
-  \href{https://docs.python.org/3/library/threading.html}{\texttt{threading}}
+  decoupled from the record\_send\_and\_play() task. But notice that
+  using the sounddevice package this can be achived without using the
+  \href{https://docs.python.org/3/library/threading.html}{threading}
   nor
-  \href{https://docs.python.org/3/library/multiprocessing.html}{\texttt{multiprocessing}}
-  libraries because the interruption handler (the so called
-  \texttt{callback} function) already runs in parallel with the main
+  \href{https://docs.python.org/3/library/multiprocessing.html}{multiprocessing}
+   packages because the interruption handler (the so called
+  \emph{callback}() function) already runs in parallel with the main
   thread.
 \end{enumerate}
 
 \begin{pseudocode}{Buffer\_InterCom}{~}
-  \PROCEDURE{Record\_Send\_and\_Play}{~}
+  \PROCEDURE{record\_send\_and\_play}{~}
   \BEGIN
-    \mathtt{chunk} \GETS \mathtt{record()}\\
-    \mathtt{packed\_chunk} \GETS \mathtt{pack(chunk)}\\
-    \mathtt{send(packed\_chunk)}\\
-    \mathtt{chunk} \GETS \mathtt{unbuffer\_next\_chunk()}\\
-    \mathtt{play(chunk)}
+    \text{chunk} \GETS \text{record}()\\
+    \text{packed\_chunk} \GETS \text{pack}(\text{chunk})\\
+    \text{send}(\text{packed\_chunk})\\
+    \text{chunk} \GETS \text{unbuffer\_next\_chunk}()\\
+    \text{play}(\text{chunk})
   \END
   \ENDPROCEDURE
-  \PROCEDURE{Receive\_and\_Buffer}{~}
+  \PROCEDURE{receive\_and\_buffer}{~}
   \BEGIN
-    \mathtt{packed\_chunk} \GETS \mathtt{receive()}\\
-    \mathtt{chunk\_number}, \mathtt{chunk} \GETS \mathtt{unpack(packed\_chunk)}\\
-    \mathtt{buffer(chunk\_number, chunk)}
+    \text{packed\_chunk} \GETS \text{receive}()\\
+    \text{chunk\_number}, \text{chunk} \GETS \text{unpack}(\text{packed\_chunk})\\
+    \text{buffer}(\text{chunk\_number}, \text{chunk})
   \END
   \ENDPROCEDURE
 \end{pseudocode}
-
 
 \section{Timming}
 
@@ -128,8 +127,9 @@ Please, finish this milestone in two weeks.
 
 \section{Deliverables}
 
-A python module called \texttt{buffer.py} stored in the root directory
-of the intercom's repo.
+A python module named buffer.py stored in the
+\href{https://github.com/Tecnologias-multimedia/intercom}{root
+  directory} of the InterCom's repo.
 
 \section{Resources}
 
