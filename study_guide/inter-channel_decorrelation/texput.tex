@@ -4,8 +4,8 @@
 
 \section{Description}
 
-Transform Coding is a basic signal decorrelating tool, used in most
-multimedia (audio, image and vídeo) compression systems. The main
+Transform Coding (TC) is a basic signal decorrelating tool, used in
+most multimedia (audio, image and vídeo) compression systems. The main
 reasons for this are: (1) a good \href{}{coding gain}, (2) a
 reasonable \href{}{computational complexity} (usually equal or smaller
 than $O(N\log_2N)$, (3) \href{}{in-place} computation, and (4) that
@@ -16,20 +16,60 @@ involved in a transform-based signal compression system.
 \begin{figure}
   \begin{center}
 \begin{verbatim}
-
-   s  +---+ s  +---+ s' +---+ s'
-  --->| T |--->| Q |--->| E |--->
-      +---+    +---+    +---+
-
+   s   +---+   w    +---+   k    +---+    c
+ ----->| T |------->| Q |------->| E |-----------+
+  (s)  +---+  (s)   +---+  (~s)  +---+   (~s)    |
+samples   coefficients   indexes      code-words ~
+                                                 :
+                                                 ~
+   ~s  +---+    w   +---+   k    +---+           |
+ <-----| t |<-------| q |<-------| D |<----------+
+  (~s) +---+  (~s)  +---+  (~s)  +---+
+approx.    quantized     indexes
+samples   coefficients
 \end{verbatim}                
   \end{center}
-  \caption{Timelines of two InterCom interactions. On the left, the
-    playback is defective because some chunks are lost. On the right,
-    the audio rendering is correct because the playback has been
-    delayed 2 chunk times (enough for this example).}
+  \caption{Common data-flow used un Transform Coding. $s$ represents
+    the signal to compress, $\tilde{s}$ the lossy version of the
+    reconstructed signal, $T$ the (forward) transform (which takes blocks of
+    samples) producing blocks of coefficients $w$, $Q$ the scalar
+    quantization stage (which takes single coefficients) producing
+    quantization indexes $k$, $E$ the entropy encoder (which in our
+    case (DEFLATE) works with blocks of coefficients) producing
+    code-words $c$, $D$ the entropy decoder, $q$ the decuantization
+    stage, and $t$ the inverse (or backward) transform. PCM stands for Puse Code
+    Modulation and DEFLATE is the technique used to find a compact
+    representation of the quantized coefficients.}
   \label{fig:transform_coding}
 \end{figure}
 
+There exist docens of suitable transform used in TC. They are
+characterized by the
+\hred{https://en.wikipedia.org/wiki/Orthogonality}{orthogonality}
+property, which basically means that the output coefficients are going
+to be decorrelated because the functions (or vectors, depending on the
+terminology) that describe the transform are
+\href{https://en.wikipedia.org/wiki/Orthogonal_functions}{orthogonal}
+and therefore, form a
+\href{https://en.wikipedia.org/wiki/Basis_(linear_algebra)}{basis
+  (set)} with which is possible to describe any signal in terms
+(usually as a linear combination) of the (basis) functions of such
+basis, i.e., are able to describe any signal in the vector space
+spanned by the basis, using an unique description (set of
+coefficients)~\cite{}.
+
+Wavelets and Wavelet Transforms
+% https://cnx.org/contents/EQurkhlI@6.9:9Qg8uP5e@5/Introduction-to-Wavelets
+% https://cnx.org/exports/110bab92-1948-4958-b1c7-8fc0926c392c@6.9.pdf/wavelets-and-wavelet-transforms-6.9.pdf
+
+Other major family of transform used in TC forms bi-orthogonal basis
+(sets). In this case,
+
+In this milestone we will use an orghogonal wavelet transform. This
+makes that the quantization of the coefficients can be uniform, i.e.,
+we can use the same quantization step for all the coefficients.
+
+In the transform described in the previous milestone, the concept of subband is degradated because we have only one coefficient per subband.
 
 
 \href{https://en.wikipedia.org/wiki/Correlation_and_dependence}{Correlation}
