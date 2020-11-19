@@ -33,23 +33,26 @@ transform~\cite{sayood2017introduction,burrus2013wavelets}, that in
 the case of decorrelating a (digital) stereo frame $x$ (a pair of L
 and R samples, $x[0]$ and $x[1]$) is
 \begin{equation}
-  w = Kx = \frac{1}{2}\begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}x,
+  w = Kx = \frac{1}{2}\begin{bmatrix} 1 & 1 \\ -1 & 1 \end{bmatrix}x,
   \label{eq:forward_transform_matrix_form}
 \end{equation}
-that in our case becomes
-\begin{equation}
+that in equivalent to
+\begin{equation*}
   \begin{bmatrix}
     w[0] \\
     w[1]
   \end{bmatrix}
   = \frac{1}{2}
-  \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}
+  \begin{bmatrix} 1 & 1 \\ -1 & 1 \end{bmatrix}
   \begin{bmatrix}
     x[0] \\
     x[1]
   \end{bmatrix}.
-  \label{eq:our_transform_in_matrix_form}
-\end{equation}
+\end{equation*}
+Here $w$ represents the vector of transform coefficients (in our case,
+a pair of coefficients $w[0]$ with the
+\href{https://en.wikipedia.org/wiki/Arithmetic_mean}{mean} and $w[1]$
+with the difference of the samples).
 
 The transform represented by the Eq.~\ref{eq:forward_transform_matrix_form} can be
 also expressed by
@@ -62,84 +65,112 @@ $K$, that for our case performs the operations
 \begin{equation*}
   \begin{array}{rcl}
   w[0] & = & \frac{1}{2}(x[0] + x[1])\\
-  w[1] & = & \frac{1}{2}(x[0] - x[1]).
+  w[1] & = & \frac{1}{2}(x[1] - x[0]).
   \end{array}
 \end{equation*}
 
-The inverse transform can be found by solving $x[0]$ and $x[1]$ in these equations.
+The inverse transform can be found by solving $x[0]$ and $x[1]$ in
+these previous equations, obtaining that
+\begin{equation*}
+  \begin{array}{rcl}
+  x[0] & = & w[0] - w[1]\\
+  x[1] & = & w[0] + w[1],
+  \end{array}
+\end{equation*}
+that in matrix form becomes
+\begin{equation*}
+  \begin{bmatrix}
+    x[0] \\
+    x[1]
+  \end{bmatrix}
+  = 
+  \begin{bmatrix} 1 & -1 \\ 1 & 1 \end{bmatrix}
+  \begin{bmatrix}
+    w[0] \\
+    w[1]
+  \end{bmatrix}.
+\end{equation*}
 
-which is the same that
+Therefore, the inverse transform can be written as
 \begin{equation}
-  y = \sum_i K_ix[i]
+  x[i] = \sum_u K_{u,i}w[u],
+  \label{eq:inverse_transform_linear_combination_form}
 \end{equation}
+that in matrix form is
+\begin{equation}
+  x = K^Tw = \begin{bmatrix} 1 & -1 \\ 1 & 1 \end{bmatrix}w.
+  \label{eq:inverse_transform_matrix_form}
+\end{equation}
+Notice that the inverse matrix $K^-1$, which computes the inverse
+transform, is the transpose of the forward transform. This is a property satisfied by orthogonal transforms.
 
-$K$ is the $2\times 2$ KLT
-\href{http://fourier.eng.hmc.edu/e161/lectures/klt/node3.html}{(Karhunen-Lo\`eve
-  Transform)} matrix multiplied by $1/\sqrt{2}$ (which is closely
-related to the \href{http://wavelets.pybytes.com/wavelet/haar/}{Haar
-  Transform}~\cite{vetterli1995wavelets} and the $2\times 2$
-\href{https://en.wikipedia.org/wiki/Hadamard_transform}{Walsh-Hadamard
-  Transform}~\cite{sayood2017introduction}), and $w$ represents the
-transform coefficients (in our case, a tuple of coefficients $w[0]$
-with the \href{https://en.wikipedia.org/wiki/Arithmetic_mean}{mean}
-and $w[1]$ with the difference of the samples).
-
- 
-Notice that this
-transform is not
+Notice that this transform ($K$) is not
 \href{https://en.wikipedia.org/wiki/Orthonormal_basis}{orthonormal}
-(energy preserving in the transform domain) because
+(it is not energy preserving in the transform domain, i.e., the
+Parseval's Theorem is not satisfied) because
 \begin{equation}
-  \sum w[i]^2 = \frac{1}{\sqrt{2}}\sum x[i]^2,
+  \sum w[i]^2 =
+  \left[\frac{1}{2}(x[0]+x[1])\right]^2 + \left[\frac{1}{2}(x[1]+x[0])\right]^2 =
+  \frac{1}{4}(x[0]^2+2x[0]x[1]+x[1]^2) + \frac{1}{4}(x[0]^2-2x[0]x[1]+x[1]^2) =
+  \frac{1}{2}(x[0]^2+x[1]^2) =
+  \frac{1}{2}\sum x[i]^2,
 \end{equation}
-(i.e., the Parseval's Theorem is not satisfied) although both subbands
-$w[0]$ and $w[1]$ have the same gain ($\frac{1}{\sqrt{2}}$, and
-therefore the same ``importance'' for a future
+although both ``subbands''\footnote{In a effort of extrapolate this
+discussion to a transform case where each subband has more than only
+one coefficient, we have called to $w[0]$ the low-pass subband and
+$w[1]$ the high-pass subband. However, notice that each subband has
+only one coefficient!} $w[0]$ and $w[1]$ have the same gain
+($\frac{1}{2}$, and therefore the same ``importance'' for a
+future
 \href{https://en.wikipedia.org/wiki/Quantization_(signal_processing)}{quantization}
-of $w$, i.e., the same quantization step can be used for the $w[0]$ and
-$w[1]$ coefficients).
+of $w$, i.e., the same quantization step can be used for the $w[0]$
+and $w[1]$ coefficients).
 
-Notice that the vectors $K_1=(1, 1)$ and $K_2=(1, -1)$ are linearly
-independent~\cite{strang4linear} (we cannot derive one from the other
-using the operations that define a vector space, or in other words,
-they inner product (also called dot product) is the zero vector $(0,
-0)$) and therefore, they form a basis (set).
-
-
-
-The described transform is similar to the so called
+The matrix $K$ proposed is similar to the $2\times 2$ KLT
+\href{http://fourier.eng.hmc.edu/e161/lectures/klt/node3.html}{(Karhunen-Lo\`eve
+  Transform)}, the
+\href{http://wavelets.pybytes.com/wavelet/haar/}{Haar
+  Transform}~\cite{vetterli1995wavelets} and the $2\times 2$
+\href{https://en.wikipedia.org/wiki/Hadamard_transform}{Discrete
+  Walsh-Hadamard Transform}~\cite{sayood2017introduction}).  The
+described transform is also similar to the so called
 \href{https://en.wikipedia.org/wiki/Joint_encoding#M/S_stereo_coding}{M/S
-  stereo coding}, but in our case, the división by 2 is carried on
-the forward transform, instead of the backward (inverse) transform.
+  stereo coding}, but in our case, the división by 2 is carried on the
+forward transform, instead of the inverse (backward) transform. This
+is done to ensure that the transform can be computed
+\href{https://en.wikipedia.org/wiki/In-place_algorithm}{\emph{in-place}}.
 
-This transform can be implemented
-\href{https://en.wikipedia.org/wiki/In-place_algorithm}{\emph{in-place}}
-using the following algorithm:
+
+Notice that the (basis) vectors $K_1=(1, 1)$ and $K_2=(1, -1)$ are
+linearly independent~\cite{strang4linear} (we cannot derive one from
+the other using the operations that define a vector space, or in other
+words, they inner product (also called dot product) is the zero vector
+$(0, 0)$) and therefore, they form a basis (set).
+
+Inspired in the
+\href{https://cm-bell-labs.github.io/who/wim/papers/athome/athome.pdf}{the
+  Lifting Scheme}~\cite{2006.sweldens}, this transform can be
+implemented using the following in-place algorithm:
 
 \begin{pseudocode}{Inter-channel\_decorrelation}{~}
   \PROCEDURE{analyze}{\text{frame}}
   \BEGIN
-    \text{frame}[0] -= \text{frame}[1] \\
-    \text{frame}[1] += (\text{frame}[0] / 2) \\
-    \text{frame}[0] /= 2
+    \text{frame}[1] -= \text{frame}[0] \\
+    \text{frame}[0] += (\text{frame}[1] / 2) \\
+    \text{frame}[1] /= 2
   \END
   \ENDPROCEDURE
   \PROCEDURE{synthesize}{\text{frame}}
   \BEGIN
-    \text{frame}[0] *= 2 \\
-    \text{frame}[1] -= (\text{frame}[0] / 2) \\
-    \text{frame}[0] += \text{frame}[1]
+    \text{frame}[1] *= 2 \\
+    \text{frame}[0] -= (\text{frame}[1] / 2) \\
+    \text{frame}[1] += \text{frame}[0]
   \END
   \ENDPROCEDURE
 \end{pseudocode}
 
 where $\text{a}~\mathtt{OPER}= \text{b}$ is a shorter representation of the operation
-$\text{a} = \text{a}~\mathtt{OPER}~\text{b}$. Notice that this type of in-place computations
-are commonly used in the implementation of DWTs
-(\href{https://en.wikipedia.org/wiki/Discrete_wavelet_transform}{Dicrete
-  Wavelet Transform}s) using
-\href{https://cm-bell-labs.github.io/who/wim/papers/athome/athome.pdf}{the
-  Lifting Scheme}~\cite{2006.sweldens}.
+$\text{a} = \text{a}~\mathtt{OPER}~\text{b}$.
 
 \section{What you have to do?}
 

@@ -6,10 +6,11 @@
 
 Transform Coding (TC) is a basic signal decorrelating tool, used in
 most multimedia (audio, image and vídeo) compression systems. The main
-reasons for this are: (1) a good \href{}{coding gain}, (2) a
-reasonable \href{}{computational complexity} (usually equal or smaller
-than $O(N\log_2N)$, (3) \href{}{in-place} computation, and (4) that
-are able to provide \href{}{multiresolution} representations. The
+reasons for this are: (1) a good \href{}{coding
+  gain}~\cite{sayood2017introduction}, (2) a reasonable
+\href{}{computational complexity} (usually equal or smaller than
+$O(N\log_2N)$, (3) \href{}{in-place} computation, and (4) that are
+able to provide \href{}{multiresolution} representations. The
 Figure~\ref{fig:transform_coding} shows the stages that are tipycally
 involved in a transform-based signal compression system.
 
@@ -71,6 +72,7 @@ we can use the same quantization step for all the coefficients.
 
 In the transform described in the previous milestone, the concept of subband is degradated because we have only one coefficient per subband.
 
+The coefficient $w[0]$ is called the DC (Direct Current) coefficient, and the rest of coefficients are called AC (Alternating Current) coefficients.
 
 \href{https://en.wikipedia.org/wiki/Correlation_and_dependence}{Correlation}
 is a term used in statistics which refer to the interdependency
