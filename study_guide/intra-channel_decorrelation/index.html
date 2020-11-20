@@ -39,7 +39,7 @@ class="ecrm-1200">- </span><a
 href="https://www.ual.es" ><span 
 class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
-class="ecrm-1200">November 19, 2020</span></div>
+class="ecrm-1200">November 20, 2020</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
@@ -78,36 +78,13 @@ channel). From a mathematical point of view, this process can be seen as a
 href="https://en.wikipedia.org/wiki/Decorrelation" >decorrelation</a> process. From a physical perspective, decorrelating implies energy
 accumulation in a small number of coeﬃcients <span class="cite">[<a 
 href="#Xsayood2017introduction">4</a>]</span>.
-</p><!--l. 28--><p class="indent" >   To perform this inter-channel decorrelation, we can use an
+</p><!--l. 28--><p class="indent" >   To perform this inter-channel decorrelation we can use the transform </p><table class="equation"><tr><td>
 <a 
-href="https://en.wikipedia.org/wiki/Orthogonal_transformation" >orthogonal</a><span class="footnote-mark"><a 
-href="index2.html#fn1x0"><sup class="textsuperscript">1</sup></a></span><a 
- id="x1-1001f1"></a> 
-transform <span class="cite">[<a 
-href="#Xsayood2017introduction">4</a>, <a 
-href="#Xburrus2013wavelets">2</a>]</span>, that in the case of decorrelating a (digital) stereo frame
-<!--l. 33--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->x</mi></math> (a pair of L
-and R samples, <!--l. 34--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->x</mi><mrow ><mo 
-class="MathClass-open">[</mo><mrow><mn>0</mn></mrow><mo 
-class="MathClass-close">]</mo></mrow></math>
-and <!--l. 34--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->x</mi><mrow ><mo 
-class="MathClass-open">[</mo><mrow><mn>1</mn></mrow><mo 
-class="MathClass-close">]</mo></mrow></math>)
+ id="x1-1001r1"></a>
                                                                   
 
                                                                   
-is </p><table class="equation"><tr><td> <a 
- id="x1-1002r1"></a>
-<!--l. 35--><math 
+<!--l. 29--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
 <mi 
@@ -129,8 +106,8 @@ class="array"  columnalign="center"> <mn>1</mn></mtd></mtr> <!--*\c@MaxMatrixCol
 >x</mi><mo 
 class="MathClass-punc">,</mo>
 </math></td><td class="eq-no">(1)</td></tr></table>
-<!--l. 39--><p class="indent" >   that in equivalent to </p><table class="equation-star"><tr><td>
-<!--l. 40--><math 
+<!--l. 33--><p class="indent" >   that is equivalent to </p><table class="equation-star"><tr><td>
+<!--l. 34--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
  <mfenced separators="" 
@@ -167,31 +144,50 @@ class="array"  columnalign="center"> <mi
 class="MathClass-open">[</mo><mrow><mn>1</mn></mrow><mo 
 class="MathClass-close">]</mo></mrow></mtd>
 </mtr>   <!--*\c@MaxMatrixCols c--></mtable>                                                                                                 </mrow></mfenced><mo 
-class="MathClass-punc">.</mo>
+class="MathClass-punc">,</mo>
 </math></td></tr></table>
-<!--l. 52--><p class="indent" >   Here <!--l. 52--><math 
+<!--l. 46--><p class="indent" >   where <!--l. 46--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>x</mi><mrow ><mo 
+class="MathClass-open">[</mo><mrow><mn>0</mn></mrow><mo 
+class="MathClass-close">]</mo></mrow></math> and
+<!--l. 46--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>x</mi><mrow ><mo 
+class="MathClass-open">[</mo><mrow><mn>1</mn></mrow><mo 
+class="MathClass-close">]</mo></mrow></math> are the samples of
+the stereo frame <!--l. 46--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>x</mi></math>.
+</p><!--l. 48--><p class="indent" >   In Eq. <a 
+href="#x1-1001r1">1<!--tex4ht:ref: eq:forward_transform_matrix_form --></a> <!--l. 48--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >w</mi></math>
 represents the vector of transform coeﬃcients (in our case, a pair of coeﬃcients
-<!--l. 53--><math 
+<!--l. 50--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >w</mi><mrow ><mo 
 class="MathClass-open">[</mo><mrow><mn>0</mn></mrow><mo 
-class="MathClass-close">]</mo></mrow></math> with the
-<a 
-href="https://en.wikipedia.org/wiki/Arithmetic_mean" >mean</a> and <!--l. 54--><math 
+class="MathClass-close">]</mo></mrow></math> with the <a 
+href="https://en.wikipedia.org/wiki/Arithmetic_mean" >mean</a> and
+<!--l. 51--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >w</mi><mrow ><mo 
 class="MathClass-open">[</mo><mrow><mn>1</mn></mrow><mo 
-class="MathClass-close">]</mo></mrow></math>
-with the diﬀerence of the samples).
-</p><!--l. 57--><p class="indent" >   The transform represented by the Eq. <a 
-href="#x1-1002r1">1<!--tex4ht:ref: eq:forward_transform_matrix_form --></a> can be also expressed by </p><table class="equation"><tr><td> <a 
- id="x1-1003r2"></a>
-<!--l. 59--><math 
+class="MathClass-close">]</mo></mrow></math> with the diﬀerence of
+the samples divided by <!--l. 52--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mn>2</mn></math>).
+</p><!--l. 54--><p class="indent" >   If the transform represented by the Eq. <a 
+href="#x1-1001r1">1<!--tex4ht:ref: eq:forward_transform_matrix_form --></a> can be also expressed by </p><table class="equation"><tr><td> <a 
+ id="x1-1002r2"></a>
+<!--l. 56--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
                         <mi 
@@ -219,10 +215,7 @@ class="MathClass-open">[</mo><mrow><mi
 class="MathClass-close">]</mo></mrow><mo 
 class="MathClass-punc">,</mo>
 </math></td><td class="eq-no">(2)</td></tr></table>
-                                                                  
-
-                                                                  
-<!--l. 63--><p class="indent" >   where <!--l. 63--><math 
+<!--l. 60--><p class="indent" >   where <!--l. 60--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -232,20 +225,23 @@ display="inline" ><msub><mrow
 class="MathClass-punc">,</mo><mi 
 >i</mi></mrow></msub 
 ></math> denotes
-<!--l. 63--><math 
+<!--l. 60--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >i</mi></math>-th element of
-the <!--l. 63--><math 
+the <!--l. 60--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >u</mi></math>-th row of
-the matrix <!--l. 64--><math 
+the matrix <!--l. 61--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
->K</mi></math>,
-that for our case performs the operations </p><table class="equation-star"><tr><td>
-<!--l. 65--><math 
+>K</mi></math>.
+</p><!--l. 63--><p class="indent" >   If the forward transform is performing the operations </p><table class="equation-star"><tr><td>
+                                                                  
+
+                                                                  
+<!--l. 64--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
  <mtable  align="axis" style=""  
@@ -289,23 +285,23 @@ class="MathClass-bin">−</mo> <mi
 class="MathClass-open">[</mo><mrow><mn>0</mn></mrow><mo 
 class="MathClass-close">]</mo></mrow></mrow><mo 
 class="MathClass-close">)</mo></mrow><mo 
-class="MathClass-punc">.</mo> </mtd></mtr><!--rcl--></mtable>
+class="MathClass-punc">,</mo> </mtd></mtr><!--rcl--></mtable>
 </math></td></tr></table>
-<!--l. 72--><p class="indent" >   The inverse transform can be found by solving
-<!--l. 72--><math 
+<!--l. 70--><p class="indent" >   the inverse transform can be found by solving
+<!--l. 70--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >x</mi><mrow ><mo 
 class="MathClass-open">[</mo><mrow><mn>0</mn></mrow><mo 
 class="MathClass-close">]</mo></mrow></math> and
-<!--l. 72--><math 
+<!--l. 70--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >x</mi><mrow ><mo 
 class="MathClass-open">[</mo><mrow><mn>1</mn></mrow><mo 
 class="MathClass-close">]</mo></mrow></math> in
 these previous equations, obtaining that </p><table class="equation-star"><tr><td>
-<!--l. 74--><math 
+<!--l. 72--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
  <mtable  align="axis" style=""  
@@ -341,11 +337,8 @@ class="MathClass-open">[</mo><mrow><mn>1</mn></mrow><mo
 class="MathClass-close">]</mo></mrow><mo 
 class="MathClass-punc">,</mo> </mtd></mtr><!--rcl--></mtable>
 </math></td></tr></table>
-<!--l. 80--><p class="indent" >   that in matrix form becomes </p><table class="equation-star"><tr><td>
-                                                                  
-
-                                                                  
-<!--l. 81--><math 
+<!--l. 78--><p class="indent" >   that in matrix form becomes </p><table class="equation-star"><tr><td>
+<!--l. 79--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
  <mfenced separators="" 
@@ -381,9 +374,12 @@ class="MathClass-close">]</mo></mrow></mtd>
 </mtr>   <!--*\c@MaxMatrixCols c--></mtable>                                                                                                 </mrow></mfenced><mo 
 class="MathClass-punc">.</mo>
 </math></td></tr></table>
-<!--l. 94--><p class="indent" >   Therefore, the inverse transform can be written as </p><table class="equation"><tr><td> <a 
- id="x1-1004r3"></a>
-<!--l. 95--><math 
+<!--l. 92--><p class="indent" >   Therefore, the inverse transform can be written as </p><table class="equation"><tr><td> <a 
+ id="x1-1003r3"></a>
+                                                                  
+
+                                                                  
+<!--l. 93--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
                         <mi 
@@ -411,13 +407,20 @@ class="MathClass-open">[</mo><mrow><mi
 class="MathClass-close">]</mo></mrow><mo 
 class="MathClass-punc">,</mo>
 </math></td><td class="eq-no">(3)</td></tr></table>
-<!--l. 99--><p class="indent" >   that in matrix form is </p><table class="equation"><tr><td> <a 
- id="x1-1005r4"></a>
-<!--l. 100--><math 
+<!--l. 97--><p class="indent" >   that in matrix form is </p><table class="equation"><tr><td> <a 
+ id="x1-1004r4"></a>
+<!--l. 98--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
 <mi 
 >x</mi> <mo 
+class="MathClass-rel">=</mo> <msup><mrow 
+><mi 
+>K</mi></mrow><mrow 
+><mo 
+class="MathClass-bin">−</mo><mn>1</mn></mrow></msup 
+><mi 
+>w</mi> <mo 
 class="MathClass-rel">=</mo> <msup><mrow 
 ><mi 
 >K</mi></mrow><mrow 
@@ -437,43 +440,15 @@ class="array"  columnalign="center">   <mn>1</mn>   </mtd></mtr> <!--*\c@MaxMatr
 >w</mi><mo 
 class="MathClass-punc">.</mo>
 </math></td><td class="eq-no">(4)</td></tr></table>
-<!--l. 105--><p class="indent" >   The matrix <!--l. 105--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->K</mi></math> proposed
-is similar to the <!--l. 105--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mn>2</mn> <mo 
-class="MathClass-bin">×</mo> <mn>2</mn></math>
-KLT <a 
-href="http://fourier.eng.hmc.edu/e161/lectures/klt/node3.html" >(Karhunen-Loève Transform)</a>, the <a 
-href="http://wavelets.pybytes.com/wavelet/haar/" >Haar Transform</a> <span class="cite">[<a 
-href="#Xvetterli1995wavelets">7</a>]</span> and the
-<!--l. 109--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mn>2</mn> <mo 
-class="MathClass-bin">×</mo> <mn>2</mn></math>
-<a 
-href="https://en.wikipedia.org/wiki/Hadamard_transform" >Discrete Walsh-Hadamard Transform</a> <span class="cite">[<a 
-href="#Xsayood2017introduction">4</a>]</span>). The described transform is also similar to
-the so called <a 
-href="https://en.wikipedia.org/wiki/Joint_encoding#M/S_stereo_coding" >M/S stereo coding</a>, but in our case, the división by 2 is carried on the
-forward transform, instead of the inverse (backward) transform. This is done to
-ensure that the transform can be computed <a 
-href="https://en.wikipedia.org/wiki/In-place_algorithm" ><span 
-class="ecti-1000">in-place</span></a>.
-</p><!--l. 119--><p class="indent" >   Notice that this transform (<!--l. 119--><math 
+<!--l. 103--><p class="indent" >   Notice that this transform (<!--l. 103--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >K</mi></math>)
 is not <a 
 href="https://en.wikipedia.org/wiki/Orthonormal_basis" >orthonormal</a> (it is not energy preserving in the transform domain, i.e., the
 Parseval’s Theorem is not satisﬁed) because </p><table class="equation"><tr><td> <a 
- id="x1-1006r5"></a>
-                                                                  
-
-                                                                  
-<!--l. 123--><math 
+ id="x1-1005r5"></a>
+<!--l. 107--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
 <mo  
@@ -606,48 +581,14 @@ class="MathClass-close">]</mo></mrow></mrow><mrow
 ><mo 
 class="MathClass-punc">,</mo>
 </math></td><td class="eq-no">(5)</td></tr></table>
-<!--l. 130--><p class="indent" >   although both “subbands”<span class="footnote-mark"><a 
-href="index3.html#fn2x0"><sup class="textsuperscript">2</sup></a></span><a 
- id="x1-1007f2"></a> 
-<!--l. 134--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->w</mi><mrow ><mo 
-class="MathClass-open">[</mo><mrow><mn>0</mn></mrow><mo 
-class="MathClass-close">]</mo></mrow></math> and
-<!--l. 134--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->w</mi><mrow ><mo 
-class="MathClass-open">[</mo><mrow><mn>1</mn></mrow><mo 
-class="MathClass-close">]</mo></mrow></math> have the
-same gain (<!--l. 135--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mfrac><mrow 
-><mn>1</mn></mrow>
-<mrow 
-><mn>2</mn></mrow></mfrac></math>,
-and therefore the same “importance” for a future <a 
-href="https://en.wikipedia.org/wiki/Quantization_(signal_processing)" >quantization</a> of
-<!--l. 138--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->w</mi></math>,
-i.e., the same quantization step can be used for the
-<!--l. 138--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->w</mi><mrow ><mo 
-class="MathClass-open">[</mo><mrow><mn>0</mn></mrow><mo 
-class="MathClass-close">]</mo></mrow></math> and
-<!--l. 139--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->w</mi><mrow ><mo 
-class="MathClass-open">[</mo><mrow><mn>1</mn></mrow><mo 
-class="MathClass-close">]</mo></mrow></math>
-coeﬃcients).
-</p><!--l. 141--><p class="indent" >   Notice that the (basis) vectors <!--l. 141--><math 
+<!--l. 114--><p class="indent" >   but is <a 
+href="https://en.wikipedia.org/wiki/Orthogonal_transformation" >orthogonal</a><span class="footnote-mark"><a 
+href="index2.html#fn1x0"><sup class="textsuperscript">1</sup></a></span><a 
+ id="x1-1006f1"></a> 
+transform <span class="cite">[<a 
+href="#Xsayood2017introduction">4</a>, <a 
+href="#Xburrus2013wavelets">2</a>]</span>, because the inner (also called dot) product of the basis vectors
+<!--l. 117--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -657,8 +598,8 @@ display="inline" ><msub><mrow
 class="MathClass-rel">=</mo> <mrow ><mo 
 class="MathClass-open">(</mo><mrow><mn>1</mn><mo 
 class="MathClass-punc">,</mo><mn>1</mn></mrow><mo 
-class="MathClass-close">)</mo></mrow></math>
-and <!--l. 141--><math 
+class="MathClass-close">)</mo></mrow></math> and
+<!--l. 117--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -669,21 +610,337 @@ class="MathClass-rel">=</mo> <mrow ><mo
 class="MathClass-open">(</mo><mrow><mn>1</mn><mo 
 class="MathClass-punc">,</mo><mo 
 class="MathClass-bin">−</mo><mn>1</mn></mrow><mo 
-class="MathClass-close">)</mo></mrow></math> are
-linearly independent <span class="cite">[<a 
-href="#Xstrang4linear">5</a>]</span> (we cannot derive one from the other using the operations that
-deﬁne a vector space, or in other words, they inner product (also called dot product) is the
-zero vector <!--l. 145--><math 
+class="MathClass-close">)</mo></mrow></math> is
+</p><table class="equation-star"><tr><td>
+                                                                  
+
+                                                                  
+<!--l. 118--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mrow ><mo 
-class="MathClass-open">(</mo><mrow><mn>0</mn><mo 
-class="MathClass-punc">,</mo><mn>0</mn></mrow><mo 
-class="MathClass-close">)</mo></mrow></math>)
-and therefore, they form a basis (set).
-</p><!--l. 149--><p class="indent" >   This transform can be implemented in-place using the following algorithm:
+display="block" class="equation">
+<mrow ><mo 
+class="MathClass-open">⟨</mo><mrow><msub><mrow 
+><mi 
+>K</mi></mrow><mrow 
+><mn>1</mn></mrow></msub 
+><mo 
+class="MathClass-punc">,</mo><msub><mrow 
+><mi 
+>K</mi></mrow><mrow 
+><mn>2</mn></mrow></msub 
+></mrow><mo 
+class="MathClass-close">⟩</mo></mrow> <mo 
+class="MathClass-rel">=</mo>  <mfenced separators="" 
+open="["  close="]" ><mrow><mtable  align="axis" style=""  
+equalrows="false" columnlines="none none none none none none none none none" equalcolumns="false" class="array"><mtr><mtd 
+class="array"  columnalign="center"> <mn>1</mn> </mtd><mtd 
+class="array"  columnalign="center"> <mn>1</mn> </mtd></mtr> <!--*\c@MaxMatrixCols c--></mtable>                                                                                           </mrow></mfenced> <mfenced separators="" 
+open="["  close="]" ><mrow><mtable  align="axis" style=""  
+equalrows="false" columnlines="none none none none none none none none none" equalcolumns="false" class="array"><mtr><mtd 
+class="array"  columnalign="center">   <mn>1</mn>   </mtd></mtr> <mtr><mtd 
+class="array"  columnalign="center"> <mo 
+class="MathClass-bin">−</mo><mn>1</mn></mtd></mtr> <!--*\c@MaxMatrixCols c--></mtable>                                                                                             </mrow></mfenced> <mo 
+class="MathClass-rel">=</mo> <mn>0</mn><mo 
+class="MathClass-punc">.</mo>
+</math></td></tr></table>
+<!--l. 129--><p class="indent" >   This means that <!--l. 129--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mi 
+>K</mi></mrow><mrow 
+><mn>1</mn></mrow></msub 
+></math>
+and <!--l. 129--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mi 
+>K</mi></mrow><mrow 
+><mn>2</mn></mrow></msub 
+></math> are linearly
+independent<span class="footnote-mark"><a 
+href="index3.html#fn2x0"><sup class="textsuperscript">2</sup></a></span><a 
+ id="x1-1007f2"></a>  <span class="cite">[<a 
+href="#Xstrang4linear">5</a>]</span>),
+and therefore they form a basis (set). This can be also veriﬁed
+with<span class="footnote-mark"><a 
+href="index4.html#fn3x0"><sup class="textsuperscript">3</sup></a></span><a 
+ id="x1-1008f3"></a>  </p><table class="equation"><tr><td>
 <a 
- id="x1-1008r1"></a>
-<!--l. 167--><p class="noindent" ></p><div class="minipage"><span 
+ id="x1-1009r6"></a>
+<!--l. 136--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="block" class="equation">
+                        <mi 
+>K</mi><msup><mrow 
+><mi 
+>K</mi></mrow><mrow 
+><mi 
+>T</mi></mrow></msup 
+> <mo 
+class="MathClass-rel">=</mo> <msup><mrow 
+><mi 
+>K</mi></mrow><mrow 
+><mi 
+>T</mi></mrow></msup 
+><mi 
+>K</mi> <mo 
+class="MathClass-rel">=</mo> <mn>2</mn><mi 
+>I</mi><mo 
+class="MathClass-punc">,</mo>
+</math></td><td class="eq-no">(6)</td></tr></table>
+<!--l. 140--><p class="indent" >   where <!--l. 140--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>I</mi></math>
+is the identity matrix.
+</p><!--l. 142--><p class="indent" >   The factor <!--l. 142--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mn>2</mn></math>
+in the Eq. <a 
+href="#x1-1009r6">6<!--tex4ht:ref: eq:ortho_matrix_test --></a> is indicating that the transform has a gain of
+<!--l. 143--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mn>2</mn></math> (the output
+of the inverse transform will be equal to the input to the forward transform multiplied
+by <!--l. 145--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mn>2</mn></math>,
+which physically impled that we are amplifying the audio signal by
+<!--l. 146--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mn>2</mn></math>). To avoid this, we can
+divide each subband (<!--l. 147--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>w</mi><mrow ><mo 
+class="MathClass-open">[</mo><mrow><mn>0</mn></mrow><mo 
+class="MathClass-close">]</mo></mrow></math>
+                                                                  
+
+                                                                  
+and <!--l. 147--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>w</mi><mrow ><mo 
+class="MathClass-open">[</mo><mrow><mn>1</mn></mrow><mo 
+class="MathClass-close">]</mo></mrow></math>)
+by <!--l. 147--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mn>2</mn></math>
+after computing the forward transform.
+</p><!--l. 149--><p class="indent" >   Eq. <a 
+href="#x1-1009r6">6<!--tex4ht:ref: eq:ortho_matrix_test --></a> is showing also that the gain of each subband is the same:
+<!--l. 150--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mn>2</mn></math>. This
+fact can be also veriﬁed comparing the energy of the reconstruction provided by each
+coeﬃcient:
+</p>
+   <table class="equation-star"><tr><td>
+<!--l. 153--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="block" class="equation">
+ <mtable  align="axis" style=""  
+equalrows="false" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="left">   <mfenced separators="" 
+open="["  close="]" ><mrow> <mtable  align="axis" style=""  
+equalrows="false" columnlines="none none none none none none none none none" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="center"><mn>1</mn></mtd><mtd 
+class="array"  columnalign="center"><mo 
+class="MathClass-bin">−</mo><mn>1</mn></mtd></mtr>  <mtr><mtd 
+class="array"  columnalign="center"><mn>1</mn></mtd> <mtd 
+class="array"  columnalign="center"> <mn>1</mn></mtd></mtr> <!--*\c@MaxMatrixCols c--></mtable>                                                                                                </mrow></mfenced> <mfenced separators="" 
+open="["  close="]" ><mrow> <mtable  align="axis" style=""  
+equalrows="false" columnlines="none none none none none none none none none" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="center"><mn>1</mn></mtd></mtr>  <mtr><mtd 
+class="array"  columnalign="center"><mn>0</mn></mtd></mtr> <!--*\c@MaxMatrixCols c--></mtable>                                                                                                   </mrow></mfenced> <mo 
+class="MathClass-rel">=</mo>  <mfenced separators="" 
+open="["  close="]" ><mrow> <mtable  align="axis" style=""  
+equalrows="false" columnlines="none none none none none none none none none" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="center"><mn>1</mn></mtd><mtd 
+class="array"  columnalign="center"><mn>1</mn></mtd></mtr> <!--*\c@MaxMatrixCols c--></mtable>                                                                                                   </mrow></mfenced>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             </mtd>
+</mtr>  <mtr><mtd 
+class="array"  columnalign="left">   <mfenced separators="" 
+open="["  close="]" ><mrow> <mtable  align="axis" style=""  
+equalrows="false" columnlines="none none none none none none none none none" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="center"><mn>1</mn></mtd><mtd 
+class="array"  columnalign="center"><mo 
+class="MathClass-bin">−</mo><mn>1</mn></mtd></mtr>  <mtr><mtd 
+class="array"  columnalign="center"><mn>1</mn></mtd> <mtd 
+class="array"  columnalign="center"> <mn>1</mn></mtd></mtr> <!--*\c@MaxMatrixCols c--></mtable>                                                                                                </mrow></mfenced> <mfenced separators="" 
+open="["  close="]" ><mrow> <mtable  align="axis" style=""  
+equalrows="false" columnlines="none none none none none none none none none" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="center"><mn>0</mn></mtd></mtr>  <mtr><mtd 
+class="array"  columnalign="center"><mn>1</mn></mtd></mtr> <!--*\c@MaxMatrixCols c--></mtable>                                                                                                   </mrow></mfenced> <mo 
+class="MathClass-rel">=</mo>  <mfenced separators="" 
+open="["  close="]" ><mrow> <mtable  align="axis" style=""  
+equalrows="false" columnlines="none none none none none none none none none" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="center"><mo 
+class="MathClass-bin">−</mo><mn>1</mn></mtd><mtd 
+class="array"  columnalign="center"><mn>1</mn></mtd></mtr> <!--*\c@MaxMatrixCols c--></mtable>                                                                                                </mrow></mfenced>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             </mtd>
+</mtr>  <mtr><mtd 
+class="array"  columnalign="left">  <msub><mrow 
+> <mfenced separators="" 
+open="∥"  close="∥" ><mrow> <mfenced separators="" 
+open="["  close="]" ><mrow> <mtable  align="axis" style=""  
+equalrows="false" columnlines="none none none none none none none none none" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="center"><mn>1</mn></mtd><mtd 
+class="array"  columnalign="center"><mn>1</mn></mtd></mtr> <!--*\c@MaxMatrixCols c--></mtable>                                                                                                   </mrow></mfenced></mrow></mfenced></mrow><mrow 
+><mn>2</mn></mrow></msub 
+> <mo 
+class="MathClass-punc">:</mo><mo 
+class="MathClass-rel">=</mo> <msqrt><mrow><mrow ><mo 
+class="MathClass-open">⟨</mo><mrow> <mfenced separators="" 
+open="["  close="]" ><mrow> <mtable  align="axis" style=""  
+equalrows="false" columnlines="none none none none none none none none none" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="center"><mn>1</mn></mtd> <mtd 
+class="array"  columnalign="center"><mn>1</mn></mtd></mtr> <!--*\c@MaxMatrixCols c--></mtable>  </mrow></mfenced> <mo 
+class="MathClass-punc">,</mo> <mfenced separators="" 
+open="["  close="]" ><mrow> <mtable  align="axis" style=""  
+equalrows="false" columnlines="none none none none none none none none none" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="center"><mn>1</mn></mtd> <mtd 
+class="array"  columnalign="center"><mn>1</mn></mtd></mtr> <!--*\c@MaxMatrixCols c--></mtable>  </mrow></mfenced> </mrow><mo 
+class="MathClass-close">⟩</mo></mrow></mrow></msqrt> <mo 
+class="MathClass-rel">=</mo> <msqrt><mrow> <mfenced separators="" 
+open="["  close="]" ><mrow> <mtable  align="axis" style=""  
+equalrows="false" columnlines="none none none none none none none none none" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="center"><mn>1</mn></mtd> <mtd 
+class="array"  columnalign="center"><mn>1</mn></mtd></mtr> <!--*\c@MaxMatrixCols c--></mtable>  </mrow></mfenced> <mo 
+class="MathClass-bin">⋅</mo> <mfenced separators="" 
+open="["  close="]" ><mrow> <mtable  align="axis" style=""  
+equalrows="false" columnlines="none none none none none none none none none" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="center"><mn>1</mn></mtd> <mtd 
+class="array"  columnalign="center"><mn>1</mn></mtd></mtr> <!--*\c@MaxMatrixCols c--></mtable>  </mrow></mfenced></mrow></msqrt> <mo 
+class="MathClass-rel">=</mo> <msqrt><mrow><mn>2</mn></mrow></msqrt><msub><mrow 
+> <mfenced separators="" 
+open="∥"  close="∥" ><mrow> <mfenced separators="" 
+open="["  close="]" ><mrow> <mtable  align="axis" style=""  
+equalrows="false" columnlines="none none none none none none none none none" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="center"><mn>1</mn></mtd><mtd 
+class="array"  columnalign="center"><mn>1</mn></mtd></mtr> <!--*\c@MaxMatrixCols c--></mtable>                                                                                                   </mrow></mfenced></mrow></mfenced></mrow><mrow 
+><mn>2</mn></mrow></msub 
+> <mo 
+class="MathClass-punc">:</mo><mo 
+class="MathClass-rel">=</mo> <msqrt><mrow><mrow ><mo 
+class="MathClass-open">⟨</mo><mrow> <mfenced separators="" 
+open="["  close="]" ><mrow> <mtable  align="axis" style=""  
+equalrows="false" columnlines="none none none none none none none none none" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="center"><mo 
+class="MathClass-bin">−</mo><mn>1</mn></mtd> <mtd 
+class="array"  columnalign="center"><mn>1</mn></mtd></mtr> <!--*\c@MaxMatrixCols c--></mtable>  </mrow></mfenced> <mo 
+class="MathClass-punc">,</mo> <mfenced separators="" 
+open="["  close="]" ><mrow> <mtable  align="axis" style=""  
+equalrows="false" columnlines="none none none none none none none none none" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="center"><mo 
+class="MathClass-bin">−</mo><mn>1</mn></mtd> <mtd 
+class="array"  columnalign="center"><mn>1</mn></mtd></mtr> <!--*\c@MaxMatrixCols c--></mtable>  </mrow></mfenced> </mrow><mo 
+class="MathClass-close">⟩</mo></mrow></mrow></msqrt> <mo 
+class="MathClass-rel">=</mo> <msqrt><mrow> <mfenced separators="" 
+open="["  close="]" ><mrow> <mtable  align="axis" style=""  
+equalrows="false" columnlines="none none none none none none none none none" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="center"><mo 
+class="MathClass-bin">−</mo><mn>1</mn></mtd> <mtd 
+class="array"  columnalign="center"><mn>1</mn></mtd></mtr> <!--*\c@MaxMatrixCols c--></mtable>  </mrow></mfenced> <mo 
+class="MathClass-bin">⋅</mo> <mfenced separators="" 
+open="["  close="]" ><mrow> <mtable  align="axis" style=""  
+equalrows="false" columnlines="none none none none none none none none none" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="center"><mo 
+class="MathClass-bin">−</mo><mn>1</mn></mtd> <mtd 
+class="array"  columnalign="center"><mn>1</mn></mtd></mtr> <!--*\c@MaxMatrixCols c--></mtable>  </mrow></mfenced></mrow></msqrt> <mo 
+class="MathClass-rel">=</mo> <msqrt><mrow><mn>2</mn></mrow></msqrt> </mtd></mtr><!--l--></mtable>
+</math></td></tr></table>
+<!--l. 186--><p class="indent" >   Notice that this technique allows to ﬁnd the basis vectors
+(<!--l. 186--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mi 
+>K</mi></mrow><mrow 
+><mn>1</mn></mrow></msub 
+></math> and
+<!--l. 187--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mi 
+>K</mi></mrow><mrow 
+><mn>2</mn></mrow></msub 
+></math> in our
+case) from the inverse tranform.
+</p><!--l. 190--><p class="indent" >   although both “subbands”<span class="footnote-mark"><a 
+href="index5.html#fn4x0"><sup class="textsuperscript">4</sup></a></span><a 
+ id="x1-1010f4"></a> 
+<!--l. 194--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>w</mi><mrow ><mo 
+class="MathClass-open">[</mo><mrow><mn>0</mn></mrow><mo 
+class="MathClass-close">]</mo></mrow></math> and
+<!--l. 194--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>w</mi><mrow ><mo 
+class="MathClass-open">[</mo><mrow><mn>1</mn></mrow><mo 
+class="MathClass-close">]</mo></mrow></math> have the
+same gain (<!--l. 195--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mfrac><mrow 
+><mn>1</mn></mrow>
+<mrow 
+><mn>2</mn></mrow></mfrac></math>,
+and therefore the same “importance” for a future <a 
+href="https://en.wikipedia.org/wiki/Quantization_(signal_processing)" >quantization</a> of
+<!--l. 198--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>w</mi></math>,
+i.e., the same quantization step can be used for the
+<!--l. 198--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>w</mi><mrow ><mo 
+class="MathClass-open">[</mo><mrow><mn>0</mn></mrow><mo 
+class="MathClass-close">]</mo></mrow></math> and
+<!--l. 199--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>w</mi><mrow ><mo 
+class="MathClass-open">[</mo><mrow><mn>1</mn></mrow><mo 
+class="MathClass-close">]</mo></mrow></math>
+coeﬃcients).
+</p><!--l. 201--><p class="indent" >   The matrix <!--l. 201--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>K</mi></math> proposed
+is similar to the <!--l. 201--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mn>2</mn> <mo 
+class="MathClass-bin">×</mo> <mn>2</mn></math>
+                                                                  
+
+                                                                  
+KLT <a 
+href="http://fourier.eng.hmc.edu/e161/lectures/klt/node3.html" >(Karhunen-Loève Transform)</a>, the <a 
+href="http://wavelets.pybytes.com/wavelet/haar/" >Haar Transform</a> <span class="cite">[<a 
+href="#Xvetterli1995wavelets">7</a>]</span> and the
+<!--l. 205--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mn>2</mn> <mo 
+class="MathClass-bin">×</mo> <mn>2</mn></math>
+<a 
+href="https://en.wikipedia.org/wiki/Hadamard_transform" >Discrete Walsh-Hadamard Transform</a> <span class="cite">[<a 
+href="#Xsayood2017introduction">4</a>]</span>). The described transform is also similar to
+the so called <a 
+href="https://en.wikipedia.org/wiki/Joint_encoding#M/S_stereo_coding" >M/S stereo coding</a>, but in our case, the división by 2 is carried on the
+forward transform, instead of the inverse (backward) transform. This is done to
+ensure that the transform can be computed <a 
+href="https://en.wikipedia.org/wiki/In-place_algorithm" ><span 
+class="ecti-1000">in-place</span></a>.
+</p><!--l. 217--><p class="indent" >   Inspired in the <a 
+href="https://cm-bell-labs.github.io/who/wim/papers/athome/athome.pdf" >the Lifting Scheme</a> <span class="cite">[<a 
+href="#X2006.sweldens">6</a>]</span>, this transform can be implemented using
+the following in-place algorithm:
+<a 
+ id="x1-1011r1"></a>
+<!--l. 237--><p class="noindent" ></p><div class="minipage"><span 
 class="ecbx-1000">Algorithm</span>
 <span 
 class="ecbx-1000">1.1:</span> <span 
@@ -714,11 +971,11 @@ class="small-caps">a</span><span
 class="small-caps">t</span><span 
 class="small-caps">i</span><span 
 class="small-caps">o</span><span 
-class="small-caps">n</span></span>(<!--l. 152--><math 
+class="small-caps">n</span></span>(<!--l. 222--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 > </mi></math>)<br 
-class="newline" /> <!--l. 152--><math 
+class="newline" /> <!--l. 222--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" > <mtable  align="axis" style=""  
 equalrows="false" columnlines="none" equalcolumns="false" class="array"> <mtr><mtd 
@@ -809,10 +1066,7 @@ class="MathClass-close">]</mo></mrow>     </mtd></mtr><!--@{}lr@{}--></mtable>  
  </mtr><!--@{\pcode@tab {1}}l@{}--></mtable>                                                                                                  </mtd>
 </mtr>  <mtr><mtd 
 class="array"  columnalign="left"><mspace width="4.3045pt"/>                                                                                                   </mtd></mtr><!--@{\pcode@tab {1}}lr@{}--></mtable></math></div>
-                                                                  
-
-                                                                  
-</p><!--l. 169--><p class="indent" >   where <!--l. 169--><math 
+</p><!--l. 239--><p class="indent" >   where <!--l. 239--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle 
 class="text"><mtext  >a</mtext></mstyle><mi 
@@ -823,7 +1077,7 @@ class="text"><mtext  >a</mtext></mstyle><mi
 >R</mi></mstyle> <mo 
 class="MathClass-rel">=</mo> <mstyle 
 class="text"><mtext  >b</mtext></mstyle></math> is a shorter
-representation of the operation <!--l. 170--><math 
+representation of the operation <!--l. 240--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle 
 class="text"><mtext  >a</mtext></mstyle> <mo 
@@ -836,16 +1090,10 @@ class="text"><mtext  >a</mtext></mstyle><mi
 >R</mi></mstyle><mi 
 > </mi><mstyle 
 class="text"><mtext  >b</mtext></mstyle></math>.
-Notice that this type of in-place computations are commonly used in the
-implementation of DWTs (<a 
-href="https://en.wikipedia.org/wiki/Discrete_wavelet_transform" >Dicrete Wavelet Transform</a>s) using <a 
-href="https://cm-bell-labs.github.io/who/wim/papers/athome/athome.pdf" >the Lifting
-Scheme</a> <span class="cite">[<a 
-href="#X2006.sweldens">6</a>]</span>.
 </p>
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
  id="x1-20002"></a>What you have to do?</h3>
-<!--l. 179--><p class="noindent" >
+<!--l. 244--><p class="noindent" >
      </p><ol  class="enumerate1" >
      <li 
   class="enumerate" id="x1-2002x1">In a module named stereo.py, inherit the class Quantization and create a
@@ -862,24 +1110,24 @@ href="https://www.oreilly.com/library/view/python-for-data/9781449323592/ch04.ht
   class="enumerate" id="x1-2006x3">Has been the <a 
 href="https://en.wikipedia.org/wiki/Data_compression_ratio" >compression ratio</a> improved (on <a 
 href="https://en.wikipedia.org/wiki/Average" >average</a>)? How much?</li></ol>
-<!--l. 194--><p class="noindent" >
-</p>
-   <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
- id="x1-30003"></a>Timming</h3>
-<!--l. 196--><p class="noindent" >You should reach this milestone at most one week.
-</p><!--l. 198--><p class="noindent" >
-</p>
-   <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
- id="x1-40004"></a>Deliverables</h3>
-<!--l. 200--><p class="noindent" >The module stereo.py. Store it at the <a 
-href="https://github.com/Tecnologias-multimedia/intercom" >root directory</a> of your InterCom’s repo.
-</p><!--l. 204--><p class="noindent" >
-</p>
-   <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
- id="x1-50005"></a>Resources</h3>
                                                                   
 
                                                                   
+<!--l. 259--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
+ id="x1-30003"></a>Timming</h3>
+<!--l. 261--><p class="noindent" >You should reach this milestone at most one week.
+</p><!--l. 263--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
+ id="x1-40004"></a>Deliverables</h3>
+<!--l. 265--><p class="noindent" >The module stereo.py. Store it at the <a 
+href="https://github.com/Tecnologias-multimedia/intercom" >root directory</a> of your InterCom’s repo.
+</p><!--l. 269--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
+ id="x1-50005"></a>Resources</h3>
    <div class="thebibliography">
    <p class="bibitem" ><span class="biblabel">
  [1]<span class="bibsp">   </span></span><a 
@@ -920,6 +1168,9 @@ href="http://cm.bell-labs.com/who/wim/papers/lift1.pdf" >The  Liﬁng  Scheme:  
    Biorthogonal  Wavelets</a>.   <span 
 class="ecti-1000">Applied and Computational Harmonic Analysis</span>,
    3(2):186–200, 1996.
+                                                                  
+
+                                                                  
    </p>
    <p class="bibitem" ><span class="biblabel">
  [7]<span class="bibsp">   </span></span><a 
