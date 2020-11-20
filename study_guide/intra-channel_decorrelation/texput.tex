@@ -147,12 +147,12 @@ The factor $2$ in the Eq.~\ref{eq:ortho_matrix_test} is indicating
 that the transform has a gain of $2$ (the output of the inverse
 transform will be equal to the input to the forward transform
 multiplied by $2$, which physically impled that we are amplifying the
-audio signal by $2$). To avoid this, we can divide each subband
+audio signal by $2$). To avoid this, we can divide each coefficient
 ($w[0]$ and $w[1]$) by $2$ after computing the forward transform.
 
-Eq.~\ref{eq:ortho_matrix_test} is showing also that the gain of each
-subband is the same: $2$. This fact can be also verified comparing the
-energy of the reconstruction provided by each coefficient:
+Eq.~\ref{eq:ortho_matrix_test} is showing also that the gain of
+coefficient is the same: $2$. This fact can be also verified comparing
+the energy of the reconstruction provided by each coefficient:
 
 \begin{equation*}
   \begin{array}{l}
@@ -182,15 +182,19 @@ energy of the reconstruction provided by each coefficient:
       -1 & 1
     \end{bmatrix} = K_2
     \\
-    \left\| \begin{bmatrix}1 & 1\end{bmatrix} \right\|_2 := \sqrt{\langle \begin{bmatrix}1 & 1\end{bmatrix}, \begin{bmatrix}1 & 1\end{bmatrix} \rangle} = \sqrt{\begin{bmatrix}1 & 1\end{bmatrix}\cdot \begin{bmatrix}1 & 1\end{bmatrix}} = \sqrt{2}
-    \left\| \begin{bmatrix}1 & 1\end{bmatrix} \right\|_2 := \sqrt{\langle \begin{bmatrix}-1 & 1\end{bmatrix}, \begin{bmatrix}-1 & 1\end{bmatrix} \rangle} = \sqrt{\begin{bmatrix}-1 & 1\end{bmatrix}\cdot \begin{bmatrix}-1 & 1\end{bmatrix}} = \sqrt{2},
+    \left\| \begin{bmatrix}1 & 1\end{bmatrix} \right\|_2 := \sqrt{\langle \begin{bmatrix}1 & 1\end{bmatrix}, \begin{bmatrix}1 & 1\end{bmatrix} \rangle} = \sqrt{\begin{bmatrix}1 & 1\end{bmatrix}\cdot \begin{bmatrix}1 & 1\end{bmatrix}} = \sqrt{2}\\
+    \left\| \begin{bmatrix}-1 & 1\end{bmatrix} \right\|_2 := \sqrt{\langle \begin{bmatrix}-1 & 1\end{bmatrix}, \begin{bmatrix}-1 & 1\end{bmatrix} \rangle} = \sqrt{\begin{bmatrix}-1 & 1\end{bmatrix}\cdot \begin{bmatrix}-1 & 1\end{bmatrix}} = \sqrt{2},
   \end{array}
 \end{equation*}
 where $\left\|v \right\|_2$ denotes the L$_2$ norm of the vector $v$.
 
-Notice that this technique allows to find the basis vectors ($K_1$ and
-$K_2$ in our case) from the inverse tranform.
-  
+This information, the gain of each coefficient, is relevant for the
+quantization stage, which ideally, should allow to compress each pair
+of coefficients with the same rate/distortion slope. To achieve this
+
+Because both coefficients have the same gain, the number of bits assigned by the quantizer should be the same
+
+As it can be seen in this, the gain of each subband (and each coefficient, because we have only one coefficient per subband)
 
 although both ``subbands''\footnote{In a effort of extrapolate this
 discussion to a transform case where each subband has more than only
@@ -202,6 +206,12 @@ future
 \href{https://en.wikipedia.org/wiki/Quantization_(signal_processing)}{quantization}
 of $w$, i.e., the same quantization step can be used for the $w[0]$
 and $w[1]$ coefficients).
+
+Notice that this procedure allows to find the basis vectors ($K_1$ and
+$K_2$ in our case) from an implementation of the inverse
+tranform.\footnote{Normally, the transform is not implemented as a
+matrix-vector multiplication and therefore, the basis vectors are not
+directly available.}
 
 The matrix $K$ proposed is similar to the $2\times 2$ KLT
 \href{http://fourier.eng.hmc.edu/e161/lectures/klt/node3.html}{(Karhunen-Lo\`eve
@@ -215,14 +225,8 @@ described transform is also similar to the so called
   stereo coding}, but in our case, the división by 2 is carried on the
 forward transform, instead of the inverse (backward) transform. This
 is done to ensure that the transform can be computed
-\href{https://en.wikipedia.org/wiki/In-place_algorithm}{\emph{in-place}}.
-
-
-
-Inspired in the
-\href{https://cm-bell-labs.github.io/who/wim/papers/athome/athome.pdf}{the
-  Lifting Scheme}~\cite{2006.sweldens}, this transform can be
-implemented using the following in-place algorithm:
+\href{https://en.wikipedia.org/wiki/In-place_algorithm}{\emph{in-place}}~\cite{2006.sweldens}. Such
+implementation is:
 
 \begin{pseudocode}{Inter-channel\_decorrelation}{~}
   \PROCEDURE{analyze}{\text{frame}}
