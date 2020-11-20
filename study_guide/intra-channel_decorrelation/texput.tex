@@ -91,12 +91,12 @@ that in matrix form becomes
 
 Therefore, the inverse transform can be written as
 \begin{equation}
-  x[i] = \sum_u K_{u,i}w[u],
+  x[i] = \sum_u K_{i,u}w[u],
   \label{eq:inverse_transform_linear_combination_form}
 \end{equation}
-that in matrix form is
+and therefore,
 \begin{equation}
-  x = K^{-1}w = K^Tw = \begin{bmatrix} 1 & -1 \\ 1 & 1 \end{bmatrix}w.
+  x = K^Tw = K^{-1}w = \begin{bmatrix} 1 & -1 \\ 1 & 1 \end{bmatrix}w.
   \label{eq:inverse_transform_matrix_form}
 \end{equation}
 
@@ -111,28 +111,32 @@ Parseval's Theorem is not satisfied) because
   \frac{1}{2}(x[0]^2+x[1]^2) =
   \frac{1}{2}\sum x[i]^2,
 \end{equation}
-but is \href{https://en.wikipedia.org/wiki/Orthogonal_transformation}{orthogonal}\footnote{Orthogonality
+but is
+\href{https://en.wikipedia.org/wiki/Orthogonal_transformation}{orthogonal}\footnote{Orthogonality
 of the transform is a important property because the correlation
 between the coefficients (the output of the transform) is 0.}
-transform~\cite{sayood2017introduction,burrus2013wavelets}, because the inner (also called dot) product of the basis vectors $K_1=(1, 1)$ and $K_2=(1, -1)$ is
+\cite{sayood2017introduction,burrus2013wavelets}, because the inner
+(also named dot) product of the basis vectors $K_1=\begin{bmatrix}1 &
+1\end{bmatrix}$ and $K_2=\begin{bmatrix} -1 & 1\end{bmatrix}$ is
 \begin{equation*}
   \langle K_1,K_2 \rangle =
   \begin{bmatrix}
     1 & 1
   \end{bmatrix}
+  \cdot
   \begin{bmatrix}
-    1 \\
-    -1
+    -1 & 1
   \end{bmatrix}
   = 0.
 \end{equation*}
 This means that $K_1$ and $K_2$ are linearly independent\footnote{We
 cannot derive one from the other using the operations that define a
-vector space.}~\cite{strang4linear}), and therefore they form a basis
-(set). This can be also verified with\footnote{The inverse matrix
-$K^{-1}$, which computes the inverse transform, is the transpose of
-the forward transform $K$. This is a property satisfied by orthogonal
-transforms.}
+vector space.}, and therefore they form a basis
+(set)~\cite{strang4linear}. This can be also verified
+with\footnote{The inverse matrix $K^{-1}$, which computes the inverse
+transform, is the transpose of the forward transform $K$. This
+property is satisfied by all orthogonal
+transforms~\cite{sayood2017introduction}.}
 \begin{equation}
   KK^T=K^TK=2I,
   \label{eq:ortho_matrix_test}
@@ -163,7 +167,7 @@ energy of the reconstruction provided by each coefficient:
     =
     \begin{bmatrix}
       1 & 1
-    \end{bmatrix}
+    \end{bmatrix} = K_1
     \\
     \begin{bmatrix}
       1 & -1 \\
@@ -176,12 +180,13 @@ energy of the reconstruction provided by each coefficient:
     =
     \begin{bmatrix}
       -1 & 1
-    \end{bmatrix}
+    \end{bmatrix} = K_2
     \\
     \left\| \begin{bmatrix}1 & 1\end{bmatrix} \right\|_2 := \sqrt{\langle \begin{bmatrix}1 & 1\end{bmatrix}, \begin{bmatrix}1 & 1\end{bmatrix} \rangle} = \sqrt{\begin{bmatrix}1 & 1\end{bmatrix}\cdot \begin{bmatrix}1 & 1\end{bmatrix}} = \sqrt{2}
-    \left\| \begin{bmatrix}1 & 1\end{bmatrix} \right\|_2 := \sqrt{\langle \begin{bmatrix}-1 & 1\end{bmatrix}, \begin{bmatrix}-1 & 1\end{bmatrix} \rangle} = \sqrt{\begin{bmatrix}-1 & 1\end{bmatrix}\cdot \begin{bmatrix}-1 & 1\end{bmatrix}} = \sqrt{2}
+    \left\| \begin{bmatrix}1 & 1\end{bmatrix} \right\|_2 := \sqrt{\langle \begin{bmatrix}-1 & 1\end{bmatrix}, \begin{bmatrix}-1 & 1\end{bmatrix} \rangle} = \sqrt{\begin{bmatrix}-1 & 1\end{bmatrix}\cdot \begin{bmatrix}-1 & 1\end{bmatrix}} = \sqrt{2},
   \end{array}
 \end{equation*}
+where $\left\|v \right\|_2$ denotes the L$_2$ norm of the vector $v$.
 
 Notice that this technique allows to find the basis vectors ($K_1$ and
 $K_2$ in our case) from the inverse tranform.
