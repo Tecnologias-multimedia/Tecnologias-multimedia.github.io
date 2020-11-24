@@ -39,7 +39,7 @@ class="ecrm-1200">- </span><a
 href="https://www.ual.es" ><span 
 class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
-class="ecrm-1200">November 18, 2020</span></div>
+class="ecrm-1200">November 24, 2020</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
@@ -61,24 +61,24 @@ volumen levels that a human being can recognize</a> <span class="cite">[<a
 href="#Xbosi2003intro">1</a>]</span>. In this milestone we
 will proﬁt of that fact to decrease the transmission bit-rate by sacriﬁcing
 quality. In most lossy compression systems, quantization is the only source of
-distortion <span class="cite">[<a 
-href="#Xtaubman2002jpeg2000">3</a>]</span>.
+distortion <span class="cite">[<span 
+class="ecbx-1000">?</span>]</span>.
 </p><!--l. 31--><p class="indent" >   <a 
 href="https://en.wikipedia.org/wiki/Quantization_(signal_processing)" >Scalar Quantization</a> (SQ) is the process of decreasing the number of levels that a
 signal can take <span class="cite">[<a 
 href="#Xsayood2017introduction">2</a>]</span>. <a 
 href="https://en.wikipedia.org/wiki/Vector_quantization" >Vector Quantization</a> (VQ) is similar, but is applied tuples of
 samples at the same time <span class="cite">[<a 
-href="#Xvetterli2014foundations">4</a>]</span>. SQ is used when the samples are decorrelated (not in
+href="#Xvetterli2014foundations">3</a>]</span>. SQ is used when the samples are decorrelated (not in
 our case, now, this will be true in the future) because the <a 
 href="https://en.wikipedia.org/wiki/Quantization_(signal_processing)#Rate%E2%80%93distortion_optimization" >coding eﬃciency</a> provided
 by VQ is marginal in this context <span class="cite">[<a 
-href="#Xvetterli2014foundations">4</a>]</span>.
+href="#Xvetterli2014foundations">3</a>]</span>.
 </p><!--l. 42--><p class="indent" >   Quantizers can also be classiﬁed into <a 
 href="https://en.wikipedia.org/wiki/Quantization_(signal_processing)#Mid-riser_and_mid-tread_uniform_quantizers" >uniform</a> and <a 
 href="https://nptel.ac.in/content/storage2/courses/117104069/chapter_5/5_5.html" >non-uniform</a> <span class="cite">[<a 
 href="#Xsayood2017introduction">2</a>, <a 
-href="#Xvetterli2014foundations">4</a>]</span>. An
+href="#Xvetterli2014foundations">3</a>]</span>. An
 uniform quantizer distributes the available representation levels uniformely
 over the range of input values. Non-uniform quantizers use higher density
 representation levels (more output levels per input levels) to those intervals of input
@@ -131,7 +131,7 @@ href="https://en.wikipedia.org/wiki/Network_congestion" >congestion</a> occurs.
      quantize.py.
      </li>
      <li 
-  class="enumerate" id="x1-2004x2">Override the methods pack() and unpack(), which now hould implement:
+  class="enumerate" id="x1-2004x2">Override the methods pack() and unpack(), which now whould implement:
 <a 
  id="x1-2005r1"></a>
      <!--l. 103--><p class="noindent" ><div class="minipage"><span 
@@ -161,8 +161,7 @@ class="small-caps">C</span><span
 class="small-caps">o</span><span 
 class="small-caps">m</span></span>(<!--l. 88--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
-> </mi></math>)<br 
+display="inline" ><mspace width="0.33em" class="nbsp" /></math>)<br 
 class="newline" />  <!--l. 88--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" > <mtable  align="axis" style=""  
@@ -200,9 +199,8 @@ class="text"><mtext  >quantized_chunk</mtext></mstyle></mrow><mo
 class="MathClass-close">)</mo></mrow></mtd>
 </mtr>  <mtr><mtd 
 class="array"  columnalign="left"><mstyle 
-class="text"><mtext  >return</mtext></mstyle><mi 
-> </mi><mstyle 
-class="text"><mtext  >packed_chunk</mtext></mstyle>                                                        </mtd></mtr><!--@{}lr@{}--></mtable>     </mrow></mfenced></mtd>
+class="text"><mtext  >return</mtext></mstyle><mspace width="0.33em" class="nbsp" /><mstyle 
+class="text"><mtext  >packed_chunk</mtext></mstyle>                                                          </mtd></mtr><!--@{}lr@{}--></mtable>     </mrow></mfenced></mtd>
  </mtr><!--@{\pcode@tab {1}}l@{}--></mtable>                                                                                                  </mtd>
 </mtr>  <mtr><mtd 
 class="array"  columnalign="left"><mspace width="4.3045pt"/> <mstyle 
@@ -236,11 +234,10 @@ class="text"><mtext  >quantized_chunk</mtext></mstyle></mrow><mo
 class="MathClass-close">)</mo></mrow>                                     </mtd>
 </mtr>  <mtr><mtd 
 class="array"  columnalign="left"><mstyle 
-class="text"><mtext  >return</mtext></mstyle><mi 
-> </mi><mstyle 
+class="text"><mtext  >return</mtext></mstyle><mspace width="0.33em" class="nbsp" /><mstyle 
 class="text"><mtext  >chunk_number</mtext></mstyle><mo 
 class="MathClass-punc">,</mo><mstyle 
-class="text"><mtext  >chunk</mtext></mstyle>                                                 </mtd></mtr><!--@{}lr@{}--></mtable> </mrow></mfenced></mtd>
+class="text"><mtext  >chunk</mtext></mstyle>                                                   </mtd></mtr><!--@{}lr@{}--></mtable> </mrow></mfenced></mtd>
  </mtr><!--@{\pcode@tab {1}}l@{}--></mtable>                                                                                                  </mtd>
 </mtr>  <mtr><mtd 
 class="array"  columnalign="left"><mspace width="4.3045pt"/>                                                                                                   </mtd></mtr><!--@{\pcode@tab {1}}lr@{}--></mtable></math> </div>
@@ -331,19 +328,10 @@ class="ecti-1000">Introduction to data compression</span></a>. Morgan Kaufmann, 
    </p>
    <p class="bibitem" ><span class="biblabel">
  [3]<span class="bibsp">   </span></span><a 
- id="Xtaubman2002jpeg2000"></a>D.S. Taubman and W.M. Marcellin.   <a 
-href="https://shorturl.at/rtvLZ" ><span 
-class="ecti-1000">JPEG2000. Image Compression</span>
-   <span 
-class="ecti-1000">Fundamentals, Standards and Practice</span></a>. Kluwer Academic Publishers, 2002.
-   </p>
-   <p class="bibitem" ><span class="biblabel">
- [4]<span class="bibsp">   </span></span><a 
- id="Xvetterli2014foundations"></a>M. Vetterli, J. Kovačević, and V.K. Goyal.  <a 
-href="http://www.fourierandwavelets.org/FSP_v1.1_2014.pdf" ><span 
+ id="Xvetterli2014foundations"></a>M. Vetterli, J. Kovačević, and V.K. Goyal.  <span 
 class="ecti-1000">Foundations of Signal</span>
    <span 
-class="ecti-1000">Processing</span></a>. Cambridge University Press, 2014.
+class="ecti-1000">Processing</span>. Cambridge University Press, 2014.
 </p>
    </div>
 <a 
