@@ -39,7 +39,7 @@ class="ecrm-1200">- </span><a
 href="https://www.ual.es" ><span 
 class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
-class="ecrm-1200">November 24, 2020</span></div>
+class="ecrm-1200">November 26, 2020</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
@@ -61,24 +61,24 @@ volumen levels that a human being can recognize</a> <span class="cite">[<a
 href="#Xbosi2003intro">1</a>]</span>. In this milestone we
 will proﬁt of that fact to decrease the transmission bit-rate by sacriﬁcing
 quality. In most lossy compression systems, quantization is the only source of
-distortion <span class="cite">[<span 
-class="ecbx-1000">?</span>]</span>.
+distortion <span class="cite">[<a 
+href="#Xtaubman2002jpeg2000">3</a>]</span>.
 </p><!--l. 31--><p class="indent" >   <a 
 href="https://en.wikipedia.org/wiki/Quantization_(signal_processing)" >Scalar Quantization</a> (SQ) is the process of decreasing the number of levels that a
 signal can take <span class="cite">[<a 
 href="#Xsayood2017introduction">2</a>]</span>. <a 
 href="https://en.wikipedia.org/wiki/Vector_quantization" >Vector Quantization</a> (VQ) is similar, but is applied tuples of
 samples at the same time <span class="cite">[<a 
-href="#Xvetterli2014foundations">3</a>]</span>. SQ is used when the samples are decorrelated (not in
+href="#Xvetterli2014foundations">4</a>]</span>. SQ is used when the samples are decorrelated (not in
 our case, now, this will be true in the future) because the <a 
 href="https://en.wikipedia.org/wiki/Quantization_(signal_processing)#Rate%E2%80%93distortion_optimization" >coding eﬃciency</a> provided
 by VQ is marginal in this context <span class="cite">[<a 
-href="#Xvetterli2014foundations">3</a>]</span>.
+href="#Xvetterli2014foundations">4</a>]</span>.
 </p><!--l. 42--><p class="indent" >   Quantizers can also be classiﬁed into <a 
 href="https://en.wikipedia.org/wiki/Quantization_(signal_processing)#Mid-riser_and_mid-tread_uniform_quantizers" >uniform</a> and <a 
 href="https://nptel.ac.in/content/storage2/courses/117104069/chapter_5/5_5.html" >non-uniform</a> <span class="cite">[<a 
 href="#Xsayood2017introduction">2</a>, <a 
-href="#Xvetterli2014foundations">3</a>]</span>. An
+href="#Xvetterli2014foundations">4</a>]</span>. An
 uniform quantizer distributes the available representation levels uniformely
 over the range of input values. Non-uniform quantizers use higher density
 representation levels (more output levels per input levels) to those intervals of input
@@ -161,7 +161,8 @@ class="small-caps">C</span><span
 class="small-caps">o</span><span 
 class="small-caps">m</span></span>(<!--l. 88--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mspace width="0.33em" class="nbsp" /></math>)<br 
+display="inline" ><mi 
+> </mi></math>)<br 
 class="newline" />  <!--l. 88--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" > <mtable  align="axis" style=""  
@@ -199,8 +200,9 @@ class="text"><mtext  >quantized_chunk</mtext></mstyle></mrow><mo
 class="MathClass-close">)</mo></mrow></mtd>
 </mtr>  <mtr><mtd 
 class="array"  columnalign="left"><mstyle 
-class="text"><mtext  >return</mtext></mstyle><mspace width="0.33em" class="nbsp" /><mstyle 
-class="text"><mtext  >packed_chunk</mtext></mstyle>                                                          </mtd></mtr><!--@{}lr@{}--></mtable>     </mrow></mfenced></mtd>
+class="text"><mtext  >return</mtext></mstyle><mi 
+> </mi><mstyle 
+class="text"><mtext  >packed_chunk</mtext></mstyle>                                                        </mtd></mtr><!--@{}lr@{}--></mtable>     </mrow></mfenced></mtd>
  </mtr><!--@{\pcode@tab {1}}l@{}--></mtable>                                                                                                  </mtd>
 </mtr>  <mtr><mtd 
 class="array"  columnalign="left"><mspace width="4.3045pt"/> <mstyle 
@@ -234,10 +236,11 @@ class="text"><mtext  >quantized_chunk</mtext></mstyle></mrow><mo
 class="MathClass-close">)</mo></mrow>                                     </mtd>
 </mtr>  <mtr><mtd 
 class="array"  columnalign="left"><mstyle 
-class="text"><mtext  >return</mtext></mstyle><mspace width="0.33em" class="nbsp" /><mstyle 
+class="text"><mtext  >return</mtext></mstyle><mi 
+> </mi><mstyle 
 class="text"><mtext  >chunk_number</mtext></mstyle><mo 
 class="MathClass-punc">,</mo><mstyle 
-class="text"><mtext  >chunk</mtext></mstyle>                                                   </mtd></mtr><!--@{}lr@{}--></mtable> </mrow></mfenced></mtd>
+class="text"><mtext  >chunk</mtext></mstyle>                                                 </mtd></mtr><!--@{}lr@{}--></mtable> </mrow></mfenced></mtd>
  </mtr><!--@{\pcode@tab {1}}l@{}--></mtable>                                                                                                  </mtd>
 </mtr>  <mtr><mtd 
 class="array"  columnalign="left"><mspace width="4.3045pt"/>                                                                                                   </mtd></mtr><!--@{\pcode@tab {1}}lr@{}--></mtable></math> </div>
@@ -246,57 +249,40 @@ class="array"  columnalign="left"><mspace width="4.3045pt"/>                    
                                                                   
      </p></li>
      <li 
-  class="enumerate" id="x1-2007x3">Determine the quantization step <!--l. 105--><math 
+  class="enumerate" id="x1-2007x3">Determine  the  quantization  step
+     <!--l. 105--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
->Δ</mi></math>
-     used in the <!--l. 106--><math 
+>Δ</mi></math> used in the
+     <!--l. 106--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle 
-class="text"><mtext  >quantize()</mtext></mstyle></math>
-     method as a function of the <a 
-href="https://en.wikipedia.org/wiki/Throughput" >throughput</a>
-     <!--l. 107--><math 
+class="text"><mtext  >quantize()</mtext></mstyle></math> method depending
+     on the <a 
+href="https://en.wikipedia.org/wiki/Throughput" >throughput</a> <!--l. 107--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
->B</mi></math> of the
-     communication link. Take into consideration that in a real intercommunication scenario,
+>B</mi></math>
+     of the communication link. Your implementation should consider that
      <!--l. 109--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
->B</mi></math> is time-variying
-     and therefore, <!--l. 110--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->Δ</mi> <mo 
-class="MathClass-rel">=</mo> <mstyle 
-class="text"><mtext  >estimation</mtext></mstyle><mrow ><mo 
-class="MathClass-open">(</mo><mrow><mi 
->B</mi></mrow><mo 
-class="MathClass-close">)</mo></mrow></math>,
-     where <!--l. 110--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mstyle 
-class="text"><mtext  >estimation()</mtext></mstyle></math>
-     should use the previously measured values of
-     <!--l. 111--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->B</mi></math>.
-     Such estimation should maximize the QoE.</li></ol>
-<!--l. 115--><p class="noindent" >
+>B</mi></math>
+     can be time-variying, and should maximize the QoE.
+     </li></ol>
+<!--l. 121--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-30003"></a>Timming</h3>
-<!--l. 117--><p class="noindent" >Please, ﬁnish this milestone at most in two weeks.
-</p><!--l. 119--><p class="noindent" >
+<!--l. 123--><p class="noindent" >Please, ﬁnish this milestone at most in two weeks.
+</p><!--l. 125--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-40004"></a>Deliverables</h3>
-<!--l. 121--><p class="noindent" >
+<!--l. 127--><p class="noindent" >
      </p><ol  class="enumerate1" >
      <li 
-  class="enumerate" id="x1-4002x1">The Python module named quantize.py stored in the <a 
+  class="enumerate" id="x1-4002x1">The Python module named br_control.py stored in the <a 
 href="https://github.com/Tecnologias-multimedia/intercom" >root directory</a> of
      your InterCom’s repo.
      </li>
@@ -304,13 +290,10 @@ href="https://github.com/Tecnologias-multimedia/intercom" >root directory</a> of
   class="enumerate" id="x1-4004x2">A video demonstration of 3 minutes (at most) showing how quantize.py
      adapts to the variations of the throughput of the link (use <a 
 href="https://man7.org/linux/man-pages/man8/tc.8.html" >tc</a>).</li></ol>
-<!--l. 130--><p class="noindent" >
+<!--l. 136--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-50005"></a>Resources</h3>
-                                                                  
-
-                                                                  
    <div class="thebibliography">
    <p class="bibitem" ><span class="biblabel">
  [1]<span class="bibsp">   </span></span><a 
@@ -319,6 +302,9 @@ href="https://last.hit.bme.hu/download/vidtechlab/fcc/literature/audio/audio_cod
 class="ecti-1000">Introduction to Digital Audio Coding and</span>
    <span 
 class="ecti-1000">Standards</span></a>. Kluwer Academic Publishers, 2003.
+                                                                  
+
+                                                                  
    </p>
    <p class="bibitem" ><span class="biblabel">
  [2]<span class="bibsp">   </span></span><a 
@@ -328,10 +314,19 @@ class="ecti-1000">Introduction to data compression</span></a>. Morgan Kaufmann, 
    </p>
    <p class="bibitem" ><span class="biblabel">
  [3]<span class="bibsp">   </span></span><a 
- id="Xvetterli2014foundations"></a>M. Vetterli, J. Kovačević, and V.K. Goyal.  <span 
+ id="Xtaubman2002jpeg2000"></a>D.S. Taubman and W.M. Marcellin.   <a 
+href="https://shorturl.at/rtvLZ" ><span 
+class="ecti-1000">JPEG2000. Image Compression</span>
+   <span 
+class="ecti-1000">Fundamentals, Standards and Practice</span></a>. Kluwer Academic Publishers, 2002.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [4]<span class="bibsp">   </span></span><a 
+ id="Xvetterli2014foundations"></a>M. Vetterli, J. Kovačević, and V.K. Goyal.  <a 
+href="http://www.fourierandwavelets.org/FSP_v1.1_2014.pdf" ><span 
 class="ecti-1000">Foundations of Signal</span>
    <span 
-class="ecti-1000">Processing</span>. Cambridge University Press, 2014.
+class="ecti-1000">Processing</span></a>. Cambridge University Press, 2014.
 </p>
    </div>
 <a 

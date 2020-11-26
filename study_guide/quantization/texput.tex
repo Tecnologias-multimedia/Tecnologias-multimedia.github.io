@@ -103,13 +103,19 @@ occurs.
 \end{pseudocode}
 
 \item Determine the quantization step $\Delta$ used in the
-  $\text{quantize()}$ method as a function of the
-  \href{https://en.wikipedia.org/wiki/Throughput}{throughput} $B$ of
-  the communication link. Take into consideration that in a real
-  intercommunication scenario, $B$ is time-variying and therefore,
-  $\Delta = \text{estimation}(B)$, where $\text{estimation()}$
-  should use the previously measured values of $B$. Such estimation
-  should maximize the QoE.
+  $\text{quantize()}$ method depending on
+  the \href{https://en.wikipedia.org/wiki/Throughput}{throughput} $B$
+  of the communication link. Your implementation should consider that
+  $B$ can be time-variying, and should maximize the QoE.
+
+%\item Determine the quantization step $\Delta$ used in the
+%  $\text{quantize()}$ method as a function of the
+%  \href{https://en.wikipedia.org/wiki/Throughput}{throughput} $B$ of
+%  the communication link. Take into consideration that in a real
+%  intercommunication scenario, $B$ is time-variying and therefore,
+%  $\Delta = \text{estimation}(B)$, where $\text{estimation()}$
+%  should use the previously measured values of $B$. Such estimation
+%  should maximize the QoE.
 \end{enumerate}
 
 \section{Timming}
@@ -119,7 +125,7 @@ Please, finish this milestone at most in two weeks.
 \section{Deliverables}
 
 \begin{enumerate}
-  \item The Python module named quantize.py stored in the
+  \item The Python module named br\_control.py stored in the
     \href{https://github.com/Tecnologias-multimedia/intercom}{root
       directory} of your InterCom's repo.  \item A video demonstration
     of 3 minutes (at most) showing how quantize.py adapts to the

@@ -39,7 +39,7 @@ class="ecrm-1200">- </span><a
 href="https://www.ual.es" ><span 
 class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
-class="ecrm-1200">November 20, 2020</span></div>
+class="ecrm-1200">November 25, 2020</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
@@ -712,7 +712,7 @@ which physically impled that we are amplifying the audio signal by
 <!--l. 150--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mn>2</mn></math>). To avoid this, we can
-divide each subband (<!--l. 151--><math 
+divide each coeﬃcient (<!--l. 151--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >w</mi><mrow ><mo 
@@ -732,7 +732,7 @@ by <!--l. 151--><math
 display="inline" ><mn>2</mn></math>
 after computing the forward transform.
 </p><!--l. 153--><p class="indent" >   Eq. <a 
-href="#x1-1009r6">6<!--tex4ht:ref: eq:ortho_matrix_test --></a> is showing also that the gain of each subband is the same:
+href="#x1-1009r6">6<!--tex4ht:ref: eq:ortho_matrix_test --></a> is showing also that the gain of coeﬃcient is the same:
 <!--l. 154--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mn>2</mn></math>. This
@@ -884,23 +884,29 @@ the vector <!--l. 189--><math
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >v</mi></math>.
-As it can be seen in this
-</p><!--l. 191--><p class="indent" >   although both “subbands”<span class="footnote-mark"><a 
+</p><!--l. 191--><p class="indent" >   This information, the gain of each coeﬃcient, is relevant for the quantization
+stage, which ideally, should allow to compress each pair of coeﬃcients with the same
+rate/distortion slope. To achieve this
+</p><!--l. 195--><p class="indent" >   Because both coeﬃcients have the same gain, the number of bits assigned by the
+quantizer should be the same
+</p><!--l. 197--><p class="indent" >   As it can be seen in this, the gain of each subband (and each coeﬃcient, because
+we have only one coeﬃcient per subband)
+</p><!--l. 199--><p class="indent" >   although both “subbands”<span class="footnote-mark"><a 
 href="index5.html#fn4x0"><sup class="textsuperscript">4</sup></a></span><a 
  id="x1-1010f4"></a> 
-<!--l. 195--><math 
+<!--l. 203--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >w</mi><mrow ><mo 
 class="MathClass-open">[</mo><mrow><mn>0</mn></mrow><mo 
 class="MathClass-close">]</mo></mrow></math> and
-<!--l. 195--><math 
+<!--l. 203--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >w</mi><mrow ><mo 
 class="MathClass-open">[</mo><mrow><mn>1</mn></mrow><mo 
 class="MathClass-close">]</mo></mrow></math> have the
-same gain (<!--l. 196--><math 
+same gain (<!--l. 204--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mfrac><mrow 
 ><mn>1</mn></mrow>
@@ -908,36 +914,36 @@ display="inline" ><mfrac><mrow
 ><mn>2</mn></mrow></mfrac></math>,
 and therefore the same “importance” for a future <a 
 href="https://en.wikipedia.org/wiki/Quantization_(signal_processing)" >quantization</a> of
-<!--l. 199--><math 
+                                                                  
+
+                                                                  
+<!--l. 207--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >w</mi></math>,
 i.e., the same quantization step can be used for the
-<!--l. 199--><math 
+<!--l. 207--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >w</mi><mrow ><mo 
 class="MathClass-open">[</mo><mrow><mn>0</mn></mrow><mo 
 class="MathClass-close">]</mo></mrow></math> and
-<!--l. 200--><math 
+<!--l. 208--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >w</mi><mrow ><mo 
 class="MathClass-open">[</mo><mrow><mn>1</mn></mrow><mo 
 class="MathClass-close">]</mo></mrow></math>
 coeﬃcients).
-</p><!--l. 202--><p class="indent" >   Notice that this procedure allows to ﬁnd the basis vectors
-(<!--l. 202--><math 
+</p><!--l. 210--><p class="indent" >   Notice that this procedure allows to ﬁnd the basis vectors
+(<!--l. 210--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
 >K</mi></mrow><mrow 
 ><mn>1</mn></mrow></msub 
 ></math> and
-                                                                  
-
-                                                                  
-<!--l. 203--><math 
+<!--l. 211--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -948,11 +954,11 @@ in our case) from an implementation of the inverse
 tranform.<span class="footnote-mark"><a 
 href="index6.html#fn5x0"><sup class="textsuperscript">5</sup></a></span><a 
  id="x1-1011f5"></a> 
-</p><!--l. 208--><p class="indent" >   The matrix <!--l. 208--><math 
+</p><!--l. 216--><p class="indent" >   The matrix <!--l. 216--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >K</mi></math> proposed
-is similar to the <!--l. 208--><math 
+is similar to the <!--l. 216--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mn>2</mn> <mo 
 class="MathClass-bin">×</mo> <mn>2</mn></math>
@@ -960,7 +966,7 @@ KLT <a
 href="http://fourier.eng.hmc.edu/e161/lectures/klt/node3.html" >(Karhunen-Loève Transform)</a>, the <a 
 href="http://wavelets.pybytes.com/wavelet/haar/" >Haar Transform</a> <span class="cite">[<a 
 href="#Xvetterli1995wavelets">7</a>]</span> and the
-<!--l. 212--><math 
+<!--l. 220--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mn>2</mn> <mo 
 class="MathClass-bin">×</mo> <mn>2</mn></math>
@@ -977,7 +983,7 @@ href="#X2006.sweldens">6</a>]</span>. Such implementation
 is:
 <a 
  id="x1-1012r1"></a>
-<!--l. 238--><p class="noindent" ></p><div class="minipage"><span 
+<!--l. 246--><p class="noindent" ></p><div class="minipage"><span 
 class="ecbx-1000">Algorithm</span>
 <span 
 class="ecbx-1000">1.1:</span> <span 
@@ -1008,11 +1014,11 @@ class="small-caps">a</span><span
 class="small-caps">t</span><span 
 class="small-caps">i</span><span 
 class="small-caps">o</span><span 
-class="small-caps">n</span></span>(<!--l. 223--><math 
+class="small-caps">n</span></span>(<!--l. 231--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 > </mi></math>)<br 
-class="newline" /> <!--l. 223--><math 
+class="newline" /> <!--l. 231--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" > <mtable  align="axis" style=""  
 equalrows="false" columnlines="none" equalcolumns="false" class="array"> <mtr><mtd 
@@ -1103,7 +1109,7 @@ class="MathClass-close">]</mo></mrow>     </mtd></mtr><!--@{}lr@{}--></mtable>  
  </mtr><!--@{\pcode@tab {1}}l@{}--></mtable>                                                                                                  </mtd>
 </mtr>  <mtr><mtd 
 class="array"  columnalign="left"><mspace width="4.3045pt"/>                                                                                                   </mtd></mtr><!--@{\pcode@tab {1}}lr@{}--></mtable></math></div>
-</p><!--l. 240--><p class="indent" >   where <!--l. 240--><math 
+</p><!--l. 248--><p class="indent" >   where <!--l. 248--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle 
 class="text"><mtext  >a</mtext></mstyle><mi 
@@ -1114,7 +1120,7 @@ class="text"><mtext  >a</mtext></mstyle><mi
 >R</mi></mstyle> <mo 
 class="MathClass-rel">=</mo> <mstyle 
 class="text"><mtext  >b</mtext></mstyle></math> is a shorter
-representation of the operation <!--l. 241--><math 
+representation of the operation <!--l. 249--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle 
 class="text"><mtext  >a</mtext></mstyle> <mo 
@@ -1130,7 +1136,10 @@ class="text"><mtext  >b</mtext></mstyle></math>.
 </p>
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
  id="x1-20002"></a>What you have to do?</h3>
-<!--l. 245--><p class="noindent" >
+<!--l. 253--><p class="noindent" >
+                                                                  
+
+                                                                  
      </p><ol  class="enumerate1" >
      <li 
   class="enumerate" id="x1-2002x1">In a module named stereo.py, inherit the class Quantization and create a
@@ -1139,9 +1148,6 @@ class="text"><mtext  >b</mtext></mstyle></math>.
      <li 
   class="enumerate" id="x1-2004x2">Override   the   methods   pack()   and   unpack().   In   pack()   perform
      the  procedure  analyze()  previously  described,  and  in  unpack()  the
-                                                                  
-
-                                                                  
      synthesize(). These procedures should be applied to all the frames of a
      chunk using <a 
 href="https://www.oreilly.com/library/view/python-for-data/9781449323592/ch04.html" >vectorized operations</a>.
@@ -1150,18 +1156,18 @@ href="https://www.oreilly.com/library/view/python-for-data/9781449323592/ch04.ht
   class="enumerate" id="x1-2006x3">Has been the <a 
 href="https://en.wikipedia.org/wiki/Data_compression_ratio" >compression ratio</a> improved (on <a 
 href="https://en.wikipedia.org/wiki/Average" >average</a>)? How much?</li></ol>
-<!--l. 260--><p class="noindent" >
+<!--l. 268--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-30003"></a>Timming</h3>
-<!--l. 262--><p class="noindent" >You should reach this milestone at most one week.
-</p><!--l. 264--><p class="noindent" >
+<!--l. 270--><p class="noindent" >You should reach this milestone at most one week.
+</p><!--l. 272--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-40004"></a>Deliverables</h3>
-<!--l. 266--><p class="noindent" >The module stereo.py. Store it at the <a 
+<!--l. 274--><p class="noindent" >The module stereo.py. Store it at the <a 
 href="https://github.com/Tecnologias-multimedia/intercom" >root directory</a> of your InterCom’s repo.
-</p><!--l. 270--><p class="noindent" >
+</p><!--l. 278--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-50005"></a>Resources</h3>
@@ -1184,15 +1190,15 @@ class="ecti-1000">Standards</span></a>. Kluwer Academic Publishers, 2003.
 href="https://greenteapress.com/thinkstats/thinkstats.pdf" ><span 
 class="ecti-1000">Think Stats Probability and Statistics for Programmers</span></a>.
    O’Reilly, 2011.
+                                                                  
+
+                                                                  
    </p>
    <p class="bibitem" ><span class="biblabel">
  [4]<span class="bibsp">   </span></span><a 
  id="Xsayood2017introduction"></a>K. Sayood. <a 
 href="http://rahilshaikh.weebly.com/uploads/1/1/6/3/11635894/data_compression.pdf" ><span 
 class="ecti-1000">Introduction to data compression</span></a>. Morgan Kaufmann, 2017.
-                                                                  
-
-                                                                  
    </p>
    <p class="bibitem" ><span class="biblabel">
  [5]<span class="bibsp">   </span></span><a 
