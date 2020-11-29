@@ -1,160 +1,264 @@
-\title{\href{https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN}{Tecnologías Multimedia} - Study Guide - Milestone 12: Intra-channel Decorrelation (Transform Coding)}
+\title{\href{https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN}{Tecnologías Multimedia} - Study Guide - Milestone 11: Inter-channel decorrelation in stereo audio signals}
 
 \maketitle
 
 \section{Description}
 
-Transform Coding (TC) is a basic signal decorrelating tool, used in
-most multimedia (audio, image and vídeo) compression systems. The main
-reasons for this are: (1) a good \href{}{coding
-  gain}~\cite{sayood2017introduction}, (2) a reasonable
-\href{}{computational complexity} (usually equal or smaller than
-$O(N\log_2N)$, (3) \href{}{in-place} computation, and (4) that are
-able to provide \href{}{multiresolution} representations. The
-Figure~\ref{fig:transform_coding} shows the stages that are tipycally
-involved in a transform-based signal compression system.
+InterCom transmit a \href{https://en.wikipedia.org/wiki/Stereophonic_sound}{stereo} (left and right) signals. In most cases,
+both channels
+are \href{https://en.wikipedia.org/wiki/Binaural_recording}{highly
+correlated} (especially when the microphone is mono), which means that
+we can represent one of them (for example, the right channel) with
+respect to the other (the left channel).
 
-\begin{figure}
-  \begin{center}
-\begin{verbatim}
-   s   +---+   w    +---+   k    +---+    c
- ----->| T |------->| Q |------->| E |-----------+
-  (s)  +---+  (s)   +---+  (~s)  +---+   (~s)    |
-samples   coefficients   indexes      code-words ~
-                                                 :
-                                                 ~
-   ~s  +---+    w   +---+   k    +---+           |
- <-----| t |<-------| q |<-------| D |<----------+
-  (~s) +---+  (~s)  +---+  (~s)  +---+
-approx.    quantized     indexes
-samples   coefficients
-\end{verbatim}                
-  \end{center}
-  \caption{Common data-flow used un Transform Coding. $s$ represents
-    the signal to compress, $\tilde{s}$ the lossy version of the
-    reconstructed signal, $T$ the (forward) transform (which takes blocks of
-    samples) producing blocks of coefficients $w$, $Q$ the scalar
-    quantization stage (which takes single coefficients) producing
-    quantization indexes $k$, $E$ the entropy encoder (which in our
-    case (DEFLATE) works with blocks of coefficients) producing
-    code-words $c$, $D$ the entropy decoder, $q$ the decuantization
-    stage, and $t$ the inverse (or backward) transform. PCM stands for Puse Code
-    Modulation and DEFLATE is the technique used to find a compact
-    representation of the quantized coefficients.}
-  \label{fig:transform_coding}
-\end{figure}
-
-There exist docens of suitable transform used in TC. They are
-characterized by the
-\href{https://en.wikipedia.org/wiki/Orthogonality}{orthogonality}
-property, which basically means that the output coefficients are going
-to be decorrelated because the functions (or vectors, depending on the
-terminology) that describe the transform are
-\href{https://en.wikipedia.org/wiki/Orthogonal_functions}{orthogonal}
-and therefore, form a
-\href{https://en.wikipedia.org/wiki/Basis_(linear_algebra)}{basis
-  (set)} with which is possible to describe any signal in terms
-(usually as a linear combination) of the (basis) functions of such
-basis, i.e., are able to describe any signal in the vector space
-spanned by the basis, using an unique description (set of
-coefficients)~\cite{}.
-
-Wavelets and Wavelet Transforms
-% https://cnx.org/contents/EQurkhlI@6.9:9Qg8uP5e@5/Introduction-to-Wavelets
-% https://cnx.org/exports/110bab92-1948-4958-b1c7-8fc0926c392c@6.9.pdf/wavelets-and-wavelet-transforms-6.9.pdf
-
-Other major family of transform used in TC forms bi-orthogonal basis
-(sets). In this case,
-
-In this milestone we will use an orghogonal wavelet transform. This
-makes that the quantization of the coefficients can be uniform, i.e.,
-we can use the same quantization step for all the coefficients.
-
-In the transform described in the previous milestone, the concept of subband is degradated because we have only one coefficient per subband.
-
-The coefficient $w[0]$ is called the DC (Direct Current) coefficient, and the rest of coefficients are called AC (Alternating Current) coefficients.
-
-\href{https://en.wikipedia.org/wiki/Correlation_and_dependence}{Correlation}
-is a term used in statistics which refer to the interdependency
-between two \href{https://en.wikipedia.org/wiki/Random_variable}{random
-  variables}. It can be measured by the
-\href{https://www.mathsisfun.com/data/correlation.html}{correlation
-  coefficient}~\cite{thinkstats}.
-
-In the case of InterCom, the random variables are the two channels
-(left $L$ and right $R$) of the
-\href{https://en.wikipedia.org/wiki/Stereophonic_sound}{stereo
-  \href{https://en.wikipedia.org/wiki/Pulse-code_modulation}{PCM}
-  signal}~\cite{bosi2003intro}. In most cases, both channels are going
-to be \href{https://en.wikipedia.org/wiki/Binaural_recording}{highly
-  correlated} (especially if the microphone is mono), which means that
-we can represent one of them (for example, the $R$ channel) with
-respect to the other (the $L$ channel). From a mathematical point of
+From a mathematical point of
 view, this process can be seen as a
 \href{https://en.wikipedia.org/wiki/Decorrelation}{decorrelation}
 process. From a physical perspective, decorrelating implies energy
-accumulation in a few coefficients~\cite{sayood2017introduction}.
+accumulation in a small number of
+coefficients~\cite{sayood2017introduction}. \href{https://en.wikipedia.org/wiki/Correlation_and_dependence}{Correlation}
+is a term used in statistics which refer to the interdependency
+between
+two \href{https://en.wikipedia.org/wiki/Random_variable}{random
+variables}, and it can be measured by the
+\href{https://www.mathsisfun.com/data/correlation.html}{correlation
+  coefficient}~\cite{thinkstats}. In the case of InterCom, the random
+variables are the two channels (left and right) of the
+stereo \href{https://en.wikipedia.org/wiki/Pulse-code_modulation}{PCM
+signal}~\cite{bosi2003intro}.
 
-To perform this inter-channel decorrelation, we can use an
-\href{https://en.wikipedia.org/wiki/Orthogonal_transformation}{orthogonal}\footnote{Orthogonality
-  of the transform is a important property because the correlation
-  between the coefficients (the output of the transform) is 0.}
-transform, that in the case of decorrelating a stereo signal is
+A major difference between transformed sequence $y$ and the original
+sequence $x$ is that the characteristics of the elements of the $y$
+sequence are determined by their position within the
+sequence~\cite{sayood2017introduction}.
+
+
+To perform this inter-channel decorrelation we can use the transform
 \begin{equation}
-  y = Kx = \frac{1}{2}\begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}x,
+  w = Kx = \frac{1}{2}\begin{bmatrix} 1 & 1 \\ -1 & 1 \end{bmatrix}x,
+  \label{eq:forward_transform_matrix_form}
 \end{equation}
-where $x$ represents a frame (a tuple of L and R samples, $x[0]$ and
-$x[1]$), $K$ is the $2\times 2$ KLT
-\href{http://fourier.eng.hmc.edu/e161/lectures/klt/node3.html}{(Karhunen-Lo\`eve
-  Transform)} matrix multiplied by $1/\sqrt{2}$ (which is closely
-related to the \href{http://wavelets.pybytes.com/wavelet/haar/}{Haar
-  transform}~\cite{vetterli1995wavelets}), and $y$ represents the
-transform coefficients (in our case, a couple of coefficients $y[0]$
-with the \href{https://en.wikipedia.org/wiki/Arithmetic_mean}{mean}
-and $y[1]$ with the difference of the samples). Notice that this
-transform is not
+that is equivalent to
+\begin{equation*}
+  \begin{bmatrix}
+    w[0] \\
+    w[1]
+  \end{bmatrix}
+  = \frac{1}{2}
+  \begin{bmatrix} 1 & 1 \\ -1 & 1 \end{bmatrix}
+  \begin{bmatrix}
+    x[0] \\
+    x[1]
+  \end{bmatrix},
+\end{equation*}
+where $x[0]$ and $x[1]$ are the samples of the stereo frame $x$.
+
+In Eq.~\ref{eq:forward_transform_matrix_form} $w$ represents the
+vector of transform coefficients (in our case, a pair of coefficients
+$w[0]$ with the
+\href{https://en.wikipedia.org/wiki/Arithmetic_mean}{mean} and $w[1]$
+with the difference of the samples divided by $2$).
+
+If the transform represented by the Eq.~\ref{eq:forward_transform_matrix_form} can be
+also expressed by
+\begin{equation}
+  w[u] = \sum_i K_{u,i}x[i],
+  \label{eq:forward_transform_linear_combination_form}
+\end{equation}
+where $K_{u,i}$ denotes $i$-th element of the $u$-th row of the matrix
+$K$.
+
+If the forward transform is performing the operations
+\begin{equation*}
+  \begin{array}{rcl}
+  w[0] & = & \frac{1}{2}(x[0] + x[1])\\
+  w[1] & = & \frac{1}{2}(x[1] - x[0]),
+  \end{array}
+\end{equation*}
+the inverse transform can be found by solving $x[0]$ and $x[1]$ in
+these equations, obtaining that
+\begin{equation*}
+  \begin{array}{rcl}
+  x[0] & = & w[0] - w[1]\\
+  x[1] & = & w[0] + w[1],
+  \end{array}
+\end{equation*}
+that in matrix form becomes
+\begin{equation*}
+  \begin{bmatrix}
+    x[0] \\
+    x[1]
+  \end{bmatrix}
+  = 
+  \begin{bmatrix} 1 & -1 \\ 1 & 1 \end{bmatrix}
+  \begin{bmatrix}
+    w[0] \\
+    w[1]
+  \end{bmatrix}.
+\end{equation*}
+
+Notice that the inverse transform is the transpose of the forward transform. This is a characteristic of orthogonal transforms~\cite{sayood2017introduction}.
+
+Orthonormal transforms are energy preserving~\cite{sayood2017introduction}.
+
+Therefore, the inverse transform can be written as
+\begin{equation}
+  x[i] = \sum_u K_{i,u}w[u],
+  \label{eq:inverse_transform_linear_combination_form}
+\end{equation}
+and therefore,
+\begin{equation}
+  x = K^Tw = K^{-1}w = \begin{bmatrix} 1 & -1 \\ 1 & 1 \end{bmatrix}w.
+  \label{eq:inverse_transform_matrix_form}
+\end{equation}
+
+Notice that this transform ($K$) is not
 \href{https://en.wikipedia.org/wiki/Orthonormal_basis}{orthonormal}
-(energy preserving in the transform domain) because
+(it is not energy preserving in the transform domain, i.e., the
+Parseval's Theorem is not satisfied) because
 \begin{equation}
-  \sum y[i]^2 = \frac{1}{\sqrt{2}}\sum x[i]^2,
+  \sum w[i]^2 =
+  \left[\frac{1}{2}(x[0]+x[1])\right]^2 + \left[\frac{1}{2}(x[1]+x[0])\right]^2 =
+  \frac{1}{4}(x[0]^2+2x[0]x[1]+x[1]^2) + \frac{1}{4}(x[0]^2-2x[0]x[1]+x[1]^2) =
+  \frac{1}{2}(x[0]^2+x[1]^2) =
+  \frac{1}{2}\sum x[i]^2,
 \end{equation}
-although both subbands $y[0]$ and $y[1]$ have the same gain
-($\frac{1}{\sqrt{2}}$, and therefore the same ``importance'' for a
+but is
+\href{https://en.wikipedia.org/wiki/Orthogonal_transformation}{orthogonal}\footnote{Orthogonality
+of the transform is a important property because the correlation
+between the coefficients (the output of the transform) is 0.}
+\cite{sayood2017introduction,burrus2013wavelets}, because the inner
+(also named dot) product of the basis vectors $K_1=\begin{bmatrix}1 &
+1\end{bmatrix}$ and $K_2=\begin{bmatrix} -1 & 1\end{bmatrix}$ is
+\begin{equation*}
+  \langle K_1,K_2 \rangle =
+  \begin{bmatrix}
+    1 & 1
+  \end{bmatrix}
+  \cdot
+  \begin{bmatrix}
+    -1 & 1
+  \end{bmatrix}
+  = 0.
+\end{equation*}
+This means that $K_1$ and $K_2$ are linearly independent\footnote{We
+cannot derive one from the other using the operations that define a
+vector space.}, and therefore they form a basis
+(set)~\cite{strang4linear}. This can be also verified
+with\footnote{The inverse matrix $K^{-1}$, which computes the inverse
+transform, is the transpose of the forward transform $K$. This
+property is satisfied by all orthogonal
+transforms~\cite{sayood2017introduction}.}
+\begin{equation}
+  KK^T=K^TK=2I,
+  \label{eq:ortho_matrix_test}
+\end{equation}
+where $I$ is the identity matrix.
+
+The factor $2$ in the Eq.~\ref{eq:ortho_matrix_test} is indicating
+that the transform has a gain of $2$ (the output of the inverse
+transform will be equal to the input to the forward transform
+multiplied by $2$, which physically impled that we are amplifying the
+audio signal by $2$). To avoid this, we can divide each coefficient
+($w[0]$ and $w[1]$) by $2$ after computing the forward transform.
+
+Eq.~\ref{eq:ortho_matrix_test} is showing also that the gain of
+coefficient is the same: $2$. This fact can be also verified comparing
+the energy of the reconstruction provided by each coefficient:
+
+\begin{equation*}
+  \begin{array}{l}
+    \begin{bmatrix}
+      1 & -1 \\
+      1 & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+      1 \\
+      0
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      1 & 1
+    \end{bmatrix} = K_1
+    \\
+    \begin{bmatrix}
+      1 & -1 \\
+      1 & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+      0 \\
+      1
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      -1 & 1
+    \end{bmatrix} = K_2
+    \\
+    \left\| \begin{bmatrix}1 & 1\end{bmatrix} \right\|_2 := \sqrt{\langle \begin{bmatrix}1 & 1\end{bmatrix}, \begin{bmatrix}1 & 1\end{bmatrix} \rangle} = \sqrt{\begin{bmatrix}1 & 1\end{bmatrix}\cdot \begin{bmatrix}1 & 1\end{bmatrix}} = \sqrt{2}\\
+    \left\| \begin{bmatrix}-1 & 1\end{bmatrix} \right\|_2 := \sqrt{\langle \begin{bmatrix}-1 & 1\end{bmatrix}, \begin{bmatrix}-1 & 1\end{bmatrix} \rangle} = \sqrt{\begin{bmatrix}-1 & 1\end{bmatrix}\cdot \begin{bmatrix}-1 & 1\end{bmatrix}} = \sqrt{2},
+  \end{array}
+\end{equation*}
+where $\left\|v \right\|_2$ denotes the L$_2$ norm of the vector $v$.
+
+This information, the gain of each coefficient, is relevant for the
+quantization stage, which ideally, should allow to compress each pair
+of coefficients with the same rate/distortion slope. To achieve this
+
+Because both coefficients have the same gain, the number of bits assigned by the quantizer should be the same
+
+As it can be seen in this, the gain of each subband (and each coefficient, because we have only one coefficient per subband)
+
+although both ``subbands''\footnote{In a effort of extrapolate this
+discussion to a transform case where each subband has more than only
+one coefficient, we have called to $w[0]$ the low-pass subband and
+$w[1]$ the high-pass subband. However, notice that each subband has
+only one coefficient!} $w[0]$ and $w[1]$ have the same gain
+($\frac{1}{2}$, and therefore the same ``importance'' for a
 future
 \href{https://en.wikipedia.org/wiki/Quantization_(signal_processing)}{quantization}
-of $y$). The described transform is similar to the so called
-\href{https://en.wikipedia.org/wiki/Joint_encoding#M/S_stereo_coding}{M/S
-  stereo coding}, but in our case, the división by 2 is carried on
-the forward transform, instead of the backward (inverse) transform.
+of $w$, i.e., the same quantization step can be used for the $w[0]$
+and $w[1]$ coefficients).
 
-This transform can be implemented
-\href{https://en.wikipedia.org/wiki/In-place_algorithm}{\emph{in-place}}
-using the following algorithm:
+Notice that this procedure allows to find the basis vectors ($K_1$ and
+$K_2$ in our case) from an implementation of the inverse
+tranform.\footnote{Normally, the transform is not implemented as a
+matrix-vector multiplication and therefore, the basis vectors are not
+directly available.}
+
+The matrix $K$ proposed is similar to the $2\times 2$ KLT
+\href{http://fourier.eng.hmc.edu/e161/lectures/klt/node3.html}{(Karhunen-Lo\`eve
+  Transform)}, the
+\href{http://wavelets.pybytes.com/wavelet/haar/}{Haar
+  Transform}~\cite{vetterli1995wavelets} and the $2\times 2$
+\href{https://en.wikipedia.org/wiki/Hadamard_transform}{Discrete
+  Walsh-Hadamard Transform}~\cite{sayood2017introduction}).  The
+described transform is also similar to the so called
+\href{https://en.wikipedia.org/wiki/Joint_encoding#M/S_stereo_coding}{M/S
+  stereo coding}, but in our case, the división by 2 is carried on the
+forward transform, instead of the inverse (backward) transform. This
+is done to ensure that the transform can be computed
+\href{https://en.wikipedia.org/wiki/In-place_algorithm}{\emph{in-place}}~\cite{2006.sweldens}. Such
+implementation is:
 
 \begin{pseudocode}{Inter-channel\_decorrelation}{~}
   \PROCEDURE{analyze}{\text{frame}}
   \BEGIN
-    \text{frame}[0] -= \text{frame}[1] \\
-    \text{frame}[1] += (\text{frame}[0] / 2) \\
-    \text{frame}[0] /= 2
+    \text{frame}[1] -= \text{frame}[0] \\
+    \text{frame}[0] += (\text{frame}[1] / 2) \\
+    \text{frame}[1] /= 2
   \END
   \ENDPROCEDURE
   \PROCEDURE{synthesize}{\text{frame}}
   \BEGIN
-    \text{frame}[0] *= 2 \\
-    \text{frame}[1] -= (\text{frame}[0] / 2) \\
-    \text{frame}[0] += \text{frame}[1]
+    \text{frame}[1] *= 2 \\
+    \text{frame}[0] -= (\text{frame}[1] / 2) \\
+    \text{frame}[1] += \text{frame}[0]
   \END
   \ENDPROCEDURE
 \end{pseudocode}
 
 where $\text{a}~\mathtt{OPER}= \text{b}$ is a shorter representation of the operation
-$\text{a} = \text{a}~\mathtt{OPER}~\text{b}$. Notice that this type of in-place computations
-are commonly used in the implementation of DWTs
-(\href{https://en.wikipedia.org/wiki/Discrete_wavelet_transform}{Dicrete
-  Wavelet Transform}s) using
-\href{https://cm-bell-labs.github.io/who/wim/papers/athome/athome.pdf}{the
-  Lifting Scheme}~\cite{2006.sweldens}.
+$\text{a} = \text{a}~\mathtt{OPER}~\text{b}$.
 
 \section{What you have to do?}
 
