@@ -4,33 +4,27 @@
 
 \section{Description}
 
-InterCom transmit a \href{https://en.wikipedia.org/wiki/Stereophonic_sound}{stereo} (left and right) signals. In most cases,
-both channels
+InterCom transmit
+a \href{https://en.wikipedia.org/wiki/Stereophonic_sound}{stereo}
+\href{https://en.wikipedia.org/wiki/Pulse-code_modulation}{PCM
+signal} with two channels (left and right). In most cases, both
+channels
 are \href{https://en.wikipedia.org/wiki/Binaural_recording}{highly
 correlated} (especially when the microphone is mono), which means that
-we can represent one of them (for example, the right channel) with
-respect to the other (the left channel).
+we can find a more efficient representation.
 
-From a mathematical point of
-view, this process can be seen as a
+From a mathematical point of view, this process can be seen as a
 \href{https://en.wikipedia.org/wiki/Decorrelation}{decorrelation}
-process. From a physical perspective, decorrelating implies energy
-accumulation in a small number of
-coefficients~\cite{sayood2017introduction}. \href{https://en.wikipedia.org/wiki/Correlation_and_dependence}{Correlation}
+process. From a physical perspective, decorrelating implies \href{https://en.wikipedia.org/wiki/Energy_(signal_processing)}{energy}
+accumulation in some
+\href{https://web.stanford.edu/class/ee398a/handouts/lectures/07-TransformCoding.pdf}{coefficients}~\cite{sayood2017introduction}. \href{https://en.wikipedia.org/wiki/Correlation_and_dependence}{Correlation}
 is a term used in statistics which refer to the interdependency
 between
 two \href{https://en.wikipedia.org/wiki/Random_variable}{random
 variables}, and it can be measured by the
 \href{https://www.mathsisfun.com/data/correlation.html}{correlation
-  coefficient}~\cite{thinkstats}. In the case of InterCom, the random
-variables are the two channels (left and right) of the
-stereo \href{https://en.wikipedia.org/wiki/Pulse-code_modulation}{PCM
-signal}~\cite{bosi2003intro}.
-
-A major difference between transformed sequence $y$ and the original
-sequence $x$ is that the characteristics of the elements of the $y$
-sequence are determined by their position within the
-sequence~\cite{sayood2017introduction}.
+  coefficient}~\cite{thinkstats}. In the case of InterCom, we have two
+  random variables, one for each channel~\cite{bosi2003intro}.
 
 
 To perform this inter-channel decorrelation we can use the transform
@@ -100,6 +94,11 @@ that in matrix form becomes
 Notice that the inverse transform is the transpose of the forward transform. This is a characteristic of orthogonal transforms~\cite{sayood2017introduction}.
 
 Orthonormal transforms are energy preserving~\cite{sayood2017introduction}.
+
+A major difference between transformed sequence $y$ and the original
+sequence $x$ is that the characteristics of the elements of the $y$
+sequence are determined by their position within the
+sequence~\cite{sayood2017introduction}.
 
 Therefore, the inverse transform can be written as
 \begin{equation}
