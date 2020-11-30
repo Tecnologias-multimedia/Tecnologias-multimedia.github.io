@@ -26,145 +26,256 @@ variables}, and it can be measured by the
   coefficient}~\cite{thinkstats}. In the case of InterCom, we have two
   random variables, one for each channel~\cite{bosi2003intro}.
 
-To perform this inter-channel decorrelation we can use the transform
+To perform this inter-channel decorrelation we can use the linear transform
 \begin{equation}
   w = Kx = \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}x,
   \label{eq:forward_transform_matrix_form}
 \end{equation}
-where $x_0$ and $x_1$ are the samples of the stereo frame $x$.
-
-In Eq.~\ref{eq:forward_transform_matrix_form} $w$ represents to the
-vector of transform coefficients, in our case, a pair of coefficients
-$w_0$ with sum of the left and right samples and $w_1$ with the
-difference. Notice that $w_0$ represents to the low frequencies of
-$x$ and $w_1$ to the high frequencies (see this notebook).
-
-the
-\href{https://en.wikipedia.org/wiki/Arithmetic_mean}{mean} and $w[1]$
-with the difference of the samples divided by $2$).
-
-that is equivalent to
-\begin{equation*}
+or alternatively
+\begin{equation}
   \begin{bmatrix}
-    w[0] \\
-    w[1]
+    w_0 \\
+    w_1
   \end{bmatrix}
   = 
-  \begin{bmatrix} 1 & 1 \\ -1 & 1 \end{bmatrix}
+  \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}
   \begin{bmatrix}
-    x[0] \\
-    x[1]
+    x_0 \\
+    x_1
   \end{bmatrix},
-\end{equation*}
+  \label{eq:forward_transform_matrix_form2}
+\end{equation}
+where $x$ is a stereo frame, $K$ is the (forward) transform matrix and
+$w$ is the
+corresponding \href{https://en.wikipedia.org/wiki/Discrete_wavelet_transform#Example_in_image_processing}{decomposition}.
 
+%where $x_0$ and $x_1$ are the samples of the stereo frame $x$.
 
-If the transform represented by the Eq.~\ref{eq:forward_transform_matrix_form} can be
-also expressed by
+In general (for all the linear transforms), Eqs.~\ref{eq:forward_transform_matrix_form}
+and \ref{eq:forward_transform_matrix_form2} can be also expressed as
 \begin{equation}
-  w[u] = \sum_i K_{u,i}x[i],
+  w_u = \sum_i K_{u,i}x_i,
   \label{eq:forward_transform_linear_combination_form}
 \end{equation}
 where $K_{u,i}$ denotes $i$-th element of the $u$-th row of the matrix
-$K$.
+$K$. Notice that in our case, $w=\begin{bmatrix} w_0 &
+w_1\end{bmatrix}^{\text T}$, i.e., the~ decomposition has only 2
+subbands $w_0$ and $w_1$, and each one has only one coefficient.
 
-If the forward transform is performing the operations
-\begin{equation*}
-  \begin{array}{rcl}
-  w[0] & = & \frac{1}{2}(x[0] + x[1])\\
-  w[1] & = & \frac{1}{2}(x[1] - x[0]),
-  \end{array}
-\end{equation*}
-the inverse transform can be found by solving $x[0]$ and $x[1]$ in
-these equations, obtaining that
-\begin{equation*}
-  \begin{array}{rcl}
-  x[0] & = & w[0] - w[1]\\
-  x[1] & = & w[0] + w[1],
-  \end{array}
-\end{equation*}
-that in matrix form becomes
-\begin{equation*}
-  \begin{bmatrix}
-    x[0] \\
-    x[1]
-  \end{bmatrix}
-  = 
-  \begin{bmatrix} 1 & -1 \\ 1 & 1 \end{bmatrix}
-  \begin{bmatrix}
-    w[0] \\
-    w[1]
-  \end{bmatrix}.
-\end{equation*}
+A major difference between transformed sequence $w$ (a decomposition
+of two subbands with only one coefficient per subband) and the
+original sequence $x$ (a frame of two samples in our case) is that the
+characteristics of the elements of $w$ are determined by their
+position within the decomposition~\cite{sayood2017introduction}. Thus,
+as a consequence of the way the matrix has been defined, the subband
+$w_0$ represents (very roughly) the low frequencies of $x$ and $w_1$
+the high frequencies. This can be also seen in this \href{}{notebook}.
 
-Notice that the inverse transform is the transpose of the forward transform. This is a characteristic of orthogonal transforms~\cite{sayood2017introduction}.
-
-Orthonormal transforms are energy preserving~\cite{sayood2017introduction}.
-
-A major difference between transformed sequence $y$ and the original
-sequence $x$ is that the characteristics of the elements of the $y$
-sequence are determined by their position within the
-sequence~\cite{sayood2017introduction}.
-
-Therefore, the inverse transform can be written as
+Let's find the inverse
+transform
 \begin{equation}
-  x[i] = \sum_u K_{i,u}w[u],
-  \label{eq:inverse_transform_linear_combination_form}
+  x = K^{-1}w.
+  \label{eq:inverse_transform}
 \end{equation}
-and therefore,
+From \ref{eq:forward_transform_matrix_form} we get that
 \begin{equation}
-  x = K^Tw = K^{-1}w = \begin{bmatrix} 1 & -1 \\ 1 & 1 \end{bmatrix}w.
+  \begin{array}{rcl}
+  w_0 & = & x_0 + x_1\\
+  w_1 & = & x_0 - x_1.
+  \end{array}
+\end{equation}
+By solving $x_0$ (adding) and $x_1$ (substracting) in
+these equations, we obtain that
+\begin{equation}
+  \begin{array}{rcl}
+  x_0 & = & \frac{1}{2}(w_0 + w_1)\\
+  x_1 & = & \frac{1}{2}(w_0 - w_1),
+  \end{array}
+\end{equation}
+that in matrix form becomes
+\begin{equation}
+  \begin{bmatrix}
+    x_0 \\
+    x_1
+  \end{bmatrix}
+  = \frac{1}{2}
+  \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}
+  \begin{bmatrix}
+    w_0 \\
+    w_1
+  \end{bmatrix}.
+\end{equation}
+Therefore,
+\begin{equation}
+  x = K^{-1}w = \frac{1}{2}K^{\text T}w = \frac{1}{2}\begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}w.
   \label{eq:inverse_transform_matrix_form}
 \end{equation}
 
-Notice that this transform ($K$) is not
-\href{https://en.wikipedia.org/wiki/Orthonormal_basis}{orthonormal}
-(it is not energy preserving in the transform domain, i.e., the
-Parseval's Theorem is not satisfied) because
+Notice that the inverse transform is the transpose of the forward
+transform. This is a characteristic of all orthogonal
+transforms~\cite{sayood2017introduction}. For the transform that we
+are analyzing, it also holds that (ignoring the $\frac{1}{2}$ scale factor)
+$K^{-1}=K$.
+
+Orthogonality is important for compression applications because the
+correlation between subbands is 0, and therefore, the contributions of
+the subbands to the reconstruction of the original signal are
+independent. Apart from checking that $K^{-1}=K^{\text T}$, $K$ is
+orthogonal if the inner product (also called the dot product)
+of the basis functions is $0$ between the different basis. In our case $K_1=\begin{bmatrix}1 &
+1\end{bmatrix}$ and $K_2=\begin{bmatrix} 1 & -1\end{bmatrix}$~ is
 \begin{equation}
-  \sum w[i]^2 =
-  \left[\frac{1}{2}(x[0]+x[1])\right]^2 + \left[\frac{1}{2}(x[1]+x[0])\right]^2 =
-  \frac{1}{4}(x[0]^2+2x[0]x[1]+x[1]^2) + \frac{1}{4}(x[0]^2-2x[0]x[1]+x[1]^2) =
-  \frac{1}{2}(x[0]^2+x[1]^2) =
-  \frac{1}{2}\sum x[i]^2,
-\end{equation}
-but is
-\href{https://en.wikipedia.org/wiki/Orthogonal_transformation}{orthogonal}\footnote{Orthogonality
-of the transform is a important property because the correlation
-between the coefficients (the output of the transform) is 0.}
-\cite{sayood2017introduction,burrus2013wavelets}, because the inner
-(also named dot) product of the basis vectors $K_1=\begin{bmatrix}1 &
-1\end{bmatrix}$ and $K_2=\begin{bmatrix} -1 & 1\end{bmatrix}$ is
-\begin{equation*}
   \langle K_1,K_2 \rangle =
+  \langle \begin{bmatrix}
+    1 & 1
+  \end{bmatrix}
+  ,
+  \begin{bmatrix}
+    1 & -1
+  \end{bmatrix}
+  \rangle =
   \begin{bmatrix}
     1 & 1
   \end{bmatrix}
   \cdot
   \begin{bmatrix}
-    -1 & 1
+    1 & -1
   \end{bmatrix}
-  = 0.
-\end{equation*}
-This means that $K_1$ and $K_2$ are linearly independent\footnote{We
+   = 0.
+\end{equation}
+which means that $K_1$ and $K_2$ are linearly independent\footnote{We
 cannot derive one from the other using the operations that define a
 vector space.}, and therefore they form a basis
-(set)~\cite{strang4linear}. This can be also verified
-with\footnote{The inverse matrix $K^{-1}$, which computes the inverse
-transform, is the transpose of the forward transform $K$. This
+(set)~\cite{strang4linear}.
+
+In our case, it also holds that
+\begin{equation}
+\begin{array}{l}
+  \langle K_1,K_1 \rangle =
+  \langle \begin{bmatrix}
+    1 & 1
+  \end{bmatrix}
+  ,
+  \begin{bmatrix}
+    1 & 1
+  \end{bmatrix}
+  \rangle =
+  \begin{bmatrix}
+    1 & 1
+  \end{bmatrix}
+  \cdot
+  \begin{bmatrix}
+    1 & 1
+  \end{bmatrix}
+   = 2,
+   \\
+     \langle K_2,K_2 \rangle =
+  \langle \begin{bmatrix}
+    1 & -1
+  \end{bmatrix}
+  ,
+  \begin{bmatrix}
+    1 & -1
+  \end{bmatrix}
+  \rangle =
+  \begin{bmatrix}
+    1 & -1
+  \end{bmatrix}
+  \cdot
+  \begin{bmatrix}
+    1 & -1
+  \end{bmatrix}
+   = 2,
+   \end{array}
+\end{equation}
+that implies that $K$ is not orthonormal, i.e., it is not energy
+preserving~\cite{sayood2017introduction}. Another way of saying this
+is that the Parseval's Theorem is not satisfied:
+\begin{equation}
+  \sum_i {w_i}^2 =
+  \left[(x_0+x_1)\right]^2 + \left[(x_0-x_1)\right]^2 =
+  (x_0^2+2x_0x_1+x_1^2) + (x_0^2-2x_0x_1+x_1^2) =
+  2(x_0^2+x_1^2) =
+  2\sum_i {x_i}^2.
+  \label{eq:No_Parseval}
+\end{equation}
+
+
+The factor $2$ in the Eq.~\ref{eq:No_Parseval} is indicating that the
+chain forward-inverse transform defined by $K$ has a gain of $2$ (the
+output of the inverse transform will be equal to the input to the
+forward transform multiplied by $2$, which physically means that we
+are amplifying the audio signal by $2$). To avoid this, as the
+Eq.~\ref{eq:inverse_transform_matrix_form} indicates, we must divide
+each coefficient ($w_0$ and $w_1$) by $2$ after computing the forward
+transform.
+
+Finally, because the gain of each subband can\footnote{We could use
+quantization steps $\Delta_1$ and $\Delta_2$ inversely proportional to
+the gain of the subbands $w_1$ and $w_2$, removing less information
+from the subband that has a higher gain.} be important in the
+quantization stage, let's analyze them. To find the relative gain of
+the subband $w_i$ we must first compute the inverse transform of the
+decomposition $\begin{bmatrix} 0 & \cdots & 1 & \cdots &
+  0 \end{bmatrix}$ where the $1$ is in the position $i$ of the
+decomposition, to obtain the basis functions. In our example, we get
+that
+
+\begin{equation}
+  \begin{array}{l}
+    \begin{bmatrix}
+      1 & 1 \\
+      1 & -1
+    \end{bmatrix}
+    \begin{bmatrix}
+      1 \\
+      0
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      1 & 1
+    \end{bmatrix} = K_1
+    \\
+    \begin{bmatrix}
+      1 & 1 \\
+      1 & -1
+    \end{bmatrix}
+    \begin{bmatrix}
+      0 \\
+      1
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      1 & -1
+    \end{bmatrix} = K_2.
+  \end{array}
+\end{equation}
+
+Next, we must compute the L$_2$ norm of the basis functions.
+
+\begin{equation*}
+  \begin{array}{l}
+    \left\| K_1 \right\|_2 := \sqrt{\langle \begin{bmatrix}1 & 1\end{bmatrix}, \begin{bmatrix}1 & 1\end{bmatrix} \rangle} = \sqrt{\begin{bmatrix}1 & 1\end{bmatrix}\cdot \begin{bmatrix}1 & 1\end{bmatrix}} = \sqrt{2}\\
+    \left\| K_2 \right\|_2 := \sqrt{\langle \begin{bmatrix}1 & -1\end{bmatrix}, \begin{bmatrix}1 & -1\end{bmatrix} \rangle} = \sqrt{\begin{bmatrix}1 & -1\end{bmatrix}\cdot \begin{bmatrix}1 & -1\end{bmatrix}} = \sqrt{2},
+  \end{array}
+\end{equation*}
+
+Therefore, both $w_1$ and $w_2$ have the same gain.
+
+L$_2$ norms of the inverse
+
+============
+
+ This
 property is satisfied by all orthogonal
-transforms~\cite{sayood2017introduction}.}
+transforms~\cite{sayood2017introduction}.
 \begin{equation}
   KK^T=K^TK=2I,
   \label{eq:ortho_matrix_test}
 \end{equation}
 where $I$ is the identity matrix.
 
-The factor $2$ in the Eq.~\ref{eq:ortho_matrix_test} is indicating
-that the transform has a gain of $2$ (the output of the inverse
-transform will be equal to the input to the forward transform
-multiplied by $2$, which physically impled that we are amplifying the
-audio signal by $2$). To avoid this, we can divide each coefficient
-($w[0]$ and $w[1]$) by $2$ after computing the forward transform.
+The 
 
 Eq.~\ref{eq:ortho_matrix_test} is showing also that the gain of
 coefficient is the same: $2$. This fact can be also verified comparing
