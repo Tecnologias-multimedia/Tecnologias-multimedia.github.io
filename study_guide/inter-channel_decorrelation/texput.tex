@@ -26,32 +26,37 @@ variables}, and it can be measured by the
   coefficient}~\cite{thinkstats}. In the case of InterCom, we have two
   random variables, one for each channel~\cite{bosi2003intro}.
 
-
 To perform this inter-channel decorrelation we can use the transform
 \begin{equation}
-  w = Kx = \frac{1}{2}\begin{bmatrix} 1 & 1 \\ -1 & 1 \end{bmatrix}x,
+  w = Kx = \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}x,
   \label{eq:forward_transform_matrix_form}
 \end{equation}
+where $x_0$ and $x_1$ are the samples of the stereo frame $x$.
+
+In Eq.~\ref{eq:forward_transform_matrix_form} $w$ represents to the
+vector of transform coefficients, in our case, a pair of coefficients
+$w_0$ with sum of the left and right samples and $w_1$ with the
+difference. Notice that $w_0$ represents to the low frequencies of
+$x$ and $w_1$ to the high frequencies (see this notebook).
+
+the
+\href{https://en.wikipedia.org/wiki/Arithmetic_mean}{mean} and $w[1]$
+with the difference of the samples divided by $2$).
+
 that is equivalent to
 \begin{equation*}
   \begin{bmatrix}
     w[0] \\
     w[1]
   \end{bmatrix}
-  = \frac{1}{2}
+  = 
   \begin{bmatrix} 1 & 1 \\ -1 & 1 \end{bmatrix}
   \begin{bmatrix}
     x[0] \\
     x[1]
   \end{bmatrix},
 \end{equation*}
-where $x[0]$ and $x[1]$ are the samples of the stereo frame $x$.
 
-In Eq.~\ref{eq:forward_transform_matrix_form} $w$ represents the
-vector of transform coefficients (in our case, a pair of coefficients
-$w[0]$ with the
-\href{https://en.wikipedia.org/wiki/Arithmetic_mean}{mean} and $w[1]$
-with the difference of the samples divided by $2$).
 
 If the transform represented by the Eq.~\ref{eq:forward_transform_matrix_form} can be
 also expressed by
