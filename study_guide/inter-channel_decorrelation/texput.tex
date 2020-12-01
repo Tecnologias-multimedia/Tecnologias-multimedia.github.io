@@ -4,21 +4,22 @@
 
 \section{Description}
 
-InterCom transmit
-a \href{https://en.wikipedia.org/wiki/Stereophonic_sound}{stereo}
+InterCom transmits a
+\href{https://en.wikipedia.org/wiki/Stereophonic_sound}{stereo}
 \href{https://en.wikipedia.org/wiki/Pulse-code_modulation}{PCM
-signal} with two channels (left and right). In most cases, both
-channels
-are \href{https://en.wikipedia.org/wiki/Binaural_recording}{highly
-correlated} (especially when the microphone is mono), which means that
-we can find a more efficient representation.
+  signals} with two channels (left and right). In most cases, both
+channels are
+\href{https://en.wikipedia.org/wiki/Binaural_recording}{highly
+  correlated} (especially when the microphone is mono), which means
+that we can find a more efficient representation than the provided by
+the sound card.
 
 From a mathematical point of view, this process can be seen as a
 \href{https://en.wikipedia.org/wiki/Decorrelation}{decorrelation}
 process. From a physical perspective, decorrelating implies \href{https://en.wikipedia.org/wiki/Energy_(signal_processing)}{energy}
 accumulation in some
 \href{https://web.stanford.edu/class/ee398a/handouts/lectures/07-TransformCoding.pdf}{coefficients}~\cite{sayood2017introduction}. \href{https://en.wikipedia.org/wiki/Correlation_and_dependence}{Correlation}
-is a term used in statistics which refer to the interdependency
+is a term used in statistics for refering to the interdependency
 between
 two \href{https://en.wikipedia.org/wiki/Random_variable}{random
 variables}, and it can be measured by the
@@ -26,7 +27,7 @@ variables}, and it can be measured by the
   coefficient}~\cite{thinkstats}. In the case of InterCom, we have two
   random variables, one for each channel~\cite{bosi2003intro}.
 
-To perform this inter-channel decorrelation we can use the linear transform
+To perform this inter-channel decorrelation we can use the \href{https://en.wikipedia.org/wiki/Linear_map}{linear transform}
 \begin{equation}
   w = Kx = \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}x,
   \label{eq:forward_transform_matrix_form}
@@ -46,30 +47,32 @@ or alternatively
   \label{eq:forward_transform_matrix_form2}
 \end{equation}
 where $x$ is a stereo frame, $K$ is the (forward) transform matrix and
-$w$ is the
-corresponding \href{https://en.wikipedia.org/wiki/Discrete_wavelet_transform#Example_in_image_processing}{decomposition}.
+$w=\begin{bmatrix} w_0 &
+w_1\end{bmatrix}^{\text T}$ is the corresponding
+\href{https://en.wikipedia.org/wiki/Discrete_wavelet_transform#Example_in_image_processing}{decomposition}. In
+this transform, the decomposition has two
+\href{https://en.wikipedia.org/wiki/Sub-band_coding}{subbands} $w_0$
+and $w_1$, and each subband has only one coefficient.
 
 %where $x_0$ and $x_1$ are the samples of the stereo frame $x$.
 
-In general (for all the linear transforms), Eqs.~\ref{eq:forward_transform_matrix_form}
-and \ref{eq:forward_transform_matrix_form2} can be also expressed as
+In general (for all the linear transforms),
+Eqs.~\ref{eq:forward_transform_matrix_form} and
+\ref{eq:forward_transform_matrix_form2} can be also expressed as
 \begin{equation}
   w_u = \sum_i K_{u,i}x_i,
   \label{eq:forward_transform_linear_combination_form}
 \end{equation}
 where $K_{u,i}$ denotes $i$-th element of the $u$-th row of the matrix
-$K$. Notice that in our case, $w=\begin{bmatrix} w_0 &
-w_1\end{bmatrix}^{\text T}$, i.e., the~ decomposition has only 2
-subbands $w_0$ and $w_1$, and each one has only one coefficient.
+$K$.
 
-A major difference between transformed sequence $w$ (a decomposition
-of two subbands with only one coefficient per subband) and the
-original sequence $x$ (a frame of two samples in our case) is that the
-characteristics of the elements of $w$ are determined by their
-position within the decomposition~\cite{sayood2017introduction}. Thus,
-as a consequence of the way the matrix has been defined, the subband
-$w_0$ represents (very roughly) the low frequencies of $x$ and $w_1$
-the high frequencies. This can be also seen in this \href{}{notebook}.
+A major difference between the transformed sequence $w$ and the
+original sequence $x$ is that the characteristics of the elements of
+$w$ are determined by their position within the
+decomposition~\cite{sayood2017introduction}. Thus, as a consequence of
+how the matrix has been defined, the subband $w_0$ represents (very
+roughly) the low frequencies of $x$ and $w_1$ the high
+frequencies. This can be also seen in this \href{}{notebook}.
 
 Let's find the inverse
 transform
@@ -77,7 +80,7 @@ transform
   x = K^{-1}w.
   \label{eq:inverse_transform}
 \end{equation}
-From \ref{eq:forward_transform_matrix_form} we get that
+From Eq. \ref{eq:forward_transform_matrix_form} we get that
 \begin{equation}
   \begin{array}{rcl}
   w_0 & = & x_0 + x_1\\
@@ -107,15 +110,17 @@ that in matrix form becomes
 \end{equation}
 Therefore,
 \begin{equation}
-  x = K^{-1}w = \frac{1}{2}K^{\text T}w = \frac{1}{2}\begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}w.
+  x = K^{-1}w = \frac{1}{2}K^{\text T}w = \frac{1}{2}Kw = \frac{1}{2}\begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}w.
   \label{eq:inverse_transform_matrix_form}
 \end{equation}
 
-Notice that the inverse transform is the transpose of the forward
-transform. This is a characteristic of all orthogonal
-transforms~\cite{sayood2017introduction}. For the transform that we
-are analyzing, it also holds that (ignoring the $\frac{1}{2}$ scale factor)
-$K^{-1}=K$.
+Notice that (ignoring the $\frac{1}{2}$ scale factor) the inverse
+transform is the transpose of the forward transform. This is a
+characteristic of all
+\href{https://en.wikipedia.org/wiki/Orthogonal_transformation}{orthogonal
+  transforms}~\cite{sayood2017introduction}. For the transform that we
+are analyzing, it also holds that $K^{\text T}=K$ because $K$ is
+\href{https://en.wikipedia.org/wiki/Symmetric_matrix}{symmetric}.
 
 Orthogonality is important for compression applications because the
 correlation between subbands is 0, and therefore, the contributions of
@@ -123,10 +128,15 @@ the subbands to the reconstruction of the original signal are
 independent\footnote{The distortion measure is such that the total
 distortion is the sum of the distortion contribution of each
 subband~\cite{sayood2017introduction}.}. Apart from checking that
-$K^{-1}=K^{\text T}$, $K$ is orthogonal if the inner product (also
-called the dot product) of the basis functions is $0$ between the
-different basis. In our case $K_1=\begin{bmatrix}1 & 1\end{bmatrix}$
-and $K_2=\begin{bmatrix} 1 & -1\end{bmatrix}$~ is
+$K^{-1}=K^{\text T}$, $K$ is orthogonal if the
+\href{https://en.wikipedia.org/wiki/Inner_product_space}{inner
+  product} (also called the
+\href{https://en.wikipedia.org/wiki/Dot_product}{dot product} when we
+work with
+\href{https://en.wikipedia.org/wiki/Euclidean_space}{Euclidean
+  spaces}) of the basis functions is $0$ between the different
+basis. In our case $K_1=\begin{bmatrix}1 & 1\end{bmatrix}$ and
+$K_2=\begin{bmatrix} 1 & -1\end{bmatrix}$~ is
 \begin{equation}
   \langle K_1,K_2 \rangle =
   \langle \begin{bmatrix}
@@ -219,14 +229,17 @@ the gain of the subbands $w_1$ and $w_2$, removing less information
 from the subband that has a higher gain.} be important in the
 \href{https://en.wikipedia.org/wiki/Quantization_(signal_processing)}{quantization}
 stage, let's analyze them. By definition, the gain of the subband
-$w_i$ is the L$_2$ norm of the basis function $K_i$. Unfortunately,
-most of the transform are not implemented using matrix-vector
-operations, but using faster algorithms based on a sucession of
-lattice bufferflies with different apertures. In general, we can
-determine $W_i$ simply by computing the inverse transform of the
-decomposition $\begin{bmatrix} 0 & \cdots & 0 & 1 & 0 & \cdots &
-  0 \end{bmatrix}$ where the $1$ value is in the position $i$ of the
-decomposition $w_i$. In our example, we get that
+$w_i$ is the \href{https://en.wikipedia.org/wiki/Lp_space}{L$_2$ norm}
+(named also
+\href{https://en.wikipedia.org/wiki/Euclidean_distance}{Euclidean
+  distance} in multidimensional (higher than 3 dimenssions) spaces) of
+the basis function $K_i$. Unfortunately, most of the transform are not
+implemented using matrix-vector operations, but using faster
+algorithms based on a sucession of lattice bufferflies with different
+apertures. In general, we can determine $K_i$ simply by computing the
+inverse transform of the decomposition $\begin{bmatrix} 0 & \cdots & 0
+  & 1 & 0 & \cdots & 0 \end{bmatrix}$ where the $1$ value is in the
+position $i$ of the decomposition $w_i$. In our example, we get that
 
 \begin{equation}
   \begin{array}{l}

@@ -43,20 +43,21 @@ class="ecrm-1200">December 1, 2020</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
-<!--l. 7--><p class="noindent" >InterCom transmit a <a 
+<!--l. 7--><p class="noindent" >InterCom transmits a <a 
 href="https://en.wikipedia.org/wiki/Stereophonic_sound" >stereo</a> <a 
-href="https://en.wikipedia.org/wiki/Pulse-code_modulation" >PCM signal</a> with two channels (left and right). In most
+href="https://en.wikipedia.org/wiki/Pulse-code_modulation" >PCM signals</a> with two channels (left and right). In most
 cases, both channels are <a 
 href="https://en.wikipedia.org/wiki/Binaural_recording" >highly correlated</a> (especially when the microphone is mono),
-which means that we can ﬁnd a more eﬃcient representation.
-</p><!--l. 16--><p class="indent" >   From a mathematical point of view, this process can be seen as a <a 
+which means that we can ﬁnd a more eﬃcient representation than the provided by
+the sound card.
+</p><!--l. 17--><p class="indent" >   From a mathematical point of view, this process can be seen as a <a 
 href="https://en.wikipedia.org/wiki/Decorrelation" >decorrelation</a>
 process. From a physical perspective, decorrelating implies <a 
 href="https://en.wikipedia.org/wiki/Energy_(signal_processing)" >energy</a> accumulation in
 some <a 
 href="https://web.stanford.edu/class/ee398a/handouts/lectures/07-TransformCoding.pdf" >coeﬃcients</a> <span class="cite">[<a 
 href="#Xsayood2017introduction">3</a>]</span>. <a 
-href="https://en.wikipedia.org/wiki/Correlation_and_dependence" >Correlation</a> is a term used in statistics which refer to the
+href="https://en.wikipedia.org/wiki/Correlation_and_dependence" >Correlation</a> is a term used in statistics for refering to the
 interdependency between two <a 
 href="https://en.wikipedia.org/wiki/Random_variable" >random variables</a>, and it can be measured by the
 <a 
@@ -64,10 +65,14 @@ href="https://www.mathsisfun.com/data/correlation.html" >correlation coeﬃcient
 href="#Xthinkstats">2</a>]</span>. In the case of InterCom, we have two random variables,
 one for each channel <span class="cite">[<a 
 href="#Xbosi2003intro">1</a>]</span>.
-</p><!--l. 29--><p class="indent" >   To perform this inter-channel decorrelation we can use the linear transform </p><table class="equation"><tr><td>
+</p><!--l. 30--><p class="indent" >   To perform this inter-channel decorrelation we can use the <a 
+href="https://en.wikipedia.org/wiki/Linear_map" >linear transform</a> </p><table class="equation"><tr><td>
 <a 
  id="x1-1001r1"></a>
-<!--l. 30--><math 
+                                                                  
+
+                                                                  
+<!--l. 31--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
 <mi 
@@ -86,12 +91,9 @@ class="MathClass-bin">−</mo><mn>1</mn></mtd></mtr> <!--*\c@MaxMatrixCols c--><
 >x</mi><mo 
 class="MathClass-punc">,</mo>
 </math></td><td class="eq-no">(1)</td></tr></table>
-                                                                  
-
-                                                                  
-<!--l. 34--><p class="indent" >   or alternatively </p><table class="equation"><tr><td> <a 
+<!--l. 35--><p class="indent" >   or alternatively </p><table class="equation"><tr><td> <a 
  id="x1-1002r2"></a>
-<!--l. 35--><math 
+<!--l. 36--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
  <mfenced separators="" 
@@ -131,26 +133,59 @@ class="array"  columnalign="center">  <msub><mrow
 >  </mtd></mtr> <!--*\c@MaxMatrixCols c--></mtable>                                                                                                                    </mrow></mfenced> <mo 
 class="MathClass-punc">,</mo>
 </math></td><td class="eq-no">(2)</td></tr></table>
-<!--l. 48--><p class="indent" >   where <!--l. 48--><math 
+<!--l. 49--><p class="indent" >   where <!--l. 49--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >x</mi></math> is a stereo
-frame, <!--l. 48--><math 
+frame, <!--l. 49--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >K</mi></math> is the (forward)
-transform matrix and <!--l. 49--><math 
+transform matrix and <!--l. 50--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
->w</mi></math>
+>w</mi> <mo 
+class="MathClass-rel">=</mo><msup><mrow 
+>  <mfenced separators="" 
+open="["  close="]" ><mrow><mtable  align="axis" style=""  
+equalrows="false" columnlines="none none none none none none none none none" equalcolumns="false" class="array"><mtr><mtd 
+class="array"  columnalign="center"> <msub><mrow 
+><mi 
+>w</mi></mrow><mrow 
+><mn>0</mn></mrow></msub 
+>  </mtd><mtd 
+class="array"  columnalign="center">  <msub><mrow 
+><mi 
+>w</mi></mrow><mrow 
+><mn>1</mn></mrow></msub 
+>  </mtd></mtr> <!--*\c@MaxMatrixCols c--></mtable>                                                                                                           </mrow></mfenced> </mrow><mrow 
+><mstyle 
+class="text"><mtext  >T</mtext></mstyle></mrow></msup 
+></math>
 is the corresponding <a 
-href="https://en.wikipedia.org/wiki/Discrete_wavelet_transform#Example_in_image_processing" >decomposition</a>.
-</p><!--l. 54--><p class="indent" >   In general (for all the linear transforms), Eqs. <a 
+href="https://en.wikipedia.org/wiki/Discrete_wavelet_transform#Example_in_image_processing" >decomposition</a>. In this transform, the decomposition has two
+<a 
+href="https://en.wikipedia.org/wiki/Sub-band_coding" >subbands</a> <!--l. 54--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mi 
+>w</mi></mrow><mrow 
+><mn>0</mn></mrow></msub 
+></math>
+and <!--l. 55--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mi 
+>w</mi></mrow><mrow 
+><mn>1</mn></mrow></msub 
+></math>,
+and each subband has only one coeﬃcient.
+</p><!--l. 59--><p class="indent" >   In general (for all the linear transforms), Eqs. <a 
 href="#x1-1001r1">1<!--tex4ht:ref: eq:forward_transform_matrix_form --></a> and <a 
 href="#x1-1002r2">2<!--tex4ht:ref: eq:forward_transform_matrix_form2 --></a> can be also expressed as </p><table class="equation"><tr><td>
 <a 
  id="x1-1003r3"></a>
-<!--l. 56--><math 
+<!--l. 62--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
                           <msub><mrow 
@@ -180,7 +215,7 @@ class="MathClass-punc">,</mo><mi
 ><mo 
 class="MathClass-punc">,</mo>
 </math></td><td class="eq-no">(3)</td></tr></table>
-<!--l. 60--><p class="indent" >   where <!--l. 60--><math 
+<!--l. 66--><p class="indent" >   where <!--l. 66--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -190,87 +225,49 @@ display="inline" ><msub><mrow
 class="MathClass-punc">,</mo><mi 
 >i</mi></mrow></msub 
 ></math> denotes
-<!--l. 60--><math 
+<!--l. 66--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
->i</mi></math>-th element of the
-<!--l. 60--><math 
+>i</mi></math>-th element of
+the <!--l. 66--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
->u</mi></math>-th row of the matrix
-<!--l. 61--><math 
+>u</mi></math>-th row of
+the matrix <!--l. 67--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
->K</mi></math>. Notice that in our case,
-<!--l. 61--><math 
+>K</mi></math>.
+</p><!--l. 69--><p class="indent" >   A major diﬀerence between the transformed sequence
+<!--l. 69--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
->w</mi> <mo 
-class="MathClass-rel">=</mo><msup><mrow 
->  <mfenced separators="" 
-open="["  close="]" ><mrow><mtable  align="axis" style=""  
-equalrows="false" columnlines="none none none none none none none none none" equalcolumns="false" class="array"><mtr><mtd 
-class="array"  columnalign="center"> <msub><mrow 
-><mi 
->w</mi></mrow><mrow 
-><mn>0</mn></mrow></msub 
->  </mtd><mtd 
-class="array"  columnalign="center">  <msub><mrow 
-><mi 
->w</mi></mrow><mrow 
-><mn>1</mn></mrow></msub 
->  </mtd></mtr> <!--*\c@MaxMatrixCols c--></mtable>                                                                                                           </mrow></mfenced> </mrow><mrow 
-><mstyle 
-class="text"><mtext  >T</mtext></mstyle></mrow></msup 
-></math>, i.e., the  decomposition
-has only 2 subbands <!--l. 63--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><msub><mrow 
-><mi 
->w</mi></mrow><mrow 
-><mn>0</mn></mrow></msub 
-></math>
-and <!--l. 63--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><msub><mrow 
-><mi 
->w</mi></mrow><mrow 
-><mn>1</mn></mrow></msub 
-></math>,
-and each one has only one coeﬃcient.
-</p><!--l. 65--><p class="indent" >   A major diﬀerence between transformed sequence
-<!--l. 65--><math 
+>w</mi></math> and the original sequence
+                                                                  
+
+                                                                  
+<!--l. 70--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
->w</mi></math> (a
-decomposition of two subbands with only one coeﬃcient per subband) and the original
-sequence <!--l. 67--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->x</mi></math>
-(a frame of two samples in our case) is that the characteristics of the elements of
-<!--l. 68--><math 
+>x</mi></math> is that the characteristics
+of the elements of <!--l. 71--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >w</mi></math>
 are determined by their position within the decomposition <span class="cite">[<a 
 href="#Xsayood2017introduction">3</a>]</span>. Thus,
-                                                                  
-
-                                                                  
-as a consequence of the way the matrix has been deﬁned, the subband
-<!--l. 71--><math 
+as a consequence of how the matrix has been deﬁned, the subband
+<!--l. 73--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
 >w</mi></mrow><mrow 
 ><mn>0</mn></mrow></msub 
 ></math> represents (very roughly)
-the low frequencies of <!--l. 71--><math 
+the low frequencies of <!--l. 74--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >x</mi></math>
-and <!--l. 71--><math 
+and <!--l. 74--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -278,9 +275,9 @@ display="inline" ><msub><mrow
 ><mn>1</mn></mrow></msub 
 ></math>
 the high frequencies. This can be also seen in this notebook.
-</p><!--l. 74--><p class="indent" >   Let’s ﬁnd the inverse transform </p><table class="equation"><tr><td> <a 
+</p><!--l. 77--><p class="indent" >   Let’s ﬁnd the inverse transform </p><table class="equation"><tr><td> <a 
  id="x1-1004r4"></a>
-<!--l. 76--><math 
+<!--l. 79--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
                             <mi 
@@ -294,10 +291,10 @@ class="MathClass-bin">−</mo><mn>1</mn></mrow></msup
 >w</mi><mo 
 class="MathClass-punc">.</mo>
 </math></td><td class="eq-no">(4)</td></tr></table>
-<!--l. 80--><p class="indent" >   From <a 
+<!--l. 83--><p class="indent" >   From Eq. <a 
 href="#x1-1001r1">1<!--tex4ht:ref: eq:forward_transform_matrix_form --></a> we get that </p><table class="equation"><tr><td> <a 
  id="x1-1005r5"></a>
-<!--l. 81--><math 
+<!--l. 84--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
  <mtable  align="axis" style=""  
@@ -339,14 +336,14 @@ class="MathClass-bin">−</mo> <msub><mrow
 ><mo 
 class="MathClass-punc">.</mo> </mtd></mtr><!--rcl--></mtable>
 </math></td><td class="eq-no">(5)</td></tr></table>
-<!--l. 87--><p class="indent" >   By solving <!--l. 87--><math 
+<!--l. 90--><p class="indent" >   By solving <!--l. 90--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
 >x</mi></mrow><mrow 
 ><mn>0</mn></mrow></msub 
 ></math>
-(adding) and <!--l. 87--><math 
+(adding) and <!--l. 90--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -355,7 +352,10 @@ display="inline" ><msub><mrow
 ></math>
 (substracting) in these equations, we obtain that </p><table class="equation"><tr><td> <a 
  id="x1-1006r6"></a>
-<!--l. 89--><math 
+                                                                  
+
+                                                                  
+<!--l. 92--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
  <mtable  align="axis" style=""  
@@ -407,12 +407,9 @@ class="MathClass-bin">−</mo> <msub><mrow
 class="MathClass-close">)</mo></mrow><mo 
 class="MathClass-punc">,</mo> </mtd></mtr><!--rcl--></mtable>
 </math></td><td class="eq-no">(6)</td></tr></table>
-                                                                  
-
-                                                                  
-<!--l. 95--><p class="indent" >   that in matrix form becomes </p><table class="equation"><tr><td> <a 
+<!--l. 98--><p class="indent" >   that in matrix form becomes </p><table class="equation"><tr><td> <a 
  id="x1-1007r7"></a>
-<!--l. 96--><math 
+<!--l. 99--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
  <mfenced separators="" 
@@ -455,9 +452,9 @@ class="array"  columnalign="center">  <msub><mrow
 >  </mtd></mtr> <!--*\c@MaxMatrixCols c--></mtable>                                                                                                                    </mrow></mfenced> <mo 
 class="MathClass-punc">.</mo>
 </math></td><td class="eq-no">(7)</td></tr></table>
-<!--l. 108--><p class="indent" >   Therefore, </p><table class="equation"><tr><td> <a 
+<!--l. 111--><p class="indent" >   Therefore, </p><table class="equation"><tr><td> <a 
  id="x1-1008r8"></a>
-<!--l. 109--><math 
+<!--l. 112--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
 <mi 
@@ -482,6 +479,12 @@ class="text"><mtext  >T</mtext></mstyle></mrow></msup
 class="MathClass-rel">=</mo> <mfrac><mrow 
 ><mn>1</mn></mrow> 
 <mrow 
+><mn>2</mn></mrow></mfrac><mi 
+>K</mi><mi 
+>w</mi> <mo 
+class="MathClass-rel">=</mo> <mfrac><mrow 
+><mn>1</mn></mrow> 
+<mrow 
 ><mn>2</mn></mrow></mfrac> <mfenced separators="" 
 open="["  close="]" ><mrow><mtable  align="axis" style=""  
 equalrows="false" columnlines="none none none none none none none none none" equalcolumns="false" class="array"><mtr><mtd 
@@ -493,30 +496,39 @@ class="MathClass-bin">−</mo><mn>1</mn></mtd></mtr> <!--*\c@MaxMatrixCols c--><
 >w</mi><mo 
 class="MathClass-punc">.</mo>
 </math></td><td class="eq-no">(8)</td></tr></table>
-<!--l. 114--><p class="indent" >   Notice that the inverse transform is the transpose of the forward
-transform. This is a characteristic of all orthogonal transforms <span class="cite">[<a 
-href="#Xsayood2017introduction">3</a>]</span>. For
-the transform that we are analyzing, it also holds that (ignoring the
-<!--l. 117--><math 
+<!--l. 117--><p class="indent" >   Notice that (ignoring the <!--l. 117--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mfrac><mrow 
 ><mn>1</mn></mrow>
 <mrow 
-><mn>2</mn></mrow></mfrac></math> scale
-factor) <!--l. 118--><math 
+><mn>2</mn></mrow></mfrac></math>
+scale factor) the inverse transform is the transpose of the forward transform. This is a
+characteristic of all <a 
+href="https://en.wikipedia.org/wiki/Orthogonal_transformation" >orthogonal transforms</a> <span class="cite">[<a 
+href="#Xsayood2017introduction">3</a>]</span>. For the transform that we are analyzing, it also
+holds that <!--l. 122--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msup><mrow 
 ><mi 
 >K</mi></mrow><mrow 
-><mo 
-class="MathClass-bin">−</mo><mn>1</mn></mrow></msup 
+><mstyle 
+class="text"><mtext  >T</mtext></mstyle></mrow></msup 
 > <mo 
 class="MathClass-rel">=</mo> <mi 
->K</mi></math>.
-</p><!--l. 120--><p class="indent" >   Orthogonality is important for compression applications because the correlation
-between subbands is 0, and therefore, the contributions of the subbands to the
-reconstruction of the original signal are independent. Apart from checking that
-<!--l. 123--><math 
+>K</mi></math>
+because <!--l. 122--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>K</mi></math>
+is <a 
+href="https://en.wikipedia.org/wiki/Symmetric_matrix" >symmetric</a>.
+</p><!--l. 125--><p class="indent" >   Orthogonality is important for compression applications because the
+correlation between subbands is 0, and therefore, the contributions
+of the subbands to the reconstruction of the original signal are
+independent<span class="footnote-mark"><a 
+href="index2.html#fn1x0"><sup class="textsuperscript">1</sup></a></span><a 
+ id="x1-1009f1"></a> . Apart
+from checking that <!--l. 131--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msup><mrow 
 ><mi 
@@ -530,15 +542,22 @@ class="MathClass-rel">=</mo> <msup><mrow
 ><mstyle 
 class="text"><mtext  >T</mtext></mstyle></mrow></msup 
 ></math>,
-<!--l. 123--><math 
+                                                                  
+
+                                                                  
+<!--l. 131--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
->K</mi></math> is
-orthogonal if the inner product (also called the dot product) of the basis functions is
-<!--l. 125--><math 
+>K</mi></math>
+is orthogonal if the <a 
+href="https://en.wikipedia.org/wiki/Inner_product_space" >inner product</a> (also called the <a 
+href="https://en.wikipedia.org/wiki/Dot_product" >dot product</a>
+when we work with <a 
+href="https://en.wikipedia.org/wiki/Euclidean_space" >Euclidean spaces</a>) of the basis functions is
+<!--l. 137--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mn>0</mn></math> between the diﬀerent
-basis. In our case <!--l. 125--><math 
+basis. In our case <!--l. 138--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -550,7 +569,7 @@ open="["  close="]" ><mrow><mtable  align="axis" style=""
 equalrows="false" columnlines="none none none none none none none none none" equalcolumns="false" class="array"><mtr><mtd 
 class="array"  columnalign="center"> <mn>1</mn> </mtd><mtd 
 class="array"  columnalign="center"> <mn>1</mn> </mtd></mtr> <!--*\c@MaxMatrixCols c--></mtable>                                                                                           </mrow></mfenced></math>
-and <!--l. 126--><math 
+and <!--l. 139--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -564,11 +583,8 @@ class="array"  columnalign="center"> <mn>1</mn> </mtd><mtd
 class="array"  columnalign="center"> <mo 
 class="MathClass-bin">−</mo><mn>1</mn> </mtd></mtr> <!--*\c@MaxMatrixCols c--></mtable>                                                                                         </mrow></mfenced></math> 
 is </p><table class="equation"><tr><td> <a 
- id="x1-1009r9"></a>
-                                                                  
-
-                                                                  
-<!--l. 127--><math 
+ id="x1-1010r9"></a>
+<!--l. 140--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
 <mrow ><mo 
@@ -610,14 +626,14 @@ class="MathClass-bin">−</mo><mn>1</mn> </mtd></mtr> <!--*\c@MaxMatrixCols c-->
 class="MathClass-rel">=</mo> <mn>0</mn><mo 
 class="MathClass-punc">.</mo>
 </math></td><td class="eq-no">(9)</td></tr></table>
-<!--l. 146--><p class="indent" >   which means that <!--l. 146--><math 
+<!--l. 159--><p class="indent" >   which means that <!--l. 159--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
 >K</mi></mrow><mrow 
 ><mn>1</mn></mrow></msub 
 ></math>
-and <!--l. 146--><math 
+and <!--l. 159--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -625,13 +641,13 @@ display="inline" ><msub><mrow
 ><mn>2</mn></mrow></msub 
 ></math> are linearly
 independent<span class="footnote-mark"><a 
-href="index2.html#fn1x0"><sup class="textsuperscript">1</sup></a></span><a 
- id="x1-1010f1"></a> ,
+href="index3.html#fn2x0"><sup class="textsuperscript">2</sup></a></span><a 
+ id="x1-1011f2"></a> ,
 and therefore they form a basis (set) <span class="cite">[<a 
 href="#Xstrang4linear">4</a>]</span>.
-</p><!--l. 151--><p class="indent" >   In our case, it also holds that </p><table class="equation"><tr><td> <a 
- id="x1-1011r10"></a>
-<!--l. 152--><math 
+</p><!--l. 164--><p class="indent" >   In our case, it also holds that </p><table class="equation"><tr><td> <a 
+ id="x1-1012r10"></a>
+<!--l. 165--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
  <mtable  align="axis" style=""  
@@ -714,15 +730,18 @@ class="MathClass-bin">−</mo><mn>1</mn></mtd></mtr> <!--*\c@MaxMatrixCols c--><
 class="MathClass-rel">=</mo> <mn>2</mn><mo 
 class="MathClass-punc">,</mo> </mtd></mtr><!--l--></mtable>
 </math></td><td class="eq-no">(10)</td></tr></table>
-<!--l. 191--><p class="indent" >   that implies that <!--l. 191--><math 
+<!--l. 204--><p class="indent" >   that implies that <!--l. 204--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >K</mi></math>
 is not orthonormal, i.e., it is not energy preserving <span class="cite">[<a 
 href="#Xsayood2017introduction">3</a>]</span>. Another way of saying this is
 that the Parseval’s Theorem is not satisﬁed: </p><table class="equation"><tr><td> <a 
- id="x1-1012r11"></a>
-<!--l. 194--><math 
+ id="x1-1013r11"></a>
+                                                                  
+
+                                                                  
+<!--l. 207--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
 <munder class="msub"><mrow 
@@ -857,55 +876,53 @@ class="MathClass-rel">=</mo> <mn>2</mn><munder class="msub"><mrow
 ><mo 
 class="MathClass-punc">.</mo>
 </math></td><td class="eq-no">(11)</td></tr></table>
-                                                                  
-
-                                                                  
-<!--l. 204--><p class="indent" >   The factor <!--l. 204--><math 
+<!--l. 217--><p class="indent" >   The factor <!--l. 217--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mn>2</mn></math>
 in the Eq. <a 
-href="#x1-1012r11">11<!--tex4ht:ref: eq:No_Parseval --></a> is indicating that the chain forward-inverse transform deﬁned by
-<!--l. 205--><math 
+href="#x1-1013r11">11<!--tex4ht:ref: eq:No_Parseval --></a> is indicating that the chain forward-inverse transform deﬁned by
+<!--l. 218--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >K</mi></math> has a gain
-of <!--l. 205--><math 
+of <!--l. 218--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mn>2</mn></math> (the
 output of the inverse transform will be equal to the input to the forward transform multiplied
-by <!--l. 207--><math 
+by <!--l. 220--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mn>2</mn></math>,
 which physically means that we are amplifying the audio signal by
-<!--l. 208--><math 
+<!--l. 221--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mn>2</mn></math>).
 To avoid this, as the Eq. <a 
 href="#x1-1008r8">8<!--tex4ht:ref: eq:inverse_transform_matrix_form --></a> indicates, we must divide each coeﬃcient
-(<!--l. 210--><math 
+(<!--l. 223--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
 >w</mi></mrow><mrow 
 ><mn>0</mn></mrow></msub 
 ></math> and
-<!--l. 210--><math 
+<!--l. 223--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
 >w</mi></mrow><mrow 
 ><mn>1</mn></mrow></msub 
 ></math>) by
-<!--l. 210--><math 
+<!--l. 223--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mn>2</mn></math> after
 computing the forward transform.
-</p><!--l. 213--><p class="indent" >   Finally, because the gain of each subband
+</p><!--l. 226--><p class="indent" >   Finally, because the gain of each subband
 can<span class="footnote-mark"><a 
-href="index3.html#fn2x0"><sup class="textsuperscript">2</sup></a></span><a 
- id="x1-1013f2"></a>  be
-important in the quantization stage, let’s analyze them. By deﬁnition, the gain of the subband
-<!--l. 218--><math 
+href="index4.html#fn3x0"><sup class="textsuperscript">3</sup></a></span><a 
+ id="x1-1014f3"></a>  be
+important in the <a 
+href="https://en.wikipedia.org/wiki/Quantization_(signal_processing)" >quantization</a> stage, let’s analyze them. By deﬁnition, the gain of the subband
+<!--l. 232--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -913,13 +930,16 @@ display="inline" ><msub><mrow
 ><mi 
 >i</mi></mrow></msub 
 ></math> is the
-L<!--l. 218--><math 
+<a 
+href="https://en.wikipedia.org/wiki/Lp_space" >L<!--l. 232--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ></mrow><mrow 
 ><mn>2</mn></mrow></msub 
-></math> norm of the
-basis function <!--l. 219--><math 
+></math> norm</a> (named
+also <a 
+href="https://en.wikipedia.org/wiki/Euclidean_distance" >Euclidean distance</a> in multidimensional (higher than 3 dimenssions) spaces) of the basis
+function <!--l. 236--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -930,16 +950,16 @@ display="inline" ><msub><mrow
 Unfortunately, most of the transform are not implemented using
 matrix-vector operations, but using faster algorithms based on a sucession
 of lattice buﬀerﬂies with diﬀerent apertures. In general, we can determine
-<!--l. 222--><math 
+<!--l. 239--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
->W</mi></mrow><mrow 
+>K</mi></mrow><mrow 
 ><mi 
 >i</mi></mrow></msub 
 ></math>
 simply by computing the inverse transform of the decomposition
-<!--l. 223--><math 
+<!--l. 240--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" > <mfenced separators="" 
 open="["  close="]" ><mrow><mtable  align="axis" style=""  
@@ -953,14 +973,14 @@ class="array"  columnalign="center"> <mn>0</mn> </mtd><mtd
 class="array"  columnalign="center"> <mo 
 class="MathClass-rel">⋯</mo> </mtd><mtd 
 class="array"  columnalign="center"> <mn>0</mn> </mtd></mtr> <!--*\c@MaxMatrixCols c--></mtable>                                                                    </mrow></mfenced></math>where the
-<!--l. 224--><math 
+<!--l. 241--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mn>1</mn></math> value is in the
-position <!--l. 224--><math 
+position <!--l. 242--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >i</mi></math> of the
-decomposition <!--l. 225--><math 
+decomposition <!--l. 242--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -970,12 +990,12 @@ display="inline" ><msub><mrow
 ></math>.
 In our example, we get that
 </p>
-   <table class="equation"><tr><td> <a 
- id="x1-1014r12"></a>
                                                                   
 
                                                                   
-<!--l. 228--><math 
+   <table class="equation"><tr><td> <a 
+ id="x1-1015r12"></a>
+<!--l. 244--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
  <mtable  align="axis" style=""  
@@ -1001,9 +1021,10 @@ class="MathClass-rel">=</mo> <msub><mrow
 ><mi 
 >K</mi></mrow><mrow 
 ><mn>1</mn></mrow></msub 
->   </mtd>
+><mo 
+class="MathClass-punc">,</mo> </mtd>
 </mtr>  <mtr><mtd 
-class="array"  columnalign="left">   <mfenced separators="" 
+class="array"  columnalign="left">  <mfenced separators="" 
 open="["  close="]" ><mrow> <mtable  align="axis" style=""  
 equalrows="false" columnlines="none none none none none none none none none" equalcolumns="false" class="array"> <mtr><mtd 
 class="array"  columnalign="center"><mn>1</mn></mtd><mtd 
@@ -1028,16 +1049,20 @@ class="MathClass-rel">=</mo> <msub><mrow
 ><mo 
 class="MathClass-punc">.</mo> </mtd></mtr><!--l--></mtable>
 </math></td><td class="eq-no">(12)</td></tr></table>
-<!--l. 258--><p class="indent" >   Next, we must compute the L<!--l. 258--><math 
+<!--l. 274--><p class="indent" >   Next, we compute the L<!--l. 274--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ></mrow><mrow 
 ><mn>2</mn></mrow></msub 
 ></math>
-norm of the basis functions.
+norm<span class="footnote-mark"><a 
+href="index5.html#fn4x0"><sup class="textsuperscript">4</sup></a></span><a 
+ id="x1-1016f4"></a> 
+of the basis functions as
 </p>
-   <table class="equation-star"><tr><td>
-<!--l. 260--><math 
+   <table class="equation"><tr><td> <a 
+ id="x1-1017r13"></a>
+<!--l. 278--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
  <mtable  align="axis" style=""  
@@ -1074,9 +1099,10 @@ open="["  close="]" ><mrow> <mtable  align="axis" style=""
 equalrows="false" columnlines="none none none none none none none none none" equalcolumns="false" class="array"> <mtr><mtd 
 class="array"  columnalign="center"><mn>1</mn></mtd> <mtd 
 class="array"  columnalign="center"><mn>1</mn></mtd></mtr> <!--*\c@MaxMatrixCols c--></mtable>  </mrow></mfenced></mrow></msqrt> <mo 
-class="MathClass-rel">=</mo> <msqrt><mrow><mn>2</mn></mrow></msqrt>  </mtd>
+class="MathClass-rel">=</mo> <msqrt><mrow><mn>2</mn></mrow></msqrt><mo 
+class="MathClass-punc">,</mo> </mtd>
 </mtr>  <mtr><mtd 
-class="array"  columnalign="left">  <msub><mrow 
+class="array"  columnalign="left"> <msub><mrow 
 > <mfenced separators="" 
 open="∥"  close="∥" ><mrow><msub><mrow 
 ><mi 
@@ -1114,34 +1140,155 @@ class="array"  columnalign="center"><mo
 class="MathClass-bin">−</mo><mn>1</mn></mtd></mtr> <!--*\c@MaxMatrixCols c--></mtable>  </mrow></mfenced></mrow></msqrt> <mo 
 class="MathClass-rel">=</mo> <msqrt><mrow><mn>2</mn></mrow></msqrt><mo 
 class="MathClass-punc">,</mo> </mtd></mtr><!--l--></mtable>
-</math></td></tr></table>
-<!--l. 267--><p class="indent" >   Therefore, both <!--l. 267--><math 
+</math></td><td class="eq-no">(13)</td></tr></table>
+<!--l. 285--><p class="indent" >   resulting that both subbands <!--l. 285--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
 >w</mi></mrow><mrow 
 ><mn>1</mn></mrow></msub 
 ></math>
-and <!--l. 267--><math 
+and <!--l. 285--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
 >w</mi></mrow><mrow 
 ><mn>2</mn></mrow></msub 
-></math>
-have the same gain.
-</p><!--l. 269--><p class="indent" >   L<!--l. 269--><math 
+></math> have the
+same gain (<!--l. 286--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msqrt><mrow><mn>2</mn></mrow></msqrt></math>).
+This result tell us that both subbands should use the same quantization step
+(<!--l. 287--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mi 
+>Δ</mi></mrow><mrow 
+><mn>1</mn></mrow></msub 
+> <mo 
+class="MathClass-rel">=</mo> <msub><mrow 
+><mi 
+>Δ</mi></mrow><mrow 
+><mn>2</mn></mrow></msub 
+></math>).
+Unfortunately, this estatement is only true if the entropy coding stage generates the
+same number of bits for both subbands, something that rarely happens because we
+are compressing the coeﬃcients considering the whole chunk (we are exploiting the
+statistical correlation between the sequence of coeﬃcients generated by all the frames
+of a chunk). In general, the amount of information of provided by the sequence of
+<!--l. 294--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mi 
+>w</mi></mrow><mrow 
+><mi 
+>i</mi></mrow></msub 
+></math> values
+is diﬀerent, and therefore, the RD (Rate Distortion) curve of each sequence is
+                                                                  
+
+                                                                  
+distint.
+</p><!--l. 297--><p class="indent" >   The standard solution for this problem is to use
+<!--l. 297--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mi 
+>Δ</mi></mrow><mrow 
+><mi 
+>i</mi></mrow></msub 
+></math> values
+that select those RD points that provides the same RD slopes <span class="cite">[<span 
+class="ecbx-1000">?</span>, <a 
+href="#Xsayood2017introduction">3</a>]</span>. A discrete RD curve
+is deﬁned by the Pareto front form by the RD points. A RD point is deﬁned as a pair or
+<!--l. 301--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mi 
+>r</mi><mo 
+class="MathClass-punc">,</mo><mi 
+>d</mi></mrow><mo 
+class="MathClass-close">)</mo></mrow></math> values
+where <!--l. 301--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>r</mi></math>
+represents a bit-rate (typically expressed in bits/sample) and
+<!--l. 302--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>d</mi></math>
+represents a distortion (that uses to be the RMSE when we use the
+L<!--l. 304--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ></mrow><mrow 
 ><mn>2</mn></mrow></msub 
 ></math>
-norms of the inverse
-</p><!--l. 271--><p class="indent" >   ============
-</p><!--l. 273--><p class="indent" >   This property is satisﬁed by all orthogonal transforms <span class="cite">[<a 
+norm to measure distances). Therefore, to ﬁnd the two RD curves for
+the current chunk, we should apply the stereo transform, apply a set of
+<!--l. 306--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mi 
+>Δ</mi></mrow><mrow 
+><mi 
+>i</mi></mrow></msub 
+></math> values to
+each subband, and compress the resulting quantization indexes. This would ﬁnd the
+<!--l. 307--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>r</mi></math> values of our
+RD curve. Then, decompress, dequantize and ﬁnd the distortion for the chunk. This would
+ﬁnd the <!--l. 309--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>d</mi></math>
+values. Finally, with this RD curve, we should select the
+<!--l. 310--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mi 
+>Δ</mi></mrow><mrow 
+><mi 
+>i</mi></mrow></msub 
+></math> values
+that provides the same slopes for both subbands.
+</p><!--l. 313--><p class="indent" >   Obviously, we can not use the previous algoritm for
+computing the RD curves in a real-time application such as
+InterCom.<span class="footnote-mark"><a 
+href="index6.html#fn5x0"><sup class="textsuperscript">5</sup></a></span><a 
+ id="x1-1018f5"></a> 
+We need to make some suppositions in order to reduce the computational
+cost of ﬁnding the RD curves. The ﬁrst of our suppositions is that between
+(temporally) adjacent chunks the RD curves are going to be similar. Therefore,
+we can build the RD curve for the current chunk by using the RD points
+generated<span class="footnote-mark"><a 
+href="index7.html#fn6x0"><sup class="textsuperscript">6</sup></a></span><a 
+ id="x1-1019f6"></a> 
+by the compression of previously processed chunks. The second supposition is that we
+can estimate the average slope of the complete RD curve by using only 2 RD points.
+Using this information, we will try to use, for the current chunk, a pair of
+<!--l. 326--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mi 
+>Δ</mi></mrow><mrow 
+><mi 
+>i</mi></mrow></msub 
+></math>
+quantization steps that produce two RD curves (one curve per subband) with the
+same average slope for the current chunk.
+</p><!--l. 329--><p class="indent" >   ============
+</p><!--l. 331--><p class="indent" >   This property is satisﬁed by all orthogonal transforms <span class="cite">[<a 
 href="#Xsayood2017introduction">3</a>]</span>. </p><table class="equation"><tr><td> <a 
- id="x1-1015r13"></a>
-<!--l. 276--><math 
+ id="x1-1020r14"></a>
+                                                                  
+
+                                                                  
+<!--l. 334--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
                         <mi 
@@ -1161,26 +1308,23 @@ class="MathClass-rel">=</mo> <msup><mrow
 class="MathClass-rel">=</mo> <mn>2</mn><mi 
 >I</mi><mo 
 class="MathClass-punc">,</mo>
-</math></td><td class="eq-no">(13)</td></tr></table>
-<!--l. 280--><p class="indent" >   where <!--l. 280--><math 
+</math></td><td class="eq-no">(14)</td></tr></table>
+<!--l. 338--><p class="indent" >   where <!--l. 338--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >I</mi></math>
 is the identity matrix.
-</p><!--l. 282--><p class="indent" >   The
-                                                                  
-
-                                                                  
-</p><!--l. 284--><p class="indent" >   Eq. <a 
-href="#x1-1015r13">13<!--tex4ht:ref: eq:ortho_matrix_test --></a> is showing also that the gain of coeﬃcient is the same:
-<!--l. 285--><math 
+</p><!--l. 340--><p class="indent" >   The
+</p><!--l. 342--><p class="indent" >   Eq. <a 
+href="#x1-1020r14">14<!--tex4ht:ref: eq:ortho_matrix_test --></a> is showing also that the gain of coeﬃcient is the same:
+<!--l. 343--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mn>2</mn></math>. This
 fact can be also veriﬁed comparing the energy of the reconstruction provided by each
 coeﬃcient:
 </p>
    <table class="equation-star"><tr><td>
-<!--l. 288--><math 
+<!--l. 346--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
  <mtable  align="axis" style=""  
@@ -1306,7 +1450,7 @@ class="array"  columnalign="center"><mn>1</mn></mtd></mtr> <!--*\c@MaxMatrixCols
 class="MathClass-rel">=</mo> <msqrt><mrow><mn>2</mn></mrow></msqrt><mo 
 class="MathClass-punc">,</mo> </mtd></mtr><!--l--></mtable>
 </math></td></tr></table>
-<!--l. 320--><p class="indent" >   where <!--l. 320--><math 
+<!--l. 378--><p class="indent" >   where <!--l. 378--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 > <mfenced separators="" 
@@ -1314,39 +1458,42 @@ open="∥"  close="∥" ><mrow><mi
 >v</mi></mrow></mfenced></mrow><mrow 
 ><mn>2</mn></mrow></msub 
 ></math> denotes
-the L<!--l. 320--><math 
+the L<!--l. 378--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ></mrow><mrow 
 ><mn>2</mn></mrow></msub 
 ></math> norm of
-the vector <!--l. 320--><math 
+the vector <!--l. 378--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >v</mi></math>.
-</p><!--l. 322--><p class="indent" >   This information, the gain of each coeﬃcient, is relevant for the quantization
+</p><!--l. 380--><p class="indent" >   This information, the gain of each coeﬃcient, is relevant for the quantization
 stage, which ideally, should allow to compress each pair of coeﬃcients with the same
 rate/distortion slope. To achieve this
-</p><!--l. 326--><p class="indent" >   Because both coeﬃcients have the same gain, the number of bits assigned by the
+</p><!--l. 384--><p class="indent" >   Because both coeﬃcients have the same gain, the number of bits assigned by the
 quantizer should be the same
-</p><!--l. 328--><p class="indent" >   As it can be seen in this, the gain of each subband (and each coeﬃcient, because
+</p><!--l. 386--><p class="indent" >   As it can be seen in this, the gain of each subband (and each coeﬃcient, because
 we have only one coeﬃcient per subband)
-</p><!--l. 330--><p class="indent" >   although both “subbands”<span class="footnote-mark"><a 
-href="index4.html#fn3x0"><sup class="textsuperscript">3</sup></a></span><a 
- id="x1-1016f3"></a> 
-<!--l. 334--><math 
+                                                                  
+
+                                                                  
+</p><!--l. 388--><p class="indent" >   although both “subbands”<span class="footnote-mark"><a 
+href="index8.html#fn7x0"><sup class="textsuperscript">7</sup></a></span><a 
+ id="x1-1021f7"></a> 
+<!--l. 392--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >w</mi><mrow ><mo 
 class="MathClass-open">[</mo><mrow><mn>0</mn></mrow><mo 
 class="MathClass-close">]</mo></mrow></math> and
-<!--l. 334--><math 
+<!--l. 392--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >w</mi><mrow ><mo 
 class="MathClass-open">[</mo><mrow><mn>1</mn></mrow><mo 
 class="MathClass-close">]</mo></mrow></math> have the
-same gain (<!--l. 335--><math 
+same gain (<!--l. 393--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mfrac><mrow 
 ><mn>1</mn></mrow>
@@ -1354,36 +1501,33 @@ display="inline" ><mfrac><mrow
 ><mn>2</mn></mrow></mfrac></math>,
 and therefore the same “importance” for a future <a 
 href="https://en.wikipedia.org/wiki/Quantization_(signal_processing)" >quantization</a> of
-<!--l. 338--><math 
+<!--l. 396--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >w</mi></math>,
 i.e., the same quantization step can be used for the
-<!--l. 338--><math 
+<!--l. 396--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >w</mi><mrow ><mo 
 class="MathClass-open">[</mo><mrow><mn>0</mn></mrow><mo 
 class="MathClass-close">]</mo></mrow></math> and
-                                                                  
-
-                                                                  
-<!--l. 339--><math 
+<!--l. 397--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >w</mi><mrow ><mo 
 class="MathClass-open">[</mo><mrow><mn>1</mn></mrow><mo 
 class="MathClass-close">]</mo></mrow></math>
 coeﬃcients).
-</p><!--l. 341--><p class="indent" >   Notice that this procedure allows to ﬁnd the basis vectors
-(<!--l. 341--><math 
+</p><!--l. 399--><p class="indent" >   Notice that this procedure allows to ﬁnd the basis vectors
+(<!--l. 399--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
 >K</mi></mrow><mrow 
 ><mn>1</mn></mrow></msub 
 ></math> and
-<!--l. 342--><math 
+<!--l. 400--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -1392,13 +1536,13 @@ display="inline" ><msub><mrow
 ></math>
 in our case) from an implementation of the inverse
 tranform.<span class="footnote-mark"><a 
-href="index5.html#fn4x0"><sup class="textsuperscript">4</sup></a></span><a 
- id="x1-1017f4"></a> 
-</p><!--l. 347--><p class="indent" >   The matrix <!--l. 347--><math 
+href="index9.html#fn8x0"><sup class="textsuperscript">8</sup></a></span><a 
+ id="x1-1022f8"></a> 
+</p><!--l. 405--><p class="indent" >   The matrix <!--l. 405--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >K</mi></math> proposed
-is similar to the <!--l. 347--><math 
+is similar to the <!--l. 405--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mn>2</mn> <mo 
 class="MathClass-bin">×</mo> <mn>2</mn></math>
@@ -1406,7 +1550,7 @@ KLT <a
 href="http://fourier.eng.hmc.edu/e161/lectures/klt/node3.html" >(Karhunen-Loève Transform)</a>, the <a 
 href="http://wavelets.pybytes.com/wavelet/haar/" >Haar Transform</a> <span class="cite">[<a 
 href="#Xvetterli1995wavelets">6</a>]</span> and the
-<!--l. 351--><math 
+<!--l. 409--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mn>2</mn> <mo 
 class="MathClass-bin">×</mo> <mn>2</mn></math>
@@ -1422,8 +1566,11 @@ class="ecti-1000">in-place</span></a> <span class="cite">[<a
 href="#X2006.sweldens">5</a>]</span>. Such implementation
 is:
 <a 
- id="x1-1018r1"></a>
-<!--l. 377--><p class="noindent" ></p><div class="minipage"><span 
+ id="x1-1023r1"></a>
+                                                                  
+
+                                                                  
+<!--l. 435--><p class="noindent" ></p><div class="minipage"><span 
 class="ecbx-1000">Algorithm</span>
 <span 
 class="ecbx-1000">1.1:</span> <span 
@@ -1454,11 +1601,11 @@ class="small-caps">a</span><span
 class="small-caps">t</span><span 
 class="small-caps">i</span><span 
 class="small-caps">o</span><span 
-class="small-caps">n</span></span>(<!--l. 362--><math 
+class="small-caps">n</span></span>(<!--l. 420--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 > </mi></math>)<br 
-class="newline" /> <!--l. 362--><math 
+class="newline" /> <!--l. 420--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" > <mtable  align="axis" style=""  
 equalrows="false" columnlines="none" equalcolumns="false" class="array"> <mtr><mtd 
@@ -1549,7 +1696,7 @@ class="MathClass-close">]</mo></mrow>     </mtd></mtr><!--@{}lr@{}--></mtable>  
  </mtr><!--@{\pcode@tab {1}}l@{}--></mtable>                                                                                                  </mtd>
 </mtr>  <mtr><mtd 
 class="array"  columnalign="left"><mspace width="4.3045pt"/>                                                                                                   </mtd></mtr><!--@{\pcode@tab {1}}lr@{}--></mtable></math></div>
-</p><!--l. 379--><p class="indent" >   where <!--l. 379--><math 
+</p><!--l. 437--><p class="indent" >   where <!--l. 437--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle 
 class="text"><mtext  >a</mtext></mstyle><mi 
@@ -1560,7 +1707,7 @@ class="text"><mtext  >a</mtext></mstyle><mi
 >R</mi></mstyle> <mo 
 class="MathClass-rel">=</mo> <mstyle 
 class="text"><mtext  >b</mtext></mstyle></math> is a shorter
-representation of the operation <!--l. 380--><math 
+representation of the operation <!--l. 438--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle 
 class="text"><mtext  >a</mtext></mstyle> <mo 
@@ -1576,14 +1723,11 @@ class="text"><mtext  >b</mtext></mstyle></math>.
 </p>
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
  id="x1-20002"></a>What you have to do?</h3>
-<!--l. 384--><p class="noindent" >
+<!--l. 442--><p class="noindent" >
      </p><ol  class="enumerate1" >
      <li 
   class="enumerate" id="x1-2002x1">In a module named stereo.py, inherit the class Quantization and create a
      class named Stereo_decorrelation.
-                                                                  
-
-                                                                  
      </li>
      <li 
   class="enumerate" id="x1-2004x2">Override   the   methods   pack()   and   unpack().   In   pack()   perform
@@ -1596,18 +1740,21 @@ href="https://www.oreilly.com/library/view/python-for-data/9781449323592/ch04.ht
   class="enumerate" id="x1-2006x3">Has been the <a 
 href="https://en.wikipedia.org/wiki/Data_compression_ratio" >compression ratio</a> improved (on <a 
 href="https://en.wikipedia.org/wiki/Average" >average</a>)? How much?</li></ol>
-<!--l. 399--><p class="noindent" >
+<!--l. 457--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-30003"></a>Timming</h3>
-<!--l. 401--><p class="noindent" >You should reach this milestone at most one week.
-</p><!--l. 403--><p class="noindent" >
+<!--l. 459--><p class="noindent" >You should reach this milestone at most one week.
+                                                                  
+
+                                                                  
+</p><!--l. 461--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-40004"></a>Deliverables</h3>
-<!--l. 405--><p class="noindent" >The module stereo.py. Store it at the <a 
+<!--l. 463--><p class="noindent" >The module stereo.py. Store it at the <a 
 href="https://github.com/Tecnologias-multimedia/intercom" >root directory</a> of your InterCom’s repo.
-</p><!--l. 409--><p class="noindent" >
+</p><!--l. 467--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-50005"></a>Resources</h3>
@@ -1633,9 +1780,6 @@ class="ecti-1000">Think Stats Probability and Statistics for Programmers</span><
 href="http://rahilshaikh.weebly.com/uploads/1/1/6/3/11635894/data_compression.pdf" ><span 
 class="ecti-1000">Introduction to data compression</span></a>. Morgan Kaufmann, 2017.
    </p>
-                                                                  
-
-                                                                  
    <p class="bibitem" ><span class="biblabel">
  [4]<span class="bibsp">   </span></span><a 
  id="Xstrang4linear"></a>G. Strang. <a 
