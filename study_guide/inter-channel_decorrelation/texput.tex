@@ -5,34 +5,22 @@
 \section{Description}
 
 InterCom transmits a
-\href{https://en.wikipedia.org/wiki/Stereophonic_sound}{stereo}
+\href{https://en.wikipedia.org/wiki/Stereophonic_sound}{stereo} (two
+channels)
 \href{https://en.wikipedia.org/wiki/Pulse-code_modulation}{PCM
-  signals} with two channels (left and right). In most cases, both
-channels are
+  signals}. In most cases, the channels are
 \href{https://en.wikipedia.org/wiki/Binaural_recording}{highly
   correlated} (especially when the microphone is mono), which means
-that we can find a more efficient representation than the provided by
-the sound card.
-
-From a mathematical point of view, this process can be seen as a
-\href{https://en.wikipedia.org/wiki/Decorrelation}{decorrelation}
-process. From a physical perspective, decorrelating implies \href{https://en.wikipedia.org/wiki/Energy_(signal_processing)}{energy}
-accumulation in some
-\href{https://web.stanford.edu/class/ee398a/handouts/lectures/07-TransformCoding.pdf}{coefficients}~\cite{sayood2017introduction}. \href{https://en.wikipedia.org/wiki/Correlation_and_dependence}{Correlation}
-is a term used in statistics for refering to the interdependency
-between
-two \href{https://en.wikipedia.org/wiki/Random_variable}{random
-variables}, and it can be measured by the
-\href{https://www.mathsisfun.com/data/correlation.html}{correlation
-  coefficient}~\cite{thinkstats}. In the case of InterCom, we have two
-  random variables, one for each channel~\cite{bosi2003intro}.
-
-To perform this inter-channel decorrelation we can use the \href{https://en.wikipedia.org/wiki/Linear_map}{linear transform}
+that we can find a more efficient representation. To perform this
+inter-channel
+\href{https://en.wikipedia.org/wiki/Decorrelation}{decorrelation}~\cite{thinkstats}
+we can use the \href{https://en.wikipedia.org/wiki/Linear_map}{linear
+  transform}
 \begin{equation}
   w = Kx = \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}x,
   \label{eq:forward_transform_matrix_form}
 \end{equation}
-or alternatively
+that can be also written as
 \begin{equation}
   \begin{bmatrix}
     w_0 \\
@@ -46,15 +34,24 @@ or alternatively
   \end{bmatrix},
   \label{eq:forward_transform_matrix_form2}
 \end{equation}
-where $x$ is a stereo frame, $K$ is the (forward) transform matrix and
-$w=\begin{bmatrix} w_0 &
-w_1\end{bmatrix}^{\text T}$ is the corresponding
+where $x$ is a stereo frame, $K$ is the (forward or analysis)
+transform matrix and $w=\begin{bmatrix} w_0 & w_1\end{bmatrix}^{\text
+  T}$ is the corresponding
 \href{https://en.wikipedia.org/wiki/Discrete_wavelet_transform#Example_in_image_processing}{decomposition}. In
-this transform, the decomposition has two
+this particular transform, the decomposition has two
 \href{https://en.wikipedia.org/wiki/Sub-band_coding}{subbands} $w_0$
-and $w_1$, and each subband has only one coefficient.
+and $w_1$, and each subband has only one
+\href{https://web.stanford.edu/class/ee398a/handouts/lectures/07-TransformCoding.pdf}{coefficient}.
 
-%where $x_0$ and $x_1$ are the samples of the stereo frame $x$.
+The matrix $K$ proposed corresponds to the
+\href{https://en.wikipedia.org/wiki/Joint_encoding#M/S_stereo_coding}{M/S
+  stereo coding}, which is similar to the $2\times 2$ KLT
+\href{http://fourier.eng.hmc.edu/e161/lectures/klt/node3.html}{(Karhunen-Lo\`eve
+  Transform)}, the
+\href{http://wavelets.pybytes.com/wavelet/haar/}{Haar
+  Transform}~\cite{vetterli1995wavelets} and the $2\times 2$
+\href{https://en.wikipedia.org/wiki/Hadamard_transform}{Discrete
+  Walsh-Hadamard Transform}~\cite{sayood2017introduction}).
 
 In general (for all the linear transforms),
 Eqs.~\ref{eq:forward_transform_matrix_form} and
@@ -66,21 +63,22 @@ Eqs.~\ref{eq:forward_transform_matrix_form} and
 where $K_{u,i}$ denotes $i$-th element of the $u$-th row of the matrix
 $K$.
 
-A major difference between the transformed sequence $w$ and the
-original sequence $x$ is that the characteristics of the elements of
-$w$ are determined by their position within the
+A major difference between the transformed data $w$ and the original
+data $x$ is that the characteristics of the elements of $w$ are
+determined by their position within the
 decomposition~\cite{sayood2017introduction}. Thus, as a consequence of
 how the matrix has been defined, the subband $w_0$ represents (very
 roughly) the low frequencies of $x$ and $w_1$ the high
-frequencies. This can be also seen in this \href{}{notebook}.
+frequencies. This can be also seen in this
+\href{https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/stereo_transforms_RD.ipynb}{notebook}.
 
-Let's find the inverse
-transform
+The inverse (or synthesis) transform
 \begin{equation}
-  x = K^{-1}w.
+  x = K^{-1}w
   \label{eq:inverse_transform}
 \end{equation}
-From Eq. \ref{eq:forward_transform_matrix_form} we get that
+can be found from Eq. \ref{eq:forward_transform_matrix_form} where we
+get that
 \begin{equation}
   \begin{array}{rcl}
   w_0 & = & x_0 + x_1\\
@@ -114,17 +112,18 @@ Therefore,
   \label{eq:inverse_transform_matrix_form}
 \end{equation}
 
-Notice that (ignoring the $\frac{1}{2}$ scale factor) the inverse
-transform is the transpose of the forward transform. This is a
-characteristic of all
+As can be seen (previously ignoring the $\frac{1}{2}$ scale factor)
+the inverse transform is the transpose of the forward transform. This
+is a characteristic of all
 \href{https://en.wikipedia.org/wiki/Orthogonal_transformation}{orthogonal
   transforms}~\cite{sayood2017introduction}. For the transform that we
 are analyzing, it also holds that $K^{\text T}=K$ because $K$ is
 \href{https://en.wikipedia.org/wiki/Symmetric_matrix}{symmetric}.
 
 Orthogonality is important for compression applications because the
-correlation between subbands is 0, and therefore, the contributions of
-the subbands to the reconstruction of the original signal are
+\href{https://en.wikipedia.org/wiki/Correlation_and_dependence}{correlation}
+between subbands is 0, and therefore, the contributions of the
+subbands to the reconstruction of the original signal are
 independent\footnote{The
 \href{https://en.wikipedia.org/wiki/Distortion}{distortion} measure is
 such that the total distortion is the sum of the distortion
@@ -138,8 +137,8 @@ from checking that $K^{-1}=K^{\text T}$, $K$ is orthogonal if the
 \href{https://en.wikipedia.org/wiki/Real_number}{real} signals) of the
 \href{https://en.wikipedia.org/wiki/Basis_(linear_algebra)}{basis
   functions} is $0$ between the different basis (functions). In our
-case $K_1=\begin{bmatrix}1 & 1\end{bmatrix}$ and $K_1=\begin{bmatrix}
-1 & -1\end{bmatrix}$~ is
+case $K_0=\begin{bmatrix}1 & 1\end{bmatrix}$~ and $K_1=\begin{bmatrix}
+1 & -1\end{bmatrix}$~, and as we can see
 \begin{equation}
   \langle K_0,K_1 \rangle =
   \langle \begin{bmatrix}
@@ -161,7 +160,7 @@ case $K_1=\begin{bmatrix}1 & 1\end{bmatrix}$ and $K_1=\begin{bmatrix}
 \end{equation}
 which means that $K_0$ and $K_1$ are linearly independent\footnote{We
 cannot derive one from the other using the operations that define a
-vector space.}, and therefore they form a basis
+vector space.}, and therefore they can be a part a basis
 (set)~\cite{strang4linear}.
 
 In our case, it also holds that
@@ -210,7 +209,7 @@ i.e., it is not
 \href{https://en.wikipedia.org/wiki/Energy_(signal_processing)}{energy}
 preserving~\cite{sayood2017introduction}. Another way of saying this
 is that the \href{https://en.wikipedia.org/wiki/Parseval%27s_theorem}{Parseval's theorem}
-  is not satisfied:
+  is not satisfied because
 \begin{equation}
   \sum_i {w_i}^2 =
   \left[(x_0+x_1)\right]^2 + \left[(x_0-x_1)\right]^2 =
@@ -221,14 +220,14 @@ is that the \href{https://en.wikipedia.org/wiki/Parseval%27s_theorem}{Parseval's
 \end{equation}
 
 The factor $2$ in the Eq.~\ref{eq:No_Parseval} is indicating that the
-chain forward-inverse transform defined by $K$ has a
+analysis-synthesis transform chain defined by $K$ and $K^{-1}$ has a
 \href{https://en.wikipedia.org/wiki/Gain_(electronics)}{gain} of $2$
 (the output of the inverse transform will be equal to the input to the
 forward transform multiplied by $2$, which physically means that we
 are \href{https://en.wikipedia.org/wiki/Amplifier}{amplifying} the
-audio signal by $2$). To avoid this, as the
+audio signal by a factor of $2$). To avoid this, as the
 Eq.~\ref{eq:inverse_transform_matrix_form} indicates, we must divide
-each subband ($w_0$ and $w_1$) by $2$ after computing the forward
+each subband ($w_0$ and $w_1$) by $2$ after computing the analysis
 transform.
 
 Finally, because the gain of each subband can\footnote{We could use
@@ -250,9 +249,9 @@ implemented using matrix-vector operations, but using
 \href{https://en.wikipedia.org/wiki/Butterfly_diagram}{computational
   bufferflies}. In general, we can determine $K_i$ simply by computing
 the inverse transform of the decomposition $\begin{bmatrix} 0 & \cdots
-  & 0 & 1 & 0 & \cdots & 0 \end{bmatrix}$ where the $1$ value is in
-the position $i$ of the decomposition $w_i$. In our example, we get
-that
+  & 0 & 1 & 0 & \cdots & 0 \end{bmatrix}^{\text T}$, where the $1$
+value is in the position $i$ of the subband $w_i$. In our
+example, we get that
 
 \begin{equation}
   \begin{array}{l}
@@ -305,24 +304,25 @@ exploiting the
 \href{https://en.wikipedia.org/wiki/Correlation_and_dependence}{statistical
   correlation} between the sequence of coefficients generated by all
 the frames of a chunk). In general, the amount of information provided
-by each $w_i$ subband is different, and therefore, the
+by each subband $w_i$ is different, and therefore, the discrete
 \href{https://en.wikipedia.org/wiki/Rate%E2%80%93distortion_theory}{Rate
-  Distortion} (RD) curve generated by each subband is distint.
-
-The standard solution for this problem is to select a $\Delta_i$ value for each $w_i$ subband
-that select RD points with the same RD
-\href{https://en.wikipedia.org/wiki/Slope}{slope}~\cite{vetterli2014foundations,sayood2017introduction}. A
-discrete RD curve is defined by the
+  Distortion} (RD) curve\footnote{A discrete RD curve is defined by
+the
 \href{https://en.wikipedia.org/wiki/Multi-objective_optimization}{Pareto
-  front} form by the RD points. A RD point is defined as a pair or
-$(r,d)$ values where $r$ represents a bit-rate (typically expressed in
-bits/sample) and $d$ represents a distortion (that uses to be the
+  front} form by the RD points.} generated by each subband is distint.
+
+The standard solution for this problem is to select a $\Delta_i$ value
+for each $w_i$ that select RD points with the same RD
+\href{https://en.wikipedia.org/wiki/Slope}{slope}~\cite{vetterli2014foundations,sayood2017introduction}.
+A RD point is defined as a pair or $(r,d)$ values where $r$ represents
+a bit-rate (typically expressed in bits/sample) and $d$ represents a
+distortion (that uses to be the
 \href{https://en.wikipedia.org/wiki/Root-mean-square_deviation}{RMSE}
 when we use the L$_2$ norm to measure distances). Therefore, to find
 the two RD curves for the current chunk, we should apply the stereo
-transform, apply a set of $\Delta_i$ values to each subband, and
-compress the resulting quantization indexes for each $\Delta_i$
-value. This would find the $r$ values of our RD curve. Then,
+transform, use a set of quantization steps to each subband, and
+compress the resulting quantization indexes for each quantization
+step. This would find the $r$ values of our RD curve. Then,
 decompress, dequantize and find the distortion for the chunk. This
 would find the $d$ values. Finally, with this RD curve, we should
 select the $\Delta_i$ values that provides the same slope for both
@@ -331,14 +331,14 @@ subbands.
 Obviously, we can not use the previous algoritm for computing the RD
 curves in a real-time application such as InterCom.\footnote{The
 amount of computational resources would increase significatively.} We
-need to make some suppositions in order to reduce the computational
-cost of finding the RD curves. The first of our suppositions is that
+need to make some assumptions in order to reduce the computational
+cost of finding the RD curves. The first of our assumptions is that
 between (temporally) adjacent chunks the RD curves are going to be
 similar. Therefore, we can build the RD curve for the current chunk by
 using the RD points generated\footnote{Each chunk is quantized and
 compressed, so, we only need to compute the distortion to have the RD
 point used for the chunk.} by the compression of previously processed
-chunks. The second supposition is that we can estimate the average
+chunks. The second assumption is that we can estimate the average
 slope of the complete RD curve by using only 2 RD points. Using this
 information, we will try to use, for the current chunk, a pair of
 $\Delta_i$ quantization steps that produce two RD curves (one curve
@@ -347,90 +347,6 @@ per subband) with the same average slope for the current chunk.
 ============
 
  This
-property is satisfied by all orthogonal
-transforms~\cite{sayood2017introduction}.
-\begin{equation}
-  KK^T=K^TK=2I,
-  \label{eq:ortho_matrix_test}
-\end{equation}
-where $I$ is the identity matrix.
-
-The 
-
-Eq.~\ref{eq:ortho_matrix_test} is showing also that the gain of
-coefficient is the same: $2$. This fact can be also verified comparing
-the energy of the reconstruction provided by each coefficient:
-
-\begin{equation*}
-  \begin{array}{l}
-    \begin{bmatrix}
-      1 & -1 \\
-      1 & 1
-    \end{bmatrix}
-    \begin{bmatrix}
-      1 \\
-      0
-    \end{bmatrix}
-    =
-    \begin{bmatrix}
-      1 & 1
-    \end{bmatrix} = K_0
-    \\
-    \begin{bmatrix}
-      1 & -1 \\
-      1 & 1
-    \end{bmatrix}
-    \begin{bmatrix}
-      0 \\
-      1
-    \end{bmatrix}
-    =
-    \begin{bmatrix}
-      -1 & 1
-    \end{bmatrix} = K_1
-    \\
-    \left\| \begin{bmatrix}1 & 1\end{bmatrix} \right\|_2 := \sqrt{\langle \begin{bmatrix}1 & 1\end{bmatrix}, \begin{bmatrix}1 & 1\end{bmatrix} \rangle} = \sqrt{\begin{bmatrix}1 & 1\end{bmatrix}\cdot \begin{bmatrix}1 & 1\end{bmatrix}} = \sqrt{2}\\
-    \left\| \begin{bmatrix}-1 & 1\end{bmatrix} \right\|_2 := \sqrt{\langle \begin{bmatrix}-1 & 1\end{bmatrix}, \begin{bmatrix}-1 & 1\end{bmatrix} \rangle} = \sqrt{\begin{bmatrix}-1 & 1\end{bmatrix}\cdot \begin{bmatrix}-1 & 1\end{bmatrix}} = \sqrt{2},
-  \end{array}
-\end{equation*}
-where $\left\|v \right\|_2$ denotes the L$_2$ norm of the vector $v$.
-
-This information, the gain of each coefficient, is relevant for the
-quantization stage, which ideally, should allow to compress each pair
-of coefficients with the same rate/distortion slope. To achieve this
-
-Because both coefficients have the same gain, the number of bits assigned by the quantizer should be the same
-
-As it can be seen in this, the gain of each subband (and each coefficient, because we have only one coefficient per subband)
-
-although both ``subbands''\footnote{In a effort of extrapolate this
-discussion to a transform case where each subband has more than only
-one coefficient, we have called to $w[0]$ the low-pass subband and
-$w[1]$ the high-pass subband. However, notice that each subband has
-only one coefficient!} $w[0]$ and $w[1]$ have the same gain
-($\frac{1}{2}$, and therefore the same ``importance'' for a
-future
-\href{https://en.wikipedia.org/wiki/Quantization_(signal_processing)}{quantization}
-of $w$, i.e., the same quantization step can be used for the $w[0]$
-and $w[1]$ coefficients).
-
-Notice that this procedure allows to find the basis vectors ($K_0$ and
-$K_1$ in our case) from an implementation of the inverse
-tranform.\footnote{Normally, the transform is not implemented as a
-matrix-vector multiplication and therefore, the basis vectors are not
-directly available.}
-
-The matrix $K$ proposed is similar to the $2\times 2$ KLT
-\href{http://fourier.eng.hmc.edu/e161/lectures/klt/node3.html}{(Karhunen-Lo\`eve
-  Transform)}, the
-\href{http://wavelets.pybytes.com/wavelet/haar/}{Haar
-  Transform}~\cite{vetterli1995wavelets} and the $2\times 2$
-\href{https://en.wikipedia.org/wiki/Hadamard_transform}{Discrete
-  Walsh-Hadamard Transform}~\cite{sayood2017introduction}).  The
-described transform is also similar to the so called
-\href{https://en.wikipedia.org/wiki/Joint_encoding#M/S_stereo_coding}{M/S
-  stereo coding}, but in our case, the división by 2 is carried on the
-forward transform, instead of the inverse (backward) transform. This
 is done to ensure that the transform can be computed
 \href{https://en.wikipedia.org/wiki/In-place_algorithm}{\emph{in-place}}~\cite{2006.sweldens}. Such
 implementation is:
