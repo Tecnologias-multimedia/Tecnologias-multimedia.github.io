@@ -44,8 +44,9 @@ and $w_1$, and each subband has only one
 \href{https://web.stanford.edu/class/ee398a/handouts/lectures/07-TransformCoding.pdf}{coefficient}.
 
 The matrix $K$ proposed corresponds to the
-\href{https://en.wikipedia.org/wiki/Joint_encoding#M/S_stereo_coding}{M/S
-  stereo coding}, which is similar to the $2\times 2$ KLT
+\href{https://en.wikipedia.org/wiki/Joint_encoding#M/S_stereo_coding}{Mid/Side
+  (M/S) stereo coding}~\cite{bosi2003intro}, which is similar to the
+$2\times 2$ KLT
 \href{http://fourier.eng.hmc.edu/e161/lectures/klt/node3.html}{(Karhunen-Lo\`eve
   Transform)}, the
 \href{http://wavelets.pybytes.com/wavelet/haar/}{Haar
@@ -342,45 +343,18 @@ chunks. The second assumption is that we can estimate the average
 slope of the complete RD curve by using only 2 RD points. Using this
 information, we will try to use, for the current chunk, a pair of
 $\Delta_i$ quantization steps that produce two RD curves (one curve
-per subband) with the same average slope for the current chunk.
-
-============
-
- This
-is done to ensure that the transform can be computed
-\href{https://en.wikipedia.org/wiki/In-place_algorithm}{\emph{in-place}}~\cite{2006.sweldens}. Such
-implementation is:
-
-\begin{pseudocode}{Inter-channel\_decorrelation}{~}
-  \PROCEDURE{analyze}{\text{frame}}
-  \BEGIN
-    \text{frame}[1] -= \text{frame}[0] \\
-    \text{frame}[0] += (\text{frame}[1] / 2) \\
-    \text{frame}[1] /= 2
-  \END
-  \ENDPROCEDURE
-  \PROCEDURE{synthesize}{\text{frame}}
-  \BEGIN
-    \text{frame}[1] *= 2 \\
-    \text{frame}[0] -= (\text{frame}[1] / 2) \\
-    \text{frame}[1] += \text{frame}[0]
-  \END
-  \ENDPROCEDURE
-\end{pseudocode}
-
-where $\text{a}~\mathtt{OPER}= \text{b}$ is a shorter representation of the operation
-$\text{a} = \text{a}~\mathtt{OPER}~\text{b}$.
+per subband) with the same average slope.
 
 \section{What you have to do?}
 
 \begin{enumerate}
 \item In a module named stereo.py, inherit the class
   Quantization and create a class named Stereo\_decorrelation.
-\item Override the methods pack() and unpack(). In
-  pack() perform the procedure analyze() previously
-  described, and in unpack() the
-  synthesize(). These procedures should be applied to
-  all the frames of a chunk using \href{https://www.oreilly.com/library/view/python-for-data/9781449323592/ch04.html}{vectorized
+\item Override the methods pack() and unpack(). In pack() perform the
+  analysis transform previously described, and in unpack() the
+  synthesiis transform. These procedures should be applied to all the
+  frames of a chunk using
+  \href{https://www.oreilly.com/library/view/python-for-data/9781449323592/ch04.html}{vectorized
     operations}.
 \item Has been the
   \href{https://en.wikipedia.org/wiki/Data_compression_ratio}{compression
