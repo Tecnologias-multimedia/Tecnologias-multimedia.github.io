@@ -1210,7 +1210,7 @@ display="inline" ><msub><mrow
 values that select those <a 
 href="https://en.wikipedia.org/wiki/Rate%E2%80%93distortion_theory" >Rate/Distortion</a> (RD) points that provides
 the same RD <a 
-href="https://en.wikipedia.org/wiki/Slope" >slopes</a> <span class="cite">[<a 
+href="https://en.wikipedia.org/wiki/Slope" >slope</a> <span class="cite">[<a 
 href="#Xvetterli2014foundations">7</a>, <a 
 href="#Xsayood2017introduction">3</a>]</span>. A discrete RD curve is deﬁned by the
 <a 
@@ -1252,19 +1252,27 @@ display="inline" ><msub><mrow
 >Δ</mi></mrow><mrow 
 ><mi 
 >i</mi></mrow></msub 
-></math> values to
-each subband, and compress the resulting quantization indexes. This would ﬁnd the
+></math> values
+to each subband, and compress the resulting quantization indexes for each
 <!--l. 323--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mi 
+>Δ</mi></mrow><mrow 
+><mi 
+>i</mi></mrow></msub 
+></math> value. This
+would ﬁnd the <!--l. 324--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
->r</mi></math> values of our
-RD curve. Then, decompress, dequantize and ﬁnd the distortion for the chunk. This would
-ﬁnd the <!--l. 325--><math 
+>r</mi></math>
+values of our RD curve. Then, decompress, dequantize and ﬁnd the distortion for the chunk. This
+would ﬁnd the <!--l. 326--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >d</mi></math>
 values. Finally, with this RD curve, we should select the
-<!--l. 326--><math 
+<!--l. 327--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -1272,8 +1280,8 @@ display="inline" ><msub><mrow
 ><mi 
 >i</mi></mrow></msub 
 ></math> values
-that provides the same slopes for both subbands.
-</p><!--l. 329--><p class="indent" >   Obviously, we can not use the previous algoritm for
+that provides the same slope for both subbands.
+</p><!--l. 330--><p class="indent" >   Obviously, we can not use the previous algoritm for
 computing the RD curves in a real-time application such as
 InterCom.<span class="footnote-mark"><a 
 href="index5.html#fn4x0"><sup class="textsuperscript">4</sup></a></span><a 
@@ -1288,7 +1296,7 @@ href="index6.html#fn5x0"><sup class="textsuperscript">5</sup></a></span><a
 by the compression of previously processed chunks. The second supposition is that we
 can estimate the average slope of the complete RD curve by using only 2 RD points.
 Using this information, we will try to use, for the current chunk, a pair of
-<!--l. 342--><math 
+<!--l. 343--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -1298,14 +1306,14 @@ display="inline" ><msub><mrow
 ></math>
 quantization steps that produce two RD curves (one curve per subband) with the
 same average slope for the current chunk.
-</p><!--l. 345--><p class="indent" >   ============
-</p><!--l. 347--><p class="indent" >   This property is satisﬁed by all orthogonal transforms <span class="cite">[<a 
+</p><!--l. 346--><p class="indent" >   ============
+</p><!--l. 348--><p class="indent" >   This property is satisﬁed by all orthogonal transforms <span class="cite">[<a 
 href="#Xsayood2017introduction">3</a>]</span>. </p><table class="equation"><tr><td> <a 
  id="x1-1019r14"></a>
                                                                   
 
                                                                   
-<!--l. 350--><math 
+<!--l. 351--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
                         <mi 
@@ -1326,22 +1334,22 @@ class="MathClass-rel">=</mo> <mn>2</mn><mi
 >I</mi><mo 
 class="MathClass-punc">,</mo>
 </math></td><td class="eq-no">(14)</td></tr></table>
-<!--l. 354--><p class="indent" >   where <!--l. 354--><math 
+<!--l. 355--><p class="indent" >   where <!--l. 355--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >I</mi></math>
 is the identity matrix.
-</p><!--l. 356--><p class="indent" >   The
-</p><!--l. 358--><p class="indent" >   Eq. <a 
+</p><!--l. 357--><p class="indent" >   The
+</p><!--l. 359--><p class="indent" >   Eq. <a 
 href="#x1-1019r14">14<!--tex4ht:ref: eq:ortho_matrix_test --></a> is showing also that the gain of coeﬃcient is the same:
-<!--l. 359--><math 
+<!--l. 360--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mn>2</mn></math>. This
 fact can be also veriﬁed comparing the energy of the reconstruction provided by each
 coeﬃcient:
 </p>
    <table class="equation-star"><tr><td>
-<!--l. 362--><math 
+<!--l. 363--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
  <mtable  align="axis" style=""  
@@ -1467,7 +1475,7 @@ class="array"  columnalign="center"><mn>1</mn></mtd></mtr> <!--*\c@MaxMatrixCols
 class="MathClass-rel">=</mo> <msqrt><mrow><mn>2</mn></mrow></msqrt><mo 
 class="MathClass-punc">,</mo> </mtd></mtr><!--l--></mtable>
 </math></td></tr></table>
-<!--l. 394--><p class="indent" >   where <!--l. 394--><math 
+<!--l. 395--><p class="indent" >   where <!--l. 395--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 > <mfenced separators="" 
@@ -1475,42 +1483,42 @@ open="∥"  close="∥" ><mrow><mi
 >v</mi></mrow></mfenced></mrow><mrow 
 ><mn>2</mn></mrow></msub 
 ></math> denotes
-the L<!--l. 394--><math 
+the L<!--l. 395--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ></mrow><mrow 
 ><mn>2</mn></mrow></msub 
 ></math> norm of
-the vector <!--l. 394--><math 
+the vector <!--l. 395--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >v</mi></math>.
-</p><!--l. 396--><p class="indent" >   This information, the gain of each coeﬃcient, is relevant for the quantization
+</p><!--l. 397--><p class="indent" >   This information, the gain of each coeﬃcient, is relevant for the quantization
 stage, which ideally, should allow to compress each pair of coeﬃcients with the same
 rate/distortion slope. To achieve this
-</p><!--l. 400--><p class="indent" >   Because both coeﬃcients have the same gain, the number of bits assigned by the
+</p><!--l. 401--><p class="indent" >   Because both coeﬃcients have the same gain, the number of bits assigned by the
 quantizer should be the same
-</p><!--l. 402--><p class="indent" >   As it can be seen in this, the gain of each subband (and each coeﬃcient, because
+</p><!--l. 403--><p class="indent" >   As it can be seen in this, the gain of each subband (and each coeﬃcient, because
 we have only one coeﬃcient per subband)
                                                                   
 
                                                                   
-</p><!--l. 404--><p class="indent" >   although both “subbands”<span class="footnote-mark"><a 
+</p><!--l. 405--><p class="indent" >   although both “subbands”<span class="footnote-mark"><a 
 href="index7.html#fn6x0"><sup class="textsuperscript">6</sup></a></span><a 
  id="x1-1020f6"></a> 
-<!--l. 408--><math 
+<!--l. 409--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >w</mi><mrow ><mo 
 class="MathClass-open">[</mo><mrow><mn>0</mn></mrow><mo 
 class="MathClass-close">]</mo></mrow></math> and
-<!--l. 408--><math 
+<!--l. 409--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >w</mi><mrow ><mo 
 class="MathClass-open">[</mo><mrow><mn>1</mn></mrow><mo 
 class="MathClass-close">]</mo></mrow></math> have the
-same gain (<!--l. 409--><math 
+same gain (<!--l. 410--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mfrac><mrow 
 ><mn>1</mn></mrow>
@@ -1518,33 +1526,33 @@ display="inline" ><mfrac><mrow
 ><mn>2</mn></mrow></mfrac></math>,
 and therefore the same “importance” for a future <a 
 href="https://en.wikipedia.org/wiki/Quantization_(signal_processing)" >quantization</a> of
-<!--l. 412--><math 
+<!--l. 413--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >w</mi></math>,
 i.e., the same quantization step can be used for the
-<!--l. 412--><math 
+<!--l. 413--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >w</mi><mrow ><mo 
 class="MathClass-open">[</mo><mrow><mn>0</mn></mrow><mo 
 class="MathClass-close">]</mo></mrow></math> and
-<!--l. 413--><math 
+<!--l. 414--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >w</mi><mrow ><mo 
 class="MathClass-open">[</mo><mrow><mn>1</mn></mrow><mo 
 class="MathClass-close">]</mo></mrow></math>
 coeﬃcients).
-</p><!--l. 415--><p class="indent" >   Notice that this procedure allows to ﬁnd the basis vectors
-(<!--l. 415--><math 
+</p><!--l. 416--><p class="indent" >   Notice that this procedure allows to ﬁnd the basis vectors
+(<!--l. 416--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
 >K</mi></mrow><mrow 
 ><mn>0</mn></mrow></msub 
 ></math> and
-<!--l. 416--><math 
+<!--l. 417--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -1555,11 +1563,11 @@ in our case) from an implementation of the inverse
 tranform.<span class="footnote-mark"><a 
 href="index8.html#fn7x0"><sup class="textsuperscript">7</sup></a></span><a 
  id="x1-1021f7"></a> 
-</p><!--l. 421--><p class="indent" >   The matrix <!--l. 421--><math 
+</p><!--l. 422--><p class="indent" >   The matrix <!--l. 422--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >K</mi></math> proposed
-is similar to the <!--l. 421--><math 
+is similar to the <!--l. 422--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mn>2</mn> <mo 
 class="MathClass-bin">×</mo> <mn>2</mn></math>
@@ -1567,7 +1575,7 @@ KLT <a
 href="http://fourier.eng.hmc.edu/e161/lectures/klt/node3.html" >(Karhunen-Loève Transform)</a>, the <a 
 href="http://wavelets.pybytes.com/wavelet/haar/" >Haar Transform</a> <span class="cite">[<a 
 href="#Xvetterli1995wavelets">6</a>]</span> and the
-<!--l. 425--><math 
+<!--l. 426--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mn>2</mn> <mo 
 class="MathClass-bin">×</mo> <mn>2</mn></math>
@@ -1587,7 +1595,7 @@ is:
                                                                   
 
                                                                   
-<!--l. 451--><p class="noindent" ></p><div class="minipage"><span 
+<!--l. 452--><p class="noindent" ></p><div class="minipage"><span 
 class="ecbx-1000">Algorithm</span>
 <span 
 class="ecbx-1000">1.1:</span> <span 
@@ -1618,11 +1626,11 @@ class="small-caps">a</span><span
 class="small-caps">t</span><span 
 class="small-caps">i</span><span 
 class="small-caps">o</span><span 
-class="small-caps">n</span></span>(<!--l. 436--><math 
+class="small-caps">n</span></span>(<!--l. 437--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 > </mi></math>)<br 
-class="newline" /> <!--l. 436--><math 
+class="newline" /> <!--l. 437--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" > <mtable  align="axis" style=""  
 equalrows="false" columnlines="none" equalcolumns="false" class="array"> <mtr><mtd 
@@ -1713,7 +1721,7 @@ class="MathClass-close">]</mo></mrow>     </mtd></mtr><!--@{}lr@{}--></mtable>  
  </mtr><!--@{\pcode@tab {1}}l@{}--></mtable>                                                                                                  </mtd>
 </mtr>  <mtr><mtd 
 class="array"  columnalign="left"><mspace width="4.3045pt"/>                                                                                                   </mtd></mtr><!--@{\pcode@tab {1}}lr@{}--></mtable></math></div>
-</p><!--l. 453--><p class="indent" >   where <!--l. 453--><math 
+</p><!--l. 454--><p class="indent" >   where <!--l. 454--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle 
 class="text"><mtext  >a</mtext></mstyle><mi 
@@ -1724,7 +1732,7 @@ class="text"><mtext  >a</mtext></mstyle><mi
 >R</mi></mstyle> <mo 
 class="MathClass-rel">=</mo> <mstyle 
 class="text"><mtext  >b</mtext></mstyle></math> is a shorter
-representation of the operation <!--l. 454--><math 
+representation of the operation <!--l. 455--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle 
 class="text"><mtext  >a</mtext></mstyle> <mo 
@@ -1740,7 +1748,7 @@ class="text"><mtext  >b</mtext></mstyle></math>.
 </p>
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
  id="x1-20002"></a>What you have to do?</h3>
-<!--l. 458--><p class="noindent" >
+<!--l. 459--><p class="noindent" >
      </p><ol  class="enumerate1" >
      <li 
   class="enumerate" id="x1-2002x1">In a module named stereo.py, inherit the class Quantization and create a
@@ -1757,21 +1765,21 @@ href="https://www.oreilly.com/library/view/python-for-data/9781449323592/ch04.ht
   class="enumerate" id="x1-2006x3">Has been the <a 
 href="https://en.wikipedia.org/wiki/Data_compression_ratio" >compression ratio</a> improved (on <a 
 href="https://en.wikipedia.org/wiki/Average" >average</a>)? How much?</li></ol>
-<!--l. 473--><p class="noindent" >
+<!--l. 474--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-30003"></a>Timming</h3>
-<!--l. 475--><p class="noindent" >You should reach this milestone at most one week.
+<!--l. 476--><p class="noindent" >You should reach this milestone at most one week.
                                                                   
 
                                                                   
-</p><!--l. 477--><p class="noindent" >
+</p><!--l. 478--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-40004"></a>Deliverables</h3>
-<!--l. 479--><p class="noindent" >The module stereo.py. Store it at the <a 
+<!--l. 480--><p class="noindent" >The module stereo.py. Store it at the <a 
 href="https://github.com/Tecnologias-multimedia/intercom" >root directory</a> of your InterCom’s repo.
-</p><!--l. 483--><p class="noindent" >
+</p><!--l. 484--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-50005"></a>Resources</h3>
