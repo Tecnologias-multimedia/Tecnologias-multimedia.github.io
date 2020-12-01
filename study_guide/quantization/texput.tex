@@ -31,10 +31,12 @@ source of distortion~\cite{taubman2002jpeg2000}.
   Quantization} (SQ) is the process of decreasing the number of levels
 that a signal can
 take~\cite{sayood2017introduction}. \href{https://en.wikipedia.org/wiki/Vector_quantization}{Vector
-  Quantization} (VQ) is similar, but is applied tuples of samples at
-the same time~\cite{vetterli2014foundations}. SQ is used when the
-samples are decorrelated (not in our case, now, this will be true in
-the future) because the
+Quantization} (VQ) is similar, but is applied tuples of samples at the
+same time~\cite{vetterli2014foundations}. SQ is used when the samples
+are decorrelated or althoug are correlated, the decorrelation will be
+exploited in
+the \href{https://en.wikipedia.org/wiki/Entropy_encoding}{entropy
+coding} stage (which is our case with DEFLATE), because the
 \href{https://en.wikipedia.org/wiki/Quantization_(signal_processing)#Rate%E2%80%93distortion_optimization}{coding
   efficiency} provided by VQ is marginal in this
 context~\cite{vetterli2014foundations}.
