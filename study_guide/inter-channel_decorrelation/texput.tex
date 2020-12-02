@@ -15,7 +15,7 @@ that we can find a more efficient representation. To perform this
 inter-channel
 \href{https://en.wikipedia.org/wiki/Decorrelation}{decorrelation}~\cite{thinkstats}
 we can use the \href{https://en.wikipedia.org/wiki/Linear_map}{linear
-  transform}
+  transform}~\cite{strang4linear}
 \begin{equation}
   w = Kx = \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}x,
   \label{eq:forward_transform_matrix_form}
@@ -43,16 +43,16 @@ this particular transform, the decomposition has two
 and $w_1$, and each subband has only one
 \href{https://web.stanford.edu/class/ee398a/handouts/lectures/07-TransformCoding.pdf}{coefficient}.
 
-The matrix $K$ proposed corresponds to the
+The proposed matrix $K$ corresponds to the transform used in
 \href{https://en.wikipedia.org/wiki/Joint_encoding#M/S_stereo_coding}{Mid/Side
-  (M/S) stereo coding}~\cite{bosi2003intro}, which is similar to the
-$2\times 2$ KLT
+  (M/S) stereo coding}~\cite{bosi2003intro} (MST) , which is similar
+to the $2\times 2$ KLT
 \href{http://fourier.eng.hmc.edu/e161/lectures/klt/node3.html}{(Karhunen-Lo\`eve
   Transform)}, the
 \href{http://wavelets.pybytes.com/wavelet/haar/}{Haar
   Transform}~\cite{vetterli1995wavelets} and the $2\times 2$
 \href{https://en.wikipedia.org/wiki/Hadamard_transform}{Discrete
-  Walsh-Hadamard Transform}~\cite{sayood2017introduction}).
+  Walsh-Hadamard Transform}~\cite{sayood2017introduction}.
 
 In general (for all the linear transforms),
 Eqs.~\ref{eq:forward_transform_matrix_form} and
@@ -162,7 +162,7 @@ case $K_0=\begin{bmatrix}1 & 1\end{bmatrix}$~ and $K_1=\begin{bmatrix}
 which means that $K_0$ and $K_1$ are linearly independent\footnote{We
 cannot derive one from the other using the operations that define a
 vector space.}, and therefore they can be a part a basis
-(set)~\cite{strang4linear}. The basis as also a direct interpretation
+(set)~\cite{strang4linear}. The basis has also a direct interpretation
 in terms of Signal Processing: $K_0$ is a
 \href{https://en.wikipedia.org/wiki/Low-pass_filter}{low-pass filter},
 $K_1$ is a
@@ -213,14 +213,14 @@ In our case, it also holds that
 \end{equation}
 that implies that $K$ is not
 \href{https://en.wikipedia.org/wiki/Orthonormality}{orthonormal},
-i.e., it is not
+i.e., the analysis transform is not
 \href{https://en.wikipedia.org/wiki/Energy_(signal_processing)}{energy}
 preserving~\cite{sayood2017introduction}. Another way of saying this
 is that the \href{https://en.wikipedia.org/wiki/Parseval%27s_theorem}{Parseval's theorem}
   is not satisfied because
 \begin{equation}
   \sum_i {w_i}^2 =
-  \left[(x_0+x_1)\right]^2 + \left[(x_0-x_1)\right]^2 =
+  (x_0+x_1)^2 + (x_0-x_1)^2 =
   (x_0^2+2x_0x_1+x_1^2) + (x_0^2-2x_0x_1+x_1^2) =
   2(x_0^2+x_1^2) =
   2\sum_i {x_i}^2.
@@ -230,13 +230,12 @@ is that the \href{https://en.wikipedia.org/wiki/Parseval%27s_theorem}{Parseval's
 The factor $2$ in the Eq.~\ref{eq:No_Parseval} is indicating that the
 analysis-synthesis transform chain defined by $K$ and $K^{-1}$ has a
 \href{https://en.wikipedia.org/wiki/Gain_(electronics)}{gain} of $2$
-(the output of the inverse transform will be equal to the input to the
-forward transform multiplied by $2$, which physically means that we
-are \href{https://en.wikipedia.org/wiki/Amplifier}{amplifying} the
+(the output of the synthesis transform will be equal to the input to
+the analysis transform multiplied by $2$, which physically means that
+we are \href{https://en.wikipedia.org/wiki/Amplifier}{amplifying} the
 audio signal by a factor of $2$). To avoid this, as the
 Eq.~\ref{eq:inverse_transform_matrix_form} indicates, we must divide
-each subband ($w_0$ and $w_1$) by $2$ after computing the analysis
-transform.
+each subband ($w_0$ and $w_1$) by $2$ after aplying $K^{-1}$ to $w$.
 
 Finally, because the gain of each subband can\footnote{We could use
 quantization steps $\Delta_1$ and $\Delta_2$ inversely proportional to
@@ -362,7 +361,7 @@ per subband) with the same average slope.
   Quantization and create a class named Stereo\_decorrelation.
 \item Override the methods pack() and unpack(). In pack() perform the
   analysis transform previously described, and in unpack() the
-  synthesiis transform. These procedures should be applied to all the
+  synthesis transform. These procedures should be applied to all the
   frames of a chunk using
   \href{https://www.oreilly.com/library/view/python-for-data/9781449323592/ch04.html}{vectorized
     operations}.
