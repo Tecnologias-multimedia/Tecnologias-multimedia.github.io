@@ -1,14 +1,29 @@
-\title{\href{https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN}{Tecnologías Multimedia} - Study Guide - Milestone 12: Temporal decorrelation in audio signals
+\title{\href{https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN}{Tecnologías Multimedia} - Study Guide - Milestone 12: Temporal decorrelation in audio signals}
 
 \maketitle
 
 \section{Description}
 
-After removing the stereo (spatial) redundancy, the next decorrelating
-step is to remove the temporal redundancy inside of each
-subband\footnote{Notice that, beacuse the MST is lineal, the temporal
-redundancy can be exploited after or before removing the spatial
-redundancy}.
+After removing the spatial (stereo) redundancy, the next natural step
+is the removal of the temporal redundancy that can be found inside of
+each subband\footnote{Notice that, beacuse the MST and the used
+transform in this milestone are lineal, the temporal redundancy can be
+exploited before or after removing the spatial redundancy}. As it can
+be seen in this notebook, most audio signals show *patterns* of
+samples that tends to repeat themselfs, especially locally.
+
+For removing the temporal redundancy we will use the Discrete Wavelet
+Transform (DWT). The DWT has been selected because it is
+\href{https://en.wikipedia.org/wiki/Discrete_wavelet_transform#Time_complexity}{fast
+  ($O(N)$)}. and it is able to represent efficienty
+\href{https://en.wikipedia.org/wiki/Transient_(oscillation)}{transient}
+signals. Moreover, although we are not going to profit from the
+following characteristic (for now), one of the most interesting
+features of the DWT is that it can used to find easely a
+\href{https://en.wikipedia.org/wiki/Multiresolution_analysis}{multiresolution
+  representation} of the signal.
+
+the autocorrelation of a signal can show how 
 
 Transform Coding (TC) is a basic signal decorrelating tool, used in
 most multimedia (audio, image and vídeo) compression systems. The main
@@ -20,6 +35,7 @@ able to provide \href{}{multiresolution} representations. The
 Figure~\ref{fig:transform_coding} shows the stages that are tipycally
 involved in a transform-based signal compression system.
 
+\begin{comment}
 \begin{figure}
   \begin{center}
 \begin{verbatim}
@@ -49,6 +65,7 @@ samples   coefficients
     representation of the quantized coefficients.}
   \label{fig:transform_coding}
 \end{figure}
+\end{comment}
 
 There exist docens of suitable transform used in TC. They are
 characterized by the
