@@ -295,7 +295,9 @@ Next, we compute the L$_2$ norm of the basis functions as
 
 resulting that both subbands $w_1$ and $w_2$ have the same gain
 ($\sqrt{2}$). This result tell us that both subbands should use the
-same quantization step ($\Delta_0=\Delta_1$). Unfortunately, this
+same quantization step ($\Delta_0=\Delta_1$).
+\begin{comment}
+Unfortunately, this
 estatement is only true if the
 \href{https://en.wikipedia.org/wiki/Entropy_encoding}{entropy coding}
 stage generates the same number of bits for both subbands, something
@@ -344,6 +346,7 @@ slope of the complete RD curve by using only 2 RD points. Using this
 information, we will try to use, for the current chunk, a pair of
 $\Delta_i$ quantization steps that produce two RD curves (one curve
 per subband) with the same average slope.
+\end{comment}
 
 \section{What you have to do?}
 
