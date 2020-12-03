@@ -6,36 +6,32 @@
 
 After removing the spatial (stereo) redundancy, the next natural step
 is the removal of the temporal redundancy that can be found inside of
-each subband\footnote{Notice that, beacuse the MST and the used
-transform in this milestone are lineal, the temporal redundancy can be
-exploited before or after removing the spatial redundancy}. As it can
-be seen in this notebook, most audio signals show *patterns* of
-samples that tends to repeat themselfs, especially locally.
+each subband\footnote{Notice that, beacuse the MST and the DWT used
+transform in this milestone are both lineal transforms, the order in
+which the transforms are applied is irrelevant}. As it can be seen in
+this notebook, most audio signals show *patterns* of samples that
+tends to repeat, especially locally.
 
 For removing the temporal redundancy we will use the Discrete Wavelet
-Transform (DWT). The DWT has been selected because it is
+Transform (DWT). DWT has been selected because it is
 \href{https://en.wikipedia.org/wiki/Discrete_wavelet_transform#Time_complexity}{fast
   ($O(N)$)}. and it is able to represent efficienty
 \href{https://en.wikipedia.org/wiki/Transient_(oscillation)}{transient}
-signals. Moreover, although we are not going to profit from the
-following characteristic (for now), one of the most interesting
-features of the DWT is that it can used to find easely a
+signals, which can happen frequencly in audio. Moreover, although we
+are not going to take advantage of the following characteristic (for
+now), one of the most interesting features of the DWT is that it can
+used to find easely a
 \href{https://en.wikipedia.org/wiki/Multiresolution_analysis}{multiresolution
   representation} of the signal.
 
 the autocorrelation of a signal can show how 
 
-Transform Coding (TC) is a basic signal decorrelating tool, used in
-most multimedia (audio, image and vídeo) compression systems. The main
-reasons for this are: (1) a good \href{}{coding
-  gain}~\cite{sayood2017introduction}, (2) a reasonable
-\href{}{computational complexity} (usually equal or smaller than
-$O(N\log_2N)$, (3) \href{}{in-place} computation, and (4) that are
-able to provide \href{}{multiresolution} representations. The
-Figure~\ref{fig:transform_coding} shows the stages that are tipycally
-involved in a transform-based signal compression system.
 
 \begin{comment}
+
+  The Figure~\ref{fig:transform_coding} shows the stages that are
+  tipycally involved in a transform-based signal compression system.
+
 \begin{figure}
   \begin{center}
 \begin{verbatim}
