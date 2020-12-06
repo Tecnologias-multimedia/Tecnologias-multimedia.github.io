@@ -4,13 +4,66 @@
 
 \section{Description}
 
-After removing the spatial (stereo) redundancy, the next natural step
-is the removal of the temporal redundancy that can be found inside of
-each subband\footnote{Notice that, beacuse the MST and the DWT used
-transform in this milestone are both lineal transforms, the order in
-which the transforms are applied is irrelevant}. As it can be seen in
-this notebook, most audio signals show *patterns* of samples that
-tends to repeat, especially locally.
+After removing the spatial (stereo) redundancy in the InterCom
+application, the next natural step in its development is the removal
+of the temporal redundancy that can be found inside of each
+subband\footnote{Notice that, https://en.wikipedia.org/wiki/Filter_bank#Perfect_reconstruction_filter_bankshttps://en.wikipedia.org/wiki/Filter_bank#Perfect_reconstruction_filter_bankshttps://en.wikipedia.org/wiki/Filter_bank#Perfect_reconstruction_filter_bankshttps://en.wikipedia.org/wiki/Filter_bank#Perfect_reconstruction_filter_banksbeacuse the MST and the DWT used
+  transform in this milestone are both lineal transforms, the order in
+  which the transforms are applied is irrelevant. For this reason, we
+  could also have used ``inside of each channel'', and then, remote
+  the spatial redundancy}. As it can be seen in this notebook, most
+audio signals show *patterns* of samples that tends to repeat,
+especially locally. Another clear source of temporal redundancy is
+that the neighbor audio samples usually show similar amplitude values.
+
+There are several techniques that can be used for removing the
+temporal redundancy from a sequence of audio. Maybe, the most
+straightforward one is to use
+\href{https://en.wikipedia.org/wiki/Differential_pulse-code_modulation}{Differential
+  Pulse Code Modulation
+  (DPCM)~\cite{sayood2017introduction}}. However, there are more
+efficient decorrelation algorithms based on
+\href{https://en.wikipedia.org/wiki/Transform_coding}{transform
+  coding}, such the used in the previous milestone.
+
+Transform coding is based on the idea that we can decompose (we can
+generate a decomposition from) the input signal into a set of
+subbands, and if the used filters\footnote{Basis functions or vectors
+  in a more pure mathematical context.} are the adecuate for removing
+the temporal redundancy, we can achieve a high transform coding gain,
+accumulating most of the signal energy (information) in a small number
+of subbands. When this is true, a quantization process of the
+coefficients of the subbands will remove basically the least
+significant information, allowing\footnote{Notice that if we use, for
+  example, a dead-zone quantizer and most of the coefficients are
+  close to zero, the quantizer will generate a high number of zero
+  quantization indexes and therefore, a high number of dequantized
+  coefficients will be equal to zero.} better compression ratios than
+those in which we apply the same quantization process to the original
+samples.
+
+Let's suppose that our analysis transform matrix $K$ has only two
+(digital) filters with filter coefficients (or taps) $K_0$ and $K_1$
+(see the previous milestone), and that we apply them to the input
+signal $x$. In the context of
+\href{https://en.wikipedia.org/wiki/Sub-band_coding}{subband coding},
+$K$ is describing a 
+\href{https://en.wikipedia.org/wiki/Filter_bank}{Filter Bank (FB)} and we are descomposing $x$ into
+two subbands $w_0$ and $w_1$ (see the Figure~\ref{fig:PRFB}, and this
+\href{}{notebook}). Remember, however, that in the context of this
+milestone, $x$ is a sequence of MST coefficients that show some degree
+of temporal correlation, not a simple pair of samples (a frame).
+
+Supposing that (the taps) $K_0$ applied to $x$ removes basically
+high-frequency information and $K_1$ removes low-frequency
+information, and that the
+\href{https://en.wikipedia.org/wiki/Filter_(signal_processing)#The_transfer_function}{transfer
+  function} of both filters
+\href{https://en.wikipedia.org/wiki/Filter_bank#Perfect_reconstruction_filter_banks}{are
+  the inverse of each other}, 
+
+%\href{https://en.wikipedia.org/wiki/Filter_bank#Perfect_reconstruction_filter_banks}{Perfect
+%  Reconstruction Filter Bank (PRFB)} and we are descomposing $x$ into
 
 For removing the temporal redundancy we will use the Discrete Wavelet
 Transform (DWT). DWT has been selected because it is
