@@ -96,7 +96,8 @@ consider also that the accuracy of the humman perception of the sound
 depends on the frequency: (as it can be seen in this notebook) we are
 more sensitive to frequency variations when the frequency of the sound
 is low. This fact is related with the existence of
-\href{https://en.wikipedia.org/wiki/Bark_scale}{the bark scale}.
+\href{https://en.wikipedia.org/wiki/Bark_scale}{the bark scale} and
+\href{https://en.wikipedia.org/wiki/Critical_band}{critical bands}.
 
 % The bark scale and the DWT
 The bark scale divides the audible spectrum into 24 subband of (a
@@ -145,6 +146,17 @@ The DWT can be implemented in different ways:
   is wasting the calculus of half of the coefficients at each level of
   the cascade.
 \end{enumerate}
+
+# Example, the MST-based DWT As an example, let's implement a DWT
+based on the MST filters. Let's represent them as
+\begin{equation}
+  \begin{array}{rcl}
+  l^r & = & x^r_{2i} + x^r_{2i} \\
+  h^r & = & x^r_{2i} + x^r_{2i}.
+  \end{array}
+\end{equation}
+
+
 
 \begin{comment}
 
