@@ -81,7 +81,11 @@ filter, and that the
   Reconstruction Filter Bank (PRFB)}, and $x$ can be recoverd from a
 subsampled version (in this case
 \href{https://en.wikipedia.org/wiki/Downsampling_(signal_processing)}{decimating}
-by 2) of $w_0$ and $w_1$ (see the notebook).
+by 2) of $w_0$ and $w_1$ (see the notebook). Notice that this
+subsampling is possible because the
+\href{https://en.wikipedia.org/wiki/Aliasing}{aliasing} generated in
+the low-pass subband is compensated by the aliasing generated in the
+high-pass subband.
 
 % M-channels PRFB and the frequency resolution of the HAS
 Using the suitable filters, it is possible to build $M$-channels
@@ -140,15 +144,15 @@ The DWT can be implemented in different ways:
   than the based in vector-matrix arithmetic. And most importantly, we
   don't need to store $K$, but only the taps of the filters.
 \item Using
-  \href{https://en.wikipedia.org/wiki/Lifting_scheme}{lifting}, which
-  provides a speed-up factor of 2. DWTs implemented with lifting do
-  not need to downsample and upsample the subbands, an operation that
-  is wasting the calculus of half of the coefficients at each level of
-  the cascade.
+  \href{https://en.wikipedia.org/wiki/Lifting_scheme}{lifting}~\cite{2006.sweldens},
+  which provides a speed-up factor of 2. DWTs implemented with lifting
+  do not need to downsample and upsample the subbands, an operation
+  that is wasting the calculus of half of the coefficients at each
+  level of the cascade.
 \end{enumerate}
 
 % Using the MST filters for building a DWT
-In order to clarify the introduces concepts, let's build a DWT using
+In order to clarify the introduced concepts, let's build a DWT using
 the MST filters and lifting.
 
 \begin{enumerate}
@@ -194,7 +198,9 @@ the MST filters and lifting.
   \begin{equation*}
     | l^s_0 | h^s_0 | h^{s-1}_0 h^{s-1}_1 | h^{s-2}_0 h^{s-2}_1 h^{s-2}_2 h^{s-2}_3 | \cdots | h^1_0 h^1_1 \cdots h^1_{2^{n-1}-1} |,
   \end{equation*}
-  where it holds that
+  where\footnote{The coefficient $l^s_0$ is called the DC (Direct
+    Current) coefficient, and the rest of $h$ coefficients are called
+    AC (Alternating Current) coefficients.} it holds that
   \begin{equation}
     1+\sum_{j=1}^s 2^{j-1}=2^n.
   \end{equation}
@@ -236,9 +242,13 @@ known as the wavelet function and it is usually denoted by $\psi$, the
 response of the synthesis low-pass filter is denoted by $\tilde\phi$
 and the synthesis high-pass filter is represented by $\tilde\psi$.
 
-For the MST it holds that $\phi\bot\psi$, that
-$\tilde\phi\bot\tilde\psi$, that $\tilde\phi\bot\psi$, and that
-$\phi\bot\tilde\psi$. This is true for all orthogonal DWTs. For this reason, the same 
+For the MST it holds that $\phi\bot\psi$, that $\phi=\tilde\psi$ and
+that $\psi=\tilde\phi$. This is true for all orthogonal DWTs. Another
+important characteristic of orthogonal DWTs is that the filters cannot
+be symmetric.
+
+%The dilated and translated versions of the wavelet function are
+%orthogonal~\cite{sayood2017introduction}.
 
 The previous MST-based DWT is similar to other transforms such as the
 Haar transform, in which we are using a 1-order predictor for removing
@@ -255,6 +265,9 @@ where the factor 1/4 is used for preserving the
 energy~\cite{sweldens1997building}. This transform is known as the
 \href{https://en.wikipedia.org/wiki/Biorthogonal_wavelet}{biorthogonal}
 (2,2) of Cohen-Daubechies-Feauveau, and also as the linear transform.
+Biorthogonal filters can be \href{http://wavelets.pybytes.com/}{easely
+  recognized} because they are always symmetric and because the
+analysis filters are different to the synthesis filters.
 
 Again, the linear transform in invertible by simply reversing the
 steps:
@@ -303,117 +316,12 @@ samples   coefficients
 \end{figure}
 \end{comment}
 
-There exist docens of suitable transform used in TC. They are
-characterized by the
-\href{https://en.wikipedia.org/wiki/Orthogonality}{orthogonality}
-property, which basically means that the output coefficients are going
-to be decorrelated because the functions (or vectors, depending on the
-terminology) that describe the transform are
-\href{https://en.wikipedia.org/wiki/Orthogonal_functions}{orthogonal}
-and therefore, form a
-\href{https://en.wikipedia.org/wiki/Basis_(linear_algebra)}{basis
-  (set)} with which is possible to describe any signal in terms
-(usually as a linear combination) of the (basis) functions of such
-basis, i.e., are able to describe any signal in the vector space
-spanned by the basis, using an unique description (set of
-coefficients)~\cite{}.
 
-Wavelets and Wavelet Transforms
-% https://cnx.org/contents/EQurkhlI@6.9:9Qg8uP5e@5/Introduction-to-Wavelets
-% https://cnx.org/exports/110bab92-1948-4958-b1c7-8fc0926c392c@6.9.pdf/wavelets-and-wavelet-transforms-6.9.pdf
-
-Other major family of transform used in TC forms bi-orthogonal basis
-(sets). In this case,
 
 In this milestone we will use an orghogonal wavelet transform. This
 makes that the quantization of the coefficients can be uniform, i.e.,
 we can use the same quantization step for all the coefficients.
 
-In the transform described in the previous milestone, the concept of subband is degradated because we have only one coefficient per subband.
-
-The coefficient $w[0]$ is called the DC (Direct Current) coefficient, and the rest of coefficients are called AC (Alternating Current) coefficients.
-
-\href{https://en.wikipedia.org/wiki/Correlation_and_dependence}{Correlation}
-is a term used in statistics which refer to the interdependency
-between two \href{https://en.wikipedia.org/wiki/Random_variable}{random
-  variables}. It can be measured by the
-\href{https://www.mathsisfun.com/data/correlation.html}{correlation
-  coefficient}~\cite{thinkstats}.
-
-In the case of InterCom, the random variables are the two channels
-(left $L$ and right $R$) of the
-\href{https://en.wikipedia.org/wiki/Stereophonic_sound}{stereo
-  \href{https://en.wikipedia.org/wiki/Pulse-code_modulation}{PCM}
-  signal}~\cite{bosi2003intro}. In most cases, both channels are going
-to be \href{https://en.wikipedia.org/wiki/Binaural_recording}{highly
-  correlated} (especially if the microphone is mono), which means that
-we can represent one of them (for example, the $R$ channel) with
-respect to the other (the $L$ channel). From a mathematical point of
-view, this process can be seen as a
-\href{https://en.wikipedia.org/wiki/Decorrelation}{decorrelation}
-process. From a physical perspective, decorrelating implies energy
-accumulation in a few coefficients~\cite{sayood2017introduction}.
-
-To perform this inter-channel decorrelation, we can use an
-\href{https://en.wikipedia.org/wiki/Orthogonal_transformation}{orthogonal}\footnote{Orthogonality
-  of the transform is a important property because the correlation
-  between the coefficients (the output of the transform) is 0.}
-transform, that in the case of decorrelating a stereo signal is
-\begin{equation}
-  y = Kx = \frac{1}{2}\begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}x,
-\end{equation}
-where $x$ represents a frame (a tuple of L and R samples, $x[0]$ and
-$x[1]$), $K$ is the $2\times 2$ KLT
-\href{http://fourier.eng.hmc.edu/e161/lectures/klt/node3.html}{(Karhunen-Lo\`eve
-  Transform)} matrix multiplied by $1/\sqrt{2}$ (which is closely
-related to the \href{http://wavelets.pybytes.com/wavelet/haar/}{Haar
-  transform}~\cite{vetterli1995wavelets}), and $y$ represents the
-transform coefficients (in our case, a couple of coefficients $y[0]$
-with the \href{https://en.wikipedia.org/wiki/Arithmetic_mean}{mean}
-and $y[1]$ with the difference of the samples). Notice that this
-transform is not
-\href{https://en.wikipedia.org/wiki/Orthonormal_basis}{orthonormal}
-(energy preserving in the transform domain) because
-\begin{equation}
-  \sum y[i]^2 = \frac{1}{\sqrt{2}}\sum x[i]^2,
-\end{equation}
-although both subbands $y[0]$ and $y[1]$ have the same gain
-($\frac{1}{\sqrt{2}}$, and therefore the same ``importance'' for a
-future
-\href{https://en.wikipedia.org/wiki/Quantization_(signal_processing)}{quantization}
-of $y$). The described transform is similar to the so called
-\href{https://en.wikipedia.org/wiki/Joint_encoding#M/S_stereo_coding}{M/S
-  stereo coding}, but in our case, the división by 2 is carried on
-the forward transform, instead of the backward (inverse) transform.
-
-This transform can be implemented
-\href{https://en.wikipedia.org/wiki/In-place_algorithm}{\emph{in-place}}
-using the following algorithm:
-
-\begin{pseudocode}{Inter-channel\_decorrelation}{~}
-  \PROCEDURE{analyze}{\text{frame}}
-  \BEGIN
-    \text{frame}[0] -= \text{frame}[1] \\
-    \text{frame}[1] += (\text{frame}[0] / 2) \\
-    \text{frame}[0] /= 2
-  \END
-  \ENDPROCEDURE
-  \PROCEDURE{synthesize}{\text{frame}}
-  \BEGIN
-    \text{frame}[0] *= 2 \\
-    \text{frame}[1] -= (\text{frame}[0] / 2) \\
-    \text{frame}[0] += \text{frame}[1]
-  \END
-  \ENDPROCEDURE
-\end{pseudocode}
-
-where $\text{a}~\mathtt{OPER}= \text{b}$ is a shorter representation of the operation
-$\text{a} = \text{a}~\mathtt{OPER}~\text{b}$. Notice that this type of in-place computations
-are commonly used in the implementation of DWTs
-(\href{https://en.wikipedia.org/wiki/Discrete_wavelet_transform}{Dicrete
-  Wavelet Transform}s) using
-\href{https://cm-bell-labs.github.io/who/wim/papers/athome/athome.pdf}{the
-  Lifting Scheme}~\cite{2006.sweldens}.
 
 \section{What you have to do?}
 
