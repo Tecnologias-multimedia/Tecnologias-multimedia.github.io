@@ -147,17 +147,126 @@ The DWT can be implemented in different ways:
   the cascade.
 \end{enumerate}
 
-# Example, the MST-based DWT As an example, let's implement a DWT
-based on the MST filters. Let's represent them as
+% Using the MST filters for building a DWT
+In order to clarify the introduces concepts, let's build a DWT using
+the MST filters and lifting.
+
+\begin{enumerate}
+\item Lifting is based on the concept of dyadic
+  \href{https://en.wikipedia.org/wiki/Multiresolution_analysis}{multiresolution
+    analysis} of the signals. Using it, we can rewrite the MST filter
+  equations ($K_0$ and $K_1$) as
+  \begin{equation}
+    \begin{array}{rcl}
+      l^1_i & = & x_{2i} + x_{2i+1} \\
+      h^1_i & = & x_{2i+1} - x_{2i},
+    \end{array}
+    \label{eq:1dwt}
+  \end{equation}
+  where a subband $z^s=\{z_i^s|0\le i\le 2^{n-r}\}$, $2^n=N$ is the
+  number of samples in $x$, and by definition, $l^0=x$, the original
+  resolution level of the signal. The subbands $l^1$ and $h^1$
+  computed by Eq.~\ref{rq:1dwt} are the same than the decimated
+  subbands computed by a 1-levels PRFB (based on that filters), and we
+  say, therefore, that Eq.~\ref{rq:1dwt} computes the 1-levels DWT.
+
+  We define the 2-levels DWT as
+  \begin{equation}
+    \begin{array}{rcl}
+      l^2_i & = & l^1_{2i} + l^1_{2i+1} \\
+      h^2_i & = & l^1_{2i+1} - l^1_{2i},
+    \end{array}
+    \label{eq:2dwt}
+  \end{equation}
+  that, as we can see, uses as input the output of Eq.~\ref{rq:1dwt}.
+
+  In general, for a $s$-levels DWT, we get
+    \begin{equation}
+    \begin{array}{rcl}
+      l^s_i & = & l^{s-1}_{2i} + l^{s-1}_{2i+1} \\
+      h^s_i & = & l^{s-1}_{2i+1} - l^{s-1}_{2i}.
+    \end{array}
+    \label{eq:2dwt}
+  \end{equation}
+
+  The $s$-levels DWT splits the signal spectrum in $s$ subbands. If
+  $s=n$, we have the spectrum partition
+  \begin{equation*}
+    | l^s_0 | h^s_0 | h^{s-1}_0 h^{s-1}_1 | h^{s-2}_0 h^{s-2}_1 h^{s-2}_2 h^{s-2}_3 | \cdots | h^1_0 h^1_1 \cdots h^1_{2^{n-1}-1} |,
+  \end{equation*}
+  where it holds that
+  \begin{equation}
+    1+\sum_{j=1}^s 2^{j-1}=2^n.
+  \end{equation}
+
+\item Perform a number of lifting steps, each one with 2 (sub)steps:
+  \begin{enumerate}
+  \item Predict step: compute the $h$ subbands as a prediction error,
+    that should be minimized, between the even samples (the values to
+    predict) and the odd samples (the values used to predict). For the
+    MST filters, we have that
+    \begin{equation}
+      h^s_i = l^{s-1}_{2i+1} - l^{s-1}_{2i}.
+    \end{equation}
+    
+  \item Update step: compute the $l$ subbands considering (only) the even
+    samples and the prediction errors. For the MST, we have
+    \begin{equation}
+      l^s_i = 2l^{s-1}_{2i} + h^s_i.
+    \end{equation}
+  \end{enumerate}
+\end{enumerate}
+
+Notice that these steps are invertible:
 \begin{equation}
   \begin{array}{rcl}
-  l^r & = & x^r_{2i} + x^r_{2i} \\
-  h^r & = & x^r_{2i} + x^r_{2i}.
+    l^{s-1}_{2i} & = & \frac{1}{2}(l^s_i - h^s_i)\\
+    l^{s-1}_{2i+1} & = & l^{s-1}_{2i} + h^s_i.
   \end{array}
 \end{equation}
 
+In the context of the wavelet theory, the response of the analysis
+low-pass filter to the
+\href{https://en.wikipedia.org/?title=Unit_impulse&redirect=no}{unit
+  impulse}\footnote{The response of a filter to the unit impulse
+  characterize the filter because the output of the filter is the set
+  of taps of the filter.} is known as the scaling function and is
+usually denoted by $\phi$, the response of the analysis high-pass is
+known as the wavelet function and it is usually denoted by $\psi$, the
+response of the synthesis low-pass filter is denoted by $\tilde\phi$
+and the synthesis high-pass filter is represented by $\tilde\psi$.
 
+For the MST it holds that $\phi\bot\psi$, that
+$\tilde\phi\bot\tilde\psi$, that $\tilde\phi\bot\psi$, and that
+$\phi\bot\tilde\psi$. This is true for all orthogonal DWTs. For this reason, the same 
 
+The previous MST-based DWT is similar to other transforms such as the
+Haar transform, in which we are using a 1-order predictor for removing
+the temporal redundancy. Let's extend the lifting idea to a predictor
+of order two. For that, we define the predict step as
+\begin{equation}
+  h^s_i = l^{s-1}_{2i+1} - \frac{1}{2}(l^{s-1}_{2i} + l^{s-1}_{2i+2})
+\end{equation}
+and the update step as
+\begin{equation}
+  l^s_i = 2l^{s-1}_{2i} + \frac{1}{4}(h^s_{i-1} + h^s_i),
+\end{equation}
+where the factor 1/4 is used for preserving the
+energy~\cite{sweldens1997building}. This transform is known as the
+\href{https://en.wikipedia.org/wiki/Biorthogonal_wavelet}{biorthogonal}
+(2,2) of Cohen-Daubechies-Feauveau, and also as the linear transform.
+
+Again, the linear transform in invertible by simply reversing the
+steps:
+\begin{equation}
+  \begin{array}{rcl}
+    l^{s-1}_{2i} & = & l^s_i - \frac{1}{4}(h^s_{i-1} + h^s_i)\\
+    l^{s-1}_{2i+1} & = & h^s_i + \frac{1}{2}(l^{s-1}_{2i} + l^{s-1}_{2i+2}).
+  \end{array}
+\end{equation}
+
+The 
+  
 \begin{comment}
 
   The Figure~\ref{fig:transform_coding} shows the stages that are
