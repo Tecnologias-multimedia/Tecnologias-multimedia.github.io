@@ -56,11 +56,12 @@ The name that has been given to the previous process is
 previous milestone) represents the coefficients (or
 \href{https://en.wikipedia.org/wiki/Finite_impulse_response}{taps}) of
 a 2-channels analysis
-\href{https://en.wikipedia.org/wiki/Filter_bank}{Filter Bank (FB)},
-and the forward transform is in fact ``descomposing'' $x$ into two subbands
-$w_0$ and $w_1$ (see the Figure~\ref{fig:PRFB}, and this
-\href{}{notebook}). On the other hand, the synthesis transform matrix
-$K^{-1}$ denotes the taps of a synthesis FB.
+\href{https://en.wikipedia.org/wiki/Filter_bank}{Filter Bank
+  (FB)}~\cite{vetterli1995wavelets}, and the forward transform is in
+fact ``descomposing'' $x$ into two subbands $w_0$ and $w_1$ (see the
+Figure~\ref{fig:PRFB}, and this \href{}{notebook}). On the other hand,
+the synthesis transform matrix $K^{-1}$ denotes the taps of a
+synthesis FB.
 
 % An intro to PRFBs
 Let's suppose now that the filters (represented by the taps of) $K_0$
@@ -144,11 +145,12 @@ The DWT can be implemented in different ways:
   than the based in vector-matrix arithmetic. And most importantly, we
   don't need to store $K$, but only the taps of the filters.
 \item Using
-  \href{https://en.wikipedia.org/wiki/Lifting_scheme}{lifting}~\cite{2006.sweldens},
-  which provides a speed-up factor of 2. DWTs implemented with lifting
-  do not need to downsample and upsample the subbands, an operation
-  that is wasting the calculus of half of the coefficients at each
-  level of the cascade.
+  \href{https://en.wikipedia.org/wiki/Lifting_scheme}{lifting}~\cite{sweldens1997building},
+  which provides a speed-up factor of 2 compared to the FB
+  implementation. DWTs implemented with lifting do not need to
+  downsample and upsample the subbands, an operation that is wasting
+  the calculus of half of the coefficients at each level of the
+  cascade.
 \end{enumerate}
 
 % Using the MST filters for building a DWT
@@ -172,7 +174,7 @@ the MST filters and lifting.
   resolution level of the signal. The subbands $l^1$ and $h^1$
   computed by Eq.~\ref{rq:1dwt} are the same than the decimated
   subbands computed by a 1-levels PRFB (based on that filters), and we
-  say, therefore, that Eq.~\ref{rq:1dwt} computes the 1-levels DWT.
+  say, therefore, that Eq.~\ref{eq:1dwt} computes the 1-levels DWT.
 
   We define the 2-levels DWT as
   \begin{equation}
@@ -182,7 +184,7 @@ the MST filters and lifting.
     \end{array}
     \label{eq:2dwt}
   \end{equation}
-  that, as we can see, uses as input the output of Eq.~\ref{rq:1dwt}.
+  that, as we can see, uses as input the output of Eq.~\ref{eq:1dwt}.
 
   In general, for a $s$-levels DWT, we get
     \begin{equation}
@@ -231,8 +233,8 @@ Notice that these steps are invertible:
   \end{array}
 \end{equation}
 
-In the context of the wavelet theory, the response of the analysis
-low-pass filter to the
+In the context of the wavelet theory~\cite{burrus2013wavelets}, the
+response of the analysis low-pass filter to the
 \href{https://en.wikipedia.org/?title=Unit_impulse&redirect=no}{unit
   impulse}\footnote{The response of a filter to the unit impulse
   characterize the filter because the output of the filter is the set
@@ -259,9 +261,9 @@ of order two. For that, we define the predict step as
 \end{equation}
 and the update step as
 \begin{equation}
-  l^s_i = 2l^{s-1}_{2i} + \frac{1}{4}(h^s_{i-1} + h^s_i),
+  l^s_i = l^{s-1}_{2i} + \frac{1}{4}(h^s_{i-1} + h^s_i),
 \end{equation}
-where the factor 1/4 is used for preserving the
+where the factor 1/4 is used to preserve the
 energy~\cite{sweldens1997building}. This transform is known as the
 \href{https://en.wikipedia.org/wiki/Biorthogonal_wavelet}{biorthogonal}
 (2,2) of Cohen-Daubechies-Feauveau, and also as the linear transform.
@@ -278,8 +280,57 @@ steps:
   \end{array}
 \end{equation}
 
-The 
+A final (and important) consideration about transform coding and
+quantization. Transform coding implies splitting the signal into
+chunks, and compute the transform of each chunk. When the coefficients
+are quantized, it is possible that large (and umpleasant) differences
+may appear between the border samples of the chunks (see this
+notebook). One simple solution is to use the last samples of the
+$i-1$-th chunk and the first samples of the $i+1$-chunk for computing
+the transform of the $i$-th chunk. The number of overlaped samples
+depends on the length of the filters and the number of levels of the
+DWT. This last parameter (the number of levels of the DWT) has also a
+high impact on the decorrelation process, but take into consideration
+that, depending on the signal, usually happens that it is not worth
+decomposing the signal into the maximum number subbands because the
+increments in the coding gain can be negligible beyond a number of
+levels.
   
+\section{What you have to do?}
+
+\begin{enumerate}
+\item In a module named temporal.py, inherit the class
+  Spatial\_decorrelation and create a class named Temporal\_decorrelation.
+\item Override the methods pack() and unpack(). In pack() perform a
+  DWT decomposition of each channel, and in unpack() perform the
+  inverse transform. Use a suitable\footnote{Take into consideration
+    the subband gains and the shape of the wavelet functions in your
+    wavelet selection.} wavelet from
+  \href{https://pywavelets.readthedocs.io/en/latest/}{PyWavelets}. Take
+  also into consideration that the signal should be processed using
+  overlaped chunks in order to minimize the discontinuities of the
+  signal at the chunk boundaries, when the DWT coefficients are
+  quantized.
+\item Has been the
+  \href{https://en.wikipedia.org/wiki/Data_compression_ratio}{compression
+    ratio} improved (on
+  \href{https://en.wikipedia.org/wiki/Average}{average})? How much?
+\end{enumerate}
+
+\section{Timming}
+
+This is the final milestone. Present your results in the exam time.
+
+\section{Deliverables}
+
+The module temporal.py. Store it at the
+\href{https://github.com/Tecnologias-multimedia/intercom}{root
+  directory} of your InterCom's repo.
+
+\section{Resources}
+
+\bibliography{maths,data-compression,DWT,audio-coding}
+
 \begin{comment}
 
   The Figure~\ref{fig:transform_coding} shows the stages that are
@@ -316,40 +367,3 @@ samples   coefficients
 \end{figure}
 \end{comment}
 
-
-
-In this milestone we will use an orghogonal wavelet transform. This
-makes that the quantization of the coefficients can be uniform, i.e.,
-we can use the same quantization step for all the coefficients.
-
-
-\section{What you have to do?}
-
-\begin{enumerate}
-\item In a module named stereo.py, inherit the class
-  Quantization and create a class named Stereo\_decorrelation.
-\item Override the methods pack() and unpack(). In
-  pack() perform the procedure analyze() previously
-  described, and in unpack() the
-  synthesize(). These procedures should be applied to
-  all the frames of a chunk using \href{https://www.oreilly.com/library/view/python-for-data/9781449323592/ch04.html}{vectorized
-    operations}.
-\item Has been the
-  \href{https://en.wikipedia.org/wiki/Data_compression_ratio}{compression
-    ratio} improved (on
-  \href{https://en.wikipedia.org/wiki/Average}{average})? How much?
-\end{enumerate}
-
-\section{Timming}
-
-You should reach this milestone at most one week.
-
-\section{Deliverables}
-
-The module stereo.py. Store it at the
-\href{https://github.com/Tecnologias-multimedia/intercom}{root
-  directory} of your InterCom's repo.
-
-\section{Resources}
-
-\bibliography{maths,data-compression,DWT,audio-coding}
