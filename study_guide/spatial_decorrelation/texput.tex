@@ -8,7 +8,7 @@ InterCom transmits a
 \href{https://en.wikipedia.org/wiki/Stereophonic_sound}{stereo} (two
 channels)
 \href{https://en.wikipedia.org/wiki/Pulse-code_modulation}{PCM
-  signals}. In most cases, the channels are
+  signal}. In most cases, the channels are
 \href{https://en.wikipedia.org/wiki/Binaural_recording}{highly
   correlated} (especially when the microphone is mono), which means
 that we can find a more efficient representation. To perform this
@@ -45,8 +45,8 @@ and $w_1$, and each subband has only one
 
 The proposed matrix $K$ corresponds to the transform used in
 \href{https://en.wikipedia.org/wiki/Joint_encoding#M/S_stereo_coding}{Mid/Side
-  (M/S) stereo coding}~\cite{bosi2003intro} (MST) , which is similar
-to the $2\times 2$ KLT
+  (M/S) stereo coding}~\cite{bosi2003intro} that we will call MST
+(Mid/Side Transform), which is similar to the $2\times 2$ KLT
 \href{http://fourier.eng.hmc.edu/e161/lectures/klt/node3.html}{(Karhunen-Lo\`eve
   Transform)}, the
 \href{http://wavelets.pybytes.com/wavelet/haar/}{Haar
@@ -78,7 +78,7 @@ The inverse (or synthesis) transform
   x = K^{-1}w
   \label{eq:inverse_transform}
 \end{equation}
-can be found from Eq. \ref{eq:forward_transform_matrix_form} where we
+can be found from Eq. \ref{eq:forward_transform_matrix_form}, where we
 get that
 \begin{equation}
   \begin{array}{rcl}
@@ -117,17 +117,17 @@ As can be seen (previously ignoring the $\frac{1}{2}$ scale factor)
 the inverse transform is the transpose of the forward transform. This
 is a characteristic of all
 \href{https://en.wikipedia.org/wiki/Orthogonal_transformation}{orthogonal
-  transforms}~\cite{sayood2017introduction}. For the transform that we
-are analyzing, it also holds that $K^{\text T}=K$ because $K$ is
+  transforms}~\cite{sayood2017introduction}. For the MST,
+specifically, it also holds that $K^{\text T}=K$ because $K$ is
 \href{https://en.wikipedia.org/wiki/Symmetric_matrix}{symmetric}.
 
 Orthogonality is important for compression applications because the
 \href{https://en.wikipedia.org/wiki/Correlation_and_dependence}{correlation}
 between subbands is 0, and therefore, the contributions of the
 subbands to the reconstruction of the original signal are
-independent\footnote{The
-  \href{https://en.wikipedia.org/wiki/Distortion}{distortion} measure
-  is such that the total distortion is the sum of the distortion
+independent\footnote{The total
+  \href{https://en.wikipedia.org/wiki/Distortion}{distortion}
+  distortion is the sum of the distortion
   contribution of each subband~\cite{sayood2017introduction}.}. Apart
 from checking that $K^{-1}=K^{\text T}$, $K$ is orthogonal if the
 \href{https://en.wikipedia.org/wiki/Inner_product_space}{inner
