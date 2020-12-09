@@ -741,8 +741,9 @@ is proportional to the similarity between the input signal
 <!--l. 190--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
->x</mi></math> and the taps
-of the ﬁlter <!--l. 191--><math 
+>x</mi></math> and the <a 
+href="https://en.wikipedia.org/wiki/Finite_impulse_response" >taps</a>
+of the ﬁlter <!--l. 193--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -752,7 +753,7 @@ display="inline" ><msub><mrow
 ></math>.
 These <a 
 href="https://cseweb.ucsd.edu/classes/fa17/cse166-a/lec13.pdf" >slides</a> can help you with this key idea.
-</p><!--l. 195--><p class="indent" >   Orthogonality is important in compression applications because the
+</p><!--l. 197--><p class="indent" >   Orthogonality is important in compression applications because the
 <a 
 href="https://en.wikipedia.org/wiki/Correlation_and_dependence" >correlation</a> between subbands is 0, and therefore, the contributions
 of the subbands to the reconstruction of the original signal are
@@ -768,9 +769,9 @@ preserving <span class="cite">[<a
 href="#Xsayood2017introduction">4</a>]</span> (or that the <a 
 href="https://en.wikipedia.org/wiki/Parseval%27s_theorem" >Parseval’s theorem</a> is satisﬁed, in both, the analysis and
 the synthesis transform.
-</p><!--l. 213--><p class="indent" >   The MST analysis is not orthonormal, because </p><table class="equation"><tr><td> <a 
+</p><!--l. 215--><p class="indent" >   The MST analysis is not orthonormal, because </p><table class="equation"><tr><td> <a 
  id="x1-1017r11"></a>
-<!--l. 214--><math 
+<!--l. 216--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
 <munder class="msub"><mrow 
@@ -903,8 +904,8 @@ class="MathClass-rel">=</mo> <mn>2</mn><munder class="msub"><mrow
 ><mo 
 class="MathClass-punc">.</mo>
 </math></td><td class="eq-no">(11)</td></tr></table>
-<!--l. 222--><p class="indent" >   For this reason, we must divide the synthesized samples by
-<!--l. 222--><math 
+<!--l. 224--><p class="indent" >   For this reason, we must divide the synthesized samples by
+<!--l. 224--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mn>2</mn></math>
 (see Eq. <a 
@@ -912,23 +913,23 @@ href="#x1-1008r8">8<!--tex4ht:ref: eq:inverse_transform_matrix_form --></a>). On
                                                                   
 
                                                                   
-<!--l. 224--><math 
+<!--l. 226--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mn>2</mn><mi 
 >x</mi></math> as the reconstructed
-signal instead of <!--l. 224--><math 
+signal instead of <!--l. 226--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >x</mi></math>.
-</p><!--l. 226--><p class="indent" >   Finally, let’s analyze the <a 
+</p><!--l. 228--><p class="indent" >   Finally, let’s analyze the <a 
 href="https://en.wikipedia.org/wiki/Filter_(signal_processing)" >gain</a> of each analysis ﬁlter of
-<!--l. 228--><math 
+<!--l. 230--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >K</mi></math>
 (remember that each ﬁlter produces a diﬀerent subband). The gains of the analysis
 ﬁlters are important because the contribution of the subbands to the reconstuction of
-<!--l. 230--><math 
+<!--l. 232--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >x</mi></math> is proportional
@@ -936,8 +937,8 @@ to the gains. Thus, if the ﬁlters had diﬀerent gains, the quantization steps
 this fact.<span class="footnote-mark"><a 
 href="index8.html#fn7x0"><sup class="textsuperscript">7</sup></a></span><a 
  id="x1-1018f7"></a> 
-</p><!--l. 239--><p class="indent" >   By deﬁnition, the gain of the subband
-<!--l. 240--><math 
+</p><!--l. 241--><p class="indent" >   By deﬁnition, the gain of the subband
+<!--l. 242--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -946,7 +947,7 @@ display="inline" ><msub><mrow
 >i</mi></mrow></msub 
 ></math> is the
 <a 
-href="https://en.wikipedia.org/wiki/Lp_space" >L<!--l. 241--><math 
+href="https://en.wikipedia.org/wiki/Lp_space" >L<!--l. 243--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ></mrow><mrow 
@@ -955,7 +956,7 @@ display="inline" ><msub><mrow
 norm</a><span class="footnote-mark"><a 
 href="index9.html#fn8x0"><sup class="textsuperscript">8</sup></a></span><a 
  id="x1-1019f8"></a>  of
-the ﬁlter <!--l. 256--><math 
+the ﬁlter <!--l. 258--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -970,7 +971,7 @@ Thus
                                                                   
 
                                                                   
-<!--l. 258--><math 
+<!--l. 260--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
  <mtable  align="axis" style=""  
@@ -1049,25 +1050,25 @@ class="MathClass-bin">−</mo><mn>1</mn></mtd></mtr> <!--*\c@MaxMatrixCols c--><
 class="MathClass-rel">=</mo> <msqrt><mrow><mn>2</mn></mrow></msqrt><mo 
 class="MathClass-punc">,</mo> </mtd></mtr><!--l--></mtable>
 </math></td><td class="eq-no">(12)</td></tr></table>
-<!--l. 265--><p class="indent" >   resulting that both subbands <!--l. 265--><math 
+<!--l. 267--><p class="indent" >   resulting that both subbands <!--l. 267--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
 >w</mi></mrow><mrow 
 ><mn>1</mn></mrow></msub 
 ></math>
-and <!--l. 265--><math 
+and <!--l. 267--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
 >w</mi></mrow><mrow 
 ><mn>2</mn></mrow></msub 
 ></math> have the
-same gain (<!--l. 266--><math 
+same gain (<!--l. 268--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msqrt><mrow><mn>2</mn></mrow></msqrt></math>).
 This result tell us that both subbands should use the same quantization step
-(<!--l. 267--><math 
+(<!--l. 269--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -1081,17 +1082,17 @@ class="MathClass-rel">=</mo> <msub><mrow
 ></math>). See
 the <a 
 href="https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/stereo_transforms_RD.ipynb" >notebook</a>.
-</p><!--l. 270--><p class="indent" >   Unfortunately, most of the transform are not implemented using
+</p><!--l. 272--><p class="indent" >   Unfortunately, most of the transform are not implemented using
 matrix-vector operations, but using <a 
 href="https://en.wikipedia.org/wiki/Fast_Fourier_transform" >faster algorithms</a> based on a lattice of
 <a 
 href="https://en.wikipedia.org/wiki/Butterfly_diagram" >computational buﬀerﬂies</a> or ﬁlter <a 
 href="https://en.wikipedia.org/wiki/Filter_(signal_processing)" >convolutions</a> (and therefore, we don’t know
-<!--l. 277--><math 
+<!--l. 279--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >K</mi></math>). In general, we
-can determine <!--l. 277--><math 
+can determine <!--l. 279--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -1100,7 +1101,7 @@ display="inline" ><msub><mrow
 >i</mi></mrow></msub 
 ></math>
 simply by computing the inverse transform of the decomposition
-<!--l. 279--><math 
+<!--l. 281--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msup><mrow 
 > <mfenced separators="" 
@@ -1118,14 +1119,14 @@ class="array"  columnalign="center"> <mn>0</mn> </mtd></mtr> <!--*\c@MaxMatrixCo
 ><mstyle 
 class="text"><mtext  >T</mtext></mstyle></mrow></msup 
 ></math>, where the
-<!--l. 280--><math 
+<!--l. 282--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mn>1</mn></math> value is in the position
-<!--l. 281--><math 
+<!--l. 283--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >i</mi></math> of the subband
-<!--l. 281--><math 
+<!--l. 283--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -1139,7 +1140,7 @@ In our example, we get that
 </p>
    <table class="equation"><tr><td> <a 
  id="x1-1022r13"></a>
-<!--l. 287--><math 
+<!--l. 289--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
  <mtable  align="axis" style=""  
@@ -1198,7 +1199,7 @@ class="MathClass-punc">.</mo> </mtd></mtr><!--l--></mtable>
                                                                   
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
  id="x1-20002"></a>What you have to do?</h3>
-<!--l. 373--><p class="noindent" >
+<!--l. 375--><p class="noindent" >
      </p><ol  class="enumerate1" >
      <li 
   class="enumerate" id="x1-2002x1">In a module named spatial.py, inherit the class Quantization and create a
@@ -1215,19 +1216,19 @@ href="https://www.oreilly.com/library/view/python-for-data/9781449323592/ch04.ht
   class="enumerate" id="x1-2006x3">Has the <a 
 href="https://en.wikipedia.org/wiki/Data_compression_ratio" >compression ratio</a> been improved (on <a 
 href="https://en.wikipedia.org/wiki/Average" >average</a>)? How much?</li></ol>
-<!--l. 388--><p class="noindent" >
+<!--l. 390--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-30003"></a>Timming</h3>
-<!--l. 390--><p class="noindent" >You should reach this milestone at most one week.
-</p><!--l. 392--><p class="noindent" >
+<!--l. 392--><p class="noindent" >You should reach this milestone at most one week.
+</p><!--l. 394--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-40004"></a>Deliverables</h3>
-<!--l. 394--><p class="noindent" >The module spatial.py. Store it at the <a 
+<!--l. 396--><p class="noindent" >The module spatial.py. Store it at the <a 
 href="https://github.com/Tecnologias-multimedia/intercom" >root directory</a> of your InterCom’s
 repo.
-</p><!--l. 398--><p class="noindent" >
+</p><!--l. 400--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-50005"></a>Resources</h3>

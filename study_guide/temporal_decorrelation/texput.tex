@@ -6,8 +6,8 @@
 
 % About the redundancy
 After removing the spatial (stereo) redundancy in the previous
-milestone, the next natural step in its development is the removal of
-the temporal redundancy that can be found inside of each
+milestone, the next natural step in the development of InterCom is the
+removal of the temporal redundancy that can be found inside of each
 subband\footnote{Notice that, beacuse the MST and the transform used
 in this milestone are both lineal, the order in which the transforms
 are applied is irrelevant. For this reason, we could also have used
@@ -20,42 +20,33 @@ similar amplitude values.
 
 % A decorrelating technique: DPCM
 There are several techniques that can be used for removing the
-temporal redundancy from a sequence of audio. One of the most
+temporal redundancy of a sequence of audio. One of the most
 straightforward is
 \href{https://en.wikipedia.org/wiki/Differential_pulse-code_modulation}{Differential
   Pulse Code Modulation
   (DPCM)~\cite{sayood2017introduction}}. However, there are more
 efficient decorrelation algorithms based on
 \href{https://en.wikipedia.org/wiki/Transform_coding}{transform
-  coding}, such the used in the previous milestone and in this one.
+  coding}, such as the used in the previous milestone and in this one.
 
 % Another decorrelating technique: transform coding
 Transform coding is based on the idea that we can decompose (we can
 generate a decomposition from) the input signal into a set of
-subbands, and if the used filters\footnote{In a more pure mathematical
-  context, the
-  \href{https://en.wikipedia.org/wiki/Digital_filter}{filters} are
-  representing the basis vectors of a lineal transform.} are the
-adecuate for removing the temporal redundancy, we can achieve a high
+subbands, and if the used filters are the adecuate for removing the
+temporal redundancy, we can achieve a high
 transform \href{https://en.wikipedia.org/wiki/Coding_gain}{coding
-  gain}, accumulating most of the signal energy (and presumably most
-of the information) in a small number of subbands. When this happens,
-the quantization of the coefficients of the subbands will remove
-basically the least significant information, allowing better
-compression ratios than those in which we apply the same quantization
-process to the original samples.\footnote{Notice that if we use, for
-  example, a dead-zone quantizer and most of the coefficients are
-  close to zero, the quantizer will generate a high number of zero
-  quantization indexes and therefore, a high number of dequantized
-  coefficients will be equal to zero.}
+gain}, accumulating most of the signal energy (and presumably most of
+the information) in a small number of subbands. When this happens, the
+quantization of the subbands will remove basically the least
+significant information, allowing better compression ratios than those
+in which we apply the same quantization process to the original
+samples.\footnote{Notice that is we dead-zone quantize a decomposition and most of the coefficients are close to zero, the information removed from $x$ will be those with a smaller energy.}
 
 % Relation between transform coding and subband coding
 The name that has been given to the previous process is
 \href{https://en.wikipedia.org/wiki/Sub-band_coding}{subband
   coding}. In this context, our analysis transform matrix $K$ (see the
-previous milestone) represents the coefficients (or
-\href{https://en.wikipedia.org/wiki/Finite_impulse_response}{taps}) of
-a 2-channels analysis
+previous milestone) represents the taps of a 2-channels analysis
 \href{https://en.wikipedia.org/wiki/Filter_bank}{Filter Bank
   (FB)}~\cite{vetterli1995wavelets}, and the forward transform is in
 fact ``descomposing'' $x$ into two subbands $w_0$ and $w_1$ (see the
