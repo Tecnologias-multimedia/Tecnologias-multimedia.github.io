@@ -33,14 +33,16 @@ efficient decorrelation algorithms based on
 Transform coding is based on the idea that we can decompose (we can
 generate a decomposition from) the input signal into a set of
 subbands, and if the used filters are the adecuate for removing the
-temporal redundancy, we can achieve a high
-transform \href{https://en.wikipedia.org/wiki/Coding_gain}{coding
-gain}, accumulating most of the signal energy (and presumably most of
-the information) in a small number of subbands. When this happens, the
+temporal redundancy, we can achieve a high transform
+\href{https://en.wikipedia.org/wiki/Coding_gain}{coding gain},
+accumulating most of the signal energy (and presumably most of the
+information) in a small number of subbands. When this happens, the
 quantization of the subbands will remove basically the least
 significant information, allowing better compression ratios than those
 in which we apply the same quantization process to the original
-samples.\footnote{Notice that is we dead-zone quantize a decomposition and most of the coefficients are close to zero, the information removed from $x$ will be those with a smaller energy.}
+samples.\footnote{Notice that is we dead-zone quantize a decomposition
+  and most of the coefficients are close to zero, the information
+  removed from $x$ will be those with a smaller energy.}
 
 % Relation between transform coding and subband coding
 The name that has been given to the previous process is
@@ -67,61 +69,71 @@ filter, and that the
   \href{https://en.wikipedia.org/?title=Unit_impulse&redirect=no}{unit
     impulse}.} of both filters
 \href{https://en.wikipedia.org/wiki/Filter_bank#Perfect_reconstruction_filter_banks}{are
-  the inverse of each other}. Under these assumptions, the complete
-(analysis/synthesis) system is called a (2-channels)
+  one the inverse of the other}. Under these assumptions, the complete
+(analysis/synthesis) transform is called a (2-channels)
 \href{https://en.wikipedia.org/wiki/Filter_bank#Perfect_reconstruction_filter_banks}{Perfect
-  Reconstruction Filter Bank (PRFB)}, and $x$ can be recoverd from a
-subsampled version (in this case
+  Reconstruction Filter Bank (PRFB)}, and $x$ can be recovered
+(perfectly) from a subsampled version (in this case
 \href{https://en.wikipedia.org/wiki/Downsampling_(signal_processing)}{decimating}
 by 2) of $w_0$ and $w_1$ (see the notebook). Notice that this
 subsampling is possible because the
-\href{https://en.wikipedia.org/wiki/Aliasing}{aliasing} generated in
-the low-pass subband is compensated by the aliasing generated in the
-high-pass subband.
-
- Notice that, in
-general, following this reasoning, a transform matrix of dimension $M$
-(remember that the matrix needs to be square in order to satisfy that
-$K^{-1}=K^{\text T}$) used as a a PRFB of
+\href{https://en.wikipedia.org/wiki/Aliasing}{aliasing}\footnote{Because
+  the filters are not ideal, the bandwidth of the filtered signals
+  $w_0$ and $w_1$ is bigger than half of the bandwidth of
+  $x$. Therefore, subsampling at a ratio of one of each two
+  coefficients, we are generating aliasing. See the
+  \href{https://en.wikipedia.org/wiki/Nyquist-Shannon_sampling_theorem}{sampling
+    theorem}.}  generated in the low-pass subband is compensated by
+the aliasing generated in the high-pass subband. To achieve this, the
+frequency response of $K_0$ must be equal to the mirror frequency
+response of $K_1$, and obviously, both filters must have the same
+bandwidth~\cite{sayood2017introduction}. When $K_1$ and $K_2$ are
+mirror filters they form a
+\href{https://en.wikipedia.org/wiki/Quadrature_mirror_filter}{Quadrature
+  Mirror Filters Bank (QMF)}.
 
 % M-channels PRFB and the frequency resolution of the HAS
 Using the suitable filters, it is possible to build $M$-channels
 PRFBs.\footnote{Notice that our matrix $K$ would have $M$ rows in this
-  case.} These filters can analyze (and synthesize) the signal $x$,
-decomposing it in
+  case, and also $M$ colums, to satisfy that $K^{-1}=K^{\text T}$ if
+  we are implementing an orthogonal transform.}  These filters can
+analyze (and synthesize) the signal $x$, decomposing it in
 (\href{https://en.wikipedia.org/wiki/Low-pass_filter#Ideal_and_real_filters}{almost
   for sure}) overlaping frequency subbands with different
 bandwidth. The question here is how many filters should be used and
-what bandwidth should they have. At this design point, we must
-consider also that the accuracy of the humman perception of the sound
-depends on the frequency: (as it can be seen in this notebook) we are
-more sensitive to frequency variations when the frequency of the sound
-is low. This fact is related with the existence of
-\href{https://en.wikipedia.org/wiki/Bark_scale}{the bark scale} and
-\href{https://en.wikipedia.org/wiki/Critical_band}{critical bands}.
+what \href{https://en.wikipedia.org/wiki/Band-pass_filter}{pass-band}
+width should they have. At this design point, we must also consider
+that the accuracy of the
+\href{https://en.wikipedia.org/wiki/Psychoacoustics}{humman perception
+  of the sound} depends on the frequency: (as it can be seen in this
+notebook) we are more sensitive to frequency variations when the
+frequency of the sound is low. This fact is related with the way in
+which the \href{https://en.wikipedia.org/wiki/Critical_band}{critical
+  bands} are distributed in
+\href{https://en.wikipedia.org/wiki/Bark_scale}{the bark scale}.
 
 % The bark scale and the DWT
-The bark scale divides the audible spectrum into 24 subband of (a
-priori) ``whimsical'' bandwidths. However, it's clear that a
-\href{https://en.wikipedia.org/wiki/Octave_band}{dyadic partition of
-  the spectrum} fits better than
+As it can be seen, the bark scale divides the audible spectrum into 24
+subband of (a priori) ``whimsical'' bandwidths. However, it's clear
+that a \href{https://en.wikipedia.org/wiki/Octave_band}{dyadic
+  partition of the spectrum} fits better than
 \href{https://en.wikipedia.org/wiki/Wavelet_transform#Principle}{a
-  lineal partition}. Considering this reason, from all the transforms
-designed to date, the most suitable one from a strict frequency if the
-Discrete Wavelet Transform (DWT).
+  lineal partition}. Considering this reason, from all the families of
+transforms designed to date, the most suitable one, from a frequency
+partitioning point of view, is the Discrete Wavelet Transform (DWT).
 
 % Features of the DWT
 The DWT has also other interesting features:
 \begin{enumerate}
 \item It is
   \href{https://en.wikipedia.org/wiki/Discrete_wavelet_transform#Time_complexity}{fast
-    ($O(N)$, where $N$ is the number of ``transformed'' elements)}.
-\item Can represent efficienty
+    ($O(N)$, where $N$ is the number of ``transformed'' samples)}.
+\item It can represent efficienty
   \href{https://en.wikipedia.org/wiki/Transient_(oscillation)}{transient}
-  signals, which can happen frequencly in audio.
+  signals, which can happen frequently in audio.
 \item Although we are not going to take advantage of the following
   characteristic (for now), one of the most interesting features of
-  the DWT is that it can used to find easely a
+  the DWT is that it can used to find a
   \href{https://en.wikipedia.org/wiki/Multiresolution_analysis}{multiresolution
     representation} of the signal.
 \end{enumerate}
@@ -129,20 +141,29 @@ The DWT has also other interesting features:
 % Implementation alternatives for the DWT
 The DWT can be implemented in different ways:
 \begin{enumerate}
-\item Defining $K$ and computing vector-matrix multiplications, which
-  requires a calculation time proportional to $O(N^2)$. However, the
-  main problem of this type of implementation is generated by the
-  memory that $K$ can require, that is proportional to $N^2$.
+\item Defining the transform matrix $K$ (see these
+  \href{https://cseweb.ucsd.edu/classes/fa17/cse166-a/lec13.pdf}{slides})
+  and computing vector-matrix multiplications, which requires a
+  calculation time proportional to $O(N^2)$. However, the main problem
+  of this type of implementation is generated by the amount of memory
+  that $K$ requires, that is proportional to $N^2$.
 \item
   \href{https://en.wikipedia.org/wiki/Discrete_wavelet_transform#Cascading_and_filter_banks}{Cascading
-    PRFBs}. Considering that the convolution is a $O(N\log_2N)$
-  operation, and that the number the number of levels in the cascade
-  is generally small (5 for example), this implementation is faster
-  than the based in vector-matrix arithmetic. And most importantly, we
-  don't need to store $K$, but only the taps of the filters.
+    PRFBs} (see the Figure~\ref{fig:}). Considering that the
+  \href{https://en.wikipedia.org/wiki/Convolution}{convolution} is a
+  $O(N\log_2N)$ operation (if it is
+  \href{https://en.wikipedia.org/wiki/Convolution_theorem}{implemented
+    in the frequency domain}), and that the number the number of
+  levels in the cascade is generally small (5 for example), this
+  implementation is faster than the based in vector-matrix
+  arithmetic. And most importantly, we don't need to store $K$, but
+  only the taps of the filters that in a software implementation of a
+  cascade can be as small as the number of different
+  filters.\footnote{Notice that in a typical cascade, the filters are
+    always the same.}
 \item Using
   \href{https://en.wikipedia.org/wiki/Lifting_scheme}{lifting}~\cite{sweldens1997building},
-  which provides a speed-up factor of 2 compared to the FB
+  which provides an extra speed-up factor of 2 compared to the FB
   implementation. DWTs implemented with lifting do not need to
   downsample and upsample the subbands, an operation that is wasting
   the calculus of half of the coefficients at each level of the
@@ -150,14 +171,16 @@ The DWT can be implemented in different ways:
 \end{enumerate}
 
 % Using the MST filters for building a DWT
-In order to clarify the introduced concepts, let's build a DWT using
+In order to clarify the previously introduced concepts, let's build a DWT using
 the MST filters and lifting.
 
 \begin{enumerate}
 \item Lifting is based on the concept of dyadic
   \href{https://en.wikipedia.org/wiki/Multiresolution_analysis}{multiresolution
-    analysis} of the signals. Using it, we can rewrite the MST filter
-  equations ($K_0$ and $K_1$) as
+    analysis} of the signals (and also with the so called
+  \href{https://en.wikipedia.org/wiki/Polyphase_matrix}{polyphase
+    representation} of signals). In order to do that, we can rewrite
+  the MST filter equations ($K_0$ and $K_1$) as
   \begin{equation}
     \begin{array}{rcl}
       l^1_i & = & x_{2i} + x_{2i+1} \\
@@ -165,14 +188,14 @@ the MST filters and lifting.
     \end{array}
     \label{eq:1dwt}
   \end{equation}
-  where a subband $z^s=\{z_i^s|0\le i\le 2^{n-r}\}$, $2^n=N$ is the
+  where the $s$-th subband $z^s=\{z_i^s|0\le i\le 2^{n-s}\}$, $2^n=N$ is the
   number of samples in $x$, and by definition, $l^0=x$, the original
   resolution level of the signal. The subbands $l^1$ and $h^1$
   computed by Eq.~\ref{rq:1dwt} are the same than the decimated
   subbands computed by a 1-levels PRFB (based on that filters), and we
   say, therefore, that Eq.~\ref{eq:1dwt} computes the 1-levels DWT.
 
-  We define the 2-levels DWT as
+  Based on the 1-levels DWT, we define the 2-levels DWT as
   \begin{equation}
     \begin{array}{rcl}
       l^2_i & = & l^1_{2i} + l^1_{2i+1} \\
@@ -191,7 +214,7 @@ the MST filters and lifting.
     \label{eq:2dwt}
   \end{equation}
 
-  The $s$-levels DWT splits the signal spectrum in $s$ subbands. If
+  The $s$-levels DWT splits the signal spectrum in $s+1$ subbands. If
   $s=n$, we have the spectrum partition
   \begin{equation*}
     | l^s_0 | h^s_0 | h^{s-1}_0 h^{s-1}_1 | h^{s-2}_0 h^{s-2}_1 h^{s-2}_2 h^{s-2}_3 | \cdots | h^1_0 h^1_1 \cdots h^1_{2^{n-1}-1} |,
@@ -203,7 +226,8 @@ the MST filters and lifting.
     1+\sum_{j=1}^s 2^{j-1}=2^n.
   \end{equation}
 
-\item Perform a number of lifting steps, each one with 2 (sub)steps:
+\item DWT transforms perform a number of lifting steps, each one with
+  2 (sub)steps:
   \begin{enumerate}
   \item Predict step: compute the $h$ subbands as a prediction error,
     that should be minimized, between the even samples (the values to
@@ -219,15 +243,17 @@ the MST filters and lifting.
       l^s_i = 2l^{s-1}_{2i} + h^s_i.
     \end{equation}
   \end{enumerate}
+
+  Notice that these steps are invertible:
+  \begin{equation}
+    \begin{array}{rcl}
+      l^{s-1}_{2i} & = & \frac{1}{2}(l^s_i - h^s_i)\\
+      l^{s-1}_{2i+1} & = & l^{s-1}_{2i} + h^s_i.
+    \end{array}
+  \end{equation}
+
 \end{enumerate}
 
-Notice that these steps are invertible:
-\begin{equation}
-  \begin{array}{rcl}
-    l^{s-1}_{2i} & = & \frac{1}{2}(l^s_i - h^s_i)\\
-    l^{s-1}_{2i+1} & = & l^{s-1}_{2i} + h^s_i.
-  \end{array}
-\end{equation}
 
 In the context of the wavelet theory~\cite{burrus2013wavelets}, the
 response of the analysis low-pass filter to the
@@ -243,15 +269,17 @@ and the synthesis high-pass filter is represented by $\tilde\psi$.
 For the MST it holds that $\phi\bot\psi$, that $\phi=\tilde\psi$ and
 that $\psi=\tilde\phi$. This is true for all orthogonal DWTs. Another
 important characteristic of orthogonal DWTs is that the filters cannot
-be symmetric.
+be symmetric.\footnote{The symmetry of the filters is important to
+  produce the same type of artifacts in the boundaries of the signal.}
 
 %The dilated and translated versions of the wavelet function are
 %orthogonal~\cite{sayood2017introduction}.
 
 The previous MST-based DWT is similar to other transforms such as the
-Haar transform, in which we are using a 1-order predictor for removing
-the temporal redundancy. Let's extend the lifting idea to a predictor
-of order two. For that, we define the predict step as
+\href{https://en.wikipedia.org/wiki/Haar_wavelet}{Haar transform}, in
+which we are using an 1-order predictor for removing the temporal
+redundancy. Let's extend the lifting idea to a prediction of order
+two. For that, we define the predict step as
 \begin{equation}
   h^s_i = l^{s-1}_{2i+1} - \frac{1}{2}(l^{s-1}_{2i} + l^{s-1}_{2i+2})
 \end{equation}
@@ -265,7 +293,8 @@ energy~\cite{sweldens1997building}. This transform is known as the
 (2,2) of Cohen-Daubechies-Feauveau, and also as the linear transform.
 Biorthogonal filters can be \href{http://wavelets.pybytes.com/}{easely
   recognized} because they are always symmetric and because the
-analysis filters are different to the synthesis filters.
+analysis filters are different to the synthesis filters
+($\phi\ne\tilde{\phi}$ and $\psi\ne\tilde{\psi}$).
 
 Again, the linear transform in invertible by simply reversing the
 steps:
@@ -278,19 +307,23 @@ steps:
 
 A final (and important) consideration about transform coding and
 quantization. Transform coding implies splitting the signal into
-chunks, and compute the transform of each chunk. When the coefficients
-are quantized, it is possible that large (and umpleasant) differences
-may appear between the border samples of the chunks (see this
-notebook). One simple solution is to use the last samples of the
-$i-1$-th chunk and the first samples of the $i+1$-chunk for computing
-the transform of the $i$-th chunk. The number of overlaped samples
-depends on the length of the filters and the number of levels of the
-DWT. This last parameter (the number of levels of the DWT) has also a
-high impact on the decorrelation process, but take into consideration
-that, depending on the signal, usually happens that it is not worth
-decomposing the signal into the maximum number subbands because the
-increments in the coding gain can be negligible beyond a number of
-levels.
+chunks, and computing the transform of each chunk. When the
+coefficients are quantized, it is possible that significative (and
+unpleasant) distortions may appear between the border samples of the
+chunks (see this notebook). One simple solution is to use the last
+samples of the $i-1$-th chunk and the first samples of the $i+1$-chunk
+for computing the transform of the $i$-th chunk (notice that this
+\href{https://en.wikipedia.org/wiki/Lapped_transform}{overlaping} does
+not imply to generate more transform coefficients, but only to avoid
+using an artificial
+\href{https://pywavelets.readthedocs.io/en/latest/ref/signal-extension-modes.html}{signal
+  extension}). The number of overlaped samples depends on the length
+of the filters and the number of levels $s$ of the DWT. This last
+parameter (the number of levels of the DWT) has also a high impact on
+the decorrelation process, but take into consideration that, depending
+on the signal, usually happens that it is not worth decomposing the
+signal into the maximum number subbands because the increments in the
+coding gain can be negligible beyond a number of levels.
   
 \section{What you have to do?}
 
