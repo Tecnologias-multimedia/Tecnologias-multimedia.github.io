@@ -51,16 +51,16 @@ previous milestone) represents the taps of a 2-channels analysis
   (FB)}~\cite{vetterli1995wavelets}, and the forward transform is in
 fact ``descomposing'' $x$ into two subbands $w_0$ and $w_1$ (see the
 Figure~\ref{fig:PRFB}, and this \href{}{notebook}). On the other hand,
-the synthesis transform matrix $K^{-1}$ denotes the taps of a
-synthesis FB.
+the synthesis transform matrix $K^{-1}$ denotes the taps of the
+corresponding synthesis FB that allows to recover $x$.
 
 % An intro to PRFBs
 Let's suppose now that the filters (represented by the taps of) $K_0$
-and $K_1$ are applied to the input signal $x$.\footnote{Remember,
-  however, that in the context of this milestone, $x$ is a sequence of
-  MST coefficients that show some degree of temporal correlation, not
-  a simple pair of samples (a frame).} Let's also suppose (as happens
-in the MST) that $K_0$ is a low-pass filter and $K_1$ is a high-pass
+and $K_1$ are applied to the input signal $x$ (now a sequence of $N$
+samples) using a
+\href{https://en.wikipedia.org/wiki/Kernel_(image_processing)}{convolution}
+(without splitting $x$ into blocks). Let's also suppose (as happens in
+the MST) that $K_0$ is a low-pass filter and $K_1$ is a high-pass
 filter, and that the
 \href{https://en.wikipedia.org/wiki/Filter_(signal_processing)#The_transfer_function}{transfer
   function}\footnote{The response of the filter to the
@@ -78,6 +78,11 @@ subsampling is possible because the
 \href{https://en.wikipedia.org/wiki/Aliasing}{aliasing} generated in
 the low-pass subband is compensated by the aliasing generated in the
 high-pass subband.
+
+ Notice that, in
+general, following this reasoning, a transform matrix of dimension $M$
+(remember that the matrix needs to be square in order to satisfy that
+$K^{-1}=K^{\text T}$) used as a a PRFB of
 
 % M-channels PRFB and the frequency resolution of the HAS
 Using the suitable filters, it is possible to build $M$-channels
