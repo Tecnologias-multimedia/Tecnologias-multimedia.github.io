@@ -76,10 +76,31 @@ those in which we apply the same quantization process to the original
 samples.<span class="footnote-mark"><a 
 href="index3.html#fn2x0"><sup class="textsuperscript">2</sup></a></span><a 
  id="x1-1002f2"></a> 
-</p><!--l. 48--><p class="indent" >   The name that has been given to the previous process is
+</p>
+   <hr class="figure" /><div class="figure" 
+>
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+<!--l. 49--><p class="noindent" ><div style="text-align:center;"> <img width=500 src="graphics/PRFB.svg" /> </div>  <a 
+ id="x1-1003r1"></a>
+<a 
+ id="x1-1004"></a>
+<br />                                                                  </p><div class="caption" 
+><span class="id">
+Figure 1: : </span><span  
+class="content">A 2-channels PRFB (Perfect Reconstruction Filter Bank).        </span></div><!--tex4ht:label?: x1-1003r1 -->
+                                                                  
+
+                                                                  
+   </div><hr class="endfigure" />
+<!--l. 55--><p class="indent" >   The name that has been given to the previous process is
 <a 
 href="https://en.wikipedia.org/wiki/Sub-band_coding" >subband coding</a>. In this context, our analysis transform matrix
-<!--l. 50--><math 
+<!--l. 57--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >K</mi></math>
@@ -87,27 +108,27 @@ display="inline" ><mi
 <a 
 href="https://en.wikipedia.org/wiki/Filter_bank" >Filter Bank (FB)</a> <span class="cite">[<a 
 href="#Xvetterli1995wavelets">4</a>]</span>, and the forward transform is in fact “descomposing”
-<!--l. 54--><math 
+<!--l. 61--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >x</mi></math> into two
-subbands <!--l. 54--><math 
+subbands <!--l. 61--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
 >w</mi></mrow><mrow 
 ><mn>0</mn></mrow></msub 
 ></math>
-and <!--l. 54--><math 
+and <!--l. 61--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
 >w</mi></mrow><mrow 
 ><mn>1</mn></mrow></msub 
-></math>
-(see the Figure <span 
-class="ecbx-1000">??</span>, and this notebook). On the other hand, the synthesis transform
-matrix <!--l. 56--><math 
+></math> (see
+the Figure <a 
+href="#x1-1003r1">1<!--tex4ht:ref: fig:PRFB --></a>, and this notebook). On the other hand, the synthesis transform matrix
+<!--l. 63--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msup><mrow 
 ><mi 
@@ -116,48 +137,48 @@ display="inline" ><msup><mrow
 class="MathClass-bin">−</mo><mn>1</mn></mrow></msup 
 ></math>
 denotes the taps of the corresponding synthesis FB that allows to recover
-<!--l. 57--><math 
+<!--l. 64--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >x</mi></math>.
-</p><!--l. 60--><p class="indent" >   Let’s suppose now that the ﬁlters (represented by the taps of)
-<!--l. 60--><math 
+</p><!--l. 67--><p class="indent" >   Let’s suppose now that the ﬁlters (represented by the taps of)
+<!--l. 67--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
 >K</mi></mrow><mrow 
 ><mn>0</mn></mrow></msub 
 ></math> and
-<!--l. 61--><math 
+<!--l. 68--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
 >K</mi></mrow><mrow 
 ><mn>1</mn></mrow></msub 
 ></math> are applied to
-the input signal <!--l. 61--><math 
+the input signal <!--l. 68--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >x</mi></math>
-(now a sequence of <!--l. 61--><math 
+(now a sequence of <!--l. 68--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >N</mi></math>
 samples) using a <a 
 href="https://en.wikipedia.org/wiki/Kernel_(image_processing)" >convolution</a> (without splitting
-<!--l. 64--><math 
+<!--l. 71--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >x</mi></math>
 into blocks). Let’s also suppose (as happens in the MST) that
-<!--l. 65--><math 
+<!--l. 72--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
 >K</mi></mrow><mrow 
 ><mn>0</mn></mrow></msub 
 ></math> is a low-pass ﬁlter and
-<!--l. 65--><math 
+<!--l. 72--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -167,25 +188,25 @@ display="inline" ><msub><mrow
 that the <a 
 href="https://en.wikipedia.org/wiki/Filter_(signal_processing)#The_transfer_function" >transfer function</a><span class="footnote-mark"><a 
 href="index4.html#fn3x0"><sup class="textsuperscript">3</sup></a></span><a 
- id="x1-1003f3"></a> 
+ id="x1-1005f3"></a> 
 of both ﬁlters <a 
 href="https://en.wikipedia.org/wiki/Filter_bank#Perfect_reconstruction_filter_banks" >are one the inverse of the other</a>. Under these assumptions, the complete
 (analysis/synthesis) transform is called a (2-channels) <a 
 href="https://en.wikipedia.org/wiki/Filter_bank#Perfect_reconstruction_filter_banks" >Perfect Reconstruction Filter Bank
-(PRFB)</a>, and <!--l. 75--><math 
+(PRFB)</a>, and <!--l. 82--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >x</mi></math>
 can be recovered (perfectly) from a subsampled version (in this case <a 
 href="https://en.wikipedia.org/wiki/Downsampling_(signal_processing)" >decimating</a> by 2)
-of <!--l. 78--><math 
+of <!--l. 85--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
 >w</mi></mrow><mrow 
 ><mn>0</mn></mrow></msub 
 ></math>
-and <!--l. 78--><math 
+and <!--l. 85--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -193,25 +214,58 @@ display="inline" ><msub><mrow
 ><mn>1</mn></mrow></msub 
 ></math>
 (see the notebook). Notice that this subsampling is possible because the
-                                                                  
-
-                                                                  
 <a 
 href="https://en.wikipedia.org/wiki/Aliasing" >aliasing</a><span class="footnote-mark"><a 
 href="index5.html#fn4x0"><sup class="textsuperscript">4</sup></a></span><a 
- id="x1-1004f4"></a> 
-generated in the low-pass subband is compensated by the aliasing generated in the
-high-pass subband.
-</p><!--l. 90--><p class="indent" >   Using the suitable ﬁlters, it is possible to build
-<!--l. 90--><math 
+ id="x1-1006f4"></a> 
+generated in the low-pass subband is compensated by the aliasing generated
+in the high-pass subband. To achieve this, the frequency response of
+<!--l. 95--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mi 
+>K</mi></mrow><mrow 
+><mn>0</mn></mrow></msub 
+></math>
+must be equal to the mirror frequency response of
+<!--l. 96--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mi 
+>K</mi></mrow><mrow 
+><mn>1</mn></mrow></msub 
+></math>,
+                                                                  
+
+                                                                  
+and obviously, both ﬁlters must have the same bandwidth <span class="cite">[<a 
+href="#Xsayood2017introduction">2</a>]</span>. When
+<!--l. 97--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mi 
+>K</mi></mrow><mrow 
+><mn>1</mn></mrow></msub 
+></math> and
+<!--l. 97--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mi 
+>K</mi></mrow><mrow 
+><mn>2</mn></mrow></msub 
+></math> are
+mirror ﬁlters they form a <a 
+href="https://en.wikipedia.org/wiki/Quadrature_mirror_filter" >Quadrature Mirror Filters Bank (QMF)</a>.
+</p><!--l. 103--><p class="indent" >   Using the suitable ﬁlters, it is possible to build
+<!--l. 103--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >M</mi></math>-channels
 PRFBs.<span class="footnote-mark"><a 
 href="index6.html#fn5x0"><sup class="textsuperscript">5</sup></a></span><a 
- id="x1-1005f5"></a> 
+ id="x1-1007f5"></a> 
 These ﬁlters can analyze (and synthesize) the signal
-<!--l. 94--><math 
+<!--l. 107--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >x</mi></math>,
@@ -228,7 +282,7 @@ related with the way in which the <a
 href="https://en.wikipedia.org/wiki/Critical_band" >critical bands</a> are distributed in <a 
 href="https://en.wikipedia.org/wiki/Bark_scale" >the bark
 scale</a>.
-</p><!--l. 110--><p class="indent" >   As it can be seen, the bark scale divides the audible spectrum into 24 subband of
+</p><!--l. 123--><p class="indent" >   As it can be seen, the bark scale divides the audible spectrum into 24 subband of
 (a priori) “whimsical” bandwidths. However, it’s clear that a <a 
 href="https://en.wikipedia.org/wiki/Octave_band" >dyadic partition of the
 spectrum</a> ﬁts better than <a 
@@ -236,46 +290,63 @@ href="https://en.wikipedia.org/wiki/Wavelet_transform#Principle" >a lineal parti
 the families of transforms designed to date, the most suitable one, from a
 frequency partitioning point of view, is the Discrete Wavelet Transform
 (DWT).
-</p><!--l. 120--><p class="indent" >   The DWT has also other interesting features:
+</p><!--l. 133--><p class="indent" >   The DWT has also other interesting features:
      </p><ol  class="enumerate1" >
      <li 
-  class="enumerate" id="x1-1007x1">It is <a 
-href="https://en.wikipedia.org/wiki/Discrete_wavelet_transform#Time_complexity" >fast (<!--l. 124--><math 
+  class="enumerate" id="x1-1009x1">It is <a 
+href="https://en.wikipedia.org/wiki/Discrete_wavelet_transform#Time_complexity" >fast (<!--l. 137--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >O</mi><mrow ><mo 
 class="MathClass-open">(</mo><mrow><mi 
 >N</mi></mrow><mo 
 class="MathClass-close">)</mo></mrow></math>,
-     where <!--l. 124--><math 
+     where <!--l. 137--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >N</mi></math>
      is the number of “transformed” samples)</a>.
      </li>
      <li 
-  class="enumerate" id="x1-1009x2">It can represent eﬃcienty <a 
+  class="enumerate" id="x1-1011x2">It can represent eﬃcienty <a 
 href="https://en.wikipedia.org/wiki/Transient_(oscillation)" >transient</a> signals, which can happen frequently
      in audio.
      </li>
      <li 
-  class="enumerate" id="x1-1011x3">Although we are not going to take advantage of the following characteristic
-                                                                  
-
-                                                                  
+  class="enumerate" id="x1-1013x3">Although we are not going to take advantage of the following characteristic
      (for now), one of the most interesting features of the DWT is that it can
      used to ﬁnd a <a 
 href="https://en.wikipedia.org/wiki/Multiresolution_analysis" >multiresolution representation</a> of the signal.</li></ol>
-<!--l. 136--><p class="indent" >   The DWT can be implemented in diﬀerent ways:
+   <hr class="figure" /><div class="figure" 
+>
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+<!--l. 150--><p class="noindent" ><div style="text-align:center;"> <img width=1000 src="graphics/cascade.svg" /> </div>  <a 
+ id="x1-1014r2"></a>
+<a 
+ id="x1-1015"></a>
+<br />                                                                  </p><div class="caption" 
+><span class="id">
+Figure 2: : </span><span  
+class="content">A dyadic 2-levels cascade of PRFBs.                          </span></div><!--tex4ht:label?: x1-1014r1 -->
+                                                                  
+
+                                                                  
+   </div><hr class="endfigure" />
+<!--l. 156--><p class="indent" >   The DWT can be implemented in diﬀerent ways:
      </p><ol  class="enumerate1" >
      <li 
-  class="enumerate" id="x1-1013x1">Deﬁning the transform matrix <!--l. 138--><math 
+  class="enumerate" id="x1-1017x1">Deﬁning the transform matrix <!--l. 158--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >K</mi></math>
      (see these <a 
 href="https://cseweb.ucsd.edu/classes/fa17/cse166-a/lec13.pdf" >slides</a>) and computing vector-matrix multiplications, which requires
-     a calculation time proportional to <!--l. 141--><math 
+     a calculation time proportional to <!--l. 161--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >O</mi><mrow ><mo 
@@ -286,11 +357,11 @@ class="MathClass-open">(</mo><mrow><msup><mrow
 ></mrow><mo 
 class="MathClass-close">)</mo></mrow></math>.
      However, the main problem of this type of implementation is generated by
-     the amount of memory that <!--l. 143--><math 
+     the amount of memory that <!--l. 163--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >K</mi></math>
-     requires, that is proportional to <!--l. 143--><math 
+     requires, that is proportional to <!--l. 163--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msup><mrow 
 ><mi 
@@ -299,11 +370,11 @@ display="inline" ><msup><mrow
 ></math>.
      </li>
      <li 
-  class="enumerate" id="x1-1015x2"><a 
-href="https://en.wikipedia.org/wiki/Discrete_wavelet_transform#Cascading_and_filter_banks" >Cascading PRFBs</a> (see the Figure <span 
-class="ecbx-1000">??</span>). Considering that the <a 
+  class="enumerate" id="x1-1019x2"><a 
+href="https://en.wikipedia.org/wiki/Discrete_wavelet_transform#Cascading_and_filter_banks" >Cascading PRFBs</a> (see the Figure <a 
+href="#x1-1014r2">2<!--tex4ht:ref: fig:cascade --></a>). Considering that the <a 
 href="https://en.wikipedia.org/wiki/Convolution" >convolution</a> is
-     a <!--l. 148--><math 
+     a <!--l. 168--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >O</mi><mrow ><mo 
@@ -318,37 +389,39 @@ class="MathClass-close">)</mo></mrow></math>
 href="https://en.wikipedia.org/wiki/Convolution_theorem" >implemented in the frequency domain</a>), and that the
      number  the  number  of  levels  in  the  cascade  is  generally  small  (5  for
      example), this implementation is faster than the based in vector-matrix
-     arithmetic. And most importantly, we don’t need to store <!--l. 153--><math 
+     arithmetic. And most importantly, we don’t need to store <!--l. 173--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >K</mi></math>,
      but only the taps of the ﬁlters that in a software implementation of a
      cascade can be as small as the number of diﬀerent ﬁlters.<span class="footnote-mark"><a 
 href="index7.html#fn6x0"><sup class="textsuperscript">6</sup></a></span><a 
- id="x1-1016f6"></a> 
+ id="x1-1020f6"></a> 
      </li>
      <li 
-  class="enumerate" id="x1-1018x3">Using <a 
+  class="enumerate" id="x1-1022x3">Using <a 
 href="https://en.wikipedia.org/wiki/Lifting_scheme" >lifting</a> <span class="cite">[<a 
 href="#Xsweldens1997building">3</a>]</span>, which provides an extra speed-up factor of 2 compared
      to the FB implementation. DWTs implemented with lifting do not need
      to downsample and upsample the subbands, an operation that is wasting
      the calculus of half of the coeﬃcients at each level of the cascade.</li></ol>
-<!--l. 168--><p class="indent" >   In order to clarify the previously introduced concepts, let’s build a DWT using
+<!--l. 188--><p class="indent" >   In order to clarify the previously introduced concepts, let’s build a DWT using
 the MST ﬁlters and lifting.
      </p><ol  class="enumerate1" >
      <li 
-  class="enumerate" id="x1-1020x1">Lifting is based on the concept of dyadic <a 
-href="https://en.wikipedia.org/wiki/Multiresolution_analysis" >multiresolution analysis</a> of the
-     signals. In order to do that, we can rewrite the MST ﬁlter equations
-     (<!--l. 175--><math 
+  class="enumerate" id="x1-1024x1">Lifting is based on the concept of dyadic <a 
+href="https://en.wikipedia.org/wiki/Multiresolution_analysis" >multiresolution analysis</a> of
+     the signals (and also with the so called <a 
+href="https://en.wikipedia.org/wiki/Polyphase_matrix" >polyphase representation</a> of
+     signals). In order to do that, we can rewrite the MST ﬁlter equations
+     (<!--l. 197--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
 >K</mi></mrow><mrow 
 ><mn>0</mn></mrow></msub 
 ></math> and
-     <!--l. 175--><math 
+     <!--l. 197--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -356,11 +429,11 @@ display="inline" ><msub><mrow
 ><mn>1</mn></mrow></msub 
 ></math>)
      as <table class="equation"><tr><td> <a 
- id="x1-1021r1"></a>
+ id="x1-1025r1"></a>
                                                                   
 
                                                                   
-     <!--l. 176--><math 
+     <!--l. 198--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
  <mtable  align="axis" style=""  
@@ -412,11 +485,11 @@ class="MathClass-bin">−</mo> <msub><mrow
 ><mo 
 class="MathClass-punc">,</mo> </mtd></mtr><!--rcl--></mtable>
 </math></td><td class="eq-no">(1)</td></tr></table>
-     <!--l. 183--><p class="noindent" >where the <!--l. 183--><math 
+     <!--l. 205--><p class="noindent" >where the <!--l. 205--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >s</mi></math>-th
-     subband <!--l. 183--><math 
+     subband <!--l. 205--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msup><mrow 
 ><mi 
@@ -444,7 +517,7 @@ class="MathClass-bin">−</mo><mi
 >s</mi></mrow></msup 
 ></mrow><mo 
 class="MathClass-close">}</mo></mrow></math>,
-     <!--l. 183--><math 
+     <!--l. 205--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msup><mrow 
 ><mn>2</mn></mrow><mrow 
@@ -453,11 +526,11 @@ display="inline" ><msup><mrow
 > <mo 
 class="MathClass-rel">=</mo> <mi 
 >N</mi></math> is the number of
-     samples in <!--l. 184--><math 
+     samples in <!--l. 206--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >x</mi></math>, and
-     by deﬁnition, <!--l. 184--><math 
+     by deﬁnition, <!--l. 206--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msup><mrow 
 ><mi 
@@ -467,14 +540,14 @@ display="inline" ><msup><mrow
 class="MathClass-rel">=</mo> <mi 
 >x</mi></math>,
      the original resolution level of the signal. The subbands
-     <!--l. 185--><math 
+     <!--l. 207--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msup><mrow 
 ><mi 
 >l</mi></mrow><mrow 
 ><mn>1</mn></mrow></msup 
 ></math> and
-     <!--l. 185--><math 
+     <!--l. 207--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msup><mrow 
 ><mi 
@@ -484,11 +557,11 @@ display="inline" ><msup><mrow
      computed by Eq. <span 
 class="ecbx-1000">??</span> are the same than the decimated subbands computed by a
      1-levels PRFB (based on that ﬁlters), and we say, therefore, that Eq. <a 
-href="#x1-1021r1">1<!--tex4ht:ref: eq:1dwt --></a>
+href="#x1-1025r1">1<!--tex4ht:ref: eq:1dwt --></a>
      computes the 1-levels DWT.
-     </p><!--l. 190--><p class="noindent" >Based on the 1-levels DWT, we deﬁne the 2-levels DWT as </p><table class="equation"><tr><td> <a 
- id="x1-1022r2"></a>
-     <!--l. 191--><math 
+     </p><!--l. 212--><p class="noindent" >Based on the 1-levels DWT, we deﬁne the 2-levels DWT as </p><table class="equation"><tr><td> <a 
+ id="x1-1026r2"></a>
+     <!--l. 213--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
  <mtable  align="axis" style=""  
@@ -544,15 +617,15 @@ class="MathClass-bin">−</mo> <msubsup><mrow
 ><mo 
 class="MathClass-punc">,</mo> </mtd></mtr><!--rcl--></mtable>
 </math></td><td class="eq-no">(2)</td></tr></table>
-     <!--l. 198--><p class="noindent" >that, as we can see, uses as input the output of Eq. <a 
-href="#x1-1021r1">1<!--tex4ht:ref: eq:1dwt --></a>.
-     </p><!--l. 200--><p class="noindent" >In general, for a <!--l. 200--><math 
+     <!--l. 220--><p class="noindent" >that, as we can see, uses as input the output of Eq. <a 
+href="#x1-1025r1">1<!--tex4ht:ref: eq:1dwt --></a>.
+     </p><!--l. 222--><p class="noindent" >In general, for a <!--l. 222--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >s</mi></math>-levels
      DWT, we get </p><table class="equation"><tr><td> <a 
- id="x1-1023r3"></a>
-     <!--l. 201--><math 
+ id="x1-1027r3"></a>
+     <!--l. 223--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
  <mtable  align="axis" style=""  
@@ -621,23 +694,23 @@ class="MathClass-punc">.</mo> </mtd></mtr><!--rcl--></mtable>
                                                                   
 
                                                                   
-     <!--l. 209--><p class="noindent" >The <!--l. 209--><math 
+     <!--l. 231--><p class="noindent" >The <!--l. 231--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >s</mi></math>-levels DWT splits
-     the signal spectrum in <!--l. 209--><math 
+     the signal spectrum in <!--l. 231--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >s</mi> <mo 
 class="MathClass-bin">+</mo> <mn>1</mn></math>
-     subbands. If <!--l. 210--><math 
+     subbands. If <!--l. 232--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >s</mi> <mo 
 class="MathClass-rel">=</mo> <mi 
 >n</mi></math>,
      we have the spectrum partition </p><table class="equation-star"><tr><td>
-     <!--l. 211--><math 
+     <!--l. 233--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
           <mo 
@@ -737,12 +810,12 @@ class="MathClass-bin">−</mo><mn>1</mn></mrow><mrow
 class="MathClass-rel">|</mo><mo 
 class="MathClass-punc">,</mo>
 </math></td></tr></table>
-     <!--l. 214--><p class="noindent" >where<span class="footnote-mark"><a 
+     <!--l. 236--><p class="noindent" >where<span class="footnote-mark"><a 
 href="index8.html#fn7x0"><sup class="textsuperscript">7</sup></a></span><a 
- id="x1-1024f7"></a> 
+ id="x1-1028f7"></a> 
      it holds that </p><table class="equation"><tr><td> <a 
- id="x1-1025r4"></a>
-     <!--l. 217--><math 
+ id="x1-1029r4"></a>
+     <!--l. 239--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
                                      <mn>1</mn> <mo 
@@ -770,11 +843,11 @@ class="MathClass-punc">.</mo>
 </math></td><td class="eq-no">(4)</td></tr></table>
      </li>
      <li 
-  class="enumerate" id="x1-1027x2">DWT transforms perform a number of lifting steps, each one with 2
+  class="enumerate" id="x1-1031x2">DWT transforms perform a number of lifting steps, each one with 2
      (sub)steps:
          <ol  class="enumerate2" >
          <li 
-  class="enumerate" id="x1-1029x1">Predict step: compute the <!--l. 224--><math 
+  class="enumerate" id="x1-1033x1">Predict step: compute the <!--l. 246--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >h</mi></math>
@@ -782,11 +855,11 @@ display="inline" ><mi
          the even samples (the values to predict) and the odd samples
          (the values used to predict). For the MST ﬁlters, we have that <table class="equation"><tr><td>
          <a 
- id="x1-1030r5"></a>
+ id="x1-1034r5"></a>
                                                                   
 
                                                                   
-         <!--l. 228--><math 
+         <!--l. 250--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
                                     <msubsup><mrow 
@@ -822,14 +895,14 @@ class="MathClass-punc">.</mo>
 </math></td><td class="eq-no">(5)</td></tr></table>
          </li>
          <li 
-  class="enumerate" id="x1-1032x2">Update step: compute the <!--l. 232--><math 
+  class="enumerate" id="x1-1036x2">Update step: compute the <!--l. 254--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >l</mi></math>
          subbands considering (only) the even samples and the prediction errors.
          For the MST, we have <table class="equation"><tr><td> <a 
- id="x1-1033r6"></a>
-         <!--l. 234--><math 
+ id="x1-1037r6"></a>
+         <!--l. 256--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
                                        <msubsup><mrow 
@@ -862,9 +935,9 @@ class="MathClass-bin">+</mo> <msubsup><mrow
 class="MathClass-punc">.</mo>
 </math></td><td class="eq-no">(6)</td></tr></table>
          </li></ol>
-     <!--l. 239--><p class="noindent" >Notice that these steps are invertible: </p><table class="equation"><tr><td> <a 
- id="x1-1034r7"></a>
-     <!--l. 240--><math 
+     <!--l. 261--><p class="noindent" >Notice that these steps are invertible: </p><table class="equation"><tr><td> <a 
+ id="x1-1038r7"></a>
+     <!--l. 262--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
  <mtable  align="axis" style=""  
@@ -938,43 +1011,73 @@ class="MathClass-punc">.</mo> </mtd></mtr><!--rcl--></mtable>
                                                                   
 
                                                                   
-<!--l. 250--><p class="indent" >   In the context of the wavelet theory <span class="cite">[<a 
-href="#Xburrus2013wavelets">1</a>]</span>, the response of the analysis low-pass ﬁlter to the
-<a 
-href="https://en.wikipedia.org/?title=Unit_impulse&redirect=no" >unit impulse</a><span class="footnote-mark"><a 
+<!--l. 272--><p class="indent" >   In the context of the wavelet theory <span class="cite">[<a 
+href="#Xburrus2013wavelets">1</a>]</span>, the response of the analysis low-pass ﬁlter
+(<!--l. 273--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mi 
+>K</mi></mrow><mrow 
+><mn>0</mn></mrow></msub 
+></math>) to the <a 
+href="https://en.wikipedia.org/?title=Unit_impulse&redirect=no" >unit
+impulse</a><span class="footnote-mark"><a 
 href="index9.html#fn8x0"><sup class="textsuperscript">8</sup></a></span><a 
- id="x1-1035f8"></a> 
+ id="x1-1039f8"></a> 
 is known as the scaling function and is usually denoted by
-<!--l. 256--><math 
+<!--l. 278--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
->ϕ</mi></math>, the
-response of the analysis high-pass is known as the wavelet function and it is usually denoted
-by <!--l. 257--><math 
+>ϕ</mi></math>, the response of the
+analysis high-pass ﬁlter (<!--l. 279--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mi 
+>K</mi></mrow><mrow 
+><mn>1</mn></mrow></msub 
+></math>)
+is known as the wavelet function and it is usually denoted by
+<!--l. 280--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
->ψ</mi></math>,
-the response of the synthesis low-pass ﬁlter is denoted by
-<!--l. 258--><math 
+>ψ</mi></math>, the response of the
+synthesis low-pass ﬁlter (<!--l. 281--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msubsup><mrow 
+><mi 
+>K</mi></mrow><mrow 
+><mn>0</mn></mrow><mrow 
+><mo 
+class="MathClass-bin">−</mo><mn>1</mn></mrow></msubsup 
+></math>)
+is denoted by <!--l. 281--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mover 
 accent="true"><mrow 
 ><mi 
->ϕ</mi></mrow><mo accent="true">̃</mo></mover></math>
-and the synthesis high-pass ﬁlter is represented by
-<!--l. 259--><math 
+>ϕ</mi></mrow><mo accent="true">̃</mo></mover></math> and the
+synthesis high-pass ﬁlter (<!--l. 282--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msubsup><mrow 
+><mi 
+>K</mi></mrow><mrow 
+><mn>1</mn></mrow><mrow 
+><mo 
+class="MathClass-bin">−</mo><mn>1</mn></mrow></msubsup 
+></math>)
+is represented by <!--l. 282--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mover 
 accent="true"><mrow 
 ><mi 
 >ψ</mi></mrow><mo accent="true">̃</mo></mover></math>.
-</p><!--l. 261--><p class="indent" >   For the MST it holds that <!--l. 261--><math 
+</p><!--l. 284--><p class="indent" >   For the MST it holds that <!--l. 284--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >ϕ</mi><mo 
 class="MathClass-rel">⊥</mo><mi 
 >ψ</mi></math>,
-that <!--l. 261--><math 
+that <!--l. 284--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >ϕ</mi> <mo 
@@ -982,7 +1085,7 @@ class="MathClass-rel">=</mo> <mover
 accent="true"><mrow 
 ><mi 
 >ψ</mi></mrow><mo accent="true">̃</mo></mover></math> and
-that <!--l. 262--><math 
+that <!--l. 285--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >ψ</mi> <mo 
@@ -994,14 +1097,14 @@ This is true for all orthogonal DWTs. Another important
 characteristic of orthogonal DWTs is that the ﬁlters cannot be
 symmetric.<span class="footnote-mark"><a 
 href="index10.html#fn9x0"><sup class="textsuperscript">9</sup></a></span><a 
- id="x1-1036f9"></a> 
-</p><!--l. 270--><p class="indent" >   The previous MST-based DWT is similar to other transforms such as the <a 
+ id="x1-1040f9"></a> 
+</p><!--l. 293--><p class="indent" >   The previous MST-based DWT is similar to other transforms such as the <a 
 href="https://en.wikipedia.org/wiki/Haar_wavelet" >Haar
 transform</a>, in which we are using an 1-order predictor for removing the temporal
 redundancy. Let’s extend the lifting idea to a prediction of order two. For that, we
 deﬁne the predict step as </p><table class="equation"><tr><td> <a 
- id="x1-1037r8"></a>
-<!--l. 275--><math 
+ id="x1-1041r8"></a>
+<!--l. 298--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
                  <msubsup><mrow 
@@ -1049,12 +1152,12 @@ class="MathClass-bin">−</mo><mn>1</mn></mrow></msubsup
 ></mrow><mo 
 class="MathClass-close">)</mo></mrow>
 </math></td><td class="eq-no">(8)</td></tr></table>
-<!--l. 278--><p class="indent" >   and the update step as </p><table class="equation"><tr><td> <a 
- id="x1-1038r9"></a>
+<!--l. 301--><p class="indent" >   and the update step as </p><table class="equation"><tr><td> <a 
+ id="x1-1042r9"></a>
                                                                   
 
                                                                   
-<!--l. 279--><math 
+<!--l. 302--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
                      <msubsup><mrow 
@@ -1100,14 +1203,14 @@ class="MathClass-bin">+</mo> <msubsup><mrow
 class="MathClass-close">)</mo></mrow><mo 
 class="MathClass-punc">,</mo>
 </math></td><td class="eq-no">(9)</td></tr></table>
-<!--l. 282--><p class="indent" >   where the factor 1/4 is used to preserve the energy <span class="cite">[<a 
+<!--l. 305--><p class="indent" >   where the factor 1/4 is used to preserve the energy <span class="cite">[<a 
 href="#Xsweldens1997building">3</a>]</span>. This transform is known
 as the <a 
 href="https://en.wikipedia.org/wiki/Biorthogonal_wavelet" >biorthogonal</a> (2,2) of Cohen-Daubechies-Feauveau, and also as the linear
 transform. Biorthogonal ﬁlters can be <a 
 href="http://wavelets.pybytes.com/" >easely recognized</a> because they are always
 symmetric and because the analysis ﬁlters are diﬀerent to the synthesis ﬁlters
-(<!--l. 289--><math 
+(<!--l. 312--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >ϕ</mi><mo 
@@ -1115,7 +1218,7 @@ class="MathClass-rel">≠</mo><mover
 accent="true"><mrow 
 ><mi 
 >ϕ</mi></mrow><mo accent="true">̃</mo></mover></math> and
-<!--l. 289--><math 
+<!--l. 312--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >ψ</mi><mo 
@@ -1123,10 +1226,10 @@ class="MathClass-rel">≠</mo><mover
 accent="true"><mrow 
 ><mi 
 >ψ</mi></mrow><mo accent="true">̃</mo></mover></math>).
-</p><!--l. 291--><p class="indent" >   Again, the linear transform in invertible by simply reversing the steps: </p><table class="equation"><tr><td>
+</p><!--l. 314--><p class="indent" >   Again, the linear transform in invertible by simply reversing the steps: </p><table class="equation"><tr><td>
 <a 
- id="x1-1039r10"></a>
-<!--l. 293--><math 
+ id="x1-1043r10"></a>
+<!--l. 316--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
  <mtable  align="axis" style=""  
@@ -1221,42 +1324,46 @@ class="MathClass-bin">−</mo><mn>1</mn></mrow></msubsup
 class="MathClass-close">)</mo></mrow><mo 
 class="MathClass-punc">.</mo> </mtd></mtr><!--rcl--></mtable>
 </math></td><td class="eq-no">(10)</td></tr></table>
-<!--l. 300--><p class="indent" >   A ﬁnal (and important) consideration about transform coding and quantization.
+<!--l. 323--><p class="indent" >   A ﬁnal (and important) consideration about transform coding and quantization.
 Transform coding implies splitting the signal into chunks, and computing the
 transform of each chunk. When the coeﬃcients are quantized, it is possible that
 signiﬁcative (and unpleasant) distortions may appear between the border samples of
 the chunks (see this notebook). One simple solution is to use the last samples of the
-<!--l. 306--><math 
+<!--l. 329--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >i</mi> <mo 
 class="MathClass-bin">−</mo> <mn>1</mn></math>-th chunk and the ﬁrst samples
-of the <!--l. 306--><math 
+of the <!--l. 329--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >i</mi> <mo 
 class="MathClass-bin">+</mo> <mn>1</mn></math>-chunk for computing
-the transform of the <!--l. 307--><math 
+the transform of the <!--l. 330--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >i</mi></math>-th
 chunk (notice that this <a 
 href="https://en.wikipedia.org/wiki/Lapped_transform" >overlaping</a> does not imply to generate more transform
-coeﬃcients, only to avoid using an artiﬁcial <a 
+coeﬃcients, but only to avoid using an artiﬁcial <a 
 href="https://pywavelets.readthedocs.io/en/latest/ref/signal-extension-modes.html" >signal extension</a>). The number of
-overlaped samples depends on the length of the ﬁlters and the number of levels of the
+overlaped samples depends on the length of the ﬁlters and the number of levels
+<!--l. 336--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>s</mi></math> of the
 DWT. This last parameter (the number of levels of the DWT) has also a high impact
 on the decorrelation process, but take into consideration that, depending on the
 signal, usually happens that it is not worth decomposing the signal into the
 maximum number subbands because the increments in the coding gain can be
 negligible beyond a number of levels.
-</p>
                                                                   
 
                                                                   
+</p>
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
  id="x1-20002"></a>What you have to do?</h3>
-<!--l. 322--><p class="noindent" >
+<!--l. 345--><p class="noindent" >
      </p><ol  class="enumerate1" >
      <li 
   class="enumerate" id="x1-2002x1">In a module named temporal.py, inherit the class Spatial_decorrelation
@@ -1278,19 +1385,19 @@ href="https://pywavelets.readthedocs.io/en/latest/" >PyWavelets</a>. Take also i
   class="enumerate" id="x1-2007x3">Has been the <a 
 href="https://en.wikipedia.org/wiki/Data_compression_ratio" >compression ratio</a> improved (on <a 
 href="https://en.wikipedia.org/wiki/Average" >average</a>)? How much?</li></ol>
-<!--l. 341--><p class="noindent" >
+<!--l. 364--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-30003"></a>Timming</h3>
-<!--l. 343--><p class="noindent" >This is the ﬁnal milestone. Present your results in the exam time.
-</p><!--l. 345--><p class="noindent" >
+<!--l. 366--><p class="noindent" >This is the ﬁnal milestone. Present your results in the exam time.
+</p><!--l. 368--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-40004"></a>Deliverables</h3>
-<!--l. 347--><p class="noindent" >The module temporal.py. Store it at the <a 
+<!--l. 370--><p class="noindent" >The module temporal.py. Store it at the <a 
 href="https://github.com/Tecnologias-multimedia/intercom" >root directory</a> of your InterCom’s
 repo.
-</p><!--l. 351--><p class="noindent" >
+</p><!--l. 374--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-50005"></a>Resources</h3>

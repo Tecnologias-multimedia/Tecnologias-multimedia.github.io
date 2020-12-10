@@ -44,6 +44,13 @@ samples.\footnote{Notice that is we dead-zone quantize a decomposition
   and most of the coefficients are close to zero, the information
   removed from $x$ will be those with a smaller energy.}
 
+\begin{figure}
+  \centering
+  \myfig{graphics/PRFB}{5cm}{500}
+  \caption{A 2-channels PRFB (Perfect Reconstruction Filter Bank).}
+  \label{fig:PRFB}
+\end{figure}
+
 % Relation between transform coding and subband coding
 The name that has been given to the previous process is
 \href{https://en.wikipedia.org/wiki/Sub-band_coding}{subband
@@ -138,6 +145,13 @@ The DWT has also other interesting features:
     representation} of the signal.
 \end{enumerate}
 
+\begin{figure}
+  \centering
+  \myfig{graphics/cascade}{10cm}{1000}
+  \caption{A dyadic 2-levels cascade of PRFBs.}
+  \label{fig:cascade}
+\end{figure}
+
 % Implementation alternatives for the DWT
 The DWT can be implemented in different ways:
 \begin{enumerate}
@@ -149,7 +163,7 @@ The DWT can be implemented in different ways:
   that $K$ requires, that is proportional to $N^2$.
 \item
   \href{https://en.wikipedia.org/wiki/Discrete_wavelet_transform#Cascading_and_filter_banks}{Cascading
-    PRFBs} (see the Figure~\ref{fig:}). Considering that the
+    PRFBs} (see the Figure~\ref{fig:cascade}). Considering that the
   \href{https://en.wikipedia.org/wiki/Convolution}{convolution} is a
   $O(N\log_2N)$ operation (if it is
   \href{https://en.wikipedia.org/wiki/Convolution_theorem}{implemented
@@ -256,15 +270,16 @@ the MST filters and lifting.
 
 
 In the context of the wavelet theory~\cite{burrus2013wavelets}, the
-response of the analysis low-pass filter to the
+response of the analysis low-pass filter ($K_0$) to the
 \href{https://en.wikipedia.org/?title=Unit_impulse&redirect=no}{unit
   impulse}\footnote{The response of a filter to the unit impulse
   characterize the filter because the output of the filter is the set
   of taps of the filter.} is known as the scaling function and is
-usually denoted by $\phi$, the response of the analysis high-pass is
-known as the wavelet function and it is usually denoted by $\psi$, the
-response of the synthesis low-pass filter is denoted by $\tilde\phi$
-and the synthesis high-pass filter is represented by $\tilde\psi$.
+usually denoted by $\phi$, the response of the analysis high-pass
+filter ($K_1$) is known as the wavelet function and it is usually
+denoted by $\psi$, the response of the synthesis low-pass filter
+($K^{-1}_0$) is denoted by $\tilde\phi$ and the synthesis high-pass
+filter ($K^{-1}_1$) is represented by $\tilde\psi$.
 
 For the MST it holds that $\phi\bot\psi$, that $\phi=\tilde\psi$ and
 that $\psi=\tilde\phi$. This is true for all orthogonal DWTs. Another
