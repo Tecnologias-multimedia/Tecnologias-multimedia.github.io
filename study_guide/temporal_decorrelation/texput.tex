@@ -328,9 +328,11 @@ quantization. Transform coding implies splitting the signal into
 chunks, and computing the transform of each chunk. When the
 coefficients are quantized, it is possible that significative (and
 unpleasant) distortions may appear between the border samples of the
-chunks (see this notebook). One simple solution is to use the last
-samples of the $i-1$-th chunk and the first samples of the $i+1$-chunk
-for computing the transform of the $i$-th chunk (notice that this
+chunks (see this
+\href{https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/quantization_DWT.ipynb}{notebook}). One
+simple solution is to use the last samples of the $i-1$-th chunk and
+the first samples of the $i+1$-chunk for computing the transform of
+the $i$-th chunk (notice that this
 \href{https://en.wikipedia.org/wiki/Lapped_transform}{overlaping} does
 not imply to generate more transform coefficients, but only to avoid
 using an artificial
@@ -341,7 +343,8 @@ parameter (the number of levels of the DWT) has also a high impact on
 the decorrelation process, but take into consideration that, depending
 on the signal, usually happens that it is not worth decomposing the
 signal into the maximum number subbands because the increments in the
-coding gain can be negligible beyond a number of levels.
+coding gain can be negligible beyond a number of levels (typically,
+$5$).
   
 \section{What you have to do?}
 
