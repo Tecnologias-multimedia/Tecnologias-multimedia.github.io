@@ -46,7 +46,7 @@ and $w_1$, and each subband has only one
 The proposed matrix $K$ corresponds to the transform used in
 \href{https://en.wikipedia.org/wiki/Joint_encoding#M/S_stereo_coding}{Mid/Side
   (M/S) stereo coding}~\cite{bosi2003intro} that we will call MST
-(Mid/Side Transform), which is similar to the $2\times 2$ KLT
+(Mid/Side Transform). This is similar to the $2\times 2$ KLT
 \href{http://fourier.eng.hmc.edu/e161/lectures/klt/node3.html}{(Karhunen-Lo\`eve
   Transform)}, the
 \href{http://wavelets.pybytes.com/wavelet/haar/}{Haar
@@ -210,7 +210,7 @@ which means that the transform is
 \href{https://en.wikipedia.org/wiki/Energy_(signal_processing)}{energy}
 preserving~\cite{sayood2017introduction} (or that the
 \href{https://en.wikipedia.org/wiki/Parseval%27s_theorem}{Parseval's theorem}
-  is satisfied, in both, the analysis and the synthesis transform.
+  is satisfied, in both, the analysis and the synthesis transform).
 
 The MST analysis is not orthonormal, because
 \begin{equation}
@@ -280,11 +280,12 @@ matrix-vector operations, but using
 simply by computing the inverse transform of the decomposition
 $\begin{bmatrix} 0 & \cdots & 0 & 1 & 0 & \cdots &
   0 \end{bmatrix}^{\text T}$, where the $1$ value is in the position
-$i$ of the subband $w_i$.\footnote{Notice that this operation will
-  ``extract'' the $i$-th column from $K^{-1}$ that is equivalent to
-  say that will ``extract'' the $i$-th row of $K$, $K_i$ (remember
-  that for orthogonal traksforms, $K^{-1}=K^{\text T}$).} In our
-example, we get that
+$i$ (only the subband $w_i=1$, the rest are
+``zeroed'')).\footnote{Notice that this operation will ``extract'' the
+  $i$-th column from $K^{-1}$ that is equivalent to say that will
+  ``extract'' the $i$-th row of $K$, $K_i$ (remember that for
+  orthogonal traksforms, $K^{-1}=K^{\text T}$).} In our example, we
+get that
 
 \begin{equation}
   \begin{array}{l}
