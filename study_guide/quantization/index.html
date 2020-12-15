@@ -127,34 +127,35 @@ smaller the output bit-rate.
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >Δ</mi></math> values
-is a technique that can be used in real-time transmission systems to minimize the
-jitter and the loss of packets when <a 
-href="https://en.wikipedia.org/wiki/Network_congestion" >congestion</a> occurs. However, notice that depending
-of the entropy coding stage, may not exist a clear relationship between the
-<!--l. 82--><math 
+is a technique that can be used in real-time transmission systems to minimize
+the jitter and the loss of packets when <a 
+href="https://en.wikipedia.org/wiki/Network_congestion" >congestion</a> occurs. However, notice
+that depending of the entropy coding stage and the characteristics of the
+signal (variance, entropy) may not exist a clear relationship between the
+<!--l. 83--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >Δ</mi></math> and
 the output bit-rate. This happens using DEFLATE.
-</p><!--l. 85--><p class="noindent" >
+</p><!--l. 86--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
  id="x1-40002"></a>What you have to do?</h3>
-<!--l. 87--><p class="noindent" >
+<!--l. 88--><p class="noindent" >
      </p><ol  class="enumerate1" >
      <li 
   class="enumerate" id="x1-4002x1">Create a class named BR_Control that inherits from Compression (the
      class implemented in the previous milestone). Store it in a ﬁle named
      quantize.py.
-     </li>
-     <li 
-  class="enumerate" id="x1-4004x2">Override the methods pack() and unpack(), which now whould implement:
                                                                   
 
                                                                   
+     </li>
+     <li 
+  class="enumerate" id="x1-4004x2">Override the methods pack() and unpack(), which now whould implement:
 <a 
  id="x1-4005r1"></a>
-     <!--l. 110--><p class="noindent" ><div class="minipage"><span 
+     <!--l. 111--><p class="noindent" ><div class="minipage"><span 
 class="ecbx-1000">Algorithm</span>
 <span 
 class="ecbx-1000">2.1:</span> <span 
@@ -179,11 +180,11 @@ class="small-caps">e</span><span
 class="small-caps">r</span><span 
 class="small-caps">C</span><span 
 class="small-caps">o</span><span 
-class="small-caps">m</span></span>(<!--l. 95--><math 
+class="small-caps">m</span></span>(<!--l. 96--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 > </mi></math>)<br 
-class="newline" />  <!--l. 95--><math 
+class="newline" />  <!--l. 96--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" > <mtable  align="axis" style=""  
 equalrows="false" columnlines="none" equalcolumns="false" class="array"> <mtr><mtd 
@@ -267,36 +268,36 @@ class="array"  columnalign="left"><mspace width="4.3045pt"/>                    
      </p></li>
      <li 
   class="enumerate" id="x1-4007x3">Determine  the  quantization  step
-     <!--l. 112--><math 
+     <!--l. 113--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >Δ</mi></math> used in the
-     <!--l. 113--><math 
+     <!--l. 114--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle 
 class="text"><mtext  >quantize()</mtext></mstyle></math> method depending
      on the <a 
-href="https://en.wikipedia.org/wiki/Throughput" >throughput</a> <!--l. 114--><math 
+href="https://en.wikipedia.org/wiki/Throughput" >throughput</a> <!--l. 115--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >B</mi></math>
      of the communication link. Your implementation should consider that
-     <!--l. 116--><math 
+     <!--l. 117--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >B</mi></math>
      can be time-variying, and should maximize the QoE.
      </li></ol>
-<!--l. 128--><p class="noindent" >
+<!--l. 129--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-50003"></a>Timming</h3>
-<!--l. 130--><p class="noindent" >Please, ﬁnish this milestone at most in two weeks.
-</p><!--l. 132--><p class="noindent" >
+<!--l. 131--><p class="noindent" >Please, ﬁnish this milestone at most in two weeks.
+</p><!--l. 133--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-60004"></a>Deliverables</h3>
-<!--l. 134--><p class="noindent" >
+<!--l. 135--><p class="noindent" >
      </p><ol  class="enumerate1" >
      <li 
   class="enumerate" id="x1-6002x1">A Python module named br_control.py stored in the <a 
@@ -310,7 +311,7 @@ href="https://github.com/Tecnologias-multimedia/intercom" >root directory</a> of
   class="enumerate" id="x1-6004x2">A video demonstration of 3 minutes (at most) showing how quantize.py
      adapts to the variations of the throughput of the link (use <a 
 href="https://man7.org/linux/man-pages/man8/tc.8.html" >tc</a>).</li></ol>
-<!--l. 143--><p class="noindent" >
+<!--l. 144--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-70005"></a>Resources</h3>
