@@ -265,9 +265,8 @@ are independent).  Thus, if the filters had different gains, the
 quantization steps should consider this fact.\footnote{Notice that the
 important here is the relative gain of each subband. For example, if
 the gain of $K_0$ were $2$ and the gain of $K_1$ were $1$, and the
-dynamic range of $w_0$ and $w_1$ is the same, we should use
-$\Delta_1=2\Delta_0$ if we want to minimize the distortion (in
-L$^2$).}
+dynamic range of $w_0$ and $w_1$ is the same, we could use
+$\Delta_1=2\Delta_0$ and expect to minimize the distortion.}
 
 By definition, the gain of the subband
 $w_i$ is the \href{https://en.wikipedia.org/wiki/Lp_space}{L$_2$
@@ -296,9 +295,10 @@ filter $K_i$. Thus
 \end{equation}
 
 resulting that both subbands $w_1$ and $w_2$ have the same gain
-($\sqrt{2}$). This result tell us that both subbands should use the
-same quantization step ($\Delta_0=\Delta_1$). See the
-\href{https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/stereo_transforms_RD.ipynb}{notebook}.
+($\sqrt{2}$). This result tell us that both subbands could use the
+same quantization step ($\Delta_0=\Delta_1$). In the
+\href{https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/stereo_transforms_RD.ipynb}{notebook}
+there are some evidences of this.
 
 Unfortunately, most of the transform are not implemented using
 matrix-vector operations, but using
