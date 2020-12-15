@@ -4,6 +4,7 @@
 
 \section{Description}
 
+\subsection{An analysis transform}
 InterCom transmits a
 \href{https://en.wikipedia.org/wiki/Stereophonic_sound}{stereo} (two
 channels)
@@ -80,6 +81,7 @@ the values of $K_1$ describe a
 filters. This can be also seen in this
 \href{https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/stereo_transforms_RD.ipynb}{notebook}.
 
+\subsection{The synthesis transform}
 The inverse (or synthesis) transform
 \begin{equation}
   x = K^{-1}w
@@ -120,6 +122,7 @@ Therefore,
   \label{eq:inverse_transform_matrix_form}
 \end{equation}
 
+\subsection{Orthogonalizy of the transform}
 As can be seen (previously ignoring the $\frac{1}{2}$ scale factor)
 the inverse transform is the transpose of the forward transform
 ($K^{-1}=K^{\text T}$). This is a characteristic of all
@@ -226,31 +229,45 @@ Eq.~\ref{eq:inverse_transform_matrix_form}). On the contrary, we would
 get $2x$ as the reconstructed signal instead of $x$.
 
 % About quantizing the subbands
-\subsection{Quantization}
+\subsection{Quantization of the subbands}
 Ideally, the quantization step $\Delta_i$ used for a subband $w_i$
 must operate in the RD curve $f_i$ with the same
 slope~\cite{vetterli2014foundations,sayood2017introduction} (this is
 the same to say that we must satisfy that $f'_0(x)=f'_1(x)$, where
 $f'$ denotes the derivative of $f$). The main drawback of this
 approach is that the finding of $f_i$ is computationally intensive (we
-must analyze, quantize, compress, decompress, dequantize and
-synthesize the data for a enoughly high number of quantization steps),
-and cannot be used in real-time applications.
+must analyze, quantize, compress, decompress, dequantize, synthesize
+and compute the distortion of the data for a enoughly high number of
+quantization steps), and usually we cannot do that in real-time
+applications.\footnote{Notice, however, that this would solve the
+problem of controlling the bit-rate because using the RD curves we
+know how many bits will require each subband.}
 
-==============
+An approximation to this could be to suppose that the RD curves of the
+subbands resulting from the analysis of our current piece of data
+(remember, two samples of a stereo frame in our case) are similar to
+the curves of previous pieces, that has already been compressed and
+transmitted, and therefore, we can compute also the distortion. Using
+this information, we can estimate a RD curve for the current piece,
+and find the quantization steps. This procedure is much faster than
+the described in the previou paragraph, but it may still be
+time-consuming.
 
-Finally, let's analyze the
+For this reason, in
+the \href{https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/stereo_transforms_RD.ipynb}{notebook}
+we explore a different solution based on the idea of that the contribution
+(in terms of energy) of the subbands to the reconstruction of the
+signal $x$ is proportional to the
 \href{https://en.wikipedia.org/wiki/Filter_(signal_processing)}{gain}
-of each analysis filter of $K$ (remember that each filter produces a
-different subband). The gains of the analysis filters are important
-because the contribution of the subbands to the reconstuction of $x$
-is proportional to the gains. Thus, if the filters had
-different gains, the quantization steps should consider this
-fact.\footnote{Notice that the important here is the relative gain of
-  each subband. For example, if the gain of $K_0$ were $2$ and the
-  gain of $K_1$ were $1$, and the dynamic range of $w_0$ and $w_1$ is
-  the same, we should use $\Delta_1=2\Delta_0$ if we want to minimize
-  the distortion (in L$^2$).}
+of each analysis filter of $K$ (remember that we are working with
+orthogonal transforms and therefore, the contribution of the subbands
+are independent).  Thus, if the filters had different gains, the
+quantization steps should consider this fact.\footnote{Notice that the
+important here is the relative gain of each subband. For example, if
+the gain of $K_0$ were $2$ and the gain of $K_1$ were $1$, and the
+dynamic range of $w_0$ and $w_1$ is the same, we should use
+$\Delta_1=2\Delta_0$ if we want to minimize the distortion (in
+L$^2$).}
 
 By definition, the gain of the subband
 $w_i$ is the \href{https://en.wikipedia.org/wiki/Lp_space}{L$_2$
