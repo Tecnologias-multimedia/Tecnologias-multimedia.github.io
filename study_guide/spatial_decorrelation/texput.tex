@@ -225,6 +225,20 @@ For this reason, we must divide the synthesized samples by $2$ (see
 Eq.~\ref{eq:inverse_transform_matrix_form}). On the contrary, we would
 get $2x$ as the reconstructed signal instead of $x$.
 
+% About quantizing the subbands
+\subsection{Quantization}
+Ideally, the quantization step $\Delta_i$ used for a subband $w_i$
+must operate in the RD curve $f_i$ with the same
+slope~\cite{vetterli2014foundations,sayood2017introduction} (this is
+the same to say that we must satisfy that $f'_0(x)=f'_1(x)$, where
+$f'$ denotes the derivative of $f$). The main drawback of this
+approach is that the finding of $f_i$ is computationally intensive (we
+must analyze, quantize, compress, decompress, dequantize and
+synthesize the data for a enoughly high number of quantization steps),
+and cannot be used in real-time applications.
+
+==============
+
 Finally, let's analyze the
 \href{https://en.wikipedia.org/wiki/Filter_(signal_processing)}{gain}
 of each analysis filter of $K$ (remember that each filter produces a
