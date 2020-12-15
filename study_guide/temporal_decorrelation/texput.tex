@@ -4,10 +4,10 @@
 
 \section{Description}
 
-% About the redundancy
-After removing the spatial (stereo) redundancy in the previous
-milestone, the next natural step in the development of InterCom is the
-removal of the temporal redundancy that can be found inside of each
+\subsection{About temporal redundancy in audio}
+After exploiting the spatial (stereo) redundancy in the previous
+milestone, the next natural step in the development of InterCom is to
+remove the temporal redundancy that can be found inside of each
 subband\footnote{Notice that, beacuse the MST and the transform used
   in this milestone are both lineal, the order in which the transforms
   are applied is irrelevant. For this reason, we could also have used
@@ -32,17 +32,19 @@ efficient decorrelation algorithms based on
 % Another decorrelating technique: transform coding
 Transform coding is based on the idea that we can decompose (we can
 generate a decomposition from) the input signal into a set of
-subbands, and if the used filters are the adecuate for removing the
-temporal redundancy, we can achieve a high transform
+subbands, and if the used filters are the adecuate ones for removing
+the temporal redundancy, we can achieve a high transform
 \href{https://en.wikipedia.org/wiki/Coding_gain}{coding gain},
 accumulating most of the signal energy (and presumably most of the
 information) in a small number of subbands. When this happens, the
 quantization of the subbands will remove basically the least
-significant information, allowing better compression ratios than those
-in which we apply the same quantization process to the original
+significant information (usually
+\href{https://en.wikipedia.org/wiki/Noise_(electronics)}{electronic
+  noise}), allowing better compression ratios than those in which we
+apply the same quantization process to the original
 samples.\footnote{Notice that is we dead-zone quantize a decomposition
-  and most of the coefficients are close to zero, the information
-  removed from $x$ will be those with a smaller energy.}
+and most of the coefficients are close to zero, the information
+removed from $x$ will be those with a smaller energy.}
 
 \begin{figure}
   \centering
@@ -51,6 +53,7 @@ samples.\footnote{Notice that is we dead-zone quantize a decomposition
   \label{fig:PRFB}
 \end{figure}
 
+\subsection{Transform and subband coding}
 % Relation between transform coding and subband coding
 The name that has been given to the previous process is
 \href{https://en.wikipedia.org/wiki/Sub-band_coding}{subband
@@ -101,6 +104,7 @@ mirror filters they form a
 \href{https://en.wikipedia.org/wiki/Quadrature_mirror_filter}{Quadrature
   Mirror Filters Bank (QMF)}.
 
+\subsection{Multichannel filter banks and psychoacoustic frequency resolution}
 % M-channels PRFB and the frequency resolution of the HAS
 Using the suitable filters, it is possible to build $M$-channels
 PRFBs.\footnote{Notice that our matrix $K$ would have $M$ rows in this
@@ -109,10 +113,11 @@ are implementing an orthogonal transform.}  These filters can analyze
 (and synthesize) the signal $x$, decomposing it in
 (\href{https://en.wikipedia.org/wiki/Low-pass_filter#Ideal_and_real_filters}{almost
   for sure}) overlaping frequency subbands with different
-bandwidth. The question here is how many filters should be used and
-what \href{https://en.wikipedia.org/wiki/Band-pass_filter}{pass-band}
-width should they have. At this design point, we must also consider
-that the accuracy of the
+bandwidth. The question here is to know how many filters should be
+used and what
+\href{https://en.wikipedia.org/wiki/Band-pass_filter}{pass-band} width
+should they have. At this design point, we must also consider that the
+accuracy of the
 \href{https://en.wikipedia.org/wiki/Psychoacoustics}{humman perception
   of the sound} depends on the frequency: (as it can be seen in this
 \href{https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/frequency_resolution.ipynb}{notebook})
@@ -122,6 +127,7 @@ the sound is low. This fact is related with the way in which the
 distributed in \href{https://en.wikipedia.org/wiki/Bark_scale}{the
   bark scale}.
 
+\subsection{The Discrete Wavelet Transform}
 % The bark scale and the DWT
 As it can be seen, the bark scale divides the audible spectrum into 24
 subband of (a priori) ``whimsical'' bandwidths. However, it's clear
@@ -155,6 +161,7 @@ The DWT has also other interesting features:
   \label{fig:cascade}
 \end{figure}
 
+\subsection{Implementation of the DWT}
 % Implementation alternatives for the DWT
 The DWT can be implemented in different ways:
 \begin{enumerate}
@@ -187,9 +194,10 @@ The DWT can be implemented in different ways:
   cascade.
 \end{enumerate}
 
+\subsection{Example of a DWT using the MST filters}
 % Using the MST filters for building a DWT
-In order to clarify the previously introduced concepts, let's build a DWT using
-the MST filters and lifting.
+In order to clarify the previously introduced concepts, let's build a
+DWT using the MST filters and lifting.
 
 \begin{enumerate}
 \item Lifting is based on the concept of dyadic
@@ -271,7 +279,7 @@ the MST filters and lifting.
 
 \end{enumerate}
 
-
+\subsection{Wavelets and filter banks}
 In the context of the wavelet theory~\cite{burrus2013wavelets}, the
 response of the analysis low-pass filter ($K_0$) to the
 \href{https://en.wikipedia.org/?title=Unit_impulse&redirect=no}{unit
@@ -293,6 +301,7 @@ be symmetric.\footnote{The symmetry of the filters is important to
 %The dilated and translated versions of the wavelet function are
 %orthogonal~\cite{sayood2017introduction}.
 
+\subsection{Example of a DWT using high-order filters}
 The previous MST-based DWT is similar to other transforms such as the
 \href{https://en.wikipedia.org/wiki/Haar_wavelet}{Haar transform}, in
 which we are using an 1-order predictor for removing the temporal
@@ -323,6 +332,7 @@ steps:
   \end{array}
 \end{equation}
 
+\subsection{\href{https://en.wikipedia.org/wiki/Lapped_transform}{Lapped transform} for minimizing the distortion}
 A final (and important) consideration about transform coding and
 quantization. Transform coding implies splitting the signal into
 chunks, and computing the transform of each chunk. When the
