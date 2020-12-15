@@ -177,14 +177,13 @@ The DWT can be implemented in different ways:
   \href{https://en.wikipedia.org/wiki/Convolution}{convolution} is a
   $O(N\log_2N)$ operation (if it is
   \href{https://en.wikipedia.org/wiki/Convolution_theorem}{implemented
-    in the frequency domain}), and that the number the number of
-  levels in the cascade is generally small (5 for example), this
-  implementation is faster than the based in vector-matrix
-  arithmetic. And most importantly, we don't need to store $K$, but
-  only the taps of the filters that in a software implementation of a
-  cascade can be as small as the number of different
-  filters.\footnote{Notice that in a typical cascade, the filters are
-    always the same.}
+    in the frequency domain}), and that the number of levels in the
+  cascade is generally small (5 for example), this implementation is
+  faster than the based in vector-matrix arithmetic. And most
+  importantly, we don't need to store $K$, but only the taps of the
+  filters that in a software implementation of a cascade can be as
+  small as the number of different filters.\footnote{Notice that in a
+    typical cascade, the filters are always the same.}
 \item Using
   \href{https://en.wikipedia.org/wiki/Lifting_scheme}{lifting}~\cite{sweldens1997building},
   which provides an extra speed-up factor of 2 compared to the FB
