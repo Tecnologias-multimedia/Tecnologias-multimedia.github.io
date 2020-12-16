@@ -80,8 +80,8 @@ the MST) that $K_0$ is a low-pass filter and $K_1$ is a high-pass
 filter, and that the
 \href{https://en.wikipedia.org/wiki/Filter_(signal_processing)#The_transfer_function}{transfer
   function}\footnote{The response of the filter to the
-\href{https://en.wikipedia.org/?title=Unit_impulse&redirect=no}{unit
-  impulse}.} of both filters
+  \href{https://en.wikipedia.org/?title=Unit_impulse&redirect=no}{unit
+    impulse}.} of both filters
 \href{https://en.wikipedia.org/wiki/Filter_bank#Perfect_reconstruction_filter_banks}{are
   one the inverse of the other}. Under these assumptions, the complete
 (analysis/synthesis) transform is called a (2-channels)
@@ -93,15 +93,16 @@ by 2) of $w_0$ and $w_1$ (see the
 \href{https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/PRFB.ipynb}{notebook}). Notice
 that this subsampling is possible because the
 \href{https://en.wikipedia.org/wiki/Aliasing}{aliasing}\footnote{Because
-the filters are not ideal, the bandwidth of the filtered signals $w_0$
-and $w_1$ is bigger than half of the bandwidth of $x$. Therefore,
-subsampling at a ratio of one of each two coefficients, we are
-generating aliasing. See the
-\href{https://en.wikipedia.org/wiki/Nyquist-Shannon_sampling_theorem}{sampling
-  theorem}.}  generated in the low-pass subband is compensated by the
-aliasing generated in the high-pass subband. To achieve this, the
-frequency response of $K_0$ must be equal to the mirror frequency
-response of $K_1$, and obviously, both filters must have the same
+  the filters are not ideal, the bandwidth of the filtered signals
+  $w_0$ and $w_1$ is bigger than half of the bandwidth of
+  $x$. Therefore, subsampling at a ratio of one of each two
+  coefficients, we are generating aliasing. See the
+  \href{https://en.wikipedia.org/wiki/Nyquist-Shannon_sampling_theorem}{sampling
+    theorem}.}  generated in the low-pass subband is compensated by
+the aliasing generated in the high-pass subband. To achieve this, the
+\href{https://en.wikipedia.org/wiki/Filter_(signal_processing)#The_transfer_function}{frequency
+  response} of $K_0$ must be equal to the mirror frequency response of
+$K_1$, and obviously, both filters must have the same
 bandwidth~\cite{sayood2017introduction}. When $K_1$ and $K_2$ are
 mirror filters they form a
 \href{https://en.wikipedia.org/wiki/Quadrature_mirror_filter}{Quadrature
