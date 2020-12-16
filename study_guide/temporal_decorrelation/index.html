@@ -62,7 +62,7 @@ values.
 redundancy of a sequence of audio. One of the most straightforward is <a 
 href="https://en.wikipedia.org/wiki/Differential_pulse-code_modulation" >Diﬀerential
 Pulse Code Modulation (DPCM) <span class="cite">[<a 
-href="#Xsayood2017introduction">1</a>]</span></a>. However, there are more eﬃcient decorrelation
+href="#Xsayood2017introduction">2</a>]</span></a>. However, there are more eﬃcient decorrelation
 algorithms based on <a 
 href="https://en.wikipedia.org/wiki/Transform_coding" >transform coding</a>, such as the used in the previous milestone and
                                                                   
@@ -115,7 +115,7 @@ display="inline" ><mi
 (see the previous milestone) represents the taps of a 2-channels analysis
 <a 
 href="https://en.wikipedia.org/wiki/Filter_bank" >Filter Bank (FB)</a> <span class="cite">[<a 
-href="#Xvetterli1995wavelets">3</a>]</span>, and the forward transform is in fact “descomposing”
+href="#Xvetterli1995wavelets">4</a>]</span>, and the forward transform is in fact “descomposing”
 <!--l. 64--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
@@ -332,7 +332,7 @@ display="inline" ><msub><mrow
 ><mn>1</mn></mrow></msub 
 ></math>, and
 obviously, both ﬁlters must have the same bandwidth <span class="cite">[<a 
-href="#Xsayood2017introduction">1</a>]</span>. In this situation, in which
+href="#Xsayood2017introduction">2</a>]</span>. In this situation, in which
 <!--l. 107--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
@@ -507,7 +507,7 @@ href="index7.html#fn6x0"><sup class="textsuperscript">6</sup></a></span><a
      <li 
   class="enumerate" id="x1-6007x3">Using <a 
 href="https://en.wikipedia.org/wiki/Lifting_scheme" >lifting</a> <span class="cite">[<a 
-href="#Xsweldens1997building">2</a>]</span>, which provides an extra speed-up factor of 2 compared
+href="#Xsweldens1997building">3</a>]</span>, which provides an extra speed-up factor of 2 compared
      to the FB implementation. DWTs implemented with lifting do not need
      to downsample and upsample the subbands, an operation that is wasting
      the calculus of half of the coeﬃcients at each level of the cascade.</li></ol>
@@ -1126,8 +1126,8 @@ class="MathClass-punc">.</mo> </mtd></mtr><!--rcl--></mtable>
 </p>
    <h4 class="subsectionHead"><span class="titlemark">1.7   </span> <a 
  id="x1-80001.7"></a>Wavelets and ﬁlter banks</h4>
-<!--l. 286--><p class="noindent" >In the context of the wavelet theory <span class="cite">[<span 
-class="ecbx-1000">?</span>]</span>, the response of the analysis low-pass ﬁlter
+<!--l. 286--><p class="noindent" >In the context of the wavelet theory <span class="cite">[<a 
+href="#Xburrus2013wavelets">1</a>]</span>, the response of the analysis low-pass ﬁlter
 (<!--l. 287--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
@@ -1322,7 +1322,7 @@ class="MathClass-close">)</mo></mrow><mo
 class="MathClass-punc">,</mo>
 </math></td><td class="eq-no">(9)</td></tr></table>
 <!--l. 320--><p class="indent" >   where the factor 1/4 is used to preserve the energy <span class="cite">[<a 
-href="#Xsweldens1997building">2</a>]</span>. This transform is known
+href="#Xsweldens1997building">3</a>]</span>. This transform is known
 as the <a 
 href="https://en.wikipedia.org/wiki/Biorthogonal_wavelet" >biorthogonal</a> (2,2) of Cohen-Daubechies-Feauveau, and also as the linear
 transform. Biorthogonal ﬁlters can be <a 
@@ -1535,19 +1535,27 @@ repo.
    <div class="thebibliography">
    <p class="bibitem" ><span class="biblabel">
  [1]<span class="bibsp">   </span></span><a 
+ id="Xburrus2013wavelets"></a>C.S.  Burrus,  R. Gopinath,  and  H. Guo.     <a 
+href="https://cnx.org/contents/EQurkhlI@6.9:ZcNjPhDo@15/Preface" ><span 
+class="ecti-1000">Wavelets  and  Wavelet</span>
+   <span 
+class="ecti-1000">Transforms</span></a>. Rice University, 2013.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [2]<span class="bibsp">   </span></span><a 
  id="Xsayood2017introduction"></a>K. Sayood. <a 
 href="http://rahilshaikh.weebly.com/uploads/1/1/6/3/11635894/data_compression.pdf" ><span 
 class="ecti-1000">Introduction to data compression</span></a>. Morgan Kaufmann, 2017.
    </p>
    <p class="bibitem" ><span class="biblabel">
- [2]<span class="bibsp">   </span></span><a 
- id="Xsweldens1997building"></a>W. Sweldens and P. Schröder.  <a 
-href="https://scholar.google.es/scholar?hl=es&as_sdt=0%2C5&q=building+your+own+wavelets+at+home+1997+Sweldens+Schr%C3%B6der&btnG=" >Building your own wavelets at home</a>.
+ [3]<span class="bibsp">   </span></span><a 
+ id="Xsweldens1997building"></a>W. Sweldens and P. Schröder. <a 
+href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.54.5600&rep=rep1&type=pdf" >Building Your Own Wavelets at Home</a>.
    <span 
 class="ecti-1000">Wavelets in Computer Graphics</span>, 1997.
    </p>
    <p class="bibitem" ><span class="biblabel">
- [3]<span class="bibsp">   </span></span><a 
+ [4]<span class="bibsp">   </span></span><a 
  id="Xvetterli1995wavelets"></a>M. Vetterli   and   J. Kovacevic.      <a 
 href="http://waveletsandsubbandcoding.org/Repository/VetterliKovacevic95_Manuscript.pdf" ><span 
 class="ecti-1000">Wavelets  and  Subband  Coding</span></a>.
