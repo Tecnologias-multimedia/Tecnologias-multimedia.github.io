@@ -39,24 +39,24 @@ class="ecrm-1200">- </span><a
 href="https://www.ual.es" ><span 
 class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
-class="ecrm-1200">September 24, 2020</span></div>
+class="ecrm-1200">December 21, 2020</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
 <!--l. 12--><p class="noindent" >To work in <a 
 href="https://github.com/Tecnologias-multimedia/intercom" >the InterCom project</a> <span class="cite">[<a 
-href="#Xintercom">3</a>]</span> you must understand the basics of Git <span class="cite">[<a 
-href="#XGit-book">1</a>]</span> and
+href="#Xintercom">4</a>]</span> you must understand the basics of Git <span class="cite">[<a 
+href="#XGit-book">3</a>]</span> and
 <a 
 href="https://github.com/" >GitHub</a><span class="footnote-mark"><a 
 href="index2.html#fn1x0"><sup class="textsuperscript">1</sup></a></span><a 
  id="x1-1001f1"></a> 
 <span class="cite">[<a 
-href="#XGitHub">2</a>]</span>, and how to use the <a 
+href="#XGitHub">1</a>]</span>, and how to use the <a 
 href="https://guides.github.com/introduction/flow/index.html" >The GitHub (Work)Flow</a> and the <a 
 href="https://github.com/vicente-gonzalez-ruiz/fork_and_branch_git_workflow" >Fork-and-Branch Git
-Workﬂow</a> <span class="cite">[<span 
-class="ecbx-1000">?</span>]</span>.
+Workﬂow</a> <span class="cite">[<a 
+href="#Xfork-and-branch-git-workflow">2</a>]</span>.
 </p>
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
  id="x1-20002"></a>What you have to do?</h3>
@@ -65,7 +65,7 @@ class="ecbx-1000">?</span>]</span>.
      <li 
   class="enumerate" id="x1-2002x1">Have a look to the <a 
 href="https://git-scm.com/book/en/v2" >Pro Git</a> book <span class="cite">[<a 
-href="#XGit-book">1</a>]</span>, what is the main source of information
+href="#XGit-book">3</a>]</span>, what is the main source of information
      about Git.
      </li>
      <li 
@@ -479,36 +479,23 @@ class="ectt-1000">ps</span></a>.
 class="ectt-1000">ssh-agent </span>were not running, it can be launched to run in the
      <a 
 href="https://en.wikipedia.org/wiki/Background_process" >background</a> with:
-     <!--l. 203-->
-     <div class="lstlisting" id="listing-13"><span class="label"><a 
- id="x1-2043r1"></a></span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">eval</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">&#x0022;</span><span 
-class="ectt-1000">$</span><span 
-class="ectt-1000">(</span><span 
-class="ectt-1000">ssh</span><span 
-class="ectt-1000">-</span><span 
-class="ectt-1000">agent</span><span 
-class="ectt-1000"> </span><span 
-class="ectt-1000">-</span><span 
-class="ectt-1000">s</span><span 
-class="ectt-1000">)</span><span 
-class="ectt-1000">&#x0022;</span>
-     
-     </div>
-     <!--l. 207--><p class="noindent" >but you don’t need to do that in your Xubuntu installation, because
+                                                                  
+
+                                                                  
+     <pre class="verbatim" id="verbatim-2">
+         eval &#x0022;$(ssh-agent -s)&#x0022;
+       
+</pre>
+     <!--l. 205--><p class="nopar" >
+     </p><!--l. 207--><p class="noindent" >but you don’t need to do that in your Xubuntu installation, because
      (remember) the <span 
 class="ectt-1000">ssh-agent </span>the Xfce desktop environment lauches it.
      </p></li>
      <li 
-  class="enumerate" id="x1-2045x14">With your keys, run:
+  class="enumerate" id="x1-2044x14">With your keys, run:
      <!--l. 213-->
-     <div class="lstlisting" id="listing-14"><span class="label"><a 
- id="x1-2046r1"></a></span><span 
+     <div class="lstlisting" id="listing-13"><span class="label"><a 
+ id="x1-2045r1"></a></span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
@@ -525,14 +512,14 @@ class="ectt-1000">id_rsa</span>
      <!--l. 217--><p class="noindent" >and the passphrase will be prompt.
      </p></li>
      <li 
-  class="enumerate" id="x1-2048x15">Go now to GitHub <span 
+  class="enumerate" id="x1-2047x15">Go now to GitHub <span 
 class="ectt-1000">-&#x003E; </span>Settings <span 
 class="ectt-1000">-&#x003E; </span>SSH and GPG keys <span 
 class="ectt-1000">-&#x003E; </span>New SSH key. Open a
      terminal and write:
      <!--l. 222-->
-     <div class="lstlisting" id="listing-15"><span class="label"><a 
- id="x1-2049r1"></a></span><span 
+     <div class="lstlisting" id="listing-14"><span class="label"><a 
+ id="x1-2048r1"></a></span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
@@ -553,12 +540,9 @@ class="ectt-1000">Begins with ’ssh-rsa’,</span>
 class="ectt-1000">...</span>”. Don’t forget to give a title (something such as “<span 
 class="ectt-1000">tm</span>” (tecnonogías
      multimedia)) to the key pair.
-                                                                  
-
-                                                                  
      </p></li>
      <li 
-  class="enumerate" id="x1-2051x16">When you use the key for the ﬁrst time (clonning a repo or pushing a commit),
+  class="enumerate" id="x1-2050x16">When you use the key for the ﬁrst time (clonning a repo or pushing a commit),
      the SSH client will warn you that the autenticity of <span 
 class="ectt-1000">github.com </span>cannot be
      established. This is normal and should happen only once. Type <span 
@@ -568,15 +552,18 @@ href="https://en.wikipedia.org/wiki/Man-in-the-middle_attack" >man-in-the-middle
      attack</a>.
      </li>
      <li 
-  class="enumerate" id="x1-2053x17">Revise <a 
+  class="enumerate" id="x1-2052x17">Revise <a 
 href="https://github.com/vicente-gonzalez-ruiz/fork_and_branch_git_workflow" >The Fork and Branch Git Workﬂow</a>. Basically, this “protocol” explains
      that to contribute to an open-source repo hosted by GitHub without belonging
      to the develop team, you must do some <span 
 class="ectt-1000">git</span>-steps (and some of them are
      below).
+                                                                  
+
+                                                                  
      </li>
      <li 
-  class="enumerate" id="x1-2055x18">Make a fork of the <a 
+  class="enumerate" id="x1-2054x18">Make a fork of the <a 
 href="https://github.com/Tecnologias-multimedia/intercom" >InterCom</a> project. We will call to this repo the <a 
 href="https://docs.github.com/en/github/getting-started-with-github/github-glossary#upstream" ><span 
 class="ecti-1000">upstream</span></a>,
@@ -584,7 +571,7 @@ class="ecti-1000">upstream</span></a>,
                                                                   
 
                                                                   
-     <pre class="verbatim" id="verbatim-2">
+     <pre class="verbatim" id="verbatim-3">
        git@github.com:Tecnologias-multimedia/intercom.git
 </pre>
      <!--l. 253--><p class="nopar" > This info can be found when you <a 
@@ -595,15 +582,15 @@ class="ectt-1000">clone </span>your own
      repo).
      </p></li>
      <li 
-  class="enumerate" id="x1-2057x19">Add the <a 
+  class="enumerate" id="x1-2056x19">Add the <a 
 href="https://docs.github.com/en/github/getting-started-with-github/github-glossary#remote" >remote</a><span class="footnote-mark"><a 
 href="index3.html#fn2x0"><sup class="textsuperscript">2</sup></a></span><a 
- id="x1-2058f2"></a> 
+ id="x1-2057f2"></a> 
      <span 
 class="ecti-1000">upstream </span>with:
      <!--l. 269-->
-     <div class="lstlisting" id="listing-16"><span class="label"><a 
- id="x1-2059r1"></a></span><span 
+     <div class="lstlisting" id="listing-15"><span class="label"><a 
+ id="x1-2058r1"></a></span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
@@ -631,8 +618,8 @@ class="ectt-1000">git</span>
      <!--l. 273--><p class="noindent" >Check that everything has worked with:
 </p>
      <!--l. 275-->
-     <div class="lstlisting" id="listing-17"><span class="label"><a 
- id="x1-2060r1"></a></span><span 
+     <div class="lstlisting" id="listing-16"><span class="label"><a 
+ id="x1-2059r1"></a></span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
 class="ectt-1000"> </span><span 
@@ -652,7 +639,7 @@ class="ecti-1000">upstream</span>. Something similar
 
                                                                   
 </p>
-     <pre class="verbatim" id="verbatim-3">
+     <pre class="verbatim" id="verbatim-4">
      origin   git@github.com:you_at_GitHub/intercom.git (fetch)
      origin   git@github.com:you_at_GitHub/intercom.git (push)
      upstream git@github.com:Tecnologias-multimedia/intercom.git (fetch)
@@ -678,19 +665,25 @@ class="ecti-1000">upstream</span>. Something similar
    <div class="thebibliography">
    <p class="bibitem" ><span class="biblabel">
  [1]<span class="bibsp">   </span></span><a 
- id="XGit-book"></a><a 
-href="https://git-scm.com/book/en/v2" >Git - Book</a>.
+ id="XGitHub"></a><a 
+href="https://github.com" >GitHub</a>.
    </p>
    <p class="bibitem" ><span class="biblabel">
  [2]<span class="bibsp">   </span></span><a 
- id="XGitHub"></a><a 
-href="https://github.com" >GitHub</a>.
+ id="Xfork-and-branch-git-workflow"></a><a 
+href="https://github.com/vicente-gonzalez-ruiz/fork_and_branch_git_workflow" >The Fork and Branch Git Workﬂow</a>.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [3]<span class="bibsp">   </span></span><a 
+ id="XGit-book"></a>Scott Chacon and Ben Straub. <a 
+href="https://git-scm.com/book/en/v2" ><span 
+class="ecti-1000">Pro Git</span></a>. Apress, 2020.
                                                                   
 
                                                                   
    </p>
    <p class="bibitem" ><span class="biblabel">
- [3]<span class="bibsp">   </span></span><a 
+ [4]<span class="bibsp">   </span></span><a 
  id="Xintercom"></a>The students of <a 
 href="https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN" >Tecnologías Multimedia</a> at the UAL.  The <a 
 href="https://github.com/Tecnologias-multimedia/intercom" >InterCom</a>
