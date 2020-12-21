@@ -8,7 +8,7 @@ The InterCom project \cite{intercom} is a real-time application with
 a high computational (specially in terms of CPU) demand. It is written
 in Python \cite{Python}, an interpreted languaje that has been
 ported \href{https://www.python.org/download/other/}{almost to all}
-the current OS, including
+the current OSs, including
 mobile \href{https://kivy.org/#home}{devices}.
 
 This milestone (the installation of a dedicated Linux distribution for
@@ -46,7 +46,7 @@ partition of your computer the instructions are almost the same):
     console}.
 
 \item Boot the image from the USB port. This step depends on your
-  computer. Most of PCs can chose the boot device by pressing the
+  computer. Most of PCs can choose the boot device by pressing the
   F12-key when the PC is booting. On a Mac, you need to keep pressed
   the alt-key when it is booting.
   
@@ -84,21 +84,21 @@ partition of your computer the instructions are almost the same):
   installer will ask you to do it. In this description, it has been
   supposed that your computer only has one hard disk.
 
-\item Chose \texttt{Download updates while installing Xubuntu} and
+\item Choose \texttt{Download updates while installing Xubuntu} and
   \texttt{Install third-party software for graphics and Wi-Fi hardware
     and additional media formats}, in order to have access to the
     ultimate software available for Ubuntu (and derivatives).
 
-\item Chose \texttt{Erase disk and install Xubuntu}. Ignore the
+\item Choose \texttt{Erase disk and install Xubuntu}. Ignore the
   Advanced features. Wait for a couple of minutes :-/
 
 \item Select the drive corresponding to the 8GB USB drive
-  (\texttt{/dev/sdc}). Don't chose \texttt{/dev/sda} (the main disk of
+  (\texttt{/dev/sdc}). Don't choose \texttt{/dev/sda} (the main disk of
   your computer)! Select \texttt{/dev/sdc}!!
 
 \item At this point of the installation you should consider (depending
   on the amount of RAM memory installed in your computer and the size
-  of the USB drive) to create an especific partition for doing
+  of the USB drive) to create an specific partition for doing
   swapping. The rule of the thumb is to create a partition with the
   same size that the RAM. However, probably you cannot do that in a
   8GB USB drive because at least 5GB are needed for a Xubuntu
@@ -113,7 +113,8 @@ partition of your computer the instructions are almost the same):
   want, and also check that the boot loader
   (\href{https://www.gnu.org/software/grub/}{GRUB}) will be installed
   in \texttt{/dev/sdc1}. But remember, all the actions described in
-  this point are optional.
+  this point are optional (except selecting \texttt{/dev/sdc1} for
+  GRUB)..
 
 \item Click on Install Now. Something similar to:
 
@@ -130,7 +131,7 @@ The following partitions are going to be formatted:
  partition #2 of SCSI8 (0,0,0) (sdc) as ext4
 \end{verbatim}
 
-\item Chose your time zone.
+\item Choose your time zone.
   
 \item Configure you personal account, hostname and logging process.
   
