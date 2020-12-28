@@ -35,14 +35,20 @@ that can be also written as
   \end{bmatrix},
   \label{eq:forward_transform_matrix_form2}
 \end{equation}
-where $x\in\mathbb{Z}^2$ is a stereo frame, $K$ is the (forward or analysis)
-transform matrix and $w=\begin{bmatrix} w_0 & w_1\end{bmatrix}^{\text
-  T}$ is the corresponding
+where $x\in\mathbb{Z}^2$ is a stereo frame, $K$ is the (forward or
+analysis) transform matrix and
+$w=\begin{bmatrix} w_0 & w_1\end{bmatrix}^{\text T}$ is the
+corresponding
 \href{https://en.wikipedia.org/wiki/Discrete_wavelet_transform#Example_in_image_processing}{decomposition}. In
 this particular transform, the decomposition has two
 \href{https://en.wikipedia.org/wiki/Sub-band_coding}{subbands} $w_0$
 and $w_1$, and each subband has only one
-\href{https://web.stanford.edu/class/ee398a/handouts/lectures/07-TransformCoding.pdf}{coefficient}.
+\href{https://web.stanford.edu/class/ee398a/handouts/lectures/07-TransformCoding.pdf}{coefficient}. Notice
+that $x\in\mathbb{Z}^2$ is a vector space\footnote{Adding two vectors
+  in the plane produces a third one also in the plane; mul- tiplying a
+  vector by a real scalar produces a second vector also in the
+  plane. These two ingrained facts make the real plane be a vector
+  space.~\cite{vetterli2014foundations}}.
 
 The proposed matrix $K$ corresponds to the transform used in
 \href{https://en.wikipedia.org/wiki/Joint_encoding#M/S_stereo_coding}{Mid/Side
