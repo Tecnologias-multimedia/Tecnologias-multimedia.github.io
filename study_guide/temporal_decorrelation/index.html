@@ -1338,7 +1338,7 @@ href="index11.html#fn10x0"><sup class="textsuperscript">10</sup></a></span><a
 ﬁlters can be <a 
 href="http://wavelets.pybytes.com/" >easely recognized</a> because they are always symmetric
 and because the analysis ﬁlters are diﬀerent to the synthesis ﬁlters
-(<!--l. 336--><math 
+(<!--l. 335--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >ϕ</mi><mo 
@@ -1346,7 +1346,7 @@ class="MathClass-rel">≠</mo><mover
 accent="true"><mrow 
 ><mi 
 >ϕ</mi></mrow><mo accent="true">̃</mo></mover></math> and
-<!--l. 337--><math 
+<!--l. 336--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >ψ</mi><mo 
@@ -1354,13 +1354,13 @@ class="MathClass-rel">≠</mo><mover
 accent="true"><mrow 
 ><mi 
 >ψ</mi></mrow><mo accent="true">̃</mo></mover></math>).
-</p><!--l. 339--><p class="indent" >   The linear transform is also invertible by simply reversing the steps: </p><table class="equation"><tr><td>
+</p><!--l. 338--><p class="indent" >   The linear transform is also invertible by simply reversing the steps: </p><table class="equation"><tr><td>
 <a 
  id="x1-9004r10"></a>
                                                                   
 
                                                                   
-<!--l. 340--><math 
+<!--l. 339--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
  <mtable  align="axis" style=""  
@@ -1458,23 +1458,23 @@ class="MathClass-punc">.</mo> </mtd></mtr><!--rcl--></mtable>
    <h4 class="subsectionHead"><span class="titlemark">1.9   </span> <a 
  id="x1-100001.9"></a><a 
 href="https://en.wikipedia.org/wiki/Lapped_transform" >Lapped transforms</a> for minimizing the distortion</h4>
-<!--l. 348--><p class="noindent" >A ﬁnal (and important) consideration about transform coding and quantization.
+<!--l. 347--><p class="noindent" >A ﬁnal (and important) consideration about transform coding and quantization.
 Transform coding implies splitting the signal into chunks, and computing the
 transform of each chunk. When the coeﬃcients are quantized, it is possible that
 signiﬁcative (and unpleasant) distortions may appear between the border samples of
 the chunks (see this <a 
 href="https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/quantization_DWT.ipynb" >notebook</a>). One simple solution is to use the last samples of the
-<!--l. 355--><math 
+<!--l. 354--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >i</mi> <mo 
 class="MathClass-bin">−</mo> <mn>1</mn></math>-th chunk and the ﬁrst samples
-of the <!--l. 356--><math 
+of the <!--l. 355--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >i</mi> <mo 
 class="MathClass-bin">+</mo> <mn>1</mn></math>-chunk for computing
-the transform of the <!--l. 357--><math 
+the transform of the <!--l. 356--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >i</mi></math>-th
@@ -1483,7 +1483,7 @@ href="https://en.wikipedia.org/wiki/Lapped_transform" >overlaping</a> does not i
 but only to avoid using an artiﬁcial <a 
 href="https://pywavelets.readthedocs.io/en/latest/ref/signal-extension-modes.html" >signal extension</a> at the limits of the chunks). The
 number of overlaped samples depends on the length of the ﬁlters and the number of
-levels <!--l. 364--><math 
+levels <!--l. 363--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >s</mi></math>
@@ -1492,14 +1492,14 @@ high impact on the decorrelation process, but take into consideration that,
 depending on the signal, usually happens that it is not worth decomposing
 the signal into the maximum number of subbands because the increase in
 the coding gain can be negligible beyond a number of levels (typically,
-<!--l. 369--><math 
+<!--l. 368--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mn>5</mn></math>).
-</p><!--l. 371--><p class="noindent" >
+</p><!--l. 370--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
  id="x1-110002"></a>What you have to do?</h3>
-<!--l. 373--><p class="noindent" >
+<!--l. 372--><p class="noindent" >
      </p><ol  class="enumerate1" >
      <li 
   class="enumerate" id="x1-11002x1">In   a   module   named   temporal_decorrelate.py,   inherit   the   class
@@ -1522,19 +1522,19 @@ href="https://pywavelets.readthedocs.io/en/latest/" >PyWavelets</a> and transfor
      <li 
   class="enumerate" id="x1-11007x3">Compare  the  RD  (Rate/Distortion)  curves  generated  by  the  modules
      br_control.py, stereo_decorrelate.py and temporal_decorrelate.py.</li></ol>
-<!--l. 390--><p class="noindent" >
+<!--l. 389--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-120003"></a>Timming</h3>
-<!--l. 392--><p class="noindent" >This is the ﬁnal milestone. Present your results in the exam time.
-</p><!--l. 394--><p class="noindent" >
+<!--l. 391--><p class="noindent" >This is the ﬁnal milestone. Present your results in the exam time.
+</p><!--l. 393--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-130004"></a>Deliverables</h3>
-<!--l. 396--><p class="noindent" >The module temporal.py. Store it at the <a 
+<!--l. 395--><p class="noindent" >The module temporal.py. Store it at the <a 
 href="https://github.com/Tecnologias-multimedia/intercom" >root directory</a> of your InterCom’s
 repo.
-</p><!--l. 400--><p class="noindent" >
+</p><!--l. 399--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-140005"></a>Resources</h3>
