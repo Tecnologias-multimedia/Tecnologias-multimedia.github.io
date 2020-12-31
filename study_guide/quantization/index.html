@@ -1,6 +1,6 @@
 <!DOCTYPE html> 
 <html> 
-<head> <title>TecnologÃŋas Multimedia - Study Guide - Milestone 10: Bit-rate Control through
+<head> <title>TecnologÃŋas Multimedia- Study Guide - Milestone 10: Bit-rate Control through
 Quantization</title> 
 <meta charset="UTF-8" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
@@ -22,7 +22,7 @@ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLor
                                                                   
 
 <h2 class="titleHead"><a 
-href="https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN" >Tecnologías Multimedia</a> - Study Guide -
+href="https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN" >Tecnologías Multimedia</a>- Study Guide -
 Milestone 10: Bit-rate Control through
 Quantization</h2>
  <div class="author" ><a 
@@ -39,23 +39,23 @@ class="ecrm-1200">- </span><a
 href="https://www.ual.es" ><span 
 class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
-class="ecrm-1200">December 15, 2020</span></div>
+class="ecrm-1200">December 31, 2020</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
-<!--l. 7--><p class="noindent" >
+<!--l. 8--><p class="noindent" >
 </p>
    <h4 class="subsectionHead"><span class="titlemark">1.1   </span> <a 
  id="x1-20001.1"></a>Quantization</h4>
-<!--l. 8--><p class="noindent" >This discussion is reﬀered only to the <a 
+<!--l. 9--><p class="noindent" >This discussion is reﬀered only to the <a 
 href="https://en.wikipedia.org/wiki/Quantization_(signal_processing)" >quantization</a> of digital signals.
-</p><!--l. 12--><p class="indent" >   At the hardware level, the samples of audio are usually represented using
+</p><!--l. 13--><p class="indent" >   At the hardware level, the samples of audio are usually represented using
 <a 
 href="https://en.wikipedia.org/wiki/Pulse-code_modulation" >PCM (Pulse Code Modulation)</a>. In a PCM sample, the number of levels that
 the signal can take depends on the <a 
 href="https://en.wikipedia.org/wiki/Audio_bit_depth" >number of bits/sample</a> (16 bits in our
 case).
-</p><!--l. 19--><p class="indent" >   Another key aspect to consider is that the processing that the <a 
+</p><!--l. 20--><p class="indent" >   Another key aspect to consider is that the processing that the <a 
 href="https://en.wikipedia.org/wiki/Auditory_system" >Human Auditory
 System (HAS)</a> performs to understand audio signals has several <a 
 href="https://en.wikipedia.org/wiki/Psychoacoustics" >sources of
@@ -67,7 +67,7 @@ will proﬁt of that fact to decrease the transmission bit-rate by sacriﬁcing
 quality. In most lossy compression systems, quantization is the only source of
 distortion <span class="cite">[<a 
 href="#Xtaubman2002jpeg2000">3</a>]</span>.
-</p><!--l. 32--><p class="indent" >   <a 
+</p><!--l. 33--><p class="indent" >   <a 
 href="https://en.wikipedia.org/wiki/Quantization_(signal_processing)" >Scalar Quantization</a> (SQ) is the process of decreasing the number of levels that a
 signal can take <span class="cite">[<a 
 href="#Xsayood2017introduction">2</a>]</span>. <a 
@@ -83,7 +83,7 @@ href="https://en.wikipedia.org/wiki/Quantization_(signal_processing)#Rate%E2%80%
                                                                   
 marginal in this context <span class="cite">[<a 
 href="#Xvetterli2014foundations">4</a>]</span>.
-</p><!--l. 45--><p class="indent" >   Quantizers can also be classiﬁed into <a 
+</p><!--l. 46--><p class="indent" >   Quantizers can also be classiﬁed into <a 
 href="https://en.wikipedia.org/wiki/Quantization_(signal_processing)#Mid-riser_and_mid-tread_uniform_quantizers" >uniform</a> and <a 
 href="https://nptel.ac.in/content/storage2/courses/117104069/chapter_5/5_5.html" >non-uniform</a> <span class="cite">[<a 
 href="#Xsayood2017introduction">2</a>, <a 
@@ -104,17 +104,17 @@ provides a good <a
 href="https://en.wikipedia.org/wiki/Rate%E2%80%93distortion_theory" >rate/distortion</a> trade-oﬀ. See <a 
 href="https://github.com/vicente-gonzalez-ruiz/quantization/blob/master/digital_quantization.ipynb" >this Jupyter notebook</a> for more
 information.
-</p><!--l. 68--><p class="noindent" >
+</p><!--l. 69--><p class="noindent" >
 </p>
    <h4 class="subsectionHead"><span class="titlemark">1.2   </span> <a 
  id="x1-30001.2"></a>Rate-control and distortion</h4>
-<!--l. 69--><p class="noindent" >The number of representation levels used by a quantizer depends
+<!--l. 70--><p class="noindent" >The number of representation levels used by a quantizer depends
 basically on the so called quantization step, typically denoted by
-<!--l. 71--><math 
+<!--l. 72--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >Δ</mi></math>. The
-higher the <!--l. 71--><math 
+higher the <!--l. 72--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >Δ</mi></math>,
@@ -122,8 +122,8 @@ the smaller the number of representation levels, and therefore, the higher the
 distortion generated by the quantization error (see <a 
 href="https://github.com/vicente-gonzalez-ruiz/quantization/blob/master/digital_quantization.ipynb" >the notebook</a>), and lileky, the
 smaller the output bit-rate.
-</p><!--l. 77--><p class="indent" >   The control of the bit-rate through the
-<!--l. 77--><math 
+</p><!--l. 78--><p class="indent" >   The control of the bit-rate through the
+<!--l. 78--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >Δ</mi></math> values
@@ -132,16 +132,16 @@ the jitter and the loss of packets when <a
 href="https://en.wikipedia.org/wiki/Network_congestion" >congestion</a> occurs. However, notice
 that depending of the entropy coding stage and the characteristics of the
 signal (variance, entropy) may not exist a clear relationship between the
-<!--l. 83--><math 
+<!--l. 84--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >Δ</mi></math> and
 the output bit-rate. This happens using DEFLATE.
-</p><!--l. 86--><p class="noindent" >
+</p><!--l. 87--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
  id="x1-40002"></a>What you have to do?</h3>
-<!--l. 88--><p class="noindent" >
+<!--l. 89--><p class="noindent" >
      </p><ol  class="enumerate1" >
      <li 
   class="enumerate" id="x1-4002x1">Create a class named BR_Control that inherits from Compression (the
@@ -155,7 +155,7 @@ the output bit-rate. This happens using DEFLATE.
   class="enumerate" id="x1-4004x2">Override the methods pack() and unpack(), which now whould implement:
 <a 
  id="x1-4005r1"></a>
-     <!--l. 111--><p class="noindent" ><div class="minipage"><span 
+     <!--l. 112--><p class="noindent" ><div class="minipage"><span 
 class="ecbx-1000">Algorithm</span>
 <span 
 class="ecbx-1000">2.1:</span> <span 
@@ -180,11 +180,11 @@ class="small-caps">e</span><span
 class="small-caps">r</span><span 
 class="small-caps">C</span><span 
 class="small-caps">o</span><span 
-class="small-caps">m</span></span>(<!--l. 96--><math 
+class="small-caps">m</span></span>(<!--l. 97--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 > </mi></math>)<br 
-class="newline" />  <!--l. 96--><math 
+class="newline" />  <!--l. 97--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" > <mtable  align="axis" style=""  
 equalrows="false" columnlines="none" equalcolumns="false" class="array"> <mtr><mtd 
@@ -268,36 +268,36 @@ class="array"  columnalign="left"><mspace width="4.3045pt"/>                    
      </p></li>
      <li 
   class="enumerate" id="x1-4007x3">Determine  the  quantization  step
-     <!--l. 113--><math 
+     <!--l. 114--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >Δ</mi></math> used in the
-     <!--l. 114--><math 
+     <!--l. 115--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle 
 class="text"><mtext  >quantize()</mtext></mstyle></math> method depending
      on the <a 
-href="https://en.wikipedia.org/wiki/Throughput" >throughput</a> <!--l. 115--><math 
+href="https://en.wikipedia.org/wiki/Throughput" >throughput</a> <!--l. 116--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >B</mi></math>
      of the communication link. Your implementation should consider that
-     <!--l. 117--><math 
+     <!--l. 118--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >B</mi></math>
      can be time-variying, and should maximize the QoE.
      </li></ol>
-<!--l. 129--><p class="noindent" >
+<!--l. 130--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-50003"></a>Timming</h3>
-<!--l. 131--><p class="noindent" >Please, ﬁnish this milestone at most in two weeks.
-</p><!--l. 133--><p class="noindent" >
+<!--l. 132--><p class="noindent" >Please, ﬁnish this milestone at most in two weeks.
+</p><!--l. 134--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-60004"></a>Deliverables</h3>
-<!--l. 135--><p class="noindent" >
+<!--l. 136--><p class="noindent" >
      </p><ol  class="enumerate1" >
      <li 
   class="enumerate" id="x1-6002x1">A Python module named br_control.py stored in the <a 
@@ -311,7 +311,7 @@ href="https://github.com/Tecnologias-multimedia/intercom" >root directory</a> of
   class="enumerate" id="x1-6004x2">A video demonstration of 3 minutes (at most) showing how quantize.py
      adapts to the variations of the throughput of the link (use <a 
 href="https://man7.org/linux/man-pages/man8/tc.8.html" >tc</a>).</li></ol>
-<!--l. 144--><p class="noindent" >
+<!--l. 145--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-70005"></a>Resources</h3>

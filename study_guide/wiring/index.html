@@ -1,7 +1,7 @@
 <!DOCTYPE html> 
 <html> 
-<head> <title>TecnologÃŋas Multimedia - Study Guide - Milestone 4: “wiring” the ADC with
-the DAC and measuring latencies</title> 
+<head> <title>TecnologÃŋas Multimedia- Study Guide - Milestone 4: “wiring” the ADC with the
+DAC and measuring latencies</title> 
 <meta charset="UTF-8" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <link rel="stylesheet" type="text/css" href="index.css" /> 
@@ -22,7 +22,7 @@ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLor
                                                                   
 
 <h2 class="titleHead"><a 
-href="https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN" >Tecnologías Multimedia</a> - Study Guide -
+href="https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN" >Tecnologías Multimedia</a>- Study Guide -
 Milestone 4: “wiring” the ADC with the DAC
 and measuring latencies</h2>
  <div class="author" ><a 
@@ -39,11 +39,11 @@ class="ecrm-1200">- </span><a
 href="https://www.ual.es" ><span 
 class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
-class="ecrm-1200">October 7, 2020</span></div>
+class="ecrm-1200">December 31, 2020</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
-<!--l. 7--><p class="noindent" >Let’s start our development of InterCom with a simple program that inputs digital
+<!--l. 8--><p class="noindent" >Let’s start our development of InterCom with a simple program that inputs digital
 audio (through the <a 
 href="https://en.wikipedia.org/wiki/Analog-to-digital_converter" >ADC</a> of your computer) and, as soon as possible, outputs it
 (through the <a 
@@ -56,11 +56,11 @@ class="ectt-1000">sounddevice</span></a> <span class="cite">[<a
 href="#Xsounddevice">1</a>]</span>,
 that is wrapper for the <a 
 href="http://www.portaudio.com/" >PortAudio</a> library.
-</p><!--l. 21--><p class="noindent" >
+</p><!--l. 22--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
  id="x1-20002"></a>What you have to do?</h3>
-<!--l. 23--><p class="noindent" >
+<!--l. 24--><p class="noindent" >
      </p><ol  class="enumerate1" >
      <li 
   class="enumerate" id="x1-2002x1">Refresh some (probably high-school) ideas about <a 
@@ -79,7 +79,7 @@ href="https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/t
                                                                   
 
                                                                   
-     <!--l. 39-->
+     <!--l. 40-->
      <div class="lstlisting" id="listing-1"><span class="label"><a 
  id="x1-2005r1"></a></span><span 
 class="ectt-1000"> </span><span 
@@ -134,10 +134,10 @@ class="ectt-1000">.</span><span
 class="ectt-1000">py</span>
      
      </div>
-     <!--l. 44--><p class="noindent" >This module implements the algorithm:
+     <!--l. 45--><p class="noindent" >This module implements the algorithm:
 <a 
  id="x1-2007r1"></a>
-     </p><!--l. 46--><p class="noindent" ><!--l. 46--><math 
+     </p><!--l. 47--><p class="noindent" ><!--l. 47--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" > <mfenced separators="" 
 open="{"  close="" ><mrow> <mtable  align="axis" style=""  
@@ -218,7 +218,7 @@ class="array"  columnalign="right"><mstyle
    id="x1-2009r2"  class="label" ></mstyle><!--endlabel--><mspace width="74.438pt"/>                      <mstyle 
 class="mbox"><mtext  >(2)</mtext></mstyle></mtd></mtr><!--@{}lr@{}--></mtable>                            </mrow></mfenced>  </mtd></mtr>
 <!--@{}lr@{}--></mtable>                                                                                                                              </mrow></mfenced></math>
-     </p><!--l. 57--><p class="noindent" >where (1) captures <!--l. 57--><math 
+     </p><!--l. 58--><p class="noindent" >where (1) captures <!--l. 58--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mi 
 >C</mi><mi 
@@ -232,7 +232,7 @@ class="text"><mtext  >_</mtext></mstyle><mi
 >Z</mi><mi 
 >E</mi></mstyle></math>
      frames from the sound card, and (2) plays the chunk of frames
-     <!--l. 59--><math 
+     <!--l. 60--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mi 
 >c</mi><mi 
@@ -259,7 +259,7 @@ class="ectt-1000">sounddevice </span>a frame is a collection of one or more samp
   class="enumerate" id="x1-2013x4">OK, run it (remember to activate ﬁrst the virtual environment <span 
 class="ectt-1000">tm </span>before using
      Python), with:
-     <!--l. 77-->
+     <!--l. 78-->
      <div class="lstlisting" id="listing-2"><span class="label"><a 
  id="x1-2014r1"></a></span><span 
 class="ectt-1000"> </span><span 
@@ -286,14 +286,14 @@ class="ectt-1000">py</span>
      <li 
   class="enumerate" id="x1-2017x5">Now, lets compute, experimentally, the <span 
 class="ectt-1000">wire3.py </span>latency.
-     <!--l. 95--><p class="noindent" >
+     <!--l. 96--><p class="noindent" >
          </p><ol  class="enumerate2" >
          <li 
   class="enumerate" id="x1-2019x1">First, we need the tools <a 
 href="http://sox.sourceforge.net/" >SoX</a>, <a 
 href="https://www.audacityteam.org/" >Audacity</a> and <a 
 href="https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire3.py" >wire3.py</a>:
-         <!--l. 99-->
+         <!--l. 100-->
                                                                   
 
                                                                   
@@ -382,7 +382,7 @@ class="ectt-1000">py</span>
          </li>
          <li 
   class="enumerate" id="x1-2025x2">Run:
-         <!--l. 108-->
+         <!--l. 109-->
          <div class="lstlisting" id="listing-4"><span class="label"><a 
  id="x1-2026r1"></a></span><span 
 class="ectt-1000"> </span><span 
@@ -409,14 +409,14 @@ class="ectt-1000">.</span><span
 class="ectt-1000">py</span>
          
          </div>
-         <!--l. 113--><p class="noindent" >and check that the gain of the mic does not produce <a 
+         <!--l. 114--><p class="noindent" >and check that the gain of the mic does not produce <a 
 href="https://en.wikipedia.org/wiki/Clipping_(audio)" >clipping</a> during the
          sound recording.
          </p></li>
          <li 
   class="enumerate" id="x1-2029x3"><a 
  id="x1-20283"></a> In a terminal, run:
-         <!--l. 119-->
+         <!--l. 120-->
          <div class="lstlisting" id="listing-5"><span class="label"><a 
  id="x1-2030r1"></a></span><span 
 class="ectt-1000"> </span><span 
@@ -431,7 +431,7 @@ class="ectt-1000">.</span><span
 class="ectt-1000">py</span>
          
          </div>
-         <!--l. 123--><p class="noindent" >while you control the output volume of the speakers to produce a decaying
+         <!--l. 124--><p class="noindent" >while you control the output volume of the speakers to produce a decaying
          coupling eﬀect between both devices (the speaker(s) and the mic). If your
          desktop has not these <a 
 href="https://en.wikipedia.org/wiki/Transducer" >transducers</a>, we can use a <a 
@@ -442,7 +442,7 @@ href="https://www.google.com/search?q=male+to+male+audio+jack+cable&client=firef
          <li 
   class="enumerate" id="x1-2032x4">In a diﬀerent terminal (keep <span 
 class="ectt-1000">python wire3.py </span>running), run:
-         <!--l. 135-->
+         <!--l. 136-->
          <div class="lstlisting" id="listing-6"><span class="label"><a 
  id="x1-2033r1"></a></span><span 
 class="ectt-1000"> </span><span 
@@ -464,7 +464,7 @@ class="ectt-1000">.</span><span
 class="ectt-1000">wav</span>
          
          </div>
-         <!--l. 139--><p class="noindent" >to save the ADC’s output to a ﬁle.
+         <!--l. 140--><p class="noindent" >to save the ADC’s output to a ﬁle.
          </p></li>
          <li 
   class="enumerate" id="x1-2035x5">While <span 
@@ -490,7 +490,7 @@ class="ectt-1000">python wire3.pt </span>with CTRL+C.
          </li>
          <li 
   class="enumerate" id="x1-2041x8">Load the sound ﬁle into Audacity:
-         <!--l. 155-->
+         <!--l. 156-->
          <div class="lstlisting" id="listing-7"><span class="label"><a 
  id="x1-2042r1"></a></span><span 
 class="ectt-1000"> </span><span 
@@ -525,7 +525,7 @@ href="https://manual.audacityteam.org/man/edit_toolbar.html#zoom_to_selection" >
 class="ectt-1000">wire3.py</span>.
          </li>
          <li 
-  class="enumerate" id="x1-2052x13">Modify the constant <!--l. 175--><math 
+  class="enumerate" id="x1-2052x13">Modify the constant <!--l. 176--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mi 
 >C</mi><mi 
@@ -558,14 +558,14 @@ class="ectt-1000">latency_vs_chunk_size.txt</span>) with the content (use tabula
          4096            ...
          8192            ...
 </pre>
-         <!--l. 190--><p class="nopar" >
+         <!--l. 191--><p class="nopar" >
 </p>
          </li></ol>
      </li>
      <li 
   class="enumerate" id="x1-2054x6">At this point, we know the real latency of <span 
 class="ectt-1000">wire3.py </span>as a function of
-     <!--l. 195--><math 
+     <!--l. 196--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mi 
 >C</mi><mi 
@@ -580,7 +580,7 @@ class="text"><mtext  >_</mtext></mstyle><mi
 >E</mi></mstyle></math>.
      Plot the ﬁle <span 
 class="ectt-1000">latency_vs_chunk_size.txt </span>with:
-     <!--l. 198-->
+     <!--l. 199-->
      <div class="lstlisting" id="listing-8"><span class="label"><a 
  id="x1-2055r1"></a></span><span 
 class="ectt-1000"> </span><span 
@@ -674,7 +674,7 @@ class="ectt-1000">gnuplot</span>
      </li>
      <li 
   class="enumerate" id="x1-2058x7">Let’s compute now the buﬀering latency of a chunk (the chunk-time). If
-     <!--l. 204--><math 
+     <!--l. 205--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mi 
 >s</mi><mi 
@@ -693,7 +693,7 @@ class="text"><mtext  >_</mtext></mstyle><mi
      is the number of frames per second, it holds that:
      <table class="equation"><tr><td> <a 
  id="x1-2059r1"></a>
-     <!--l. 207--><math 
+     <!--l. 208--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
                  <mstyle mathvariant="monospace"><mi 
@@ -743,7 +743,7 @@ class="text"><mtext  >_</mtext></mstyle><mi
                                                                   
 
                                                                   
-     <!--l. 211--><p class="noindent" >Add these calculations to <span 
+     <!--l. 212--><p class="noindent" >Add these calculations to <span 
 class="ectt-1000">latency_vs_chunk_size.txt </span>using a third column
      (remember to use TABs).
                                                                   
@@ -754,11 +754,11 @@ class="ectt-1000">latency_vs_chunk_size.txt </span>using a third column
      # CHUNK_SIZE    real    minimal
      :               :       :
 </pre>
-     <!--l. 216--><p class="nopar" >
+     <!--l. 217--><p class="nopar" >
      </p></li>
      <li 
   class="enumerate" id="x1-2061x8">Plot both latencies:
-     <!--l. 220-->
+     <!--l. 221-->
      <div class="lstlisting" id="listing-9"><span class="label"><a 
  id="x1-2062r1"></a></span><span 
 class="ectt-1000"> </span><span 
@@ -872,7 +872,7 @@ class="ectt-1000">gnuplot</span>
      </li>
      <li 
   class="enumerate" id="x1-2064x9">Which seems to be the minimal practical latency (the latency obtained when
-     <!--l. 225--><math 
+     <!--l. 226--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mi 
 >C</mi><mi 
@@ -889,18 +889,18 @@ class="MathClass-rel">=</mo> <mn>1</mn></math>)
      in your computer? Justify your answers. <a 
  id="x1-20639"></a>
      </li></ol>
-<!--l. 230--><p class="noindent" >
+<!--l. 231--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-30003"></a>Timming</h3>
-<!--l. 232--><p class="noindent" >You should reach this milestone at most in one week.
-</p><!--l. 234--><p class="noindent" >
+<!--l. 233--><p class="noindent" >You should reach this milestone at most in one week.
+</p><!--l. 235--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-40004"></a>Deliverables</h3>
-<!--l. 236--><p class="noindent" >Answer the question enunciated in the Step  <a 
+<!--l. 237--><p class="noindent" >Answer the question enunciated in the Step  <a 
 href="#x1-20639">9<!--tex4ht:ref: question --></a>.
-</p><!--l. 238--><p class="noindent" >
+</p><!--l. 239--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-50005"></a>Resources</h3>
