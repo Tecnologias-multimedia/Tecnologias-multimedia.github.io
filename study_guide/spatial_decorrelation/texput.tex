@@ -129,7 +129,7 @@ Therefore,
   \label{eq:inverse_transform_matrix_form}
 \end{equation}
 
-\subsection{Orthogonalizy of the transform}
+\subsection{Orthogonality of the transform}
 As can be seen (previously ignoring the $\frac{1}{2}$ scale factor)
 the inverse transform is the transpose of the forward transform
 ($K^{-1}=K^{\text T}$). This is a characteristic of all
@@ -186,7 +186,7 @@ $K_1=\begin{bmatrix} 1 & -1\end{bmatrix}$~, and as we can see
   \begin{bmatrix}
     1 & -1
   \end{bmatrix}
-   = 0,
+   = 1\times 1 + 1\times -1 = 0,
 \end{equation}
 which means that the filters $K_0$ and $K_1$ are linearly
 independent\footnote{In terms of orthogonality, this means that we
@@ -301,7 +301,7 @@ filter $K_i$. Thus
 
 \begin{equation}
   \begin{array}{l}
-    \left\| K_0 \right\|_2 := \sqrt{\langle \begin{bmatrix}1 & 1\end{bmatrix}, \begin{bmatrix}1 & 1\end{bmatrix} \rangle} = \sqrt{\begin{bmatrix}1 & 1\end{bmatrix}\cdot \begin{bmatrix}1 & 1\end{bmatrix}} = \sqrt{2},\\
+    \left\| K_0 \right\|_2 := \sqrt{\langle \begin{bmatrix}1 & 1\end{bmatrix}, \begin{bmatrix}1 & 1\end{bmatrix} \rangle} = \sqrt{\begin{bmatrix}1 & 1\end{bmatrix} \cdot \begin{bmatrix}1 & 1\end{bmatrix}} = \sqrt{2},\\
     \left\| K_1 \right\|_2 := \sqrt{\langle \begin{bmatrix}1 & -1\end{bmatrix}, \begin{bmatrix}1 & -1\end{bmatrix} \rangle} = \sqrt{\begin{bmatrix}1 & -1\end{bmatrix}\cdot \begin{bmatrix}1 & -1\end{bmatrix}} = \sqrt{2},
   \end{array}
 \end{equation}
