@@ -68,8 +68,8 @@ Figure~\ref{fig:PRFB}, and this
 the other hand, the synthesis transform matrix $K^{-1}$ denotes the
 taps of the corresponding synthesis FB that allows to recover $x$
 (notice that in the figure, $x=l^i$, $w_0=l^{i+1}$, $w_1=h^{i+1}$,
-$\phi=K_0$, $\psi=K_1$, $\tilde\phi=K^{-1}_0$, and
-$\tilde\psi=K^{-1}_1$).
+$\tilde\phi=K_0$, $\tilde\psi=K_1$, $\phi=K^{-1}_0$, and
+$\psi=K^{-1}_1$).
 
 % An intro to PRFBs
 Let's suppose now that the filters (represented by the taps of) $K_0$
@@ -292,16 +292,16 @@ response of the analysis low-pass filter ($K_0$ in the MST) to the
   impulse}\footnote{The response of a filter to the unit impulse
   characterize the filter because the output of the filter is the set
   of taps of the filter.} is known as the scaling function and is
-usually denoted by $\phi$, the response of the analysis high-pass
+usually denoted by $\tilde\phi$, the response of the analysis high-pass
 filter ($K_1$) is known as the wavelet function and it is usually
-denoted by $\psi$, the response of the synthesis low-pass filter
-($K^{-1}_0$) is denoted by $\tilde\phi$ and the synthesis high-pass
-filter ($K^{-1}_1$) is represented by $\tilde\psi$.
+denoted by $\tilde\psi$, the response of the synthesis low-pass filter
+($K^{-1}_0$) is denoted by $\phi$ and the synthesis high-pass
+filter ($K^{-1}_1$) is represented by $\psi$.
 
-For the MST it holds that $\phi\bot\psi$, that $\phi=\tilde\psi$ and
-that $\psi=\tilde\phi$, and this is also true for all orthogonal
-DWTs. Another important characteristic of orthogonal DWTs is that the
-filters cannot be
+For the MST it holds that $\tilde\phi\bot\tilde\psi$, that
+$\tilde\phi=\psi$ and that $\tilde\psi=\phi$, and this is also true
+for all orthogonal DWTs. Another important characteristic of
+orthogonal DWTs is that the filters cannot be
 \href{https://en.wikipedia.org/wiki/Symmetry}{symmetric}.\footnote{The
   symmetry of the filters is important to produce the same type of
   artifacts in the boundaries of the signal.}
@@ -333,8 +333,8 @@ Biorthogonal\footnote{All transforms express a change of basis. When
   transform is said biorthogonal.~\cite{vetterli2014foundations}}
 filters can be \href{http://wavelets.pybytes.com/}{easely recognized}
 because they are always symmetric and because the analysis filters are
-different to the synthesis filters ($\phi\ne\tilde{\phi}$ and
-$\psi\ne\tilde{\psi}$).
+different to the synthesis filters ($\tilde\phi\ne\phi$ and
+$\tilde\psi\ne\psi$).
 
 The linear transform is also invertible by simply reversing the steps:
 \begin{equation}
