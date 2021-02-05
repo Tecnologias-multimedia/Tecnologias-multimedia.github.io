@@ -67,7 +67,7 @@ Figure~\ref{fig:PRFB}, and this
 \href{https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/PRFB.ipynb}{notebook}). On
 the other hand, the synthesis transform matrix $K^{-1}$ denotes the
 taps of the corresponding synthesis FB that allows to recover $x$
-(notice that in the figure, $x=l^i$, $w_0=l^{i+1}$, $w_1=h^{i+1}$,
+(notice that in the figure, $x=L^i$, $w_0=L^{i+1}$, $w_1=H^{i+1}$,
 $\tilde\phi=K_0$, $\tilde\psi=K_1$, $\phi=K^{-1}_0$, and
 $\psi=K^{-1}_1$).
 
@@ -213,23 +213,23 @@ DWT using the MST filters and lifting.
   previous milestone) as
   \begin{equation}
     \begin{array}{rcl}
-      l^1_i & = & x_{2i} + x_{2i+1} \\
-      h^1_i & = & x_{2i+1} - x_{2i},
+      L^1_i & = & x_{2i} + x_{2i+1} \\
+      H^1_i & = & x_{2i+1} - x_{2i},
     \end{array}
     \label{eq:1dwt}
   \end{equation}
   where the $s$-th subband $z^s=\{z_i^s~|~0\le i\le 2^{n-s}\}$, being
-  $2^n=N$ the number of samples in $x$, and where, by definition, $l^0=x$,
-  the original resolution level of the signal. The subbands $l^1$ and
-  $h^1$ computed by Eq.~\ref{eq:1dwt} are the same than the decimated
+  $2^n=N$ the number of samples in $x$, and where, by definition, $L^0=x$,
+  the original resolution level of the signal. The subbands $L^1$ and
+  $H^1$ computed by Eq.~\ref{eq:1dwt} are the same than the decimated
   subbands computed by a 1-levels PRFB (based on that filters), and we
   say, therefore, that Eq.~\ref{eq:1dwt} computes the 1-levels DWT.
 
   Based on the 1-levels DWT, we define the 2-levels DWT as
   \begin{equation}
     \begin{array}{rcl}
-      l^2_i & = & l^1_{2i} + l^1_{2i+1} \\
-      h^2_i & = & l^1_{2i+1} - l^1_{2i},
+      L^2_i & = & L^1_{2i} + L^1_{2i+1} \\
+      H^2_i & = & L^1_{2i+1} - L^1_{2i},
     \end{array}
     \label{eq:2dwt}
   \end{equation}
@@ -238,8 +238,8 @@ DWT using the MST filters and lifting.
   In general, for a $s$-levels DWT, we get
     \begin{equation}
     \begin{array}{rcl}
-      l^s_i & = & l^{s-1}_{2i} + l^{s-1}_{2i+1} \\
-      h^s_i & = & l^{s-1}_{2i+1} - l^{s-1}_{2i}.
+      L^s_i & = & L^{s-1}_{2i} + L^{s-1}_{2i+1} \\
+      H^s_i & = & L^{s-1}_{2i+1} - L^{s-1}_{2i}.
     \end{array}
     \label{eq:2dwt}
   \end{equation}
@@ -247,9 +247,9 @@ DWT using the MST filters and lifting.
   The $s$-levels DWT splits the signal spectrum in $s+1$ subbands. If
   $s=n$, we have the spectrum partition
   \begin{equation*}
-    | l^s_0 | h^s_0 | h^{s-1}_0 h^{s-1}_1 | h^{s-2}_0 h^{s-2}_1 h^{s-2}_2 h^{s-2}_3 | \cdots | h^1_0 h^1_1 \cdots h^1_{2^{n-1}-1} |,
+    | L^s_0 | H^s_0 | H^{s-1}_0 H^{s-1}_1 | H^{s-2}_0 H^{s-2}_1 H^{s-2}_2 H^{s-2}_3 | \cdots | H^1_0 H^1_1 \cdots H^1_{2^{n-1}-1} |,
   \end{equation*}
-  where\footnote{The coefficient $l^s_0$ is called the DC (Direct
+  where\footnote{The coefficient $L^s_0$ is called the DC (Direct
     Current) coefficient, and the rest of $h$ coefficients are called
     AC (Alternating Current) coefficients.} it holds that
   \begin{equation}
@@ -264,22 +264,22 @@ DWT using the MST filters and lifting.
     samples (usually, the values used to predict) and the odd samples
     (usually, the values predicted). For the MST filters, we have that
     \begin{equation}
-      h^s_i = l^{s-1}_{2i+1} - l^{s-1}_{2i}.
+      H^s_i = L^{s-1}_{2i+1} - L^{s-1}_{2i}.
     \end{equation}
     
   \item An \textbf{update step}, which computes the $l$ subbands
     considering (only) the even samples and the prediction errors. For
     the MST, we have that
     \begin{equation}
-      l^s_i = 2l^{s-1}_{2i} + h^s_i.
+      L^s_i = 2L^{s-1}_{2i} + H^s_i.
     \end{equation}
   \end{enumerate}
 
   Notice that these steps are invertible:
   \begin{equation}
     \begin{array}{rcl}
-      l^{s-1}_{2i} & = & \frac{1}{2}(l^s_i - h^s_i)\\
-      l^{s-1}_{2i+1} & = & l^{s-1}_{2i} + h^s_i.
+      L^{s-1}_{2i} & = & \frac{1}{2}(L^s_i - H^s_i)\\
+      L^{s-1}_{2i+1} & = & L^{s-1}_{2i} + H^s_i.
     \end{array}
   \end{equation}
 
@@ -316,11 +316,11 @@ which we are using an 1-order predictor for removing the temporal
 redundancy. Let's extend the idea of lifting to a prediction of order
 two. For that, we define the predict step as
 \begin{equation}
-  h^s_i = l^{s-1}_{2i+1} - \frac{1}{2}(l^{s-1}_{2i} + l^{s-1}_{2i+2})
+  H^s_i = L^{s-1}_{2i+1} - \frac{1}{2}(L^{s-1}_{2i} + L^{s-1}_{2i+2})
 \end{equation}
 and the update step as
 \begin{equation}
-  l^s_i = l^{s-1}_{2i} + \frac{1}{4}(h^s_{i-1} + h^s_i),
+  L^s_i = L^{s-1}_{2i} + \frac{1}{4}(H^s_{i-1} + H^s_i),
 \end{equation}
 where the factor 1/4 is used to preserve the
 energy~\cite{sweldens1997building}. This transform is known as the
@@ -339,8 +339,8 @@ $\phi\bot\tilde\psi$.
 The linear transform is also invertible by simply reversing the steps:
 \begin{equation}
   \begin{array}{rcl}
-    l^{s-1}_{2i} & = & l^s_i - \frac{1}{4}(h^s_{i-1} + h^s_i)\\
-    l^{s-1}_{2i+1} & = & h^s_i + \frac{1}{2}(l^{s-1}_{2i} + l^{s-1}_{2i+2}).
+    L^{s-1}_{2i} & = & L^s_i - \frac{1}{4}(H^s_{i-1} + H^s_i)\\
+    L^{s-1}_{2i+1} & = & H^s_i + \frac{1}{2}(L^{s-1}_{2i} + L^{s-1}_{2i+2}).
   \end{array}
 \end{equation}
 
