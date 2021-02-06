@@ -39,7 +39,7 @@ class="ecrm-1200">- </span><a
 href="https://www.ual.es" ><span 
 class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
-class="ecrm-1200">February 5, 2021</span></div>
+class="ecrm-1200">February 6, 2021</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
@@ -1459,89 +1459,64 @@ class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msubsup
 class="MathClass-close">&#x0029;</mo><mo 
 class="MathClass-punc">.</mo> </mtd></mtr><!--rcl--></mtable>
 </math></td><td class="eq-no">&#x0028;10&#x0029;</td></tr></table>
-   <h4 class="subsectionHead"><span class="titlemark">1.9   </span> <a 
- id="x1-100001.9"></a><a 
-href="https://en.wikipedia.org/wiki/Lapped_transform" >Lapped transforms</a> for minimizing the distortion</h4>
-<!--l. 348--><p class="noindent" >A &#xFB01;nal &#x0028;and important&#x0029; consideration about transform coding and quantization.
-Transform coding implies splitting the signal into chunks, and computing the
-transform of each chunk. When the coe&#xFB03;cients are quantized, it is possible that
-signi&#xFB01;cative &#x0028;and unpleasant&#x0029; distortions may appear between the border samples of
-the chunks &#x0028;see this <a 
-href="https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/quantization_DWT.ipynb" >notebook</a>&#x0029;. One simple solution is to use the last samples of the
-<!--l. 355--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->i</mi> <mo 
-class="MathClass-bin">&#x2212;</mo> <mn>1</mn></math>-th chunk and the &#xFB01;rst samples
-of the <!--l. 356--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->i</mi> <mo 
-class="MathClass-bin">+</mo> <mn>1</mn></math>-chunk for computing
-the transform of the <!--l. 357--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->i</mi></math>-th
-chunk &#x0028;notice that this <a 
-href="https://en.wikipedia.org/wiki/Lapped_transform" >overlaping</a> does not imply to generate more transform coe&#xFB03;cients,
-but only to avoid using an arti&#xFB01;cial <a 
-href="https://pywavelets.readthedocs.io/en/latest/ref/signal-extension-modes.html" >signal extension</a> at the limits of the chunks&#x0029;. The
-number of overlaped samples depends on the length of the &#xFB01;lters and the number of
-levels <!--l. 364--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->s</mi></math>
-of the DWT. This last parameter &#x0028;the number of levels of the DWT&#x0029; has also a
-high impact on the decorrelation process, but take into consideration that,
-depending on the signal, usually happens that it is not worth decomposing
-the signal into the maximum number of subbands because the increase in
-the coding gain can be negligible beyond a number of levels &#x0028;typically,
-<!--l. 369--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mn>5</mn></math>&#x0029;.
-</p><!--l. 371--><p class="noindent" >
-</p>
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
- id="x1-110002"></a>What you have to do?</h3>
-<!--l. 373--><p class="noindent" >
+ id="x1-100002"></a>What you have to do?</h3>
+<!--l. 349--><p class="noindent" >
      </p><ol  class="enumerate1" >
      <li 
-  class="enumerate" id="x1-11002x1">In   a   module   named   temporal_decorrelate.py,   inherit   the   class
-     Stereo_decorrelation and create a class named Temporal_decorrelation.
+  class="enumerate" id="x1-10002x1">In   a   module   named   temporal_decorrelate.py,   inherit   the   class
+     Stereo_decorrelation de&#xFB01;ned in stereo_decorrelate.py, and create a class
+     named Temporal_decorrelation.
      </li>
      <li 
-  class="enumerate" id="x1-11004x2">Select a suitable<span class="footnote-mark"><a 
+  class="enumerate" id="x1-10004x2">Select a suitable<span class="footnote-mark"><a 
 href="index12.html#fn11x0"><sup class="textsuperscript">11</sup></a></span><a 
- id="x1-11005f11"></a> 
-                                                                  
-
-                                                                  
-     DWT from <a 
-href="https://pywavelets.readthedocs.io/en/latest/" >PyWavelets</a> and transform the MST subbands. Take also into
-     consideration that the signal should be processed using overlaped chunks
-     in order to minimize the discontinuities of the reconstructed signal at the
-     chunk boundaries, when the DWT coe&#xFB03;cients are quantized. Obviously,
+ id="x1-10005f11"></a> 
+     DWT  from  <a 
+href="https://pywavelets.readthedocs.io/en/latest/" >PyWavelets</a>  and  transform  the  MST  subbands.  Obviously,
      implement also the inverse stu&#xFB00; for recovering the audio signal.
      </li>
      <li 
-  class="enumerate" id="x1-11007x3">Compare  the  RD  &#x0028;Rate/Distortion&#x0029;  curves  generated  by  the  modules
-     br_control.py, stereo_decorrelate.py and temporal_decorrelate.py.</li></ol>
-<!--l. 390--><p class="noindent" >
+  class="enumerate" id="x1-10007x3">Compare the RD &#x0028;Rate/Distortion&#x0029; curves generated by the modules br_control.py
+     &#x0028;that only provides quantization in the original audio domain&#x0029;, stereo_decorrelate.py
+     &#x0028;that apply quantization on the transformed frames, that form two subbands
+     <!--l. 362--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>M</mi></math>
+     &#x0028;mid&#x0029; and <!--l. 362--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>S</mi></math>
+     &#x0028;side&#x0029;&#x0029; and temporal_decorrelate.py &#x0028;that apply quantization on the DWT
+     of the <!--l. 364--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>M</mi></math>
+     and <!--l. 364--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>S</mi></math>
+     subbands&#x0029;.</li></ol>
+<!--l. 367--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
- id="x1-120003"></a>Timming</h3>
-<!--l. 392--><p class="noindent" >This is the &#xFB01;nal milestone. Present your results in the exam time.
-</p><!--l. 394--><p class="noindent" >
+ id="x1-110003"></a>Timming</h3>
+<!--l. 369--><p class="noindent" >Please, present your results in one week..
+                                                                  
+
+                                                                  
+</p><!--l. 371--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
- id="x1-130004"></a>Deliverables</h3>
-<!--l. 396--><p class="noindent" >The module temporal.py. Store it at the <a 
+ id="x1-120004"></a>Deliverables</h3>
+<!--l. 373--><p class="noindent" >The module temporal.py. Store it at the <a 
 href="https://github.com/Tecnologias-multimedia/intercom" >root directory</a> of your InterCom&#x2019;s
 repo.
-</p><!--l. 400--><p class="noindent" >
+</p><!--l. 377--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
- id="x1-140005"></a>Resources</h3>
+ id="x1-130005"></a>Resources</h3>
    <div class="thebibliography">
    <p class="bibitem" ><span class="biblabel">
  &#x005B;1&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
@@ -1563,9 +1538,6 @@ class="ecti-1000">Introduction to data compression</span></a>. Morgan Kaufmann, 
 href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.54.5600&rep=rep1&type=pdf" >Building Your Own Wavelets at Home</a>.
    <span 
 class="ecti-1000">Wavelets in Computer Graphics</span>, 1997.
-                                                                  
-
-                                                                  
    </p>
    <p class="bibitem" ><span class="biblabel">
  &#x005B;4&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
@@ -1576,7 +1548,7 @@ class="ecti-1000">Wavelets  and  Subband  Coding</span></a>.
 </p>
    </div>
 <a 
- id="Q1-1-15"></a>
+ id="Q1-1-14"></a>
     
 </body></html> 
 
