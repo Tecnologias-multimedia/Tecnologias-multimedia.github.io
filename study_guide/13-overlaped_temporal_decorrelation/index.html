@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="iso-8859-1" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN" 
+"http://www.w3.org/Math/DTD/mathml2/xhtml-math11-f.dtd" > 
+<html xmlns="http://www.w3.org/1999/xhtml"  
+> 
+<head><title>Tecnolog&#x00C3;&#x014B;as Multimedia - Study Guide - Milestone 13: Overlapped DWT</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
+<meta name="generator" content="TeX4ht (https://tug.org/tex4ht/)" /> 
+<meta name="originator" content="TeX4ht (https://tug.org/tex4ht/)" /> 
+<!-- xhtml,mathml,html --> 
+<meta name="src" content="index.tex" /> 
+<link rel="stylesheet" type="text/css" href="index.css" /> 
+</head><body 
+>
+   <div class="maketitle">
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+
+<h2 class="titleHead"><a 
+href="https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN" >Tecnolog&#x00ED;as Multimedia</a> - Study Guide -
+Milestone 13: Overlapped DWT</h2>
+ <div class="author" ><span 
+class="ecrm-1200">Vicente Gonz</span><span 
+class="ecrm-1200">&#x00E1;</span><span 
+class="ecrm-1200">lez Ruiz</span></div><br />
+<div class="date" ><span 
+class="ecrm-1200">February 6, 2021</span></div>
+   </div>
+   <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
+ id="x1-10001"></a>Description</h3>
+<!--l. 8--><p class="noindent" >
+</p>
+   <h4 class="subsectionHead"><span class="titlemark">1.1   </span> <a 
+ id="x1-20001.1"></a><a 
+href="https://en.wikipedia.org/wiki/Lapped_transform" >Overlapped transforms</a> for minimizing the distortion</h4>
+<!--l. 9--><p class="noindent" >Transform coding implies to split the signal into chunks, and to compute the
+transform of each chunk. When the output coe&#xFB03;cients are quantized, it is possible
+that signi&#xFB01;cative &#x0028;and unpleasant&#x0029; distortions may appear between the border
+samples of the chunks &#x0028;see this <a 
+href="https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/quantization_DWT.ipynb" >notebook</a>&#x0029;.
+</p><!--l. 16--><p class="indent" >   One solution for the current &#x0028;<!--l. 16--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>i</mi></math>-th&#x0029;
+chunk is to use the last samples of the previous
+&#x0028;<!--l. 17--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>i</mi> <mo 
+class="MathClass-bin">&#x2212;</mo> <mn>1</mn></math>-th&#x0029; chunk and the &#xFB01;rst
+samples of the next &#x0028;<!--l. 18--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>i</mi> <mo 
+class="MathClass-bin">+</mo> <mn>1</mn></math>-th&#x0029;
+chunk for computing the transform of the current
+&#x0028;<!--l. 18--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>i</mi></math>-th&#x0029;
+chunk. Therefore, to avoid signal discontinuities between chunks, we can overlap
+them. This idea has been implemented in this <a 
+href="https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/overlapped_DWT.ipynb" >notebook</a>.
+</p><!--l. 23--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
+ id="x1-30002"></a>What you have to do?</h3>
+<!--l. 25--><p class="noindent" >
+                                                                  
+
+                                                                  
+     </p><ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x1-3002x1">In a module named overlapped_temporal_decorrelate.py, inherit the class
+     Temporal_decorrelation       and       create       a       class       named
+     Overlapped_temporal_decorrelation.
+     </li>
+     <li 
+  class="enumerate" id="x1-3004x2">Compare the RD &#x0028;Rate/Distortion&#x0029; curves with the previous one.</li></ol>
+<!--l. 32--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
+ id="x1-40003"></a>Timming</h3>
+<!--l. 34--><p class="noindent" >Please, present your results in one week.
+</p><!--l. 36--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
+ id="x1-50004"></a>Deliverables</h3>
+<!--l. 38--><p class="noindent" >The module overlapped_ttemporal_decorrelate.py. Store it at the <a 
+href="https://github.com/Tecnologias-multimedia/intercom" >root directory</a> of
+your InterCom&#x2019;s repo.
+</p><!--l. 42--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
+ id="x1-60005"></a>Resources</h3>
+<a 
+ id="Q1-1-7"></a>
+    
+</body></html> 
+
+                                                                  
+
+
