@@ -17,8 +17,9 @@ One solution for the current ($i$-th) chunk is to use the last samples
 of the previous ($i-1$-th) chunk and the first samples of the next
 ($i+1$-th) chunk for computing the transform of the current ($i$-th)
 chunk. Therefore, to avoid signal discontinuities between chunks, we
-can overlap them.
-  
+can overlap them. This idea has been implemented in this 
+\href{https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/overlapped_DWT.ipynb}{notebook}.
+
 \section{What you have to do?}
 
 \begin{enumerate}
