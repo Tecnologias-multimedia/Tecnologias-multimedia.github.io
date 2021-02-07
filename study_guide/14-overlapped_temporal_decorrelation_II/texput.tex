@@ -1,29 +1,18 @@
 \input{../definitions}
-\title{\TM{} - Study Guide - Milestone 13: Overlapped DWT}
+\title{\TM{} - Study Guide - Milestone 13: Overlapped DWT (II)}
 
 \maketitle
 
 \section{Description}
 
-\subsection{\href{https://en.wikipedia.org/wiki/Lapped_transform}{Overlapped transforms} for minimizing the distortion}
-Transform coding implies to split the signal into chunks, and to
-compute the transform of each chunk. When the output coefficients are
-quantized, it is possible that significative (and unpleasant)
-distortions may appear between the border samples of the chunks (see
-this
-\href{https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/quantization_DWT.ipynb}{notebook}).
-
-One solution for the current ($i$-th) chunk is to use the last samples
-of the previous ($i-1$-th) chunk and the first samples of the next
-($i+1$-th) chunk for computing the transform of the current ($i$-th)
-chunk. Therefore, to avoid signal discontinuities between chunks, we
-can overlap them. This idea has been implemented in this 
-\href{https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/overlapped_DWT.ipynb}{notebook}.
+In the previous milestone we have sent the DWT coefficients of the
+overlapped areas twice. This milestone removes this redundancy. See
+\href{https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/overlapped_DWT_II.ipynb}{notebook}.
 
 \section{What you have to do?}
 
 \begin{enumerate}
-\item In a module named overlapped\_temporal\_decorrelate.py, inherit
+\item In a module named overlapped\_temporal\_decorrelate\_II.py, inherit
   the class Temporal\_decorrelation and create a class named
   Overlapped\_temporal\_decorrelation.
 \item Compare the RD (Rate/Distortion) curves with the previous one.
