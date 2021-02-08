@@ -29,7 +29,7 @@ class="ecrm-1200">Vicente Gonz</span><span
 class="ecrm-1200">&#x00E1;</span><span 
 class="ecrm-1200">lez Ruiz</span></div><br />
 <div class="date" ><span 
-class="ecrm-1200">February 7, 2021</span></div>
+class="ecrm-1200">February 8, 2021</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
@@ -41,65 +41,388 @@ href="https://en.wikipedia.org/wiki/Lapped_transform" >Overlapped transforms</a>
 <!--l. 9--><p class="noindent" >Transform coding implies to split the signal into chunks, and to compute the
 transform of each chunk. When the output coe&#xFB03;cients are quantized, it is possible
 that signi&#xFB01;cative &#x0028;and unpleasant&#x0029; distortions may appear between the border
-samples of the chunks &#x0028;see this <a 
-href="https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/quantization_DWT.ipynb" >notebook</a>&#x0029;.
-</p><!--l. 16--><p class="indent" >   One solution for the current &#x0028;<!--l. 16--><math 
+samples of the chunks &#x0028;see this the Fig&#x00A0;<a 
+href="#x1-2001r1">1<!--tex4ht:ref: fig:3_chunks --></a>&#x0029;.
+</p>
+   <hr class="figure" /><div class="figure" 
+>
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+<div class="tabular"> <table id="TBL-2" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-2-1g"><col 
+id="TBL-2-1" /><col 
+id="TBL-2-2" /></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-2-1-"><td  style="text-align:center; white-space:nowrap;" id="TBL-2-1-1"  
+class="td11"> <div style="text-align:center;"> <img width=500 src="3_chunks.svg" /> </div>   </td><td  style="text-align:center; white-space:nowrap;" id="TBL-2-1-2"  
+class="td11"> <div style="text-align:center;"> <img width=500 src="without.svg" /> </div>   </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-2-"><td  style="text-align:center; white-space:nowrap;" id="TBL-2-2-1"  
+class="td11"> <div style="text-align:center;"> <img width=500 src="extended.svg" /> </div>   </td><td  style="text-align:center; white-space:nowrap;" id="TBL-2-2-2"  
+class="td11"> <div style="text-align:center;"> <img width=500 src="reconstructed.svg" /> </div>   </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-3-"><td  style="text-align:center; white-space:nowrap;" id="TBL-2-3-1"  
+class="td11">    </td></tr></table>
+</div> <a 
+ id="x1-2001r1"></a>
+<a 
+ id="x1-2002"></a>
+<br />                                                                  <div class="caption" 
+><span class="id">
+Figure&#x00A0;1: </span><span  
+class="content">On the top-left, three consecutive chunks of a real audio sequence.
+On the top-right, the reconstruction of the chunks without overlapping. On the
+bottom-left, the extended chunk. On the bottom-right, the reconstruction of the
+extended chunk. See this <a 
+href="https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/quantization_DWT.ipynb" >notebook</a>.
+</span></div><!--tex4ht:label?: x1-2001r1 -->
+                                                                  
+
+                                                                  
+   </div><hr class="endfigure" />
+<!--l. 30--><p class="indent" >   One solution for the current &#x0028;<!--l. 30--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >i</mi></math>-th&#x0029;
 chunk is to use the last samples of the previous
-&#x0028;<!--l. 17--><math 
+&#x0028;<!--l. 31--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
+display="inline" ><mo 
+class="MathClass-open">&#x0028;</mo><mi 
 >i</mi> <mo 
-class="MathClass-bin">&#x2212;</mo> <mn>1</mn></math>-th&#x0029; chunk and the &#xFB01;rst
-samples of the next &#x0028;<!--l. 18--><math 
+class="MathClass-bin">&#x2212;</mo> <mn>1</mn><mo 
+class="MathClass-close">&#x0029;</mo></math>-th&#x0029; chunk and the &#xFB01;rst
+samples of the next &#x0028;<!--l. 32--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
+display="inline" ><mo 
+class="MathClass-open">&#x0028;</mo><mi 
 >i</mi> <mo 
-class="MathClass-bin">+</mo> <mn>1</mn></math>-th&#x0029;
+class="MathClass-bin">+</mo> <mn>1</mn><mo 
+class="MathClass-close">&#x0029;</mo></math>-th&#x0029;
 chunk for computing the transform of the current
-&#x0028;<!--l. 18--><math 
+&#x0028;<!--l. 32--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >i</mi></math>-th&#x0029;
 chunk. Therefore, to avoid signal discontinuities between chunks, we can overlap
-them. This idea has been implemented in this <a 
-href="https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/overlapped_DWT_I.ipynb" >notebook</a>.
-</p><!--l. 23--><p class="noindent" >
+them and use the following algorithm:
 </p>
-   <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
- id="x1-30002"></a>What you have to do?</h3>
-<!--l. 25--><p class="noindent" >
+   <h4 class="likesubsectionHead"><a 
+ id="x1-30001.1"></a>Encoder:</h4>
+<!--l. 37--><p class="noindent" >
+     </p><ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x1-3002x1">Input chunks <!--l. 38--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>i</mi> <mo 
+class="MathClass-bin">&#x2212;</mo> <mn>1</mn></math>,
+     <!--l. 38--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>i</mi></math>
+     and <!--l. 38--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>i</mi> <mo 
+class="MathClass-bin">+</mo> <mn>1</mn></math>,
+     <!--l. 38--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mi 
+>C</mi></mrow><mrow 
+><mi 
+>i</mi><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msub 
+></math>,
+     <!--l. 38--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mi 
+>C</mi></mrow><mrow 
+><mi 
+>i</mi></mrow></msub 
+></math>
+     and <!--l. 38--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mi 
+>C</mi></mrow><mrow 
+><mi 
+>i</mi><mo 
+class="MathClass-bin">+</mo><mn>1</mn></mrow></msub 
+></math>.
+     </li>
+     <li 
+  class="enumerate" id="x1-3004x2">Let&#x2019;s the overlapped area size <!--l. 39--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>o</mi></math>,
+     <!--l. 39--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>C</mi><mo 
+class="MathClass-open">&#x005B;</mo><mo 
+class="MathClass-punc">:</mo> <mi 
+>o</mi><mo 
+class="MathClass-close">&#x005D;</mo></math>
+     the &#xFB01;rst <!--l. 39--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>o</mi></math>
+     samples of the chunk <!--l. 40--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>C</mi></math>,
+     and <!--l. 40--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>C</mi><mo 
+class="MathClass-open">&#x005B;</mo><mi 
+>o</mi> <mo 
+class="MathClass-punc">:</mo><mo 
+class="MathClass-close">&#x005D;</mo></math>
+     the last <!--l. 40--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>o</mi></math>
+     samples.
+     </li>
+     <li 
+  class="enumerate" id="x1-3006x3"><!--l. 41--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mi 
+>D</mi></mrow><mrow 
+><mi 
+>i</mi></mrow></msub 
+> <mo 
+class="MathClass-rel">&#x2190;</mo><mstyle 
+class="text"><mtext  >DWT</mtext></mstyle><mo 
+class="MathClass-open">&#x0028;</mo><msub><mrow 
+><mi 
+>C</mi></mrow><mrow 
+><mi 
+>i</mi><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msub 
+><mo 
+class="MathClass-open">&#x005B;</mo><mi 
+>o</mi> <mo 
+class="MathClass-punc">:</mo><mo 
+class="MathClass-close">&#x005D;</mo><mo 
+class="MathClass-rel">&#x007C;</mo><msub><mrow 
+><mi 
+>C</mi></mrow><mrow 
+><mi 
+>i</mi></mrow></msub 
+><mo 
+class="MathClass-rel">&#x007C;</mo><msub><mrow 
+><mi 
+>C</mi></mrow><mrow 
+><mi 
+>i</mi><mo 
+class="MathClass-bin">+</mo><mn>1</mn></mrow></msub 
+><mo 
+class="MathClass-open">&#x005B;</mo><mo 
+class="MathClass-punc">:</mo> <mi 
+>o</mi><mo 
+class="MathClass-close">&#x005D;</mo><mo 
+class="MathClass-close">&#x0029;</mo></math>, where
+     <!--l. 41--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mi 
+>D</mi></mrow><mrow 
+><mi 
+>i</mi></mrow></msub 
+></math> is the decomposition
+     of the <!--l. 42--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>i</mi></math>-th
+     extended chunk, <!--l. 42--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" > <mo 
+class="MathClass-bin">&#x22C5;</mo><mo 
+class="MathClass-rel">&#x007C;</mo><mo 
+class="MathClass-bin">&#x22C5;</mo></math>
+     denotes the concatenation of samples operator, de&#xFB01;ned by <table class="equation"><tr><td> <a 
+ id="x1-3007r1"></a>
                                                                   
 
                                                                   
+     <!--l. 44--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="block" class="equation">
+                                            <mi 
+>a</mi><mo 
+class="MathClass-rel">&#x007C;</mo><mi 
+>b</mi> <mo 
+class="MathClass-rel">=</mo> <mo 
+class="MathClass-open">&#x007B;</mo><mi 
+>a</mi><mo 
+class="MathClass-punc">,</mo><mi 
+>b</mi><mo 
+class="MathClass-close">&#x007D;</mo><mo 
+class="MathClass-punc">,</mo>
+</math></td><td class="eq-no">&#x0028;1&#x0029;</td></tr></table>
+     <!--l. 47--><p class="noindent" >and <!--l. 47--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mi 
+>C</mi></mrow><mrow 
+><mi 
+>i</mi><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msub 
+><mo 
+class="MathClass-open">&#x005B;</mo><mi 
+>o</mi> <mo 
+class="MathClass-punc">:</mo><mo 
+class="MathClass-close">&#x005D;</mo><mo 
+class="MathClass-rel">&#x007C;</mo><msub><mrow 
+><mi 
+>C</mi></mrow><mrow 
+><mi 
+>i</mi></mrow></msub 
+><mo 
+class="MathClass-rel">&#x007C;</mo><msub><mrow 
+><mi 
+>C</mi></mrow><mrow 
+><mi 
+>i</mi><mo 
+class="MathClass-bin">+</mo><mn>1</mn></mrow></msub 
+><mo 
+class="MathClass-open">&#x005B;</mo><mo 
+class="MathClass-punc">:</mo> <mi 
+>o</mi><mo 
+class="MathClass-close">&#x005D;</mo></math> is
+     the <!--l. 47--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>i</mi></math>-th
+     extended chunk.
+     </p></li>
+     <li 
+  class="enumerate" id="x1-3009x4">Send <!--l. 48--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mi 
+>D</mi></mrow><mrow 
+><mi 
+>i</mi></mrow></msub 
+></math>.</li></ol>
+<!--l. 51--><p class="noindent" >
+</p>
+   <h4 class="likesubsectionHead"><a 
+ id="x1-40001.1"></a>Decoder:</h4>
+<!--l. 52--><p class="noindent" >
      </p><ol  class="enumerate1" >
      <li 
-  class="enumerate" id="x1-3002x1">In a module named overlapped_temporal_decorrelate.py, inherit the class
+  class="enumerate" id="x1-4002x1">Receive <!--l. 53--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mi 
+>D</mi></mrow><mrow 
+><mi 
+>i</mi></mrow></msub 
+></math>.
+     </li>
+     <li 
+  class="enumerate" id="x1-4004x2">Perform <!--l. 54--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mi 
+>C</mi></mrow><mrow 
+><mi 
+>i</mi><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msub 
+><mo 
+class="MathClass-open">&#x005B;</mo><mi 
+>o</mi> <mo 
+class="MathClass-punc">:</mo><mo 
+class="MathClass-close">&#x005D;</mo><mo 
+class="MathClass-rel">&#x007C;</mo><msub><mrow 
+><mi 
+>C</mi></mrow><mrow 
+><mi 
+>i</mi></mrow></msub 
+><mo 
+class="MathClass-rel">&#x007C;</mo><msub><mrow 
+><mi 
+>C</mi></mrow><mrow 
+><mi 
+>i</mi><mo 
+class="MathClass-bin">+</mo><mn>1</mn></mrow></msub 
+><mo 
+class="MathClass-open">&#x005B;</mo><mo 
+class="MathClass-punc">:</mo> <mi 
+>o</mi><mo 
+class="MathClass-close">&#x005D;</mo> <mo 
+class="MathClass-rel">&#x2190;</mo><msup><mrow 
+><mstyle 
+class="text"><mtext  >DWT</mtext></mstyle></mrow><mrow 
+><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msup 
+><mo 
+class="MathClass-open">&#x0028;</mo><msub><mrow 
+><mi 
+>D</mi></mrow><mrow 
+><mi 
+>i</mi></mrow></msub 
+><mo 
+class="MathClass-close">&#x0029;</mo></math>.
+     </li>
+     <li 
+  class="enumerate" id="x1-4006x3">Output <!--l. 55--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mi 
+>C</mi></mrow><mrow 
+><mi 
+>i</mi></mrow></msub 
+></math>.</li></ol>
+<!--l. 58--><p class="noindent" >This idea has been implemented in this <a 
+href="https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/overlapped_DWT_I.ipynb" >notebook</a>, and the result can be seen in the
+Fig.&#x00A0;<a 
+href="#x1-2001r1">1<!--tex4ht:ref: fig:3_chunks --></a>.
+</p><!--l. 62--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
+ id="x1-50002"></a>What you have to do?</h3>
+<!--l. 64--><p class="noindent" >
+     </p><ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x1-5002x1">In a module named overlapped_temporal_decorrelate.py, inherit the class
      Temporal_decorrelation       and       create       a       class       named
      Overlapped_temporal_decorrelation.
      </li>
      <li 
-  class="enumerate" id="x1-3004x2">Compare the RD &#x0028;Rate/Distortion&#x0029; curves with the previous one.</li></ol>
-<!--l. 32--><p class="noindent" >
+  class="enumerate" id="x1-5004x2">Compare the RD &#x0028;Rate/Distortion&#x0029; curves with the previous one.</li></ol>
+                                                                  
+
+                                                                  
+<!--l. 71--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
- id="x1-40003"></a>Timming</h3>
-<!--l. 34--><p class="noindent" >Please, present your results in one week.
-</p><!--l. 36--><p class="noindent" >
+ id="x1-60003"></a>Timming</h3>
+<!--l. 73--><p class="noindent" >Please, present your results in one week.
+</p><!--l. 75--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
- id="x1-50004"></a>Deliverables</h3>
-<!--l. 38--><p class="noindent" >The module overlapped_ttemporal_decorrelate.py. Store it at the <a 
+ id="x1-70004"></a>Deliverables</h3>
+<!--l. 77--><p class="noindent" >The module overlapped_temporal_decorrelate.py. Store it at the <a 
 href="https://github.com/Tecnologias-multimedia/intercom" >root directory</a> of
 your InterCom&#x2019;s repo.
-</p><!--l. 42--><p class="noindent" >
+</p><!--l. 81--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
- id="x1-60005"></a>Resources</h3>
+ id="x1-80005"></a>Resources</h3>
 <a 
- id="Q1-1-7"></a>
+ id="Q1-1-9"></a>
     
 </body></html> 
 
