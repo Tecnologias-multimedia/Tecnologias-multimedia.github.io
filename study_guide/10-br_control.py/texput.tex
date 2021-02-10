@@ -89,33 +89,34 @@ happens using DEFLATE.
 \begin{enumerate}
 \item Create a class named BR\_Control that inherits from
   Compression (the class implemented in the previous
-  milestone). Store it in a file named quantize.py.
+  milestone). Store it in a file named br\_control.py.
   
 \item Override the methods pack() and unpack(),
-  which now whould implement:
+  which now should implement:
 
-\begin{pseudocode}{Quantization\_InterCom}{~}
-  \PROCEDURE{pack}{\text{chunk\_number}, \text{chunk}}
-  \BEGIN
-    \text{quantized\_chunk} \GETS \text{quantize}(\text{chunk})\\
-    \text{packed\_chunk} \GETS \text{Buffer.pack}(\text{chunk\_number}, \text{quantized\_chunk})\\
-    \text{return}~ \text{packed\_chunk}
-  \END
-  \ENDPROCEDURE
-  \PROCEDURE{unpack}{\text{packed\_chunk}}
-  \BEGIN
-    \text{chunk\_number}, \text{quantized\_chunk} \GETS \text{Buffer.unpack}(\text{packed\_chunk})\\
-    \text{chunk} \GETS \text{dequantize}(\text{quantized\_chunk})\\
-    \text{return}~ \text{chunk\_number}, \text{chunk}
-  \END
-  \ENDPROCEDURE
-\end{pseudocode}
+  \begin{description}
+  \item ~
+  \item pack(chunk\_number, chunk):
+    \begin{description}
+    \item quantized\_chunk $\GETS$ quantize(chunk)
+    \item packed\_chunk $\GETS$ Buffering.pack(chunk\_number, quantized\_chunk)
+    \item return packed\_chunk
+    \end{description}
+  \item ~
+  \item unpack(packed\_chunk):
+    \begin{description}
+      \item (chunk\_number, quantized\_chunk) $\GETS$ Buffering.unpack(packed\_chunk)
+      \item chunk $\GETS$ dequantize(quantized\_chunk)
+      \item return (chunk\_number, chunk)
+    \end{description}
+  \item ~
+  \end{description}
 
-\item Determine the quantization step $\Delta$ used in the
-  $\text{quantize()}$ method depending on
-  the \href{https://en.wikipedia.org/wiki/Throughput}{throughput} $B$
-  of the communication link. Your implementation should consider that
-  $B$ can be time-variying, and should maximize the QoE.
+\item Determine the quantization step $\Delta$ used in the quantize()
+  method depending on the
+  \href{https://en.wikipedia.org/wiki/Throughput}{throughput} $B$ of
+  the communication link. Your implementation should consider that $B$
+  can be time-variying, and should maximize the QoE.
 
 %\item Determine the quantization step $\Delta$ used in the
 %  $\text{quantize()}$ method as a function of the
