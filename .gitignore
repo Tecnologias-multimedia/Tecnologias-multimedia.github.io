@@ -13,4 +13,6 @@
 *.acr
 *.4tc
 *.4ct
+*.acn
 *.ipynb_checkpoints
+*~
