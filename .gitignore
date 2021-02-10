@@ -1,0 +1,16 @@
+*.xref
+*.xdy
+*.tmp
+*.pdf
+*.out
+*.log
+*.lg
+*.idx
+*.idv
+*.dvi
+*.aux
+*.alg
+*.acr
+*.4tc
+*.4ct
+*.ipynb_checkpoints
