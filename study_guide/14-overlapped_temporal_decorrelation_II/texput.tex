@@ -39,7 +39,7 @@ To solve this problem, we can:
   \begin{enumerate}
   \item Receive $D_i$.
   \item Perform $C_i[o:]|C_{i+1}[:o]\leftarrow\text{DWT}^{-1}(D_i)$.
-  \item Output $C_i$.
+  \item Output $C_{i-1}[:o]|C_i[o:]$.
   \end{enumerate}
 \end{enumerate}
 
