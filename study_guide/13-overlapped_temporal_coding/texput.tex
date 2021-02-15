@@ -9,8 +9,8 @@
 Transform coding implies to split the signal into chunks, and to
 compute the transform of each chunk. When the output coefficients are
 quantized, it is possible that significative (and unpleasant)
-distortions may appear between the border samples of the chunks (see
-this the Fig~\ref{fig:3_chunks}).
+distortions may appear between the border frames of the chunks (see
+the Fig~\ref{fig:3_chunks}).
 
 \begin{figure}
   \centering
@@ -18,8 +18,8 @@ this the Fig~\ref{fig:3_chunks}).
     \svg{3_chunks}{500} & \svg{without}{500} \\
     \svg{extended}{500} & \svg{reconstructed}{500} \\
   \end{tabular}
-  \caption{On the top-left, three consecutive chunks of a real audio
-    sequence. On the top-right, the reconstruction of the chunks
+  \caption{On the top-left, three consecutive chunks of a real mono
+    audio sequence. On the top-right, the reconstruction of the chunks
     without overlapping. On the bottom-left, the extended chunk. On
     the bottom-right, the reconstruction of the extended chunk. See
     this
@@ -27,29 +27,55 @@ this the Fig~\ref{fig:3_chunks}).
   \label{fig:3_chunks}
 \end{figure}
 
-One solution for the current ($i$-th) chunk is to use the last samples
-of the previous ($(i-1)$-th) chunk and the first samples of the next
-($(i+1)$-th) chunk for computing the transform of the current ($i$-th)
-chunk. Therefore, to avoid signal discontinuities between chunks, we
-can overlap them and use the following algorithm:
+\begin{figure}
+  \centering
+  \svg{graphics/overlapping}{800}
+  \caption{Chunks overlapping. Notice that $a$ data is repeated in the
+    extended chunks $C_0$ and $C_1$. Something similar happens with
+    $b$ data.}
+  \label{fig:overlapping}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \svg{graphics/subbands}{700}
+  \caption{Structure in the DWT domain of an extended chunk. $o$ is
+    the number of frames to overlap between adajacent chunks. $C[:o]$
+    represents the first $o$ framees of the chunk $C$ and $C[-o:]$ the
+    last $x-o$ frames of chunk C, where $x$ is the number of frames in
+    $C$:}
+  \label{fig:subbands}
+\end{figure}
+
+One solution to avoid signal discontinuitites between chunks is to
+overlap the chunks (see Fig.~\ref{fig:overlapping}). Thus, the current
+($i$-th) chunk uses also the last frames of the previous ($(i-1)$-th)
+chunk and the first frames of the next ($(i+1)$-th) chunk to compute
+the transform of the current extended ($i$-th) chunk (see the
+Fig.~\ref{fig:subbands}). This has been described in the following
+algorithm:
 
 \subsection*{Encoder:}
 \begin{enumerate}
 \item For $i\in\{0,1,\cdots\}$:   
   \begin{enumerate}               
-  \item Input chunks $i-1$, $i$ and $i+1$, $C_{i-1}$, $C_i$ and $C_{i+1}$.
-  \item Let's the overlapped area size $o$, $C[:o]$ the first $o$
-    samples of the chunk $C$, and $C[-o:]$ the last $o$ samples.
-  \item $D_i \leftarrow \text{DWT}(C_{i-1}[-o:]|C_i|C_{i+1}[:o])$, where $D_i$ is the
-    decomposition of the $i$-th extended chunk, $\cdot|\cdot$ denotes
-    the concatenation of samples operator, defined by
+  \item Input chunks $C_{i-1}$, $C_i$ and $C_{i+1}$.
+  \item $D_i \leftarrow \text{DWT}(C_{i-1}[-o:]|C_i|C_{i+1}[:o])$,
+    where $D_i$ is the decomposition of the $i$-th extended chunk,
+    $\cdot|\cdot$ denotes the concatenation of frames operator,
+    defined by
     \begin{equation}
       a|b = \{a,b\},
     \end{equation}
-    and $C_{i-1}[-o:]|C_i|C_{i+1}[:o]$ is the $i$-th extended chunk.
+    and $C_{i-1}[-o:]|C_i|C_{i+1}[:o]$ is the $i$-th extended chunk,
+    where $o$ is the overlapped area size, and $C[:o]$ the first $o$
+    frames of the chunk $C$, and $C[-o:]$ the last $o$ frames.
   \item Send $D_i$.
   \end{enumerate}
 \end{enumerate}
+
+Notice that we sent for each chunk $2o+x$ frames, where $x$ is the
+number of frames/chunk.
 
 \subsection*{Decoder:}
 \begin{enumerate}
@@ -67,35 +93,30 @@ and the result can be seen in the Fig.~\ref{fig:3_chunks}.
 
 \subsection{Reducing the data overhead}
 
-In the previous algorithm, we have sent the DWT coefficients of the
-overlapped areas twice (see the Fig.~\ref{fig:overlapping}), and
-obviously, this is a waste of bandwidth. This can be avoided using:
+As it can be seen in the Fig.~\ref{fig:overlapping}, the previous
+algorithm sends twice the DWT coefficients of the overlapped areas. To
+avoid this waste of bandwidth, we can implement:
 
 \subsection*{Encoder:}
 \begin{enumerate}
 \item For $i\in\{0,1,\cdots\}$:
   \begin{enumerate}
-  \item Input chunks $i$ and $i+1$, $C_i$ and $C_{i+1}$.
-  \item Let's the overlapped area size $o$, $C[:o]$ the first $o$
-    samples of the chunk $C$, and $C[o:]$ the result of removing the
-    first $o$ samples.
-  \item $D_i \leftarrow \text{DWT}(C_i[o:]|C_{i+1}[:o])$, where $D_i$ is the
-    decomposition of the $i$-th right-shifted chunk, $\cdot|\cdot$ denotes
-    the concatenation of samples operator, defined by
-    \begin{equation}
-      a|b = \{a,b\},
-    \end{equation}
-    and $C_i[o:]|C_{i+1}[:o]$ is the $i$-th right-shifted chunk.
+  \item Input $C_i$ and $C_{i+1}$.
+  \item $D_i \leftarrow \text{DWT}(C_i[o:]|C_{i+1}[:o])$, where
+    $C[o:]$ the last $x-o$ frames of the chunk $C$, and
+    $C_i[o:]|C_{i+1}[:o]$ is the $i$-th right-only extended chunk.
     \item Send $D_i$.
   \end{enumerate}
 \end{enumerate}
+
+Notice that now, the number of sent coefficients is $x$.
 
 \subsection*{Decoder:}
 \begin{enumerate}
 \item For $i\in\{0,1,\cdots\}$:
   \begin{enumerate}
   \item Receive $D_i$.
-  \item Perform $C_i[o:]|C_{i+1}[:o]\leftarrow\text{DWT}^{-1}(D_i)$.
+  \item Compute $C_i[o:]|C_{i+1}[:o]\leftarrow\text{DWT}^{-1}(D_i)$.
   \item Output $C_{i-1}[:o]|C_i[o:]$.
   \end{enumerate}
 \end{enumerate}
