@@ -14,5 +14,7 @@
 *.4tc
 *.4ct
 *.acn
+*.bbl
+*.blg
 *.ipynb_checkpoints
 *~
