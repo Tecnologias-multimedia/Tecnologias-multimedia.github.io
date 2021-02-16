@@ -1,16 +1,18 @@
 \input{../definitions}
-\title{\TM{} - Study Guide - Milestone 13: Overlapped DWT (I)}
+\title{\TM{} - Study Guide - Milestone 13: Overlapped DWT}
 
 \maketitle
 
 \section{Description}
 
-\subsection{\href{https://en.wikipedia.org/wiki/Lapped_transform}{Overlapped transforms} for minimizing the distortion}
-Transform coding implies to split the signal into chunks, and to
-compute the transform of each chunk. When the output coefficients are
-quantized, it is possible that significative (and unpleasant)
-distortions may appear between the border frames of the chunks (see
-the Fig~\ref{fig:3_chunks}).
+\subsection{\href{https://en.wikipedia.org/wiki/Lapped_transform}{Overlapped block transforms} for minimizing the distortion}
+Transform coding implies to split the signal into blocks of data
+(chunks), and to compute the transform of each chunk. When the output
+coefficients are quantized, it is possible that significative (and
+unpleasant) distortions may appear between the border frames of the
+chunks (see the Fig~\ref{fig:3_chunks}). This is a consequence of that
+in the prediction step used by the DWT in the limits of the chunks
+generate different predictions at both sides of the border.
 
 \begin{figure}
   \centering
@@ -20,72 +22,77 @@ the Fig~\ref{fig:3_chunks}).
   \end{tabular}
   \caption{On the top-left, three consecutive chunks of a real mono
     audio sequence. On the top-right, the reconstruction of the chunks
-    without overlapping. On the bottom-left, the extended chunk. On
+    without overlapping. On the bottom-left, the extended central chunk. On
     the bottom-right, the reconstruction of the extended chunk. See
     this
     \href{https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/quantization_DWT.ipynb}{notebook}.}
   \label{fig:3_chunks}
 \end{figure}
 
-\begin{figure}
-  \centering
-  \svg{graphics/overlapping}{800}
-  \caption{Chunks overlapping. Notice that $a$ data is repeated in the
-    extended chunks $C_0$ and $C_1$. Something similar happens with
-    $b$ data.}
-  \label{fig:overlapping}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \svg{graphics/subbands}{700}
-  \caption{Structure in the DWT domain of an extended chunk. $o$ is
-    the number of frames to overlap between adajacent chunks. $C[:o]$
-    represents the first $o$ framees of the chunk $C$ and $C[-o:]$ the
-    last $x-o$ frames of chunk C, where $x$ is the number of frames in
-    $C$:}
-  \label{fig:subbands}
-\end{figure}
-
 One solution to avoid signal discontinuitites between chunks is to
-overlap the chunks (see Fig.~\ref{fig:overlapping}). Thus, the current
-($i$-th) chunk uses also the last frames of the previous ($(i-1)$-th)
-chunk and the first frames of the next ($(i+1)$-th) chunk to compute
-the transform of the current extended ($i$-th) chunk (see the
-Fig.~\ref{fig:subbands}). This has been described in the following
-algorithm:
+overlap the chunks. Thus, the current ($i$-th) chunk uses also the
+last frames of the previous ($(i-1)$-th) chunk and the first frames of
+the next ($(i+1)$-th) chunk to compute the transform of the current
+extended ($i$-th) chunk (see the Fig.~\ref{fig:subbands}). This has
+been described in the following algorithm:
 
 \subsection*{Encoder:}
 \begin{enumerate}
-\item For $i\in\{0,1,\cdots\}$:   
+\item $C_{-1}=0$.
+\item Input $C_1$.
+\item For $i\in\{1,2,\cdots\}$:   
   \begin{enumerate}               
-  \item Input chunks $C_{i-1}$, $C_i$ and $C_{i+1}$.
-  \item $D_i \leftarrow \text{DWT}(C_{i-1}[-o:]|C_i|C_{i+1}[:o])$,
-    where $D_i$ is the decomposition of the $i$-th extended chunk,
-    $\cdot|\cdot$ denotes the concatenation of frames operator,
-    defined by
+  \item Input chunk $C_{i+1}$.
+  \item Compute decomposition $D_i \leftarrow
+    \text{DWT}^l(C_{i-1}[-o:]|C_i|C_{i+1}[:o])$, where $D_i$ is the
+    decomposition of the $i$-th extended chunk, $\cdot|\cdot$ denotes
+    the concatenation-of-frames operator, defined by
     \begin{equation}
       a|b = \{a,b\},
     \end{equation}
-    and $C_{i-1}[-o:]|C_i|C_{i+1}[:o]$ is the $i$-th extended chunk,
-    where $o$ is the overlapped area size, and $C[:o]$ the first $o$
-    frames of the chunk $C$, and $C[-o:]$ the last $o$ frames.
-  \item Send $D_i$.
+    and $C_{i-1}[-o:]|C_i|C_{i+1}[:o]$ is the $i$-th extended chunk
+    (see Fig.~\ref{fig:subbands}), where $o$ is the overlapped area
+    size in frames, $C[:o]$ are the first $o$ frames of the chunk $C$,
+    $C[-o:]$ its last $o$ frames, and $l$ is the number of levels of
+    the DWT ($l=2$ in the Fig.~\ref{fig:subbands}).
+  \item Send decomposition $D_i$.
+  \item $C_{i-1}\leftarrow C_i$.
+  \item $C_i\leftarrow C_{i+1}$.
   \end{enumerate}
 \end{enumerate}
 
-Notice that we sent for each chunk $2o+x$ frames, where $x$ is the
-number of frames/chunk.
+Notice that we are sending for each chunk $2o+x$ stereo-coefficients, where
+$x$ is the number of frames/chunk.
 
 \subsection*{Decoder:}
 \begin{enumerate}
 \item For $i\in\{0,1,\cdots\}$:
   \begin{enumerate}
-  \item Receive $D_i$.
-  \item Perform $C_{i-1}[-o:]|C_i|C_{i+1}[:o]\leftarrow\text{DWT}^{-1}(D_i)$.
-  \item Output $C_i$.
+  \item Receive decomposition $D_i$.
+  \item Compute extended chunk $C_i\leftarrow\text{DWT}^{-l}(D_i)$.
+  \item Output chunk $C_i[o:-o]$.
   \end{enumerate}
 \end{enumerate}
+
+%\begin{figure}
+%  \centering
+%  \svg{graphics/overlapping2}{800}
+%  \caption{Chunks overlapping. Notice that $a$ data is repeated in the
+%    extended chunks $C_0$ and $C_1$. Something similar happens with
+%    $b$ data.}
+%  \label{fig:overlapping2}
+%\end{figure}
+
+\begin{figure}
+  \centering
+  \svg{graphics/subbands}{550}
+  \caption{Structure in the DWT domain of an extended chunk for
+    $l=2$. $o$ is the number of frames to overlap between adajacent
+    chunks. $C[:o]$ represents the first $o$ framees of the chunk $C$
+    and $C[-o:]$ the last $x-o$ frames of chunk C, where $x$ is the
+    number of frames in $C$.}
+  \label{fig:subbands}
+\end{figure}
 
 This idea has been implemented in this
 \href{https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/overlapped_DWT_I.ipynb}{notebook},
@@ -93,47 +100,80 @@ and the result can be seen in the Fig.~\ref{fig:3_chunks}.
 
 \subsection{Reducing the data overhead}
 
-As it can be seen in the Fig.~\ref{fig:overlapping}, the previous
-algorithm sends twice the DWT coefficients of the overlapped areas. To
-avoid this waste of bandwidth, we can implement:
+Unfortunately, the previous algorithm sends twice the DWT coefficients
+of the overlapped areas (in the Fig.~\ref{fig:subbands},
+$\{C_{i-1}[-o:].L^2, C_{i+1}[:o].L^2, C_{i-1}[-o:].H^2,
+C_{i+1}[:o].H^2, C_{i-1}[-o:].H^1, C_{i+1}[:o].H^1\}$). To avoid this
+waste of bandwidth, we can reuse the received coefficients of the
+overlapped areas. This procedure has been described in the
+Fig.~\ref{fig:overlapping}. As it can be seen, the encoding algorithm
+is identical to the previous one except in that only the central
+(stereo) coefficients are sent. The rest of coefficients that are
+needed to compute the inverse transform are extracted from the
+neighbor chunks (represented in the DWT domain). Notice that now, the
+number of sent coefficients is $x$.
+
+\begin{figure}
+  \centering
+  \svg{graphics/overlapping}{800}
+  \caption{Block overlapping in the DWT domain for $l=2$. Only the
+    shady coefficients are transmitted.}
+  \label{fig:overlapping}
+\end{figure}
+
+%\subsection*{Encoder:}
+%\begin{enumerate}
+%\item For $i\in\{0,1,\cdots\}$:
+%  \begin{enumerate}
+%  \item Input $C_i$ and $C_{i+1}$.
+%  \item $D_i \leftarrow \text{DWT}(C_i[o:]|C_{i+1}[:o])$, where
+%    $C[o:]$ the last $x-o$ frames of the chunk $C$, and
+%    $C_i[o:]|C_{i+1}[:o]$ is the $i$-th right-only extended chunk.
+%    \item Send $D_i$.
+%  \end{enumerate}
+%\end{enumerate}
+
+The codec now can be described by:
 
 \subsection*{Encoder:}
 \begin{enumerate}
-\item For $i\in\{0,1,\cdots\}$:
-  \begin{enumerate}
-  \item Input $C_i$ and $C_{i+1}$.
-  \item $D_i \leftarrow \text{DWT}(C_i[o:]|C_{i+1}[:o])$, where
-    $C[o:]$ the last $x-o$ frames of the chunk $C$, and
-    $C_i[o:]|C_{i+1}[:o]$ is the $i$-th right-only extended chunk.
-    \item Send $D_i$.
+\item For $i\in\{0,1,\cdots\}$:   
+  \begin{enumerate}               
+  \item Input chunk $C_i$.
+  \item Compute decomposition $D_i \leftarrow \text{DWT}^l(C_i)$.
+  \item Send $D_i$.
   \end{enumerate}
 \end{enumerate}
-
-Notice that now, the number of sent coefficients is $x$.
 
 \subsection*{Decoder:}
 \begin{enumerate}
-\item For $i\in\{0,1,\cdots\}$:
+\item $D_{-1}=0$.
+\item Input decomposition $D_1$.
+\item For $i\in\{1,2,\cdots\}$:
   \begin{enumerate}
-  \item Receive $D_i$.
-  \item Compute $C_i[o:]|C_{i+1}[:o]\leftarrow\text{DWT}^{-1}(D_i)$.
-  \item Output $C_{i-1}[:o]|C_i[o:]$.
+  \item Receive decomposition $D_{i+1}$.
+  \item Build extended decomposition ($l=2$) $E_i =
+    D_{i-1}[-o:].L^2|D_i.L^2|D_{i+1}[:0].L^2|D_{i-1}[-o:].H^2|D_i.H^2|D_{i+1}[:0].H^2|D_{i-1}[-o:].H^1|D_i.H^1|D_{i+1}[:0].H^1$.
+  \item Compute extended chunk $C_i\leftarrow\text{DWT}^{-l}(E_i)$.
+  \item Output $C_i[o:-o]$.
+  \item $D_{i-1} \leftarrow D_i$.
+  \item $D_i \leftarrow D_{i+1}$.
   \end{enumerate}
 \end{enumerate}
 
-Notice that the only that changes between this codec and the previous
-one is that now, the inverse transform of the extended chunks uses the
-last coefficients of the previous extended chunk. This idea has been
-checked in the
-\href{https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/overlapped_DWT_II.ipynb}{notebook}.
+%Notice that the only that changes between this codec and the previous
+%one is that now, the inverse transform of the extended chunks uses the
+%last coefficients of the previous extended chunk. This idea has been
+%checked in the
+%\href{https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/overlapped_DWT_II.ipynb}{notebook}.
 
 \section{What you have to do?}
 
 \begin{enumerate}
-\item In a module named overlapped\_temporal\_decorrelate.py, inherit
-  the class Temporal\_decorrelation and create a class named
-  Overlapped\_temporal\_decorrelation.
-\item Compare the RD (Rate/Distortion) curves with the previous one.
+\item In a module named overlapped\_temporal\_coding.py, inherit
+  the class Temporal\_Coding and create a class named
+  Overlapped\_Temporal\_Coding.
+\item Compare the RD (Rate/Distortion) curves with Temporal\_Coding.
 \end{enumerate}
 
 \section{Timming}
