@@ -1,0 +1,396 @@
+\documentclass[legalpaper, 12pt, addpoints]{exam}
+%\documentclass[legalpaper, 12pt, addpoints, answers]{exam}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{graphics}
+\usepackage{color}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{cancel}
+\usepackage{ragged2e}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{color}
+\usepackage{tikz}
+
+\CorrectChoiceEmphasis{\itseries\color{red}}
+
+\begin{document}
+%\begin{coverpages}
+
+%---uncomment to add a custom header (replace {header-cufm.png})---- %
+%\begin{figure}[t]
+%\includegraphics[width=1\textwidth,height=1.2\textheight,keepaspectratio]{%header-cufm.png}
+%\end{figure}
+
+\begin{center}
+  \textbf{Tecnologías Multimedia} \\
+  Examen final\\
+  Julio 2021
+\end{center}
+\extraheadheight{-0.8in}
+
+\vspace{0.25in}
+{\fbox{\parbox{6in}{\parbox{6in}{{\textbf{Instrucciones:} Lea cuidadosamente cada pregunta y responda redondeando con un círculo la solición A o B que considere correcta. Tiempo total: 120 minutos.}}}}}
+\runningheadrule \extraheadheight{0.14in}
+
+\lhead{\ifcontinuation{Question \ContinuedQuestion\ continues\ldots}{}}
+\runningheader{Tecnologñias Multimedia}{Examen final}{Julio 2021}
+\runningfooter{}
+              {Página \thepage\ de \numpages}
+              {}
+\vspace{0.15in}
+
+\vspace{0.1in}
+
+%-comment out the next line to display point value for each question -%
+%\nopointsinmargin
+%\setlength\linefillthickness{0.1pt}
+%\setlength\answerlinelength{0.1in}
+%\end{coverpages}
+
+\begin{questions}
+
+\question Un intercomunicador como el desarrollado en el proyecto de la asignatura es:
+
+\begin{oneparchoices}
+  \choice Una aplicación peer-to-peer que permite a usuarios conectados a la red comunicarse entre sí.\\
+  \choice Un servicio Web implementado en Python que permite a los clientes comunicarse entre sí.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question Una onda sonora es:
+
+\begin{oneparchoices}
+  \choice Una señal mecánica de presión que se transmite sólo por el aire.\\
+  \choice Cualquier onda mecánica de presión que proporciona información auditiva.
+\end{oneparchoices}
+  
+\question Cuando una onda sonora se representa en el dominio de la frecuencia:
+
+\begin{oneparchoices}
+  \choice La amplitud de la señal representa su energía en función del tiempo.\\
+  \choice La amplitud de la señal representa de alguna forma su energía en función de la frequencia.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question La mayoría de los sonidos naturales que percibimos los seres humanos tienden a:
+
+\begin{oneparchoices}
+  \choice Acumular la mayor parte de su energía en las bajas frecuencias.\\
+  \choice Acumular la mayor parte de su energía en las altas frecuencias.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question Aproximadamente, un ser humano joven y sano puede percibir sonidos entre:
+
+\begin{oneparchoices}
+  \choice 0 Hz y 20000 Hz.\\
+  \choice 20 Hz y 20000 Hz.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question El nivel de intensidad sonora suele medirse en decibelios porque:
+
+\begin{oneparchoices}
+  \choice Nuestra precepción de la intensidad sonora no es lineal, sino logarítmica.\\
+  \choice Existe un estándar internacional que indica que debe hacerse de esta manera.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question En general, los humanos percibimos con más facilidad
+aquellos sonidos cuyas componentes frecuenciales están entre:
+
+\begin{oneparchoices}
+  \choice 3 KHz y 4 KHz, aproximadamente.\\
+  \choice 10 KHz y 15 KHz, aproximadamente.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question La percepción binaural ayuda a los humanos a localizar la fuente de los sonidos:
+
+\begin{oneparchoices}
+  \choice Verdadero.\\
+  \choice Falso.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question Una muestra de audio:
+
+\begin{oneparchoices}
+  \choice Representa cuantos bits necesita una señal de audio en un instante de tiempo determinado.\\
+  \choice Representa el nivel de presión sonora en un instante de tiempo determinado.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question En la biblioteca \texttt{sounddevice}, un frame es:
+
+\begin{oneparchoices}
+  \choice Una pareja de muestras de audio.\\
+  \choice La estructura de datos usada para representar un chunk de audio.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question Una señal de audio estereo se diferencia de una señal de audio mono en que:
+
+\begin{oneparchoices}
+  \choice Las calidad de los canales es mejor en la señal estereo.\\
+  \choice La señal de audio estéreo transporta información binaural y la mono, no.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question La percepción binaural ayuda a los humanos a localizar la fuente de los sonidos:
+
+\begin{oneparchoices}
+  \choice Verdadero.\\
+  \choice Falso.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question Un frame de audio estereo se diferencia de un frame de audio mono en que:
+
+\begin{oneparchoices}
+  \choice Los frames de audio estéreo suelen representarse con 16
+  bits/muestra,
+  mientras que los frames de audio mono suelen representarse con 8 bits/muestra.\\
+  \choice Los frames de audio estéreo representan en un instante de
+  tiempo determinado a dos canales mono, uno izquierdo y otro derecho.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question Con 16 bits/muestra con signo, en general:
+
+\begin{oneparchoices}
+  \choice El rango dinámico de la señal de audio comprende entre -32768 y 32767.\\
+  \choice El rango dinámico de las muestras estéreo comprende entre -16 y 15, por cada canal.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question Una única muestra de audio representada en el dominio de la frecuencia:
+
+\begin{oneparchoices}
+  \choice Indica el nivel de presión sonora en el dominio de la frecuencia.\\
+  \choice No representa nada en el dominio de la frecuencia, puesto
+  que no es posible averiguar nada sobre cómo varía el sonido usando
+  una única muestra.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question Cuando usamos 16 bits/muestra, siempre trabajos con audio estéreo:
+
+\begin{oneparchoices}
+  \choice Verdadero.\\
+  \choice Falso.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question Una señal de audio en calidad CD implica que:
+
+\begin{oneparchoices}
+  \choice Usamos 16 bits/muestra.\\
+  \choice Usamos 24 bits/muestra.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question Una señal de audio en calidad CD implica que:
+
+\begin{oneparchoices}
+  \choice Se codifican 3 canales independientes de audio: el canal izquierdo, el derecho y el surround.\\
+  \choice La señal de audio es estéreo.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question Una señal de audio en calidad CD implica que:
+
+\begin{oneparchoices}
+  \choice El rango de frecuencias registradas comprende desde 20 Hz a 20 KhZ.\\
+  \choice El rango de frecuencias registradas comprende desde 0 Hz a 22050 Hz.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question Una señal de audio en calidad CD implica que:
+
+\begin{oneparchoices}
+  \choice La frecuencia de muestreo es de 44100 Hz, por cada canal.\\
+  \choice La frecuencia de muestreo es de 44100 Hz, entre los dos canales.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question En una señal de audio en calidad CD suele ocurrir que:
+
+\begin{oneparchoices}
+  \choice Las bajas frecuencias se representan con mayor calidad que las altas frecuencias.\\
+  \choice Todas las frecuencias se representan con la misma calidad.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question En una señal de audio en calidad CD cada canal genera la misma tasa de bits:
+
+\begin{oneparchoices}
+  \choice Verdadero.\\
+  \choice Falso.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question Las señales de audio en calidad CD siempre tienen una tasa de bits igual a:
+
+\begin{oneparchoices}
+  \choice 44100 muestras/segundo * 2 canales * 16 bits/muestra.\\
+  \choice La calidad no representa necesariamente una única tasa de
+  bits porque la señal de audio puede estar comprimida.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question Según el Teorema del Muestreo, para llegar a representar la
+frecuencia 2000 Hz, la tasa de muestreo debe ser:
+
+\begin{oneparchoices}
+  \choice 2000 muestras/segundo.\\
+  \choice 4000 muestras/segundo.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question Para verificar el Teorema del Muestreo, las tarjetas de
+sonido deben incorporar un filtro paso bajo cuya frecuencia de corte
+debe de coincidir con la máxima componente de frecuencia que se desea
+registrar):
+
+\begin{oneparchoices}
+  \choice Verdadero.\\
+  \choice Falso.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question Un ADC (Analog to Digital Converter) de un PC tiene por misión:
+
+\begin{oneparchoices}
+  \choice Descomprimir las señales de audio para que éstas sean audibles por los seres humanos.\\
+  \choice Muestrear las señales (presumiblemente de audio) que llegan a su entrada.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question Un ADC tiene como entrada una señal representada mediante
+alguna magnitud física (como voltaje o intensidad luminosa):
+
+\begin{oneparchoices}
+  \choice Verdadero.\\
+  \choice Falso.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question Un ADC tiene como salida una señal representada mediante
+alguna magnitud física (como voltaje o intensidad luminosa):
+
+\begin{oneparchoices}
+  \choice Verdadero.\\
+  \choice Falso.
+\end{oneparchoices}
+
+\question Un DAC (Digital to Analog Converter) tiene como entrada una
+señal representada mediante alguna magnitud física (como voltaje o
+intensidad luminosa):
+
+\begin{oneparchoices}
+  \choice Verdadero.\\
+  \choice Falso.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question Un DAC tiene como salida una señal representada mediante
+alguna magnitud física (como voltaje o intensidad luminosa):
+
+\begin{oneparchoices}
+  \choice Verdadero.\\
+  \choice Falso.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question Un DAC tiene como entrada una señal representada mediante
+alguna magnitud física (como voltaje o intensidad luminosa):
+
+\begin{oneparchoices}
+  \choice Verdadero.\\
+  \choice Falso.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question Un DAC y un ADC son dispositivos de transducción, es decir,
+elementos que transforman intensidades físicas en señales digitales, y
+viceversa:
+
+\begin{oneparchoices}
+  \choice Verdadero.\\
+  \choice Falso.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question La latencia en un sistema de reproducción de audio, en general, mide:
+
+\begin{oneparchoices}
+  \choice La diferencia de tiempo que transcurre desde que una señal es capturada hasta que es reproducida.\\
+  \choice El tiempo que transcurre desde que la señal se ``envía'' al
+  reproductor hasta que dicha señal es finalmente reproducida.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question Los sistemas de captura de audio devuelven bloques (chunks)
+de muestras, y el tamaño de dichos bloques influye en la latencia:
+
+\begin{oneparchoices}
+  \choice Verdadero.\\
+  \choice Falso.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question \texttt{sounddevice} genera chunks de audio comprimidos, es
+decir, donde la tasa de bits de la representación es inferior a la
+tasa de bits de captura/reproducción:
+
+\begin{oneparchoices}
+  \choice Verdadero.\\
+  \choice Falso.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+
+
+
+\end{questions}
+
+\end{document}
