@@ -34,7 +34,7 @@ Where:
     https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire4.py
     > wire4.py}} and also in the documentation of
   \texttt{sounddevice}, if we read only the frames that are available
-  in the ADC's buffer, this in non-blocking operation and the chunk
+  in the ADC's buffer, this is a non-blocking operation and the chunk
   size depends on the instant of time in which this method is
   called. Otherwise, if we especify a number of frames different to
   the number of available frames, the operation is blocking and
@@ -53,7 +53,7 @@ Where:
 
 \item $\mathtt{send(packed\_chunk)}$, sends the packet to the
   interlocutor's InterCom. When datagrams are used, this step is
-  non-blocking neither CPU-bounding (the CPU usage is very low), as
+  not blocking neither CPU-bounding (the CPU usage is very low), as
   long as the number of packets/second is small and the sizes of the
   payloads are also small, as it is expected in the InterCom.
 
@@ -63,14 +63,14 @@ Where:
     API}s~\cite{python} offeer a
   \href{https://docs.python.org/3.8/library/socket.html#socket.socket.setblocking}{non-blocking
     option} where when a packet is not available in the kernel's
-  buffer associanted to the corresponding socket, some kind of
+  buffer associated to the corresponding socket, some kind of
   exception is generated and, in this case, it is resposabability of
   the programmer to generate an ``alternative'' chunk (in our case, for
-  example, a chunk filled with zeros will not produce any sound).
+  example, a chunk filled with zeros that will not produce any sound).
 
-\item $\mathtt{unpack(packed\_chunk)}$ is (as $\mathtt{pack(chunk)}$)
-  a CPU-intensive step that transforms a packed\_chunk into a chunk of
-  audio.
+\item $\mathtt{unpack(packed\_chunk)}$ is (like the method
+  $\mathtt{pack(chunk)}$) a CPU-intensive step that transforms a
+  packed\_chunk into a chunk of audio.
 
 \item $\mathtt{play(chunk)}$ renders the chunk. In general, this is an
   I/O-bound
@@ -88,13 +88,15 @@ This model works fine if the chunk size is controlled by
 \href{http://www.portaudio.com/}{PortAudio}~\cite{portaudio}
 (\texttt{sounddevice}) and also, the run-time required by
 $\mathtt{pack(chunk)}$ and $\mathtt{unpack(packet)}$ operations is
-smaller than the chunk-time. The first issue is complicates slightly
-the implementation because we need to work with chunks of constantly
-changing lenghts (that as you can see, most of the time are 0). This
-also complicates the control of the latency (the chunk size is
-variable). However, the real problem appears when our computer is not
-able to satisfy the second requirement. This only can be addressed
-through optimizing and parallelizing the code.
+smaller than the chunk-time. The first premise (variable chunk sizes)
+complicates slightly the implementation because we need to work with
+chunks of constantly changing lenghts (that as you can see, most of
+the time are 0). This also complicates the control of the latency
+because the chunk size is variable. However, the real problem appears
+when our computer is not able to satisfy the second requirement, i.e.,
+when the chunk time is smaller than the time that we need to process
+the chunks. This only can be addressed through optimizing (for
+example, parallelizing) the code.
 
 \subsection{Timer-based model}
 
@@ -103,11 +105,10 @@ audio is called periodically (probably, using some timer provided by
 the sound hardware). This procedure guarantees a gliches-free audio-IO
 when constant chunk sizes are used because the timer interruption
 coincides exactly with the instant of time in which the
-$\mathtt{record()}$ and the $\mathtt{play()}$ methods need to be run
-to guarantee that we are going to handle a chunk of audio of a known
-size without blocking. The following algorithm describes the new model
-that is basically the previous one, except that the chunk size is
-controlled.
+$\mathtt{record()}$ and the $\mathtt{play()}$ methods we are going to
+handle a chunk of audio of a known size without blocking. The
+following algorithm describes the new model that is basically the
+previous one, except that the chunk size is fixed.
 
 \begin{pseudocode}{Timer-based\_InterCom}{~}
   \PROCEDURE{Record\_IO\_and\_Play}{\mathtt{chunk\_size}}
