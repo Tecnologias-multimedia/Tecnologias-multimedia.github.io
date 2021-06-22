@@ -110,7 +110,7 @@
 \question El nivel de intensidad sonora suele medirse en decibelios porque:
 
 \begin{oneparchoices}
-  \choice Nuestra precepción de la intensidad sonora no es lineal, sino logarítmica.\\
+  \choice Nuestra percepción de la intensidad sonora no es lineal, sino logarítmica.\\
   \choice Existe un estándar internacional que indica que debe hacerse de esta manera.
 \end{oneparchoices}
 
@@ -282,7 +282,7 @@ frecuencia 2000 Hz, la tasa de muestreo debe ser:
 \question Para evitar el \emph{aliasing} durante el proceso de
 muestreo digital, las tarjetas de sonido deben incorporar un filtro
 paso bajo cuya frecuencia de corte debe de coincidir con la máxima
-componente de frecuencia que se desea registrar):
+componente de frecuencia que se desea registrar:
 
 \begin{oneparchoices}
   \choice Verdadero.\\
@@ -339,24 +339,6 @@ alguna magnitud física (como voltaje o intensidad luminosa):
   
 \vspace{0.10in}
 
-\question Un DAC tiene como entrada una señal representada mediante
-alguna magnitud física (como voltaje o intensidad luminosa):
-
-\begin{oneparchoices}
-  \choice Verdadero.\\
-  \choice Falso.
-\end{oneparchoices}
-  
-\vspace{0.10in}
-
-\question Un DAC y un ADC son sistemas que transforman señales
-físicas en señales digitales, y viceversa:
-
-\begin{oneparchoices}
-  \choice Verdadero.\\
-  \choice Falso.
-\end{oneparchoices}
-  
 \vspace{0.10in}
 
 \question La latencia en un sistema de reproducción de audio, en general, mide:
@@ -472,7 +454,7 @@ es mediante el uso de paralelismo a nivel hardware:
   
 \vspace{0.10in}
 
-\question Para usar el intercomunicador en un entorno real, donde los dos interlocutores usan host diferentes:
+\question Para usar el intercomunicador en un entorno real, donde los dos interlocutores usan hosts diferentes:
 
 \begin{oneparchoices}
   \choice Ambos intercomunicadores envían y reciben \emph{chunks}.\\
@@ -484,8 +466,8 @@ es mediante el uso de paralelismo a nivel hardware:
 \question En una prueba de intercom donde dos interlocutores están en hosts diferentes, la latencia total experimentada por los usuarios es igual a:
 
 \begin{oneparchoices}
-  \choice El tiempo que tarde un \emph{chunk} desde viajar a uno de los hosts hasta que el \emph{chunk} de vuelta es recibido.
-  \choice La suma de la latencia del enlace más la latencia del intercomunicador (que básicamente es el tiempo de \emph{chunk}).\\
+  \choice El tiempo que tarde un \emph{chunk} desde viajar a uno de los hosts hasta que el \emph{chunk} de vuelta es recibido.\\
+  \choice La suma de la latencia del enlace más la latencia introducida por el intercomunicador.
 \end{oneparchoices}
   
 \vspace{0.10in}
@@ -499,7 +481,7 @@ es mediante el uso de paralelismo a nivel hardware:
   
 \vspace{0.10in}
 
-\question La variación de la latencia de la red (\emph{jitter}) influye en la tasa de transmisión de \emph{chunks}:
+\question La variación de la latencia de la red (\emph{jitter}) influye en la tasa de \emph{chunks} enviados:
 
 \begin{oneparchoices}
   \choice Verdadero.\\
@@ -508,7 +490,7 @@ es mediante el uso de paralelismo a nivel hardware:
   
 \vspace{0.10in}
 
-\question La variación de la latencia de la red influye en la tasa de pérdida de transmisión de \emph{chunks}:
+\question La variación de la latencia de la red influye en la tasa de pérdida de \emph{chunks}, a pesar de usar un buffer suficientemtente grande:
 
 \begin{oneparchoices}
   \choice Verdadero.\\
@@ -517,7 +499,7 @@ es mediante el uso de paralelismo a nivel hardware:
   
 \vspace{0.10in}
 
-\question La variación de la latencia de la red influye en la calidad del sonido:
+\question La variación de la latencia de la red influye en la calidad del sonido, a pesar de usar un buffer suficientemente grande:
 
 \begin{oneparchoices}
   \choice Verdadero.\\
@@ -535,7 +517,7 @@ es mediante el uso de paralelismo a nivel hardware:
   
 \vspace{0.10in}
 
-\question El buffering de \emph{chunks} aumenta la tasa de transmsión de \emph{chunks}:
+\question El buffering de \emph{chunks} aumenta la tasa de transmisión de \emph{chunks}:
 
 \begin{oneparchoices}
   \choice Verdadero.\\
@@ -573,7 +555,7 @@ multiprogramados):
   
 \vspace{0.10in}
 
-\question El tiempo de buffering influye en la calidad del sonido transmitido:
+\question El tiempo de buffering influye en la calidad del sonido transmitido, siempre y cuando permita acomodar el \emph{jitter}:
 
 \begin{oneparchoices}
   \choice Verdadero.\\
@@ -804,7 +786,7 @@ en formato PCM (Pulse Code Modulation) y devuelve otra señal en formato PCM:
   
 \vspace{0.10in}
 
-\question El \emph{quantization step} controla la cantidad de información se pierde durante la \emph{quantization}:
+\question El \emph{quantization step} controla la cantidad de información que se pierde durante la \emph{quantization}:
 
 \begin{oneparchoices}
   \choice Verdadero.\\
@@ -840,7 +822,9 @@ en formato PCM (Pulse Code Modulation) y devuelve otra señal en formato PCM:
   
 \vspace{0.10in}
 
-\question En la implementación actual de intercom usamos \emph{scalar quantization} para controlar la tasa de bits transmitidos:
+\question En la implementación actual de intercom usamos \emph{scalar
+  quantization} para tener cierto control (aproximado) sobre la tasa
+de bits transmitidos:
 
 \begin{oneparchoices}
   \choice Verdadero.\\
@@ -930,7 +914,7 @@ señal a discretizar y la señal discretizada:
 \question Si el \emph{quantization step} es suficientemente pequeño
 comparado con la amplitud de la señal de audio discretizada, entonces
 el \emph{quantization error} puede considerarse impredecible porque
-básicamente se trata de ruido
+básicamente se trata de ruido:
 
 \begin{oneparchoices}
   \choice Verdadero.\\
@@ -1157,7 +1141,7 @@ incrementa significativamente las tasas de compresión conseguidas por
 DEFLATE porque:
 
 \begin{oneparchoices}
-  \choice Tienden a generarse lagas cadenas de ceros especialmente en las subbandas de alta frecuencia.\\
+  \choice Tienden a generarse largas cadenas de ceros especialmente en las subbandas de alta frecuencia.\\
   \choice Las londitudes de las subbandas (en coeficientes) es menor que los \emph{chunks} de audio.
 \end{oneparchoices}
   
