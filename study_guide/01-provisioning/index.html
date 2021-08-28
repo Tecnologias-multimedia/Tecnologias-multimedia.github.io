@@ -53,29 +53,31 @@ href="https://www.python.org/download/other/" >almost to all</a> the current OSs
 href="https://kivy.org/#home" >devices</a>.
 </p><!--l. 15--><p class="indent" >   This milestone &#x0028;the installation of a dedicated Linux distribution for running
 InterCom&#x0029; is optional, but it is highly recommend to do it because you&#x2019;ll receive
-technical support in a reasonable time when you are in trouble. Futhermore, it is
-recommend to run InterCom in a Xubuntu 20.04 &#x0028;Focal Fossa&#x0029; <span class="cite">&#x005B;<a 
-href="#Xxubuntu">2</a>&#x005D;</span> machine, running
-natively &#x0028;no <a 
-href="https://en.wikipedia.org/wiki/Virtualization" >virtualization</a>&#x0029;.
-</p><!--l. 23--><p class="indent" >   The following &#x201C;guide&#x201D; helps you to install Xubuntu in an external <a 
+technical support in a reasonable amount of time in the case you are in trouble.
+Futhermore, it is recommend to run InterCom in a Xubuntu 21.04 &#x0028;Hirsute Hippo&#x0029;
+<span class="cite">&#x005B;<a 
+href="#Xxubuntu">2</a>&#x005D;</span>, running natively &#x0028;no <a 
+href="https://en.wikipedia.org/wiki/Virtualization" >virtualization</a>&#x0029;. Xubuntu is fully functional &#x0028;at
+least for developing our project&#x0029; and demand a low amount of hardware
+resources.
+</p><!--l. 25--><p class="indent" >   The following &#x201C;guide&#x201D; helps you to install Xubuntu in an external <a 
 href="https://en.wikipedia.org/wiki/USB_flash_drive" >USB drive</a>,
-which must have at least 8GB of capacity &#x0028;the minimal installation of Xubuntu 21.04
-needs about 5GB&#x0029;. You will need also a temporal external USB disk with at least
+which must have at least 8GB of capacity &#x0028;the minimal installation of Xubuntu needs
+about 5GB&#x0029;. You will need also a temporal external USB disk with at least
 4GB to boot from it the installation Xubuntu image &#x0028;or to burn an <a 
 href="https://en.wikipedia.org/wiki/Optical_disc" >optical
 disk</a>&#x0029;.
-</p><!--l. 31--><p class="noindent" >
+</p><!--l. 33--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
  id="x1-20002"></a>What do you have to do?</h3>
-<!--l. 33--><p class="noindent" >Supposing that you have decided to use Xubuntu in a USB disk, these are the steps
-you should perform &#x0028;to install Xubuntu in a &#x201C;hard&#x201D; disk partition of your computer
-the instructions are almost the same&#x0029;:
                                                                   
 
                                                                   
-</p><!--l. 37--><p class="indent" >
+<!--l. 35--><p class="noindent" >Supposing that you have decided to use Xubuntu in a USB disk, these are the steps
+you should perform &#x0028;to install Xubuntu in a &#x201C;hard&#x201D; disk partition of your computer
+the instructions are almost the same&#x0029;:
+</p><!--l. 39--><p class="indent" >
      </p><ol  class="enumerate1" >
      <li 
   class="enumerate" id="x1-2002x1">Download the installation <a 
@@ -89,13 +91,12 @@ href="https://ubuntu.com/tutorials/create-a-usb-stick-on-windows#1-overview" >Wi
 href="https://ubuntu.com/tutorials/create-a-usb-stick-on-macos#1-overview" >OSX</a>,  <a 
 href="https://ubuntu.com/tutorials/create-a-usb-stick-on-ubuntu#1-overview" >Ubuntu  &#x0028;and
      derivatives&#x0029;</a>, or <a 
-href="https://askubuntu.com/questions/372607/how-to-create-a-bootable-ubuntu-usb-flash-drive-from-terminal" >the console</a>.
+href="https://askubuntu.com/questions/372607/how-to-create-a-bootable-ubuntu-usb-flash-drive-from-terminal" >the Linux console</a>.
      </li>
      <li 
-  class="enumerate" id="x1-2006x3">Boot the image from the USB port. This step depends on your computer.
-     Most of PCs can choose the boot device by pressing the F12-key when the
-     PC is booting. On a Mac, you need to keep pressed the alt-key when it is
-     booting.
+  class="enumerate" id="x1-2006x3">Boot the image. Most of PCs can choose the boot device by pressing the
+     F12-key when the PC is booting. On a Mac, you need to keep pressed the
+     alt-key when it is booting.
      </li>
      <li 
   class="enumerate" id="x1-2008x4">Select the option <span 
@@ -105,11 +106,11 @@ class="ectt-1000">Try Xubuntu without installing</span>.
   class="enumerate" id="x1-2010x5">When the OS is running, con&#xFB01;gure the network.
      </li>
      <li 
-  class="enumerate" id="x1-2012x6">Insert also the 8GB USB drive where Xubuntu will be installed.
+  class="enumerate" id="x1-2012x6">Insert now the &#x0028;at least&#x0029; 8GB USB drive where Xubuntu will be installed.
      </li>
      <li 
   class="enumerate" id="x1-2014x7">Select <span 
-class="ectt-1000">Install Xubuntu 20.04 LTS</span>.
+class="ectt-1000">Install Xubuntu 21.04 LTS</span>.
      </li>
      <li 
   class="enumerate" id="x1-2016x8">Select  English  as  the  language  used  during  the  installation  and  the
@@ -122,7 +123,7 @@ class="ectt-1000">Spanish</span>&#x0029;.
      </li>
      <li 
   class="enumerate" id="x1-2020x10">Open a terminal and write:
-     <!--l. 71-->
+     <!--l. 72-->
      <div class="lstlisting" id="listing-1"><span class="label"><a 
  id="x1-2021r1"></a></span><span 
 class="ectt-1000">&#x00A0;</span><span 
@@ -134,23 +135,24 @@ class="ectt-1000">-</span><span
 class="ectt-1000">h</span>
      
      </div>
-     <!--l. 75--><p class="noindent" >to see all the mounted disk partitions and their capacity. Notice that no
+     <!--l. 76--><p class="noindent" >to see all the mounted disk partitions and their capacity. Notice that no
      partition of <span 
 class="ectt-1000">/dev/sda </span>&#x0028;the hard disk&#x0029; should not be mounted &#x0028;although you
      can do that, you don&#x2019;t need to mount any partition of the hard disk&#x0029;, the
-     partition <span 
-class="ectt-1000">/dev/sdb1 </span>&#x0028;with the Xubuntu image&#x0029; should be mounted, and &#xFB01;nally,
-     if the &#xFB01;rst partition of the second external USB drive has been recognized by
                                                                   
 
                                                                   
-     <a 
-href="https://gitlab.xfce.org/xfce/thunar" >Thunar</a> &#x0028;the default &#xFB01;le manager in Xubuntu&#x0029;, it should appear as <span 
-class="ectt-1000">/dev/sdc1</span>.
-     This partition should be unmounted to install on it Xubuntu. Anyway, if you
-     continue the installation process without unmounting it, the installer will ask
-     you to do it. In this description, it has been supposed that your computer only
-     has one hard disk.
+     partition <span 
+class="ectt-1000">/dev/sdb1 </span>&#x0028;with the Xubuntu image&#x0029; should be mounted,
+     and &#xFB01;nally, if the &#xFB01;rst partition of the second external USB drive has
+     been recognized by <a 
+href="https://gitlab.xfce.org/xfce/thunar" >Thunar</a> &#x0028;the default &#xFB01;le manager in Xubuntu&#x0029;, it
+     should appear as <span 
+class="ectt-1000">/dev/sdc1</span>. This partition should be unmounted to
+     install on it Xubuntu. Anyway, if you continue with the installation
+     process without unmounting it, the installer will ask you to do it. In this
+     description, it has been supposed that your computer only has one hard
+     disk.
      </p></li>
      <li 
   class="enumerate" id="x1-2023x11">Choose <span 
@@ -165,38 +167,40 @@ class="ectt-1000">additional media formats</span>, in order to have access to th
      <li 
   class="enumerate" id="x1-2025x12">Choose <span 
 class="ectt-1000">Erase disk and install Xubuntu</span>. Ignore the Advanced features.
-     Wait for a couple of minutes :-/
+     Then, wait for a couple of minutes :-/
      </li>
      <li 
-  class="enumerate" id="x1-2027x13">Select the drive corresponding to the 8GB USB drive &#x0028;<span 
-class="ectt-1000">/dev/sdc</span>&#x0029;. Don&#x2019;t choose
+  class="enumerate" id="x1-2027x13">Select the drive corresponding to the &#x003E;= 8GB USB drive &#x0028;<span 
+class="ectt-1000">/dev/sdc</span>&#x0029;.
+     Don&#x2019;t choose <span 
+class="ectt-1000">/dev/sda </span>&#x0028;the main disk of your computer&#x0029;! Again, Select
      <span 
-class="ectt-1000">/dev/sda </span>&#x0028;the main disk of your computer&#x0029;! Select <span 
 class="ectt-1000">/dev/sdc</span>!!
      </li>
      <li 
   class="enumerate" id="x1-2029x14">At this point of the installation you should consider &#x0028;depending on the amount
      of RAM memory installed in your computer and the size of the USB drive&#x0029; to
      create an speci&#xFB01;c partition for doing swapping. The rule of the thumb is to
-     create a partition with the same size that the RAM. However, probably you
-     cannot do that in a 8GB USB drive because at least 5GB are needed for a
-     Xubuntu installation. Anyway, keep in mind that this step is optional because
-     you can always perform swapping on a &#xFB01;le &#x0028;a process slightly slower than using
-     the dedicated partition&#x0029;. Consider also that InterCom requires only
-     some MB of memory for running and therefore, probably you are not
-     going to need to swap any <a 
-href="https://en.wikipedia.org/wiki/Page_(computer_memory)" >memory page</a> at all. If you decide to create
-     a speci&#xFB01;c swap partition, click on &#x201C;advanced partitioning tool&#x201D; and
-     do the modi&#xFB01;cations you want, and also check that the boot loader
-     &#x0028;<a 
-href="https://www.gnu.org/software/grub/" >GRUB</a>&#x0029; will be installed in <span 
-class="ectt-1000">/dev/sdc1</span>. But remember, all the actions
-     described in this point are optional &#x0028;except selecting <span 
-class="ectt-1000">/dev/sdc1 </span>for
-     GRUB&#x0029;..
+     create a partition with the same size that the RAM. However, probably
+     you cannot do that in a 8GB USB drive because at least 5GB are
+     needed for a Xubuntu installation. Anyway, keep in mind that this
+     step is optional because you can always perform swapping on a &#xFB01;le &#x0028;a
+     process slightly slower than using the dedicated partition&#x0029;. Consider also
+     that InterCom requires only some MB of memory for running and
+     therefore, probably you are not going to need to swap any <a 
+href="https://en.wikipedia.org/wiki/Page_(computer_memory)" >memory
+     page</a> at all. Said that, if you decide to create a speci&#xFB01;c swap partition,
+     click on &#x201C;advanced partitioning tool&#x201D; and do the modi&#xFB01;cations you
+     want.
      </li>
      <li 
-  class="enumerate" id="x1-2031x15">Click on Install Now. Something similar to:
+  class="enumerate" id="x1-2031x15">Very important: check that the boot loader &#x0028;<a 
+href="https://www.gnu.org/software/grub/" >GRUB</a>&#x0029; will be installed in
+     <span 
+class="ectt-1000">/dev/sdc1</span>.
+     </li>
+     <li 
+  class="enumerate" id="x1-2033x16">Click on &#x201C;Install Now&#x201D;. You&#x2019;ll read something similar to:
                                                                   
 
                                                                   
@@ -212,32 +216,33 @@ class="ectt-1000">/dev/sdc1 </span>for
      &#x00A0;partition&#x00A0;#1&#x00A0;of&#x00A0;SCSI8&#x00A0;&#x0028;0,0,0&#x0029;&#x00A0;&#x0028;sdc&#x0029;&#x00A0;as&#x00A0;ESP
      &#x00A0;partition&#x00A0;#2&#x00A0;of&#x00A0;SCSI8&#x00A0;&#x0028;0,0,0&#x0029;&#x00A0;&#x0028;sdc&#x0029;&#x00A0;as&#x00A0;ext4
 </pre>
-     <!--l. 133--><p class="nopar" >
+     <!--l. 134--><p class="nopar" >
      </p></li>
      <li 
-  class="enumerate" id="x1-2033x16">Choose your time zone.
+  class="enumerate" id="x1-2035x17">Choose your time zone.
      </li>
      <li 
-  class="enumerate" id="x1-2035x17">Con&#xFB01;gure you personal account, hostname and logging process.
+  class="enumerate" id="x1-2037x18">Con&#xFB01;gure you personal account &#x0028;user and password&#x0029;, hostname and logging
+     process.
      </li>
      <li 
-  class="enumerate" id="x1-2037x18">Wait for the end of the installation and boot your new Xubuntu. Don&#x2019;t worry if
+  class="enumerate" id="x1-2039x19">Wait for the end of the installation and boot your new Xubuntu. Don&#x2019;t worry if
      grub labels Xubuntu as Ubuntu. This is normal.
      </li></ol>
-<!--l. 145--><p class="noindent" >
+<!--l. 147--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-30003"></a>Timming</h3>
-<!--l. 147--><p class="noindent" >You should reach this milestone at most in one week.
-</p><!--l. 149--><p class="noindent" >
+<!--l. 149--><p class="noindent" >You should reach this milestone at most in one week.
+</p><!--l. 151--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-40004"></a>Deliverables</h3>
-<!--l. 151--><p class="noindent" >None.
+<!--l. 153--><p class="noindent" >None.
                                                                   
 
                                                                   
-</p><!--l. 153--><p class="noindent" >
+</p><!--l. 155--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-50005"></a>Resources</h3>
