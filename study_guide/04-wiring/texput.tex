@@ -1,20 +1,21 @@
 \input{../definitions}
-\title{\TM{} - Study Guide - Milestone 4: ``wiring'' the ADC with the DAC and measuring latencies}
+\title{\TM{} - Study Guide - Milestone 4: ``wiring'' the ADC with the DAC, and measuring latencies}
 
 \maketitle
 
 \section{Description}
 
-Let's start our development of InterCom with a simple program that
+Let's start our understanding of InterCom with a simple program that
 inputs digital audio (through the
 \href{https://en.wikipedia.org/wiki/Analog-to-digital_converter}{ADC}
-of your computer) and, as soon as possible, outputs it (through the
+of your computer) and, as soon as possible, outputs the audio (through
+the
 \href{https://en.wikipedia.org/wiki/Digital-to-analog_converter}{DAC}). We
 are going to use a minimal ``wiring'' program, that when it is run and
 we feed back the audio output with the audio input of our computer,
-allows us to measure
-its \href{https://en.wikipedia.org/wiki/Latency_(engineering)}{latency}. To
-handle the audio hardware we use
+allows us to measure the
+\href{https://en.wikipedia.org/wiki/Latency_(engineering)}{latency} of
+this system. To handle the audio hardware we use
 \href{https://python-sounddevice.readthedocs.io}{\texttt{sounddevice}}
 \cite{sounddevice}, that is wrapper for the
 \href{http://www.portaudio.com/}{PortAudio} library.
@@ -24,14 +25,14 @@ handle the audio hardware we use
 \begin{enumerate}
 
 \item Refresh some (probably high-school) ideas about
-  \href{https://vicente-gonzalez-ruiz.github.io/the_sound/}{The
-    Sound}, \href{https://vicente-gonzalez-ruiz.github.io/human_auditory_system/}{The
-    Human Auditory System},
-    and \href{https://vicente-gonzalez-ruiz.github.io/human_sound_perception/}{The
-    Human Sound Perception}. Notice that we are able to perceive
-    sounds whose frequency ranges between 20 Hz and 20 KHz
-    (approximately), and that a speaker is basically a microphone, and
-    viceversa.
+  \href{https://vicente-gonzalez-ruiz.github.io/the_sound/}{the
+    sound}, \href{https://vicente-gonzalez-ruiz.github.io/human_auditory_system/}{the
+    human auditory system},
+    and \href{https://vicente-gonzalez-ruiz.github.io/human_sound_perception/}{the
+    human sound perception}. %Notice that we are able to perceive
+    %sounds whose frequency ranges between 20 Hz and 20 KHz
+    %(approximately), and that a speaker is basically a microphone, and
+    %viceversa.
   
 \item Download the Python
   \href{https://docs.python.org/3/tutorial/modules.html}{module}
@@ -43,6 +44,12 @@ handle the audio hardware we use
   \end{lstlisting}      
       
   This module implements the algorithm:
+
+  \begin{lstlisting}[language=Python]
+    while True:
+      chunk = sound_card.read(chunk_size = 1024)  # (1)
+      sound_card.write(chunk)  # (2)
+  \end{lstlisting}
   
   \begin{pseudocode}[display]{}{}
     \BEGIN
@@ -55,7 +62,7 @@ handle the audio hardware we use
     \END
   \end{pseudocode}
 
-  where (1) captures $\mathtt{CHUNK\_SIZE}$ frames from the sound
+  where {\texttt (1)} captures {\textt 1024} frames from the sound
   card, and (2) plays the chunk of frames
   $\mathtt{chunk}$. In \texttt{sounddevice} a frame is a collection of
   one or more samples (typically, a frame is a single sample if the
