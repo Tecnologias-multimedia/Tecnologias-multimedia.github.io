@@ -29,17 +29,17 @@ but GitHub is the most used one.} \cite{GitHub}, and how to use the
   
 \item Have a look to the \href{https://git-scm.com/book/en/v2}{Pro Git} 
   book \cite{Git-book}, what is the main source of information about
-  Git.
+  Git. Keep in mind this reference if you are in trouble with Git.
 
 \item If you don't have an GitHub account, please, do the
   \href{https://guides.github.com/activities/hello-world/}{the Hello
     World guide at GitHub} and create one. Be aware that to contribute
-  to InterCom an GitHub account is required. Notice that in the Hello
+  to InterCom, an GitHub account is required. Notice that in the Hello
   World guide, the \texttt{master} branch is named the \texttt{main}
   branch. Please, create a \texttt{README.md} file for the Hello World
   repo, as the guide suggests.
 
-\item Now, we are going to to the same that we would have done using
+\item Now, we are going to do the same that we would have done using
   the GitHub web interface (except the Step 1: Create a Repo), but now
   using the terminal which will be the most used interface for dealing
   with Git. First, if Git is not installed in your host (try to run
@@ -106,7 +106,7 @@ but GitHub is the most used one.} \cite{GitHub}, and how to use the
   your
   \href{https://docs.github.com/en/github/getting-started-with-github/github-glossary#origin}{\emph{origin}}
   (copy at GitHub of the) remote repo. This means that your
-  \emph{local} has modifications that the \emph{origin} doesn't have.
+  \emph{local} has modifications that the \emph{origin} doesn't have yet.
 
 \item Synchronize your \emph{local} and the \emph{origin} using
   \href{https://docs.github.com/en/github/getting-started-with-github/github-glossary#push}{push}:
@@ -115,7 +115,7 @@ but GitHub is the most used one.} \cite{GitHub}, and how to use the
     git push
   \end{lstlisting}
 
-  Notice that if you have not upoaded a public
+  Notice that if you have not uploaded a public
   \href{https://www.ssh.com/}{SSH}
   \href{https://www.ssh.com/ssh/identity-key}{key} (or the
   corresponding private key is not properly installed in your
@@ -143,8 +143,8 @@ but GitHub is the most used one.} \cite{GitHub}, and how to use the
   of they finising in \texttt{.pub}, you probably own a pair of SSH
   keys.
 
-\item Let's create a pair of keys (if you don't have one or if you
-  prefeer to create a new one). Open a terminal and write:
+\item Ff you don't have one or if you prefeer to create a new one,
+  let's create a pair of keys. Open a terminal and write:
 
   \begin{lstlisting}[language=bash]
     ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
@@ -171,7 +171,7 @@ but GitHub is the most used one.} \cite{GitHub}, and how to use the
     your keys, he could access to GitHub as he were you.
   \item Input a passphrase and configure
     \href{https://www.ssh.com/ssh/agent}{\texttt{ssh-agent}} to send
-    it to GitHub by you. This option is the preferable one becase you
+    it to GitHub by you. This option is the preferable one because you
     will be asked for the passphrase only when the \texttt{ssh-agent}
     is started (\href{https://www.xfce.org/}{Xfce} does that by you).
   \end{enumerate}
@@ -215,7 +215,7 @@ but GitHub is the most used one.} \cite{GitHub}, and how to use the
     ssh-add ~/.ssh/id_rsa
   \end{lstlisting}
 
-  and the passphrase will be prompt.
+  and the passphrase will be prompted.
   
 \item Go now to GitHub \texttt{->} Settings \texttt{->} SSH and GPG
   keys \texttt{->} New SSH key. Open a terminal and write:
@@ -227,14 +227,14 @@ but GitHub is the most used one.} \cite{GitHub}, and how to use the
   and copy and paste the content of such file (which ends with your
   email address) inside of the space where you can read
   ``\texttt{Begins with 'ssh-rsa', ...}''. Don't forget to give a
-  title (something such as ``\texttt{tm}'' (tecnonogías multimedia))
-  to the key pair.
+  title (something such as ``\texttt{tm}'' (tecnologías multimedia))
+  to the key pair if you created a dedicated one.
   
 \item When you use the key for the first time (clonning a repo or
   pushing a commit), the SSH client will warn you that the autenticity
-  of \texttt{github.com} cannot be established. This is normal and
-  should happen only once. Type \texttt{yes}. If this problem
-  persists, then you could be suffering a
+  of \texttt{github.com} cannot be checked. This is normal and should
+  happen only in the first interaction. Type \texttt{yes}. Notice that
+  if this problem persists, then you could be suffering a
   \href{https://en.wikipedia.org/wiki/Man-in-the-middle_attack}{man-in-the-middle
     attack}.
 
@@ -242,7 +242,7 @@ but GitHub is the most used one.} \cite{GitHub}, and how to use the
   \href{https://github.com/vicente-gonzalez-ruiz/fork_and_branch_git_workflow}{The
     Fork and Branch Git Workflow}. Basically, this ``protocol''
   explains that to contribute to an open-source repo hosted by GitHub
-  without belonging to the develop team, you must do some
+  without belonging to the developping organization, you must do some
   \texttt{git}-steps (and some of them are below).
 
 \item Make a fork of the
@@ -254,7 +254,7 @@ but GitHub is the most used one.} \cite{GitHub}, and how to use the
 \end{verbatim}        
   This info can be found when you
   \href{https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository}{clone}
-  the InterCom. Notice however, that action of clonning the InterCom
+  the InterCom. Notice however, that the action of clonning the InterCom
   is a waste of time because you cannot contribute directly to it
   (remember, you must \texttt{clone} your own repo).
 
@@ -263,9 +263,9 @@ but GitHub is the most used one.} \cite{GitHub}, and how to use the
   is a
   \href{https://nvie.com/posts/a-successful-git-branching-model/}{decentralized
     control system for source code}. Decentralization means that every
-  developer has a copy of the \emph{origin}, and that thus, the
-  developers can synchronize their \emph{locals} with any of the
-  \emph{remotes}.}  \emph{upstream} with:
+  developer has a copy of the \emph{origin}, and that, the developers
+  can synchronize their \emph{locals} with any of the \emph{remotes}.}
+  \emph{upstream} with:
 
   \begin{lstlisting}[language=bash]
     git remote add upstream git@github.com:Tecnologias-multimedia/intercom.git
@@ -286,7 +286,7 @@ upstream git@github.com:Tecnologias-multimedia/intercom.git (fetch)
 upstream git@github.com:Tecnologias-multimedia/intercom.git (push)
 \end{verbatim}
 
-\item To update your local repo write:
+\item Finally, to update your local repo write:
 
 \begin{verbatim}
 git pull upstream master
