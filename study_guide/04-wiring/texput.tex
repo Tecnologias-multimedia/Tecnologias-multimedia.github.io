@@ -51,41 +51,51 @@ this system. To handle the audio hardware we use
       sound_card.write(chunk)  # (2)
   \end{lstlisting}
   
-  \begin{pseudocode}[display]{}{}
-    \BEGIN
-      \mathtt{CHUNK\_SIZE} \GETS 1024\\
-      \WHILE \TRUE
-      \BEGIN
-        \mathtt{chunk} \GETS \mathtt{stream}.\mathtt{read}(\mathtt{CHUNK\_SIZE}) \STMTNUM{1in}{st.1}\\
-        \mathtt{stream}.\mathtt{write}(\mathtt{chunk}) \STMTNUM{1.03in}{st.2}
-      \END
-    \END
-  \end{pseudocode}
+  %\begin{pseudocode}[display]{}{}
+  %  \BEGIN
+  %    \mathtt{CHUNK\_SIZE} \GETS 1024\\
+  %    \WHILE \TRUE
+  %    \BEGIN
+  %      \mathtt{chunk} \GETS \mathtt{stream}.\mathtt{read}(\mathtt{CHUNK\_SIZE}) \STMTNUM{1in}{st.1}\\
+  %      \mathtt{stream}.\mathtt{write}(\mathtt{chunk}) \STMTNUM{1.03in}{st.2}
+  %    \END
+  %  \END
+  %\end{pseudocode}
 
-  where {\texttt (1)} captures {\textt 1024} frames from the sound
-  card, and (2) plays the chunk of frames
-  $\mathtt{chunk}$. In \texttt{sounddevice} a frame is a collection of
-  one or more samples (typically, a frame is a single sample if the
-  number of channels is 1, or two samples if the number of channels is
-  2).
+  where \texttt{(1)} captures 1024
+  \href{https://python-sounddevice.readthedocs.io/en/0.3.12/api.html}{frames}
+  from the ADC, and \texttt{(2)} plays the chunk of frames. In
+  \texttt{sounddevice} a frame is a collection of one or more samples
+  (typically, a frame is a single sample if the number of channels is
+  1, or two samples if the number of channels is 2).
 
-\item If you want to run this module right now, check first that the
-  output volumen of your speakers is not too high, otherwise you could
-  ``couple'' the speaker and the mic(rophone) of your computer,
-  producing a loud and annoying sound. In order to mitigate this
-  effect, you can also control the record gain of your mic (if the
+\item If you want to run this module right now and you are not using a
+  \href{https://en.wikipedia.org/wiki/Headset_(audio)}{headset}, check
+  first that the output volumen of your
+  \href{https://en.wikipedia.org/wiki/Headset_(audio)}{speakers} is
+  not too high, otherwise you could involuntary
+  \href{https://www.youtube.com/watch?v=rI90lhYAffo}{``couple''} the
+  speaker and the
+  \href{https://en.wikipedia.org/wiki/Microphone}{mic(rophone)} of
+  your computer, producing a loud and annoying
+  \href{https://www.cirrusresearch.co.uk/blog/2012/03/tonal-noise-analysis-with-the-optimus-green-sound-level-meters/}{tonal
+    sound} that is considered as noise. In order to mitigate this
+  effect, you can also control the gain of your mic (if the
   gain is 0, no feedback between the speaker and the mic will be
-  possible). In Xubuntu, these controls are available by clicking in
-  the speaker icon (situated in the top right corner of your screen)
+  possible). In Xubuntu, these controls are available through clicking in
+  the speaker icon (situated in the top-right corner of your screen)
   of the Xfce window manager.
 
-\item OK, run it (remember to activate first the virtual environment
+\item OK, run the module (remember to activate first the virtual environment
   \texttt{tm} before using Python), with:
 
   \begin{lstlisting}[language=Bash]
-    pip install sounddevice
+    pip install sounddevice  # Only once
     python wire3.py
   \end{lstlisting}
+
+  Stop (killing) the module by clicking the CTRL- and c-keys (CTRL+c),
+  simultaneously.
 
   %If you obtain the message \texttt{ALSA lib
   %  pcm.c:8526:(snd\_pcm\_recover) underrun occurred}, ignore it (this
@@ -97,22 +107,22 @@ this system. To handle the audio hardware we use
   %\href{https://en.wikipedia.org/wiki/RTLinux}{real-time process
   %  scheduling}).
 
-\item Now, lets compute, experimentally, the \texttt{wire3.py}
-  latency.
+\item Now, lets compute, experimentally, the latency experimented by
+  \texttt{wire3.py}.
 
   \begin{enumerate} \item First, we need the
-  tools \href{http://sox.sourceforge.net/}{SoX}, \href{https://www.audacityteam.org/}{Audacity}
-  and \href{https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire3.py}{wire3.py}:
+  tools: \href{http://sox.sourceforge.net/}{SoX}, \href{https://www.audacityteam.org/}{Audacity},
+  and \href{https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/plot_input.py}{plot\_input.py}:
   
-    \begin{lstlisting}[language=Bash]
-      sudo apt install sox
-      sudo apt install audacity
-      sudo apt install curl
-      curl https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/plot_input.py > plot_input.py
-    \end{lstlisting}
+  \begin{lstlisting}[language=Bash]
+    sudo apt install sox
+    sudo apt install audacity
+    sudo apt install curl
+    curl https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/plot_input.py > plot_input.py
+  \end{lstlisting}
 
   \item Run:
-
+    
     \begin{lstlisting}[language=Bash]
       pip install matplotlib
       python plot_input.py
@@ -130,12 +140,12 @@ this system. To handle the audio hardware we use
 
     while you control the output volume of the speakers to produce a
     decaying coupling effect between both devices (the speaker(s) and
-    the mic). If your desktop has not
-    these \href{https://en.wikipedia.org/wiki/Transducer}{transducers},
-    we can use
-    a \href{https://www.google.com/search?q=male+to+male+audio+jack+cable&client=firefox-b-d&sxsrf=ALeKk00GZUDGqiOfc0D8xkA_MIYgCuZmSA:1600270049146&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjdvsu-_u3rAhXl0eAKHS90DUoQ_AUoAXoECA0QAw&biw=4288&bih=972}{male-to-male
-    jack audio cable} and connect the input and the output of your
-    sound card.
+    the mic). If your desktop has not these
+    \href{https://en.wikipedia.org/wiki/Transducer}{transducers}, we
+    can use a
+    \href{https://www.google.com/search?q=male+to+male+audio+jack+cable&client=firefox-b-d&sxsrf=ALeKk00GZUDGqiOfc0D8xkA_MIYgCuZmSA:1600270049146&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjdvsu-_u3rAhXl0eAKHS90DUoQ_AUoAXoECA0QAw&biw=4288&bih=972}{male-to-male
+      jack audio cable} and connect the line-output of your soundcard
+    to the input of your sound card.
 
   \item In a different terminal (keep \texttt{python wire3.py}
     running), run:
@@ -144,19 +154,19 @@ this system. To handle the audio hardware we use
       sox -t alsa default test.wav
     \end{lstlisting}
 
-    to save the ADC's output to a file.
+    to save the ADC's output to the file \texttt{test.wav}.
 
   \item While \texttt{sox} is recording, produce some short sound (for
     example, hit your laptop or your micro with one or your nails). Do
     this at least a couple of times more, to be sure that you record
-    the sound and the feedback of such sound. It's important the sound
-    to be short (a few miliseconds) in order to recognize it and it's
-    replicas.
+    the sound and also the feedback of such sound. It's important the
+    sound to be short (a few miliseconds) in order to visually
+    recognize it and it's replicas.
 
-  \item Stop \texttt{sox} by pressing the CTRL and C keys (CTRL+C) at
-    the same time. This kills \texttt{sox}.
+  \item Stop \texttt{sox} by pressing the CTRL+c (at
+    the same time). This kills \texttt{sox}.
 
-  \item Stop \texttt{python wire3.pt} with CTRL+C.
+  \item Kill \texttt{python wire3.pt} with CTRL+c.
 
   \item Load the sound file into Audacity:
     
@@ -164,26 +174,26 @@ this system. To handle the audio hardware we use
       audacity test.wav
     \end{lstlisting}
 
-  \item Localize the first one of your nail-hitting-the-mic sounds in
-    the
+  \item Localize the first one of your hitting-nail sounds in the
     \href{https://manual.audacityteam.org/man/audio_tracks.html}{audio
-      track}.
+      track} of Audacity.
 
-  \item Select the region with your sound and a replica using our
-    mouse.
+  \item Select (using the mouse) the region that contains your sound and a replica.
 
   \item Use the
     \href{https://manual.audacityteam.org/man/edit_toolbar.html#zoom_to_selection}{zoom
       to selection buttom} to zoom-in the selected area.
 
-  \item Measure the time between the ocurrence of the sound and
-    it's first replica. This time is the real latency of your computer
-    runing \texttt{wire3.py}.
+  \item Measure the time between the ocurrence of the hit (of the
+    nail) and the recording of its first replica produced by the
+    speaker-to-the-mic feedback. This time is the real latency of your
+    computer runing \texttt{wire3.py}.
 
-  \item Modify the constant $\mathtt{CHUNK\_SIZE}$ and repeat this
-    process, starting at the Step \ref{start_point}. Create an ASCII
-    file (\texttt{latency\_vs\_chunk\_size.txt}) with the content (use
-    tabulators to space the columns):
+  \item Modify the constant $\mathtt{CHUNK\_SIZE}$ in the module and
+    repeat this process, starting at the Step
+    \ref{start_point}. Create an ASCII file (named
+    \texttt{latency\_vs\_chunk\_size.txt}) with the content (use
+    TAB-ulators to space the columns):
 \begin{verbatim}
 # CHUNK_SIZE    real
 32              ...
@@ -208,9 +218,9 @@ this system. To handle the audio hardware we use
      echo "set terminal pdf; set output 'latency_vs_chunk_size.pdf'; set xlabel 'CHUNK\_SIZE (frames)'; set ylabel 'Latency (seconds)'; plot 'latency_vs_chunk_size.txt' title '' with linespoints" | gnuplot
   \end{lstlisting}
 
-\item Let's compute now the buffering latency of a chunk (the chunk-time). If
-  $\mathtt{sampling\_rate}$ is the number of frames per second, it holds
-  that:
+\item Let's compute now the buffering latency of a chunk (the
+  chunk-time). If $\mathtt{sampling\_rate}$ is the number of frames
+  per second during the recording process, it holds that:
   
   \begin{equation}
     \mathtt{buffering\_latency} = \mathtt{CHUNK\_SIZE} / \mathtt{sampling\_rate}
