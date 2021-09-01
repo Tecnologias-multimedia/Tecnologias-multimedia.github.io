@@ -154,36 +154,50 @@ The current implementation of InterCom uses the Timer-based algorithm.
 \begin{enumerate}
 
 \item Read the source code of
-  \href{https://github.com/Tecnologias-multimedia/intercom/blob/master/src/minimal.py}{\verb|minimal.py|}
+  \href{https://github.com/Tecnologias-multimedia/intercom/blob/master/src/minimal.py}{\texttt{minimal.py}}
   and identify in the code the interruption handler that implements
-  the timer-based algorithm.
+  the timer-based algorithm. This
+  \href{https://github.com/vicente-gonzalez-ruiz/YAPT/blob/master/03-IO/networking/sockets.ipynb}{guide}~\cite{YAPT}
   
-\item Evaluate 
-  
-\item Implement a timer-based InterCom. Use as reference
-  \href{https://github.com/Tecnologias-multimedia/intercom/blob/master/test/sounddevice/wire.py}{wire.py}\footnote{
-  \texttt{curl
-    https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire.py
-    > wire.py} }. Your implementation should be able to record,
-  \href{https://github.com/vicente-gonzalez-ruiz/YAPT/blob/master/03-IO/networking/sockets.ipynb}{transmit}~\cite{YAPT}
-  (using
-  \href{https://en.wikipedia.org/wiki/User_Datagram_Protocol}{UDP}~\cite{UDP})
-  and play raw (this means that the
-  $\mathtt{pack()}$/$\mathtt{unpack()}$ operations are not required for
-    this milestone) audio data between two computers.
+\item Evaluate the performance (quality of the sound) in different configurations:
+  \begin{enumerate}
+  \item When \verb|minimal.py| runs in the same computer.
+  \item When \verb|minimal.py| runs in different computers. In this
+    case, try that the computers do not belong to the same local
+    network. This
+    \href{https://www.noip.com/support/knowledgebase/general-port-forwarding-guide/}{guide}
+    can help. Consider in your analysis that
+    \href{https://en.wikipedia.org/wiki/User_Datagram_Protocol}{UDP}~\cite{UDP}
+    is used to transport the audio data.
+  \end{enumerate}
+   
+%\item Implement a timer-based InterCom. Use as reference
+%  \href{https://github.com/Tecnologias-multimedia/intercom/blob/master/test/sounddevice/wire.py}{wire.py}\footnote{
+%  \texttt{curl
+%    https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire.py
+%    > wire.py} }. Your implementation should be able to record,
+%  \href{https://github.com/vicente-gonzalez-ruiz/YAPT/blob/master/03-IO/networking/sockets.ipynb}{transmit}~\cite{YAPT}
+%  (using
+%  \href{https://en.wikipedia.org/wiki/User_Datagram_Protocol}{UDP}~\cite{UDP})
+%  and play raw (this means that the
+%  $\mathtt{pack()}$/$\mathtt{unpack()}$ operations are not required for
+%    this milestone) audio data between two computers.
   
 \end{enumerate}
 
 \section{Timming}
 
-You should reach this milestone at most in one weeks.
+You should reach this milestone at most in one week.
 
 \section{Deliverables}
 
-A Python module with the implementation of the minimal InterCom. Name
-it \texttt{intercom\_minimal.py}. Store it at the
-\href{https://github.com/Tecnologias-multimedia/intercom}{root
-  directory} of your \texttt{intercom}'s repo.
+The results of the experiments proposed in the previous section, that
+will be presented to the rest of the class.
+
+%A Python module with the implementation of the minimal InterCom. Name
+%it \texttt{intercom\_minimal.py}. Store it at the
+%\href{https://github.com/Tecnologias-multimedia/intercom}{root
+%  directory} of your \texttt{intercom}'s repo.
 
 \section{Resources}
 

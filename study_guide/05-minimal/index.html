@@ -37,7 +37,7 @@ class="ecrm-1200">- </span><a
 href="https://www.ual.es" ><span 
 class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
-class="ecrm-1200">August 31, 2021</span></div>
+class="ecrm-1200">September 1, 2021</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
@@ -369,63 +369,54 @@ class="ectt-1000">chunk</span><span
 class="ectt-1000">&#x0029;</span>
    
    </div>
-<!--l. 150--><p class="noindent" >
+<!--l. 150--><p class="indent" >   The current implementation of InterCom uses the Timer-based algorithm.
+</p><!--l. 152--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
  id="x1-40002"></a>What you have to do?</h3>
-<!--l. 152--><p class="noindent" >
+<!--l. 154--><p class="noindent" >
      </p><ol  class="enumerate1" >
      <li 
-  class="enumerate" id="x1-4002x1">Implement a timer-based InterCom. Use as reference <a 
-href="https://github.com/Tecnologias-multimedia/intercom/blob/master/test/sounddevice/wire.py" >wire.py</a><span class="footnote-mark"><a 
-href="index3.html#fn2x0"><sup class="textsuperscript">2</sup></a></span><a 
- id="x1-4003f2"></a> .
-     Your implementation should be able to record, <a 
-href="https://github.com/vicente-gonzalez-ruiz/YAPT/blob/master/03-IO/networking/sockets.ipynb" >transmit</a>&#x00A0;<span class="cite">&#x005B;<a 
-href="#XYAPT">3</a>&#x005D;</span> &#x0028;using <a 
+  class="enumerate" id="x1-4002x1">Read  the  source  code  of  <a 
+href="https://github.com/Tecnologias-multimedia/intercom/blob/master/src/minimal.py" ><span 
+class="ectt-1000">minimal.py</span></a> and  identify  in  the  code  the
+     interruption  handler  that  implements  the  timer-based  algorithm.  This
+     <a 
+href="https://github.com/vicente-gonzalez-ruiz/YAPT/blob/master/03-IO/networking/sockets.ipynb" >guide</a>&#x00A0;<span class="cite">&#x005B;<a 
+href="#XYAPT">3</a>&#x005D;</span>
+     </li>
+     <li 
+  class="enumerate" id="x1-4004x2">Evaluate the performance &#x0028;quality of the sound&#x0029; in di&#xFB00;erent con&#xFB01;gurations:
+         <ol  class="enumerate2" >
+         <li 
+  class="enumerate" id="x1-4006x1">When <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">minimal.py</span></span></span> runs in the same computer.
+         </li>
+         <li 
+  class="enumerate" id="x1-4008x2">When <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">minimal.py</span></span></span> runs in di&#xFB00;erent computers. In this case, try that
+         the computers do not belong to the same local network. This <a 
+href="https://www.noip.com/support/knowledgebase/general-port-forwarding-guide/" >guide</a>
+         can help. Consider in your analysis that <a 
 href="https://en.wikipedia.org/wiki/User_Datagram_Protocol" >UDP</a>&#x00A0;<span class="cite">&#x005B;<a 
-href="#XUDP">4</a>&#x005D;</span>&#x0029;
-     and play raw &#x0028;this means that the <!--l. 163--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mstyle mathvariant="monospace"><mi 
->p</mi><mi 
->a</mi><mi 
->c</mi><mi 
->k</mi><mo 
-class="MathClass-open">&#x0028;</mo><mo 
-class="MathClass-close">&#x0029;</mo></mstyle></math>/<!--l. 163--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mstyle mathvariant="monospace"><mi 
->u</mi><mi 
->n</mi><mi 
->p</mi><mi 
->a</mi><mi 
->c</mi><mi 
->k</mi><mo 
-class="MathClass-open">&#x0028;</mo><mo 
-class="MathClass-close">&#x0029;</mo></mstyle></math>
-     operations are not required for this milestone&#x0029; audio data between two
-     computers.
-     </li></ol>
-<!--l. 168--><p class="noindent" >
-</p>
-   <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
- id="x1-50003"></a>Timming</h3>
+href="#XUDP">4</a>&#x005D;</span> is used to transport
+         the audio data.</li></ol>
                                                                   
 
                                                                   
-<!--l. 170--><p class="noindent" >You should reach this milestone at most in two weeks.
-</p><!--l. 172--><p class="noindent" >
+     </li></ol>
+<!--l. 188--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
+ id="x1-50003"></a>Timming</h3>
+<!--l. 190--><p class="noindent" >You should reach this milestone at most in one week.
+</p><!--l. 192--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-60004"></a>Deliverables</h3>
-<!--l. 174--><p class="noindent" >A Python module with the implementation of the minimal InterCom. Name it
-<span 
-class="ectt-1000">intercom_minimal.py</span>. Store it at the <a 
-href="https://github.com/Tecnologias-multimedia/intercom" >root directory</a> of your <span 
-class="ectt-1000">intercom</span>&#x2019;s
-repo.
-</p><!--l. 179--><p class="noindent" >
+<!--l. 194--><p class="noindent" >The results of the experiments proposed in the previous section, that will be
+presented to the rest of the class.
+</p><!--l. 202--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-70005"></a>Resources</h3>
