@@ -9,7 +9,7 @@
   latency} (also called
 \href{https://en.wikipedia.org/wiki/Network_delay}{network delay} and
 \href{https://en.wikipedia.org/wiki/End-to-end_delay}{end-to-end
-  delay}) is the time that a piece of data (a
+  delay}) is the time that a chunk of data (a
 \href{https://en.wikipedia.org/wiki/Network_packet}{packet} in the
 case of the Internet) takes to travel from one point of the network to
 another. This time is relevant for an intercom because the total
@@ -28,7 +28,7 @@ available
 is shared on demand by the users of the network) $t_l$ is
 time-variying, and cannot be controlled without using
 \href{https://en.wikipedia.org/wiki/Quality_of_service}{Quality of
-  Service (QoS)}, something that is not accesible to normal network
+  Service (QoS)}, something that is not available to normal network
 users~\cite{dordal2020intro}. On the contrary, $t_i$ is constant for a
 given intercom's configuration/implementation.
 
@@ -46,8 +46,8 @@ latency varies \href{https://en.wikipedia.org/wiki/Randomness}{at
 Each option has pros and cons, from which we can highlight that:
 \begin{enumerate}
 \item \textbf{Using a real link:} (Pro) The use of real latency is
-  going to show the definitive behaviour of InterCom between the used
-  hosts, which is quite impredictable (depend basically on the
+  going to show the true behaviour of InterCom between the used hosts,
+  which is quite impredictable (depend basically on the
   \href{https://en.wikipedia.org/wiki/Network_congestion}{network
     congestion}). (Con) To run InterCom in two different hosts we will
   need to establish a direct communication between them and it is very
@@ -55,9 +55,9 @@ Each option has pros and cons, from which we can highlight that:
   \href{https://en.wikipedia.org/wiki/Network_address_translation}{NAT}
   devices~\cite{srisuresh1999nat}.
 \item \textbf{Using a simulated link:} (Pro) The simulation of the
-  link latency is much more straightforward than opening ports in
-  our routers and (pro) will allow us to run InterCom in situations
-  that are difficult to achieve in a real network. (Con) The running
+  link latency is much more straightforward than opening ports in our
+  routers and (pro) will allow us to run InterCom in situations that
+  are difficult to achieve in a real network. (Con) The running
   environment must provide a way of controlling the latency between
   \href{https://en.wikipedia.org/wiki/Process_(computing)}{processes}. Fortunately,
   in Linux we can control the latency (and the
@@ -73,9 +73,9 @@ Each option has pros and cons, from which we can highlight that:
 
 \subsubsection{In your host}
 
-In most cases we will test InterCom in our host. Therefore, it can be
-useful to have an idea of how the latencies are distributed, at least
-from a statistical point of view.
+In most cases we will test InterCom only in our host. Therefore, it
+can be useful to have an idea of how the latencies are distributed, at
+least, from a statistical point of view.
 
 To mesasure latencies, we will use
 \href{https://github.com/torvalds/linux/blob/master/net/ipv4/ping.c}{\texttt{ping}}~\cite{Kurose-Ross,Forouzan},
@@ -90,16 +90,17 @@ host, measuring the so called
 \href{https://en.wikipedia.org/wiki/Round-trip_delay}{RTT} (Round-Trip
 Time). For example, in the Figure~\ref{fig:ping_timeline} are
 described the different time components in which a RTT can be
-decomposed. $t_t$ stands for \emph{transmission time}, and $t_p$
-(again) for \emph{propagation time}. A simple link (a cable, for
-example) using
+decomposed. In this figure, $t_t$ stands for \emph{transmission time},
+and $t_p$ (again) for \emph{propagation time}. A simple link (a cable,
+for example) using
 \href{https://en.wikipedia.org/wiki/Time-division_multiple_access}{TDM}
-(Time-Domain Multiplexing) has been supposed. For that reason, the
+(Time-Domain Multiplexing) has been supposed. For this reason, the
 propagation and transmission times are identical in both
-directions. Notice that if the payload of the \texttt{ping} message
-has only 64 bytes (the default value in most \texttt{ping}
-implementations) and the bit-rate of the link is high,
-then $$t_p>>t_t.$$ For this type of link, it also holds that
+directions. Notice that if the payload of the \verb|ping| message has
+only 64 bytes (the default value in most \verb|ping| implementations)
+and the bit-rate of the link is high, then $$t_p>>t_t.$$
+
+For this type of link (a simple wire), it also holds that
 \begin{equation}
   \text{RTT} = 2t_p + 2t_t.
   \label{eq:RTT}
@@ -109,7 +110,7 @@ then $$t_p>>t_t.$$ For this type of link, it also holds that
   \begin{center}
     \myfig{graphics/ping_timeline}{5cm}{500}
   \end{center}
-  \caption{Timeline of a ping interaction between two host A and B
+  \caption{Timeline of a ping interaction between two host A and B,
     interconnected by simple communication link.}
   \label{fig:ping_timeline}
 \end{figure}
@@ -117,7 +118,7 @@ then $$t_p>>t_t.$$ For this type of link, it also holds that
 Please, do the following steps:
 
 \begin{enumerate}
-\item Ping \texttt{localhost}:
+\item Ping \verb|localhost|:
    \begin{lstlisting}{language=bash}
 ping localhost -c 100 -s <payload_length_in_bytes> > /tmp/ping.dat
   \end{lstlisting}
@@ -125,7 +126,7 @@ ping localhost -c 100 -s <payload_length_in_bytes> > /tmp/ping.dat
   in your InterCom experiments.
 \item Compute the expected (considering that the RTT should
   double the) latency to the host of your interlocutor:\\\\
-  \texttt{export LC\_NUMERIC=en\_US.UTF-8 \# Use "." instead of "," for the decimal separator}\\
+  \verb|export LC\_NUMERIC=en\_US.UTF-8 \# Use "." instead of "," for the decimal separator|\\
 \texttt{grep from < /tmp/ping.dat | cut -f 4 -d "=" | cut -f 1 -d " " | awk
   \textquotesingle\{print \$1/2\}\textquotesingle~> /tmp/localhost\_latencies.dat}\\\\
 
@@ -158,7 +159,7 @@ plot "/tmp/localhost_histogram.dat" with histogram
   \end{lstlisting}
   
 \item Characterize statistically the latency: which statistical
-  distribution is more close to your experimental data?
+  distribution is more close to your experimental results?
 \end{enumerate}
 
 \subsubsection{In the Internet}
@@ -170,10 +171,10 @@ networks. For doing that:
 \begin{enumerate}
   
 \item Repeat the previous experiment (the characterization of the
-  latencies returned by the \texttt{ping} tool) but using your
-  interlocutor's \texttt{<router\_public\_IP\_address>} instead of
-  \texttt{localhost}. Call the generated file as
-  \texttt{/tmp/<router\_public\_IP\_address>\_latencies.dat}. The IPv4
+  latencies returned by the \verb|ping| tool) but using your
+  interlocutor's \verb|<router_public_IP_address>| instead of
+  \verb|localhost|. Call the generated file as
+  \verb|/tmp/<router_public_IP_address>_latencies.dat|. The IPv4
   address of your router can be determined with:
   
   \begin{lstlisting}{language=bash}
@@ -189,8 +190,7 @@ ping -s <chunk_length_in_bytes> 192.168.1.1
   \end{lstlisting}
   
   and to send this data to you. Save this info in
-  \texttt{/tmp/<router\_private\_IP\_address>\_latencies.dat} and
-  characterize it.
+  \verb|/tmp/<router_private_IP_address>_latencies.dat| and characterize it.
 
 \item Supposing that the latencies are symmetric (the direction of the
   packes does not affect to the latency) and that the overall network
@@ -211,11 +211,11 @@ ping -s <chunk_length_in_bytes> 192.168.1.1
 
 Let's measure the QoE using the following classification:
 \begin{itemize}
-\item \textbf{Perfect}: no loss or delay can be distinguish.
+\item \textbf{Perfect}: no loss or delay can be perceived.
 \item \textbf{Good}: if you detect some minimal distortion in the
   rendering of the sound.
 \item \textbf{Acceptable}: when the effects of the latency are
-  apreciable, but you can communicate with your interlocutor.
+  noticeable, but you can communicate with your interlocutor.
 \item \textbf{Bad}: you are able to recognize only small parts of the
   received audio.
 \item \textbf{No way}: when most of the time only silence is heard.
@@ -261,7 +261,7 @@ sudo tc qdisc add dev lo root netem delay <average_delay_in_miliseconds>ms <maxi
     for the outgoing traffic.
   \item [\texttt{add}:] Add a new traffic control rule.
   \item [\texttt{dev lo}:] The device affected by the
-    rule. \texttt{lo} means \texttt{loopback}.
+    rule. \verb|lo| means \verb|loopback|.
   \item [\texttt{root}:] The rule will be applied to all the outbound
     traffic (it's the root rule of the possible tree of rules).
   \item [\texttt{netem}:] Use the
@@ -293,7 +293,7 @@ qdisc netem 8009: root refcnt 2 limit 1000 delay 100ms  10ms 25%
 
 \item Measure the QoE.
 
-\item Delete the \texttt{tc} rule with:
+\item Delete the \verb|tc| rule with:
   
   \begin{lstlisting}{language=bash}
 sudo tc qdisc delete dev lo root netem delay <average_dalay_in_miliseconds>ms <maximum_average_deviation_in_miliseconds>ms <Pearson_correlation_coefficient_expressed_as_a_percentage>% distribution <uniform|normal|pareto|paretonormal>
@@ -316,7 +316,7 @@ latency experimented by the user (the higher the network latency, the
 higher the perceived latency).
 
 For example, a packet loss ratio of $10\%$ can be configured with
-\texttt{tc} by running:
+\verb|tc| by running:
 
   \begin{lstlisting}{language=bash}
 sudo tc qdisc add dev lo root netem loss 10%
@@ -328,7 +328,8 @@ Please, finish this milestone in one week.
 
 \section{Deliverables}
 
-A report showing your results.
+The results of the experiments proposed in the previous section, that
+will be presented to the rest of the class.
 
 \section{Resources}
 
