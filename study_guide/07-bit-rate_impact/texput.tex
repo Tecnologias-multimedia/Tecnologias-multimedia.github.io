@@ -73,7 +73,7 @@ devices can be estimated as
 where $B$ is the number of bits sent in a \verb|ping|
 \href{https://en.wikipedia.org/wiki/Payload_(computing)}{payload}, and
 \begin{equation}
-  t_t = \frac{\text{RTT}_{\text{avg}}^\infty-2t_p}{2},
+  t_t = \frac{\text{RTT}-2t_p}{2},
   \label{eq:tt}
 \end{equation}
 an equation that can be determined by revisiting the \verb|ping|
@@ -84,10 +84,10 @@ timeline (Fig.~1) and the Eq.~2 of the
 Notice that if the payload of the ping is small enough ($0$ bytes
 ideally, and therefore $t_t=0$), we can consider that
 \begin{equation}
-  t_p \approx \frac{\text{RTT}_{\text{min}}^0}{2},
+  t_p \approx \frac{\text{RTT}}{2},
   \label{eq:tp}
 \end{equation}
-and that for measuring the $\text{RTT}_{\text{avg}}$ in
+and that for measuring the $\text{RTT}$ in
 Eq.~\ref{eq:tt}, we should use a payload as large as possible
 (ideally, infinite bytes), in order to make $t_t$ a significative
 amount of time, ease to measure. Notice also that we should use the
@@ -98,7 +98,7 @@ congestion of the link always increases it.
 Therefore, supposing that $t_p$ is constant and using the
 average\footnote{Remember that with the \texttt{ping} command we
 iterate several times and the tool returns average values.}
-$\text{RTT}_{\text{avg}}^\infty$ for transmitting $B$ bits ($B$ as
+$\text{RTT}$ for transmitting $B$ bits ($B$ as
 large as possible), the bit-rate value $b$ determined by
 Eq.~\ref{eq:b} can be considered as a good estimation for the link of
 the near future.
@@ -205,7 +205,7 @@ Examples:
 
 \end{enumerate}
 
-Remember to delete the rules after their are unnecessary (example):
+Remember to delete the rules after their are unnecessary (example to delete the previous rules):
 
 \begin{lstlisting}{language=bash}
   sudo tc qdisc delete dev lo parent 1:1 handle 10: netem delay 100ms 10ms 25% distribution normal

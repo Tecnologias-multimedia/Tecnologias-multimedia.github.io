@@ -141,29 +141,23 @@ href="https://en.wikipedia.org/wiki/Payload_(computing)" >payload</a>, and </p><
 <!--l. 75--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
-                        <msub><mrow 
+                          <msub><mrow 
 ><mi 
 >t</mi></mrow><mrow 
 ><mi 
 >t</mi></mrow></msub 
 > <mo 
 class="MathClass-rel">=</mo> <mfrac><mrow 
-><msubsup><mrow 
 ><mstyle 
-class="text"><mtext  >RTT</mtext></mstyle></mrow><mrow 
-><mstyle 
-class="text"><mtext  >avg</mtext></mstyle></mrow><mrow 
-><mi 
->&#x221E;</mi></mrow></msubsup 
-><mo 
+class="text"><mtext  >RTT</mtext></mstyle> <mo 
 class="MathClass-bin">&#x2212;</mo> <mn>2</mn><msub><mrow 
 ><mi 
 >t</mi></mrow><mrow 
 ><mi 
 >p</mi></mrow></msub 
 ></mrow> 
-          <mrow 
-><mn>2</mn></mrow></mfrac>          <mo 
+      <mrow 
+><mn>2</mn></mrow></mfrac>       <mo 
 class="MathClass-punc">,</mo>
 </math></td><td class="eq-no">&#x0028;2&#x0029;</td></tr></table>
 <!--l. 79--><p class="indent" >   an equation that can be determined by revisiting the <span class="obeylines-h"><span class="verb"><span 
@@ -188,32 +182,23 @@ we can consider that </p><table class="equation"><tr><td> <a
 <!--l. 86--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
-                          <msub><mrow 
+                            <msub><mrow 
 ><mi 
 >t</mi></mrow><mrow 
 ><mi 
 >p</mi></mrow></msub 
 > <mo 
 class="MathClass-rel">&#x2248;</mo> <mfrac><mrow 
-><msubsup><mrow 
 ><mstyle 
-class="text"><mtext  >RTT</mtext></mstyle></mrow><mrow 
-><mstyle 
-class="text"><mtext  >min</mtext></mstyle></mrow><mrow 
-><mn>0</mn></mrow></msubsup 
-></mrow> 
-       <mrow 
-><mn>2</mn></mrow></mfrac>      <mo 
+class="text"><mtext  >RTT</mtext></mstyle></mrow> 
+  <mrow 
+><mn>2</mn></mrow></mfrac>   <mo 
 class="MathClass-punc">,</mo>
 </math></td><td class="eq-no">&#x0028;3&#x0029;</td></tr></table>
 <!--l. 90--><p class="indent" >   and that for measuring the <!--l. 90--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><msub><mrow 
-><mstyle 
-class="text"><mtext  >RTT</mtext></mstyle></mrow><mrow 
-><mstyle 
-class="text"><mtext  >avg</mtext></mstyle></mrow></msub 
-></math>
+display="inline" ><mstyle 
+class="text"><mtext  >RTT</mtext></mstyle></math>
 in Eq.&#x00A0;<a 
 href="#x1-3002r2">2<!--tex4ht:ref: eq:tt --></a>, we should use a payload as large as possible &#x0028;ideally, in&#xFB01;nite bytes&#x0029;, in order to
 make <!--l. 92--><math 
@@ -243,14 +228,8 @@ href="index4.html#fn3x0"><sup class="textsuperscript">3</sup></a></span><a
  id="x1-3004f3"></a> 
 <!--l. 101--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><msubsup><mrow 
-><mstyle 
-class="text"><mtext  >RTT</mtext></mstyle></mrow><mrow 
-><mstyle 
-class="text"><mtext  >avg</mtext></mstyle></mrow><mrow 
-><mi 
->&#x221E;</mi></mrow></msubsup 
-></math> for transmitting
+display="inline" ><mstyle 
+class="text"><mtext  >RTT</mtext></mstyle></math> for transmitting
 <!--l. 101--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
@@ -271,10 +250,10 @@ future.
 display="inline" ><mi 
 >b</mi></math>
 we must run the following steps:
+     </p><ol  class="enumerate1" >
                                                                   
 
                                                                   
-     </p><ol  class="enumerate1" >
      <li 
   class="enumerate" id="x1-3006x1">Run <span 
 class="ectt-1000">ping </span>using the smallest possible payload that provides RTTs values.<span class="footnote-mark"><a 
@@ -366,11 +345,11 @@ href="https://en.wikipedia.org/wiki/Network_interface_controller" >network adapt
 href="https://www.meter.net/" ><span 
 class="ectt-1000">www.meter.net</span></a>
      for example.</li></ol>
+   <h4 class="subsectionHead"><span class="titlemark">2.2   </span> <a 
+ id="x1-40002.2"></a>Simulate the link</h4>
                                                                   
 
                                                                   
-   <h4 class="subsectionHead"><span class="titlemark">2.2   </span> <a 
- id="x1-40002.2"></a>Simulate the link</h4>
 <!--l. 155--><p class="noindent" >With the bit-rate value <!--l. 155--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
@@ -586,10 +565,10 @@ href="https://wiki.linuxfoundation.org/networking/netem" >with the next random t
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mn>2</mn><mn>5</mn></math>%
      on the last one</a>&#x0029;:
+     <!--l. 189-->
                                                                   
 
                                                                   
-     <!--l. 189-->
      <div class="lstlisting" id="listing-5"><span class="label"><a 
  id="x1-4013r6"></a></span><span 
 class="ectt-1000">&#x00A0;</span><span 
@@ -718,7 +697,8 @@ class="ectt-1000">25%</span>
      
      </div>
      </li></ol>
-<!--l. 208--><p class="indent" >   Remember to delete the rules after their are unnecessary &#x0028;example&#x0029;:
+<!--l. 208--><p class="indent" >   Remember to delete the rules after their are unnecessary &#x0028;example to delete the
+previous rules&#x0029;:
 </p>
    <!--l. 210-->
    <div class="lstlisting" id="listing-8"><span class="label"><a 
