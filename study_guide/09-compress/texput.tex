@@ -5,9 +5,11 @@
 
 \section{Description}
 
-It's time to reduce bandwidth comsumption. The pack() and the unpack()
-methods can compress and decompress, respectively, the chunks that are
-handled. To compress and decompress, we will use a free codec named
+It's time to reduce bandwidth comsumption in InterCom. The
+\verb|pack()| and the \verb|unpack()| methods can compress and
+decompress, respectively, the chunks that are processed. To compress
+and decompress, we will use a free
+\href{https://en.wikipedia.org/wiki/Codec}{codec} named
 \href{https://en.wikipedia.org/wiki/DEFLATE}{DEFLATE}, which is based
 on
 \href{https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Storer%E2%80%93Szymanski}{LZSS}
@@ -17,6 +19,14 @@ on
   this
   \href{https://vicente-gonzalez-ruiz.github.io/Huffman_coding/}{notebook}.
 
+The DEFLATE algorithm is implemented in the Python's standard library
+\href{https://docs.python.org/3/library/zlib.html}{\texttt{zlib}}. We
+have used this facility for compressing and decompressing the chunks
+that we are sending and receiving in the methods \verb|pack()| and
+\verb|unpack()|, respectively. These methods are implemented in the
+module \verb|compress.py|, inside of a the class \verb|Compress|, and
+override the defined in the parent class.
+
 \begin{figure}
   \begin{center}
     \myfig{graphics/reordering}{5cm}{500}
@@ -25,30 +35,19 @@ on
   \label{fig:reordering}
 \end{figure}
 
+In order to increase the
+\href{https://en.wikipedia.org/wiki/Data_compression_ratio}{(data)
+  compression ratio}, reorder the samples as it is shown in the
+Figure~\ref{fig:reordering}. Notice that with this shuffling, the
+samples are not interleaved and the correlation between consecutive
+bytes is slighly increased. Notice also that the number of UDP packets
+remain constant respect to parent code.
+
 \section{What you have to do?}
 
-\begin{enumerate}
-  
-\item Create a class named Compression, that inherits from
-  Buffering (the class implemented in the previous milestone),
-  in which the methods pack() and unpack() are
-  overriden to compress and decompress the chunks. Use the Python's
-  standard library
-  \href{https://docs.python.org/3/library/zlib.html}{\texttt{zlib}}. Store
-  this class in a module named compress.py.
-  
-\item Compress (and decompress) each chunk as a unit (each compressed
-  chunk will be transmitted in a different UDP packet). In order to
-  increase slightly the
-  \href{https://en.wikipedia.org/wiki/Data_compression_ratio}{(data)
-    compression ratio}, reorder the samples as it is shown in the
-  Figure~\ref{fig:reordering}.
-
-\item Describe the QoE as a function of the transmission bit-rate
-  (determine the transmission bit-rates that generate each possible
-  QoE clasiffication). Use
-  \href{https://man7.org/linux/man-pages/man8/tc.8.html}{tc}.
-\end{enumerate}
+Repeat the experiment performed in the previous milestone but
+expresing the QoE as a function of the transmission bit-rate. Use the
+\verb|tc| tool.
 
 \section{Timming}
 
@@ -56,9 +55,11 @@ Please, finish this milestone at most in one week.
 
 \section{Deliverables}
 
-Create a Python module named compress.py and store it in the
-\href{https://github.com/Tecnologias-multimedia/intercom}{root
-  directory} of your InterCom's repo.
+A report documenting the experiment and the results.
+
+%Create a Python module named compress.py and store it in the
+%\href{https://github.com/Tecnologias-multimedia/intercom}{root
+%  directory} of your InterCom's repo.
 
 \section{Resources}
 

@@ -42,16 +42,14 @@
 .ecti-1000{ font-style: italic;}
 .ecrm-0900{font-size:90%;}
 .ecrm-0800{font-size:80%;}
-.ecbx-1000{ font-weight: bold;}
-.ecbx-1000{ font-weight: bold;}
-.ecbx-1000{ font-weight: bold;}
-.ecbx-1000{ font-weight: bold;}
-.ecbx-1000{ font-weight: bold;}
-.ecbx-1000{ font-weight: bold;}
-.ecbx-1000{ font-weight: bold;}
-.ecbx-1000{ font-weight: bold;}
-.eccc1000-{font-variant: small-caps;}
-.small-caps{font-variant: small-caps; }
+.ecit-1000{ font-style: italic; font-family: monospace,monospace;}
+.ecit-1000{ font-style: italic; font-family: monospace,monospace;}
+.ecit-1000{ font-style: italic; font-family: monospace,monospace;}
+.ecit-1000{ font-style: italic; font-family: monospace,monospace;}
+.ecit-1000{ font-style: italic; font-family: monospace,monospace;}
+.ecit-1000{ font-style: italic; font-family: monospace,monospace;}
+.ecit-1000{ font-style: italic; font-family: monospace,monospace;}
+.ecit-1000{ font-style: italic; font-family: monospace,monospace;}
 p{margin-top:0;margin-bottom:0}
 p.indent{text-indent:0;}
 p + p{margin-top:1em;}
@@ -139,6 +137,7 @@ mi + mo.MathClass-op{margin-left:0.3em}
  math mstyle[mathvariant="bold"] { font-weight: bold; font-style: normal; } 
  math mstyle[mathvariant="normal"] { font-weight: normal; font-style: normal; } 
 .partToc a, .partToc, .likepartToc a, .likepartToc {line-height: 200%; font-weight:bold; font-size:110%;}
+.chapterToc a, .chapterToc, .likechapterToc a, .likechapterToc, .appendixToc a, .appendixToc {line-height: 200%; font-weight:bold;}
 .index-item, .index-subitem, .index-subsubitem {display:block}
 div.caption {text-indent:-2em; margin-left:3em; margin-right:1em; text-align:left;}
 div.caption span.id{font-weight: bold; white-space: nowrap; }
@@ -154,8 +153,9 @@ div.maketitle{ margin-bottom: 2em; }
 div.author, div.date {text-align:center;}
 div.thanks{text-align:left; margin-left:10%; font-size:85%; font-style:italic; }
 div.author{white-space: nowrap;}
-.abstract p {margin-left:5%; margin-right:5%;}
+div.abstract p {margin-left:5%; margin-right:5%;}
 div.abstract {width:100%;}
+.abstracttitle{text-align:center;margin-bottom:1em;}
 .equation-star td{text-align:center; vertical-align:middle; }
 table.equation-star { width:100%; } 
 mtd.align-odd{margin-left:2em; text-align:right;}

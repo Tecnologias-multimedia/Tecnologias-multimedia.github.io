@@ -1,16 +1,16 @@
-<!DOCTYPE html> 
-<html> 
-<head> <title>TecnologÃŋas Multimedia - Study Guide - Milestone 6: Compressing the audio
+<?xml version="1.0" encoding="iso-8859-1" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN" 
+"http://www.w3.org/Math/DTD/mathml2/xhtml-math11-f.dtd" > 
+<html xmlns="http://www.w3.org/1999/xhtml"  
+> 
+<head><title>Tecnolog&#x00C3;&#x014B;as Multimedia - Study Guide - Milestone 6: Compressing the audio
 data with zlib</title> 
-<meta charset="UTF-8" /> 
-<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
+<meta name="generator" content="TeX4ht (https://tug.org/tex4ht/)" /> 
+<meta name="originator" content="TeX4ht (https://tug.org/tex4ht/)" /> 
+<!-- xhtml,mathml,html --> 
+<meta name="src" content="index.tex" /> 
 <link rel="stylesheet" type="text/css" href="index.css" /> 
-<script type="text/javascript" 
-src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" 
-></script> 
-<style type="text/css"> 
-.MathJax_MathML {text-indent: 0;} 
-</style> 
 </head><body 
 >
    <div class="maketitle">
@@ -22,39 +22,53 @@ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLor
                                                                   
 
 <h2 class="titleHead"><a 
-href="https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN" >Tecnologías Multimedia</a> - Study Guide -
+href="https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN" >Tecnolog&#x00ED;as Multimedia</a> - Study Guide -
 Milestone 6: Compressing the audio data with
 <a 
 href="https://zlib.net/" >zlib</a></h2>
  <div class="author" ><a 
 href="https://cms.ual.es/UAL/personas/persona.htm?id=515256515553484875" ><span 
 class="ecrm-1200">Vicente Gonz</span><span 
-class="ecrm-1200">á</span><span 
+class="ecrm-1200">&#x00E1;</span><span 
 class="ecrm-1200">lez Ruiz</span></a> <span 
 class="ecrm-1200">- </span><a 
 href="https://cms.ual.es/UAL/universidad/departamentos/informatica/index.htm" ><span 
 class="ecrm-1200">Depto Inform</span><span 
-class="ecrm-1200">á</span><span 
+class="ecrm-1200">&#x00E1;</span><span 
 class="ecrm-1200">tica</span></a> <span 
 class="ecrm-1200">- </span><a 
 href="https://www.ual.es" ><span 
 class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
-class="ecrm-1200">December 31, 2020</span></div>
+class="ecrm-1200">September 5, 2021</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
-<!--l. 8--><p class="noindent" >It’s time to reduce bandwidth comsumption. The pack() and the unpack() methods
-can compress and decompress, respectively, the chunks that are handled.
-To compress and decompress, we will use a free codec named <a 
+<!--l. 8--><p class="noindent" >It&#x2019;s time to reduce bandwidth comsumption in InterCom. The <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">pack&#x0028;&#x0029;</span></span></span> and the
+<span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">unpack&#x0028;&#x0029;</span></span></span> methods can compress and decompress, respectively, the chunks that are
+processed. To compress and decompress, we will use a free <a 
+href="https://en.wikipedia.org/wiki/Codec" >codec</a> named <a 
 href="https://en.wikipedia.org/wiki/DEFLATE" >DEFLATE</a>,
 which is based on <a 
 href="https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Storer%E2%80%93Szymanski" >LZSS</a> and <a 
-href="https://en.wikipedia.org/wiki/Huffman_coding" >Huﬀman Coding</a> <span class="cite">[<a 
-href="#Xnelson96datacompression">1</a>]</span>. See this <a 
+href="https://en.wikipedia.org/wiki/Huffman_coding" >Hu&#xFB00;man Coding</a>&#x00A0;<span class="cite">&#x005B;<a 
+href="#Xnelson96datacompression">1</a>&#x005D;</span>. See this <a 
 href="https://github.com/vicente-gonzalez-ruiz/LZ77" >notebook</a> and this
 <a 
 href="https://vicente-gonzalez-ruiz.github.io/Huffman_coding/" >notebook</a>.
+</p><!--l. 22--><p class="indent" >   The DEFLATE algorithm is implemented in the Python&#x2019;s standard library <a 
+href="https://docs.python.org/3/library/zlib.html" ><span 
+class="ectt-1000">zlib</span></a>.
+We have used this facility for compressing and decompressing the chunks that we are
+sending and receiving in the methods <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">pack&#x0028;&#x0029;</span></span></span> and <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">unpack&#x0028;&#x0029;</span></span></span>, respectively. These
+methods are implemented in the module <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">compress.py</span></span></span>, inside of a the class
+<span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">Compress</span></span></span>, and override the de&#xFB01;ned in the parent class.
 </p>
    <hr class="figure" /><div class="figure" 
 >
@@ -66,69 +80,51 @@ href="https://vicente-gonzalez-ruiz.github.io/Huffman_coding/" >notebook</a>.
                                                                   
 <div class="center" 
 >
-<!--l. 21--><p class="noindent" >
-</p><!--l. 22--><p class="noindent" ><div style="text-align:center;"> <img width=500 src="graphics/reordering.svg" /> </div>  </p></div>
+<!--l. 31--><p class="noindent" >
+</p><!--l. 32--><p class="noindent" ><div style="text-align:center;"> <img width=500 src="graphics/reordering.svg" /> </div>  </p></div>
 <a 
  id="x1-1001r1"></a>
 <a 
  id="x1-1002"></a>
 <br />                                                                  <div class="caption" 
 ><span class="id">
-Figure 1: : </span><span  
+Figure&#x00A0;1: </span><span  
 class="content">Sample reordering to create two independent channels.
 </span></div><!--tex4ht:label?: x1-1001r1 -->
                                                                   
 
                                                                   
    </div><hr class="endfigure" />
+<!--l. 38--><p class="indent" >   In order to increase the <a 
+href="https://en.wikipedia.org/wiki/Data_compression_ratio" >&#x0028;data&#x0029; compression ratio</a>, reorder the samples as it is
+shown in the Figure&#x00A0;<a 
+href="#x1-1001r1">1<!--tex4ht:ref: fig:reordering --></a>. Notice that with this shu&#xFB04;ing, the samples are not
+interleaved and the correlation between consecutive bytes is slighly increased. Notice
+also that the number of UDP packets remain constant respect to parent
+code.
+</p>
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
  id="x1-20002"></a>What you have to do?</h3>
-<!--l. 30--><p class="noindent" >
-     </p><ol  class="enumerate1" >
-     <li 
-  class="enumerate" id="x1-2002x1">Create a class named Compression, that inherits from Buﬀering (the class
-     implemented  in  the  previous  milestone),  in  which  the  methods  pack()
-     and unpack() are overriden to compress and decompress the chunks. Use
-     the Python’s standard library <a 
-href="https://docs.python.org/3/library/zlib.html" ><span 
-class="ectt-1000">zlib</span></a>. Store this class in a module named
-     compress.py.
-     </li>
-     <li 
-  class="enumerate" id="x1-2004x2">Compress (and decompress) each chunk as a unit (each compressed chunk
-     will be transmitted in a diﬀerent UDP packet). In order to increase slightly
-     the <a 
-href="https://en.wikipedia.org/wiki/Data_compression_ratio" >(data) compression ratio</a>, reorder the samples as it is shown in the
-     Figure <a 
-href="#x1-1001r1">1<!--tex4ht:ref: fig:reordering --></a>.
-     </li>
-     <li 
-  class="enumerate" id="x1-2006x3">Describe the QoE as a function of the transmission bit-rate (determine
-     the transmission bit-rates that generate each possible QoE clasiﬃcation).
-     Use <a 
-href="https://man7.org/linux/man-pages/man8/tc.8.html" >tc</a>.</li></ol>
-<!--l. 53--><p class="noindent" >
+<!--l. 48--><p class="noindent" >Repeat the experiment performed in the previous milestone but expresing the QoE as
+a function of the transmission bit-rate. Use the <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">tc</span></span></span> tool.
+</p><!--l. 52--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-30003"></a>Timming</h3>
-<!--l. 55--><p class="noindent" >Please, ﬁnish this milestone at most in one week.
-</p><!--l. 57--><p class="noindent" >
+<!--l. 54--><p class="noindent" >Please, &#xFB01;nish this milestone at most in one week.
+</p><!--l. 56--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-40004"></a>Deliverables</h3>
-<!--l. 59--><p class="noindent" >Create a Python module named compress.py and store it in the <a 
-href="https://github.com/Tecnologias-multimedia/intercom" >root directory</a> of
-your InterCom’s repo.
-</p><!--l. 63--><p class="noindent" >
+<!--l. 58--><p class="noindent" >A report documenting the experiment and the results.
+</p><!--l. 64--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-50005"></a>Resources</h3>
-                                                                  
-
-                                                                  
    <div class="thebibliography">
    <p class="bibitem" ><span class="biblabel">
- [1]<span class="bibsp">   </span></span><a 
+ &#x005B;1&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
  id="Xnelson96datacompression"></a>Nelson M. and Gailly J.  <a 
 href="http://index-of.co.uk/Information-Theory/The%20Data%20Compression%20Book%202nd%20Ed%20-%20Mark%20Nelson.pdf" ><span 
 class="ecti-1000">The Data Compression Book</span></a>.  M&#x0026;T Books,
@@ -138,8 +134,8 @@ class="ecti-1000">The Data Compression Book</span></a>.  M&#x0026;T Books,
 <a 
  id="Q1-1-6"></a>
     
-</body> 
-</html>
+</body></html> 
+
                                                                   
 
 

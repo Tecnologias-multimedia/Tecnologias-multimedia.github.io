@@ -3,7 +3,8 @@
 "http://www.w3.org/Math/DTD/mathml2/xhtml-math11-f.dtd" > 
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Tecnolog&#x00C3;&#x014B;as Multimedia - Study Guide - Milestone 6: Bu&#xFB00;ering for dejitterizing</title> 
+<head><title>Tecnolog&#x00C3;&#x014B;as Multimedia - Study Guide - Milestone 8: Bu&#xFB00;ering for hidding the
+jitter</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (https://tug.org/tex4ht/)" /> 
 <meta name="originator" content="TeX4ht (https://tug.org/tex4ht/)" /> 
@@ -22,7 +23,7 @@
 
 <h2 class="titleHead"><a 
 href="https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN" >Tecnolog&#x00ED;as Multimedia</a> - Study Guide -
-Milestone 6: Bu&#xFB00;ering for dejitterizing</h2>
+Milestone 8: Bu&#xFB00;ering for hidding the jitter</h2>
  <div class="author" ><a 
 href="https://cms.ual.es/UAL/personas/persona.htm?id=515256515553484875" ><span 
 class="ecrm-1200">Vicente Gonz</span><span 
@@ -37,18 +38,19 @@ class="ecrm-1200">- </span><a
 href="https://www.ual.es" ><span 
 class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
-class="ecrm-1200">February 15, 2021</span></div>
+class="ecrm-1200">September 5, 2021</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
-<!--l. 8--><p class="noindent" >The QoE provided by InterCom is inversely proportional to the network jitter &#x0028;see
-Fig.&#x00A0;<a 
-href="#x1-1001r1">1<!--tex4ht:ref: fig:timelines --></a>-a&#x0029;. One solution to this drawback &#x0028;Fig.&#x00A0;<a 
-href="#x1-1001r1">1<!--tex4ht:ref: fig:timelines --></a>-b&#x0029; is the use of a <a 
-href="https://en.wikipedia.org/wiki/Random_access" >random access</a>
-<a 
-href="https://en.wikipedia.org/wiki/Data_buffer" >bu&#xFB00;er</a> at the receiver side, where the chunks are stored for a time large enough to
-hidden the jitter to the user&#x00A0;<span class="cite">&#x005B;<a 
+<!--l. 8--><p class="noindent" >As we have determined in the previous milestones, we can consider that the QoE
+provided by InterCom is inversely proportional to the network jitter &#x0028;see Fig.&#x00A0;<a 
+href="#x1-1001r1">1<!--tex4ht:ref: fig:timelines --></a>-a&#x0029;.
+One solution &#x0028;see Fig.&#x00A0;<a 
+href="#x1-1001r1">1<!--tex4ht:ref: fig:timelines --></a>-b&#x0029; to this drawback is the use of a <a 
+href="https://en.wikipedia.org/wiki/Random_access" >random access</a> <a 
+href="https://en.wikipedia.org/wiki/Data_buffer" >bu&#xFB00;er</a> at
+the receiver side, where the chunks are stored for a time large enough to hidde the
+jitter to the user&#x00A0;<span class="cite">&#x005B;<a 
 href="#XKurose-Ross">1</a>&#x005D;</span>.
 </p>
    <hr class="figure" /><div class="figure" 
@@ -61,8 +63,8 @@ href="#XKurose-Ross">1</a>&#x005D;</span>.
                                                                   
 <div class="center" 
 >
-<!--l. 17--><p class="noindent" >
-</p><!--l. 18--><p class="noindent" ><div style="text-align:center;"> <img width=1000 src="graphics/timelines.svg" /> </div>  </p></div>
+<!--l. 18--><p class="noindent" >
+</p><!--l. 19--><p class="noindent" ><div style="text-align:center;"> <img width=1000 src="graphics/timelines.svg" /> </div>  </p></div>
 <a 
  id="x1-1001r1"></a>
 <a 
@@ -79,10 +81,10 @@ example&#x0029;.
 
                                                                   
    </div><hr class="endfigure" />
-<!--l. 28--><p class="indent" >   <a 
+<!--l. 29--><p class="indent" >   <a 
 href="https://en.wikipedia.org/wiki/Jitter#Jitter_buffers" ><span 
 class="ecti-1000">Dejitterizing </span>bu&#xFB00;ers</a> are typically implemented with a circular bu&#xFB00;er structure
-&#x0028;see the Fig.&#x00A0;<a 
+&#x0028;see Fig.&#x00A0;<a 
 href="#x1-1004r2">2<!--tex4ht:ref: fig:circular_buffer --></a>&#x0029;. In an ideal situation &#x0028;as the depicted in the &#xFB01;gure&#x0029;, the number of
 pending-to-be-played chunks available in the bu&#xFB00;er is half of the number of cells in
 the bu&#xFB00;er, and the chunks have arrived on time. In this example, the receiver &#x0028;where
@@ -90,25 +92,25 @@ the chunks are bu&#xFB00;ered&#x0029; waits for 3 chunks before to start playing
 0.<span class="footnote-mark"><a 
 href="index2.html#fn1x0"><sup class="textsuperscript">1</sup></a></span><a 
  id="x1-1003f1"></a>  Notice that the number
-of cells in the bu&#xFB00;er <!--l. 39--><math 
+of cells in the bu&#xFB00;er <!--l. 40--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mn>2</mn><mi 
 >N</mi></math>
 must be the double of the number of the chunks bu&#xFB00;ered during the bu&#xFB00;ering time
-<!--l. 40--><math 
+<!--l. 41--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >N</mi></math>, in order
-to hide a <!--l. 40--><math 
+to hide a <!--l. 41--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >N</mi></math>
 chunk-time jitter. Notice also that this technique introduces also a
-<!--l. 41--><math 
+<!--l. 42--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >N</mi></math>
-chunk-time delay in the playback.
+chunk-times delay in the playback.
 </p>
    <hr class="figure" /><div class="figure" 
 >
@@ -119,15 +121,15 @@ chunk-time delay in the playback.
 
                                                                   
 <div class="tabular"> <table id="TBL-2" class="tabular" 
-cellspacing="0" cellpadding="0"  
+ 
 ><colgroup id="TBL-2-1g"><col 
 id="TBL-2-1" /><col 
 id="TBL-2-2" /><col 
 id="TBL-2-3" /></colgroup><tr  
  style="vertical-align:baseline;" id="TBL-2-1-"><td  style="text-align:center; white-space:nowrap;" id="TBL-2-1-1"  
-class="td11"> <!--l. 46--><p class="noindent" ><div style="text-align:center;"> <img width=200 src="graphics/circular_buffer1.svg" /> </div>                                                                    </p></td><td  style="text-align:center; white-space:nowrap;" id="TBL-2-1-2"  
-class="td11"> <!--l. 46--><p class="noindent" ><div style="text-align:center;"> <img width=200 src="graphics/circular_buffer2.svg" /> </div>                                                                    </p></td><td  style="text-align:center; white-space:nowrap;" id="TBL-2-1-3"  
-class="td11"> <!--l. 46--><p class="noindent" ><div style="text-align:center;"> <img width=200 src="graphics/circular_buffer3.svg" /> </div>                                                                    </p></td>
+class="td11"> <!--l. 47--><p class="noindent" ><div style="text-align:center;"> <img width=200 src="graphics/circular_buffer1.svg" /> </div>                                                                    </p></td><td  style="text-align:center; white-space:nowrap;" id="TBL-2-1-2"  
+class="td11"> <!--l. 47--><p class="noindent" ><div style="text-align:center;"> <img width=200 src="graphics/circular_buffer2.svg" /> </div>                                                                    </p></td><td  style="text-align:center; white-space:nowrap;" id="TBL-2-1-3"  
+class="td11"> <!--l. 47--><p class="noindent" ><div style="text-align:center;"> <img width=200 src="graphics/circular_buffer3.svg" /> </div>                                                                    </p></td>
 </tr><tr  
  style="vertical-align:baseline;" id="TBL-2-2-"><td  style="text-align:center; white-space:nowrap;" id="TBL-2-2-1"  
 class="td11">                                 &#x0028;a&#x0029;                                                    </td><td  style="text-align:center; white-space:nowrap;" id="TBL-2-2-2"  
@@ -150,193 +152,256 @@ Then, a new chunk &#x0028;chunk number 3&#x0029; is received and bu&#xFB00;ered 
 
                                                                   
    </div><hr class="endfigure" />
-<!--l. 58--><p class="indent" >   For this new improved InterCom a parameter with the <span 
+<!--l. 59--><p class="indent" >   For this new improved InterCom a parameter with the <span 
 class="ecti-1000">bu&#xFB00;ering time </span>must be
 provided by the users. This value &#x0028;typically expressed in miliseconds&#x0029; should be large
 enough to hide the network jitter, but small enough to minimize the end-to-end
 &#x0028;user&#x0029; latency.
-</p><!--l. 63--><p class="indent" >   Use the following basic guidelines to implement the <span 
+</p><!--l. 64--><p class="indent" >   The following guidelines have been used to implement the <span 
 class="ecti-1000">bu&#xFB00;ered </span>version of
 InterCom:
      </p><ol  class="enumerate1" >
      <li 
-  class="enumerate" id="x1-1007x1">Extend  &#x0028;<a 
-href="https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)" >inherit</a>  from&#x0029;  the  class  Minimal  to  implement  a  new  class
-     Bu&#xFB00;ering.
+  class="enumerate" id="x1-1007x1">The  class  Minimal  &#x0028;<a 
+href="https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)" >inherit</a>  from&#x0029;  has  been  inherited  &#x0028;extended&#x0029;  to
+     implement a new class Bu&#xFB00;ering.
      </li>
      <li 
-  class="enumerate" id="x1-1009x2">In the payload of the UDP packets a chunk number must be included
-     in order to provide to the receiver the information to determine where
-     to store the corresponding chunk in the circular bu&#xFB00;er. Use an unsigned
-     integer of 16 bits for representing the chunk numbers.
+  class="enumerate" id="x1-1009x2">In the payload of the UDP packets a chunk number has been included
+     in order to provide to the receiver the information to determine where to
+     store the corresponding chunk in the circular bu&#xFB00;er. An unsigned integer
+     of 16 bits has been used for representing the chunk numbers.
      </li>
      <li 
-  class="enumerate" id="x1-1011x3">Take into account that the critical part of InterCom is a <a 
-href="https://en.wikipedia.org/wiki/Task_(computing)" >task</a> that could be
-     called record_send_and_play&#x0028;&#x0029;, and this should be iterated each time a new
-     chunk is available in the <a 
-href="https://en.wikipedia.org/wiki/Analog-to-digital_converter" >ADC</a>. More precisely:
+  class="enumerate" id="x1-1011x3">It has been taken into consideration that the critical part of InterCom &#x0028;the
+     method <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">record_send_and_play&#x0028;&#x0029;</span></span></span>&#x0029; is a method that runs as an <a 
+href="https://en.wikipedia.org/wiki/Interrupt_handler" >interrup
+     handler</a> that could be called each time a new chunk is available in the ADC &#x0028;see
+     the Milestone 4&#x0029;. More precisely:
          <ol  class="enumerate2" >
          <li 
-  class="enumerate" id="x1-1013x1">In order to minimize the latency, the recorded chunks must be sent
-         to the interlocutor as soon as possible.
+  class="enumerate" id="x1-1013x1">In order to minimize the latency, the recorded chunks are sent to the
+         interlocutor as soon as possible.
          </li>
          <li 
-  class="enumerate" id="x1-1015x2">The playback of the chunks extracted from the bu&#xFB00;er must be <a 
+  class="enumerate" id="x1-1015x2">The  playback  of  the  chunks  extracted  from  the  bu&#xFB00;er  is  <a 
 href="https://en.wikipedia.org/wiki/Gapless_playback" ><span 
 class="ecti-1000">gapless</span></a>
          &#x0028;without the ocurrence of silences&#x0029; as long as the chunks have been
          received on time.
          </li>
          <li 
-  class="enumerate" id="x1-1017x3">As always, the lost chunks should be replaced by zero-chunks in the
+  class="enumerate" id="x1-1017x3">As  always,  the  lost  chunks  are  replaced  by  zero-chunks  in  the
          playback.</li></ol>
      </li>
      <li 
-  class="enumerate" id="x1-1019x4">A receive_and_bu&#xFB00;er&#x0028;&#x0029; task can be run now in a di&#xFB00;erent execution <a 
+  class="enumerate" id="x1-1019x4">A method <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">receive_and_buffer&#x0028;&#x0029;</span></span></span> is run now in a di&#xFB00;erent execution <a 
 href="https://en.wikipedia.org/wiki/Thread_(computing)" >thread</a>,
-     decoupled from the record_send_and_play&#x0028;&#x0029; task. But notice that using the
-     sounddevice package this can be achived without using the <a 
+     decoupled from the <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">record_send_and_play&#x0028;&#x0029;</span></span></span> method. But notice that using
+     the sounddevice package this is achived without using the <a 
 href="https://docs.python.org/3/library/threading.html" >threading</a>
      nor <a 
 href="https://docs.python.org/3/library/multiprocessing.html" >multiprocessing</a> packages because the interruption handler &#x0028;the
      so called <span 
 class="ecti-1000">callback</span>&#x0028;&#x0029; function&#x0029; already runs in parallel with the main
      thread.</li></ol>
-<a 
- id="x1-1020r1"></a>
+<!--l. 106--><p class="indent" >   This is an overview of the implementation:
+</p>
+   <!--l. 108-->
                                                                   
 
                                                                   
-<!--l. 122--><p class="noindent" ><div class="minipage"><span 
-class="ecbx-1000">Algorithm</span>
-<span 
-class="ecbx-1000">1.1:</span> <span 
-class="eccc1000-"><span 
-class="small-caps">&#x0042;</span><span 
-class="small-caps">&#x0075;</span><span 
-class="small-caps">&#x0066;</span><span 
-class="small-caps">&#x0066;</span><span 
-class="small-caps">&#x0065;</span><span 
-class="small-caps">&#x0072;</span><span 
-class="small-caps">&#x0069;</span><span 
-class="small-caps">&#x006E;</span><span 
-class="small-caps">&#x0067;</span><span 
-class="small-caps">&#x005F;</span><span 
-class="small-caps">&#x0049;</span><span 
-class="small-caps">&#x006E;</span><span 
-class="small-caps">&#x0074;</span><span 
-class="small-caps">&#x0065;</span><span 
-class="small-caps">&#x0072;</span><span 
-class="small-caps">&#x0043;</span><span 
-class="small-caps">&#x006F;</span><span 
-class="small-caps">&#x006D;</span></span>&#x0028;<!--l. 105--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->&#x00A0;</mi></math>&#x0029;<br 
-class="newline" /> <!--l. 105--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" > <mtable  align="axis" style=""  
-equalrows="false" columnlines="none" equalcolumns="false" class="array"> <mtr><mtd 
-class="array"  columnalign="left"><mspace width="4.3045pt"/> <mstyle 
-class="mbox"><mtext  >procedure&#x00A0;</mtext></mstyle><mstyle 
-class="mbox"><mtext  >&#x0072;&#x0065;&#x0063;&#x006F;&#x0072;&#x0064;&#x005F;&#x0073;&#x0065;&#x006E;&#x0064;&#x005F;&#x0061;&#x006E;&#x0064;&#x005F;&#x0070;&#x006C;&#x0061;&#x0079;</mtext></mstyle><mo 
-class="MathClass-open">&#x0028;</mo><mi 
->&#x00A0;</mi><mo 
-class="MathClass-close">&#x0029;</mo>                                        </mtd>
-</mtr>  <mtr><mtd 
-class="array"  columnalign="left"><mspace width="4.3045pt"/>  <mtable  align="axis" style=""  
-equalrows="false" equalcolumns="false" class="array"> <mtr><mtd 
-class="array"  columnalign="left"><mspace width="4.3045pt"/>  <mrow><mo fence="true" form="prefix"> {</mo><mrow> <mtable  align="axis" style=""  
-equalrows="false" columnlines="none" equalcolumns="false" class="array"> <mtr><mtd 
-class="array"  columnalign="left"><mstyle 
-class="text"><mtext  >chunk</mtext></mstyle> <mo 
-class="MathClass-rel">&#x2190;</mo><mstyle 
-class="text"><mtext  >record</mtext></mstyle><mo 
-class="MathClass-open">&#x0028;</mo><mo 
-class="MathClass-close">&#x0029;</mo>                     </mtd>
-</mtr>  <mtr><mtd 
-class="array"  columnalign="left"><mstyle 
-class="text"><mtext  >packed_chunk</mtext></mstyle> <mo 
-class="MathClass-rel">&#x2190;</mo><mstyle 
-class="text"><mtext  >pack</mtext></mstyle><mo 
-class="MathClass-open">&#x0028;</mo><mstyle 
-class="text"><mtext  >chunk</mtext></mstyle><mo 
-class="MathClass-close">&#x0029;</mo>    </mtd>
-</mtr>  <mtr><mtd 
-class="array"  columnalign="left"><mstyle 
-class="text"><mtext  >send</mtext></mstyle><mo 
-class="MathClass-open">&#x0028;</mo><mstyle 
-class="text"><mtext  >packed_chunk</mtext></mstyle><mo 
-class="MathClass-close">&#x0029;</mo>                 </mtd>
-</mtr>  <mtr><mtd 
-class="array"  columnalign="left"><mstyle 
-class="text"><mtext  >chunk</mtext></mstyle> <mo 
-class="MathClass-rel">&#x2190;</mo><mstyle 
-class="text"><mtext  >unbu&#xFB00;er_next_chunk</mtext></mstyle><mo 
-class="MathClass-open">&#x0028;</mo><mo 
-class="MathClass-close">&#x0029;</mo></mtd>
-</mtr>  <mtr><mtd 
-class="array"  columnalign="left"><mstyle 
-class="text"><mtext  >play</mtext></mstyle><mo 
-class="MathClass-open">&#x0028;</mo><mstyle 
-class="text"><mtext  >chunk</mtext></mstyle><mo 
-class="MathClass-close">&#x0029;</mo>                            </mtd></mtr><!--@{}lr@{}--></mtable>                                              </mrow><mo fence="true" form="postfix"></mo></mrow></mtd>
- </mtr><!--@{\pcode@tab {1}}l@{}--></mtable>                                                                                                  </mtd>
-</mtr>  <mtr><mtd 
-class="array"  columnalign="left"><mspace width="4.3045pt"/> <mstyle 
-class="mbox"><mtext  >procedure&#x00A0;</mtext></mstyle><mstyle 
-class="mbox"><mtext  >&#x0072;&#x0065;&#x0063;&#x0065;&#x0069;&#x0076;&#x0065;&#x005F;&#x0061;&#x006E;&#x0064;&#x005F;&#x0062;&#x0075;&#x0066;&#x0066;&#x0065;&#x0072;</mtext></mstyle><mo 
-class="MathClass-open">&#x0028;</mo><mi 
->&#x00A0;</mi><mo 
-class="MathClass-close">&#x0029;</mo>                                             </mtd>
-</mtr>  <mtr><mtd 
-class="array"  columnalign="left"><mspace width="4.3045pt"/>  <mtable  align="axis" style=""  
-equalrows="false" equalcolumns="false" class="array"> <mtr><mtd 
-class="array"  columnalign="left"><mspace width="4.3045pt"/>  <mrow><mo fence="true" form="prefix"> {</mo><mrow> <mtable  align="axis" style=""  
-equalrows="false" columnlines="none" equalcolumns="false" class="array"> <mtr><mtd 
-class="array"  columnalign="left"><mstyle 
-class="text"><mtext  >packed_chunk</mtext></mstyle> <mo 
-class="MathClass-rel">&#x2190;</mo><mstyle 
-class="text"><mtext  >receive</mtext></mstyle><mo 
-class="MathClass-open">&#x0028;</mo><mo 
-class="MathClass-close">&#x0029;</mo>                              </mtd>
-</mtr>  <mtr><mtd 
-class="array"  columnalign="left"><mstyle 
-class="text"><mtext  >chunk_number</mtext></mstyle><mo 
-class="MathClass-punc">,</mo><mstyle 
-class="text"><mtext  >chunk</mtext></mstyle> <mo 
-class="MathClass-rel">&#x2190;</mo><mstyle 
-class="text"><mtext  >unpack</mtext></mstyle><mo 
-class="MathClass-open">&#x0028;</mo><mstyle 
-class="text"><mtext  >packed_chunk</mtext></mstyle><mo 
-class="MathClass-close">&#x0029;</mo></mtd>
-</mtr>  <mtr><mtd 
-class="array"  columnalign="left"><mstyle 
-class="text"><mtext  >bu&#xFB00;er</mtext></mstyle><mo 
-class="MathClass-open">&#x0028;</mo><mstyle 
-class="text"><mtext  >chunk_number</mtext></mstyle><mo 
-class="MathClass-punc">,</mo><mstyle 
-class="text"><mtext  >chunk</mtext></mstyle><mo 
-class="MathClass-close">&#x0029;</mo>                         </mtd></mtr><!--@{}lr@{}--></mtable>                         </mrow><mo fence="true" form="postfix"></mo></mrow></mtd>
- </mtr><!--@{\pcode@tab {1}}l@{}--></mtable>                                                                                                  </mtd>
-</mtr>  <mtr><mtd 
-class="array"  columnalign="left"><mspace width="4.3045pt"/>                                                                                                   </mtd></mtr><!--@{\pcode@tab {1}}lr@{}--></mtable></math></div>
+   <div class="lstlisting" id="listing-1"><span class="label"><a 
+ id="x1-1020r1"></a></span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">#</span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">Buffering</span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">InterCom</span><span 
+class="ectt-1000">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-1021r2"></a></span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">def</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">record_send_and_play</span><span 
+class="ectt-1000">&#x0028;&#x0029;:</span><span 
+class="ectt-1000">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-1022r3"></a></span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">chunk</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">=</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">record</span><span 
+class="ectt-1000">&#x0028;&#x0029;</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">#</span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">&#x0028;1&#x0029;</span><span 
+class="ectt-1000">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-1023r4"></a></span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">packed_chunk</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">=</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">pack</span><span 
+class="ectt-1000">&#x0028;</span><span 
+class="ectt-1000">chunk</span><span 
+class="ectt-1000">&#x0029;</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">#</span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">&#x0028;2&#x0029;</span><span 
+class="ectt-1000">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-1024r5"></a></span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">send</span><span 
+class="ectt-1000">&#x0028;</span><span 
+class="ectt-1000">packed_chunk</span><span 
+class="ectt-1000">&#x0029;</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">#</span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">&#x0028;3&#x0029;</span><span 
+class="ectt-1000">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-1025r6"></a></span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">chunk</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">=</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">unbuffer_next_chunk</span><span 
+class="ectt-1000">&#x0028;&#x0029;</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">#</span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">&#x0028;4&#x0029;</span><span 
+class="ectt-1000">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-1026r7"></a></span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">play</span><span 
+class="ectt-1000">&#x0028;</span><span 
+class="ectt-1000">chunk</span><span 
+class="ectt-1000">&#x0029;</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">#</span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">&#x0028;5&#x0029;</span><span 
+class="ectt-1000">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-1027r8"></a></span><span 
+class="ectt-1000">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-1028r9"></a></span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">def</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">receive_and_buffer</span><span 
+class="ectt-1000">&#x0028;&#x0029;:</span><span 
+class="ectt-1000">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-1029r10"></a></span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">packed_chunk</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">=</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">receive</span><span 
+class="ectt-1000">&#x0028;&#x0029;</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">#</span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">&#x0028;1&#x0029;</span><span 
+class="ectt-1000">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-1030r11"></a></span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">chunk_number</span><span 
+class="ectt-1000">,</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">chunk</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">=</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">unpack</span><span 
+class="ectt-1000">&#x0028;</span><span 
+class="ectt-1000">packed_chunk</span><span 
+class="ectt-1000">&#x0029;</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">#</span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">&#x0028;2&#x0029;</span><span 
+class="ectt-1000">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-1031r12"></a></span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">buffer</span><span 
+class="ectt-1000">&#x0028;</span><span 
+class="ectt-1000">chunk_number</span><span 
+class="ectt-1000">,</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">chunk</span><span 
+class="ectt-1000">&#x0029;</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">#</span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">&#x0028;3&#x0029;</span>
+   
+   </div>
+<!--l. 123--><p class="indent" >   Notice that the Step &#x0028;4&#x0029; of the method <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">record_send_and_play&#x0028;&#x0029;</span></span></span> extractcs from
+the bu&#xFB00;er an unpacked chunk. The chunks are bu&#xFB00;ered in the Step &#x0028;3&#x0029; of the method
+<span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">receive_and_buffer&#x0028;&#x0029;</span></span></span>.
 </p>
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
- id="x1-20002"></a>Timming</h3>
-<!--l. 126--><p class="noindent" >Please, &#xFB01;nish this milestone in two weeks.
-</p><!--l. 128--><p class="noindent" >
+ id="x1-20002"></a>What do you have to do?</h3>
+<!--l. 148--><p class="noindent" >Using the real scenario &#x0028;two hosts in di&#xFB00;erent LANs&#x0029; used in the previous milestone,
+execute <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">buffer.py</span></span></span> to inter-communicate two users. Use the <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">--buffering_time</span></span></span>
+parameter to &#xFB01;nd the minimum delay that provides a good QoS.
+</p><!--l. 153--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
- id="x1-30003"></a>Deliverables</h3>
-<!--l. 130--><p class="noindent" >A python module named bu&#xFB00;er.py stored in the <a 
-href="https://github.com/Tecnologias-multimedia/intercom" >root directory</a> of the InterCom&#x2019;s
-repo.
-</p><!--l. 134--><p class="noindent" >
+ id="x1-30003"></a>Timming</h3>
+<!--l. 155--><p class="noindent" >Please, &#xFB01;nish this milestone in one week.
+</p><!--l. 157--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
- id="x1-40004"></a>Resources</h3>
+ id="x1-40004"></a>Deliverables</h3>
+<!--l. 159--><p class="noindent" >A report explaining your experiment and the corresponding results.
+</p><!--l. 161--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
+ id="x1-50005"></a>Resources</h3>
    <div class="thebibliography">
    <p class="bibitem" ><span class="biblabel">
  &#x005B;1&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
@@ -348,7 +413,7 @@ class="ecti-1000">Top-Down Approach Featuring the Internet</span></a>. Pearson, 
 </p>
    </div>
 <a 
- id="Q1-1-5"></a>
+ id="Q1-1-6"></a>
     
 </body></html> 
 

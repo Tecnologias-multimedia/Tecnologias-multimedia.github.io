@@ -1,17 +1,18 @@
 \input{../definitions}
-\title{\TM{} - Study Guide - Milestone 6: Buffering for dejitterizing}
+\title{\TM{} - Study Guide - Milestone 8: Buffering for hidding the jitter}
 
 \maketitle
 
 \section{Description}
 
-The QoE provided by InterCom is inversely proportional to the network
-jitter (see Fig.~\ref{fig:timelines}-a). One solution to this drawback
-(Fig.~\ref{fig:timelines}-b) is the use of a
+As we have determined in the previous milestones, we can consider that
+the QoE provided by InterCom is inversely proportional to the network
+jitter (see Fig.~\ref{fig:timelines}-a). One solution (see
+Fig.~\ref{fig:timelines}-b) to this drawback is the use of a
 \href{https://en.wikipedia.org/wiki/Random_access}{random access}
 \href{https://en.wikipedia.org/wiki/Data_buffer}{buffer} at the
 receiver side, where the chunks are stored for a time large enough to
-hidden the jitter to the user~\cite{Kurose-Ross}.
+hidde the jitter to the user~\cite{Kurose-Ross}.
 
 \begin{figure}
   \begin{center}
@@ -26,7 +27,7 @@ hidden the jitter to the user~\cite{Kurose-Ross}.
 
 \href{https://en.wikipedia.org/wiki/Jitter#Jitter_buffers}{\emph{Dejitterizing}
   buffers} are typically implemented with a circular buffer structure
-(see the Fig.~\ref{fig:circular_buffer}). In an ideal situation (as
+(see Fig.~\ref{fig:circular_buffer}). In an ideal situation (as
 the depicted in the figure), the number of pending-to-be-played chunks
 available in the buffer is half of the number of cells in the buffer,
 and the chunks have arrived on time. In this example, the receiver
@@ -39,7 +40,7 @@ playing the chunk number 0.\footnote{Implementation tip: in a system
 buffer $2N$ must be the double of the number of the chunks buffered
 during the buffering time $N$, in order to hide a $N$ chunk-time
 jitter. Notice also that this technique introduces also a $N$
-chunk-time delay in the playback.
+chunk-times delay in the playback.
 
 \begin{figure}
   \begin{tabular}{ccc}
@@ -60,76 +61,102 @@ For this new improved InterCom a parameter with the \emph{buffering
 in miliseconds) should be large enough to hide the network jitter, but
 small enough to minimize the end-to-end (user) latency.
 
-Use the following basic guidelines to implement the \emph{buffered}
-version of InterCom:
+The following guidelines have been used to implement the
+\emph{buffered} version of InterCom:
 
 \begin{enumerate}
-\item Extend
+\item The class Minimal
   (\href{https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)}{inherit}
-  from) the class Minimal to implement a new class
+  from) has been inherited (extended) to implement a new class
   Buffering.
-\item In the payload of the UDP packets a chunk number must be
+\item In the payload of the UDP packets a chunk number has been
   included in order to provide to the receiver the information to
   determine where to store the corresponding chunk in the circular
-  buffer. Use an unsigned integer of 16 bits for representing the
-  chunk numbers.
-\item Take into account that the critical part of InterCom is a
-  \href{https://en.wikipedia.org/wiki/Task_(computing)}{task} that
-  could be called record\_send\_and\_play(), and this should be
-  iterated each time a new chunk is available in the
-  \href{https://en.wikipedia.org/wiki/Analog-to-digital_converter}{ADC}. More
-  precisely:
+  buffer. An unsigned integer of 16 bits has been used for
+  representing the chunk numbers.
+\item It has been taken into consideration that the critical part of
+  InterCom (the method \verb|record_send_and_play()|) is a method that
+  runs as an
+  \href{https://en.wikipedia.org/wiki/Interrupt_handler}{interrup
+    handler} that could be called each time a new chunk is available
+  in the ADC (see the Milestone 4). More precisely:
   \begin{enumerate}
-  \item In order to minimize the latency, the recorded chunks must be
-    sent to the interlocutor as soon as possible.
-  \item The playback of the chunks extracted from the buffer must be
+  \item In order to minimize the latency, the recorded chunks are sent
+    to the interlocutor as soon as possible.
+  \item The playback of the chunks extracted from the buffer is
     \href{https://en.wikipedia.org/wiki/Gapless_playback}{\emph{gapless}}
     (without the ocurrence of silences) as long as the chunks have
     been received on time.
-  \item As always, the lost chunks should be replaced by zero-chunks
+  \item As always, the lost chunks are replaced by zero-chunks
     in the playback.
   \end{enumerate}
-\item A receive\_and\_buffer() task can be run now in a different
+\item A method \verb|receive_and_buffer()| is run now in a different
   execution
   \href{https://en.wikipedia.org/wiki/Thread_(computing)}{thread},
-  decoupled from the record\_send\_and\_play() task. But notice that
-  using the sounddevice package this can be achived without using the
+  decoupled from the \verb|record_send_and_play()| method. But notice
+  that using the sounddevice package this is achived without using the
   \href{https://docs.python.org/3/library/threading.html}{threading}
   nor
   \href{https://docs.python.org/3/library/multiprocessing.html}{multiprocessing}
-   packages because the interruption handler (the so called
+  packages because the interruption handler (the so called
   \emph{callback}() function) already runs in parallel with the main
   thread.
 \end{enumerate}
 
-\begin{pseudocode}{Buffering\_InterCom}{~}
-  \PROCEDURE{record\_send\_and\_play}{~}
-  \BEGIN
-    \text{chunk} \GETS \text{record}()\\
-    \text{packed\_chunk} \GETS \text{pack}(\text{chunk})\\
-    \text{send}(\text{packed\_chunk})\\
-    \text{chunk} \GETS \text{unbuffer\_next\_chunk}()\\
-    \text{play}(\text{chunk})
-  \END
-  \ENDPROCEDURE
-  \PROCEDURE{receive\_and\_buffer}{~}
-  \BEGIN
-    \text{packed\_chunk} \GETS \text{receive}()\\
-    \text{chunk\_number}, \text{chunk} \GETS \text{unpack}(\text{packed\_chunk})\\
-    \text{buffer}(\text{chunk\_number}, \text{chunk})
-  \END
-  \ENDPROCEDURE
-\end{pseudocode}
+This is an overview of the implementation:
+
+\begin{lstlisting}[language=Python]
+  # Buffering InterCom
+  def record_send_and_play():
+    chunk = record()  # (1)
+    packed_chunk = pack(chunk)  # (2)
+    send(packed_chunk)  # (3)
+    chunk = unbuffer_next_chunk()  # (4)
+    play(chunk)  # (5)
+
+  def receive_and_buffer():
+    packed_chunk = receive()  # (1)
+    chunk_number, chunk = unpack(packed_chunk)  # (2)
+    buffer(chunk_number, chunk)  # (3)
+\end{lstlisting}
+
+Notice that the Step (4) of the method \verb|record_send_and_play()|
+extractcs from the buffer an unpacked chunk. The chunks are buffered
+in the Step (3) of the method \verb|receive_and_buffer()|.
+
+%\begin{pseudocode}{Buffering\_InterCom}{~}
+%  \PROCEDURE{record\_send\_and\_play}{~}
+%  \BEGIN
+%    \text{chunk} \GETS \text{record}()\\
+%    \text{packed\_chunk} \GETS \text{pack}(\text{chunk})\\
+%    \text{send}(\text{packed\_chunk})\\
+%    \text{chunk} \GETS \text{unbuffer\_next\_chunk}()\\
+%    \text{play}(\text{chunk})
+%  \END
+%  \ENDPROCEDURE
+%  \PROCEDURE{receive\_and\_buffer}{~}
+%  \BEGIN
+%    \text{packed\_chunk} \GETS \text{receive}()\\
+%    \text{chunk\_number}, \text{chunk} \GETS \text{unpack}(\text{packe%d\_chunk})\\
+%    \text{buffer}(\text{chunk\_number}, \text{chunk})
+%  \END
+%  \ENDPROCEDURE
+%\end{pseudocode}
+
+\section{What do you have to do?}
+
+Using the real scenario (two hosts in different LANs) used in the
+previous milestone, execute \verb|buffer.py| to inter-communicate two
+users. Use the \verb|--buffering_time| parameter to find the minimum
+delay that provides a good QoE.
 
 \section{Timming}
 
-Please, finish this milestone in two weeks.
+Please, finish this milestone in one week.
 
 \section{Deliverables}
 
-A python module named buffer.py stored in the
-\href{https://github.com/Tecnologias-multimedia/intercom}{root
-  directory} of the InterCom's repo.
+A report explaining your experiment and the corresponding results.
 
 \section{Resources}
 
