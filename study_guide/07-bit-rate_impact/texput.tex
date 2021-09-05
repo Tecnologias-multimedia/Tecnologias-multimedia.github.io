@@ -70,18 +70,19 @@ devices can be estimated as
   b=\frac{B}{t_t},
   \label{eq:b}
 \end{equation}
-where $B$ is the number of bits sent in a \texttt{ping}'s payload, and
+where $B$ is the number of bits sent in a \verb|ping|
+\href{https://en.wikipedia.org/wiki/Payload_(computing)}{payload}, and
 \begin{equation}
   t_t = \frac{\text{RTT}_{\text{avg}}^\infty-2t_p}{2},
   \label{eq:tt}
 \end{equation}
-an equation that can be determined by revisiting the \texttt{ping}'s
-timeline (Figure 1) and the Equation~2 of the
+an equation that can be determined by revisiting the \verb|ping|
+timeline (Fig.~1) and the Eq.~2 of the
 \href{https://tecnologias-multimedia.github.io/study_guide/06-jitter_impact/}{previous
   milestone}.
 
 Notice that if the payload of the ping is small enough ($0$ bytes
-ideally), we can consider that
+ideally, and therefore $t_t=0$), we can consider that
 \begin{equation}
   t_p \approx \frac{\text{RTT}_{\text{min}}^0}{2},
   \label{eq:tp}
@@ -91,16 +92,18 @@ Eq.~\ref{eq:tt}, we should use a payload as large as possible
 (ideally, infinite bytes), in order to make $t_t$ a significative
 amount of time, ease to measure. Notice also that we should use the
 smaller RTT value of a \texttt{ping} session of measurements in the
-Eq.~\ref{eq:tp} because the real link latency is a constant and the
+Eq.~\ref{eq:tp} because the minimum link latency is a constant and the
 congestion of the link always increases it.
 
-Therefore, supposing that $t_p$ is constant between pings and using
-the average $\text{RTT}_{\text{avg}}^\infty$ for transmitting $B$ bits ($B$
-as large as possible), the bit-rate value $b$ determined by
+Therefore, supposing that $t_p$ is constant and using the
+average\footnote{Remember that with the \texttt{ping} command we
+iterate several times and the tool returns average values.}
+$\text{RTT}_{\text{avg}}^\infty$ for transmitting $B$ bits ($B$ as
+large as possible), the bit-rate value $b$ determined by
 Eq.~\ref{eq:b} can be considered as a good estimation for the link of
 the near future.
 
-So, for determining $b$ we can:
+So, for determining $b$ we must run the following steps:
 \begin{enumerate}
 \item Run \texttt{ping} using the smallest possible payload that
   provides RTTs values.\footnote{The minimal payload for a
@@ -110,50 +113,54 @@ So, for determining $b$ we can:
   
 \item Run \texttt{ping} using the largest possible payload to achieve
   that the most part of the average RTT provided by \texttt{ping}
-  corresponds to $t_t$. This is necessary because the accuracy of the
-  cronometer used by \texttt{ping}, in general, is not high enough to
-  measure $t_t$ for small values of the payload size.
+  corresponds to $t_t$. It is necessary to use the highest
+  payload-size because the accuracy of the cronometer used by
+  \texttt{ping}, in general, is not high enough.
   
-\item Use the Equation~\ref{eq:tt} to find $t_t$ as a function of
-  the average RTT and the minimal $t_p$.
+\item Use Eq.~\ref{eq:tt} to find $t_t$ as a function of the average
+  RTT and the minimal $t_p$.
   
-\item Finally, use the Equation~\ref{eq:b} to determine $b$.
+\item Finally, use Eq.~\ref{eq:b} to determine $b$.
 \end{enumerate}
 
-(Optional) In order to gain experience with all this stuff, measure
-your bandwith with different \texttt{ping} servers, try to compute the
-transmission bit-rate:
-\begin{enumerate}
-\item In \texttt{localhost}.
-\item In \texttt{localhost}, limiting the bit-rate with \texttt{tc}.
-\item Between two hosts in your local network (your host and your
-  router, for example). Notice that in this case, you should not
-  obtain a bit-rate higher than the capacity of your network adapter.
-\item Between your host and a public host of the Internet. Try
-  \texttt{www.meter.net} for example.
-\end{enumerate}
-
-(Not optional) If the devices cannot \texttt{ping} each other, and
-supposing that there is only one point in the communication link that
-is filtering the ICMP Echo Request traffic in each direction, then we
-can apply the same technique that was used in the previous milestone,
-which basically consists in compute the total RTT as the sum of the
-RTT from the devices that we want to connect (where the InterCom is it
+If the devices cannot \texttt{ping} each other, and supposing that
+there is only one point in the communication link that is filtering
+the ICMP Echo Request traffic in each direction, then we can apply the
+same technique that was used in the previous milestone, which
+basically consists in compute the total RTT as the sum of the RTTs
+from the devices that we want to connect (where the InterCom is it
 supposed to be run) to the filter (possiblely, one of your home
 routers). A similar capacity estimation should be obtained considering
 only the slower part of the total link.
 
+(Optional) In order to gain experience with all this stuff, measure
+your bandwith (using your local host) with different \texttt{ping}
+servers, try to compute the transmission bit-rate:
+\begin{enumerate}
+\item In \href{https://en.wikipedia.org/wiki/Localhost}{\texttt{localhost}}.
+\item In \texttt{localhost}, limiting the bit-rate with \texttt{tc}.
+\item Between two hosts in your
+  \href{https://en.wikipedia.org/wiki/Local_area_network}{local
+    network} (your host and your router, for example). Notice that in
+  this case, you should not obtain a bit-rate higher than the capacity
+  of your
+  \href{https://en.wikipedia.org/wiki/Network_interface_controller}{network
+    adapter}.
+\item Between your host and a public host of the Internet. Try
+  \href{https://www.meter.net/}{\texttt{www.meter.net}} for example.
+\end{enumerate}
+
 \subsection{Simulate the link}
 
-With the bit-rate vaule $b$ computed from the previous section, simulate
-such link locally with:
+With the bit-rate value $b$ computed from the previous section, simulate
+such link (locally) with:
 
 \begin{lstlisting}{language=bash}
   sudo tc qdisc add dev lo root handle 1: tbf rate <bit-rate_in_kbps>kbit burst 32kbit limit 32kbit
   sudo tc qdisc add dev lo root parent 1:1 handle 10: netem delay <average_delay_in_miliseconds>ms <maximum_average_deviation_in_miliseconds>ms <Pearson_correlation_coefficient_expressed_as_a_percentage>% distribution <uniform|normal|pareto|paretonormal>
 \end{lstlisting}
 
-Example:
+Examples:
 
 \begin{enumerate}
 \item Check the current configuration:
@@ -168,13 +175,16 @@ Example:
     qdisc noqueue 0: root refcnt 2
   \end{lstlisting}
   
-\item Define the rule for the bit-rate control (example):
+\item Define the rule for the bit-rate control (example for $200$ kbps):
   
   \begin{lstlisting}{language=bash}
     sudo tc qdisc add dev lo root handle 1: tbf rate 200kbit burst 32kbit limit 32kbit
   \end{lstlisting}
   
-\item Define the rule for the latency control (see previous milestone) (example):
+\item Define the rule for the latency control (see previous milestone)
+  (example for $100$ ms, $10$ ms of jitter, and
+  \href{https://wiki.linuxfoundation.org/networking/netem}{with the
+    next random transmission depending $25$\% on the last one}):
   
   \begin{lstlisting}{language=bash}
     sudo tc qdisc add dev lo parent 1:1 handle 10: netem delay 100ms 10ms 25% distribution normal

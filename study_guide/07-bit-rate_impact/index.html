@@ -131,13 +131,14 @@ class="MathClass-punc">,</mo>
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >B</mi></math>
-is the number of bits sent in a <span 
-class="ectt-1000">ping</span>&#x2019;s payload, and </p><table class="equation"><tr><td> <a 
+is the number of bits sent in a <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">ping</span></span></span> <a 
+href="https://en.wikipedia.org/wiki/Payload_(computing)" >payload</a>, and </p><table class="equation"><tr><td> <a 
  id="x1-3002r2"></a>
                                                                   
 
                                                                   
-<!--l. 74--><math 
+<!--l. 75--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
                         <msub><mrow 
@@ -165,17 +166,26 @@ class="MathClass-bin">&#x2212;</mo> <mn>2</mn><msub><mrow
 ><mn>2</mn></mrow></mfrac>          <mo 
 class="MathClass-punc">,</mo>
 </math></td><td class="eq-no">&#x0028;2&#x0029;</td></tr></table>
-<!--l. 78--><p class="indent" >   an equation that can be determined by <a 
-href="https://tecnologias-multimedia.github.io/study_guide/06-jitter_impact/" >revisiting</a> the <span 
-class="ectt-1000">ping</span>&#x2019;s timeline &#x0028;Figure 1&#x0029;
-and the Equation&#x00A0;2 of the previous milestone.
-</p><!--l. 83--><p class="indent" >   Notice that if the payload of the ping is small enough
-&#x0028;<!--l. 83--><math 
+<!--l. 79--><p class="indent" >   an equation that can be determined by revisiting the <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">ping</span></span></span> timeline &#x0028;Fig.&#x00A0;1&#x0029; and
+the Eq.&#x00A0;2 of the <a 
+href="https://tecnologias-multimedia.github.io/study_guide/06-jitter_impact/" >previous milestone</a>.
+</p><!--l. 84--><p class="indent" >   Notice that if the payload of the ping is small enough
+&#x0028;<!--l. 84--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mn>0</mn></math>
-bytes ideally&#x0029;, we can consider that </p><table class="equation"><tr><td> <a 
+display="inline" ><mn>0</mn></math> bytes ideally,
+and therefore <!--l. 85--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mi 
+>t</mi></mrow><mrow 
+><mi 
+>t</mi></mrow></msub 
+> <mo 
+class="MathClass-rel">=</mo> <mn>0</mn></math>&#x0029;,
+we can consider that </p><table class="equation"><tr><td> <a 
  id="x1-3003r3"></a>
-<!--l. 85--><math 
+<!--l. 86--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
                           <msub><mrow 
@@ -196,7 +206,7 @@ class="text"><mtext  >min</mtext></mstyle></mrow><mrow
 ><mn>2</mn></mrow></mfrac>      <mo 
 class="MathClass-punc">,</mo>
 </math></td><td class="eq-no">&#x0028;3&#x0029;</td></tr></table>
-<!--l. 89--><p class="indent" >   and that for measuring the <!--l. 89--><math 
+<!--l. 90--><p class="indent" >   and that for measuring the <!--l. 90--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mstyle 
@@ -206,7 +216,7 @@ class="text"><mtext  >avg</mtext></mstyle></mrow></msub
 ></math>
 in Eq.&#x00A0;<a 
 href="#x1-3002r2">2<!--tex4ht:ref: eq:tt --></a>, we should use a payload as large as possible &#x0028;ideally, in&#xFB01;nite bytes&#x0029;, in order to
-make <!--l. 91--><math 
+make <!--l. 92--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -217,19 +227,21 @@ display="inline" ><msub><mrow
 a signi&#xFB01;cative amount of time, ease to measure. Notice also that we should use the
 smaller RTT value of a <span 
 class="ectt-1000">ping </span>session of measurements in the Eq.&#x00A0;<a 
-href="#x1-3003r3">3<!--tex4ht:ref: eq:tp --></a> because the real
-link latency is a constant and the congestion of the link always increases
+href="#x1-3003r3">3<!--tex4ht:ref: eq:tp --></a> because the
+minimum link latency is a constant and the congestion of the link always increases
 it.
-</p><!--l. 97--><p class="indent" >   Therefore, supposing that <!--l. 97--><math 
+</p><!--l. 98--><p class="indent" >   Therefore, supposing that <!--l. 98--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
 >t</mi></mrow><mrow 
 ><mi 
 >p</mi></mrow></msub 
-></math>
-is constant between pings and using the average
-<!--l. 98--><math 
+></math> is
+constant and using the average<span class="footnote-mark"><a 
+href="index4.html#fn3x0"><sup class="textsuperscript">3</sup></a></span><a 
+ id="x1-3004f3"></a> 
+<!--l. 101--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msubsup><mrow 
 ><mstyle 
@@ -239,79 +251,36 @@ class="text"><mtext  >avg</mtext></mstyle></mrow><mrow
 ><mi 
 >&#x221E;</mi></mrow></msubsup 
 ></math> for transmitting
-<!--l. 98--><math 
+<!--l. 101--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >B</mi></math> bits
-&#x0028;<!--l. 98--><math 
+&#x0028;<!--l. 101--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >B</mi></math> as large as possible&#x0029;,
-the bit-rate value <!--l. 99--><math 
+the bit-rate value <!--l. 102--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >b</mi></math>
 determined by Eq.&#x00A0;<a 
 href="#x1-3001r1">1<!--tex4ht:ref: eq:b --></a> can be considered as a good estimation for the link of the near
 future.
-</p><!--l. 103--><p class="indent" >   So, for determining <!--l. 103--><math 
+</p><!--l. 106--><p class="indent" >   So, for determining <!--l. 106--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >b</mi></math>
-we can:
-     </p><ol  class="enumerate1" >
-     <li 
-  class="enumerate" id="x1-3005x1">Run <span 
-class="ectt-1000">ping </span>using the smallest possible payload that provides RTTs values.<span class="footnote-mark"><a 
-href="index4.html#fn3x0"><sup class="textsuperscript">3</sup></a></span><a 
- id="x1-3006f3"></a> 
-     Use it for computing <!--l. 109--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><msub><mrow 
-><mi 
->t</mi></mrow><mrow 
-><mi 
->p</mi></mrow></msub 
-></math>.
+we must run the following steps:
                                                                   
 
                                                                   
-     </li>
+     </p><ol  class="enumerate1" >
      <li 
-  class="enumerate" id="x1-3008x2">Run <span 
-class="ectt-1000">ping </span>using the largest possible payload to achieve that the most part
-     of the average RTT provided by <span 
-class="ectt-1000">ping </span>corresponds to <!--l. 113--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><msub><mrow 
-><mi 
->t</mi></mrow><mrow 
-><mi 
->t</mi></mrow></msub 
-></math>.
-     This is necessary because the accuracy of the cronometer used by <span 
-class="ectt-1000">ping</span>, in
-     general, is not high enough to measure <!--l. 115--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><msub><mrow 
-><mi 
->t</mi></mrow><mrow 
-><mi 
->t</mi></mrow></msub 
-></math>
-     for small values of the payload size.
-     </li>
-     <li 
-  class="enumerate" id="x1-3010x3">Use the Equation&#x00A0;<a 
-href="#x1-3002r2">2<!--tex4ht:ref: eq:tt --></a> to &#xFB01;nd <!--l. 117--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><msub><mrow 
-><mi 
->t</mi></mrow><mrow 
-><mi 
->t</mi></mrow></msub 
-></math>
-     as a function of the average RTT and the minimal <!--l. 118--><math 
+  class="enumerate" id="x1-3006x1">Run <span 
+class="ectt-1000">ping </span>using the smallest possible payload that provides RTTs values.<span class="footnote-mark"><a 
+href="index5.html#fn4x0"><sup class="textsuperscript">4</sup></a></span><a 
+ id="x1-3007f4"></a> 
+     Use it for computing <!--l. 112--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -321,56 +290,94 @@ display="inline" ><msub><mrow
 ></math>.
      </li>
      <li 
-  class="enumerate" id="x1-3012x4">Finally, use the Equation&#x00A0;<a 
-href="#x1-3001r1">1<!--tex4ht:ref: eq:b --></a> to determine <!--l. 120--><math 
+  class="enumerate" id="x1-3009x2">Run <span 
+class="ectt-1000">ping </span>using the largest possible payload to achieve that the most part
+     of the average RTT provided by <span 
+class="ectt-1000">ping </span>corresponds to <!--l. 116--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mi 
+>t</mi></mrow><mrow 
+><mi 
+>t</mi></mrow></msub 
+></math>.
+     It is necessary to use the highest payload-size because the accuracy of the
+     cronometer used by <span 
+class="ectt-1000">ping</span>, in general, is not high enough.
+     </li>
+     <li 
+  class="enumerate" id="x1-3011x3">Use Eq.&#x00A0;<a 
+href="#x1-3002r2">2<!--tex4ht:ref: eq:tt --></a> to &#xFB01;nd <!--l. 120--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mi 
+>t</mi></mrow><mrow 
+><mi 
+>t</mi></mrow></msub 
+></math>
+     as a function of the average RTT and the minimal <!--l. 121--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mi 
+>t</mi></mrow><mrow 
+><mi 
+>p</mi></mrow></msub 
+></math>.
+     </li>
+     <li 
+  class="enumerate" id="x1-3013x4">Finally, use Eq.&#x00A0;<a 
+href="#x1-3001r1">1<!--tex4ht:ref: eq:b --></a> to determine <!--l. 123--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >b</mi></math>.</li></ol>
-<!--l. 123--><p class="indent" >   &#x0028;Optional&#x0029; In order to gain experience with all this stu&#xFB00;, measure your bandwith
-with di&#xFB00;erent <span 
-class="ectt-1000">ping </span>servers, try to compute the transmission bit-rate:
+<!--l. 126--><p class="indent" >   If the devices cannot <span 
+class="ectt-1000">ping </span>each other, and supposing that there is only one point
+in the communication link that is &#xFB01;ltering the ICMP Echo Request tra&#xFB03;c in each
+direction, then we can apply the same technique that was used in the previous
+milestone, which basically consists in compute the total RTT as the sum of the RTTs
+from the devices that we want to connect &#x0028;where the InterCom is it supposed to be
+run&#x0029; to the &#xFB01;lter &#x0028;possiblely, one of your home routers&#x0029;. A similar capacity
+estimation should be obtained considering only the slower part of the total
+link.
+</p><!--l. 136--><p class="indent" >   &#x0028;Optional&#x0029; In order to gain experience with all this stu&#xFB00;, measure your bandwith
+&#x0028;using your local host&#x0029; with di&#xFB00;erent <span 
+class="ectt-1000">ping </span>servers, try to compute the transmission
+bit-rate:
      </p><ol  class="enumerate1" >
      <li 
-  class="enumerate" id="x1-3014x1">In <span 
-class="ectt-1000">localhost</span>.
+  class="enumerate" id="x1-3015x1">In <a 
+href="https://en.wikipedia.org/wiki/Localhost" ><span 
+class="ectt-1000">localhost</span></a>.
      </li>
      <li 
-  class="enumerate" id="x1-3016x2">In <span 
+  class="enumerate" id="x1-3017x2">In <span 
 class="ectt-1000">localhost</span>, limiting the bit-rate with <span 
 class="ectt-1000">tc</span>.
      </li>
      <li 
-  class="enumerate" id="x1-3018x3">Between two hosts in your local network &#x0028;your host and your router, for
+  class="enumerate" id="x1-3019x3">Between two hosts in your <a 
+href="https://en.wikipedia.org/wiki/Local_area_network" >local network</a> &#x0028;your host and your router, for
      example&#x0029;. Notice that in this case, you should not obtain a bit-rate higher
-     than the capacity of your network adapter.
+     than the capacity of your <a 
+href="https://en.wikipedia.org/wiki/Network_interface_controller" >network adapter</a>.
      </li>
      <li 
-  class="enumerate" id="x1-3020x4">Between your host and a public host of the Internet. Try <span 
-class="ectt-1000">www.meter.net</span>
+  class="enumerate" id="x1-3021x4">Between your host and a public host of the Internet. Try <a 
+href="https://www.meter.net/" ><span 
+class="ectt-1000">www.meter.net</span></a>
      for example.</li></ol>
-<!--l. 136--><p class="indent" >   &#x0028;Not optional&#x0029; If the devices cannot <span 
-class="ectt-1000">ping </span>each other, and supposing that there is
-only one point in the communication link that is &#xFB01;ltering the ICMP Echo Request
-tra&#xFB03;c in each direction, then we can apply the same technique that was used in the
-previous milestone, which basically consists in compute the total RTT as the sum of
-the RTT from the devices that we want to connect &#x0028;where the InterCom is it
-supposed to be run&#x0029; to the &#xFB01;lter &#x0028;possiblely, one of your home routers&#x0029;. A similar
-capacity estimation should be obtained considering only the slower part of the total
-link.
-</p><!--l. 146--><p class="noindent" >
-</p>
-   <h4 class="subsectionHead"><span class="titlemark">2.2   </span> <a 
- id="x1-40002.2"></a>Simulate the link</h4>
-<!--l. 148--><p class="noindent" >With the bit-rate vaule <!--l. 148--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->b</mi></math>
-computed from the previous section, simulate such link locally with:
-</p>
-   <!--l. 151-->
                                                                   
 
                                                                   
+   <h4 class="subsectionHead"><span class="titlemark">2.2   </span> <a 
+ id="x1-40002.2"></a>Simulate the link</h4>
+<!--l. 155--><p class="noindent" >With the bit-rate value <!--l. 155--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>b</mi></math>
+computed from the previous section, simulate such link &#x0028;locally&#x0029; with:
+</p>
+   <!--l. 158-->
 <a 
  id="x1-4001"></a>
    <div class="lstlisting" id="listing-1"><span class="label"><a 
@@ -472,12 +479,12 @@ class="ectt-1000">paretonormal</span><span
 class="ectt-1000">&#x003E;</span>
    
    </div>
-<!--l. 156--><p class="indent" >   Example:
-</p><!--l. 158--><p class="indent" >
+<!--l. 163--><p class="indent" >   Examples:
+</p><!--l. 165--><p class="indent" >
      </p><ol  class="enumerate1" >
      <li 
   class="enumerate" id="x1-4005x1">Check the current con&#xFB01;guration:
-     <!--l. 161-->
+     <!--l. 168-->
      <div class="lstlisting" id="listing-2"><span class="label"><a 
  id="x1-4006r3"></a></span><span 
 class="ectt-1000">&#x00A0;</span><span 
@@ -494,9 +501,9 @@ class="ectt-1000">&#x00A0;</span><span
 class="ectt-1000">lo</span>
      
      </div>
-     <!--l. 165--><p class="noindent" >The output should be something like:
+     <!--l. 172--><p class="noindent" >The output should be something like:
 </p>
-     <!--l. 167-->
+     <!--l. 174-->
      <div class="lstlisting" id="listing-3"><span class="label"><a 
  id="x1-4007r4"></a></span><span 
 class="ectt-1000">&#x00A0;</span><span 
@@ -517,8 +524,12 @@ class="ectt-1000">2</span>
      </div>
      </li>
      <li 
-  class="enumerate" id="x1-4009x2">De&#xFB01;ne the rule for the bit-rate control &#x0028;example&#x0029;:
-     <!--l. 173-->
+  class="enumerate" id="x1-4009x2">De&#xFB01;ne the rule for the bit-rate control &#x0028;example for
+     <!--l. 178--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mn>2</mn><mn>0</mn><mn>0</mn></math>
+     kbps&#x0029;:
+     <!--l. 180-->
      <div class="lstlisting" id="listing-4"><span class="label"><a 
  id="x1-4010r5"></a></span><span 
 class="ectt-1000">&#x00A0;</span><span 
@@ -562,8 +573,23 @@ class="ectt-1000">kbit</span>
      </div>
      </li>
      <li 
-  class="enumerate" id="x1-4012x3">De&#xFB01;ne the rule for the latency control &#x0028;see previous milestone&#x0029; &#x0028;example&#x0029;:
-     <!--l. 179-->
+  class="enumerate" id="x1-4012x3">De&#xFB01;ne the rule for the latency control &#x0028;see previous milestone&#x0029; &#x0028;example for
+     <!--l. 185--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mn>1</mn><mn>0</mn><mn>0</mn></math> ms,
+     <!--l. 185--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mn>1</mn><mn>0</mn></math>
+     ms of jitter, and <a 
+href="https://wiki.linuxfoundation.org/networking/netem" >with the next random transmission depending
+     <!--l. 187--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mn>2</mn><mn>5</mn></math>%
+     on the last one</a>&#x0029;:
+                                                                  
+
+                                                                  
+     <!--l. 189-->
      <div class="lstlisting" id="listing-5"><span class="label"><a 
  id="x1-4013r6"></a></span><span 
 class="ectt-1000">&#x00A0;</span><span 
@@ -609,7 +635,7 @@ class="ectt-1000">normal</span>
      </li>
      <li 
   class="enumerate" id="x1-4015x4">After adding these rules, this should be the con&#xFB01;guration:
-     <!--l. 185-->
+     <!--l. 195-->
      <div class="lstlisting" id="listing-6"><span class="label"><a 
  id="x1-4016r7"></a></span><span 
 class="ectt-1000">&#x00A0;</span><span 
@@ -625,13 +651,10 @@ class="ectt-1000">dev</span><span
 class="ectt-1000">&#x00A0;</span><span 
 class="ectt-1000">lo</span>
      
-                                                                  
-
-                                                                  
      </div>
-     <!--l. 189--><p class="noindent" >The output should be something like:
+     <!--l. 199--><p class="noindent" >The output should be something like:
 </p>
-     <!--l. 191-->
+     <!--l. 201-->
      <div class="lstlisting" id="listing-7"><span class="label"><a 
  id="x1-4017r8"></a></span><span 
 class="ectt-1000">&#x00A0;</span><span 
@@ -695,9 +718,9 @@ class="ectt-1000">25%</span>
      
      </div>
      </li></ol>
-<!--l. 198--><p class="indent" >   Remember to delete the rules after their are unnecessary &#x0028;example&#x0029;:
+<!--l. 208--><p class="indent" >   Remember to delete the rules after their are unnecessary &#x0028;example&#x0029;:
 </p>
-   <!--l. 200-->
+   <!--l. 210-->
    <div class="lstlisting" id="listing-8"><span class="label"><a 
  id="x1-4019r10"></a></span><span 
 class="ectt-1000">&#x00A0;</span><span 
@@ -777,17 +800,20 @@ class="ectt-1000">32</span><span
 class="ectt-1000">kbit</span>
    
    </div>
-<!--l. 205--><p class="noindent" >
+<!--l. 215--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-50003"></a>Timming</h3>
-<!--l. 207--><p class="noindent" >Please, &#xFB01;nish this milestone in one week.
-</p><!--l. 209--><p class="noindent" >
+<!--l. 217--><p class="noindent" >Please, &#xFB01;nish this milestone in one week.
+</p><!--l. 219--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-60004"></a>Deliverables</h3>
-<!--l. 211--><p class="noindent" >A report showing your results.
-</p><!--l. 213--><p class="noindent" >
+<!--l. 221--><p class="noindent" >A report showing your results.
+                                                                  
+
+                                                                  
+</p><!--l. 223--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-70005"></a>Resources</h3>
@@ -799,9 +825,6 @@ href="https://docs.google.com/viewer?a=v&pid=sites&srcid=ZWNjaGFuZ2EuYWMuaW58Y2h
 class="ecti-1000">Introduction  to  Data  Communications  and</span>
    <span 
 class="ecti-1000">Networking</span></a>. McGraw-Hill, 2007.
-                                                                  
-
-                                                                  
    </p>
    <p class="bibitem" ><span class="biblabel">
  &#x005B;2&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
