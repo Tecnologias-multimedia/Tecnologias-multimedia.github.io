@@ -39,25 +39,28 @@ class="ecrm-1200">- </span><a
 href="https://www.ual.es" ><span 
 class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
-class="ecrm-1200">September 1, 2021</span></div>
+class="ecrm-1200">September 8, 2021</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
 <!--l. 8--><p class="noindent" >The InterCom project <span class="cite">&#x005B;<a 
 href="#Xintercom">4</a>&#x005D;</span> are a collection of <a 
-href="https://docs.python.org/3/tutorial/modules.html#modules" >Python modules</a> written in Python <span class="cite">&#x005B;<a 
-href="#Xpython">2</a>&#x005D;</span>.
-Therefore, you will need an interpreter and know how to develop/run Python
-programs &#x0028;modules and <a 
-href="https://docs.python.org/3/tutorial/modules.html#packages" >packages</a>&#x0029;.
-</p><!--l. 15--><p class="indent" >   Most of the current Unix-based operating systems &#x0028;Linux, FreeBSD and OSX&#x0029; use
+href="https://www.python.org/" >Python</a> <a 
+href="https://docs.python.org/3/tutorial/modules.html#modules" >modules</a> written in Python <span class="cite">&#x005B;<a 
+href="#Xpython">2</a>&#x005D;</span>,
+that use a number of <a 
+href="https://docs.python.org/3/tutorial/modules.html#packages" >packages</a>. Therefore, you will need a <a 
+href="https://docs.python.org/3/tutorial/interpreter.html" >Python interpreter</a> and
+know how to develop/run Python code.
+</p><!--l. 17--><p class="indent" >   Most of the current Unix-based operating systems &#x0028;Linux, FreeBSD and OSX&#x0029; use
 Python for running some of their &#x201C;daily tasks&#x201D;, which means that a Python
 interpreter is already available. However, usually it is better to use our own
 interpreter because:
-</p><!--l. 20--><p class="indent" >
+</p><!--l. 22--><p class="indent" >
      </p><ol  class="enumerate1" >
      <li 
-  class="enumerate" id="x1-1002x1">We can chose the version of Python and the packages.
+  class="enumerate" id="x1-1002x1">We can chose the version of Python and have more &#xFB02;exibility with the
+     packages.
      </li>
      <li 
   class="enumerate" id="x1-1004x2">We can optimize the compilation of the interpreter depending on our needs
@@ -72,30 +75,36 @@ href="https://wiki.python.org/moin/TkInter" >Tk support</a> or not&#x0029;.
                                                                   
 
                                                                   
-<!--l. 34--><p class="indent" >   In Windows you need to install Python, yes or yes, from the o&#xFB03;cial <a 
+<!--l. 37--><p class="indent" >   In Windows you need to install Python, yes or yes, from the o&#xFB03;cial <a 
 href="https://www.python.org/downloads/" >website</a>.
 However, notice that this &#x201C;guide&#x201D; only contemplates the installation of Python in
-Unix-based OS machines.
-</p><!--l. 39--><p class="indent" >   As said before, it is very likely that your Unix-like OS has Python installed.
+Unix-based OS machines, and speci&#xFB01;cally, in a Xubuntu computer.
+</p><!--l. 42--><p class="indent" >   As said before, it is very likely that your Unix-like OS has Python installed.
 However, in order to control the version of the Python interpreter, we will install a
 dedicated one.
-</p><!--l. 43--><p class="noindent" >
+</p><!--l. 46--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
  id="x1-20002"></a>What you have to do?</h3>
-<!--l. 45--><p class="noindent" >
+<!--l. 48--><p class="noindent" >
      </p><ol  class="enumerate1" >
      <li 
   class="enumerate" id="x1-2002x1">Installation of Python.
-     <!--l. 49--><p class="noindent" >
+     <!--l. 52--><p class="noindent" >
          </p><ol  class="enumerate2" >
          <li 
   class="enumerate" id="x1-2004x1">Go to <a 
 href="https://github.com/vicente-gonzalez-ruiz/YAPT/blob/master/01-hello_world/02-installation.ipynb" >YAPT/01-hello_world/02-installation.ipynb</a> <span class="cite">&#x005B;<a 
 href="#XYAPT">3</a>&#x005D;</span> and follow the
-         instructions  to  install  CPython  3.8.5,  and  create  a  new  virtual
-         environment called <span 
-class="ectt-1000">tm</span>. Basically:
+         instructions to install the lastest stable version <a 
+href="https://en.wikipedia.org/wiki/CPython" >CPython</a>, and create
+         a new virtual environment called <span 
+class="ectt-1000">tm </span>with <a 
+href="https://github.com/pyenv/pyenv" ><span 
+class="ectt-1000">pyenv</span></a>. Basically &#x0028;example
+         for <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">Python</span><span 
+class="ectt-1000">&#x00A0;3.8.5</span></span></span>&#x0029;:
                                                                   
 
                                                                   
@@ -110,12 +119,12 @@ class="ectt-1000">tm</span>. Basically:
          pyenv&#x00A0;install&#x00A0;-v&#x00A0;3.8.5
          pyenv&#x00A0;virtualenv&#x00A0;3.8.5&#x00A0;tm
 </pre>
-         <!--l. 66--><p class="nopar" >
+         <!--l. 73--><p class="nopar" >
          </p></li>
          <li 
   class="enumerate" id="x1-2006x2">Remember that you will need to active it when you want to work in this
          project:
-         <!--l. 71-->
+         <!--l. 78-->
          <div class="lstlisting" id="listing-1"><span class="label"><a 
  id="x1-2007r1"></a></span><span 
 class="ectt-1000">&#x00A0;</span><span 
@@ -130,7 +139,7 @@ class="ectt-1000">&#x00A0;</span><span
 class="ectt-1000">tm</span>
          
          </div>
-         <!--l. 75--><p class="noindent" >It is a good idea to append this to the <span class="obeylines-h"><span class="verb"><span 
+         <!--l. 82--><p class="noindent" >It is a good idea to append this to the <span class="obeylines-h"><span class="verb"><span 
 class="ectt-1000">~/.bashrc</span></span></span> &#xFB01;le.
          </p></li>
          <li 
@@ -138,7 +147,7 @@ class="ectt-1000">~/.bashrc</span></span></span> &#xFB01;le.
 href="https://en.wikipedia.org/wiki/Integrated_development_environment" >IDE</a> for programming with Python. I recommend <a 
 href="https://thonny.org/" >Thonny</a> if you
          are not used to any other.
-         <!--l. 83-->
+         <!--l. 90-->
          <div class="lstlisting" id="listing-2"><span class="label"><a 
  id="x1-2010r1"></a></span><span 
 class="ectt-1000">&#x00A0;</span><span 
@@ -156,15 +165,15 @@ class="ectt-1000">thonny</span>
          </li></ol>
      </li>
      <li 
-  class="enumerate" id="x1-2012x2">Alternatively &#x0028;and reducing the chances of solving any possible issue&#x0029;, you can
-     use the Python interpreter shipped with your OS. In this case, it is strongly
-     recommended to use an speci&#xFB01;c Python <a 
+  class="enumerate" id="x1-2012x2">Alternatively &#x0028;but reducing the chances of solving any possible issue&#x0029;, you can
+     use the Python interpreter shipped with your OS. In this case, still it is
+     strongly recommended to use an speci&#xFB01;c Python <a 
 href="https://docs.python.org/3/library/venv.html" >environment</a> for the InterCom
      project.
      </li>
      <li 
   class="enumerate" id="x1-2014x3">Python programming.
-     <!--l. 98--><p class="noindent" >
+     <!--l. 105--><p class="noindent" >
                                                                   
 
                                                                   
@@ -183,18 +192,18 @@ href="#XYAPT">3</a>&#x005D;</span> could also
 href="http://zetcode.com/lang/python/" >ZetCode&#x2019;s Python Tutorial</a>.
          </li></ol>
      </li></ol>
-<!--l. 115--><p class="noindent" >
+<!--l. 122--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-30003"></a>Timming</h3>
-<!--l. 117--><p class="noindent" >There is not time limit for &#xFB01;nishing this milestone. Develop it at your own pace.
+<!--l. 124--><p class="noindent" >There is not time limit for &#xFB01;nishing this milestone. Develop it at your own pace.
 However, notice that we will be using Python very soon.
-</p><!--l. 120--><p class="noindent" >
+</p><!--l. 127--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-40004"></a>Deliverables</h3>
-<!--l. 122--><p class="noindent" >None.
-</p><!--l. 124--><p class="noindent" >
+<!--l. 129--><p class="noindent" >None.
+</p><!--l. 131--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-50005"></a>Resources</h3>

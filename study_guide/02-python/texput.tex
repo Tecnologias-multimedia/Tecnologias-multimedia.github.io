@@ -6,11 +6,13 @@
 \section{Description}
 
 The InterCom project \cite{intercom} are a collection of
-\href{https://docs.python.org/3/tutorial/modules.html#modules}{Python
-  modules} written in Python \cite{python}. Therefore, you will need
-an interpreter and know how to develop/run Python programs (modules
-and
-\href{https://docs.python.org/3/tutorial/modules.html#packages}{packages}).
+\href{https://www.python.org/}{Python}
+\href{https://docs.python.org/3/tutorial/modules.html#modules}{modules}
+written in Python \cite{python}, that use a number of
+\href{https://docs.python.org/3/tutorial/modules.html#packages}{packages}. Therefore,
+you will need a
+\href{https://docs.python.org/3/tutorial/interpreter.html}{Python
+  interpreter} and know how to develop/run Python code.
 
 Most of the current Unix-based operating systems (Linux, FreeBSD and
 OSX) use Python for running some of their ``daily tasks'', which means
@@ -19,7 +21,8 @@ better to use our own interpreter because:
 
 \begin{enumerate}
 
-\item We can chose the version of Python and the packages.
+\item We can chose the version of Python and have more flexibility
+  with the packages.
 
 \item We can optimize the compilation of the interpreter depending on
   our needs (for example, including
@@ -34,7 +37,7 @@ better to use our own interpreter because:
 In Windows you need to install Python, yes or yes, from the official
 \href{https://www.python.org/downloads/}{website}. However, notice
 that this ``guide'' only contemplates the installation of Python in
-Unix-based OS machines.
+Unix-based OS machines, and specifically, in a Xubuntu computer.
 
 As said before, it is very likely that your Unix-like OS has Python
 installed. However, in order to control the version of the Python
@@ -50,8 +53,12 @@ interpreter, we will install a dedicated one.
     
   \item Go to
     \href{https://github.com/vicente-gonzalez-ruiz/YAPT/blob/master/01-hello_world/02-installation.ipynb}{YAPT/01-hello\_world/02-installation.ipynb}
-    \cite{YAPT} and follow the instructions to install CPython 3.8.5,
-    and create a new virtual environment called \texttt{tm}. Basically:
+    \cite{YAPT} and follow the instructions to install the lastest
+    stable version
+    \href{https://en.wikipedia.org/wiki/CPython}{CPython}, and create
+    a new virtual environment called \texttt{tm} with
+    \href{https://github.com/pyenv/pyenv}{\texttt{pyenv}}. Basically
+    (example for \verb|Python 3.8.5|):
 
 \begin{verbatim}
 sudo apt-get install -y build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl git
@@ -86,10 +93,10 @@ pyenv virtualenv 3.8.5 tm
 
   \end{enumerate}
 
-  \item Alternatively (and reducing the chances of solving any possible
-    issue), you can use the Python interpreter shipped with your
-    OS. In this case, it is strongly recommended to use an specific
-    Python
+  \item Alternatively (but reducing the chances of solving any
+    possible issue), you can use the Python interpreter shipped with
+    your OS. In this case, still it is strongly recommended to use an
+    specific Python
     \href{https://docs.python.org/3/library/venv.html}{environment}
     for the InterCom project.
   
