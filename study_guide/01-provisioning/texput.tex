@@ -8,7 +8,7 @@
 The InterCom project \cite{intercom} is a real-time application with
 a high computational (specially in terms of CPU) demand. It is written
 in Python \cite{python}, an interpreted languaje that has been
-ported \href{https://www.python.org/download/other/}{almost to all}
+ported to \href{https://www.python.org/download/other/}{almost all}
 the current OSs, including
 mobile \href{https://kivy.org/#home}{devices}.
 
@@ -32,7 +32,7 @@ an \href{https://en.wikipedia.org/wiki/Optical_disc}{optical disk}).
 
 \section{What do you have to do?}
 
-Supposing that you have decided to use Xubuntu in a USB disk,
+Supposing that you have decided to use Xubuntu in an USB disk,
 these are the steps you should perform (to install Xubuntu in a ``hard'' disk
 partition of your computer the instructions are almost the same):
 
@@ -54,9 +54,13 @@ partition of your computer the instructions are almost the same):
   
 \item Select the option \texttt{Try Xubuntu without installing}.
   
-\item When the OS is running, configure the network.
+\item When the OS is running, configure the network. Thus, you will
+  have access to the lastest verion of the packages during the
+  installation.
   
-\item Insert now the (at least) 8GB USB drive where Xubuntu will be installed.
+\item Insert now the (at least) 8GB USB drive where Xubuntu will be
+  installed. Be aware that this device will be formated, and
+  therefore, all the current content will be lost.
   
 \item Select \texttt{Install Xubuntu 21.04 LTS}.
   
@@ -92,7 +96,7 @@ partition of your computer the instructions are almost the same):
     ultimate software available for Ubuntu (and derivatives).
 
 \item Choose \texttt{Erase disk and install Xubuntu}. Ignore the
-  Advanced features. Then, wait for a couple of minutes :-/
+  \verb|Advanced Features|. Then, wait for a couple of minutes :-/
 
 \item Select the drive corresponding to the >= 8GB USB drive
   (\texttt{/dev/sdc}). Don't choose \texttt{/dev/sda} (the main disk of
@@ -101,24 +105,25 @@ partition of your computer the instructions are almost the same):
 \item At this point of the installation you should consider (depending
   on the amount of RAM memory installed in your computer and the size
   of the USB drive) to create an specific partition for doing
-  swapping. The rule of the thumb is to create a partition with the
-  same size that the RAM. However, probably you cannot do that in a
-  8GB USB drive because at least 5GB are needed for a Xubuntu
-  installation. Anyway, keep in mind that this step is optional
-  because you can always perform swapping on a file (a process
-  slightly slower than using the dedicated partition). Consider also
-  that InterCom requires only some MB of memory for running and
-  therefore, probably you are not going to need to swap any
+  \href{https://en.wikipedia.org/wiki/Swapping}{swapping}. The rule of
+  the thumb is to create a partition with the same size that the
+  RAM. However, probably you cannot do that in a 8GB USB drive because
+  at least 5GB are needed for a Xubuntu installation. Anyway, keep in
+  mind that this step is optional because you can always perform
+  swapping on a file (a process slightly slower than using the
+  dedicated partition). Consider also that InterCom requires only some
+  MB of memory for running and therefore, probably you are not going
+  to need to swap any
   \href{https://en.wikipedia.org/wiki/Page_(computer_memory)}{memory
-    page} at all. Said that, if you decide to create a specific swap partition,
-  click on ``advanced partitioning tool'' and do the modifications you
-  want.
+    page} at all. Said that, if you decide to create a specific swap
+  partition, click on \verb|Advanced Partitioning Tool| and do the
+  modifications you want.
 
-\item Very important: check that the boot loader
+\item Very important: \textbf{double check that the boot loader
   (\href{https://www.gnu.org/software/grub/}{GRUB}) will be installed
-  in \texttt{/dev/sdc1}.
+  in \texttt{/dev/sdc1}!!}.
 
-\item Click on ``Install Now''. You'll read something similar to:
+\item Click on \verb|Install Now|. You'll read something similar to:
 
 \begin{verbatim}
 If you continue, the changes listed below will be written to the disks. Otherwise, you will be able to make further changes manually.
@@ -135,11 +140,12 @@ The following partitions are going to be formatted:
 
 \item Choose your time zone.
   
-\item Configure you personal account (user and password), hostname and
-  logging process.
+\item Configure you personal account (user and password),
+  \href{https://en.wikipedia.org/wiki/Hostname}{hostname} and
+  \href{https://en.wikipedia.org/wiki/Login}{login} process.
   
 \item Wait for the end of the installation and boot your new
-  Xubuntu. Don't worry if grub labels Xubuntu as Ubuntu. This is
+  Xubuntu. Don't worry if GRUB labels Xubuntu as Ubuntu. This is
   normal.
   
 \end{enumerate}

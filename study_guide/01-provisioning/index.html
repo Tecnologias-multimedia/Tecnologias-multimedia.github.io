@@ -39,7 +39,7 @@ class="ecrm-1200">- </span><a
 href="https://www.ual.es" ><span 
 class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
-class="ecrm-1200">August 28, 2021</span></div>
+class="ecrm-1200">September 8, 2021</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
@@ -47,8 +47,8 @@ class="ecrm-1200">August 28, 2021</span></div>
 href="#Xintercom">3</a>&#x005D;</span> is a real-time application with a high computational
 &#x0028;specially in terms of CPU&#x0029; demand. It is written in Python <span class="cite">&#x005B;<a 
 href="#Xpython">1</a>&#x005D;</span>, an interpreted
-languaje that has been ported <a 
-href="https://www.python.org/download/other/" >almost to all</a> the current OSs, including mobile
+languaje that has been ported to <a 
+href="https://www.python.org/download/other/" >almost all</a> the current OSs, including mobile
 <a 
 href="https://kivy.org/#home" >devices</a>.
 </p><!--l. 15--><p class="indent" >   This milestone &#x0028;the installation of a dedicated Linux distribution for running
@@ -74,7 +74,7 @@ disk</a>&#x0029;.
                                                                   
 
                                                                   
-<!--l. 35--><p class="noindent" >Supposing that you have decided to use Xubuntu in a USB disk, these are the steps
+<!--l. 35--><p class="noindent" >Supposing that you have decided to use Xubuntu in an USB disk, these are the steps
 you should perform &#x0028;to install Xubuntu in a &#x201C;hard&#x201D; disk partition of your computer
 the instructions are almost the same&#x0029;:
 </p><!--l. 39--><p class="indent" >
@@ -103,10 +103,13 @@ href="https://askubuntu.com/questions/372607/how-to-create-a-bootable-ubuntu-usb
 class="ectt-1000">Try Xubuntu without installing</span>.
      </li>
      <li 
-  class="enumerate" id="x1-2010x5">When the OS is running, con&#xFB01;gure the network.
+  class="enumerate" id="x1-2010x5">When the OS is running, con&#xFB01;gure the network. Thus, you will have access
+     to the lastest verion of the packages during the installation.
      </li>
      <li 
   class="enumerate" id="x1-2012x6">Insert now the &#x0028;at least&#x0029; 8GB USB drive where Xubuntu will be installed.
+     Be aware that this device will be formated, and therefore, all the current
+     content will be lost.
      </li>
      <li 
   class="enumerate" id="x1-2014x7">Select <span 
@@ -123,7 +126,7 @@ class="ectt-1000">Spanish</span>&#x0029;.
      </li>
      <li 
   class="enumerate" id="x1-2020x10">Open a terminal and write:
-     <!--l. 72-->
+     <!--l. 76-->
      <div class="lstlisting" id="listing-1"><span class="label"><a 
  id="x1-2021r1"></a></span><span 
 class="ectt-1000">&#x00A0;</span><span 
@@ -134,14 +137,14 @@ class="ectt-1000">&#x00A0;</span><span
 class="ectt-1000">-</span><span 
 class="ectt-1000">h</span>
      
-     </div>
-     <!--l. 76--><p class="noindent" >to see all the mounted disk partitions and their capacity. Notice that no
-     partition of <span 
-class="ectt-1000">/dev/sda </span>&#x0028;the hard disk&#x0029; should not be mounted &#x0028;although you
-     can do that, you don&#x2019;t need to mount any partition of the hard disk&#x0029;, the
                                                                   
 
                                                                   
+     </div>
+     <!--l. 80--><p class="noindent" >to see all the mounted disk partitions and their capacity. Notice that no
+     partition of <span 
+class="ectt-1000">/dev/sda </span>&#x0028;the hard disk&#x0029; should not be mounted &#x0028;although you
+     can do that, you don&#x2019;t need to mount any partition of the hard disk&#x0029;, the
      partition <span 
 class="ectt-1000">/dev/sdb1 </span>&#x0028;with the Xubuntu image&#x0029; should be mounted,
      and &#xFB01;nally, if the &#xFB01;rst partition of the second external USB drive has
@@ -166,7 +169,9 @@ class="ectt-1000">additional media formats</span>, in order to have access to th
      </li>
      <li 
   class="enumerate" id="x1-2025x12">Choose <span 
-class="ectt-1000">Erase disk and install Xubuntu</span>. Ignore the Advanced features.
+class="ectt-1000">Erase disk and install Xubuntu</span>. Ignore the <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">Advanced</span><span 
+class="ectt-1000">&#x00A0;Features</span></span></span>.
      Then, wait for a couple of minutes :-/
      </li>
      <li 
@@ -180,7 +185,8 @@ class="ectt-1000">/dev/sdc</span>!!
      <li 
   class="enumerate" id="x1-2029x14">At this point of the installation you should consider &#x0028;depending on the amount
      of RAM memory installed in your computer and the size of the USB drive&#x0029; to
-     create an speci&#xFB01;c partition for doing swapping. The rule of the thumb is to
+     create an speci&#xFB01;c partition for doing <a 
+href="https://en.wikipedia.org/wiki/Swapping" >swapping</a>. The rule of the thumb is to
      create a partition with the same size that the RAM. However, probably
      you cannot do that in a 8GB USB drive because at least 5GB are
      needed for a Xubuntu installation. Anyway, keep in mind that this
@@ -190,17 +196,30 @@ class="ectt-1000">/dev/sdc</span>!!
      therefore, probably you are not going to need to swap any <a 
 href="https://en.wikipedia.org/wiki/Page_(computer_memory)" >memory
      page</a> at all. Said that, if you decide to create a speci&#xFB01;c swap partition,
-     click on &#x201C;advanced partitioning tool&#x201D; and do the modi&#xFB01;cations you
+     click on <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">Advanced</span><span 
+class="ectt-1000">&#x00A0;Partitioning</span><span 
+class="ectt-1000">&#x00A0;Tool</span></span></span> and do the modi&#xFB01;cations you
      want.
      </li>
      <li 
-  class="enumerate" id="x1-2031x15">Very important: check that the boot loader &#x0028;<a 
-href="https://www.gnu.org/software/grub/" >GRUB</a>&#x0029; will be installed in
+  class="enumerate" id="x1-2031x15">Very important: <span 
+class="ecbx-1000">double check that the boot loader &#x0028;</span><a 
+href="https://www.gnu.org/software/grub/" ><span 
+class="ecbx-1000">GRUB</span></a><span 
+class="ecbx-1000">&#x0029; will be</span>
      <span 
-class="ectt-1000">/dev/sdc1</span>.
+class="ecbx-1000">installed in </span><span 
+class="ectt-1000">/dev/sdc1</span><span 
+class="ecbx-1000">!!</span>.
+                                                                  
+
+                                                                  
      </li>
      <li 
-  class="enumerate" id="x1-2033x16">Click on &#x201C;Install Now&#x201D;. You&#x2019;ll read something similar to:
+  class="enumerate" id="x1-2033x16">Click on <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">Install</span><span 
+class="ectt-1000">&#x00A0;Now</span></span></span>. You&#x2019;ll read something similar to:
                                                                   
 
                                                                   
@@ -216,33 +235,35 @@ class="ectt-1000">/dev/sdc1</span>.
      &#x00A0;partition&#x00A0;#1&#x00A0;of&#x00A0;SCSI8&#x00A0;&#x0028;0,0,0&#x0029;&#x00A0;&#x0028;sdc&#x0029;&#x00A0;as&#x00A0;ESP
      &#x00A0;partition&#x00A0;#2&#x00A0;of&#x00A0;SCSI8&#x00A0;&#x0028;0,0,0&#x0029;&#x00A0;&#x0028;sdc&#x0029;&#x00A0;as&#x00A0;ext4
 </pre>
-     <!--l. 134--><p class="nopar" >
+     <!--l. 139--><p class="nopar" >
      </p></li>
      <li 
   class="enumerate" id="x1-2035x17">Choose your time zone.
      </li>
      <li 
-  class="enumerate" id="x1-2037x18">Con&#xFB01;gure you personal account &#x0028;user and password&#x0029;, hostname and logging
+  class="enumerate" id="x1-2037x18">Con&#xFB01;gure you personal account &#x0028;user and password&#x0029;, <a 
+href="https://en.wikipedia.org/wiki/Hostname" >hostname</a> and <a 
+href="https://en.wikipedia.org/wiki/Login" >login</a>
      process.
      </li>
      <li 
   class="enumerate" id="x1-2039x19">Wait for the end of the installation and boot your new Xubuntu. Don&#x2019;t worry if
-     grub labels Xubuntu as Ubuntu. This is normal.
+     GRUB labels Xubuntu as Ubuntu. This is normal.
      </li></ol>
-<!--l. 147--><p class="noindent" >
+<!--l. 153--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-30003"></a>Timming</h3>
-<!--l. 149--><p class="noindent" >You should reach this milestone at most in one week.
-</p><!--l. 151--><p class="noindent" >
+<!--l. 155--><p class="noindent" >You should reach this milestone at most in one week.
+</p><!--l. 157--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-40004"></a>Deliverables</h3>
-<!--l. 153--><p class="noindent" >None.
+<!--l. 159--><p class="noindent" >None.
                                                                   
 
                                                                   
-</p><!--l. 155--><p class="noindent" >
+</p><!--l. 161--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-50005"></a>Resources</h3>
