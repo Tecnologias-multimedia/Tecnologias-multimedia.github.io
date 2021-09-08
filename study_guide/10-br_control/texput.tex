@@ -30,14 +30,14 @@ quality.  In most lossy compression systems, quantization is the only
 source of distortion~\cite{taubman2002jpeg2000}.
 
 \href{https://en.wikipedia.org/wiki/Quantization_(signal_processing)}{Scalar
-  Quantization} (SQ) is the process of decreasing the number of levels
-that a signal can
+  Quantization} (SQ) is the process of decreasing the number of
+discrete levels that a signal can
 take~\cite{sayood2017introduction}. \href{https://en.wikipedia.org/wiki/Vector_quantization}{Vector
-Quantization} (VQ) is similar, but is applied to tuples of samples at the
-same time~\cite{vetterli2014foundations}. SQ is used when the samples
-are decorrelated or althoug are correlated, the decorrelation will be
-exploited in
-the \href{https://en.wikipedia.org/wiki/Entropy_encoding}{entropy
+Quantization} (VQ) is similar, but is applied to tuples of samples at
+the same time~\cite{vetterli2014foundations}. SQ is used when the
+samples are decorrelated or althought are correlated, the decorrelation
+will be exploited in
+a \href{https://en.wikipedia.org/wiki/Entropy_encoding}{entropy
 coding} stage (which is our case with DEFLATE), because the
 \href{https://en.wikipedia.org/wiki/Quantization_(signal_processing)#Rate%E2%80%93distortion_optimization}{coding
   efficiency} provided by VQ is marginal in this
@@ -50,15 +50,15 @@ and
 uniform quantizer distributes the available representation levels
 uniformely over the range of input values. Non-uniform quantizers use
 higher density of representation levels (more output levels per input
-levels) to those intervals of input values that occur more
+different values) to those intervals of input values that occur more
 often. Non-uniform quantizers can also be classified into static and
 \href{https://en.wikipedia.org/wiki/Adaptive_differential_pulse-code_modulation}{adaptive
   quantizers}. In the first case, the
 \href{https://en.wikipedia.org/wiki/Probability_distribution}{distribution}
-of the representation levels remain constant during the quantization
-stage, and in the second case, the densities are adapted dinamically
-to the characteristics of the input signal. In this milestone we will
-use an
+of the representation levels remains constant during the quantization
+stage, and in the second case, the quantizer parameters are adapted
+dinamically to the characteristics of the input signal. In this
+milestone we will use an
 \href{https://en.wikipedia.org/wiki/Quantization_(signal_processing)#Dead-zone_quantizers}{uniform
   dead-zone scalar static quantizer}, which can be implemented
 efficiently for digital signals and that provides a good
