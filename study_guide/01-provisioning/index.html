@@ -39,7 +39,7 @@ class="ecrm-1200">- </span><a
 href="https://www.ual.es" ><span 
 class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
-class="ecrm-1200">September 8, 2021</span></div>
+class="ecrm-1200">September 9, 2021</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
@@ -91,8 +91,36 @@ href="https://ubuntu.com/tutorials/create-a-usb-stick-on-windows#1-overview" >Wi
 href="https://ubuntu.com/tutorials/create-a-usb-stick-on-macos#1-overview" >OSX</a>,  <a 
 href="https://ubuntu.com/tutorials/create-a-usb-stick-on-ubuntu#1-overview" >Ubuntu  &#x0028;and
      derivatives&#x0029;</a>, or <a 
-href="https://askubuntu.com/questions/372607/how-to-create-a-bootable-ubuntu-usb-flash-drive-from-terminal" >the Linux console</a>.
-     </li>
+href="https://askubuntu.com/questions/372607/how-to-create-a-bootable-ubuntu-usb-flash-drive-from-terminal" >the Linux console</a>. Using the console &#x0028;example&#x0029;:
+                                                                  
+
+                                                                  
+     <pre class="verbatim" id="verbatim-1">
+     vruiz@pluton&#x00A0;Descargas&#x005D;$&#x00A0;lsblk&#x00A0;&#x00A0;&#x00A0;#&#x00A0;Before&#x00A0;connecting&#x00A0;the&#x00A0;USB&#x00A0;drive
+     NAME&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;MAJ:MIN&#x00A0;RM&#x00A0;&#x00A0;&#x00A0;SIZE&#x00A0;RO&#x00A0;TYPE&#x00A0;MOUNTPOINTS
+     nvme0n1&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;259:0&#x00A0;&#x00A0;&#x00A0;&#x00A0;0&#x00A0;238,5G&#x00A0;&#x00A0;0&#x00A0;disk
+     +-nvme0n1p1&#x00A0;259:1&#x00A0;&#x00A0;&#x00A0;&#x00A0;0&#x00A0;198,5G&#x00A0;&#x00A0;0&#x00A0;part&#x00A0;/home
+     +-nvme0n1p2&#x00A0;259:2&#x00A0;&#x00A0;&#x00A0;&#x00A0;0&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;8G&#x00A0;&#x00A0;0&#x00A0;part&#x00A0;&#x005B;SWAP&#x005D;
+     +-nvme0n1p3&#x00A0;259:3&#x00A0;&#x00A0;&#x00A0;&#x00A0;0&#x00A0;&#x00A0;&#x00A0;513M&#x00A0;&#x00A0;0&#x00A0;part&#x00A0;/boot/efi
+     +-nvme0n1p4&#x00A0;259:4&#x00A0;&#x00A0;&#x00A0;&#x00A0;0&#x00A0;&#x00A0;31,5G&#x00A0;&#x00A0;0&#x00A0;part&#x00A0;/
+     &#x005B;vruiz@pluton&#x00A0;Descargas&#x005D;$&#x00A0;lsblk&#x00A0;&#x00A0;#&#x00A0;After&#x00A0;connecting&#x00A0;the&#x00A0;USB&#x00A0;drive
+     NAME&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;MAJ:MIN&#x00A0;RM&#x00A0;&#x00A0;&#x00A0;SIZE&#x00A0;RO&#x00A0;TYPE&#x00A0;MOUNTPOINTS
+     sda&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;8:0&#x00A0;&#x00A0;&#x00A0;&#x00A0;1&#x00A0;&#x00A0;29,2G&#x00A0;&#x00A0;0&#x00A0;disk
+     +-sda1&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;8:1&#x00A0;&#x00A0;&#x00A0;&#x00A0;1&#x00A0;&#x00A0;&#x00A0;512M&#x00A0;&#x00A0;0&#x00A0;part
+     +-sda2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;8:2&#x00A0;&#x00A0;&#x00A0;&#x00A0;1&#x00A0;&#x00A0;28,7G&#x00A0;&#x00A0;0&#x00A0;part
+     nvme0n1&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;259:0&#x00A0;&#x00A0;&#x00A0;&#x00A0;0&#x00A0;238,5G&#x00A0;&#x00A0;0&#x00A0;disk
+     +-nvme0n1p1&#x00A0;259:1&#x00A0;&#x00A0;&#x00A0;&#x00A0;0&#x00A0;198,5G&#x00A0;&#x00A0;0&#x00A0;part&#x00A0;/home
+     +-nvme0n1p2&#x00A0;259:2&#x00A0;&#x00A0;&#x00A0;&#x00A0;0&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;8G&#x00A0;&#x00A0;0&#x00A0;part&#x00A0;&#x005B;SWAP&#x005D;
+     +-nvme0n1p3&#x00A0;259:3&#x00A0;&#x00A0;&#x00A0;&#x00A0;0&#x00A0;&#x00A0;&#x00A0;513M&#x00A0;&#x00A0;0&#x00A0;part&#x00A0;/boot/efi
+     +-nvme0n1p4&#x00A0;259:4&#x00A0;&#x00A0;&#x00A0;&#x00A0;0&#x00A0;&#x00A0;31,5G&#x00A0;&#x00A0;0&#x00A0;part&#x00A0;/
+     &#x005B;vruiz@pluton&#x00A0;Descargas&#x005D;$&#x00A0;sudo&#x00A0;dd&#x00A0;bs=4M&#x00A0;if=xubuntu-21.04-desktop-amd64.iso&#x00A0;of=/dev/sda&#x00A0;conv=fsync&#x00A0;oflag=direct&#x00A0;status=progress
+     1929379840&#x00A0;bytes&#x00A0;&#x0028;1,9&#x00A0;GB,&#x00A0;1,8&#x00A0;GiB&#x0029;&#x00A0;copied,&#x00A0;151&#x00A0;s,&#x00A0;12,8&#x00A0;MB/s
+     466+1&#x00A0;registros&#x00A0;le&#x00ED;dos
+     466+1&#x00A0;registros&#x00A0;escritos
+     1958051840&#x00A0;bytes&#x00A0;&#x0028;2,0&#x00A0;GB,&#x00A0;1,8&#x00A0;GiB&#x0029;&#x00A0;copied,&#x00A0;152,555&#x00A0;s,&#x00A0;12,8&#x00A0;MB/s
+</pre>
+     <!--l. 74--><p class="nopar" >
+     </p></li>
      <li 
   class="enumerate" id="x1-2006x3">Boot the image. Most of PCs can choose the boot device by pressing the
      F12-key when the PC is booting. On a Mac, you need to keep pressed the
@@ -103,22 +131,25 @@ href="https://askubuntu.com/questions/372607/how-to-create-a-bootable-ubuntu-usb
 class="ectt-1000">Try Xubuntu without installing</span>.
      </li>
      <li 
-  class="enumerate" id="x1-2010x5">When the OS is running, con&#xFB01;gure the network. Thus, you will have access
-     to the lastest verion of the packages during the installation.
+  class="enumerate" id="x1-2010x5">When the OS is running, con&#xFB01;gure the network. Thus, you will have access to
+     the lastest verion of the packages during the installation.
      </li>
      <li 
-  class="enumerate" id="x1-2012x6">Insert now the &#x0028;at least&#x0029; 8GB USB drive where Xubuntu will be installed.
-     Be aware that this device will be formated, and therefore, all the current
-     content will be lost.
+  class="enumerate" id="x1-2012x6">Insert now the &#x0028;at least&#x0029; 8GB USB drive where Xubuntu will be installed. Be
+     aware that this device will be formated, and therefore, all the current content
+     will be lost.
      </li>
      <li 
   class="enumerate" id="x1-2014x7">Select <span 
 class="ectt-1000">Install Xubuntu 21.04 LTS</span>.
+                                                                  
+
+                                                                  
      </li>
      <li 
-  class="enumerate" id="x1-2016x8">Select  English  as  the  language  used  during  the  installation  and  the
-     installed system. This will help in the case you need to search information
-     in the Internet, providing the error descriptions in English.
+  class="enumerate" id="x1-2016x8">Select English as the language used during the installation and the installed
+     system. This will help in the case you need to search information in the
+     Internet, providing the error descriptions in English.
      </li>
      <li 
   class="enumerate" id="x1-2018x9">Select your keyboard layout &#x0028;probably <span 
@@ -126,7 +157,7 @@ class="ectt-1000">Spanish</span>&#x0029;.
      </li>
      <li 
   class="enumerate" id="x1-2020x10">Open a terminal and write:
-     <!--l. 76-->
+     <!--l. 101-->
      <div class="lstlisting" id="listing-1"><span class="label"><a 
  id="x1-2021r1"></a></span><span 
 class="ectt-1000">&#x00A0;</span><span 
@@ -137,11 +168,8 @@ class="ectt-1000">&#x00A0;</span><span
 class="ectt-1000">-</span><span 
 class="ectt-1000">h</span>
      
-                                                                  
-
-                                                                  
      </div>
-     <!--l. 80--><p class="noindent" >to see all the mounted disk partitions and their capacity. Notice that no
+     <!--l. 105--><p class="noindent" >to see all the mounted disk partitions and their capacity. Notice that no
      partition of <span 
 class="ectt-1000">/dev/sda </span>&#x0028;the hard disk&#x0029; should not be mounted &#x0028;although you
      can do that, you don&#x2019;t need to mount any partition of the hard disk&#x0029;, the
@@ -188,6 +216,9 @@ class="ectt-1000">/dev/sdc</span>!!
      create an speci&#xFB01;c partition for doing <a 
 href="https://en.wikipedia.org/wiki/Swapping" >swapping</a>. The rule of the thumb is to
      create a partition with the same size that the RAM. However, probably
+                                                                  
+
+                                                                  
      you cannot do that in a 8GB USB drive because at least 5GB are
      needed for a Xubuntu installation. Anyway, keep in mind that this
      step is optional because you can always perform swapping on a &#xFB01;le &#x0028;a
@@ -212,9 +243,6 @@ class="ecbx-1000">&#x0029; will be</span>
 class="ecbx-1000">installed in </span><span 
 class="ectt-1000">/dev/sdc1</span><span 
 class="ecbx-1000">!!</span>.
-                                                                  
-
-                                                                  
      </li>
      <li 
   class="enumerate" id="x1-2033x16">Click on <span class="obeylines-h"><span class="verb"><span 
@@ -223,7 +251,7 @@ class="ectt-1000">&#x00A0;Now</span></span></span>. You&#x2019;ll read something
                                                                   
 
                                                                   
-     <pre class="verbatim" id="verbatim-1">
+     <pre class="verbatim" id="verbatim-2">
      If&#x00A0;you&#x00A0;continue,&#x00A0;the&#x00A0;changes&#x00A0;listed&#x00A0;below&#x00A0;will&#x00A0;be&#x00A0;written&#x00A0;to&#x00A0;the&#x00A0;disks.&#x00A0;Otherwise,&#x00A0;you&#x00A0;will&#x00A0;be&#x00A0;able&#x00A0;to&#x00A0;make&#x00A0;further&#x00A0;changes&#x00A0;manually.
      
      WARNING:&#x00A0;This&#x00A0;will&#x00A0;destroy&#x00A0;all&#x00A0;data&#x00A0;on&#x00A0;any&#x00A0;partitions&#x00A0;you&#x00A0;have&#x00A0;removed&#x00A0;as&#x00A0;well&#x00A0;as&#x00A0;on&#x00A0;the&#x00A0;partitions&#x00A0;that&#x00A0;are&#x00A0;going&#x00A0;to&#x00A0;be&#x00A0;formatted.
@@ -235,7 +263,7 @@ class="ectt-1000">&#x00A0;Now</span></span></span>. You&#x2019;ll read something
      &#x00A0;partition&#x00A0;#1&#x00A0;of&#x00A0;SCSI8&#x00A0;&#x0028;0,0,0&#x0029;&#x00A0;&#x0028;sdc&#x0029;&#x00A0;as&#x00A0;ESP
      &#x00A0;partition&#x00A0;#2&#x00A0;of&#x00A0;SCSI8&#x00A0;&#x0028;0,0,0&#x0029;&#x00A0;&#x0028;sdc&#x0029;&#x00A0;as&#x00A0;ext4
 </pre>
-     <!--l. 139--><p class="nopar" >
+     <!--l. 164--><p class="nopar" >
      </p></li>
      <li 
   class="enumerate" id="x1-2035x17">Choose your time zone.
@@ -250,20 +278,20 @@ href="https://en.wikipedia.org/wiki/Login" >login</a>
   class="enumerate" id="x1-2039x19">Wait for the end of the installation and boot your new Xubuntu. Don&#x2019;t worry if
      GRUB labels Xubuntu as Ubuntu. This is normal.
      </li></ol>
-<!--l. 153--><p class="noindent" >
+<!--l. 178--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-30003"></a>Timming</h3>
-<!--l. 155--><p class="noindent" >You should reach this milestone at most in one week.
-</p><!--l. 157--><p class="noindent" >
+<!--l. 180--><p class="noindent" >You should reach this milestone at most in one week.
+</p><!--l. 182--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-40004"></a>Deliverables</h3>
-<!--l. 159--><p class="noindent" >None.
+<!--l. 184--><p class="noindent" >None.
                                                                   
 
                                                                   
-</p><!--l. 161--><p class="noindent" >
+</p><!--l. 186--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-50005"></a>Resources</h3>

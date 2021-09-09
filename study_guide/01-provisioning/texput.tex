@@ -46,7 +46,32 @@ partition of your computer the instructions are almost the same):
     for \href{https://ubuntu.com/tutorials/create-a-usb-stick-on-windows#1-overview}{Windows}, \href{https://ubuntu.com/tutorials/create-a-usb-stick-on-macos#1-overview}{OSX}, \href{https://ubuntu.com/tutorials/create-a-usb-stick-on-ubuntu#1-overview}{Ubuntu
     (and derivatives)},
     or \href{https://askubuntu.com/questions/372607/how-to-create-a-bootable-ubuntu-usb-flash-drive-from-terminal}{the Linux
-    console}.
+    console}. Using the console (example):
+
+\begin{verbatim}
+vruiz@pluton Descargas]$ lsblk   # Before connecting the USB drive
+NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+nvme0n1     259:0    0 238,5G  0 disk 
++-nvme0n1p1 259:1    0 198,5G  0 part /home
++-nvme0n1p2 259:2    0     8G  0 part [SWAP]
++-nvme0n1p3 259:3    0   513M  0 part /boot/efi
++-nvme0n1p4 259:4    0  31,5G  0 part /
+[vruiz@pluton Descargas]$ lsblk  # After connecting the USB drive 
+NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+sda           8:0    1  29,2G  0 disk 
++-sda1        8:1    1   512M  0 part 
++-sda2        8:2    1  28,7G  0 part 
+nvme0n1     259:0    0 238,5G  0 disk 
++-nvme0n1p1 259:1    0 198,5G  0 part /home
++-nvme0n1p2 259:2    0     8G  0 part [SWAP]
++-nvme0n1p3 259:3    0   513M  0 part /boot/efi
++-nvme0n1p4 259:4    0  31,5G  0 part /
+[vruiz@pluton Descargas]$ sudo dd bs=4M if=xubuntu-21.04-desktop-amd64.iso of=/dev/sda conv=fsync oflag=direct status=progress
+1929379840 bytes (1,9 GB, 1,8 GiB) copied, 151 s, 12,8 MB/s
+466+1 registros leídos
+466+1 registros escritos
+1958051840 bytes (2,0 GB, 1,8 GiB) copied, 152,555 s, 12,8 MB/s
+\end{verbatim}
 
 \item Boot the image. Most of PCs can choose the boot device by pressing the
   F12-key when the PC is booting. On a Mac, you need to keep pressed
