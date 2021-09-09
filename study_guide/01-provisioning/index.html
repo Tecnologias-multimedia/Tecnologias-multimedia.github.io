@@ -96,6 +96,8 @@ href="https://askubuntu.com/questions/372607/how-to-create-a-bootable-ubuntu-usb
 
                                                                   
      <pre class="verbatim" id="verbatim-1">
+     &#x005B;vruiz@pluton&#x00A0;Descargas&#x005D;$&#x00A0;ls&#x00A0;-lh&#x00A0;*.iso
+     -rw-r--r--&#x00A0;1&#x00A0;vruiz&#x00A0;vruiz&#x00A0;1,9G&#x00A0;sep&#x00A0;&#x00A0;9&#x00A0;16:00&#x00A0;xubuntu-21.04-desktop-amd64.iso
      vruiz@pluton&#x00A0;Descargas&#x005D;$&#x00A0;lsblk&#x00A0;&#x00A0;&#x00A0;#&#x00A0;Before&#x00A0;connecting&#x00A0;the&#x00A0;USB&#x00A0;drive
      NAME&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;MAJ:MIN&#x00A0;RM&#x00A0;&#x00A0;&#x00A0;SIZE&#x00A0;RO&#x00A0;TYPE&#x00A0;MOUNTPOINTS
      nvme0n1&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;259:0&#x00A0;&#x00A0;&#x00A0;&#x00A0;0&#x00A0;238,5G&#x00A0;&#x00A0;0&#x00A0;disk
@@ -119,7 +121,7 @@ href="https://askubuntu.com/questions/372607/how-to-create-a-bootable-ubuntu-usb
      466+1&#x00A0;registros&#x00A0;escritos
      1958051840&#x00A0;bytes&#x00A0;&#x0028;2,0&#x00A0;GB,&#x00A0;1,8&#x00A0;GiB&#x0029;&#x00A0;copied,&#x00A0;152,555&#x00A0;s,&#x00A0;12,8&#x00A0;MB/s
 </pre>
-     <!--l. 74--><p class="nopar" >
+     <!--l. 76--><p class="nopar" >
      </p></li>
      <li 
   class="enumerate" id="x1-2006x3">Boot the image. Most of PCs can choose the boot device by pressing the
@@ -138,13 +140,13 @@ class="ectt-1000">Try Xubuntu without installing</span>.
   class="enumerate" id="x1-2012x6">Insert now the &#x0028;at least&#x0029; 8GB USB drive where Xubuntu will be installed. Be
      aware that this device will be formated, and therefore, all the current content
      will be lost.
+                                                                  
+
+                                                                  
      </li>
      <li 
   class="enumerate" id="x1-2014x7">Select <span 
 class="ectt-1000">Install Xubuntu 21.04 LTS</span>.
-                                                                  
-
-                                                                  
      </li>
      <li 
   class="enumerate" id="x1-2016x8">Select English as the language used during the installation and the installed
@@ -157,7 +159,7 @@ class="ectt-1000">Spanish</span>&#x0029;.
      </li>
      <li 
   class="enumerate" id="x1-2020x10">Open a terminal and write:
-     <!--l. 101-->
+     <!--l. 103-->
      <div class="lstlisting" id="listing-1"><span class="label"><a 
  id="x1-2021r1"></a></span><span 
 class="ectt-1000">&#x00A0;</span><span 
@@ -169,7 +171,7 @@ class="ectt-1000">-</span><span
 class="ectt-1000">h</span>
      
      </div>
-     <!--l. 105--><p class="noindent" >to see all the mounted disk partitions and their capacity. Notice that no
+     <!--l. 107--><p class="noindent" >to see all the mounted disk partitions and their capacity. Notice that no
      partition of <span 
 class="ectt-1000">/dev/sda </span>&#x0028;the hard disk&#x0029; should not be mounted &#x0028;although you
      can do that, you don&#x2019;t need to mount any partition of the hard disk&#x0029;, the
@@ -212,13 +214,13 @@ class="ectt-1000">/dev/sdc</span>!!
      </li>
      <li 
   class="enumerate" id="x1-2029x14">At this point of the installation you should consider &#x0028;depending on the amount
+                                                                  
+
+                                                                  
      of RAM memory installed in your computer and the size of the USB drive&#x0029; to
      create an speci&#xFB01;c partition for doing <a 
 href="https://en.wikipedia.org/wiki/Swapping" >swapping</a>. The rule of the thumb is to
      create a partition with the same size that the RAM. However, probably
-                                                                  
-
-                                                                  
      you cannot do that in a 8GB USB drive because at least 5GB are
      needed for a Xubuntu installation. Anyway, keep in mind that this
      step is optional because you can always perform swapping on a &#xFB01;le &#x0028;a
@@ -263,7 +265,7 @@ class="ectt-1000">&#x00A0;Now</span></span></span>. You&#x2019;ll read something
      &#x00A0;partition&#x00A0;#1&#x00A0;of&#x00A0;SCSI8&#x00A0;&#x0028;0,0,0&#x0029;&#x00A0;&#x0028;sdc&#x0029;&#x00A0;as&#x00A0;ESP
      &#x00A0;partition&#x00A0;#2&#x00A0;of&#x00A0;SCSI8&#x00A0;&#x0028;0,0,0&#x0029;&#x00A0;&#x0028;sdc&#x0029;&#x00A0;as&#x00A0;ext4
 </pre>
-     <!--l. 164--><p class="nopar" >
+     <!--l. 166--><p class="nopar" >
      </p></li>
      <li 
   class="enumerate" id="x1-2035x17">Choose your time zone.
@@ -278,20 +280,20 @@ href="https://en.wikipedia.org/wiki/Login" >login</a>
   class="enumerate" id="x1-2039x19">Wait for the end of the installation and boot your new Xubuntu. Don&#x2019;t worry if
      GRUB labels Xubuntu as Ubuntu. This is normal.
      </li></ol>
-<!--l. 178--><p class="noindent" >
+<!--l. 180--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-30003"></a>Timming</h3>
-<!--l. 180--><p class="noindent" >You should reach this milestone at most in one week.
-</p><!--l. 182--><p class="noindent" >
+<!--l. 182--><p class="noindent" >You should reach this milestone at most in one week.
+</p><!--l. 184--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-40004"></a>Deliverables</h3>
-<!--l. 184--><p class="noindent" >None.
+<!--l. 186--><p class="noindent" >None.
                                                                   
 
                                                                   
-</p><!--l. 186--><p class="noindent" >
+</p><!--l. 188--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-50005"></a>Resources</h3>
