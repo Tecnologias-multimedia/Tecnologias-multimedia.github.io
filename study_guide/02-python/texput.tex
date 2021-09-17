@@ -58,53 +58,83 @@ interpreter, we will install a dedicated one.
     \href{https://en.wikipedia.org/wiki/CPython}{CPython}, and create
     a new virtual environment called \texttt{tm} with
     \href{https://github.com/pyenv/pyenv}{\texttt{pyenv}}. Basically
-    (example for \verb|Python 3.8.5|):
+    (example for \verb|Python 3.9.7|):
 
     \begin{enumerate}
       \item Install package dependencies for compiling Python:
 
         \begin{lstlisting}[mathescape=false, language=Bash]
-          #sudo apt-get install -y build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev git
-          # sudo apt-get update; sudo apt-get install make build-essential libssl-dev zlib1g-dev \
-          libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
-          libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+#sudo apt-get install -y build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev git
+sudo apt-get update; sudo apt-get install make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
         \end{lstlisting}
 
         \item Download Pyenv:
         \begin{lstlisting}[mathescape=false, language=Bash]
-          #curl https://pyenv.run | bash
-          git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+#curl https://pyenv.run | bash
+git clone https://github.com/pyenv/pyenv.git ~/.pyenv
         \end{lstlisting}
         
       \item (Optional) Compile a dynamic Bash extension to speed up
         Pyenv.
         \begin{lstlisting}[mathescape=false, language=Bash]
-cd ~/.pyenv && src/configure && make -C src
+cd ~/.pyenv && src/configure && make -C src; cd ~
         \end{lstlisting}
-
-# Define the PYENV_ROOT environment variable to point to the path
-# where you cloned the Pyenv repo. For this, put these lines into
-# ~/.profile before the part that sources ~/.bashrc
+      \item Define the \verb|PYENV_ROOT| environment variable to point
+        to the path where you cloned the Pyenv repo. For this, put
+        these lines into \verb|~/.profile| before the part that sources
+        \verb|~/.bashrc|.
+        
+        \begin{lstlisting}[mathescape=false, language=Bash]
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
+        \end{lstlisting}
 
-# And put this line at the bottom of ~/.profile to enable
-# autocompletion and all subcommands
+      \item Run:
+        \begin{lstlisting}[mathescape=false, language=Bash]
 echo 'eval "$(pyenv init --path)"' >> ~/.profile
 echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+        \end{lstlisting}
+        to put these lines at the bottom of \verb|~/.profile| and \verb|~/.basrhrc| to enable autocompletion and all subcommands.
 
-# Restart your login session for the changes to take effect.
-# E.g. if you're in a GUI session, you need to fully log out and log back in.
+      \item Restart your login session for the changes to take
+        effect. E.g. if you're in a GUI session, you need to fully log
+        out and log back in.
 
+      \item List the available Python interpreters:
+        \begin{lstlisting}[mathescape=false, language=Bash]
+pyenv install --list
+        \end{lstlisting}
+
+      \item Install the Python interpreter (and some basic tools such as \href{https://pypi.org/project/pip/}{pip}):
+        \begin{lstlisting}[mathescape=false, language=Bash]
+pyenv install -v 3.9.7
+        \end{lstlisting}
+
+      \item Check what it is currently available:
+        \begin{lstlisting}[mathescape=false, language=Bash]
+pyenv versions        
+        \end{lstlisting}
+        You should get something such as:
+        \begin{lstlisting}[mathescape=false, language=Bash]
+* system (set by /home/<your_home_sir_here>/.pyenv/version)
+  3.9.7
+        \end{lstlisting}
+
+        \item Create a virtual environments for TM
+        \begin{lstlisting}[mathescape=false, language=Bash]
+pyenv virtualenv 3.9.7 TM
+        \end{lstlisting}
+
+        
+\end{enumerate}
+        \begin{lstlisting}[mathescape=false, language=Bash]
 # Install Python:
-pyenv install -v 3.8.5
 
 cat << EOF >> ~/.bashrc
 export PATH="\$HOME/.pyenv/bin:$PATH"
 eval "\$(pyenv init -)"
 EOF
 source ~/.bashrc
-pyenv virtualenv 3.8.5 tm
 \end{lstlisting}
 
   \item Remember that you will need to active it when you want to
