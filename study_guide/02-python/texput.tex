@@ -75,10 +75,12 @@ interpreter, we will install a dedicated one.
           #curl https://pyenv.run | bash
           git clone https://github.com/pyenv/pyenv.git ~/.pyenv
         \end{lstlisting}
-
+        
+      \item (Optional) Compile a dynamic Bash extension to speed up
+        Pyenv.
         \begin{lstlisting}[mathescape=false, language=Bash]
-# (Optional) Compile a dynamic Bash extension to speed up Pyenv
 cd ~/.pyenv && src/configure && make -C src
+        \end{lstlisting}
 
 # Define the PYENV_ROOT environment variable to point to the path
 # where you cloned the Pyenv repo. For this, put these lines into
