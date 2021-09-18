@@ -61,90 +61,76 @@ interpreter, we will install a dedicated one.
     (example for \verb|Python 3.9.7|):
 
     \begin{enumerate}
-      \item Install package dependencies for compiling Python:
-
-        \begin{lstlisting}[mathescape=false, language=Bash]
-#sudo apt-get install -y build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev git
+    \item Install package dependencies for compiling Python:
+      
+      \begin{lstlisting}[mathescape=false, language=Bash]
 sudo apt-get update; sudo apt-get install make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
-        \end{lstlisting}
-
-        \item Download Pyenv:
-        \begin{lstlisting}[mathescape=false, language=Bash]
-#curl https://pyenv.run | bash
-git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-        \end{lstlisting}
-        
-      \item (Optional) Compile a dynamic Bash extension to speed up
-        Pyenv.
-        \begin{lstlisting}[mathescape=false, language=Bash]
-cd ~/.pyenv && src/configure && make -C src; cd ~
-        \end{lstlisting}
-      \item Define the \verb|PYENV_ROOT| environment variable to point
-        to the path where you cloned the Pyenv repo. For this, put
-        these lines into \verb|~/.profile| before the part that sources
-        \verb|~/.bashrc|.
-        
-        \begin{lstlisting}[mathescape=false, language=Bash]
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-        \end{lstlisting}
-
-      \item Run:
-        \begin{lstlisting}[mathescape=false, language=Bash]
-echo 'eval "$(pyenv init --path)"' >> ~/.profile
-echo 'eval "$(pyenv init -)"' >> ~/.bashrc
-        \end{lstlisting}
-        to put these lines at the bottom of \verb|~/.profile| and \verb|~/.bashrc| to enable autocompletion and all subcommands.
-
-      \item Restart your login session for the changes to take
-        effect. E.g. if you're in a GUI session, you need to fully log
-        out and log back in.
-
-      \item List the available Python interpreters:
-        \begin{lstlisting}[mathescape=false, language=Bash]
-pyenv install --list
-        \end{lstlisting}
-
-      \item Install the Python interpreter (and some basic tools such as \href{https://pypi.org/project/pip/}{pip}):
-        \begin{lstlisting}[mathescape=false, language=Bash]
-pyenv install -v 3.9.7
-        \end{lstlisting}
-
-      \item Check what it is currently available:
-        \begin{lstlisting}[mathescape=false, language=Bash]
-pyenv versions        
-        \end{lstlisting}
-        You should get something such as:
-        \begin{lstlisting}[mathescape=false, language=Bash]
-* system (set by /home/<your_home_sir_here>/.pyenv/version)
-  3.9.7
-        \end{lstlisting}
-
-        \item Create a virtual environments for TM:
-        \begin{lstlisting}[mathescape=false, language=Bash]
-pyenv virtualenv 3.9.7 TM
-        \end{lstlisting}
-
-        
-\end{enumerate}
-        \begin{lstlisting}[mathescape=false, language=Bash]
-# Install Python:
-
-cat << EOF >> ~/.bashrc
-export PATH="\$HOME/.pyenv/bin:$PATH"
-eval "\$(pyenv init -)"
-EOF
-source ~/.bashrc
 \end{lstlisting}
 
-  \item Remember that you will need to active it when you want to
-    work in this project:
+\item Download Pyenv:
+  \begin{lstlisting}[mathescape=false, language=Bash]
+git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+\end{lstlisting}
+        
+\item (Optional) Compile a dynamic Bash extension to speed up Pyenv.
+  \begin{lstlisting}[mathescape=false, language=Bash]
+cd ~/.pyenv && src/configure && make -C src; cd ~
+\end{lstlisting}
 
-    \begin{lstlisting}[language=Bash]
-pyenv activate tm
-    \end{lstlisting}
+\item Define the \verb|PYENV_ROOT| environment variable to point to
+  the path where you cloned the Pyenv repo. For this, put these lines
+  into \verb|~/.profile|\footnote{This configuration file is sourced
+    by the \texttt{bash} interperter only when a login shell is done
+    (when the system requests your identity and you are able to
+    privide it.} before the part that sources
+  \verb|~/.bashrc|\footnote{This configuration file is sourced by the
+    \texttt{bash} interpreter when you request a non-login shell, i.e.,
+    when you reinstance the interpreter, for example, running a new
+    terminal.}.
+        
+  \begin{lstlisting}[mathescape=false, language=Bash]
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+\end{lstlisting}
 
-    It is a good idea to append this to the \verb|~/.bashrc| file.
+\item Run:
+  \begin{lstlisting}[mathescape=false, language=Bash]
+echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+echo 'eval "$(pyenv init --path)"' >> ~/.bashrc
+\end{lstlisting}
+to put these lines at the bottom of \verb|~/.bashrc| to enable
+autocompletion and all subcommands.
+
+\item Restart your login session for the changes to take
+  effect. E.g. if you're in a GUI session, you need to fully log out
+  and log back in.
+
+\item List the available Python interpreters:
+  \begin{lstlisting}[mathescape=false, language=Bash]
+pyenv install --list
+\end{lstlisting}
+
+\item Install the Python interpreter (and some basic tools such as \href{https://pypi.org/project/pip/}{pip}):
+  \begin{lstlisting}[mathescape=false, language=Bash]
+pyenv install -v 3.9.7
+\end{lstlisting}
+
+\item Check what it is currently available:
+  \begin{lstlisting}[mathescape=false, language=Bash]
+pyenv versions        
+\end{lstlisting}
+You should get something such as:
+\begin{lstlisting}[mathescape=false, language=Bash]
+* system (set by /home/<your_home_sir_here>/.pyenv/version)
+  3.9.7
+\end{lstlisting}
+
+\item Select the Python interperter:
+  \begin{lstlisting}[mathescape=false, language=Bash]
+pyenv global 3.9.7
+\end{lstlisting}
+
+\end{enumerate}
     
   \item Install an
     \href{https://en.wikipedia.org/wiki/Integrated_development_environment}{IDE}
@@ -158,12 +144,11 @@ pip install thonny
 
   \end{enumerate}
 
-  \item Alternatively (but reducing the chances of solving any
-    possible issue), you can use the Python interpreter shipped with
-    your OS. In this case, still it is strongly recommended to use an
-    specific Python
-    \href{https://docs.python.org/3/library/venv.html}{environment}
-    for the InterCom project.
+\item Alternatively (but reducing the chances of solving any possible
+  issue), you can use the Python interpreter shipped with your OS. In
+  this case, it is strongly recommended to use an specific Python
+  \href{https://docs.python.org/3/library/venv.html}{environment} for
+  the InterCom project.
   
 \item Python programming.
   
