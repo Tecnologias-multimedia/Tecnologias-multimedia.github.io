@@ -39,7 +39,7 @@ class="ecrm-1200">- </span><a
 href="https://www.ual.es" ><span 
 class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
-class="ecrm-1200">September 17, 2021</span></div>
+class="ecrm-1200">September 18, 2021</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
@@ -419,24 +419,33 @@ class="ectt-1000">bashrc</span>
              </div>
              <!--l. 97--><p class="noindent" >to put these lines at the bottom of <span class="obeylines-h"><span class="verb"><span 
 class="ectt-1000">~/.profile</span></span></span> and <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">~/.basrhrc</span></span></span> to
+class="ectt-1000">~/.bashrc</span></span></span> to
              enable autocompletion and all subcommands.
              </p></li>
              <li 
   class="enumerate" id="x1-2025x6">Restart your login session for the changes to take e&#xFB00;ect. E.g. if
              you&#x2019;re in a GUI session, you need to fully log out and log back
-             in.</li></ol>
-         <!--l. 103-->
-         <div class="lstlisting" id="listing-6"><span class="label"><a 
- id="x1-2026r1"></a></span><span 
-class="ecit-1000">#</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">Install</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">Python</span><span 
-class="ecit-1000">:</span><span 
-class="ectt-1000">&#x00A0;</span><br /><span class="label"><a 
- id="x1-2027r2"></a></span><span 
+             in.
+             </li>
+             <li 
+  class="enumerate" id="x1-2027x7">List the available Python interpreters: <!--l. 104-->
+             <div class="lstlisting" id="listing-6"><span class="label"><a 
+ id="x1-2028r1"></a></span><span 
+class="ectt-1000">pyenv</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">install</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">--</span><span 
+class="ectt-1000">list</span>
+             
+             </div>
+             </li>
+             <li 
+  class="enumerate" id="x1-2030x8">Install the Python interpreter &#x0028;and some basic tools such as <a 
+href="https://pypi.org/project/pip/" >pip</a>&#x0029;:
+             <!--l. 109-->
+             <div class="lstlisting" id="listing-7"><span class="label"><a 
+ id="x1-2031r1"></a></span><span 
 class="ectt-1000">pyenv</span><span 
 class="ectt-1000">&#x00A0;</span><span 
 class="ectt-1000">install</span><span 
@@ -444,11 +453,78 @@ class="ectt-1000">&#x00A0;</span><span
 class="ectt-1000">-</span><span 
 class="ectt-1000">v</span><span 
 class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">3.9.7</span>
+             
+             </div>
+             </li>
+             <li 
+  class="enumerate" id="x1-2033x9">Check what it is currently available: <!--l. 114-->
+             <div class="lstlisting" id="listing-8"><span class="label"><a 
+ id="x1-2034r1"></a></span><span 
+class="ectt-1000">pyenv</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">versions</span>
+             
+             </div>
+             <!--l. 117--><p class="noindent" >You should get something such as: </p><!--l. 118-->
+             <div class="lstlisting" id="listing-9"><span class="label"><a 
+ id="x1-2035r1"></a></span><span 
+class="ectt-1000">*</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">system</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">&#x0028;</span><span 
+class="ectt-1000">set</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">by</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">home</span><span 
+class="ectt-1000">/&#x003C;</span><span 
+class="ectt-1000">your_home_sir_here</span><span 
+class="ectt-1000">&#x003E;/.</span><span 
+class="ectt-1000">pyenv</span><span 
+class="ectt-1000">/</span><span 
+class="ectt-1000">version</span><span 
+class="ectt-1000">&#x0029;</span><span 
+class="ectt-1000">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-2036r2"></a></span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">3.9.7</span>
+             
+             </div>
+                                                                  
+
+                                                                  
+             </li>
+             <li 
+  class="enumerate" id="x1-2038x10">Create a virtual environments for TM <!--l. 124-->
+             <div class="lstlisting" id="listing-10"><span class="label"><a 
+ id="x1-2039r1"></a></span><span 
+class="ectt-1000">pyenv</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">virtualenv</span><span 
+class="ectt-1000">&#x00A0;</span><span 
 class="ectt-1000">3.9.7</span><span 
+class="ectt-1000">&#x00A0;</span><span 
+class="ectt-1000">TM</span>
+             
+             </div>
+             </li></ol>
+         <!--l. 130-->
+         <div class="lstlisting" id="listing-11"><span class="label"><a 
+ id="x1-2040r1"></a></span><span 
+class="ecit-1000">#</span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">Install</span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">Python</span><span 
+class="ecit-1000">:</span><span 
 class="ectt-1000">&#x00A0;</span><br /><span class="label"><a 
- id="x1-2028r3"></a></span><span 
+ id="x1-2041r2"></a></span><span 
 class="ectt-1000">&#x00A0;</span><br /><span class="label"><a 
- id="x1-2029r4"></a></span><span 
+ id="x1-2042r3"></a></span><span 
 class="ectt-1000">cat</span><span 
 class="ectt-1000">&#x00A0;</span><span 
 class="ectt-1000">&#x003C;&#x003C;</span><span 
@@ -460,7 +536,7 @@ class="ectt-1000">&#x00A0;</span><span
 class="ectt-1000">~/.</span><span 
 class="ectt-1000">bashrc</span><span 
 class="ectt-1000">&#x00A0;</span><br /><span class="label"><a 
- id="x1-2030r5"></a></span><span 
+ id="x1-2043r4"></a></span><span 
 class="ectt-1000">export</span><span 
 class="ectt-1000">&#x00A0;</span><span 
 class="ectt-1000">PATH</span><span 
@@ -476,7 +552,7 @@ class="ectt-1000">:</span><span
 class="ectt-1000">$PATH</span><span 
 class="ectt-1000">&#x0022;</span><span 
 class="ectt-1000">&#x00A0;</span><br /><span class="label"><a 
- id="x1-2031r6"></a></span><span 
+ id="x1-2044r5"></a></span><span 
 class="ectt-1000">eval</span><span 
 class="ectt-1000">&#x00A0;</span><span 
 class="ectt-1000">&#x0022;</span><span 
@@ -490,32 +566,23 @@ class="ectt-1000">&#x00A0;</span><span
 class="ectt-1000">-&#x0029;</span><span 
 class="ectt-1000">&#x0022;</span><span 
 class="ectt-1000">&#x00A0;</span><br /><span class="label"><a 
- id="x1-2032r7"></a></span><span 
+ id="x1-2045r6"></a></span><span 
 class="ectt-1000">EOF</span><span 
 class="ectt-1000">&#x00A0;</span><br /><span class="label"><a 
- id="x1-2033r8"></a></span><span 
+ id="x1-2046r7"></a></span><span 
 class="ectt-1000">source</span><span 
 class="ectt-1000">&#x00A0;</span><span 
 class="ectt-1000">~/.</span><span 
-class="ectt-1000">bashrc</span><span 
-class="ectt-1000">&#x00A0;</span><br /><span class="label"><a 
- id="x1-2034r9"></a></span><span 
-class="ectt-1000">pyenv</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">virtualenv</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">3.8.5</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">tm</span>
+class="ectt-1000">bashrc</span>
          
          </div>
          </li>
          <li 
-  class="enumerate" id="x1-2036x2">Remember that you will need to active it when you want to work in this
+  class="enumerate" id="x1-2048x2">Remember that you will need to active it when you want to work in this
          project:
-         <!--l. 118-->
-         <div class="lstlisting" id="listing-7"><span class="label"><a 
- id="x1-2037r1"></a></span><span 
+         <!--l. 143-->
+         <div class="lstlisting" id="listing-12"><span class="label"><a 
+ id="x1-2049r1"></a></span><span 
 class="ectt-1000">pyenv</span><span 
 class="ectt-1000">&#x00A0;</span><span 
 class="ectt-1000">activate</span><span 
@@ -523,17 +590,17 @@ class="ectt-1000">&#x00A0;</span><span
 class="ectt-1000">tm</span>
          
          </div>
-         <!--l. 122--><p class="noindent" >It is a good idea to append this to the <span class="obeylines-h"><span class="verb"><span 
+         <!--l. 147--><p class="noindent" >It is a good idea to append this to the <span class="obeylines-h"><span class="verb"><span 
 class="ectt-1000">~/.bashrc</span></span></span> &#xFB01;le.
          </p></li>
          <li 
-  class="enumerate" id="x1-2039x3">Install an <a 
+  class="enumerate" id="x1-2051x3">Install an <a 
 href="https://en.wikipedia.org/wiki/Integrated_development_environment" >IDE</a> for programming with Python. I recommend <a 
 href="https://thonny.org/" >Thonny</a> if you
          are not used to any other.
-         <!--l. 130-->
-         <div class="lstlisting" id="listing-8"><span class="label"><a 
- id="x1-2040r1"></a></span><span 
+         <!--l. 155-->
+         <div class="lstlisting" id="listing-13"><span class="label"><a 
+ id="x1-2052r1"></a></span><span 
 class="ectt-1000">pip</span><span 
 class="ectt-1000">&#x00A0;</span><span 
 class="ectt-1000">install</span><span 
@@ -542,27 +609,27 @@ class="ectt-1000">thonny</span>
          
          </div>
          </li></ol>
-                                                                  
-
-                                                                  
      </li>
      <li 
-  class="enumerate" id="x1-2042x2">Alternatively &#x0028;but reducing the chances of solving any possible issue&#x0029;, you can
+  class="enumerate" id="x1-2054x2">Alternatively &#x0028;but reducing the chances of solving any possible issue&#x0029;, you can
      use the Python interpreter shipped with your OS. In this case, still it is
      strongly recommended to use an speci&#xFB01;c Python <a 
 href="https://docs.python.org/3/library/venv.html" >environment</a> for the InterCom
      project.
      </li>
      <li 
-  class="enumerate" id="x1-2044x3">Python programming.
-     <!--l. 145--><p class="noindent" >
+  class="enumerate" id="x1-2056x3">Python programming.
+     <!--l. 170--><p class="noindent" >
          </p><ol  class="enumerate2" >
          <li 
-  class="enumerate" id="x1-2046x1">You don&#x2019;t need to master Python to follow this course, but it is
+  class="enumerate" id="x1-2058x1">You don&#x2019;t need to master Python to follow this course, but it is
          convenient for you to follow some Python programming tutorial, such
          as  <a 
 href="https://docs.python.org/3/tutorial/" >The  Python  Tutorial</a>  <span class="cite">&#x005B;<a 
 href="#Xpython-tutorial">1</a>&#x005D;</span>  if  you  realize  that  the  language  is  a
+                                                                  
+
+                                                                  
          setback for you. If you need to start with Python from scratch, an
          introduction to Python such as this <a 
 href="https://github.com/vicente-gonzalez-ruiz/YAPT/tree/master/workshops/programacion_python_ESO" >workshop of YAPT</a> <span class="cite">&#x005B;<a 
@@ -571,18 +638,18 @@ href="#XYAPT">3</a>&#x005D;</span> could also
 href="http://zetcode.com/lang/python/" >ZetCode&#x2019;s Python Tutorial</a>.
          </li></ol>
      </li></ol>
-<!--l. 162--><p class="noindent" >
+<!--l. 187--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-30003"></a>Timming</h3>
-<!--l. 164--><p class="noindent" >There is not time limit for &#xFB01;nishing this milestone. Develop it at your own pace.
+<!--l. 189--><p class="noindent" >There is not time limit for &#xFB01;nishing this milestone. Develop it at your own pace.
 However, notice that we will be using Python very soon.
-</p><!--l. 167--><p class="noindent" >
+</p><!--l. 192--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-40004"></a>Deliverables</h3>
-<!--l. 169--><p class="noindent" >None.
-</p><!--l. 171--><p class="noindent" >
+<!--l. 194--><p class="noindent" >None.
+</p><!--l. 196--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-50005"></a>Resources</h3>
@@ -591,9 +658,6 @@ However, notice that we will be using Python very soon.
  &#x005B;1&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
  id="Xpython-tutorial"></a>The&#x00A0;Python Foundation. <a 
 href="https://docs.python.org/3/tutorial/" >The Python Tutorial</a>.
-                                                                  
-
-                                                                  
    </p>
    <p class="bibitem" ><span class="biblabel">
  &#x005B;2&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
@@ -613,6 +677,9 @@ href="https://github.com/Tecnologias-multimedia/intercom" >InterCom</a>
    project.
 </p>
    </div>
+                                                                  
+
+                                                                  
 <a 
  id="Q1-1-6"></a>
     

@@ -94,7 +94,7 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 echo 'eval "$(pyenv init --path)"' >> ~/.profile
 echo 'eval "$(pyenv init -)"' >> ~/.bashrc
         \end{lstlisting}
-        to put these lines at the bottom of \verb|~/.profile| and \verb|~/.basrhrc| to enable autocompletion and all subcommands.
+        to put these lines at the bottom of \verb|~/.profile| and \verb|~/.bashrc| to enable autocompletion and all subcommands.
 
       \item Restart your login session for the changes to take
         effect. E.g. if you're in a GUI session, you need to fully log
@@ -120,7 +120,7 @@ pyenv versions
   3.9.7
         \end{lstlisting}
 
-        \item Create a virtual environments for TM
+        \item Create a virtual environments for TM:
         \begin{lstlisting}[mathescape=false, language=Bash]
 pyenv virtualenv 3.9.7 TM
         \end{lstlisting}
