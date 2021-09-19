@@ -24,7 +24,7 @@ low amount of hardware resources.
 
 The following ``guide'' helps you to install Xubuntu in an
 external \href{https://en.wikipedia.org/wiki/USB_flash_drive}{USB
-drive}, which must have at least 8GB of capacity (the minimal
+drive}, which must have at least 16GB of capacity (the minimal
 installation of Xubuntu needs about 5GB). You will need also a
 temporal external USB disk with at least 4GB to boot from it the
 installation Xubuntu image (or to burn
@@ -104,7 +104,7 @@ nvme0n1     259:0    0 238.5G  0 disk  # <-- This is the hard disk
   have access to the lastest verion of the packages during the
   installation.
   
-\item Insert now the (at least) 8GB USB drive where Xubuntu will be
+\item Insert now the (at least) 16GB USB drive where Xubuntu will be
   installed. Be aware that this device will be formated, and
   therefore, all the current content will be lost. Check again the
   storage devices:
@@ -130,10 +130,10 @@ nvme0n1     259:0    0 238.5G  0 disk
 +-nvme0n1p4 259:4    0  31.5G  0 part 
 \end{verbatim}
 
-  Don't worry if the >8GB USB disk is mounted by
+  Don't worry if the >16GB USB disk is mounted by
   \href{https://gitlab.xfce.org/xfce/thunar}{Thunar} (the default file
   manager in Xubuntu). The installer will ask to unmount the devices
-  when this is necessary (notice that the destination device >8GB USB
+  when this is necessary (notice that the destination device >16GB USB
   drive must be unmounted in order to modify the
   \href{https://en.wikipedia.org/wiki/Disk_partitioning}{partition
     table}).
@@ -176,7 +176,7 @@ nvme0n1     259:0    0 238.5G  0 disk
 \item Choose \texttt{Erase disk and install Xubuntu}. Ignore the
   \verb|Advanced Features|. Then, wait for a couple of minutes :-/
 
-\item Select the drive corresponding to the >= 8GB USB drive
+\item Select the drive corresponding to the >= 16GB USB drive
   (\texttt{/dev/sdb} in the previous example). Don't choose
   \texttt{/dev/nvme01n1} (the main disk of the computer in the
   previous example)! Again, Select \texttt{/dev/sdb} (in the previous
@@ -188,7 +188,7 @@ nvme0n1     259:0    0 238.5G  0 disk
   of the USB drive) to create an specific partition for doing
   \href{https://en.wikipedia.org/wiki/Swapping}{swapping}. The rule of
   the thumb is to create a partition with the same size that the
-  RAM. However, probably you cannot do that in a 8GB USB drive because
+  RAM. However, probably you cannot do that in a 16GB USB drive because
   at least 5GB are needed for a Xubuntu installation. Anyway, keep in
   mind that this step is optional because you can always perform
   swapping on a file (a process slightly slower than using the
