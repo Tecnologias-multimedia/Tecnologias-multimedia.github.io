@@ -5,12 +5,12 @@
 
 \section{Description}
 
-\subsection{Sequential algorithm}
+\subsection{Loop-based algorithm}
 
-InterCom can be divided roughtly in 6 steps:
+Roughtly, InterCom can be divided in 6 steps:
 
 \begin{lstlisting}[language=Python]
-  # Sequential algorithm
+  # Loop-based algorithm (to be called in a loop)
   def record_IO_and_play():
     chunk = record()  # (1)
     packed_chunk = pack(chunk)  # (2)
@@ -100,16 +100,17 @@ Where:
 This algorithm works fine if the chunk size is controlled by
 \href{http://www.portaudio.com/}{PortAudio}~\cite{portaudio}
 (\verb|sounddevice|) and also, the run-time required by
-\verb|pack(chunk)| and \verb|unpack(packet)| operations is
-smaller than the chunk-time. The first premise (variable chunk sizes)
-complicates slightly the implementation because we would work with
-chunks of constantly changing lenghts (that as you can see, in most of
-the iterations are 0). This also complicates the control of the latency
-because the chunk size is variable. However, the real problem appears
-when our computer is not able to satisfy the second requirement, i.e.,
-when the chunk time is smaller than the time that we need to process
-the chunks. This only can be addressed through optimizing (for
-example, parallelizing) the code.
+\verb|pack(chunk)| and \verb|unpack(packet)| operations is smaller
+than the chunk-time. The first premise (that we can use varying chunk
+sizes) complicates slightly the implementation because we would work
+with chunks of constantly changing lenghts (that as you can see
+running \verb|wire4.py|, in most of the iterations are 0). This also
+complicates the control of the latency because the chunk size is
+variable. However, the real problem appears when our computer is not
+able to satisfy the second requirement, i.e., when the chunk time is
+smaller than the time that we need to process the chunks. This only
+can be addressed through optimizing (for example, parallelizing) the
+code.
 
 \subsection{Timer-based algorithm}
 
@@ -119,12 +120,12 @@ the sound hardware). This procedure guarantees a gliches-free audio-IO
 when constant chunk sizes are used because the timer interruption
 coincides exactly with the instant of time in which the
 \verb|record()| and the \verb|play()| methods we are going to
-handle a chunk of audio of a known size without blocking. The
+handle a chunk of audio (of a known size without blocking). The
 following algorithm describes the new algorithm that is basically the
 previous one, except that the chunk size is fixed.
 
 \begin{lstlisting}[language=Python]
-  # Timer-based algorithm
+  # Timer-based algorithm (to be called periodically)
   def record_IO_and_play(chunk_size):
     chunk = record(chunk_size)
     packed_chunk = pack(chunk)
@@ -156,13 +157,13 @@ The current implementation of InterCom uses the Timer-based algorithm.
 \item Read the source code of
   \href{https://github.com/Tecnologias-multimedia/intercom/blob/master/src/minimal.py}{\texttt{minimal.py}}
   and identify in the code the interruption handler that implements
-  the timer-based algorithm. This
-  \href{https://github.com/vicente-gonzalez-ruiz/YAPT/blob/master/03-IO/networking/sockets.ipynb}{guide}~\cite{YAPT}
+  the timer-based algorithm. Here you can find information about
+  \href{https://github.com/vicente-gonzalez-ruiz/YAPT/blob/master/03-IO/networking/sockets.ipynb}{sockets}~\cite{YAPT} in Python.
   
 \item Evaluate the performance (quality of the sound) in different configurations:
   \begin{enumerate}
   \item When \verb|minimal.py| runs in the same computer.
-  \item When \verb|minimal.py| runs in different computers. In this
+  \item When \verb|minimal.py| runs in the following contexts. In this
     case, try that the computers do not belong to the same local
     network. This
     \href{https://www.noip.com/support/knowledgebase/general-port-forwarding-guide/}{guide}

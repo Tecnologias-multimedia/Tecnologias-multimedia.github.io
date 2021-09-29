@@ -37,15 +37,15 @@ class="ecrm-1200">- </span><a
 href="https://www.ual.es" ><span 
 class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
-class="ecrm-1200">September 1, 2021</span></div>
+class="ecrm-1200">September 29, 2021</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
 <!--l. 8--><p class="noindent" >
 </p>
    <h4 class="subsectionHead"><span class="titlemark">1.1   </span> <a 
- id="x1-20001.1"></a>Sequential algorithm</h4>
-<!--l. 10--><p class="noindent" >InterCom can be divided roughtly in 6 steps:
+ id="x1-20001.1"></a>Loop-based algorithm</h4>
+<!--l. 10--><p class="noindent" >Roughtly, InterCom can be divided in 6 steps:
 </p>
    <!--l. 12-->
    <div class="lstlisting" id="listing-1"><span class="label"><a 
@@ -54,9 +54,25 @@ class="ecit-1000">&#x00A0;</span><span
 class="ecit-1000">&#x00A0;</span><span 
 class="ecit-1000">#</span><span 
 class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">Sequential</span><span 
+class="ecit-1000">Loop</span><span 
+class="ecit-1000">-</span><span 
+class="ecit-1000">based</span><span 
 class="ecit-1000">&#x00A0;</span><span 
 class="ecit-1000">algorithm</span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">&#x0028;</span><span 
+class="ecit-1000">to</span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">be</span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">called</span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">in</span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">a</span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">loop</span><span 
+class="ecit-1000">&#x0029;</span><span 
 class="ectt-1000">&#x00A0;</span><br /><span class="label"><a 
  id="x1-2002r2"></a></span><span 
 class="ectt-1000">&#x00A0;</span><span 
@@ -248,12 +264,13 @@ href="http://www.portaudio.com/" >PortAudio</a>&#x00A0;<span class="cite">&#x005
 href="#Xportaudio">1</a>&#x005D;</span>
 &#x0028;<span class="obeylines-h"><span class="verb"><span 
 class="ectt-1000">sounddevice</span></span></span>&#x0029; and also, the run-time required by <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">pack&#x0028;chunk&#x0029;</span></span></span> and
-<span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">unpack&#x0028;packet&#x0029;</span></span></span> operations is smaller than the chunk-time. The &#xFB01;rst premise
-&#x0028;variable chunk sizes&#x0029; complicates slightly the implementation because we would
-work with chunks of constantly changing lenghts &#x0028;that as you can see, in most
-of the iterations are 0&#x0029;. This also complicates the control of the latency
+class="ectt-1000">pack&#x0028;chunk&#x0029;</span></span></span> and <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">unpack&#x0028;packet&#x0029;</span></span></span>
+operations is smaller than the chunk-time. The &#xFB01;rst premise &#x0028;that we can use varying
+chunk sizes&#x0029; complicates slightly the implementation because we would work with
+chunks of constantly changing lenghts &#x0028;that as you can see running <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">wire4.py</span></span></span>, in
+most of the iterations are 0&#x0029;. This also complicates the control of the latency
 because the chunk size is variable. However, the real problem appears when
 our computer is not able to satisfy the second requirement, i.e., when the
                                                                   
@@ -262,22 +279,22 @@ our computer is not able to satisfy the second requirement, i.e., when the
 chunk time is smaller than the time that we need to process the chunks. This
 only can be addressed through optimizing &#x0028;for example, parallelizing&#x0029; the
 code.
-</p><!--l. 114--><p class="noindent" >
+</p><!--l. 115--><p class="noindent" >
 </p>
    <h4 class="subsectionHead"><span class="titlemark">1.2   </span> <a 
  id="x1-30001.2"></a>Timer-based algorithm</h4>
-<!--l. 116--><p class="noindent" >In this algorithm, the task dedicated to record and play the chunks of audio is called
+<!--l. 117--><p class="noindent" >In this algorithm, the task dedicated to record and play the chunks of audio is called
 periodically &#x0028;probably, using some timer provided by the sound hardware&#x0029;. This
 procedure guarantees a gliches-free audio-IO when constant chunk sizes are used
 because the timer interruption coincides exactly with the instant of time in which the
 <span class="obeylines-h"><span class="verb"><span 
 class="ectt-1000">record&#x0028;&#x0029;</span></span></span> and the <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">play&#x0028;&#x0029;</span></span></span> methods we are going to handle a chunk of audio of a
-known size without blocking. The following algorithm describes the new
+class="ectt-1000">play&#x0028;&#x0029;</span></span></span> methods we are going to handle a chunk of audio &#x0028;of a
+known size without blocking&#x0029;. The following algorithm describes the new
 algorithm that is basically the previous one, except that the chunk size is
 &#xFB01;xed.
 </p>
-   <!--l. 126-->
+   <!--l. 127-->
    <div class="lstlisting" id="listing-2"><span class="label"><a 
  id="x1-3001r1"></a></span><span 
 class="ecit-1000">&#x00A0;</span><span 
@@ -289,6 +306,16 @@ class="ecit-1000">-</span><span
 class="ecit-1000">based</span><span 
 class="ecit-1000">&#x00A0;</span><span 
 class="ecit-1000">algorithm</span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">&#x0028;</span><span 
+class="ecit-1000">to</span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">be</span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">called</span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">periodically</span><span 
+class="ecit-1000">&#x0029;</span><span 
 class="ectt-1000">&#x00A0;</span><br /><span class="label"><a 
  id="x1-3002r2"></a></span><span 
 class="ectt-1000">&#x00A0;</span><span 
@@ -369,21 +396,21 @@ class="ectt-1000">chunk</span><span
 class="ectt-1000">&#x0029;</span>
    
    </div>
-<!--l. 150--><p class="indent" >   The current implementation of InterCom uses the Timer-based algorithm.
-</p><!--l. 152--><p class="noindent" >
+<!--l. 151--><p class="indent" >   The current implementation of InterCom uses the Timer-based algorithm.
+</p><!--l. 153--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
  id="x1-40002"></a>What you have to do?</h3>
-<!--l. 154--><p class="noindent" >
+<!--l. 155--><p class="noindent" >
      </p><ol  class="enumerate1" >
      <li 
   class="enumerate" id="x1-4002x1">Read  the  source  code  of  <a 
 href="https://github.com/Tecnologias-multimedia/intercom/blob/master/src/minimal.py" ><span 
 class="ectt-1000">minimal.py</span></a> and  identify  in  the  code  the
-     interruption  handler  that  implements  the  timer-based  algorithm.  This
-     <a 
-href="https://github.com/vicente-gonzalez-ruiz/YAPT/blob/master/03-IO/networking/sockets.ipynb" >guide</a>&#x00A0;<span class="cite">&#x005B;<a 
-href="#XYAPT">3</a>&#x005D;</span>
+     interruption handler that implements the timer-based algorithm. Here you
+     can &#xFB01;nd information about <a 
+href="https://github.com/vicente-gonzalez-ruiz/YAPT/blob/master/03-IO/networking/sockets.ipynb" >sockets</a>&#x00A0;<span class="cite">&#x005B;<a 
+href="#XYAPT">3</a>&#x005D;</span> in Python.
      </li>
      <li 
   class="enumerate" id="x1-4004x2">Evaluate the performance &#x0028;quality of the sound&#x0029; in di&#xFB00;erent con&#xFB01;gurations:
@@ -394,29 +421,29 @@ class="ectt-1000">minimal.py</span></span></span> runs in the same computer.
          </li>
          <li 
   class="enumerate" id="x1-4008x2">When <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">minimal.py</span></span></span> runs in di&#xFB00;erent computers. In this case, try that
-         the computers do not belong to the same local network. This <a 
-href="https://www.noip.com/support/knowledgebase/general-port-forwarding-guide/" >guide</a>
-         can help. Consider in your analysis that <a 
+class="ectt-1000">minimal.py</span></span></span> runs in the following contexts. In this case, try
+         that the computers do not belong to the same local network. This
+         <a 
+href="https://www.noip.com/support/knowledgebase/general-port-forwarding-guide/" >guide</a> can help. Consider in your analysis that <a 
 href="https://en.wikipedia.org/wiki/User_Datagram_Protocol" >UDP</a>&#x00A0;<span class="cite">&#x005B;<a 
-href="#XUDP">4</a>&#x005D;</span> is used to transport
-         the audio data.</li></ol>
+href="#XUDP">4</a>&#x005D;</span> is used to
+         transport the audio data.</li></ol>
                                                                   
 
                                                                   
      </li></ol>
-<!--l. 188--><p class="noindent" >
+<!--l. 189--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-50003"></a>Timming</h3>
-<!--l. 190--><p class="noindent" >You should reach this milestone at most in one week.
-</p><!--l. 192--><p class="noindent" >
+<!--l. 191--><p class="noindent" >You should reach this milestone at most in one week.
+</p><!--l. 193--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-60004"></a>Deliverables</h3>
-<!--l. 194--><p class="noindent" >The results of the experiments proposed in the previous section, that will be
+<!--l. 195--><p class="noindent" >The results of the experiments proposed in the previous section, that will be
 presented to the rest of the class.
-</p><!--l. 202--><p class="noindent" >
+</p><!--l. 203--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-70005"></a>Resources</h3>
