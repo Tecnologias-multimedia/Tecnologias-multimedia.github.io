@@ -40,7 +40,7 @@ class="ecrm-1200">- </span><a
 href="https://www.ual.es" ><span 
 class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
-class="ecrm-1200">September 5, 2021</span></div>
+class="ecrm-1200">October 20, 2021</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
@@ -65,63 +65,85 @@ We have used this facility for compressing and decompressing the chunks that we 
 sending and receiving in the methods <span class="obeylines-h"><span class="verb"><span 
 class="ectt-1000">pack&#x0028;&#x0029;</span></span></span> and <span class="obeylines-h"><span class="verb"><span 
 class="ectt-1000">unpack&#x0028;&#x0029;</span></span></span>, respectively. These
-methods are implemented in the module <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">compress.py</span></span></span>, inside of a the class
-<span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">Compress</span></span></span>, and override the de&#xFB01;ned in the parent class.
-</p>
-   <hr class="figure" /><div class="figure" 
+methods are implemented in the modules <span 
+class="ectt-1000">compress&#x007B;|0|1|2&#x007D;.py</span>, inside of a the class
+<span 
+class="ectt-1000">Compression&#x007B;|0|1|2&#x007D; </span>&#x0028;respectively&#x0029;, and override the de&#xFB01;ned in the parent
+class:
+</p><!--l. 31--><p class="indent" >
+     </p><ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x1-1002x1"><span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">compress.py</span></span></span>: Implements no compression at all.
+     </li>
+     <li 
+  class="enumerate" id="x1-1004x2"><span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">compress0.py</span></span></span>: Compress the raw chunks with DEFLATE.
+     </li>
+     <li 
+  class="enumerate" id="x1-1006x3"><span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">compress1.py</span></span></span>: Compress the chunk after concatenating the channels &#x0028;see
+     Fig.&#x00A0;<a 
+href="#x1-1007r1">1<!--tex4ht:ref: fig:reordering --></a>&#x0029;. Notice that with this shu&#xFB04;ing, the samples are not interleaved and the
+     correlation between consecutive bytes is slighly increased. This should increase
+     the <a 
+href="https://en.wikipedia.org/wiki/Data_compression_ratio" >&#x0028;data&#x0029; compression ratio</a> <hr class="figure" /><div class="figure" 
 >
-                                                                  
-
-                                                                  
                                                                   
 
                                                                   
 <div class="center" 
 >
-<!--l. 31--><p class="noindent" >
-</p><!--l. 32--><p class="noindent" ><div style="text-align:center;"> <img width=500 src="graphics/reordering.svg" /> </div>  </p></div>
+<!--l. 42--><p class="noindent" >
+</p><!--l. 43--><p class="noindent" ><div style="text-align:center;"> <img width=500 src="graphics/reordering.svg" /> </div>  </p></div>
 <a 
- id="x1-1001r1"></a>
+ id="x1-1007r1"></a>
 <a 
- id="x1-1002"></a>
-<br />                                                                  <div class="caption" 
-><span class="id">
-Figure&#x00A0;1: </span><span  
+ id="x1-1008"></a>
+     <br /> <div class="caption" 
+><span class="id">Figure&#x00A0;1: </span><span  
 class="content">Sample reordering to create two independent channels.
-</span></div><!--tex4ht:label?: x1-1001r1 -->
-                                                                  
-
-                                                                  
-   </div><hr class="endfigure" />
-<!--l. 38--><p class="indent" >   In order to increase the <a 
-href="https://en.wikipedia.org/wiki/Data_compression_ratio" >&#x0028;data&#x0029; compression ratio</a>, reorder the samples as it is
-shown in the Figure&#x00A0;<a 
-href="#x1-1001r1">1<!--tex4ht:ref: fig:reordering --></a>. Notice that with this shu&#xFB04;ing, the samples are not
-interleaved and the correlation between consecutive bytes is slighly increased. Notice
-also that the number of UDP packets remain constant respect to parent
-code.
+     </span></div><!--tex4ht:label?: x1-1007r1 -->
+     </div><hr class="endfigure" />
+     </li>
+     <li 
+  class="enumerate" id="x1-1010x4"><span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">compress2.py</span></span></span>: similar to <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">compress1.py</span></span></span>, but reseting DEFLATE at each new
+     chunk-channel.</li></ol>
+<!--l. 52--><p class="indent" >   Finally, notice that the number of sent UDP packets remain constant respect to
+parent code.
+</p><!--l. 55--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
  id="x1-20002"></a>What you have to do?</h3>
-<!--l. 48--><p class="noindent" >Repeat the experiment performed in the previous milestone but expresing the QoE as
-a function of the transmission bit-rate. Use the <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">tc</span></span></span> tool.
-</p><!--l. 52--><p class="noindent" >
+<!--l. 57--><p class="noindent" >Determine empirically which ordering of the chunk data is the most e&#xFB03;cient from a
+compression point of view &#x0028;get rates - rates vary between datasets - of higher
+compression&#x0029;. Use the song &#x2018;<span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">InterCom/data/Aviador</span><span 
+class="ectt-1000">&#x00A0;Dro</span><span 
+class="ectt-1000">&#x00A0;-</span><span 
+class="ectt-1000">&#x00A0;La</span><span 
+class="ectt-1000">&#x00A0;Zona</span><span 
+class="ectt-1000">&#x00A0;Fantasma.oga</span></span></span>&#x201D;
+in your experiments.
+</p><!--l. 63--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-30003"></a>Timming</h3>
-<!--l. 54--><p class="noindent" >Please, &#xFB01;nish this milestone at most in one week.
-</p><!--l. 56--><p class="noindent" >
+<!--l. 65--><p class="noindent" >Please, &#xFB01;nish this milestone at most in one week.
+</p><!--l. 67--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-40004"></a>Deliverables</h3>
-<!--l. 58--><p class="noindent" >A report documenting the experiment and the results.
-</p><!--l. 64--><p class="noindent" >
+<!--l. 69--><p class="noindent" >A report documenting the experiment and the results.
+</p><!--l. 75--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-50005"></a>Resources</h3>
+                                                                  
+
+                                                                  
    <div class="thebibliography">
    <p class="bibitem" ><span class="biblabel">
  &#x005B;1&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 

@@ -24,9 +24,20 @@ The DEFLATE algorithm is implemented in the Python's standard library
 have used this facility for compressing and decompressing the chunks
 that we are sending and receiving in the methods \verb|pack()| and
 \verb|unpack()|, respectively. These methods are implemented in the
-module \verb|compress.py|, inside of a the class \verb|Compress|, and
-override the defined in the parent class.
+modules \texttt{compress\{|0|1|2\}.py}, inside of a the class
+\texttt{Compression\{|0|1|2\}} (respectively), and
+override the defined in the parent class:
 
+\begin{enumerate}
+\item \verb|compress.py|: Implements no compression at all.
+\item \verb|compress0.py|: Compress the raw chunks with DEFLATE.
+\item \verb|compress1.py|: Compress the chunk after concatenating the
+  channels (see Fig.~\ref{fig:reordering}). Notice that with this
+  shuffling, the samples are not interleaved and the correlation
+  between consecutive bytes is slighly increased. This should increase
+  the
+  \href{https://en.wikipedia.org/wiki/Data_compression_ratio}{(data)
+    compression ratio}
 \begin{figure}
   \begin{center}
     \myfig{graphics/reordering}{5cm}{500}
@@ -34,20 +45,20 @@ override the defined in the parent class.
   \caption{Sample reordering to create two independent channels.}
   \label{fig:reordering}
 \end{figure}
+\item \verb|compress2.py|: similar to \verb|compress1.py|, but
+  reseting DEFLATE at each new chunk-channel.
+\end{enumerate}
 
-In order to increase the
-\href{https://en.wikipedia.org/wiki/Data_compression_ratio}{(data)
-  compression ratio}, reorder the samples as it is shown in the
-Figure~\ref{fig:reordering}. Notice that with this shuffling, the
-samples are not interleaved and the correlation between consecutive
-bytes is slighly increased. Notice also that the number of UDP packets
-remain constant respect to parent code.
+Finally, notice that the number of sent UDP packets remain constant
+respect to parent code.
 
 \section{What you have to do?}
 
-Repeat the experiment performed in the previous milestone but
-expresing the QoE as a function of the transmission bit-rate. Use the
-\verb|tc| tool.
+Determine empirically which ordering of the chunk data is the most
+efficient from a compression point of view (get rates - rates vary
+between datasets - of higher compression). Use the song
+`\verb|InterCom/data/Aviador Dro - La Zona Fantasma.oga|'' in your
+experiments.
 
 \section{Timming}
 
