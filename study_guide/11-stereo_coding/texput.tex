@@ -12,9 +12,9 @@ channels)
 \href{https://en.wikipedia.org/wiki/Pulse-code_modulation}{PCM
   signal}. In most cases, the channels are
 \href{https://en.wikipedia.org/wiki/Binaural_recording}{highly
-  correlated} (especially when the microphone is mono), which means
-that we can find a more efficient representation. To perform this
-inter-channel
+  correlated} (especially when the microphone is mono because both
+channels are identical), which means that we can find a more efficient
+representation. To perform this inter-channel
 \href{https://en.wikipedia.org/wiki/Decorrelation}{decorrelation}~\cite{thinkstats}
 we can use the \href{https://en.wikipedia.org/wiki/Linear_map}{linear
   transform}~\cite{strang4linear}
@@ -37,7 +37,7 @@ that can be also written as
   \label{eq:forward_transform_matrix_form2}
 \end{equation}
 where $x\in\mathbb{Z}^2$ is a stereo frame, $K$ is the (forward or
-analysis) transform matrix and
+analysis) transform matrix, and
 $w=\begin{bmatrix} w_0 & w_1\end{bmatrix}^{\text T}$ is the
 corresponding
 \href{https://en.wikipedia.org/wiki/Discrete_wavelet_transform#Example_in_image_processing}{decomposition}. In
@@ -78,7 +78,7 @@ determined by their position within the decomposition
 $w$~\cite{sayood2017introduction}. Thus, as a consequence of how the
 matrix has been defined, the subband $w_0$ represents (very roughly)
 the low frequencies of $x$ and $w_1$ the high frequencies. Therefore,
-the values of $K_0$ describe a
+the values of $K_0$ (the row 0 of $K$) describe a
 \href{https://en.wikipedia.org/wiki/Low-pass_filter}{low-pass filter},
 the values of $K_1$ describe a
 \href{https://en.wikipedia.org/wiki/High-pass_filter}{high-pass
@@ -358,9 +358,12 @@ get that
     =
     \begin{bmatrix}
       1 & -1
-    \end{bmatrix}.
+    \end{bmatrix},
   \end{array}
 \end{equation}
+that as you can see, correspond to the columns of the inverse
+transform matrix $K^{-1}$. Notice that this is true for all the
+orthogonal transforms because $K^{-1}=K^{\text T}$.
 
 \begin{comment}
 Unfortunately, this
@@ -416,6 +419,11 @@ per subband) with the same average slope.
 
 \section{What you have to do?}
 
+As we did in the previous milestone, generate the RD curves for a set
+of simulated transmission contexts. Use the modules
+\texttt{stereo\_coding\{|\_16|\_32\}.py}.
+
+\begin{comment}
 \begin{enumerate}
 \item In a module named stereo\_coding.py, inherit the class
   Quantization and create a class named Stereo\_Coding.
@@ -430,6 +438,7 @@ per subband) with the same average slope.
     ratio} been improved (on
   \href{https://en.wikipedia.org/wiki/Average}{average})? How much?
 \end{enumerate}
+\end{comment}
 
 \section{Timming}
 
@@ -437,9 +446,7 @@ You should reach this milestone at most one week.
 
 \section{Deliverables}
 
-The module stereo\_coding.py. Store it at the
-\href{https://github.com/Tecnologias-multimedia/intercom}{root
-  directory} of your InterCom's repo.
+The RD curves and the required information to redo them.
 
 \section{Resources}
 

@@ -39,7 +39,7 @@ class="ecrm-1200">- </span><a
 href="https://www.ual.es" ><span 
 class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
-class="ecrm-1200">February 9, 2021</span></div>
+class="ecrm-1200">October 21, 2021</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
@@ -51,13 +51,14 @@ class="ecrm-1200">February 9, 2021</span></div>
 href="https://en.wikipedia.org/wiki/Stereophonic_sound" >stereo</a> &#x0028;two channels&#x0029; <a 
 href="https://en.wikipedia.org/wiki/Pulse-code_modulation" >PCM signal</a>. In most cases, the channels
 are <a 
-href="https://en.wikipedia.org/wiki/Binaural_recording" >highly correlated</a> &#x0028;especially when the microphone is mono&#x0029;, which means that
-we can &#xFB01;nd a more e&#xFB03;cient representation. To perform this inter-channel
-<a 
+href="https://en.wikipedia.org/wiki/Binaural_recording" >highly correlated</a> &#x0028;especially when the microphone is mono because both channels
+are identical&#x0029;, which means that we can &#xFB01;nd a more e&#xFB03;cient representation. To
+perform this inter-channel <a 
 href="https://en.wikipedia.org/wiki/Decorrelation" >decorrelation</a>&#x00A0;<span class="cite">&#x005B;<a 
 href="#Xthinkstats">3</a>&#x005D;</span> we can use the <a 
 href="https://en.wikipedia.org/wiki/Linear_map" >linear transform</a>&#x00A0;<span class="cite">&#x005B;<a 
-href="#Xstrang4linear">5</a>&#x005D;</span> </p><table class="equation"><tr><td> <a 
+href="#Xstrang4linear">5</a>&#x005D;</span> </p><table class="equation"><tr><td>
+<a 
  id="x1-2001r1"></a>
 <!--l. 21--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
@@ -77,11 +78,11 @@ class="MathClass-bin">&#x2212;</mo><mn>1</mn></mtd></mtr> <!--*\c@MaxMatrixCols 
 >x</mi><mo 
 class="MathClass-punc">,</mo>
 </math></td><td class="eq-no">&#x0028;1&#x0029;</td></tr></table>
-<!--l. 25--><p class="indent" >   that can be also written as </p><table class="equation"><tr><td> <a 
- id="x1-2002r2"></a>
                                                                   
 
                                                                   
+<!--l. 25--><p class="indent" >   that can be also written as </p><table class="equation"><tr><td> <a 
+ id="x1-2002r2"></a>
 <!--l. 26--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
@@ -132,7 +133,7 @@ stereo frame, <!--l. 39--><math
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >K</mi></math>
-is the &#x0028;forward or analysis&#x0029; transform matrix and
+is the &#x0028;forward or analysis&#x0029; transform matrix, and
 <!--l. 41--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
@@ -212,6 +213,9 @@ href="#x1-2001r1">1<!--tex4ht:ref: eq:forward_transform_matrix_form --></a> and 
 href="#x1-2002r2">2<!--tex4ht:ref: eq:forward_transform_matrix_form2 --></a> can be also expressed as </p><table class="equation"><tr><td>
 <a 
  id="x1-2004r3"></a>
+                                                                  
+
+                                                                  
 <!--l. 68--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
@@ -256,9 +260,6 @@ class="MathClass-punc">,</mo><mi
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >i</mi></math>-th element of
-                                                                  
-
-                                                                  
 the <!--l. 72--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
@@ -312,7 +313,11 @@ display="inline" ><msub><mrow
 ><mi 
 >K</mi></mrow><mrow 
 ><mn>0</mn></mrow></msub 
-></math> describe a <a 
+></math> &#x0028;the row 0 of
+<!--l. 81--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>K</mi></math>&#x0029; describe a <a 
 href="https://en.wikipedia.org/wiki/Low-pass_filter" >low-pass &#xFB01;lter</a>,
 the values of <!--l. 83--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
@@ -656,11 +661,11 @@ equalrows="false" columnlines="none none none none none none none none none" equ
 class="array"  columnalign="center"> <mn>1</mn> </mtd><mtd 
 class="array"  columnalign="center"> <mo 
 class="MathClass-bin">&#x2212;</mo><mn>1</mn> </mtd></mtr> <!--*\c@MaxMatrixCols c--></mtable>                                                                                         </mrow><mo fence="true" form="postfix">]</mo></mrow></math>&#x00A0;,
-and as we can see </p><table class="equation"><tr><td> <a 
- id="x1-4004r9"></a>
                                                                   
 
                                                                   
+and as we can see </p><table class="equation"><tr><td> <a 
+ id="x1-4004r9"></a>
 <!--l. 172--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
@@ -775,12 +780,12 @@ href="https://cseweb.ucsd.edu/classes/fa17/cse166-a/lec13.pdf" >slides</a> can h
 <a 
 href="https://en.wikipedia.org/wiki/Correlation_and_dependence" >correlation</a> between subbands is 0, and therefore, the contributions
 of the subbands to the reconstruction of the original signal are
-independent<span class="footnote-mark"><a 
-href="index8.html#fn7x0"><sup class="textsuperscript">7</sup></a></span><a 
- id="x1-4008f7"></a> .
                                                                   
 
                                                                   
+independent<span class="footnote-mark"><a 
+href="index8.html#fn7x0"><sup class="textsuperscript">7</sup></a></span><a 
+ id="x1-4008f7"></a> .
 Another interesting property satis&#xFB01;ed by a lot of famous transforms &#x0028;such as the
 <a 
 href="https://en.wikipedia.org/wiki/Fourier_transform" >Fourier Transform</a>&#x0029; is <a 
@@ -1018,12 +1023,12 @@ number of quantization steps&#x0029;, and usually we cannot do that in real-time
 applications.<span class="footnote-mark"><a 
 href="index9.html#fn8x0"><sup class="textsuperscript">8</sup></a></span><a 
  id="x1-5001f8"></a> 
-</p><!--l. 258--><p class="indent" >   An approximation to this could be to suppose that the RD curves of the subbands
-resulting from the analysis of our current piece of data &#x0028;remember, two samples of a
-stereo frame in our case&#x0029; are similar to the curves of previous pieces, that has
                                                                   
 
                                                                   
+</p><!--l. 258--><p class="indent" >   An approximation to this could be to suppose that the RD curves of the subbands
+resulting from the analysis of our current piece of data &#x0028;remember, two samples of a
+stereo frame in our case&#x0029; are similar to the curves of previous pieces, that has
 already been compressed and transmitted, and therefore, we can compute
 also the distortion. Using this information, we can estimate a RD curve
 for the current piece, and &#xFB01;nd the quantization steps. This procedure is
@@ -1064,6 +1069,9 @@ display="inline" ><msub><mrow
 ></mrow><mrow 
 ><mn>2</mn></mrow></msub 
 ></math>
+                                                                  
+
+                                                                  
 norm</a><span class="footnote-mark"><a 
 href="index11.html#fn10x0"><sup class="textsuperscript">10</sup></a></span><a 
  id="x1-5003f10"></a>  of
@@ -1076,9 +1084,6 @@ display="inline" ><msub><mrow
 >i</mi></mrow></msub 
 ></math>.
 Thus
-                                                                  
-
-                                                                  
 </p>
    <table class="equation"><tr><td> <a 
  id="x1-5004r12"></a>
@@ -1202,6 +1207,9 @@ display="inline" ><msub><mrow
 >i</mi></mrow></msub 
 ></math>
 simply by computing the inverse transform of the decomposition
+                                                                  
+
+                                                                  
 <!--l. 324--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msup><mrow 
@@ -1242,9 +1250,6 @@ In our example, we get that
 </p>
    <table class="equation"><tr><td> <a 
  id="x1-5006r13"></a>
-                                                                  
-
-                                                                  
 <!--l. 333--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
@@ -1291,46 +1296,55 @@ equalrows="false" columnlines="none none none none none none none none none" equ
 class="array"  columnalign="center"><mn>1</mn></mtd><mtd 
 class="array"  columnalign="center"><mo 
 class="MathClass-bin">&#x2212;</mo><mn>1</mn></mtd></mtr> <!--*\c@MaxMatrixCols c--></mtable>                                                                                                 </mrow><mo fence="true" form="postfix">]</mo></mrow><mo 
-class="MathClass-punc">.</mo> </mtd></mtr><!--l--></mtable>
+class="MathClass-punc">,</mo> </mtd></mtr><!--l--></mtable>
 </math></td><td class="eq-no">&#x0028;13&#x0029;</td></tr></table>
+<!--l. 364--><p class="indent" >   that as you can see, correspond to the columns of the inverse transform matrix
+<!--l. 365--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msup><mrow 
+><mi 
+>K</mi></mrow><mrow 
+><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msup 
+></math>.
+Notice that this is true for all the orthogonal transforms because
+<!--l. 366--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msup><mrow 
+><mi 
+>K</mi></mrow><mrow 
+><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msup 
+> <mo 
+class="MathClass-rel">=</mo> <msup><mrow 
+><mi 
+>K</mi></mrow><mrow 
+><mstyle 
+class="text"><mtext  >T</mtext></mstyle></mrow></msup 
+></math>.
+</p>
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
  id="x1-60002"></a>What you have to do?</h3>
-<!--l. 419--><p class="noindent" >
-     </p><ol  class="enumerate1" >
-     <li 
-  class="enumerate" id="x1-6002x1">In a module named stereo_coding.py, inherit the class Quantization and
-     create a class named Stereo_Coding.
-     </li>
-     <li 
-  class="enumerate" id="x1-6004x2">Override the methods pack&#x0028;&#x0029; and unpack&#x0028;&#x0029;. In pack&#x0028;&#x0029; perform the analysis
-     transform previously described, and in unpack&#x0028;&#x0029; the synthesis transform.
-     These procedures should be applied to all the frames of a chunk using
-     <a 
-href="https://www.oreilly.com/library/view/python-for-data/9781449323592/ch04.html" >vectorized operations</a>.
-     </li>
-     <li 
-  class="enumerate" id="x1-6006x3">Has the <a 
-href="https://en.wikipedia.org/wiki/Data_compression_ratio" >compression ratio</a> been improved &#x0028;on <a 
-href="https://en.wikipedia.org/wiki/Average" >average</a>&#x0029;? How much?</li></ol>
-<!--l. 434--><p class="noindent" >
+<!--l. 422--><p class="noindent" >As we did in the previous milestone, generate the RD curves for a set of simulated
+transmission contexts. Use the modules <span 
+class="ectt-1000">stereo_coding&#x007B;|_16|_32&#x007D;.py</span>.
+</p><!--l. 443--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-70003"></a>Timming</h3>
-<!--l. 436--><p class="noindent" >You should reach this milestone at most one week.
-</p><!--l. 438--><p class="noindent" >
-</p>
-   <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
- id="x1-80004"></a>Deliverables</h3>
-<!--l. 440--><p class="noindent" >The module stereo_coding.py. Store it at the <a 
-href="https://github.com/Tecnologias-multimedia/intercom" >root directory</a> of your InterCom&#x2019;s
-repo.
-</p><!--l. 444--><p class="noindent" >
-</p>
-   <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
- id="x1-90005"></a>Resources</h3>
+<!--l. 445--><p class="noindent" >You should reach this milestone at most one week.
                                                                   
 
                                                                   
+</p><!--l. 447--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
+ id="x1-80004"></a>Deliverables</h3>
+<!--l. 449--><p class="noindent" >The RD curves and the required information to redo them.
+</p><!--l. 451--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
+ id="x1-90005"></a>Resources</h3>
    <div class="thebibliography">
    <p class="bibitem" ><span class="biblabel">
  &#x005B;1&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
@@ -1357,9 +1371,10 @@ class="ecti-1000">Think Stats Probability and Statistics for Programmers</span><
    </p>
    <p class="bibitem" ><span class="biblabel">
  &#x005B;4&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
- id="Xsayood2017introduction"></a>K.&#x00A0;Sayood. <a 
+ id="Xsayood2017introduction"></a>K.&#x00A0;Sayood.   <a 
 href="http://rahilshaikh.weebly.com/uploads/1/1/6/3/11635894/data_compression.pdf" ><span 
-class="ecti-1000">Introduction to data compression</span></a>. Morgan Kaufmann, 2017.
+class="ecti-1000">Introduction to Data Compression</span></a>.   Morgan  Kaufmann,
+   2017.
    </p>
    <p class="bibitem" ><span class="biblabel">
  &#x005B;5&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
@@ -1370,7 +1385,7 @@ class="ecti-1000">Linear Algebra and Its Applications</span></a>. Belmont, CA: T
    </p>
    <p class="bibitem" ><span class="biblabel">
  &#x005B;6&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
- id="Xvetterli1995wavelets"></a>M.&#x00A0;Vetterli   and   J.&#x00A0;Kovacevic.      <a 
+ id="Xvetterli1995wavelets"></a>M.&#x00A0;Vetterli  and  J.&#x00A0;Kova&#x010D;evi&#x0107;.     <a 
 href="http://waveletsandsubbandcoding.org/Repository/VetterliKovacevic95_Manuscript.pdf" ><span 
 class="ecti-1000">Wavelets  and  Subband  Coding</span></a>.
    Prentice-hall, 1995.
@@ -1382,6 +1397,9 @@ href="http://www.fourierandwavelets.org/FSP_v1.1_2014.pdf" ><span
 class="ecti-1000">Foundations of Signal</span>
    <span 
 class="ecti-1000">Processing</span></a>. Cambridge University Press, 2014.
+                                                                  
+
+                                                                  
 </p>
    </div>
 <a 
