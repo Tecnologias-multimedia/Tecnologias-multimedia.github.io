@@ -40,7 +40,7 @@ class="ecrm-1200">- </span><a
 href="https://www.ual.es" ><span 
 class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
-class="ecrm-1200">October 20, 2021</span></div>
+class="ecrm-1200">October 21, 2021</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
@@ -110,15 +110,16 @@ class="content">Sample reordering to create two independent channels.
   class="enumerate" id="x1-1010x4"><span class="obeylines-h"><span class="verb"><span 
 class="ectt-1000">compress2.py</span></span></span>: similar to <span class="obeylines-h"><span class="verb"><span 
 class="ectt-1000">compress1.py</span></span></span>, but reseting DEFLATE at each new
-     chunk-channel.</li></ol>
-<!--l. 52--><p class="indent" >   Finally, notice that the number of sent UDP packets remain constant respect to
-parent code.
-</p><!--l. 55--><p class="noindent" >
+     chunk-channel. The idea here is to see if DEFLATE is exploiting the
+     redundancy between the consecutive channels.</li></ol>
+<!--l. 54--><p class="indent" >   Finally, notice that the number of sent UDP packets &#x0028;that now will be
+length-variying&#x0029; remain constant respect to parent code.
+</p><!--l. 57--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
  id="x1-20002"></a>What you have to do?</h3>
-<!--l. 57--><p class="noindent" >Determine empirically which ordering of the chunk data is the most e&#xFB03;cient from a
-compression point of view &#x0028;get rates - rates vary between datasets - of higher
+<!--l. 59--><p class="noindent" >Determine empirically which ordering of the chunk data is the most e&#xFB03;cient from a
+lossless data compression point of view &#x0028;the smaller the bit-rates, the higher the
 compression&#x0029;. Use the song &#x2018;<span class="obeylines-h"><span class="verb"><span 
 class="ectt-1000">InterCom/data/Aviador</span><span 
 class="ectt-1000">&#x00A0;Dro</span><span 
@@ -127,23 +128,23 @@ class="ectt-1000">&#x00A0;La</span><span
 class="ectt-1000">&#x00A0;Zona</span><span 
 class="ectt-1000">&#x00A0;Fantasma.oga</span></span></span>&#x201D;
 in your experiments.
-</p><!--l. 63--><p class="noindent" >
+</p><!--l. 65--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-30003"></a>Timming</h3>
-<!--l. 65--><p class="noindent" >Please, &#xFB01;nish this milestone at most in one week.
-</p><!--l. 67--><p class="noindent" >
+<!--l. 67--><p class="noindent" >Please, &#xFB01;nish this milestone at most in one week.
+</p><!--l. 69--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-40004"></a>Deliverables</h3>
-<!--l. 69--><p class="noindent" >A report documenting the experiment and the results.
-</p><!--l. 75--><p class="noindent" >
-</p>
-   <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
- id="x1-50005"></a>Resources</h3>
+<!--l. 71--><p class="noindent" >A report documenting the experiment and the results.
                                                                   
 
                                                                   
+</p><!--l. 77--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
+ id="x1-50005"></a>Resources</h3>
    <div class="thebibliography">
    <p class="bibitem" ><span class="biblabel">
  &#x005B;1&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 

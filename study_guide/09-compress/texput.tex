@@ -46,17 +46,19 @@ override the defined in the parent class:
   \label{fig:reordering}
 \end{figure}
 \item \verb|compress2.py|: similar to \verb|compress1.py|, but
-  reseting DEFLATE at each new chunk-channel.
+  reseting DEFLATE at each new chunk-channel. The idea here is to see
+  if DEFLATE is exploiting the redundancy between the consecutive
+  channels.
 \end{enumerate}
 
-Finally, notice that the number of sent UDP packets remain constant
-respect to parent code.
+Finally, notice that the number of sent UDP packets (that now will be
+length-variying) remain constant respect to parent code.
 
 \section{What you have to do?}
 
 Determine empirically which ordering of the chunk data is the most
-efficient from a compression point of view (get rates - rates vary
-between datasets - of higher compression). Use the song
+efficient from a lossless data compression point of view (the smaller
+the bit-rates, the higher the compression). Use the song
 `\verb|InterCom/data/Aviador Dro - La Zona Fantasma.oga|'' in your
 experiments.
 
