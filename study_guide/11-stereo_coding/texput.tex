@@ -19,39 +19,41 @@ representation. To perform this inter-channel
 we can use the \href{https://en.wikipedia.org/wiki/Linear_map}{linear
   transform}~\cite{strang4linear}
 \begin{equation}
-  w = Kx = \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}x,
+  {\mathbf w} = {\mathbf K}{\mathbf x} =
+\begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}
+{\mathbf x},
   \label{eq:forward_transform_matrix_form}
 \end{equation}
 that can be also written as
 \begin{equation}
   \begin{bmatrix}
-    w_0 \\
-    w_1
+    {\mathbf w}_0 \\
+    {\mathbf w}_1
   \end{bmatrix}
   = 
   \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}
   \begin{bmatrix}
-    x_0 \\
-    x_1
+    {\mathbf x}_0 \\
+    {\mathbf x}_1
   \end{bmatrix},
   \label{eq:forward_transform_matrix_form2}
 \end{equation}
-where $x\in\mathbb{Z}^2$ is a stereo frame, $K$ is the (forward or
-analysis) transform matrix, and
-$w=\begin{bmatrix} w_0 & w_1\end{bmatrix}^{\text T}$ is the
-corresponding
+where ${\mathbf x}\in\mathbb{Z}^2$ is a stereo frame, ${\mathbf K}$ is
+the (forward or analysis) transform matrix, and
+${\mathbf w}=\begin{bmatrix} {\mathbf w}_0 & {\mathbf
+    w}_1\end{bmatrix}^{\text T}$ is the corresponding
 \href{https://en.wikipedia.org/wiki/Discrete_wavelet_transform#Example_in_image_processing}{decomposition}. In
 this particular transform, the decomposition has two
-\href{https://en.wikipedia.org/wiki/Sub-band_coding}{subbands} $w_0$
-and $w_1$, and each subband has only one
+\href{https://en.wikipedia.org/wiki/Sub-band_coding}{subbands}
+${\mathbf w}_0$ and ${\mathbf w}_1$, and each subband has only one
 \href{https://web.stanford.edu/class/ee398a/handouts/lectures/07-TransformCoding.pdf}{coefficient}. Notice
-that $x\in\mathbb{Z}^2$ is a vector space\footnote{Adding two vectors
-  in the plane produces a third one also in the plane; mul- tiplying a
-  vector by a real scalar produces a second vector also in the
-  plane. These two ingrained facts make the real plane be a vector
+that ${\mathbf x}\in\mathbb{Z}^2$ is a vector space\footnote{Adding two
+  vectors in the plane produces a third one also in the plane; mul-
+  tiplying a vector by a real scalar produces a second vector also in
+  the plane. These two ingrained facts make the real plane be a vector
   space.~\cite{vetterli2014foundations}}.
 
-The proposed matrix $K$ corresponds to the transform used in
+The proposed matrix ${\mathbf K}$ corresponds to the transform used in
 \href{https://en.wikipedia.org/wiki/Joint_encoding#M/S_stereo_coding}{Mid/Side
   (M/S) stereo coding}~\cite{bosi2003intro} that we will call MST
 (Mid/Side Transform). This is similar to the $2\times 2$ KLT
@@ -66,23 +68,24 @@ In general (for all the linear transforms),
 Eqs.~\ref{eq:forward_transform_matrix_form} and
 \ref{eq:forward_transform_matrix_form2} can be also expressed as
 \begin{equation}
-  w_u = \sum_i K_{u,i}x_i,
+  {\mathbf w}_u = \sum_i {\mathbf K}_{u,i}{\mathbf x}_i,
   \label{eq:forward_transform_linear_combination_form}
 \end{equation}
-where $K_{u,i}$ denotes $i$-th element of the $u$-th row of the matrix
-$K$.
+where ${\mathbf K}_{u,i}$ denotes $i$-th element of the $u$-th row of
+the matrix ${\mathbf K}$.
 
-A major difference between the transformed data $w$ and the original
-data $x$ is that the characteristics of the elements of $w$ are
-determined by their position within the decomposition
-$w$~\cite{sayood2017introduction}. Thus, as a consequence of how the
-matrix has been defined, the subband $w_0$ represents (very roughly)
-the low frequencies of $x$ and $w_1$ the high frequencies. Therefore,
-the values of $K_0$ (the row 0 of $K$) describe a
+A major difference between the transformed data ${\mathbf w}$ and the
+original data ${\mathbf x}$ is that the characteristics of the elements
+of ${\mathbf w}$ are determined by their position within the
+decomposition ${\mathbf w}$~\cite{sayood2017introduction}. Thus, as a
+consequence of how the matrix has been defined, the subband
+${\mathbf w}_0$ represents (very roughly) the low frequencies of
+${\mathbf x}$, and ${\mathbf w}_1$ the high frequencies. Therefore, the
+values of ${\mathbf K}_0$ (the row 0 of ${\mathbf K}$) describe a
 \href{https://en.wikipedia.org/wiki/Low-pass_filter}{low-pass filter},
-the values of $K_1$ describe a
+the values of ${\mathbf K}_1$ describe a
 \href{https://en.wikipedia.org/wiki/High-pass_filter}{high-pass
-  filter}, and $K$ represents the
+  filter}, and ${\mathbf K}$ represents the
 \href{https://en.wikipedia.org/wiki/Digital_filter}{filters} of a
 \href{https://en.wikipedia.org/wiki/Filter_bank}{filter bank} with two
 filters. This can be also seen in this
@@ -91,55 +94,58 @@ filters. This can be also seen in this
 \subsection{The synthesis transform}
 The inverse (or synthesis) transform
 \begin{equation}
-  x = K^{-1}w
+  {\mathbf x} = {\mathbf K}^{-1}{\mathbf w}
   \label{eq:inverse_transform}
 \end{equation}
 can be found from Eq. \ref{eq:forward_transform_matrix_form}, where we
 get that
 \begin{equation}
   \begin{array}{rcl}
-  w_0 & = & x_0 + x_1\\
-  w_1 & = & x_0 - x_1.
+  {\mathbf w}_0 & = & {\mathbf x}_0 + {\mathbf x}_1\\
+  {\mathbf w}_1 & = & {\mathbf x}_0 - {\mathbf x}_1.
   \end{array}
 \end{equation}
-By solving $x_0$ (adding) and $x_1$ (substracting) in
+By solving ${\mathbf x}_0$ (adding) and ${\mathbf x}_1$ (substracting) in
 these equations, we obtain that
 \begin{equation}
   \begin{array}{rcl}
-  x_0 & = & \frac{1}{2}(w_0 + w_1)\\
-  x_1 & = & \frac{1}{2}(w_0 - w_1),
+  {\mathbf x}_0 & = & \frac{1}{2}({\mathbf w}_0 + {\mathbf w}_1)\\
+  {\mathbf x}_1 & = & \frac{1}{2}({\mathbf w}_0 - {\mathbf w}_1),
   \end{array}
 \end{equation}
 that in matrix form becomes
 \begin{equation}
   \begin{bmatrix}
-    x_0 \\
-    x_1
+    {\mathbf x}_0 \\
+    {\mathbf x}_1
   \end{bmatrix}
   = \frac{1}{2}
   \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}
   \begin{bmatrix}
-    w_0 \\
-    w_1
+    {\mathbf w}_0 \\
+    {\mathbf w}_1
   \end{bmatrix}.
 \end{equation}
 Therefore,
 \begin{equation}
-  x = K^{-1}w = \frac{1}{2}K^{\text T}w = \frac{1}{2}Kw = \frac{1}{2}\begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}w.
+  {\mathbf x} = {\mathbf K}^{-1}{\mathbf w} = \frac{1}{2}{\mathbf K}^{\text T}{\mathbf w} = \frac{1}{2}{\mathbf K}{\mathbf w} = \frac{1}{2}\begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}{\mathbf w}.
   \label{eq:inverse_transform_matrix_form}
 \end{equation}
 
 \subsection{Orthogonality of the transform}
 As can be seen (previously ignoring the $\frac{1}{2}$ scale factor)
 the inverse transform is the transpose of the forward transform
-($K^{-1}=K^{\text T}$). This is a characteristic of all
+(${\mathbf K}^{-1}={\mathbf K}^{\text T}$). This is a characteristic of
+all
 \href{https://en.wikipedia.org/wiki/Orthogonal_transformation}{orthogonal
   transforms}~\cite{sayood2017introduction}. For the MST,
-specifically, it also holds that $K^{\text T}=K$ because $K$ is
+specifically, it also holds that ${\mathbf K}^{\text T}=K$ because
+${\mathbf K}$ is
 \href{https://en.wikipedia.org/wiki/Symmetric_matrix}{symmetric}.
 
-Apart from checking that $K^{-1}=K^{\text T}$, $K$ is orthogonal if
-the \href{https://en.wikipedia.org/wiki/Inner_product_space}{inner
+Apart from checking that ${\mathbf K}^{-1}={\mathbf K}^{\text T}$,
+${\mathbf K}$ is orthogonal if the
+\href{https://en.wikipedia.org/wiki/Inner_product_space}{inner
   product}\footnote{The inner product between two vectors is in some
   sense a measure of how ``similar'' they are
   \cite{sayood2017introduction}. In fact, the dot product computes the
@@ -167,10 +173,10 @@ filters\footnote{When we are working with discrete signals, we usually
   space is called the dimension of the vector
   space~\cite{sayood2017introduction}. In our case, for the MST, we
   have two basis vectors.}. In our case
-$K_0=\begin{bmatrix}1 & 1\end{bmatrix}$~ and
-$K_1=\begin{bmatrix} 1 & -1\end{bmatrix}$~, and as we can see
+${\mathbf K}_0=\begin{bmatrix}1 & 1\end{bmatrix}$~ and
+${\mathbf K}_1=\begin{bmatrix} 1 & -1\end{bmatrix}$~, and as we can see
 \begin{equation}
-  \langle K_0,K_1 \rangle =
+  \langle {\mathbf K}_0,{\mathbf K}_1 \rangle =
   \langle \begin{bmatrix}
     1 & 1
   \end{bmatrix}
@@ -188,7 +194,7 @@ $K_1=\begin{bmatrix} 1 & -1\end{bmatrix}$~, and as we can see
   \end{bmatrix}
    = 1\times 1 + 1\times -1 = 0,
 \end{equation}
-which means that the filters $K_0$ and $K_1$ are linearly
+which means that the filters ${\mathbf K}_0$ and ${\mathbf K}_1$ are linearly
 independent\footnote{In terms of orthogonality, this means that we
   cannot derive one from the other using the operations that define a
   vector space, and therefore the basis vectors can be a part a basis
@@ -196,16 +202,16 @@ independent\footnote{In terms of orthogonality, this means that we
 
 Notice also that
 \begin{equation}
-  w_i = \langle x, K_i\rangle,
+  {\mathbf w}_i = \langle {\mathbf x}, {\mathbf K}_i\rangle,
 \end{equation}
 which basically means\footnote{Remember that for the MST a subband has
-  only one coefficient. For other transforms, $w_i$ can be made up of
-  more than one coefficient and therefore, we would be speaking of the
-  coefficients of the subband, instead of only one coefficient.} that
-  $w_i$ is proportional to the similarity between the input signal $x$
-  and
-  the \href{https://en.wikipedia.org/wiki/Finite_impulse_response}{taps}
-  of the filter $K_i$. These
+  only one coefficient. For other transforms, ${\mathbf w}_i$ can be
+  made up of more than one coefficient and therefore, we would be
+  speaking of the coefficients of the subband, instead of only one
+  coefficient.} that ${\mathbf w}_i$ is proportional to the similarity
+between the input signal ${\mathbf x}$ and the
+\href{https://en.wikipedia.org/wiki/Finite_impulse_response}{taps} of
+the filter ${\mathbf K}_i$. These
 \href{https://cseweb.ucsd.edu/classes/fa17/cse166-a/lec13.pdf}{slides}
 can help you with this key idea.
 
@@ -229,20 +235,20 @@ preserving~\cite{sayood2017introduction} (or that the
 
 The MST analysis is not orthonormal, because
 \begin{equation}
-  \sum_i {w_i}^2 =
-  (x_0+x_1)^2 + (x_0-x_1)^2 =
-  (x_0^2+2x_0x_1+x_1^2) + (x_0^2-2x_0x_1+x_1^2) =
-  2(x_0^2+x_1^2) =
-  2\sum_i {x_i}^2.
+  \sum_i {{\mathbf w}_i}^2 =
+  ({\mathbf x}_0 + {\mathbf x}_1)^2 + ({\mathbf x}_0 - {\mathbf x}_1)^2 =
+  ({\mathbf x}_0^2 + 2{\mathbf x}_0{\mathbf x}_1+{\mathbf x}_1^2) + ({\mathbf x}_0^2-{\mathbf 2}x_0{\mathbf x}_1+{\mathbf x}_1^2) =
+  2({\mathbf x}_0^2+{\mathbf x}_1^2) =
+  2\sum_i {{\mathbf x}_i}^2.
   \label{eq:No_Parseval}
 \end{equation}
 For this reason, we must divide the synthesized samples by $2$ (see
 Eq.~\ref{eq:inverse_transform_matrix_form}). On the contrary, we would
-get $2x$ as the reconstructed signal instead of $x$.
+get $2{\mathbf x}$ as the reconstructed signal instead of ${\mathbf x}$.
 
 % About quantizing the subbands
 \subsection{Quantization of the subbands}
-Ideally, the quantization step $\Delta_i$ used for a subband $w_i$
+Ideally, the quantization step $\Delta_i$ used for a subband ${\mathbf w}_i$
 must operate in the RD curve $f_i$ with the same
 slope~\cite{vetterli2014foundations,sayood2017introduction} (this is
 the same to say that we must satisfy that $f'_0(x)=f'_1(x)$, where
@@ -269,19 +275,19 @@ For this reason, in
 the \href{https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/stereo_transforms_RD.ipynb}{notebook}
 we explore a different solution based on the idea of that the contribution
 (in terms of energy) of the subbands to the reconstruction of the
-signal $x$ is proportional to the
+signal ${\mathbf x}$ is proportional to the
 \href{https://en.wikipedia.org/wiki/Filter_(signal_processing)}{gain}
-of each analysis filter of $K$ (remember that we are working with
+of each analysis filter of ${\mathbf K}$ (remember that we are working with
 orthogonal transforms and therefore, the contribution of the subbands
 are independent).  Thus, if the filters had different gains, the
 quantization steps should consider this fact.\footnote{Notice that the
 important here is the relative gain of each subband. For example, if
-the gain of $K_0$ were $2$ and the gain of $K_1$ were $1$, and the
-dynamic range of $w_0$ and $w_1$ is the same, we could use
+the gain of ${\mathbf K}_0$ were $2$ and the gain of ${\mathbf K}_1$ were $1$, and the
+dynamic range of ${\mathbf w}_0$ and ${\mathbf w}_1$ is the same, we could use
 $\Delta_1=2\Delta_0$ and expect to minimize the distortion.}
 
 By definition, the gain of the subband
-$w_i$ is the \href{https://en.wikipedia.org/wiki/Lp_space}{L$_2$
+${\mathbf w}_i$ is the \href{https://en.wikipedia.org/wiki/Lp_space}{L$_2$
   norm}\footnote{L$_2(f)$ (where $f$ is a function) is the set of all
   functions with finite energy and constitues a vector
   space~\cite{sayood2017introduction}. $L_2({\mathbb R})$ of simply
@@ -297,16 +303,15 @@ $w_i$ is the \href{https://en.wikipedia.org/wiki/Lp_space}{L$_2$
   \href{https://en.wikipedia.org/wiki/Euclidean_distance}{Euclidean
     distance} in $N$-dimensional (in our case, $N=2$)
   \href{https://en.wikipedia.org/wiki/Vector_space}{spaces}.} of the
-filter $K_i$. Thus
+filter ${\mathbf K}_i$. Thus
 
 \begin{equation}
   \begin{array}{l}
-    \left\| K_0 \right\|_2 := \sqrt{\langle \begin{bmatrix}1 & 1\end{bmatrix}, \begin{bmatrix}1 & 1\end{bmatrix} \rangle} = \sqrt{\begin{bmatrix}1 & 1\end{bmatrix} \cdot \begin{bmatrix}1 & 1\end{bmatrix}} = \sqrt{2},\\
-    \left\| K_1 \right\|_2 := \sqrt{\langle \begin{bmatrix}1 & -1\end{bmatrix}, \begin{bmatrix}1 & -1\end{bmatrix} \rangle} = \sqrt{\begin{bmatrix}1 & -1\end{bmatrix}\cdot \begin{bmatrix}1 & -1\end{bmatrix}} = \sqrt{2},
+    \left\| {\mathbf K}_0 \right\|_2 := \sqrt{\langle \begin{bmatrix}1 & 1\end{bmatrix}, \begin{bmatrix}1 & 1\end{bmatrix} \rangle} = \sqrt{\begin{bmatrix}1 & 1\end{bmatrix} \cdot \begin{bmatrix}1 & 1\end{bmatrix}} = \sqrt{2},\\
+    \left\| {\mathbf K}_1 \right\|_2 := \sqrt{\langle \begin{bmatrix}1 & -1\end{bmatrix}, \begin{bmatrix}1 & -1\end{bmatrix} \rangle} = \sqrt{\begin{bmatrix}1 & -1\end{bmatrix}\cdot \begin{bmatrix}1 & -1\end{bmatrix}} = \sqrt{2},
   \end{array}
 \end{equation}
-
-resulting that both subbands $w_1$ and $w_2$ have the same gain
+resulting that both subbands ${\mathbf w}_1$ and ${\mathbf w}_2$ have the same gain
 ($\sqrt{2}$). This result tell us that both subbands could use the
 same quantization step ($\Delta_0=\Delta_1$). In the
 \href{https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/stereo_transforms_RD.ipynb}{notebook}
@@ -319,20 +324,22 @@ matrix-vector operations, but using
 \href{https://en.wikipedia.org/wiki/Butterfly_diagram}{computational
   bufferflies} or filter
 \href{https://en.wikipedia.org/wiki/Filter_(signal_processing)}{convolutions}
-(and therefore, we don't know $K$). In general, we can determine $K_i$
-simply by computing the inverse transform of the decomposition
+(and therefore, we don't know ${\mathbf K}$). In general, we can
+determine ${\mathbf K}_i$ simply by computing the inverse transform of
+the decomposition
 $\begin{bmatrix} 0 & \cdots & 0 & 1 & 0 & \cdots &
   0 \end{bmatrix}^{\text T}$, where the $1$ value is in the position
-$i$ (only the subband $w_i=1$, the rest are
+$i$ (only the subband ${\mathbf w}_i=1$, the rest are
 ``zeroed'')).\footnote{Notice that this operation will ``extract'' the
-  $i$-th column from $K^{-1}$ that is equivalent to say that will
-  ``extract'' the $i$-th row of $K$, $K_i$ (remember that for
-  orthogonal traksforms, $K^{-1}=K^{\text T}$).} In our example, we
-get that
+  $i$-th column from ${\mathbf K}^{-1}$ that is equivalent to say that
+  will ``extract'' the $i$-th row of ${\mathbf K}$, ${\mathbf K}_i$
+  (remember that for orthogonal transforms,
+  ${\mathbf K}^{-1}={\mathbf K}^{\text T}$).} In our example, we get
+that
 
 \begin{equation}
   \begin{array}{l}
-    K_0 =
+    {\mathbf K}_0 =
     \begin{bmatrix}
       1 & 1 \\
       1 & -1
@@ -346,7 +353,7 @@ get that
       1 & 1
     \end{bmatrix},
     \\
-    K_1 = 
+    {\mathbf K}_1 = 
     \begin{bmatrix}
       1 & 1 \\
       1 & -1
@@ -362,8 +369,9 @@ get that
   \end{array}
 \end{equation}
 that as you can see, correspond to the columns of the inverse
-transform matrix $K^{-1}$. Notice that this is true for all the
-orthogonal transforms because $K^{-1}=K^{\text T}$.
+transform matrix ${\mathbf K}^{-1}$. Notice that this is true for all
+the orthogonal transforms because
+${\mathbf K}^{-1}={\mathbf K}^{\text T}$.
 
 \begin{comment}
 Unfortunately, this

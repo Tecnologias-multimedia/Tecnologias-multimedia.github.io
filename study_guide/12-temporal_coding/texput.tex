@@ -102,12 +102,12 @@ that this subsampling is possible because the
     theorem}.}  generated in the low-pass subband is compensated by
 the aliasing generated in the high-pass subband. To achieve this, the
 \href{https://en.wikipedia.org/wiki/Filter_(signal_processing)#The_transfer_function}{frequency
-  response} of $K_0$ must be equal to the mirror frequency response of
+  response} of $K_0$ must be equal to the mirrored frequency response of
 $K_1$, and obviously, both filters must have the same
 bandwidth~\cite{sayood2017introduction}. In this situation, in which
 $K_1$ and $K_2$ are mirror filters, we say that they form a
 \href{https://en.wikipedia.org/wiki/Quadrature_mirror_filter}{Quadrature
-  Mirror Filters Bank (QMF)}.
+  Mirror Filters (QMF) Bank}.
 
 \subsection{Multichannel filter banks and psychoacoustic frequency resolution}
 % M-channels PRFB and the frequency resolution of the HAS
@@ -362,7 +362,7 @@ The linear transform is also invertible by simply reversing the steps:
   the transformed frames, that form two subbands $M$ (mid) and $S$
   (side)) and temporal\_decorrelate.py (that apply quantization on the
   DWT of the $M$ and $S$ subbands). Notice that the number of levels
-  $N_{\text{levels}}$ of the DWT can have a large impact on the degree
+  $N_{\text{levels}}$ of the DWT can have a large impact on the amount
   of energy concentration achieved by the DWT, and therefore, on the
   efficiency of coding system.
 \item In the previous compative, we have applied first the temporal
