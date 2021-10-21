@@ -108,17 +108,48 @@ class="content">Sample reordering to create two independent channels.
      </li>
      <li 
   class="enumerate" id="x1-1010x4"><span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">compress2.py</span></span></span>: similar to <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">compress2.py</span></span></span>: Similar to <span class="obeylines-h"><span class="verb"><span 
 class="ectt-1000">compress1.py</span></span></span>, but reseting DEFLATE at each new
      chunk-channel. The idea here is to see if DEFLATE is exploiting the
-     redundancy between the consecutive channels.</li></ol>
-<!--l. 54--><p class="indent" >   Finally, notice that the number of sent UDP packets &#x0028;that now will be
-length-variying&#x0029; remain constant respect to parent code.
-</p><!--l. 57--><p class="noindent" >
+     redundancy between the consecutive channels.
+     </li>
+     <li 
+  class="enumerate" id="x1-1012x5"><span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">compress3_16.py</span></span></span>: Similar to <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">compress1.py</span></span></span> &#x0028;channels are concatenated&#x0029;, but 2
+     code-streams are generated, one for the LSB &#x0028;Low Signi&#xFB01;cant Byte&#x0029; plane and
+     another for the MSB &#x0028;Most Signi&#xFB01;cant Byte&#x0029; plane. The idea here is to see if
+     the MSB can be compressed more e&#xFB03;ciently because it can contain runs of
+     zeros when the audio sequence is <span 
+class="ecti-1000">quiet</span>.
+     </li>
+     <li 
+  class="enumerate" id="x1-1014x6"><span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">compress3_24.py</span></span></span>: Similar to <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">compress3_16.py</span></span></span> but considering three
+     byte-planes. This would enable the compression of <span 
+class="ecti-1000">coe&#xFB03;cients </span>that require
+     more than two bytes to be represented.
+     </li>
+     <li 
+  class="enumerate" id="x1-1016x7"><span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">compress3_32.py</span></span></span>: Similar to <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">compress3_24.py</span></span></span> but considering four
+     byte-planes.
+     </li>
+     <li 
+  class="enumerate" id="x1-1018x8"><span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">compress4.py</span></span></span>: Similar to <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">compress3_16.py</span></span></span> but using the raw chunks &#x0028;without
+     concatenating the channels&#x0029;.</li></ol>
+<!--l. 68--><p class="indent" >   Finally, notice that the number of sent UDP packets &#x0028;that now will be
+length-variying&#x0029; remain constant respect to <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">buffer.py</span></span></span>.
+</p><!--l. 71--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
  id="x1-20002"></a>What you have to do?</h3>
-<!--l. 59--><p class="noindent" >Determine empirically which ordering of the chunk data is the most e&#xFB03;cient from a
+<!--l. 73--><p class="noindent" >Determine empirically which ordering of the chunk data is the most e&#xFB03;cient from a
 lossless data compression point of view &#x0028;the smaller the bit-rates, the higher the
 compression&#x0029;. Use the song &#x2018;<span class="obeylines-h"><span class="verb"><span 
 class="ectt-1000">InterCom/data/Aviador</span><span 
@@ -128,20 +159,20 @@ class="ectt-1000">&#x00A0;La</span><span
 class="ectt-1000">&#x00A0;Zona</span><span 
 class="ectt-1000">&#x00A0;Fantasma.oga</span></span></span>&#x201D;
 in your experiments.
-</p><!--l. 65--><p class="noindent" >
-</p>
-   <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
- id="x1-30003"></a>Timming</h3>
-<!--l. 67--><p class="noindent" >Please, &#xFB01;nish this milestone at most in one week.
-</p><!--l. 69--><p class="noindent" >
-</p>
-   <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
- id="x1-40004"></a>Deliverables</h3>
-<!--l. 71--><p class="noindent" >A report documenting the experiment and the results.
                                                                   
 
                                                                   
-</p><!--l. 77--><p class="noindent" >
+</p><!--l. 79--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
+ id="x1-30003"></a>Timming</h3>
+<!--l. 81--><p class="noindent" >Please, &#xFB01;nish this milestone at most in one week.
+</p><!--l. 83--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
+ id="x1-40004"></a>Deliverables</h3>
+<!--l. 85--><p class="noindent" >A report documenting the experiment and the results.
+</p><!--l. 91--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-50005"></a>Resources</h3>

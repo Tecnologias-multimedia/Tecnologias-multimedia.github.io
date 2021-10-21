@@ -45,14 +45,28 @@ override the defined in the parent class:
   \caption{Sample reordering to create two independent channels.}
   \label{fig:reordering}
 \end{figure}
-\item \verb|compress2.py|: similar to \verb|compress1.py|, but
+\item \verb|compress2.py|: Similar to \verb|compress1.py|, but
   reseting DEFLATE at each new chunk-channel. The idea here is to see
   if DEFLATE is exploiting the redundancy between the consecutive
   channels.
+\item \verb|compress3_16.py|: Similar to \verb|compress1.py| (channels
+  are concatenated), but 2 code-streams are generated, one for the LSB
+  (Low Significant Byte) plane and another for the MSB (Most
+  Significant Byte) plane. The idea here is to see if the MSB can be
+  compressed more efficiently because it can contain runs of zeros
+  when the audio sequence is \emph{quiet}.
+\item \verb|compress3_24.py|: Similar to \verb|compress3_16.py| but
+  considering three byte-planes. This would enable the compression of
+  \emph{coefficients} that require more than two bytes to be
+  represented.
+\item \verb|compress3_32.py|: Similar to \verb|compress3_24.py| but
+  considering four byte-planes.
+\item \verb|compress4.py|: Similar to \verb|compress3_16.py| but using
+  the raw chunks (without concatenating the channels).
 \end{enumerate}
 
 Finally, notice that the number of sent UDP packets (that now will be
-length-variying) remain constant respect to parent code.
+length-variying) remain constant respect to \verb|buffer.py|.
 
 \section{What you have to do?}
 
