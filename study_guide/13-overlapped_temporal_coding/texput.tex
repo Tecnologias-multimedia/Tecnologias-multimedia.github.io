@@ -9,10 +9,10 @@
 Transform coding implies to split the signal into blocks of data
 (chunks), and to compute the transform of each chunk. When the output
 coefficients are quantized, it is possible that significative (and
-unpleasant) distortions may appear between the border frames of the
-chunks (see the Fig~\ref{fig:3_chunks}). This is a consequence of that
-in the prediction step used by the DWT in the limits of the chunks
-generate different predictions at both sides of the border.
+unpleasant) distortions may appear in the border frames of the chunks
+(see Fig~\ref{fig:3_chunks}). This is a consequence of that in the
+prediction step used by the DWT in the limits of the chunks generate
+different predictions at the beginning and the end of the chunks.
 
 \begin{figure}
   \centering
@@ -38,39 +38,38 @@ been described in the following algorithm:
 
 \subsection*{Encoder:}
 \begin{enumerate}
-\item $C_{-1}=0$.
-\item Input $C_1$.
-\item For $i\in\{1,2,\cdots\}$:   
+\item ${\mathbf C}_{-1}={\mathbf 0}$, a zero chunk.
+\item Input ${\mathbf C}_0$.
+\item For $i\in\{0,1,\cdots\}$:   
   \begin{enumerate}               
-  \item Input chunk $C_{i+1}$.
-  \item Compute decomposition $D_i \leftarrow
-    \text{DWT}^l(C_{i-1}[-o:]|C_i|C_{i+1}[:o])$, where $D_i$ is the
-    decomposition of the $i$-th extended chunk, $\cdot|\cdot$ denotes
-    the concatenation-of-frames operator, defined by
-    \begin{equation}
-      a|b = \{a,b\},
-    \end{equation}
-    and $C_{i-1}[-o:]|C_i|C_{i+1}[:o]$ is the $i$-th extended chunk
-    (see Fig.~\ref{fig:subbands}), where $o$ is the overlapped area
-    size in frames, $C[:o]$ are the first $o$ frames of the chunk $C$,
-    $C[-o:]$ its last $o$ frames, and $l$ is the number of levels of
+  \item Input ${\mathbf C}_{i+1}$.
+  \item Build extended chunk ${\mathbf E}\leftarrow {\mathbf
+    C}_{i-1}[-o:]|{\mathbf C}_i|{\mathbf C}_{i+1}[:o]$, where
+    $\cdot|\cdot$ denotes the concatenation of chunks, $o$ is the
+    overlapped area size in frames, ${\mathbf C}_{i-1}[-o:]$ the last
+    $o$ frames of chunk ${\mathbf C}_{i-1}$, and ${\mathbf
+      C}_{i+1}[:o]$ are the first $o$ frames of the chunk ${\mathbf
+      C}_{i+1}$.
+  \item Compute decomposition ${\mathbf D}_i \leftarrow
+    \text{DWT}^l({\mathbf E})$, where $l$ is the number of levels of
     the DWT ($l=2$ in the Fig.~\ref{fig:subbands}).
-  \item Send decomposition $D_i$.
-  \item $C_{i-1}\leftarrow C_i$.
-  \item $C_i\leftarrow C_{i+1}$.
+  \item Output decomposition ${\mathbf D}_i$.
+  \item ${\mathbf C}_{i-1}\leftarrow {\mathbf C}_i$.
+  \item ${\mathbf C}_i\leftarrow {\mathbf C}_{i+1}$.
   \end{enumerate}
 \end{enumerate}
 
-Notice that we are sending for each chunk $2o+x$ stereo-coefficients, where
-$x$ is the number of frames/chunk.
+Notice that we are sending for each chunk $2o+x$ coefficients
+(stereo-coefficients, in the case of using 2 chanels), where $x$ is
+the number of frames/chunk.
 
 \subsection*{Decoder:}
 \begin{enumerate}
 \item For $i\in\{0,1,\cdots\}$:
   \begin{enumerate}
-  \item Receive decomposition $D_i$.
-  \item Compute extended chunk $C_i\leftarrow\text{DWT}^{-l}(D_i)$.
-  \item Output chunk $C_i[o:-o]$.
+  \item Input decomposition ${\mathbf D}_i$.
+  \item Compute extended chunk ${\mathbf E}\leftarrow\text{DWT}^{-l}({\mathbf D}_i)$.
+  \item Output chunk ${\mathbf C}_i={\mathbf E}[o:-o]$.
   \end{enumerate}
 \end{enumerate}
 
