@@ -59,9 +59,9 @@ been described in the following algorithm:
   \end{enumerate}
 \end{enumerate}
 
-Notice that we are sending for each chunk $2o+x$ coefficients
-(stereo-coefficients, in the case of using 2 chanels), where $x$ is
-the number of frames/chunk.
+%Notice that we are sending for each chunk $2o+x$ coefficients
+%(stereo-coefficients, in the case of using 2 chanels), where $x$ is
+%the number of frames/chunk.
 
 \subsection*{Decoder:}
 \begin{enumerate}
@@ -144,18 +144,13 @@ The codec now can be described by:
   \begin{enumerate}               
   \item Input ${\mathbf C}_{i+1}$.
   \item Build extended chunk ${\mathbf E}\leftarrow {\mathbf
-    C}_{i-1}[-o:]|{\mathbf C}_i|{\mathbf C}_{i+1}[:o]$, where
-    $\cdot|\cdot$ denotes the concatenation of chunks, $o$ is the
-    overlapped area size in frames, ${\mathbf C}_{i-1}[-o:]$ the last
-    $o$ frames of chunk ${\mathbf C}_{i-1}$, and ${\mathbf
-      C}_{i+1}[:o]$ are the first $o$ frames of the chunk ${\mathbf
-      C}_{i+1}$.
+    C}_{i-1}[-o:]|{\mathbf C}_i|{\mathbf C}_{i+1}[:o]$.
   \item Compute decomposition ${\mathbf D}_i \leftarrow
-    \text{DWT}^l({\mathbf E})$, where $l$ is the number of levels of
-    the DWT ($l=2$ in the Fig.~\ref{fig:subbands}).
+    \text{DWT}^l({\mathbf E})$.
   \item Output
-    $\Big\{{\mathbf D}_i.{\mathbf l}^2[\frac{o}{2^2}], {\mathbf
-      D}_i.{\mathbf h}^2[\frac{o}{2^2}], {\mathbf D}_i.{\mathbf
+    $\Big\{{\mathbf D}_i.{\mathbf l}^l[\frac{o}{2^l}], {\mathbf
+      D}_i.{\mathbf h}^l[\frac{o}{2^l}], {\mathbf D}_i.{\mathbf
+      h}^{l-1}[\frac{o}{2^{l-1}}], \cdots, {\mathbf D}_i.{\mathbf
       h}^1[\frac{o}{2}]\Big\}$.
   \item ${\mathbf C}_{i-1}\leftarrow {\mathbf C}_i$.
   \item ${\mathbf C}_i\leftarrow {\mathbf C}_{i+1}$.
@@ -173,19 +168,28 @@ The codec now can be described by:
 
 \subsection*{Decoder:}
 \begin{enumerate}
-\item $D_{-1}=0$.
-\item Input decomposition $D_1$.
-\item For $i\in\{1,2,\cdots\}$:
+\item For $i\in\{0,1,\cdots\}$:
   \begin{enumerate}
-  \item Receive decomposition $D_{i+1}$.
-  \item Build extended decomposition ($l=2$) $E_i =
-    D_{i-1}[-o:].L^2|D_i.L^2|D_{i+1}[:0].L^2|D_{i-1}[-o:].H^2|D_i.H^2|D_{i+1}[:0].H^2|D_{i-1}[-o:].H^1|D_i.H^1|D_{i+1}[:0].H^1$.
-  \item Compute extended chunk $C_i\leftarrow\text{DWT}^{-l}(E_i)$.
-  \item Output $C_i[o:-o]$.
-  \item $D_{i-1} \leftarrow D_i$.
-  \item $D_i \leftarrow D_{i+1}$.
+  \item Input decomposition ${\mathbf D}_i$.
+  \item Compute chunk ${\mathbf C}_i\leftarrow\text{DWT}^{-l}({\mathbf D}_i)$.
+  \item Output ${\mathbf C}_i$.
   \end{enumerate}
 \end{enumerate}
+
+% \begin{enumerate}
+%\item $D_{-1}=0$.
+%\item Input decomposition $D_1$.
+%\item For $i\in\{1,2,\cdots\}$:
+%  \begin{enumerate}
+%  \item Receive decomposition $D_{i+1}$.
+%  \item Build extended decomposition ($l=2$) $E_i =
+%    D_{i-1}[-o:].L^2|D_i.L^2|D_{i+1}[:0].L^2|D_{i-1}[-o:].H^2|D_i.H^2|D_{i+1}[:0].H^2|D_{i-1}[-o:].H^1|D_i.H^1|D_{i+1}[:0].H^1$.
+%  \item Compute extended chunk $C_i\leftarrow\text{DWT}^{-l}(E_i)$.
+%  \item Output $C_i[o:-o]$.
+%  \item $D_{i-1} \leftarrow D_i$.
+%  \item $D_i \leftarrow D_{i+1}$.
+%  \end{enumerate}
+%\end{enumerate}
 
 %Notice that the only that changes between this codec and the previous
 %one is that now, the inverse transform of the extended chunks uses the
