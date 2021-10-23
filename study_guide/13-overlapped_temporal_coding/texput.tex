@@ -98,6 +98,7 @@ This idea has been implemented in this
 and the result can be seen in the Fig.~\ref{fig:3_chunks}.
 
 \subsection{Reducing the data overhead}
+\label{sec:reducing}
 
 Unfortunately, the previous algorithm sends twice the DWT coefficients
 of the overlapped areas (in the Fig.~\ref{fig:subbands}, $\{{\mathbf
@@ -200,22 +201,28 @@ The codec now can be described by:
 \section{What you have to do?}
 
 \begin{enumerate}
-\item In a module named overlapped\_temporal\_coding.py, inherit
-  the class Temporal\_Coding and create a class named
-  Overlapped\_Temporal\_Coding.
-\item Compare the RD (Rate/Distortion) curves with Temporal\_Coding.
+\item In a module named \verb|temporal_overlapped_DWT_coding.py|,
+  inherit from \verb|temporal_np_overlapped_DWT_coding.py| the class
+  \verb|Temporal_No_Overlapped_DWT|, and create a class named
+  \verb|Temporal_Overlapped_DWT| which must implement the codec
+  described in the Section~\ref{sec:reducing}.
+\item Rebuild the RD curves to see how this improvement impacts on the
+  efficiency of intercom.
 \end{enumerate}
 
 \section{Timming}
 
-Please, present your results in one week.
+Please, present your results in two weeks.
 
 \section{Deliverables}
 
-The module overlapped\_temporal\_decorrelate.py. Store it at the
-\href{https://github.com/Tecnologias-multimedia/intercom}{root
-  directory} of your InterCom's repo.
-
+\begin{enumerate}
+\item The module \verb|temporal_overlapped_DWT_coding.py|. Store it at
+  the \href{https://github.com/Tecnologias-multimedia/intercom}{root
+    directory} of your InterCom's repo.
+\item The RD curves and the information required to regenerate them.
+\end{enumerate}
+  
 \section{Resources}
 
 \bibliography{maths,data-compression,DWT,audio-coding}

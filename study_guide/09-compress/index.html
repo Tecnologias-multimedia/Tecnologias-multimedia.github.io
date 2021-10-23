@@ -40,7 +40,7 @@ class="ecrm-1200">- </span><a
 href="https://www.ual.es" ><span 
 class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
-class="ecrm-1200">October 21, 2021</span></div>
+class="ecrm-1200">October 23, 2021</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
@@ -65,114 +65,103 @@ We have used this facility for compressing and decompressing the chunks that we 
 sending and receiving in the methods <span class="obeylines-h"><span class="verb"><span 
 class="ectt-1000">pack&#x0028;&#x0029;</span></span></span> and <span class="obeylines-h"><span class="verb"><span 
 class="ectt-1000">unpack&#x0028;&#x0029;</span></span></span>, respectively. These
-methods are implemented in the modules <span 
-class="ectt-1000">compress&#x007B;|0|1|2&#x007D;.py</span>, inside of a the class
-<span 
-class="ectt-1000">Compression&#x007B;|0|1|2&#x007D; </span>&#x0028;respectively&#x0029;, and override the de&#xFB01;ned in the parent
-class:
-</p><!--l. 31--><p class="indent" >
+methods are implemented in the modules:
+</p><!--l. 29--><p class="indent" >
      </p><ol  class="enumerate1" >
      <li 
   class="enumerate" id="x1-1002x1"><span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">compress.py</span></span></span>: Implements no compression at all.
+class="ectt-1000">DEFLATE_raw.py</span></span></span>: Compress the raw chunks with DEFLATE.
      </li>
      <li 
   class="enumerate" id="x1-1004x2"><span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">compress0.py</span></span></span>: Compress the raw chunks with DEFLATE.
-     </li>
-     <li 
-  class="enumerate" id="x1-1006x3"><span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">compress1.py</span></span></span>: Compress the chunk after concatenating the channels &#x0028;see
+class="ectt-1000">DEFLATE_serial.py</span></span></span>: Compress the chunk after concatenating the channels &#x0028;see
      Fig.&#x00A0;<a 
-href="#x1-1007r1">1<!--tex4ht:ref: fig:reordering --></a>&#x0029;. Notice that with this shu&#xFB04;ing, the samples are not interleaved and the
+href="#x1-1005r1">1<!--tex4ht:ref: fig:reordering --></a>&#x0029;. Notice that with this shu&#xFB04;ing, the samples are not interleaved and the
      correlation between consecutive bytes is slighly increased. This should increase
      the <a 
 href="https://en.wikipedia.org/wiki/Data_compression_ratio" >&#x0028;data&#x0029; compression ratio</a> <hr class="figure" /><div class="figure" 
 >
+<div class="center" 
+>
+<!--l. 39--><p class="noindent" >
+</p><!--l. 40--><p class="noindent" ><div style="text-align:center;"> <img width=500 src="graphics/reordering.svg" /> </div>  </p></div>
                                                                   
 
                                                                   
-<div class="center" 
->
-<!--l. 42--><p class="noindent" >
-</p><!--l. 43--><p class="noindent" ><div style="text-align:center;"> <img width=500 src="graphics/reordering.svg" /> </div>  </p></div>
 <a 
- id="x1-1007r1"></a>
+ id="x1-1005r1"></a>
 <a 
- id="x1-1008"></a>
+ id="x1-1006"></a>
      <br /> <div class="caption" 
 ><span class="id">Figure&#x00A0;1: </span><span  
 class="content">Sample reordering to create two independent channels.
-     </span></div><!--tex4ht:label?: x1-1007r1 -->
+     </span></div><!--tex4ht:label?: x1-1005r1 -->
      </div><hr class="endfigure" />
      </li>
      <li 
-  class="enumerate" id="x1-1010x4"><span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">compress2.py</span></span></span>: Similar to <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">compress1.py</span></span></span>, but reseting DEFLATE at each new
-     chunk-channel. The idea here is to see if DEFLATE is exploiting the
+  class="enumerate" id="x1-1008x3"><span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">DEFLATE_serial2.py</span></span></span>: Similar to <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">compress1.py</span></span></span>, but reseting DEFLATE at
+     each new chunk-channel. The idea here is to see if DEFLATE is exploiting the
      redundancy between the consecutive channels.
      </li>
      <li 
-  class="enumerate" id="x1-1012x5"><span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">compress3_16.py</span></span></span>: Similar to <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">compress1.py</span></span></span> &#x0028;channels are concatenated&#x0029;, but 2
-     code-streams are generated, one for the LSB &#x0028;Low Signi&#xFB01;cant Byte&#x0029; plane and
-     another for the MSB &#x0028;Most Signi&#xFB01;cant Byte&#x0029; plane. The idea here is to see if
-     the MSB can be compressed more e&#xFB03;ciently because it can contain runs of
-     zeros when the audio sequence is <span 
+  class="enumerate" id="x1-1010x4"><span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">DEFLATE_byteplanes2.py</span></span></span>: Similar to <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">compress_serial.py</span></span></span> &#x0028;channels are
+     concatenated&#x0029;, but 2 code-streams are generated, one for the LSB &#x0028;Low
+     Signi&#xFB01;cant Byte&#x0029; plane and another for the MSB &#x0028;Most Signi&#xFB01;cant Byte&#x0029; plane,
+     working with 16 bits/sample. The idea here is to see if the MSB can be
+     compressed more e&#xFB03;ciently because it can contain runs of zeros, especially
+     when the audio sequence is <span 
 class="ecti-1000">quiet</span>.
      </li>
      <li 
-  class="enumerate" id="x1-1014x6"><span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">compress3_24.py</span></span></span>: Similar to <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">compress3_16.py</span></span></span> but considering three
-     byte-planes. This would enable the compression of <span 
-class="ecti-1000">coe&#xFB03;cients </span>that require
-     more than two bytes to be represented.
+  class="enumerate" id="x1-1012x5"><span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">DEFLATE_byteplanes3.py</span></span></span>: Similar to <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">DEFLATE_byteplanes2.py</span></span></span> but
+     considering three byte-planes. This would enable the compression of
+     <span 
+class="ecti-1000">coe&#xFB03;cients</span><span class="footnote-mark"><a 
+href="index2.html#fn1x0"><sup class="textsuperscript">1</sup></a></span><a 
+ id="x1-1013f1"></a> 
+     that require more than two bytes to be represented.
      </li>
      <li 
-  class="enumerate" id="x1-1016x7"><span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">compress3_32.py</span></span></span>: Similar to <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">compress3_24.py</span></span></span> but considering four
-     byte-planes.
+  class="enumerate" id="x1-1015x6"><span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">DEFLATE_byteplanes4.py</span></span></span>: Considers four byte-planes.
      </li>
      <li 
-  class="enumerate" id="x1-1018x8"><span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">compress4.py</span></span></span>: Similar to <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">compress3_16.py</span></span></span> but using the raw chunks &#x0028;without
-     concatenating the channels&#x0029;.</li></ol>
-<!--l. 68--><p class="indent" >   Finally, notice that the number of sent UDP packets &#x0028;that now will be
+  class="enumerate" id="x1-1017x7"><span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">DEFLATE_byteplanes2_interlaced.py.py</span></span></span>: Similar to <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">DEFLATE_byteplanes2.py</span></span></span>
+     but using the raw chunks &#x0028;without concatenating the channels&#x0029;.</li></ol>
+<!--l. 67--><p class="indent" >   Finally, notice that the number of sent UDP packets &#x0028;that now will be
 length-variying&#x0029; remain constant respect to <span class="obeylines-h"><span class="verb"><span 
 class="ectt-1000">buffer.py</span></span></span>.
-</p><!--l. 71--><p class="noindent" >
+</p><!--l. 70--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
  id="x1-20002"></a>What you have to do?</h3>
-<!--l. 73--><p class="noindent" >Determine empirically which ordering of the chunk data is the most e&#xFB03;cient from a
+<!--l. 72--><p class="noindent" >Determine empirically which ordering of the chunk data is the most e&#xFB03;cient from a
 lossless data compression point of view &#x0028;the smaller the bit-rates, the higher the
-compression&#x0029;. Use the song &#x2018;<span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">InterCom/data/Aviador</span><span 
-class="ectt-1000">&#x00A0;Dro</span><span 
-class="ectt-1000">&#x00A0;-</span><span 
-class="ectt-1000">&#x00A0;La</span><span 
-class="ectt-1000">&#x00A0;Zona</span><span 
-class="ectt-1000">&#x00A0;Fantasma.oga</span></span></span>&#x201D;
-in your experiments.
+compression&#x0029;. Use the audio sequence you want. Some samples are stored in the <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">data</span></span></span>
+directory of intercom.
                                                                   
 
                                                                   
-</p><!--l. 79--><p class="noindent" >
+</p><!--l. 78--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-30003"></a>Timming</h3>
-<!--l. 81--><p class="noindent" >Please, &#xFB01;nish this milestone at most in one week.
-</p><!--l. 83--><p class="noindent" >
+<!--l. 80--><p class="noindent" >Please, &#xFB01;nish this milestone at most in one week.
+</p><!--l. 82--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-40004"></a>Deliverables</h3>
-<!--l. 85--><p class="noindent" >A report documenting the experiment and the results.
-</p><!--l. 91--><p class="noindent" >
+<!--l. 84--><p class="noindent" >A report documenting the experiment and the results.
+</p><!--l. 90--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-50005"></a>Resources</h3>
