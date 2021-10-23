@@ -116,8 +116,9 @@ performing:
 
 Notice that you will find four implementations related to this milestone:
 \begin{enumerate}
-\item \verb|br_control.py|: Uses a constant $\Delta$.
-\item \verb|br_control0.py|: Every second runs:
+\item \verb|BR_control_no.py|: Uses a constant $\Delta$. There is not BR
+  control.
+\item \verb|BR_control_add_lost.py|: Every second runs:
   \begin{equation}
     \begin{array}{l}
       \Delta = \Delta + L \\
@@ -127,11 +128,11 @@ Notice that you will find four implementations related to this milestone:
   where $L$ is the number of lost (received) chunks in the previous
   second. Notice that this heuristic supposes that the interlocutor is
   lossing (on average) the same number of chunks.
-\item \verb|br_control1.py|: Every second runs:
+\item \verb|BR_control_lost.py|: Every second runs:
   \begin{equation}
     \Delta = L - 1.
   \end{equation}
-\item \verb|br_control2.py|: Every second runs:
+\item \verb|BR_control_conservative.py|: Every second runs:
   \begin{equation}
     \begin{array}{ll}
       \Delta = 2\Delta & \text{if}~L>1 \\
@@ -142,14 +143,13 @@ Notice that you will find four implementations related to this milestone:
 
 \section{What you have to do?}
 
-\begin{enumerate}
-\item Considering the RMSE (Root Mean Square Error) as distortion
-  measure, generate the RD curve considering a set of different
-  simulated transmission environments (use
-  \href{https://man7.org/linux/man-pages/man8/tc.8.html}{tc}) of the
-  song ``\verb|InterCom/data/Aviador Dro - La Zona Fantasma.oga|'',
-  for the four implementations.
-\end{enumerate}
+Considering the RMSE (Root Mean Square Error) as distortion measure,
+generate the RD curve considering a set of different simulated
+transmission environments (use
+\href{https://man7.org/linux/man-pages/man8/tc.8.html}{tc}) of one
+audio sequence (remember that you can use one of the samples found in
+the \verb|data| directory of the intercom's repo), for the four
+implementations.
 
 \section{Timming}
 

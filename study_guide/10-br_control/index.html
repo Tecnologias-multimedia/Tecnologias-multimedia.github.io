@@ -39,7 +39,7 @@ class="ecrm-1200">- </span><a
 href="https://www.ual.es" ><span 
 class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
-class="ecrm-1200">October 21, 2021</span></div>
+class="ecrm-1200">October 23, 2021</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
@@ -307,16 +307,17 @@ class="ecit-1000">&#x0028;3&#x0029;</span>
      </p><ol  class="enumerate1" >
      <li 
   class="enumerate" id="x1-4010x1"><span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">br_control.py</span></span></span>: Uses a constant <!--l. 119--><math 
+class="ectt-1000">BR_control_no.py</span></span></span>: Uses a constant <!--l. 119--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >&#x0394;</mi></math>.
+     There is not BR control.
      </li>
      <li 
   class="enumerate" id="x1-4012x2"><span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">br_control0.py</span></span></span>: Every second runs: <table class="equation"><tr><td> <a 
+class="ectt-1000">BR_control_add_lost.py</span></span></span>: Every second runs: <table class="equation"><tr><td> <a 
  id="x1-4013r1"></a>
-     <!--l. 121--><math 
+     <!--l. 122--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
  <mtable  align="axis" style=""  
@@ -335,7 +336,7 @@ class="MathClass-rel">=</mo> <mi
 class="MathClass-bin">&#x2212;</mo> <mn>1</mn><mo 
 class="MathClass-punc">,</mo> </mtd></mtr><!--l--></mtable>
 </math></td><td class="eq-no">&#x0028;1&#x0029;</td></tr></table>
-     <!--l. 127--><p class="noindent" >where <!--l. 127--><math 
+     <!--l. 128--><p class="noindent" >where <!--l. 128--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >L</mi></math>
@@ -345,12 +346,12 @@ display="inline" ><mi
      </p></li>
      <li 
   class="enumerate" id="x1-4015x3"><span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">br_control1.py</span></span></span>: Every second runs: <table class="equation"><tr><td> <a 
+class="ectt-1000">BR_control_lost.py</span></span></span>: Every second runs: <table class="equation"><tr><td> <a 
  id="x1-4016r2"></a>
                                                                   
 
                                                                   
-     <!--l. 131--><math 
+     <!--l. 132--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
                                             <mi 
@@ -363,9 +364,9 @@ class="MathClass-punc">.</mo>
      </li>
      <li 
   class="enumerate" id="x1-4018x4"><span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">br_control2.py</span></span></span>: Every second runs: <table class="equation"><tr><td> <a 
+class="ectt-1000">BR_control_conservative.py</span></span></span>: Every second runs: <table class="equation"><tr><td> <a 
  id="x1-4019r3"></a>
-     <!--l. 135--><math 
+     <!--l. 136--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
  <mtable  align="axis" style=""  
@@ -392,33 +393,25 @@ class="text"><mtext  >otherwise</mtext></mstyle><mo
 class="MathClass-punc">.</mo> </mtd></mtr><!--ll--></mtable>
 </math></td><td class="eq-no">&#x0028;3&#x0029;</td></tr></table>
      </li></ol>
-<!--l. 143--><p class="noindent" >
+<!--l. 144--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
  id="x1-50002"></a>What you have to do?</h3>
-<!--l. 145--><p class="noindent" >
-     </p><ol  class="enumerate1" >
-     <li 
-  class="enumerate" id="x1-5002x1">Considering the RMSE &#x0028;Root Mean Square Error&#x0029; as distortion measure,
-     generate the RD curve considering a set of di&#xFB00;erent simulated transmission
-     environments                &#x0028;use                <a 
-href="https://man7.org/linux/man-pages/man8/tc.8.html" >tc</a>&#x0029;                of                the
-     song &#x201C;<span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">InterCom/data/Aviador</span><span 
-class="ectt-1000">&#x00A0;Dro</span><span 
-class="ectt-1000">&#x00A0;-</span><span 
-class="ectt-1000">&#x00A0;La</span><span 
-class="ectt-1000">&#x00A0;Zona</span><span 
-class="ectt-1000">&#x00A0;Fantasma.oga</span></span></span>&#x201D;, for the
-     four implementations.</li></ol>
-                                                                  
-
-                                                                  
-<!--l. 154--><p class="noindent" >
+<!--l. 146--><p class="noindent" >Considering the RMSE &#x0028;Root Mean Square Error&#x0029; as distortion measure,
+generate the RD curve considering a set of di&#xFB00;erent simulated transmission
+environments &#x0028;use <a 
+href="https://man7.org/linux/man-pages/man8/tc.8.html" >tc</a>&#x0029; of one audio sequence &#x0028;remember that you can use one of the
+samples found in the <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">data</span></span></span> directory of the intercom&#x2019;s repo&#x0029;, for the four
+implementations.
+</p><!--l. 154--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-60003"></a>Timming</h3>
 <!--l. 156--><p class="noindent" >Please, &#xFB01;nish this milestone at most in one week.
+                                                                  
+
+                                                                  
 </p><!--l. 158--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
