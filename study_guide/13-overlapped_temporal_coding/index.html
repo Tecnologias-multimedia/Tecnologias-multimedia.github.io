@@ -440,46 +440,60 @@ class="MathClass-rel">=</mo> <mn>2</mn></math>.
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >o</mi></math>
-is   the   number   of   frames   to   overlap   between   adajacent   chunks.
+is    the    number    of    overlapped    frames    between    adajacent    chunks.
 <!--l. 92--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->C</mi><mo 
-class="MathClass-open">&#x005B;</mo><mo 
-class="MathClass-punc">:</mo> <mi 
->o</mi><mo 
-class="MathClass-close">&#x005D;</mo></math>
-represents the &#xFB01;rst <!--l. 92--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->o</mi></math>
-framees of the chunk <!--l. 92--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->C</mi></math>
-and <!--l. 92--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->C</mi><mo 
+display="inline" ><msub><mrow 
+><mstyle mathvariant="bold"><mi 
+>C</mi></mstyle></mrow><mrow 
+><mi 
+>i</mi><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msub 
+><mo 
 class="MathClass-open">&#x005B;</mo><mo 
 class="MathClass-bin">&#x2212;</mo><mi 
 >o</mi> <mo 
 class="MathClass-punc">:</mo><mo 
 class="MathClass-close">&#x005D;</mo></math>
-the last <!--l. 92--><math 
+represents the last <!--l. 92--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
->x</mi> <mo 
-class="MathClass-bin">&#x2212;</mo> <mi 
 >o</mi></math>
-frames of chunk C, where <!--l. 92--><math 
+frames of chunk <!--l. 92--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mstyle mathvariant="bold"><mi 
+>C</mi></mstyle></mrow><mrow 
+><mi 
+>i</mi><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msub 
+></math>,
+and <!--l. 92--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mstyle mathvariant="bold"><mi 
+>C</mi></mstyle></mrow><mrow 
+><mi 
+>i</mi><mo 
+class="MathClass-bin">+</mo><mn>1</mn></mrow></msub 
+><mo 
+class="MathClass-open">&#x005B;</mo><mo 
+class="MathClass-punc">:</mo> <mi 
+>o</mi><mo 
+class="MathClass-close">&#x005D;</mo></math>
+the &#xFB01;rst <!--l. 92--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
->x</mi></math>
-is the number of frames in <!--l. 92--><math 
+>o</mi></math>
+frames of the chunk <!--l. 92--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->C</mi></math>.</span></div><!--tex4ht:label?: x1-4009r1 -->
+display="inline" ><msub><mrow 
+><mstyle mathvariant="bold"><mi 
+>C</mi></mstyle></mrow><mrow 
+><mi 
+>i</mi><mo 
+class="MathClass-bin">+</mo><mn>1</mn></mrow></msub 
+></math>.</span></div><!--tex4ht:label?: x1-4009r1 -->
                                                                   
 
                                                                   
@@ -493,12 +507,12 @@ href="#x1-2001r1">1<!--tex4ht:ref: fig:3_chunks --></a>.
  id="x1-50001.2"></a>Reducing the data overhead</h4>
 <!--l. 102--><p class="noindent" >Unfortunately, the previous algorithm sends twice the DWT coe&#xFB03;cients of the overlapped areas
 &#x0028;in the Fig.&#x00A0;<a 
-href="#x1-4009r2">2<!--tex4ht:ref: fig:subbands --></a>, <!--l. 104--><math 
+href="#x1-4009r2">2<!--tex4ht:ref: fig:subbands --></a>, <!--l. 103--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mo 
 class="MathClass-open">&#x007B;</mo><msub><mrow 
-><mi 
->C</mi></mrow><mrow 
+><mstyle mathvariant="bold"><mi 
+>C</mi></mstyle></mrow><mrow 
 ><mi 
 >i</mi><mo 
 class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msub 
@@ -509,13 +523,13 @@ class="MathClass-bin">&#x2212;</mo><mi
 class="MathClass-punc">:</mo><mo 
 class="MathClass-close">&#x005D;</mo><mo 
 class="MathClass-punc">.</mo><msup><mrow 
-><mi 
->L</mi></mrow><mrow 
+><mstyle mathvariant="bold"><mi 
+>l</mi></mstyle></mrow><mrow 
 ><mn>2</mn></mrow></msup 
 ><mo 
 class="MathClass-punc">,</mo><msub><mrow 
-><mi 
->C</mi></mrow><mrow 
+><mstyle mathvariant="bold"><mi 
+>C</mi></mstyle></mrow><mrow 
 ><mi 
 >i</mi><mo 
 class="MathClass-bin">+</mo><mn>1</mn></mrow></msub 
@@ -525,13 +539,13 @@ class="MathClass-punc">:</mo> <mi
 >o</mi><mo 
 class="MathClass-close">&#x005D;</mo><mo 
 class="MathClass-punc">.</mo><msup><mrow 
-><mi 
->L</mi></mrow><mrow 
+><mstyle mathvariant="bold"><mi 
+>l</mi></mstyle></mrow><mrow 
 ><mn>2</mn></mrow></msup 
 ><mo 
 class="MathClass-punc">,</mo><msub><mrow 
-><mi 
->C</mi></mrow><mrow 
+><mstyle mathvariant="bold"><mi 
+>C</mi></mstyle></mrow><mrow 
 ><mi 
 >i</mi><mo 
 class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msub 
@@ -542,13 +556,13 @@ class="MathClass-bin">&#x2212;</mo><mi
 class="MathClass-punc">:</mo><mo 
 class="MathClass-close">&#x005D;</mo><mo 
 class="MathClass-punc">.</mo><msup><mrow 
-><mi 
->H</mi></mrow><mrow 
+><mstyle mathvariant="bold"><mi 
+>h</mi></mstyle></mrow><mrow 
 ><mn>2</mn></mrow></msup 
 ><mo 
 class="MathClass-punc">,</mo><msub><mrow 
-><mi 
->C</mi></mrow><mrow 
+><mstyle mathvariant="bold"><mi 
+>C</mi></mstyle></mrow><mrow 
 ><mi 
 >i</mi><mo 
 class="MathClass-bin">+</mo><mn>1</mn></mrow></msub 
@@ -558,13 +572,13 @@ class="MathClass-punc">:</mo> <mi
 >o</mi><mo 
 class="MathClass-close">&#x005D;</mo><mo 
 class="MathClass-punc">.</mo><msup><mrow 
-><mi 
->H</mi></mrow><mrow 
+><mstyle mathvariant="bold"><mi 
+>h</mi></mstyle></mrow><mrow 
 ><mn>2</mn></mrow></msup 
 ><mo 
 class="MathClass-punc">,</mo><msub><mrow 
-><mi 
->C</mi></mrow><mrow 
+><mstyle mathvariant="bold"><mi 
+>C</mi></mstyle></mrow><mrow 
 ><mi 
 >i</mi><mo 
 class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msub 
@@ -575,13 +589,13 @@ class="MathClass-bin">&#x2212;</mo><mi
 class="MathClass-punc">:</mo><mo 
 class="MathClass-close">&#x005D;</mo><mo 
 class="MathClass-punc">.</mo><msup><mrow 
-><mi 
->H</mi></mrow><mrow 
+><mstyle mathvariant="bold"><mi 
+>h</mi></mstyle></mrow><mrow 
 ><mn>1</mn></mrow></msup 
 ><mo 
 class="MathClass-punc">,</mo><msub><mrow 
-><mi 
->C</mi></mrow><mrow 
+><mstyle mathvariant="bold"><mi 
+>C</mi></mstyle></mrow><mrow 
 ><mi 
 >i</mi><mo 
 class="MathClass-bin">+</mo><mn>1</mn></mrow></msub 
@@ -591,22 +605,29 @@ class="MathClass-punc">:</mo> <mi
 >o</mi><mo 
 class="MathClass-close">&#x005D;</mo><mo 
 class="MathClass-punc">.</mo><msup><mrow 
-><mi 
->H</mi></mrow><mrow 
+><mstyle mathvariant="bold"><mi 
+>h</mi></mstyle></mrow><mrow 
 ><mn>1</mn></mrow></msup 
 ><mo 
 class="MathClass-close">&#x007D;</mo></math>&#x0029;.
 To avoid this waste of bandwidth, we can reuse the received coe&#xFB03;cients of the
 overlapped areas. This procedure has been described in the Fig.&#x00A0;<a 
-href="#x1-5001r3">3<!--tex4ht:ref: fig:overlapping --></a>. As it can be seen,
-the encoding algorithm is identical to the previous one except in that only the central
-&#x0028;stereo&#x0029; coe&#xFB03;cients are sent. The rest of coe&#xFB03;cients that are needed to compute
-the inverse transform are extracted from the neighbor chunks &#x0028;represented
+href="#x1-5001r3">3<!--tex4ht:ref: fig:overlapping --></a>, and, it can be
+seen, the encoding algorithm is identical to the previous one except in that only the
+central &#x0028;stereo&#x0029; coe&#xFB03;cients are sent. The rest of coe&#xFB03;cients that are needed to
+compute the inverse transform are extracted from the neighbor chunks &#x0028;represented
 in the DWT domain&#x0029;. Notice that now, the number of sent coe&#xFB03;cients is
-<!--l. 113--><math 
+<!--l. 115--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->x</mi></math>.
+display="inline" ><mstyle 
+class="text"><mtext  >len</mtext></mstyle><mo 
+class="MathClass-open">&#x0028;</mo><msub><mrow 
+><mstyle mathvariant="bold"><mi 
+>C</mi></mstyle></mrow><mrow 
+><mi 
+>i</mi></mrow></msub 
+><mo 
+class="MathClass-close">&#x0029;</mo></math>.
 </p>
    <hr class="figure" /><div class="figure" 
 >
@@ -616,7 +637,7 @@ display="inline" ><mi
                                                                   
 
                                                                   
-<!--l. 117--><p class="noindent" ><div style="text-align:center;"> <img width=800 src="graphics/overlapping.svg" /> </div>  <a 
+<!--l. 119--><p class="noindent" ><div style="text-align:center;"> <img width=800 src="graphics/overlapping.svg" /> </div>  <a 
  id="x1-5001r3"></a>
 <a 
  id="x1-5002"></a>
@@ -624,7 +645,7 @@ display="inline" ><mi
 ><span class="id">
 Figure&#x00A0;3:      </span><span  
 class="content">Block      overlapping      in      the      DWT      domain      for
-<!--l. 119--><math 
+<!--l. 121--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >l</mi> <mo 
@@ -634,14 +655,14 @@ Only the shady coe&#xFB03;cients are transmitted.                             </
 
                                                                   
    </div><hr class="endfigure" />
-<!--l. 135--><p class="indent" >   The codec now can be described by:
+<!--l. 137--><p class="indent" >   The codec now can be described by:
 </p>
    <h4 class="likesubsectionHead"><a 
  id="x1-60001.2"></a>Encoder:</h4>
-<!--l. 138--><p class="noindent" >
+<!--l. 140--><p class="noindent" >
      </p><ol  class="enumerate1" >
      <li 
-  class="enumerate" id="x1-6002x1">For <!--l. 139--><math 
+  class="enumerate" id="x1-6002x1">For <!--l. 141--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >i</mi> <mo 
@@ -653,7 +674,7 @@ class="MathClass-rel">&#x22EF;</mo><mspace width="0.17em" class="thinspace"/><mo
 class="MathClass-close">&#x007D;</mo></math>:
          <ol  class="enumerate2" >
          <li 
-  class="enumerate" id="x1-6004x1">Input chunk <!--l. 141--><math 
+  class="enumerate" id="x1-6004x1">Input chunk <!--l. 143--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -663,7 +684,7 @@ display="inline" ><msub><mrow
 ></math>.
          </li>
          <li 
-  class="enumerate" id="x1-6006x2">Compute decomposition <!--l. 142--><math 
+  class="enumerate" id="x1-6006x2">Compute decomposition <!--l. 144--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -686,7 +707,7 @@ class="MathClass-open">&#x0028;</mo><msub><mrow
 class="MathClass-close">&#x0029;</mo></math>.
          </li>
          <li 
-  class="enumerate" id="x1-6008x3">Send <!--l. 143--><math 
+  class="enumerate" id="x1-6008x3">Send <!--l. 145--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -695,14 +716,14 @@ display="inline" ><msub><mrow
 >i</mi></mrow></msub 
 ></math>.</li></ol>
      </li></ol>
-<!--l. 147--><p class="noindent" >
+<!--l. 149--><p class="noindent" >
 </p>
    <h4 class="likesubsectionHead"><a 
  id="x1-70001.2"></a>Decoder:</h4>
-<!--l. 148--><p class="noindent" >
+<!--l. 150--><p class="noindent" >
      </p><ol  class="enumerate1" >
      <li 
-  class="enumerate" id="x1-7002x1"><!--l. 149--><math 
+  class="enumerate" id="x1-7002x1"><!--l. 151--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -713,7 +734,7 @@ class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msub
 class="MathClass-rel">=</mo> <mn>0</mn></math>.
      </li>
      <li 
-  class="enumerate" id="x1-7004x2">Input decomposition <!--l. 150--><math 
+  class="enumerate" id="x1-7004x2">Input decomposition <!--l. 152--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -722,7 +743,7 @@ display="inline" ><msub><mrow
 ></math>.
      </li>
      <li 
-  class="enumerate" id="x1-7006x3">For <!--l. 151--><math 
+  class="enumerate" id="x1-7006x3">For <!--l. 153--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >i</mi> <mo 
@@ -734,7 +755,7 @@ class="MathClass-rel">&#x22EF;</mo><mspace width="0.17em" class="thinspace"/><mo
 class="MathClass-close">&#x007D;</mo></math>:
          <ol  class="enumerate2" >
          <li 
-  class="enumerate" id="x1-7008x1">Receive decomposition <!--l. 153--><math 
+  class="enumerate" id="x1-7008x1">Receive decomposition <!--l. 155--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -745,12 +766,12 @@ class="MathClass-bin">+</mo><mn>1</mn></mrow></msub
 ></math>.
          </li>
          <li 
-  class="enumerate" id="x1-7010x2">Build extended decomposition &#x0028;<!--l. 154--><math 
+  class="enumerate" id="x1-7010x2">Build extended decomposition &#x0028;<!--l. 156--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >l</mi> <mo 
 class="MathClass-rel">=</mo> <mn>2</mn></math>&#x0029;
-         <!--l. 154--><math 
+         <!--l. 156--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -889,7 +910,7 @@ class="MathClass-punc">.</mo><msup><mrow
 ></math>.
          </li>
          <li 
-  class="enumerate" id="x1-7012x3">Compute extended chunk <!--l. 156--><math 
+  class="enumerate" id="x1-7012x3">Compute extended chunk <!--l. 158--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -913,7 +934,7 @@ class="MathClass-open">&#x0028;</mo><msub><mrow
 class="MathClass-close">&#x0029;</mo></math>.
          </li>
          <li 
-  class="enumerate" id="x1-7014x4">Output <!--l. 157--><math 
+  class="enumerate" id="x1-7014x4">Output <!--l. 159--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -929,7 +950,7 @@ class="MathClass-bin">&#x2212;</mo><mi
 class="MathClass-close">&#x005D;</mo></math>.
          </li>
          <li 
-  class="enumerate" id="x1-7016x5"><!--l. 158--><math 
+  class="enumerate" id="x1-7016x5"><!--l. 160--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -949,7 +970,7 @@ class="MathClass-rel">&#x2190;</mo> <msub><mrow
                                                                   
          </li>
          <li 
-  class="enumerate" id="x1-7018x6"><!--l. 159--><math 
+  class="enumerate" id="x1-7018x6"><!--l. 161--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
 ><mi 
@@ -965,11 +986,11 @@ class="MathClass-rel">&#x2190;</mo> <msub><mrow
 class="MathClass-bin">+</mo><mn>1</mn></mrow></msub 
 ></math>.</li></ol>
      </li></ol>
-<!--l. 169--><p class="noindent" >
+<!--l. 171--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
  id="x1-80002"></a>What you have to do?</h3>
-<!--l. 171--><p class="noindent" >
+<!--l. 173--><p class="noindent" >
      </p><ol  class="enumerate1" >
      <li 
   class="enumerate" id="x1-8002x1">In                         a                         module                         named
@@ -978,19 +999,19 @@ class="MathClass-bin">+</mo><mn>1</mn></mrow></msub
      </li>
      <li 
   class="enumerate" id="x1-8004x2">Compare the RD &#x0028;Rate/Distortion&#x0029; curves with Temporal_Coding.</li></ol>
-<!--l. 178--><p class="noindent" >
+<!--l. 180--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-90003"></a>Timming</h3>
-<!--l. 180--><p class="noindent" >Please, present your results in one week.
-</p><!--l. 182--><p class="noindent" >
+<!--l. 182--><p class="noindent" >Please, present your results in one week.
+</p><!--l. 184--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-100004"></a>Deliverables</h3>
-<!--l. 184--><p class="noindent" >The module overlapped_temporal_decorrelate.py. Store it at the <a 
+<!--l. 186--><p class="noindent" >The module overlapped_temporal_decorrelate.py. Store it at the <a 
 href="https://github.com/Tecnologias-multimedia/intercom" >root directory</a> of
 your InterCom&#x2019;s repo.
-</p><!--l. 188--><p class="noindent" >
+</p><!--l. 190--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-110005"></a>Resources</h3>

@@ -86,10 +86,10 @@ the number of frames/chunk.
   \centering
   \svg{graphics/subbands}{550}
   \caption{Structure in the DWT domain of an extended chunk for
-    $l=2$. $o$ is the number of frames to overlap between adajacent
-    chunks. $C[:o]$ represents the first $o$ framees of the chunk $C$
-    and $C[-o:]$ the last $x-o$ frames of chunk C, where $x$ is the
-    number of frames in $C$.}
+    $l=2$. $o$ is the number of overlapped frames between adajacent
+    chunks. ${\mathbf C}_{i-1}[-o:]$ represents the last $o$ frames of
+    chunk ${\mathbf C}_{i-1}$, and ${\mathbf C}_{i+1}[:o]$ the first
+    $o$ frames of the chunk ${\mathbf C}_{i+1}$.}
   \label{fig:subbands}
 \end{figure}
 
@@ -100,17 +100,19 @@ and the result can be seen in the Fig.~\ref{fig:3_chunks}.
 \subsection{Reducing the data overhead}
 
 Unfortunately, the previous algorithm sends twice the DWT coefficients
-of the overlapped areas (in the Fig.~\ref{fig:subbands},
-$\{C_{i-1}[-o:].L^2, C_{i+1}[:o].L^2, C_{i-1}[-o:].H^2,
-C_{i+1}[:o].H^2, C_{i-1}[-o:].H^1, C_{i+1}[:o].H^1\}$). To avoid this
-waste of bandwidth, we can reuse the received coefficients of the
-overlapped areas. This procedure has been described in the
-Fig.~\ref{fig:overlapping}. As it can be seen, the encoding algorithm
-is identical to the previous one except in that only the central
-(stereo) coefficients are sent. The rest of coefficients that are
-needed to compute the inverse transform are extracted from the
-neighbor chunks (represented in the DWT domain). Notice that now, the
-number of sent coefficients is $x$.
+of the overlapped areas (in the Fig.~\ref{fig:subbands}, $\{{\mathbf
+  C}_{i-1}[-o:].{\mathbf l}^2, {\mathbf C}_{i+1}[:o].{\mathbf l}^2,
+{\mathbf C}_{i-1}[-o:].{\mathbf h}^2, {\mathbf C}_{i+1}[:o].{\mathbf
+  h}^2, {\mathbf C}_{i-1}[-o:].{\mathbf h}^1, {\mathbf
+  C}_{i+1}[:o].{\mathbf h}^1\}$). To avoid this waste of bandwidth, we
+can reuse the received coefficients of the overlapped areas. This
+procedure has been described in the Fig.~\ref{fig:overlapping}, and,
+it can be seen, the encoding algorithm is identical to the previous
+one except in that only the central (stereo) coefficients are
+sent. The rest of coefficients that are needed to compute the inverse
+transform are extracted from the neighbor chunks (represented in the
+DWT domain). Notice that now, the number of sent coefficients is
+$\text{len}({\mathbf C}_i)$, the number of samples in ${\mathbf C}_i$.
 
 \begin{figure}
   \centering
