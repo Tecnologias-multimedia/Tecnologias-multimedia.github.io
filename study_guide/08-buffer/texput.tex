@@ -94,7 +94,7 @@ The following guidelines have been used to implement the
   execution
   \href{https://en.wikipedia.org/wiki/Thread_(computing)}{thread},
   decoupled from the \verb|record_send_and_play()| method. But notice
-  that using the sounddevice package this is achived without using the
+  that using the sounddevice package and this can be achived without using the
   \href{https://docs.python.org/3/library/threading.html}{threading}
   nor
   \href{https://docs.python.org/3/library/multiprocessing.html}{multiprocessing}
@@ -106,7 +106,7 @@ The following guidelines have been used to implement the
 This is an overview of the implementation:
 
 \begin{lstlisting}[language=Python]
-  # Buffering InterCom
+  # Interruption handler
   def record_send_and_play():
     chunk = record()  # (1)
     packed_chunk = pack(chunk)  # (2)
@@ -114,6 +114,7 @@ This is an overview of the implementation:
     chunk = unbuffer_next_chunk()  # (4)
     play(chunk)  # (5)
 
+  # (Main, not a new) thread
   def receive_and_buffer():
     packed_chunk = receive()  # (1)
     chunk_number, chunk = unpack(packed_chunk)  # (2)
@@ -122,7 +123,9 @@ This is an overview of the implementation:
 
 Notice that the Step (4) of the method \verb|record_send_and_play()|
 extractcs from the buffer an unpacked chunk. The chunks are buffered
-in the Step (3) of the method \verb|receive_and_buffer()|.
+in the Step (3) of the method \verb|receive_and_buffer()|. Notice also
+that the Step (1) of \verb|receive_and_buffer()| is a blocking method
+that will return with every new received chunk.
 
 %\begin{pseudocode}{Buffering\_InterCom}{~}
 %  \PROCEDURE{record\_send\_and\_play}{~}
