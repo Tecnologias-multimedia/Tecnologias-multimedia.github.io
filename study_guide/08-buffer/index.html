@@ -38,7 +38,7 @@ class="ecrm-1200">- </span><a
 href="https://www.ual.es" ><span 
 class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
-class="ecrm-1200">October 20, 2021</span></div>
+class="ecrm-1200">October 30, 2021</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
@@ -201,7 +201,7 @@ class="ectt-1000">receive_and_buffer&#x0028;&#x0029;</span></span></span> is run
 href="https://en.wikipedia.org/wiki/Thread_(computing)" >thread</a>,
      decoupled from the <span class="obeylines-h"><span class="verb"><span 
 class="ectt-1000">record_send_and_play&#x0028;&#x0029;</span></span></span> method. But notice that using
-     the sounddevice package this is achived without using the <a 
+     the sounddevice package and this can be achived without using the <a 
 href="https://docs.python.org/3/library/threading.html" >threading</a>
      nor <a 
 href="https://docs.python.org/3/library/multiprocessing.html" >multiprocessing</a> packages because the interruption handler &#x0028;the
@@ -220,9 +220,9 @@ class="ecit-1000">&#x00A0;</span><span
 class="ecit-1000">&#x00A0;</span><span 
 class="ecit-1000">#</span><span 
 class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">Buffering</span><span 
+class="ecit-1000">Interruption</span><span 
 class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">InterCom</span><span 
+class="ecit-1000">handler</span><span 
 class="ectt-1000">&#x00A0;</span><br /><span class="label"><a 
  id="x1-1021r2"></a></span><span 
 class="ectt-1000">&#x00A0;</span><span 
@@ -313,6 +313,24 @@ class="ectt-1000">&#x00A0;</span><br /><span class="label"><a
  id="x1-1027r8"></a></span><span 
 class="ectt-1000">&#x00A0;</span><br /><span class="label"><a 
  id="x1-1028r9"></a></span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">#</span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">&#x0028;</span><span 
+class="ecit-1000">Main</span><span 
+class="ecit-1000">,</span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">not</span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">a</span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">new</span><span 
+class="ecit-1000">&#x0029;</span><span 
+class="ecit-1000">&#x00A0;</span><span 
+class="ecit-1000">thread</span><span 
+class="ectt-1000">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-1029r10"></a></span><span 
 class="ectt-1000">&#x00A0;</span><span 
 class="ectt-1000">&#x00A0;</span><span 
 class="ectt-1000">def</span><span 
@@ -320,7 +338,7 @@ class="ectt-1000">&#x00A0;</span><span
 class="ectt-1000">receive_and_buffer</span><span 
 class="ectt-1000">&#x0028;&#x0029;:</span><span 
 class="ectt-1000">&#x00A0;</span><br /><span class="label"><a 
- id="x1-1029r10"></a></span><span 
+ id="x1-1030r11"></a></span><span 
 class="ectt-1000">&#x00A0;</span><span 
 class="ectt-1000">&#x00A0;</span><span 
 class="ectt-1000">&#x00A0;</span><span 
@@ -336,7 +354,7 @@ class="ecit-1000">#</span><span
 class="ecit-1000">&#x00A0;</span><span 
 class="ecit-1000">&#x0028;1&#x0029;</span><span 
 class="ectt-1000">&#x00A0;</span><br /><span class="label"><a 
- id="x1-1030r11"></a></span><span 
+ id="x1-1031r12"></a></span><span 
 class="ectt-1000">&#x00A0;</span><span 
 class="ectt-1000">&#x00A0;</span><span 
 class="ectt-1000">&#x00A0;</span><span 
@@ -357,7 +375,7 @@ class="ecit-1000">#</span><span
 class="ecit-1000">&#x00A0;</span><span 
 class="ecit-1000">&#x0028;2&#x0029;</span><span 
 class="ectt-1000">&#x00A0;</span><br /><span class="label"><a 
- id="x1-1031r12"></a></span><span 
+ id="x1-1032r13"></a></span><span 
 class="ectt-1000">&#x00A0;</span><span 
 class="ectt-1000">&#x00A0;</span><span 
 class="ectt-1000">&#x00A0;</span><span 
@@ -375,31 +393,35 @@ class="ecit-1000">&#x00A0;</span><span
 class="ecit-1000">&#x0028;3&#x0029;</span>
    
    </div>
-<!--l. 123--><p class="indent" >   Notice that the Step &#x0028;4&#x0029; of the method <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">record_send_and_play&#x0028;&#x0029;</span></span></span> extractcs from
-the bu&#xFB00;er an unpacked chunk. The chunks are bu&#xFB00;ered in the Step &#x0028;3&#x0029; of the method
+<!--l. 124--><p class="indent" >   Notice that the Step &#x0028;4&#x0029; of the method <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">record_send_and_play&#x0028;&#x0029;</span></span></span> extractcs
+from the bu&#xFB00;er an unpacked chunk. The chunks are bu&#xFB00;ered in the Step &#x0028;3&#x0029;
+of the method <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">receive_and_buffer&#x0028;&#x0029;</span></span></span>. Notice also that the Step &#x0028;1&#x0029; of
 <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">receive_and_buffer&#x0028;&#x0029;</span></span></span>.
+class="ectt-1000">receive_and_buffer&#x0028;&#x0029;</span></span></span> is a blocking method that will return with every new
+received chunk.
 </p>
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
  id="x1-20002"></a>What do you have to do?</h3>
-<!--l. 148--><p class="noindent" >Using the real scenario &#x0028;two hosts in di&#xFB00;erent LANs&#x0029; used in the previous milestone,
+<!--l. 151--><p class="noindent" >Using the real scenario &#x0028;two hosts in di&#xFB00;erent LANs&#x0029; used in the previous milestone,
 or using a simulated scenario, execute <span class="obeylines-h"><span class="verb"><span 
 class="ectt-1000">buffer.py</span></span></span> to inter-communicate two users
 &#x0028;one user in the case of the simulation&#x0029;. Use the <span class="obeylines-h"><span class="verb"><span 
 class="ectt-1000">--buffering_time</span></span></span> parameter to
-&#xFB01;nd the minimum delay that provides a good QoE.
-</p><!--l. 154--><p class="noindent" >
+&#xFB01;nd the minimum delay that provides a good QoE, for di&#xFB00;erent jitter con&#xFB01;gurations
+&#x0028;value, correlation, and distribution&#x0029;.
+</p><!--l. 158--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-30003"></a>Timming</h3>
-<!--l. 156--><p class="noindent" >Please, &#xFB01;nish this milestone in one week.
-</p><!--l. 158--><p class="noindent" >
+<!--l. 160--><p class="noindent" >Please, &#xFB01;nish this milestone in one week.
+</p><!--l. 162--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-40004"></a>Deliverables</h3>
-<!--l. 160--><p class="noindent" >A report explaining your experiment and the corresponding results.
-</p><!--l. 162--><p class="noindent" >
+<!--l. 164--><p class="noindent" >A report explaining your experiment and the corresponding results.
+</p><!--l. 166--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-50005"></a>Resources</h3>
@@ -413,6 +435,9 @@ class="ecti-1000">Computer  Networking:  A</span>
 class="ecti-1000">Top-Down Approach Featuring the Internet</span></a>. Pearson, 2013.
 </p>
    </div>
+                                                                  
+
+                                                                  
 <a 
  id="Q1-1-6"></a>
     
