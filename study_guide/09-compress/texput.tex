@@ -34,7 +34,7 @@ modules:
   between consecutive bytes is slighly increased. This should increase
   the
   \href{https://en.wikipedia.org/wiki/Data_compression_ratio}{(data)
-    compression ratio}
+    compression ratio}.
 \begin{figure}
   \begin{center}
     \myfig{graphics/reordering}{5cm}{500}
@@ -43,11 +43,11 @@ modules:
   \label{fig:reordering}
 \end{figure}
 \item \verb|DEFLATE_serial2.py|: Similar to \verb|compress_serial.py|, but
-  reseting DEFLATE at each new chunk-channel. The idea here is to see
-  if DEFLATE is exploiting the redundancy between the consecutive
-  channels.
+  reseting DEFLATE at each new chunk-channel, i.e., compressing each
+  chunk-channel independtly. The idea here is to see if DEFLATE is
+  exploiting the redundancy between the consecutive channels.
 \item \verb|DEFLATE_byteplanes2.py|: Similar to
-  \verb|compress_serial.py| (channels are concatenated), but 2
+  \verb|compress_serial.py| (samples are de-interleaved), but 2
   code-streams are generated, one for the LSB (Low Significant Byte)
   plane and another for the MSB (Most Significant Byte) plane, working
   with 16 bits/sample. The idea here is to see if the MSB can be
