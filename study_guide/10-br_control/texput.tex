@@ -8,7 +8,7 @@
 \subsection{Quantization}
 This discussion is reffered only to the
 \href{https://en.wikipedia.org/wiki/Quantization_(signal_processing)}{quantization}
-of digital signals.
+of digital signals. Quantizers can be also applied to analog signals.
 
 At the hardware level, the samples of audio are usually represented
 using \href{https://en.wikipedia.org/wiki/Pulse-code_modulation}{PCM
@@ -119,14 +119,13 @@ performing:
 
 Notice that you will find four implementations related to this milestone:
 \begin{enumerate}
-\item \verb|BR_control_no.py|: Uses a constant $\Delta$. There is not BR
-  control.
+\item \verb|BR_control_no.py|: Uses a constant
+  $\Delta>0$.\footnote{$\Delta$ must be always bigger than $0$, by
+definition, and this does not depend on the bit-rate control.} There
+  is not BR control.
 \item \verb|BR_control_add_lost.py|: Every second runs:
   \begin{equation}
-    \begin{array}{l}
-      \Delta = \Delta + L \\
-      \Delta = \Delta - 1,
-    \end{array}
+    \Delta = \Delta + L - 1
   \end{equation}
   where $L$ is the number of lost (received) chunks in the previous
   second. Notice that this heuristic supposes that the interlocutor is
@@ -146,15 +145,17 @@ Notice that you will find four implementations related to this milestone:
 
 \section{What you have to do?}
 
-Considering the RMSE (Root Mean Square Error) as distortion measure,
-generate the RD curve considering a set of different simulated
-transmission environments (use
+Considering the
+\href{https://en.wikipedia.org/wiki/Root-mean-square_deviation}{RMSE
+  (Root Mean Square Error)} as distortion measure between the sent and
+the received audio signal, generate the RD curve considering a set of
+different simulated transmission environments (use
 \href{https://man7.org/linux/man-pages/man8/tc.8.html}{tc}) of one
 audio sequence (remember that you can use one of the samples found in
 the \verb|data| directory of the intercom's repo), for the four
 implementations. Notice that you can use the
-\verb|--minimal_quantization_step| to generate the different points of
-the RD curves.
+\verb|--minimal_quantization_step| parameter to generate the different
+points of the RD curves.
 
 \section{Timming}
 

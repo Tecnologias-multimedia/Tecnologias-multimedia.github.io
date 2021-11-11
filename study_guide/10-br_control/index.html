@@ -39,7 +39,7 @@ class="ecrm-1200">- </span><a
 href="https://www.ual.es" ><span 
 class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
-class="ecrm-1200">November 10, 2021</span></div>
+class="ecrm-1200">November 11, 2021</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
@@ -48,7 +48,8 @@ class="ecrm-1200">November 10, 2021</span></div>
    <h4 class="subsectionHead"><span class="titlemark">1.1   </span> <a 
  id="x1-20001.1"></a>Quantization</h4>
 <!--l. 9--><p class="noindent" >This discussion is re&#xFB00;ered only to the <a 
-href="https://en.wikipedia.org/wiki/Quantization_(signal_processing)" >quantization</a> of digital signals.
+href="https://en.wikipedia.org/wiki/Quantization_(signal_processing)" >quantization</a> of digital signals. Quantizers can
+be also applied to analog signals.
 </p><!--l. 13--><p class="indent" >   At the hardware level, the samples of audio are usually represented using
 <a 
 href="https://en.wikipedia.org/wiki/Pulse-code_modulation" >PCM &#x0028;Pulse Code Modulation&#x0029;</a>. In a PCM sample, the number of levels that
@@ -77,11 +78,11 @@ tuples of samples at the same time&#x00A0;<span class="cite">&#x005B;<a
 href="#Xvetterli2014foundations">4</a>&#x005D;</span>. SQ is used when the samples are decorrelated
 or althought are correlated, the decorrelation will be exploited in a <a 
 href="https://en.wikipedia.org/wiki/Entropy_encoding" >entropy coding</a>
-stage &#x0028;which in our case is DEFLATE&#x0029;, because the <a 
-href="https://en.wikipedia.org/wiki/Quantization_(signal_processing)#Rate%E2%80%93distortion_optimization" >coding e&#xFB03;ciency</a> provided by VQ
                                                                   
 
                                                                   
+stage &#x0028;which in our case is DEFLATE&#x0029;, because the <a 
+href="https://en.wikipedia.org/wiki/Quantization_(signal_processing)#Rate%E2%80%93distortion_optimization" >coding e&#xFB03;ciency</a> provided by VQ
 is marginal in this context&#x00A0;<span class="cite">&#x005B;<a 
 href="#Xvetterli2014foundations">4</a>&#x005D;</span>.
 </p><!--l. 46--><p class="indent" >   Quantizers can also be classi&#xFB01;ed into <a 
@@ -149,10 +150,10 @@ href="https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io
 </p>
    <h4 class="subsectionHead"><span class="titlemark">1.3   </span> <a 
  id="x1-40001.3"></a>The current implementation&#x0028;s&#x0029;</h4>
-<!--l. 100--><p class="noindent" >Bit-Rate &#x0028;BR&#x0029; control through quantization has been implemented in the
                                                                   
 
                                                                   
+<!--l. 100--><p class="noindent" >Bit-Rate &#x0028;BR&#x0029; control through quantization has been implemented in the
 class <span class="obeylines-h"><span class="verb"><span 
 class="ectt-1000">BR_Control*</span></span></span> of the modules <span 
 class="ectt-1000">br_control*.py</span>. This class overrides
@@ -309,36 +310,31 @@ class="ecit-1000">&#x0028;3&#x0029;</span>
      </p><ol  class="enumerate1" >
      <li 
   class="enumerate" id="x1-4010x1"><span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">BR_control_no.py</span></span></span>: Uses a constant <!--l. 122--><math 
+class="ectt-1000">BR_control_no.py</span></span></span>: Uses a constant <!--l. 123--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
->&#x0394;</mi></math>.
+>&#x0394;</mi> <mo 
+class="MathClass-rel">&#x003E;</mo> <mn>0</mn></math>.<span class="footnote-mark"><a 
+href="index2.html#fn1x0"><sup class="textsuperscript">1</sup></a></span><a 
+ id="x1-4011f1"></a> 
      There is not BR control.
      </li>
      <li 
-  class="enumerate" id="x1-4012x2"><span class="obeylines-h"><span class="verb"><span 
+  class="enumerate" id="x1-4013x2"><span class="obeylines-h"><span class="verb"><span 
 class="ectt-1000">BR_control_add_lost.py</span></span></span>: Every second runs: <table class="equation"><tr><td> <a 
- id="x1-4013r1"></a>
-     <!--l. 125--><math 
+ id="x1-4014r1"></a>
+     <!--l. 127--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
- <mtable  align="axis" style=""  
-equalrows="false" equalcolumns="false" class="array"> <mtr><mtd 
-class="array"  columnalign="left">  <mi 
+                                          <mi 
 >&#x0394;</mi> <mo 
 class="MathClass-rel">=</mo> <mi 
 >&#x0394;</mi> <mo 
 class="MathClass-bin">+</mo> <mi 
->L</mi>  </mtd>
-</mtr>  <mtr><mtd 
-class="array"  columnalign="left"> <mi 
->&#x0394;</mi> <mo 
-class="MathClass-rel">=</mo> <mi 
->&#x0394;</mi> <mo 
-class="MathClass-bin">&#x2212;</mo> <mn>1</mn><mo 
-class="MathClass-punc">,</mo> </mtd></mtr><!--l--></mtable>
+>L</mi> <mo 
+class="MathClass-bin">&#x2212;</mo> <mn>1</mn>
 </math></td><td class="eq-no">&#x0028;1&#x0029;</td></tr></table>
-     <!--l. 131--><p class="noindent" >where <!--l. 131--><math 
+     <!--l. 130--><p class="noindent" >where <!--l. 130--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
 >L</mi></math>
@@ -347,13 +343,13 @@ display="inline" ><mi
      of chunks.
      </p></li>
      <li 
-  class="enumerate" id="x1-4015x3"><span class="obeylines-h"><span class="verb"><span 
+  class="enumerate" id="x1-4016x3"><span class="obeylines-h"><span class="verb"><span 
 class="ectt-1000">BR_control_lost.py</span></span></span>: Every second runs: <table class="equation"><tr><td> <a 
- id="x1-4016r2"></a>
+ id="x1-4017r2"></a>
                                                                   
 
                                                                   
-     <!--l. 135--><math 
+     <!--l. 134--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
                                             <mi 
@@ -365,10 +361,10 @@ class="MathClass-punc">.</mo>
 </math></td><td class="eq-no">&#x0028;2&#x0029;</td></tr></table>
      </li>
      <li 
-  class="enumerate" id="x1-4018x4"><span class="obeylines-h"><span class="verb"><span 
+  class="enumerate" id="x1-4019x4"><span class="obeylines-h"><span class="verb"><span 
 class="ectt-1000">BR_control_conservative.py</span></span></span>: Every second runs: <table class="equation"><tr><td> <a 
- id="x1-4019r3"></a>
-     <!--l. 139--><math 
+ id="x1-4020r3"></a>
+     <!--l. 138--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
  <mtable  align="axis" style=""  
@@ -395,33 +391,35 @@ class="text"><mtext  >otherwise</mtext></mstyle><mo
 class="MathClass-punc">.</mo> </mtd></mtr><!--ll--></mtable>
 </math></td><td class="eq-no">&#x0028;3&#x0029;</td></tr></table>
      </li></ol>
-<!--l. 147--><p class="noindent" >
+<!--l. 146--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
  id="x1-50002"></a>What you have to do?</h3>
-<!--l. 149--><p class="noindent" >Considering the RMSE &#x0028;Root Mean Square Error&#x0029; as distortion measure, generate
-the RD curve considering a set of di&#xFB00;erent simulated transmission environments &#x0028;use
-<a 
-href="https://man7.org/linux/man-pages/man8/tc.8.html" >tc</a>&#x0029; of one audio sequence &#x0028;remember that you can use one of the samples found in
-the <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">data</span></span></span> directory of the intercom&#x2019;s repo&#x0029;, for the four implementations. Notice that
-you can use the <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">--minimal_quantization_step</span></span></span> to generate the di&#xFB00;erent points of
-the RD curves.
-</p><!--l. 159--><p class="noindent" >
+<!--l. 148--><p class="noindent" >Considering the <a 
+href="https://en.wikipedia.org/wiki/Root-mean-square_deviation" >RMSE &#x0028;Root Mean Square Error&#x0029;</a> as distortion measure between the
+sent and the received audio signal, generate the RD curve considering a set of
+di&#xFB00;erent simulated transmission environments &#x0028;use <a 
+href="https://man7.org/linux/man-pages/man8/tc.8.html" >tc</a>&#x0029; of one audio sequence
+&#x0028;remember that you can use one of the samples found in the <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">data</span></span></span> directory of the
+intercom&#x2019;s repo&#x0029;, for the four implementations. Notice that you can use the
+<span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">--minimal_quantization_step</span></span></span> parameter to generate the di&#xFB00;erent points of the RD
+curves.
+</p><!--l. 160--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-60003"></a>Timming</h3>
-<!--l. 161--><p class="noindent" >Please, &#xFB01;nish this milestone at most in one week.
+<!--l. 162--><p class="noindent" >Please, &#xFB01;nish this milestone at most in one week.
                                                                   
 
                                                                   
-</p><!--l. 163--><p class="noindent" >
+</p><!--l. 164--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-70004"></a>Deliverables</h3>
-<!--l. 165--><p class="noindent" >A report with the RD curves and the data necessary to redo the curves.
-</p><!--l. 167--><p class="noindent" >
+<!--l. 166--><p class="noindent" >A report with the RD curves and the data necessary to redo the curves.
+</p><!--l. 168--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-80005"></a>Resources</h3>
@@ -436,9 +434,10 @@ class="ecti-1000">Standards</span></a>. Kluwer Academic Publishers, 2003.
    </p>
    <p class="bibitem" ><span class="biblabel">
  &#x005B;2&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
- id="Xsayood2017introduction"></a>K.&#x00A0;Sayood. <a 
+ id="Xsayood2017introduction"></a>K.&#x00A0;Sayood.   <a 
 href="http://rahilshaikh.weebly.com/uploads/1/1/6/3/11635894/data_compression.pdf" ><span 
-class="ecti-1000">Introduction to data compression</span></a>. Morgan Kaufmann, 2017.
+class="ecti-1000">Introduction to Data Compression</span></a>.   Morgan  Kaufmann,
+   2017.
    </p>
    <p class="bibitem" ><span class="biblabel">
  &#x005B;3&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
