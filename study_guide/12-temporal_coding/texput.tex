@@ -14,7 +14,7 @@ subband\footnote{Notice that, beacuse the MST and the transform used
   are applied is irrelevant. For this reason, we could also have used
   the temporal transform inside of each channel of samples, and then,
   remove the spatial redundancy.}. As it can be seen in this
-\href{https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/audio_viewer.ipynb}{notebook},
+\href{https://github.com/Tecnologias-multimedia/intercom/blob/master/tools/audio_viewer.ipynb}{notebook},
 most audio signals show ``patterns'' of samples that tends to repeat,
 especially locally. Another clear source of temporal redundancy is
 that the neighbor audio samples usually show similar amplitude values.
@@ -34,12 +34,11 @@ efficient decorrelation algorithms based on
 Transform coding is based on the idea that we can decompose (we can
 generate a decomposition from) the input signal into a set of
 subbands, and if the used filters are the adecuate ones for removing
-the temporal redundancy, we can achieve a high transform
-\href{https://en.wikipedia.org/wiki/Coding_gain}{coding gain},
-accumulating most of the signal energy (and presumably most of the
-information) in a small number of subbands. When this happens, the
-quantization of the subbands will remove basically the least
-significant information (usually
+the temporal redundancy, we can achieve a high transform coding
+gain~\cite{sayood2017introduction}, accumulating most of the signal
+energy (and presumably most of the information) in a small number of
+subbands. When this happens, the quantization of the subbands will
+remove basically the least significant information (usually
 \href{https://en.wikipedia.org/wiki/Noise_(electronics)}{electronic
   noise}), allowing better compression ratios than those in which we
 apply the same quantization process to the original
@@ -69,23 +68,23 @@ and ${\mathbf w}_1$ (see the Figure~\ref{fig:PRFB}, and this
 the other hand, the synthesis transform matrix ${\mathbf K}^{-1}$
 denotes the taps of the corresponding synthesis FB that allows to
 recover ${\mathbf x}$ (notice that in the figure,
-${\mathbf x}={\mathbf L}^i$, ${\mathbf w}_0={\mathbf L}^{i+1}$,
-${\mathbf w}_1={\mathbf H}^{i+1}$, $\tilde\phi={\mathbf K}_0$,
+${\mathbf x}={\mathbf l}^i$, ${\mathbf w}_0={\mathbf l}^{i+1}$,
+${\mathbf w}_1={\mathbf h}^{i+1}$, $\tilde\phi={\mathbf K}_0$,
 $\tilde\psi={\mathbf K}_1$, $\phi={\mathbf K}^{-1}_0$, and
 $\psi={\mathbf K}^{-1}_1$).
 
 % An intro to PRFBs
-Let's suppose now that the filters (represented by the taps of)
-${\mathbf K}_0$ and ${\mathbf K}_1$ are applied to the input signal
-${\mathbf x}$ (now a sequence of $N$ samples) using a
+Let's suppose now that the analysis filters (represented by the taps
+of) ${\mathbf K}_0$ and ${\mathbf K}_1$ are applied to the input
+signal ${\mathbf x}$ (now a sequence of $N$ samples) using a
 \href{https://en.wikipedia.org/wiki/Kernel_(image_processing)}{convolution}
 (without splitting $x$ into blocks). Let's also suppose (as happens in
 the MST) that ${\mathbf K}_0$ is a low-pass filter and ${\mathbf K}_1$
 is a high-pass filter, and that the
 \href{https://en.wikipedia.org/wiki/Filter_(signal_processing)#The_transfer_function}{transfer
   function}\footnote{The response of the filter to the
-  \href{https://en.wikipedia.org/?title=Unit_impulse&redirect=no}{unit
-    impulse}.} of both filters
+\href{https://en.wikipedia.org/?title=Unit_impulse&redirect=no}{unit
+  impulse}.} of both filters
 \href{https://en.wikipedia.org/wiki/Filter_bank#Perfect_reconstruction_filter_banks}{are
   one the inverse of the other}. Under these assumptions, the complete
 (analysis/synthesis) transform is called a (2-channels)
@@ -97,19 +96,20 @@ by 2) of ${\mathbf w}_0$ and ${\mathbf w}_1$ (see the
 \href{https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/PRFB.ipynb}{notebook}). Notice
 that this subsampling is possible because the
 \href{https://en.wikipedia.org/wiki/Aliasing}{aliasing}\footnote{Because
-  the filters are not ideal, the bandwidth of the filtered signals
-  ${\mathbf w}_0$ and ${\mathbf w}_1$ is bigger than half of the
-  bandwidth of ${\mathbf x}$. Therefore, subsampling at a ratio of one
-  of each two coefficients, we are generating aliasing. See the
-  \href{https://en.wikipedia.org/wiki/Nyquist-Shannon_sampling_theorem}{sampling
-    theorem}.}  generated in the low-pass subband is compensated by
-the aliasing generated in the high-pass subband. To achieve this, the
+the filters are not ideal, the bandwidth of the filtered signals
+${\mathbf w}_0$ and ${\mathbf w}_1$ is bigger than half of the
+bandwidth of ${\mathbf x}$. Therefore, subsampling at a ratio of one
+of each two coefficients, we are generating aliasing. See the
+\href{https://en.wikipedia.org/wiki/Nyquist-Shannon_sampling_theorem}{sampling
+  theorem}.}  generated in the low-pass subband is compensated by the
+aliasing generated in the high-pass subband. To achieve this, the
 \href{https://en.wikipedia.org/wiki/Filter_(signal_processing)#The_transfer_function}{frequency
   response} of ${\mathbf K}_0$ must be equal to the mirrored frequency
 response of ${\mathbf K}_1$, and obviously, both filters must have the
-same bandwidth~\cite{sayood2017introduction}. In this situation, in
-which ${\mathbf K}_1$ and ${\mathbf K}_2$ are mirror filters, we say
-that they form a
+same
+\href{https://en.wikipedia.org/wiki/Bandwidth_(signal_processing)}{bandwidth}~\cite{sayood2017introduction}. In
+this situation, in which ${\mathbf K}_1$ and ${\mathbf K}_2$ are
+mirror filters, we say that they form a
 \href{https://en.wikipedia.org/wiki/Quadrature_mirror_filter}{Quadrature
   Mirror Filters (QMF) Bank}.
 
@@ -120,7 +120,7 @@ PRFBs.\footnote{Notice that our matrix $K$ would have $M$ rows in this
   case, and also $M$ colums, to satisfy that
   ${\mathbf K}^{-1}={\mathbf K}^{\text T}$ if we are implementing an
   orthogonal transform.}  These filters can analyze (and synthesize)
-the signal $x$, decomposing it in
+the signal ${\mathbf x}$, decomposing it in
 (\href{https://en.wikipedia.org/wiki/Low-pass_filter#Ideal_and_real_filters}{almost
   for sure}) overlaping frequency subbands with different
 bandwidth. The question here is to know how many filters should be
@@ -250,7 +250,7 @@ DWT using the MST filters and lifting.
       {\mathbf l}^l_i & = & {\mathbf l}^{l-1}_{2i} + {\mathbf l}^{l-1}_{2i+1} \\
       {\mathbf h}^l_i & = & {\mathbf l}^{l-1}_{2i+1} - {\mathbf l}^{l-1}_{2i}.
     \end{array}
-    \label{eq:2dwt}
+    \label{eq:ldwt}
   \end{equation}
 
   The $l$-levels DWT splits the signal spectrum in $l+1$ subbands. If
@@ -263,24 +263,25 @@ DWT using the MST filters and lifting.
     coefficients are called AC (Alternating Current) coefficients.} it
   holds that
   \begin{equation}
-    1+\sum_{j=1}^l 2^{j-1}=2^n.
+    1+\sum_{j=1}^l 2^{j-1}=2^n,
   \end{equation}
+  i.e., the number of DWT coefficients is also $N$.
 
 \item DWT performs a number of lifting steps, each one with
   2 (sub)steps:
   \begin{enumerate}
   \item A \textbf{predict step}, that computes the ${\mathbf h}$
-    subbands as a prediction error (that should be minimized) between
-    the even samples (usually, the values used to predict) and the odd
-    samples (usually, the values predicted). For the MST filters, we
-    have that
+    subbands as a prediction error (that in general should be
+    minimized) between the even samples (usually, the values used to
+    predict) and the odd samples (usually, the values predicted). For
+    the MST filters, we have that (see Eq.~\ref{eq:ldwt})
     \begin{equation}
       {\mathbf h}^l_i = {\mathbf l}^{l-1}_{2i+1} - {\mathbf l}^{l-1}_{2i}.
     \end{equation}
     
   \item An \textbf{update step}, which computes the ${\mathbf l}$
     subbands considering (only) the even samples and the prediction
-    errors. For the MST, we have that
+    errors. For the MST, we have that (see also Eq.~\ref{eq:ldwt})
     \begin{equation}
       {\mathbf l}^l_i = 2{\mathbf l}^{l-1}_{2i} + {\mathbf h}^l_i.
     \end{equation}
@@ -302,22 +303,22 @@ response of the analysis low-pass filter (${\mathbf K}_0$ in the MST)
 to the
 \href{https://en.wikipedia.org/?title=Unit_impulse&redirect=no}{unit
   impulse}\footnote{The response of a filter to the unit impulse
-  characterize the filter because the output of the filter is the set
-  of taps of the filter.} is known as the scaling function and is
+characterize the filter because the output of the filter is the set of
+taps of the filter.} is known as the \emph{scaling function} and is
 usually denoted by $\tilde\phi$, the response of the analysis
-high-pass filter (${\mathbf K}_1$) is known as the wavelet function
-and it is usually denoted by $\tilde\psi$, the response of the
-synthesis low-pass filter (${\mathbf K}^{-1}_0$) is denoted by $\phi$
-and the synthesis high-pass filter (${\mathbf K}^{-1}_1$) is
+high-pass filter (${\mathbf K}_1$) is known as the \emph{wavelet
+function} and it is usually denoted by $\tilde\psi$, the response of
+the synthesis low-pass filter (${\mathbf K}^{-1}_0$) is denoted by
+$\phi$ and the synthesis high-pass filter (${\mathbf K}^{-1}_1$) is
 represented by $\psi$.
 
-For the MST it holds that $\tilde\phi\bot\tilde\psi$, that
-$\tilde\phi=\psi$ and that $\tilde\psi=\phi$, and this is also true
-for all orthogonal DWTs. Another important characteristic of
-orthogonal DWTs is that the filters cannot be
+For the MST it holds that $\tilde\phi\bot\tilde\psi$,
+$\tilde\phi=\psi$ and $\tilde\psi=\phi$, and this is also true for all
+orthogonal DWTs. Another important characteristic of orthogonal DWTs
+is that the filters cannot be
 \href{https://en.wikipedia.org/wiki/Symmetry}{symmetric}.\footnote{The
-  symmetry of the filters is important to produce the same type of
-  artifacts in the boundaries of the signal.}
+symmetry of the filters is important to produce the same type of
+artifacts in the boundaries of the signal.}
 
 %The dilated and translated versions of the wavelet function are
 %orthogonal~\cite{sayood2017introduction}.
@@ -398,9 +399,7 @@ Please, present your results in one week.
 
 \section{Deliverables}
 
-The module temporal\_coding.py. Store it at the
-\href{https://github.com/Tecnologias-multimedia/intercom}{root
-  directory} of your InterCom's repo.
+A report showing your results.
 
 \section{Resources}
 
