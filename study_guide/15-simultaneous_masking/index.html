@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="iso-8859-1" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN" 
+"http://www.w3.org/Math/DTD/mathml2/xhtml-math11-f.dtd" > 
+<html xmlns="http://www.w3.org/1999/xhtml"  
+> 
+<head><title>Tecnolog&#x00C3;&#x014B;as Multimedia - Study Guide - Milestone 13: Considering the
+simultaneous masking</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
+<meta name="generator" content="TeX4ht (https://tug.org/tex4ht/)" /> 
+<meta name="originator" content="TeX4ht (https://tug.org/tex4ht/)" /> 
+<!-- xhtml,mathml,html --> 
+<meta name="src" content="index.tex" /> 
+<link rel="stylesheet" type="text/css" href="index.css" /> 
+</head><body 
+>
+   <div class="maketitle">
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+
+<h2 class="titleHead"><a 
+href="https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN" >Tecnolog&#x00ED;as Multimedia</a> - Study Guide -
+Milestone 13: Considering the simultaneous
+masking</h2>
+ <div class="author" ><span 
+class="ecrm-1200">Vicente Gonz</span><span 
+class="ecrm-1200">&#x00E1;</span><span 
+class="ecrm-1200">lez Ruiz</span></div><br />
+<div class="date" ><span 
+class="ecrm-1200">November 29, 2021</span></div>
+   </div>
+   <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
+ id="x1-10001"></a>Description</h3>
+<!--l. 8--><p class="noindent" >
+</p>
+   <h4 class="subsectionHead"><span class="titlemark">1.1   </span> <a 
+ id="x1-20001.1"></a>Simultaneous masking</h4>
+<!--l. 9--><p class="noindent" >The HAS &#x0028;Human Auditory System&#x0029; has a &#xFB01;nite frequency resolution, which
+basically means that two di&#xFB00;erent tonal sounds with di&#xFB00;erent amplitudes can be
+heared only as one &#x0028;the loud one&#x0029; when they are closed enought&#x00A0;<span class="cite">&#x005B;<a 
+href="#Xbosi2003intro">1</a>&#x005D;</span>. Whe this
+happens, the DWT subband&#x00A0;<span class="cite">&#x005B;<a 
+href="#Xvetterli1995wavelets">2</a>&#x005D;</span> where the quiet sound is placed can be quantized
+more severly without perceiving that the quantization noise in such subband is higher
+&#x0028;see the Figure&#x00A0;<a 
+href="#x1-2001r1">1<!--tex4ht:ref: fig:SM --></a>&#x0029;. Notice that, the higher the quantization step, the higher the
+compression ratio.
+</p>
+   <hr class="figure" /><div class="figure" 
+>
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+<!--l. 21--><p class="noindent" ><div style="text-align:center;"> <img width=600 src="simultaneous_masking.png" /> </div>  <a 
+ id="x1-2001r1"></a>
+<a 
+ id="x1-2002"></a>
+<br />                                                                  </p><div class="caption" 
+><span class="id">
+Figure&#x00A0;1: </span><span  
+class="content">Simultaneous masking.                                      </span></div><!--tex4ht:label?: x1-2001r1 -->
+                                                                  
+
+                                                                  
+   </div><hr class="endfigure" />
+   <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
+ id="x1-30002"></a>What you have to do?</h3>
+<!--l. 29--><p class="noindent" >
+     </p><ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x1-3002x1">Write a generator of vectors of quantization steps. The generator should
+     analyze the energy of each DWT subband and decide, considering the
+     simultaneous  masking  e&#xFB00;ect,  the  vector  of  quantization  steps  &#x0028;one  for
+     subband&#x0029;..</li></ol>
+<!--l. 36--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
+ id="x1-40003"></a>Timming</h3>
+<!--l. 38--><p class="noindent" >This is a extra milestone. Take your time.
+</p><!--l. 40--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
+ id="x1-50004"></a>Deliverables</h3>
+<!--l. 42--><p class="noindent" >The module <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">simultaneous_masking.py</span></span></span> &#x0028;inheriting from <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">threshold.py</span></span></span>&#x0029;. Store it at
+the <a 
+href="https://github.com/Tecnologias-multimedia/intercom" >root directory</a> of your InterCom&#x2019;s repo.
+</p><!--l. 47--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
+ id="x1-60005"></a>Resources</h3>
+<!--l. 1--><p class="noindent" >
+</p>
+   <h3 class="likesectionHead"><a 
+ id="x1-70005"></a>References</h3>
+<!--l. 1--><p class="noindent" >
+   </p><div class="thebibliography">
+   <p class="bibitem" ><span class="biblabel">
+ &#x005B;1&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xbosi2003intro"></a>M.&#x00A0;Bosi and R.E. Goldberd.  <a 
+href="https://last.hit.bme.hu/download/vidtechlab/fcc/literature/audio/audio_coding_standards_book.pdf" ><span 
+class="ecti-1000">Introduction to Digital Audio Coding and</span>
+   <span 
+class="ecti-1000">Standards</span></a>. Kluwer Academic Publishers, 2003.
+                                                                  
+
+                                                                  
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ &#x005B;2&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xvetterli1995wavelets"></a>M.&#x00A0;Vetterli  and  J.&#x00A0;Kova&#x010D;evi&#x0107;.     <a 
+href="http://waveletsandsubbandcoding.org/Repository/VetterliKovacevic95_Manuscript.pdf" ><span 
+class="ecti-1000">Wavelets  and  Subband  Coding</span></a>.
+   Prentice-hall, 1995.
+</p>
+   </div>
+<a 
+ id="Q1-1-8"></a>
+    
+</body></html> 
+
+                                                                  
+
+
