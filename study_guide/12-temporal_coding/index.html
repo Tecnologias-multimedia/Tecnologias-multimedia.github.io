@@ -39,7 +39,7 @@ class="ecrm-1200">- </span><a
 href="https://www.ual.es" ><span 
 class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
-class="ecrm-1200">November 27, 2021</span></div>
+class="ecrm-1200">December 1, 2021</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
@@ -62,7 +62,7 @@ values.
 redundancy of a sequence of audio. One of the most straightforward is <a 
 href="https://en.wikipedia.org/wiki/Differential_pulse-code_modulation" >Di&#xFB00;erential
 Pulse Code Modulation &#x0028;DPCM&#x0029;&#x00A0;<span class="cite">&#x005B;<a 
-href="#Xsayood2017introduction">2</a>&#x005D;</span></a>. However, there are more e&#xFB03;cient decorrelation
+href="#Xsayood2017introduction">3</a>&#x005D;</span></a>. However, there are more e&#xFB03;cient decorrelation
 algorithms based on <a 
 href="https://en.wikipedia.org/wiki/Transform_coding" >transform coding</a>, such as the used in the previous milestone and
                                                                   
@@ -73,7 +73,7 @@ in this one.
 decomposition from&#x0029; the input signal into a set of subbands, and if the used &#xFB01;lters
 are the adecuate ones for removing the temporal redundancy, we can achieve a high
 transform coding gain&#x00A0;<span class="cite">&#x005B;<a 
-href="#Xsayood2017introduction">2</a>&#x005D;</span>, accumulating most of the signal energy &#x0028;and presumably
+href="#Xsayood2017introduction">3</a>&#x005D;</span>, accumulating most of the signal energy &#x0028;and presumably
 most of the information&#x0029; in a small number of subbands. When this happens,
 the quantization of the subbands will remove basically the least signi&#xFB01;cant
 information &#x0028;usually <a 
@@ -115,7 +115,7 @@ display="inline" ><mstyle mathvariant="bold"><mi
 &#x0028;see the previous milestone&#x0029; represents the taps of a 2-channels analysis
 <a 
 href="https://en.wikipedia.org/wiki/Filter_bank" >Filter Bank &#x0028;FB&#x0029;</a>&#x00A0;<span class="cite">&#x005B;<a 
-href="#Xvetterli1995wavelets">4</a>&#x005D;</span>, and the forward transform is in fact &#x201C;descomposing&#x201D;
+href="#Xvetterli1995wavelets">5</a>&#x005D;</span>, and the forward transform is in fact &#x201C;descomposing&#x201D;
 <!--l. 65--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="bold"><mi 
@@ -333,7 +333,7 @@ display="inline" ><msub><mrow
 ></math>, and
 obviously, both &#xFB01;lters must have the same <a 
 href="https://en.wikipedia.org/wiki/Bandwidth_(signal_processing)" >bandwidth</a>&#x00A0;<span class="cite">&#x005B;<a 
-href="#Xsayood2017introduction">2</a>&#x005D;</span>. In this situation, in which
+href="#Xsayood2017introduction">3</a>&#x005D;</span>. In this situation, in which
 <!--l. 111--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><msub><mrow 
@@ -508,7 +508,7 @@ href="index7.html#fn6x0"><sup class="textsuperscript">6</sup></a></span><a
      <li 
   class="enumerate" id="x1-6007x3">Using <a 
 href="https://en.wikipedia.org/wiki/Lifting_scheme" >lifting</a>&#x00A0;<span class="cite">&#x005B;<a 
-href="#Xsweldens1997building">3</a>&#x005D;</span>, which provides an extra speed-up factor of 2 compared
+href="#Xsweldens1997building">4</a>&#x005D;</span>, which provides an extra speed-up factor of 2 compared
      to the FB implementation. DWTs implemented with lifting do not need
      to downsample and upsample the subbands, an operation that is wasting
      the calculus of half of the coe&#xFB03;cients at each level of the cascade.</li></ol>
@@ -1356,7 +1356,7 @@ class="MathClass-punc">,</mo>
 display="inline" ><mn>1</mn><mo 
 class="MathClass-bin">&#x2215;</mo><mn>4</mn></math>
 is used to preserve the energy&#x00A0;<span class="cite">&#x005B;<a 
-href="#Xsweldens1997building">3</a>&#x005D;</span>. This transform is known as the <a 
+href="#Xsweldens1997building">4</a>&#x005D;</span>. This transform is known as the <a 
 href="https://en.wikipedia.org/wiki/Biorthogonal_wavelet" >biorthogonal</a>
 &#x0028;2,2&#x0029; of Cohen-Daubechies-Feauveau, and also as the linear transform.
 Biorthogonal<span class="footnote-mark"><a 
@@ -1490,21 +1490,24 @@ class="ectt-1000">temporal_no_overlapped_DWT_coding.py</span></span></span>. Not
 <!--l. 366--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mi 
->l</mi></math> of the
-DWT can have a high impact on the amount of energy concentration achieved by the
-DWT, and therefore, on the e&#xFB03;ciency of coding system. Show such impact.
-Experiment also with the wavelet name.
-</p><!--l. 397--><p class="noindent" >
+>l</mi></math> of
+the DWT &#x0028;computed using <a 
+href="https://pywavelets.readthedocs.io/en/latest/" >PyWavelets</a>&#x00A0;<span class="cite">&#x005B;<a 
+href="#Xlee2019pywavelets">2</a>&#x005D;</span>&#x0029; can have a high impact on the
+amount of energy concentration achieved by the DWT, and therefore, on the
+e&#xFB03;ciency of coding system. Show such impact. Experiment also with the wavelet
+name.
+</p><!--l. 398--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-110003"></a>Timming</h3>
-<!--l. 399--><p class="noindent" >Please, present your results in one week.
-</p><!--l. 401--><p class="noindent" >
+<!--l. 400--><p class="noindent" >Please, present your results in one week.
+</p><!--l. 402--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
  id="x1-120004"></a>Deliverables</h3>
-<!--l. 403--><p class="noindent" >A report showing your results.
-</p><!--l. 405--><p class="noindent" >
+<!--l. 404--><p class="noindent" >A report showing your results.
+</p><!--l. 406--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
  id="x1-130005"></a>Resources</h3>
@@ -1522,20 +1525,28 @@ class="ecti-1000">Transforms</span></a>. Rice University, 2013.
    </p>
    <p class="bibitem" ><span class="biblabel">
  &#x005B;2&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xlee2019pywavelets"></a>G.&#x00A0;Lee, R.&#x00A0;Gommers, F.&#x00A0;Waselewski, K.&#x00A0;Wohlfahrt, and A.&#x00A0;O&#x2019;Leary.
+   PyWavelets: A Python package for wavelet analysis. <span 
+class="ecti-1000">Journal of Open Source</span>
+   <span 
+class="ecti-1000">Software</span>, 4&#x0028;36&#x0029;:1237, 2019.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ &#x005B;3&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
  id="Xsayood2017introduction"></a>K.&#x00A0;Sayood.   <a 
 href="http://rahilshaikh.weebly.com/uploads/1/1/6/3/11635894/data_compression.pdf" ><span 
 class="ecti-1000">Introduction to Data Compression</span></a>.   Morgan  Kaufmann,
    2017.
    </p>
    <p class="bibitem" ><span class="biblabel">
- &#x005B;3&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ &#x005B;4&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
  id="Xsweldens1997building"></a>W.&#x00A0;Sweldens and P.&#x00A0;Schr&#x00F6;der. <a 
 href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.54.5600&rep=rep1&type=pdf" >Building Your Own Wavelets at Home</a>.
    <span 
 class="ecti-1000">Wavelets in Computer Graphics</span>, 1997.
    </p>
    <p class="bibitem" ><span class="biblabel">
- &#x005B;4&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ &#x005B;5&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
  id="Xvetterli1995wavelets"></a>M.&#x00A0;Vetterli  and  J.&#x00A0;Kova&#x010D;evi&#x0107;.     <a 
 href="http://waveletsandsubbandcoding.org/Repository/VetterliKovacevic95_Manuscript.pdf" ><span 
 class="ecti-1000">Wavelets  and  Subband  Coding</span></a>.

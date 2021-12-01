@@ -363,10 +363,11 @@ The linear transform is also invertible by simply reversing the steps:
 As usually, please, rebuild the RD curves considering also the
 temporal decorrelation. Use
 \verb|temporal_no_overlapped_DWT_coding.py|. Notice that the number of
-levels $l$ of the DWT can have a high impact on the amount of energy
-concentration achieved by the DWT, and therefore, on the efficiency of
-coding system. Show such impact. Experiment also with the wavelet
-name.
+levels $l$ of the DWT (computed using
+\href{https://pywavelets.readthedocs.io/en/latest/}{PyWavelets}~\cite{lee2019pywavelets})
+can have a high impact on the amount of energy concentration achieved
+by the DWT, and therefore, on the efficiency of coding system. Show
+such impact. Experiment also with the wavelet name.
 
 % \begin{enumerate}
 % \item In a module named temporal\_coding.py, inherit the class

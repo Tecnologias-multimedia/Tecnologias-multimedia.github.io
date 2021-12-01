@@ -59,6 +59,9 @@ been described in the following algorithm:
   \end{enumerate}
 \end{enumerate}
 
+Notice that we are following the NumPy~\cite{numpy,harris2020array}
+\href{https://www.pythoninformer.com/python-libraries/numpy/index-and-slice/}{slicing} notation.
+
 %Notice that we are sending for each chunk $2o+x$ coefficients
 %(stereo-coefficients, in the case of using 2 chanels), where $x$ is
 %the number of frames/chunk.
@@ -169,30 +172,33 @@ The codec now can be described by:
 %  \end{enumerate}
 %\end{enumerate}
 
-\subsection*{Decoder:}
+\subsection*{Decoder (ignores overlapping):}
+This decoder ignores the adjacent chunks in the DWT domain, but notice that it uses the right coefficients (those computed using overlapping chunks). This should provide reconstructions of the chunks with a higher quality that in the previous milestone.
 \begin{enumerate}
 \item For $i\in\{0,1,\cdots\}$:
   \begin{enumerate}
-  \item Input decomposition ${\mathbf D}_i$.
+  \item Input decomposition subset ${\mathbf D}_i$.
   \item Compute chunk ${\mathbf C}_i\leftarrow\text{DWT}^{-l}({\mathbf D}_i)$.
   \item Output ${\mathbf C}_i$.
   \end{enumerate}
 \end{enumerate}
 
-% \begin{enumerate}
-%\item $D_{-1}=0$.
-%\item Input decomposition $D_1$.
-%\item For $i\in\{1,2,\cdots\}$:
-%  \begin{enumerate}
-%  \item Receive decomposition $D_{i+1}$.
-%  \item Build extended decomposition ($l=2$) $E_i =
-%    D_{i-1}[-o:].L^2|D_i.L^2|D_{i+1}[:0].L^2|D_{i-1}[-o:].H^2|D_i.H^2|D_{i+1}[:0].H^2|D_{i-1}[-o:].H^1|D_i.H^1|D_{i+1}[:0].H^1$.
-%  \item Compute extended chunk $C_i\leftarrow\text{DWT}^{-l}(E_i)$.
-%  \item Output $C_i[o:-o]$.
-%  \item $D_{i-1} \leftarrow D_i$.
-%  \item $D_i \leftarrow D_{i+1}$.
-%  \end{enumerate}
-%\end{enumerate}
+\subsection*{Decoder (uses overlapping):}
+
+\begin{enumerate}
+\item ${\mathbf D}_{-1}={\mathbf 0}$.
+\item Input decomposition $D_1$.
+\item For $i\in\{1,2,\cdots\}$:
+  \begin{enumerate}
+  \item Receive decomposition ${\mathbf D}_{i+1}$.
+  \item Build extended decomposition (for $l=2$) ${\mathbf E}_i =
+    {\mathbf D}_{i-1}[-o:].{\mathbf l}^2|{\mathbf D}_i.{\mathbf l}^2|{\mathbf D}_{i+1}[:o].{\mathbf l}^2|{\mathbf D}_{i-1}[-o:].{\mathbf h}^2|{\mathbf D}_i.{\mathbf h}^2|{\mathbf D}_{i+1}[:o].{\mathbf h}^2|{\mathbf D}_{i-1}[-o:].{\mathbf h}^1|{\mathbf D}_i.{\mathbf h}^1|{\mathbf D}_{i+1}[:o].{\mathbf h}^1$.
+  \item Compute extended chunk ${\mathbf C}_i\leftarrow\text{DWT}^{-l}({\mathbf E}_i)$.
+  \item Output ${\mathbf C}_i[o:-o]$.
+  \item ${\mathbf D}_{i-1} \leftarrow {\mathbf D}_i$.
+  \item ${\mathbf D}_i \leftarrow {\mathbf D}_{i+1}$.
+  \end{enumerate}
+\end{enumerate}
 
 %Notice that the only that changes between this codec and the previous
 %one is that now, the inverse transform of the extended chunks uses the
@@ -208,13 +214,14 @@ The codec now can be described by:
   \verb|Temporal_No_Overlapped_DWT|, and create a class named
   \verb|Temporal_Overlapped_DWT| which must implement the codec
   described in the Section~\ref{sec:reducing}.
-\item Rebuild the RD curves to see how this improvement impacts on the
+\item Build the RD curves to see how this improvement impacts on the
   efficiency of intercom.
+\item Determine which decoder is better from the RD perspective.
 \end{enumerate}
 
 \section{Timming}
 
-Please, present your results in three weeks.
+Please, present your results in two weeks.
 
 \section{Deliverables}
 
