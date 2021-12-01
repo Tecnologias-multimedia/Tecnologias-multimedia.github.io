@@ -108,7 +108,7 @@ of the overlapped areas (in the Fig.~\ref{fig:subbands}, $\{{\mathbf
   D}_i.{\mathbf h}^1[:o/2]\}$). To avoid this waste of bandwidth, we
 can reuse the received coefficients of the overlapped areas. This
 procedure has been described in the Fig.~\ref{fig:overlapping}, and,
-it can be seen, the encoding algorithm is identical to the previous
+as it can be seen, the encoding algorithm is identical to the previous
 one except in that only the central (stereo) coefficients are
 sent. The rest of coefficients that are needed to compute the inverse
 transform are extracted from the neighbor chunks (represented in the
@@ -150,11 +150,11 @@ The codec now can be described by:
     C}_{i-1}[-o:]|{\mathbf C}_i|{\mathbf C}_{i+1}[:o]$.
   \item Compute decomposition ${\mathbf D}_i \leftarrow
     \text{DWT}^l({\mathbf E})$.
-  \item Output
-    $\Big\{{\mathbf D}_i.{\mathbf l}^l[\frac{o}{2^l}], {\mathbf
-      D}_i.{\mathbf h}^l[\frac{o}{2^l}], {\mathbf D}_i.{\mathbf
-      h}^{l-1}[\frac{o}{2^{l-1}}], \cdots, {\mathbf D}_i.{\mathbf
-      h}^1[\frac{o}{2}]\Big\}$.
+  \item Output decomposition subset
+    $\Big\{{\mathbf D}_i.{\mathbf l}^l[\frac{o}{2^l}:-\frac{o}{2^l}], {\mathbf
+      D}_i.{\mathbf h}^l[\frac{o}{2^l}:-\frac{o}{2^l}], {\mathbf D}_i.{\mathbf
+      h}^{l-1}[\frac{o}{2^{l-1}}:-\frac{o}{2^{l-1}}], \cdots, {\mathbf D}_i.{\mathbf
+      h}^1[\frac{o}{2}:-\frac{o}{2}]\Big\}$.
   \item ${\mathbf C}_{i-1}\leftarrow {\mathbf C}_i$.
   \item ${\mathbf C}_i\leftarrow {\mathbf C}_{i+1}$.
   \end{enumerate}
