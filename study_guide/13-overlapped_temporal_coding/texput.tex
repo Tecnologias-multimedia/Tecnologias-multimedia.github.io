@@ -59,8 +59,10 @@ been described in the following algorithm:
   \end{enumerate}
 \end{enumerate}
 
-Notice that we are following the NumPy~\cite{numpy,harris2020array}
-\href{https://www.pythoninformer.com/python-libraries/numpy/index-and-slice/}{slicing} notation.
+Notice that we are following the
+\href{https://numpy.org/doc/stable/reference/}{NumPy}~\cite{numpy,harris2020array}
+\href{https://www.pythoninformer.com/python-libraries/numpy/index-and-slice/}{slicing}
+notation.
 
 %Notice that we are sending for each chunk $2o+x$ coefficients
 %(stereo-coefficients, in the case of using 2 chanels), where $x$ is
@@ -190,7 +192,7 @@ This decoder ignores the adjacent chunks in the DWT domain, but notice that it u
 \item Input decomposition $D_1$.
 \item For $i\in\{1,2,\cdots\}$:
   \begin{enumerate}
-  \item Receive decomposition ${\mathbf D}_{i+1}$.
+  \item Input decomposition ${\mathbf D}_{i+1}$.
   \item Build extended decomposition (for $l=2$) ${\mathbf E}_i =
     {\mathbf D}_{i-1}[-o:].{\mathbf l}^2|{\mathbf D}_i.{\mathbf l}^2|{\mathbf D}_{i+1}[:o].{\mathbf l}^2|{\mathbf D}_{i-1}[-o:].{\mathbf h}^2|{\mathbf D}_i.{\mathbf h}^2|{\mathbf D}_{i+1}[:o].{\mathbf h}^2|{\mathbf D}_{i-1}[-o:].{\mathbf h}^1|{\mathbf D}_i.{\mathbf h}^1|{\mathbf D}_{i+1}[:o].{\mathbf h}^1$.
   \item Compute extended chunk ${\mathbf C}_i\leftarrow\text{DWT}^{-l}({\mathbf E}_i)$.
@@ -217,6 +219,8 @@ This decoder ignores the adjacent chunks in the DWT domain, but notice that it u
 \item Build the RD curves to see how this improvement impacts on the
   efficiency of intercom.
 \item Determine which decoder is better from the RD perspective.
+\item Which is the latency of the encoder and the decoders, measured
+  in chunk-times?
 \end{enumerate}
 
 \section{Timming}
