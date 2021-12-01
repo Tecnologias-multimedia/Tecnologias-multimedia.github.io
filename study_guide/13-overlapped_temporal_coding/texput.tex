@@ -119,7 +119,9 @@ $\text{len}({\mathbf C}_i)$, the number of samples in ${\mathbf C}_i$.
   \centering
   \svg{graphics/overlapping}{800}
   \caption{Block overlapping in the DWT domain for $l=2$. Only the
-    shady coefficients are transmitted.}
+    shadded coefficients are transmitted. Notice that, to be
+    reconstructed, each chunk depends on some coefficients of the
+    adjacent blocks (only some dependencies have been indicated).}
   \label{fig:overlapping}
 \end{figure}
 
@@ -202,7 +204,7 @@ The codec now can be described by:
 
 \begin{enumerate}
 \item In a module named \verb|temporal_overlapped_DWT_coding.py|,
-  inherit from \verb|temporal_np_overlapped_DWT_coding.py| the class
+  inherit from \verb|temporal_no_overlapped_DWT_coding.py| the class
   \verb|Temporal_No_Overlapped_DWT|, and create a class named
   \verb|Temporal_Overlapped_DWT| which must implement the codec
   described in the Section~\ref{sec:reducing}.
@@ -212,7 +214,7 @@ The codec now can be described by:
 
 \section{Timming}
 
-Please, present your results in two weeks.
+Please, present your results in three weeks.
 
 \section{Deliverables}
 
