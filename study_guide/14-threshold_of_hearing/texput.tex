@@ -65,10 +65,11 @@ should be applied to each subband.
   determine a suitable quantization step $\Delta_s$ for each subband
   $s$, supposing that the subband with the highest sentibility (those
   that represents audio signals close to $3$ KHz) should not be
-  quantized (or quantized with a $\Delta=1$).
-\item Quantize each subband with the corresponding $\Delta_s$.
-\item Obviously, at the receiver, the subbands should be dequantized
-  using the same quantization steps.
+  quantized (or quantized with a $\Delta=1$). Use the average of the
+  function defined by Eq.~\ref{eq:ToHH} in the corresponding subband
+  $s$ as $\Delta_s$.
+\item Quantize and dequantize each subband with the corresponding
+  $\Delta_s$, using a dead-zone quantizer.
 \end{enumerate}
 
 \section{Timming}
