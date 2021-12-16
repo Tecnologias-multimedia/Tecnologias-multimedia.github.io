@@ -6,12 +6,13 @@
 \section{Description}
 
 \subsection{Absolute Threshold of Human Hearing}
-Psychoacoustics has determined that the HAS (Human Auditory System) has a
-sensitivity
-(\href{https://en.wikipedia.org/wiki/Absolute_threshold_of_hearing}{threshold
-  of human hearing}) that depends on the frequency of the sound. This
-basically means that some subbands can be quantized with a larger
-quantization step than others without a noticeable increase of the
+Psychoacoustics has determined that the HAS (Human Auditory System)
+has a sensitivity that depends on the frequency of the sound, the so
+called THH
+(\href{https://en.wikipedia.org/wiki/Absolute_threshold_of_hearing}{Threshold
+  of Human Hearing}). This basically means that some subbands can be
+quantized with a larger quantization step than others without a
+noticeable increase (from a perfection perspective) of the
 quantization noise.
 
 \begin{figure}
@@ -41,21 +42,33 @@ the ${\mathbf l}^{N_{\text{levels}}}$ subband, it holds that
 \end{equation}
 being $W(\cdot)$ the bandwidth of the corresponding
 subband $s$. Therefore, considering that the bandwidth of the audio signal
-is 22050 Hz, the bandwidth $W({\mathbf h}^1)$ of the ${\mathbf h}^1$ subband is $11025$ Hz,
+is $22050$ Hz, the bandwidth $W({\mathbf h}^1)$ of the ${\mathbf h}^1$ subband is $11025$ Hz,
 $W({\mathbf h} ^2)=22025/4$, and so on. It also holds that
 \begin{equation}
   W({\mathbf l}^{N_{\text{levels}}}) = W({\mathbf h}^{N_{\text{levels}}}).
 \end{equation}
 
+The idea is to determine, knowning the frequencies represented in each
+DWT subband and the THH curve, the average quantization step that
+should be applied to each subband.
+
 \section{What you have to do?}
 
+%and
+%  considering that $\Delta$ is the ``master'' quantization step that
+%  will control the overall loss of quality,
+  
 \begin{enumerate}
 \item Given a $N_{\text{levels}}$, determine the bandwidth of each
   subband. Using these bandwidths, find the interval of frequencies of
-  each subband. Using these intervals, the Eq.~\ref{eq:ToHH}, and
-  considering that $\Delta$ is the ``master'' quantization step that
-  will control the overall loss of quality, determine a suitable
-  quantization step $\Delta_s$ for each subband $s$.
+  each subband. Using these intervals and the Eq.~\ref{eq:ToHH},
+  determine a suitable quantization step $\Delta_s$ for each subband
+  $s$, supposing that the subband with the highest sentibility (those
+  that represents audio signals close to $3$ KHz) should not be
+  quantized (or quantized with a $\Delta=1$).
+\item Quantize each subband with the corresponding $\Delta_s$.
+\item Obviously, at the receiver, the subbands should be dequantized
+  using the same quantization steps.
 \end{enumerate}
 
 \section{Timming}
