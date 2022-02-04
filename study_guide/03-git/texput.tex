@@ -19,7 +19,7 @@ hosting services such as \href{https://about.gitlab.com/}{GitLab} and
 \href{https://www.atlassian.com/git}{Altassian}/\href{https://bitbucket.org/product}{BitBucket},
 but GitHub is the most used one.} \cite{GitHub}, and how to use the
 \href{https://guides.github.com/introduction/flow/index.html}{The
-  GitHub (Work)Flow} and the
+  GitHub (Work-)Flow} and the
 \href{https://github.com/vicente-gonzalez-ruiz/fork_and_branch_git_workflow}{Fork-and-Branch
   Git Workflow} \cite{fork-and-branch-git-workflow}.
 
@@ -52,11 +52,10 @@ but GitHub is the most used one.} \cite{GitHub}, and how to use the
     sudo apt install git
   \end{lstlisting}
 
-\item
+\item (Optional)
   \href{https://docs.github.com/en/github/getting-started-with-github/github-glossary#clone}{Clone}
   (download) the Hello World repo. You need to click on the ``Code''
-  button (select ``https'', not ``download a
-  zip file''). Then run:
+  button (select ``https'', not ``download a zip file''). Then run:
 
   \begin{lstlisting}[language=bash]
     cd hello_world
@@ -67,7 +66,7 @@ but GitHub is the most used one.} \cite{GitHub}, and how to use the
   file written in
   \href{https://daringfireball.net/projects/markdown/}{Markdown}.
 
-\item \href{https://docs.github.com/en/github/getting-started-with-github/github-glossary#checkout}{Create (and switch to)} a
+\item (Optional) \href{https://docs.github.com/en/github/getting-started-with-github/github-glossary#checkout}{Create (and switch to)} a
   \href{https://docs.github.com/en/github/getting-started-with-github/github-glossary#feature-branch}{feature
     branch} called \texttt{improving\_readme}. In your terminal write:
   
@@ -75,7 +74,7 @@ but GitHub is the most used one.} \cite{GitHub}, and how to use the
     git checkout -b improving_readme
   \end{lstlisting}
   
-\item Modify the file \texttt{README.md}. Append to it, for example, a
+\item (Optional) Modify the file \texttt{README.md}. Append to it, for example, a
   link to the Hello World guide. Use an ASCII editor (\texttt{nano},
   for example):
 
@@ -89,7 +88,7 @@ but GitHub is the most used one.} \cite{GitHub}, and how to use the
     See the [Hello World](https://guides.github.com/activities/hello-world/) guide at GitHub.
   \end{lstlisting}
   
-\item
+\item (Optional)
   \href{https://docs.github.com/en/github/getting-started-with-github/github-glossary#commit}{Commit}
   your modification(s):
 
@@ -111,7 +110,7 @@ but GitHub is the most used one.} \cite{GitHub}, and how to use the
   (copy at GitHub of the) remote repo. This means that your
   \emph{local} has modifications that the \emph{origin} doesn't have yet.
 
-\item Synchronize your \emph{local} and the \emph{origin} using
+\item (Optional) Synchronize your \emph{local} and the \emph{origin} using
   \href{https://docs.github.com/en/github/getting-started-with-github/github-glossary#push}{push}:
 
   \begin{lstlisting}[language=bash]
