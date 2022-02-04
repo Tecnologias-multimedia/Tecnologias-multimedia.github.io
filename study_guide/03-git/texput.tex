@@ -8,7 +8,7 @@
   upquote=true
 }
 
-\section{Description}
+\section{Basic steps}
 
 To work in
 \href{https://github.com/Tecnologias-multimedia/intercom}{the InterCom
@@ -298,6 +298,20 @@ git pull upstream master
 \end{verbatim}
 
 \end{enumerate}
+
+\section{Some extra (and optional) configuration}
+
+\begin{verbatim}
+cat >> ~/.profile << EOF
+
+# Add branch name to the Bash prompt:
+parse_git_branch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+export PS1="\[\033[01;32m\][\u@\h\[\033[01;37m\] \W\[\033[01;32m\]]\$(parse_git_branch)\[\033[00m\]\$ "
+
+EOF
+\end{verbatim}
 
 \section{Timming}
 
