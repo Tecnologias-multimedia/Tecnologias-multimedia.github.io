@@ -22,7 +22,7 @@ quantization noise.
   \label{fig:ToHH}
 \end{figure}
 
-A good approximation of the ToHH (Threshold of Human Hearing) for a 20-years old person can be
+A good approximation of the THH (Threshold of Human Hearing) for a 20-years old person can be
 obtained with~\cite{bosi2003intro}
 \begin{equation}
   T(f)\text{[dB]} = 3.64(f\text{[kHz]})^{-0.8} - 6.5e^{f\text{[kHz]}-3.3)^2} + 10^{-3}(f\text{[kHz]})^4.
@@ -35,8 +35,9 @@ The number of DWT subbands
 \begin{equation}
   N_{\text{sb}} = N_{\text{levels}} + 1
 \end{equation}
-where $N_{\text{levels}}$ is the number of levels of the DWT. Except for
-the ${\mathbf l}^{N_{\text{levels}}}$ subband, it holds that
+where $N_{\text{levels}}$ is the number of levels of the DWT. Except
+for the ${\mathbf l}^{N_{\text{levels}}}$ subband (the lowest-pass
+frequency of the decomposition), it holds that
 \begin{equation}
   W({\mathbf h}^s) = \frac{1}{2}W({\mathbf h}^{s-1}),
 \end{equation}
@@ -49,8 +50,8 @@ $W({\mathbf h} ^2)=22025/4$, and so on. It also holds that
 \end{equation}
 
 The idea is to determine, knowning the frequencies represented in each
-DWT subband and the THH curve, the average quantization step that
-should be applied to each subband.
+DWT subband and the THH curve, the quantization step that should be
+applied to each subband.
 
 \section{What you have to do?}
 
