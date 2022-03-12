@@ -1,18 +1,23 @@
 \input{../definitions}
-\title{Linux audio and Sounddevice}
+\title{Linux audio basics and Sounddevice}
 
 \maketitle
 
 \section{The Linux Audio (probably partial) Stack}
-\begin{tabular}{cc}
-\multicolumn{2}{c}\href{https://en.wikipedia.org/wiki/List_of_Linux_audio_software}{Linux
-  Audio Applications} \\ \href{https://jackaudio.org/}{JACK} &
-\href{https://www.freedesktop.org/wiki/Software/PulseAudio/}{Pulse
-  Audio}
-\\ \multicolumn{2}{c}\href{https://www.alsa-project.org}{ALSA}
-\\ \multicolumn{2}{c}\href{https://www.alsa-project.org/wiki/Matrix:Main}{Sound
-  hardware}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\multicolumn{2}{c}{\href{https://en.wikipedia.org/wiki/List\_of\_Linux\_audio\_software}{Linux Audio Applications}} \\
+\hline
+\href{https://jackaudio.org/}{JACK} & \href{https://www.freedesktop.org/wiki/Software/PulseAudio/}{Pulse Audio} \\
+\hline
+\multicolumn{2}{c}{\href{https://www.alsa-project.org}{ALSA}} \\
+\hline
+\multicolumn{2}{c}{\href{https://www.alsa-project.org/wiki/Matrix:Main}{Sound hardware}} \\
+\hline
 \end{tabular}
+\end{center}
 
 \section{Advanced Linux Sound Architecture (ALSA)}
 ALSA is a software
@@ -21,8 +26,8 @@ and part of the Linux kernel (as a set of
 \href{https://wiki.archlinux.org/title/Kernel_module}{modules}) that
 provides an application programming interface (API), in
 \href{https://en.wikipedia.org/wiki/C_(programming_language)}{C}, for
-sound device drivers. For example, to show the modules related with
-ALSA currently loaded, run:
+sound device drivers~\cite{phillips2005user}. For example, to show the
+modules related with ALSA currently loaded, run:
 \begin{verbatim}
 lsmod | grep '^snd' | column -t
 \end{verbatim}
@@ -102,7 +107,7 @@ arecord -t raw -f cd | aplay -t raw -f cd
 \end{itemize}
 
 \subsection{\texttt{speaker-test}}
-\texttt{\href{https://linux.die.net/man/1/speaker-test}{speaker-test} allows to generate (by default) \href{https://en.wikipedia.org/wiki/Pink_noise}{pink noise} or a pure tone through the audio outputs. Examples:
+\texttt{\href{https://linux.die.net/man/1/speaker-test}{speaker-test}} allows to generate (by default) \href{https://en.wikipedia.org/wiki/Pink_noise}{pink noise} or a pure tone through the audio outputs. Examples:
 \begin{verbatim}
 speaker-test                       # Analog (copper or Bluetooth, if available) mono
 speaker-test -c 2                  # Analog (copper of Bluethooh, if available) stereo
@@ -111,8 +116,96 @@ speaker-test -c 8                  # Surround (usually through HDMI) 7.1, if ava
 \end{verbatim}
 
 \section{PulseAudio}
-pulseaudio-equalizer-ladspa
+
+\href{https://www.freedesktop.org/wiki/Software/PulseAudio/}{PulseAudio}
+  is a sound server system for POSIX OSes, meaning that it is a proxy
+  for your sound applications. It is an integral part of all relevant
+  modern Linux distributions and is used in various mobile devices, by
+  multiple vendors. It performs advanced operations on sound data as
+  it passes between your application and hardware. Things like
+  transferring audio to a different machine, changing the sample
+  format or channel count, or mixing several sounds into one
+  input/output, are easily achieved using
+  PulseAudio.~\cite{newmarch2017pulseaudio}
+
+Like ALSA, PulseAudio is dinamically configured using
+PulseAudio\href{https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/Modules/}{modules}. \texttt{\href{https://linux.die.net/man/1/pactl}{pactl}}
+is the command line tool for loading and downloading modules. For
+example, to use the equalizer
+\texttt{\href{https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/Equalizer/}{qpaeq}}
+that should be already installed in your computer if you are using
+PulseAudio, run:
+
+\begin{verbatim}
+pactl load-module module-equalizer-sink
+pulseaudio --kill && pulseaudio --start
+qpaeq &
+\end{verbatim}
+% Ver también: pulseaudio-equalizer-ladspa
+
+Another important PulseAudio application is the
+\texttt{\href{https://freedesktop.org/software/pulseaudio/pavucontrol/}{pavcontrol}}
+that is a mixer/VU-meter that handles sound applications, input and
+output audio devices.
+
+\section{JACK}
+
+Like PulseAudio, \href{http://jackaudio.org/}{JACK} (JACK Audio
+Connection Kit) is sound server that proxies between the audio
+applications (that must use JACK) and ALSA. JACK is the right choice
+if latency is important for you because it can be configured. Another
+interesting feature of JACK is that allows to define the connections
+(audio flows) between JACK-client applications (like in a real mixer
+desk). Finally, if you use MIDI apps and/or MIDI hardware, rely on
+JACK.
+
+All the functionality of JACK can be get through running
+\href{https://qjackctl.sourceforge.io/}{QjackCtl}:
+\begin{verbatim}
+qjackctl &
+\end{verbatim}
+that is a GUI for configuring the JACK server parameters and define the audio flows. Usually, the following options are available:
+\begin{enumerate}
+\item \texttt{Start:} the server.
+\item \texttt{Stop:} the server.
+\item \texttt{Quit:} kill the server.
+\item \texttt{Messages:} from the server.
+\item \texttt{Session:} show/hide the session manager window.
+\item \texttt{Setup:} the server. 
+\item \texttt{Connect:} the audio
+  applications. \href{http://www.rncbc.org/drupal/node/76}{Notice
+    that} all connections made in the Connections interface are kept
+  as long you don't power-cycle the JACK server (jackd). That is, all
+  connections will be lost when the JACK server or any of the client
+  application programs are closed or terminated.
+\item \texttt{Patchbay:} will keep all declared connections
+  automatically, as long as QjackCtl is kept alive. Moreover, you can
+  declare typical connection configuration that are carried out when
+  the related clients are executed.
+\item Play: start transport
+  \href{https://jackaudio.org/api/group__MIDIAPI.html}{timming
+    events}.
+\item Pause: stop transport timming events.
+\item Forward: transport timming events.
+\item Backward: transport timming event.
+\item Rewind: transport timming event.
+\end{enumerate}
+
+\section{sounddevice}
+\href{https://python-sounddevice.readthedocs.io}{sounddevice} is a
+Python \href{https://docs.python.org/3/tutorial/modules.html}{module}
+that provides bindings for the
+\href{http://www.portaudio.com/}{PortAudio
+  library}~\cite{sounddevice}.
+
+Let's see some examples of what sounddevice can do:
+
+\subsection*{Wiring the ADC and the DAC using a loop}
+\lstinputlisting[language=Python]{/home/vruiz/intercom/test/sounddevice/wire5.py}
+
+\subsection*{Wiring the ADC and the DAC using an interruption handler}
+\lstinputlisting[language=Python]{/home/vruiz/intercom/test/sounddevice/wire.py}
 
 \section{Resources}
 
-\bibliography{maths,data-compression,DWT,audio-coding}
+\bibliography{python,sound}
