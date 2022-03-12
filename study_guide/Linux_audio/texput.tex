@@ -1,5 +1,5 @@
 \input{../definitions}
-\title{Linux audio basics and Sounddevice}
+\title{Linux audio basics and \texttt{sounddevice}}
 
 \maketitle
 
@@ -117,7 +117,7 @@ speaker-test -c 8                  # Surround (usually through HDMI) 7.1, if ava
 
 \section{PulseAudio}
 
-\href{https://www.freedesktop.org/wiki/Software/PulseAudio/}{PulseAudio}
+\href{https://www.freedesktop.org/wiki/Software/PulseAudio/}{PulseAudio
   is a sound server system for POSIX OSes, meaning that it is a proxy
   for your sound applications. It is an integral part of all relevant
   modern Linux distributions and is used in various mobile devices, by
@@ -126,7 +126,7 @@ speaker-test -c 8                  # Surround (usually through HDMI) 7.1, if ava
   transferring audio to a different machine, changing the sample
   format or channel count, or mixing several sounds into one
   input/output, are easily achieved using
-  PulseAudio.~\cite{newmarch2017pulseaudio}
+  PulseAudio.}~\cite{newmarch2017pulseaudio}
 
 Like ALSA, PulseAudio is dinamically configured using
 PulseAudio\href{https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/Modules/}{modules}. \texttt{\href{https://linux.die.net/man/1/pactl}{pactl}}
