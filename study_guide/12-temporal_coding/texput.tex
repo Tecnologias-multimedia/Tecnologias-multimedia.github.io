@@ -395,6 +395,14 @@ such impact. Experiment also with the wavelet name.
 %   alternartive.
 % \end{enumerate}
 
+Visualize the effects (in the DWT domain) of quantization.
+\begin{verbatim}
+qjackctl & # Select sampling frequency 44100 Hz 
+python temporal_overlapped_DWT_coding.py -i 6 -o 6 --show_stats -q 8192
+# Connect the output of temporal_overlapped_DWT_coding.py to the input of dwt5.py
+python dwt5.py -d 9
+\end{verbatim}
+
 \section{Timming}
 
 Please, present your results in one week.

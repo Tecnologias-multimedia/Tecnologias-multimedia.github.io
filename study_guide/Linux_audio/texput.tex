@@ -1,0 +1,118 @@
+\input{../definitions}
+\title{Linux audio and Sounddevice}
+
+\maketitle
+
+\section{The Linux Audio (probably partial) Stack}
+\begin{tabular}{cc}
+\multicolumn{2}{c}\href{https://en.wikipedia.org/wiki/List_of_Linux_audio_software}{Linux
+  Audio Applications} \\ \href{https://jackaudio.org/}{JACK} &
+\href{https://www.freedesktop.org/wiki/Software/PulseAudio/}{Pulse
+  Audio}
+\\ \multicolumn{2}{c}\href{https://www.alsa-project.org}{ALSA}
+\\ \multicolumn{2}{c}\href{https://www.alsa-project.org/wiki/Matrix:Main}{Sound
+  hardware}
+\end{tabular}
+
+\section{Advanced Linux Sound Architecture (ALSA)}
+ALSA is a software
+\href{https://docs.kernel.org/sound/kernel-api/index.html}{framework}
+and part of the Linux kernel (as a set of
+\href{https://wiki.archlinux.org/title/Kernel_module}{modules}) that
+provides an application programming interface (API), in
+\href{https://en.wikipedia.org/wiki/C_(programming_language)}{C}, for
+sound device drivers. For example, to show the modules related with
+ALSA currently loaded, run:
+\begin{verbatim}
+lsmod | grep '^snd' | column -t
+\end{verbatim}
+
+\subsection{\texttt{amixer} and \texttt{alsamixer}}
+\texttt{\href{https://linux.die.net/man/1/amixer}{amixer}} (through the command line) and \texttt{\href{https://en.wikipedia.org/wiki/Alsamixer}{alsamixer}} (using also the command line but being ncurses-based) can be used to control the gain of the audio inputs and outputs. For example, to run \texttt{alsamixer}, in your terminal write:
+\begin{verbatim}
+alsamixer
+\end{verbatim}
+
+\subsection{\texttt{arecord}}
+\texttt{\href{https://linux.die.net/man/1/arecord}{arecord}} runs on
+ALSA to capture
+\href{https://en.wikipedia.org/wiki/Pulse-code_modulation}{PCM (Pulse
+  Code Modulation)} (by default, using the
+\href{https://en.wikipedia.org/wiki/WAV}{WAV} audio format) audio
+data, and provides information about the hardware, and also, about the
+audio servers. Some examples of use are:
+
+\begin{itemize}
+
+\item List the physical audio \href{https://en.wikipedia.org/wiki/Analog-to-digital_converter}{ADC}(s):
+\begin{verbatim}
+arecord -l      
+\end{verbatim}
+
+\item Show information about the ADC(s) capabilities (if \href{https://www.freedesktop.org/wiki/Software/PulseAudio/}{PulseAudio} is not running, remove \texttt{pasuspender --}):
+\begin{verbatim}
+pasuspender -- arecord -D hw:0,0 --dump-hw-params
+\end{verbatim}
+
+\item Idem, but using the default audio server (usually, PulseAudio):
+\begin{verbatim}
+arecord --dump-hw-params > /dev/null
+\end{verbatim}
+Usually, the software capabilities are higher than the hardware ones.
+
+\item List the virtual ADC(s) (\href{https://alsa.opensrc.org/Pcm-device}{PCM} outputs):
+\begin{verbatim}
+arecord -L
+\end{verbatim}
+
+\item Record raw (without header) audio in \href{https://en.wikipedia.org/wiki/Compact_Disc_Digital_Audio#Audio_format}{CD audio format}:
+\begin{verbatim}
+arecord -t raw -f cd > signed_int16_bits__little_endian__44100_frames_per_second__2_samples_per_frame.raw
+\end{verbatim}
+
+\end{itemize}
+
+\subsection{\texttt{aplay}}
+\texttt{\href{https://linux.die.net/man/1/aplay}{aplay}} is the
+companion PCM player of \texttt{arecord}. The playing capabilities
+used to be exactly the same than the provides by \texttt{arecord}.
+
+\begin{itemize}
+
+\item List the physical audio \href{https://en.wikipedia.org/wiki/Digital-to-analog_converter}{DAC}(s):
+\begin{verbatim}
+aplay -l      
+\end{verbatim}
+
+\item Idem, but listing the virtual DACs (PCM outputs):
+\begin{verbatim}
+aplay -L
+\end{verbatim}
+
+\item (Recording and) Playing directly through ALSA, using the physical DAC and DAC:
+\begin{verbatim}
+arecord -t raw -f cd | aplay -t raw -f cd
+pasuspender -- arecord -D hw:0,0 -t raw -f cd | pasuspender -- aplay -D hw:0,0 -t raw -f cd
+\end{verbatim}
+
+\item (Recording and) Playing throught the default sound server (usually PulseAudio), using the virtual DAC and DAC:
+\begin{verbatim}
+arecord -t raw -f cd | aplay -t raw -f cd
+\end{verbatim}
+\end{itemize}
+
+\subsection{\texttt{speaker-test}}
+\texttt{\href{https://linux.die.net/man/1/speaker-test}{speaker-test} allows to generate (by default) \href{https://en.wikipedia.org/wiki/Pink_noise}{pink noise} or a pure tone through the audio outputs. Examples:
+\begin{verbatim}
+speaker-test                       # Analog (copper or Bluetooth, if available) mono
+speaker-test -c 2                  # Analog (copper of Bluethooh, if available) stereo
+speaker-test -Dplug:spdif -c2      # Digital (SPDIF) stereo, if available
+speaker-test -c 8                  # Surround (usually through HDMI) 7.1, if available
+\end{verbatim}
+
+\section{PulseAudio}
+pulseaudio-equalizer-ladspa
+
+\section{Resources}
+
+\bibliography{maths,data-compression,DWT,audio-coding}
