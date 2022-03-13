@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
 <head><title>Tecnolog&#x00C3;&#x014B;as Multimedia - Study Guide - Milestone 4: &#x201C;wiring&#x201D; the ADC with the
-DAC, and measuring latencies</title> 
+DAC, and measuring latencies &#x0028;obsolete&#x0029;</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (https://tug.org/tex4ht/)" /> 
 <meta name="originator" content="TeX4ht (https://tug.org/tex4ht/)" /> 
@@ -24,7 +24,7 @@ DAC, and measuring latencies</title>
 <h2 class="titleHead"><a 
 href="https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN" >Tecnolog&#x00ED;as Multimedia</a> - Study Guide -
 Milestone 4: &#x201C;wiring&#x201D; the ADC with the DAC,
-and measuring latencies</h2>
+and measuring latencies &#x0028;obsolete&#x0029;</h2>
  <div class="author" ><a 
 href="https://cms.ual.es/UAL/personas/persona.htm?id=515256515553484875" ><span 
 class="ecrm-1200">Vicente Gonz</span><span 
@@ -39,7 +39,7 @@ class="ecrm-1200">- </span><a
 href="https://www.ual.es" ><span 
 class="ecrm-1200">UAL</span></a></div><br />
 <div class="date" ><span 
-class="ecrm-1200">September 29, 2021</span></div>
+class="ecrm-1200">March 13, 2022</span></div>
    </div>
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
  id="x1-10001"></a>Description</h3>
@@ -63,21 +63,24 @@ library.
  id="x1-20002"></a>What you have to do?</h3>
 <!--l. 25--><p class="noindent" >
      </p><ol  class="enumerate1" >
-     <li 
-  class="enumerate" id="x1-2002x1">Refresh some &#x0028;probably high-school&#x0029; ideas about <a 
+<li 
+  class="enumerate" id="x1-2002x1">
+     <!--l. 27--><p class="noindent" >Refresh some &#x0028;probably high-school&#x0029; ideas about <a 
 href="https://vicente-gonzalez-ruiz.github.io/the_sound/" >the sound</a>, <a 
 href="https://vicente-gonzalez-ruiz.github.io/human_auditory_system/" >the human
      auditory system</a>, and <a 
 href="https://vicente-gonzalez-ruiz.github.io/human_sound_perception/" >the human sound perception</a>.
-     </li>
-     <li 
-  class="enumerate" id="x1-2004x2">Download the Python <a 
-href="https://docs.python.org/3/tutorial/modules.html" >module</a> <a 
-href="https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire3.py" >wire3.py</a> with:
-     <!--l. 41-->
+     </p></li>
                                                                   
 
                                                                   
+<li 
+  class="enumerate" id="x1-2004x2">
+     <!--l. 37--><p class="noindent" >Download the Python <a 
+href="https://docs.python.org/3/tutorial/modules.html" >module</a> <a 
+href="https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire3.py" >wire3.py</a> with:
+</p>
+     <!--l. 41-->
      <div class="lstlisting" id="listing-1"><span class="label"><a 
  id="x1-2005r1"></a></span><span 
 class="ectt-1000">sudo</span><span 
@@ -87,7 +90,8 @@ class="ectt-1000">&#x00A0;</span><span
 class="ectt-1000">install</span><span 
 class="ectt-1000">&#x00A0;</span><span 
 class="ectt-1000">curl</span><span 
-class="ectt-1000">&#x00A0;</span><br /><span class="label"><a 
+class="ectt-1000">&#x00A0;</span><br /> 
+<span class="label"><a 
  id="x1-2006r2"></a></span><span 
 class="ectt-1000">curl</span><span 
 class="ectt-1000">&#x00A0;</span><span 
@@ -119,9 +123,8 @@ class="ectt-1000">&#x003E;</span><span
 class="ectt-1000">&#x00A0;</span><span 
 class="ectt-1000">wire3</span><span 
 class="ectt-1000">.</span><span 
-class="ectt-1000">py</span>
+class="ectt-1000">py</span></div>
      
-     </div>
      <!--l. 46--><p class="noindent" >This module implements the algorithm:
 </p>
      <!--l. 48-->
@@ -131,7 +134,8 @@ class="ectt-1000">while</span><span
 class="ectt-1000">&#x00A0;</span><span 
 class="ectt-1000">True</span><span 
 class="ectt-1000">:</span><span 
-class="ectt-1000">&#x00A0;</span><br /><span class="label"><a 
+class="ectt-1000">&#x00A0;</span><br /> 
+<span class="label"><a 
  id="x1-2008r2"></a></span><span 
 class="ectt-1000">&#x00A0;</span><span 
 class="ectt-1000">&#x00A0;</span><span 
@@ -153,7 +157,8 @@ class="ecit-1000">&#x00A0;</span><span
 class="ecit-1000">#</span><span 
 class="ecit-1000">&#x00A0;</span><span 
 class="ecit-1000">&#x0028;1&#x0029;</span><span 
-class="ectt-1000">&#x00A0;</span><br /><span class="label"><a 
+class="ectt-1000">&#x00A0;</span><br /> 
+<span class="label"><a 
  id="x1-2009r3"></a></span><span 
 class="ectt-1000">&#x00A0;</span><span 
 class="ectt-1000">&#x00A0;</span><span 
@@ -167,9 +172,8 @@ class="ectt-1000">&#x00A0;</span><span
 class="ecit-1000">&#x00A0;</span><span 
 class="ecit-1000">#</span><span 
 class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">&#x0028;2&#x0029;</span>
+class="ecit-1000">&#x0028;2&#x0029;</span></div>
      
-     </div>
      <!--l. 65--><p class="noindent" >where <span 
 class="ectt-1000">&#x0028;1&#x0029; </span>captures 1024 <a 
 href="https://python-sounddevice.readthedocs.io/en/0.3.12/api.html" >frames</a> from the ADC, and <span 
@@ -179,8 +183,9 @@ class="ectt-1000">sounddevice </span>a frame is a collection of one or more samp
      &#x0028;typically, a frame is a single sample if the number of channels is 1, or two
      samples if the number of channels is 2&#x0029;.
      </p></li>
-     <li 
-  class="enumerate" id="x1-2011x3">If you want to run this module right now and you are not using a <a 
+<li 
+  class="enumerate" id="x1-2011x3">
+     <!--l. 72--><p class="noindent" >If you want to run this module right now and you are not using a <a 
 href="https://en.wikipedia.org/wiki/Headset_(audio)" >headset</a>,
      check &#xFB01;rst that the output volumen of your <a 
 href="https://en.wikipedia.org/wiki/Headset_(audio)" >speakers</a> is not too high, otherwise
@@ -194,9 +199,11 @@ href="https://www.cirrusresearch.co.uk/blog/2012/03/tonal-noise-analysis-with-th
      Xubuntu, these controls are available through clicking in the speaker icon
      &#x0028;situated in the top-right corner of your screen&#x0029; of the Xfce window
      manager.
-     </li>
-     <li 
-  class="enumerate" id="x1-2013x4">OK, run the module with:
+     </p></li>
+<li 
+  class="enumerate" id="x1-2013x4">
+     <!--l. 89--><p class="noindent" >OK, run the module with:
+</p>
      <!--l. 91-->
      <div class="lstlisting" id="listing-3"><span class="label"><a 
  id="x1-2014r1"></a></span><span 
@@ -212,32 +219,35 @@ class="ecit-1000">&#x00A0;</span><span
 class="ecit-1000">Only</span><span 
 class="ecit-1000">&#x00A0;</span><span 
 class="ecit-1000">once</span><span 
-class="ectt-1000">&#x00A0;</span><br /><span class="label"><a 
+class="ectt-1000">&#x00A0;</span><br /> 
+<span class="label"><a 
  id="x1-2015r2"></a></span><span 
 class="ectt-1000">python</span><span 
 class="ectt-1000">&#x00A0;</span><span 
 class="ectt-1000">wire3</span><span 
 class="ectt-1000">.</span><span 
-class="ectt-1000">py</span>
+class="ectt-1000">py</span></div>
      
-     </div>
      <!--l. 96--><p class="noindent" >Stop &#x0028;killing&#x0029; the module by clicking the CTRL- and c-keys &#x0028;CTRL+c&#x0029;,
      simultaneously.
-     </p></li>
-     <li 
-  class="enumerate" id="x1-2017x5">Now, lets compute, experimentally, the latency experimented by <span 
-class="ectt-1000">wire3.py</span>.
-     <!--l. 112--><p class="noindent" >
-         </p><ol  class="enumerate2" >
-         <li 
-  class="enumerate" id="x1-2019x1">First, we need the tools: <a 
-href="http://sox.sourceforge.net/" >SoX</a>, <a 
-href="https://www.audacityteam.org/" >Audacity</a>, and <a 
-href="https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/plot_input.py" >plot_input.py</a>:
-         <!--l. 116-->
                                                                   
 
                                                                   
+     </p></li>
+<li 
+  class="enumerate" id="x1-2017x5">
+     <!--l. 109--><p class="noindent" >Now, lets compute, experimentally, the latency experimented by <span 
+class="ectt-1000">wire3.py</span>.
+     </p><!--l. 112--><p class="noindent" >
+         </p><ol  class="enumerate2" >
+<li 
+  class="enumerate" id="x1-2019x1">
+         <!--l. 112--><p class="noindent" >First, we need the tools: <a 
+href="http://sox.sourceforge.net/" >SoX</a>, <a 
+href="https://www.audacityteam.org/" >Audacity</a>, and <a 
+href="https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/plot_input.py" >plot_input.py</a>:
+</p>
+         <!--l. 116-->
          <div class="lstlisting" id="listing-4"><span class="label"><a 
  id="x1-2020r1"></a></span><span 
 class="ectt-1000">sudo</span><span 
@@ -247,7 +257,8 @@ class="ectt-1000">&#x00A0;</span><span
 class="ectt-1000">install</span><span 
 class="ectt-1000">&#x00A0;</span><span 
 class="ectt-1000">sox</span><span 
-class="ectt-1000">&#x00A0;</span><br /><span class="label"><a 
+class="ectt-1000">&#x00A0;</span><br /> 
+<span class="label"><a 
  id="x1-2021r2"></a></span><span 
 class="ectt-1000">sudo</span><span 
 class="ectt-1000">&#x00A0;</span><span 
@@ -256,7 +267,8 @@ class="ectt-1000">&#x00A0;</span><span
 class="ectt-1000">install</span><span 
 class="ectt-1000">&#x00A0;</span><span 
 class="ectt-1000">audacity</span><span 
-class="ectt-1000">&#x00A0;</span><br /><span class="label"><a 
+class="ectt-1000">&#x00A0;</span><br /> 
+<span class="label"><a 
  id="x1-2022r3"></a></span><span 
 class="ectt-1000">sudo</span><span 
 class="ectt-1000">&#x00A0;</span><span 
@@ -265,7 +277,8 @@ class="ectt-1000">&#x00A0;</span><span
 class="ectt-1000">install</span><span 
 class="ectt-1000">&#x00A0;</span><span 
 class="ectt-1000">curl</span><span 
-class="ectt-1000">&#x00A0;</span><br /><span class="label"><a 
+class="ectt-1000">&#x00A0;</span><br /> 
+<span class="label"><a 
  id="x1-2023r4"></a></span><span 
 class="ectt-1000">curl</span><span 
 class="ectt-1000">&#x00A0;</span><span 
@@ -297,12 +310,13 @@ class="ectt-1000">&#x003E;</span><span
 class="ectt-1000">&#x00A0;</span><span 
 class="ectt-1000">plot_input</span><span 
 class="ectt-1000">.</span><span 
-class="ectt-1000">py</span>
+class="ectt-1000">py</span></div>
          
-         </div>
          </li>
-         <li 
-  class="enumerate" id="x1-2025x2">Run:
+<li 
+  class="enumerate" id="x1-2025x2">
+         <!--l. 123--><p class="noindent" >Run:
+</p>
          <!--l. 125-->
          <div class="lstlisting" id="listing-5"><span class="label"><a 
  id="x1-2026r1"></a></span><span 
@@ -311,22 +325,24 @@ class="ectt-1000">&#x00A0;</span><span
 class="ectt-1000">install</span><span 
 class="ectt-1000">&#x00A0;</span><span 
 class="ectt-1000">matplotlib</span><span 
-class="ectt-1000">&#x00A0;</span><br /><span class="label"><a 
+class="ectt-1000">&#x00A0;</span><br /> 
+<span class="label"><a 
  id="x1-2027r2"></a></span><span 
 class="ectt-1000">python</span><span 
 class="ectt-1000">&#x00A0;</span><span 
 class="ectt-1000">plot_input</span><span 
 class="ectt-1000">.</span><span 
-class="ectt-1000">py</span>
+class="ectt-1000">py</span></div>
          
-         </div>
          <!--l. 130--><p class="noindent" >and check that the gain of the mic does not produce <a 
 href="https://en.wikipedia.org/wiki/Clipping_(audio)" >clipping</a> during the
          sound recording.
          </p></li>
-         <li 
-  class="enumerate" id="x1-2029x3"><a 
+<li 
+  class="enumerate" id="x1-2029x3">
+         <!--l. 134--><p class="noindent" ><a 
  id="x1-20283"></a> In a terminal, run:
+</p>
          <!--l. 136-->
          <div class="lstlisting" id="listing-6"><span class="label"><a 
  id="x1-2030r1"></a></span><span 
@@ -334,9 +350,8 @@ class="ectt-1000">python</span><span
 class="ectt-1000">&#x00A0;</span><span 
 class="ectt-1000">wire3</span><span 
 class="ectt-1000">.</span><span 
-class="ectt-1000">py</span>
+class="ectt-1000">py</span></div>
          
-         </div>
          <!--l. 140--><p class="noindent" >while you control the output volume of the speakers to produce a decaying
          coupling noisy e&#xFB00;ect between both devices &#x0028;the speaker&#x0028;s&#x0029; and the mic&#x0029;. If
          your desktop has not these <a 
@@ -345,9 +360,14 @@ href="https://www.google.com/search?q=male+to+male+audio+jack+cable&client=firef
          audio cable</a> and connect the line-output of your soundcard to the input of
          your sound card.
          </p></li>
-         <li 
-  class="enumerate" id="x1-2032x4">In a di&#xFB00;erent terminal &#x0028;keep <span 
+<li 
+  class="enumerate" id="x1-2032x4">
+                                                                  
+
+                                                                  
+         <!--l. 149--><p class="noindent" >In a di&#xFB00;erent terminal &#x0028;keep <span 
 class="ectt-1000">python wire3.py </span>running&#x0029;, run:
+</p>
          <!--l. 152-->
          <div class="lstlisting" id="listing-7"><span class="label"><a 
  id="x1-2033r1"></a></span><span 
@@ -362,36 +382,37 @@ class="ectt-1000">default</span><span
 class="ectt-1000">&#x00A0;</span><span 
 class="ectt-1000">test</span><span 
 class="ectt-1000">.</span><span 
-class="ectt-1000">wav</span>
+class="ectt-1000">wav</span></div>
          
-         </div>
          <!--l. 156--><p class="noindent" >to save the ADC&#x2019;s output to the &#xFB01;le <span 
 class="ectt-1000">test.wav</span>.
          </p></li>
-         <li 
-  class="enumerate" id="x1-2035x5">While <span 
+<li 
+  class="enumerate" id="x1-2035x5">
+         <!--l. 158--><p class="noindent" >While <span 
 class="ectt-1000">sox </span>is recording, produce some short sound &#x0028;for example, hit your
          laptop or your micro with one or your nails&#x0029;. Do this at least a
          couple of times more, to be sure that you record the sound and
          also the feedback of such sound. It&#x2019;s important the sound to be
          short &#x0028;a few miliseconds&#x0029; in order to visually recognize it and it&#x2019;s
          replicas.
-         </li>
-         <li 
-  class="enumerate" id="x1-2037x6">Stop <span 
+         </p></li>
+<li 
+  class="enumerate" id="x1-2037x6">
+         <!--l. 165--><p class="noindent" >Stop <span 
 class="ectt-1000">sox </span>by pressing the CTRL+c &#x0028;at the same time&#x0029;. This kills
          <span 
 class="ectt-1000">sox</span>.
-                                                                  
-
-                                                                  
-         </li>
-         <li 
-  class="enumerate" id="x1-2039x7">Kill <span 
+         </p></li>
+<li 
+  class="enumerate" id="x1-2039x7">
+         <!--l. 168--><p class="noindent" >Kill <span 
 class="ectt-1000">python wire3.pt </span>with CTRL+c.
-         </li>
-         <li 
-  class="enumerate" id="x1-2041x8">Load the sound &#xFB01;le into Audacity:
+         </p></li>
+<li 
+  class="enumerate" id="x1-2041x8">
+         <!--l. 170--><p class="noindent" >Load the sound &#xFB01;le into Audacity:
+</p>
          <!--l. 172-->
          <div class="lstlisting" id="listing-8"><span class="label"><a 
  id="x1-2042r1"></a></span><span 
@@ -404,32 +425,39 @@ class="ectt-1000">audacity</span><span
 class="ectt-1000">&#x00A0;</span><span 
 class="ectt-1000">test</span><span 
 class="ectt-1000">.</span><span 
-class="ectt-1000">wav</span>
+class="ectt-1000">wav</span></div>
          
-         </div>
          </li>
-         <li 
-  class="enumerate" id="x1-2044x9">Localize the &#xFB01;rst one of your hitting-nail sounds in the <a 
+<li 
+  class="enumerate" id="x1-2044x9">
+         <!--l. 176--><p class="noindent" >Localize the &#xFB01;rst one of your hitting-nail sounds in the <a 
 href="https://manual.audacityteam.org/man/audio_tracks.html" >audio track</a> of
          Audacity.
-         </li>
-         <li 
-  class="enumerate" id="x1-2046x10">Select &#x0028;using the mouse&#x0029; the region that contains your sound and a
+         </p></li>
+<li 
+  class="enumerate" id="x1-2046x10">
+         <!--l. 180--><p class="noindent" >Select &#x0028;using the mouse&#x0029; the region that contains your sound and a
          replica.
-         </li>
-         <li 
-  class="enumerate" id="x1-2048x11">Use the <a 
+                                                                  
+
+                                                                  
+         </p></li>
+<li 
+  class="enumerate" id="x1-2048x11">
+         <!--l. 182--><p class="noindent" >Use the <a 
 href="https://manual.audacityteam.org/man/edit_toolbar.html#zoom_to_selection" >zoom to selection buttom</a> to zoom-in the selected area.
-         </li>
-         <li 
-  class="enumerate" id="x1-2050x12">Measure the time between the ocurrence of the hit &#x0028;of the nail&#x0029; and the
+         </p></li>
+<li 
+  class="enumerate" id="x1-2050x12">
+         <!--l. 186--><p class="noindent" >Measure the time between the ocurrence of the hit &#x0028;of the nail&#x0029; and the
          recording of its &#xFB01;rst replica produced by the speaker-to-the-mic
          feedback. This time is the real latency of your computer runing
          <span 
 class="ectt-1000">wire3.py</span>.
-         </li>
-         <li 
-  class="enumerate" id="x1-2052x13">Modify the constant <!--l. 191--><math 
+         </p></li>
+<li 
+  class="enumerate" id="x1-2052x13">
+         <!--l. 191--><p class="noindent" >Modify the constant <!--l. 191--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mi 
 >C</mi><mi 
@@ -450,6 +478,7 @@ class="ectt-1000">latency_vs_chunk_size.txt</span>&#x0029; with the content &#x0
                                                                   
 
                                                                   
+</p>
          <pre class="verbatim" id="verbatim-1">
          #&#x00A0;CHUNK_SIZE&#x00A0;&#x00A0;&#x00A0;&#x00A0;real
          32&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;...
@@ -464,8 +493,9 @@ class="ectt-1000">latency_vs_chunk_size.txt</span>&#x0029; with the content &#x0
 </pre>
          <!--l. 207--><p class="nopar" > with the real &#x0028;practical&#x0029; latency.</p></li></ol>
      </li>
-     <li 
-  class="enumerate" id="x1-2054x6">At this point, we know the real latency of <span 
+<li 
+  class="enumerate" id="x1-2054x6">
+     <!--l. 211--><p class="noindent" >At this point, we know the real latency of <span 
 class="ectt-1000">wire3.py </span>as a function of
      <!--l. 212--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
@@ -482,6 +512,7 @@ class="text"><mtext  >_</mtext></mstyle><mi
 >E</mi></mstyle></math>.
      Plot the &#xFB01;le <span 
 class="ectt-1000">latency_vs_chunk_size.txt </span>with:
+</p>
      <!--l. 215-->
      <div class="lstlisting" id="listing-9"><span class="label"><a 
  id="x1-2055r1"></a></span><span 
@@ -493,7 +524,8 @@ class="ectt-1000">&#x00A0;</span><span
 class="ectt-1000">install</span><span 
 class="ectt-1000">&#x00A0;</span><span 
 class="ectt-1000">gnuplot</span><span 
-class="ectt-1000">&#x00A0;</span><br /><span class="label"><a 
+class="ectt-1000">&#x00A0;</span><br /> 
+<span class="label"><a 
  id="x1-2056r2"></a></span><span 
 class="ectt-1000">&#x00A0;</span><span 
 class="ectt-1000">echo</span><span 
@@ -564,12 +596,12 @@ class="ectt-1000">&#x0022;</span><span
 class="ectt-1000">&#x00A0;</span><span 
 class="ectt-1000">|</span><span 
 class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">gnuplot</span>
+class="ectt-1000">gnuplot</span></div>
      
-     </div>
      </li>
-     <li 
-  class="enumerate" id="x1-2058x7">Let&#x2019;s compute now the bu&#xFB00;ering latency of a chunk &#x0028;the chunk-time&#x0029;. If
+<li 
+  class="enumerate" id="x1-2058x7">
+     <!--l. 220--><p class="noindent" >Let&#x2019;s compute now the bu&#xFB00;ering latency of a chunk &#x0028;the chunk-time&#x0029;. If
      <!--l. 221--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mi 
@@ -588,37 +620,19 @@ class="text"><mtext  >_</mtext></mstyle><mi
 >e</mi></mstyle></math>
      is the number of frames per second during the recording process, it holds
      that:
-     <table class="equation"><tr><td> <a 
- id="x1-2059r1"></a>
+</p>
+     <table class="equation"><tr><td>
+                                                                  
+
+                                                                  
      <!--l. 226--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="block" class="equation">
-           <mstyle mathvariant="monospace"><mi 
->m</mi><mi 
->i</mi><mi 
->n</mi><mi 
->i</mi><mi 
->m</mi><mi 
->a</mi><mi 
->l</mi><mstyle 
-class="text"><mtext  >_</mtext></mstyle><mi 
->b</mi><mi 
->u</mi><mi 
->f</mi><mi 
->f</mi><mi 
->e</mi><mi 
->r</mi><mi 
->i</mi><mi 
->n</mi><mi 
->g</mi><mstyle 
-class="text"><mtext  >_</mtext></mstyle><mi 
->l</mi><mi 
->a</mi><mi 
->t</mi><mi 
->e</mi><mi 
->n</mi><mi 
->c</mi><mi 
->y</mi></mstyle> <mo 
+           <mstyle 
+   id="x1-2059r1"  class="label" ></mstyle><!--endlabel--><mo 
+class="MathClass-open" stretchy="false"><mstyle mathvariant="monospace">minimal<mstyle 
+class="text"><mtext  >_</mtext></mstyle>buffering<mstyle 
+class="text"><mtext  >_</mtext></mstyle>latency</mstyle></mo> <mo 
 class="MathClass-rel">=</mo> <mstyle mathvariant="monospace"><mi 
 >C</mi><mi 
 >H</mi><mi 
@@ -658,8 +672,10 @@ class="ectt-1000">latency_vs_chunk_size.txt </span>using a third column
 </pre>
      <!--l. 237--><p class="nopar" >
      </p></li>
-     <li 
-  class="enumerate" id="x1-2061x8">Plot both latencies:
+<li 
+  class="enumerate" id="x1-2061x8">
+     <!--l. 239--><p class="noindent" >Plot both latencies:
+</p>
      <!--l. 241-->
      <div class="lstlisting" id="listing-10"><span class="label"><a 
  id="x1-2062r1"></a></span><span 
@@ -765,12 +781,12 @@ class="ectt-1000">&#x0022;</span><span
 class="ectt-1000">&#x00A0;</span><span 
 class="ectt-1000">|</span><span 
 class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">gnuplot</span>
+class="ectt-1000">gnuplot</span></div>
      
-     </div>
      </li>
-     <li 
-  class="enumerate" id="x1-2064x9">Which seems to be the minimal practical &#x0028;real&#x0029; latency &#x0028;the latency obtained ideallly
+<li 
+  class="enumerate" id="x1-2064x9">
+     <!--l. 245--><p class="noindent" >Which seems to be the minimal practical &#x0028;real&#x0029; latency &#x0028;the latency obtained ideallly
      when <!--l. 246--><math 
  xmlns="http://www.w3.org/1998/Math/MathML"  
 display="inline" ><mstyle mathvariant="monospace"><mi 
@@ -789,6 +805,7 @@ class="MathClass-rel">=</mo> <mn>1</mn></math>
      small, overwhelming the CPU&#x0029; in your computer? Justify your answers.
      <a 
  id="x1-20639"></a>
+</p>
      </li></ol>
 <!--l. 253--><p class="noindent" >
 </p>

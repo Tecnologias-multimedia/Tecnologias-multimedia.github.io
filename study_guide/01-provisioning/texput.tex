@@ -16,9 +16,10 @@ This milestone (the installation of a dedicated Linux distribution for
 running InterCom) is optional, but it is highly recommend to do it
 because you'll receive technical support in a reasonable amount of
 time in the case you are in trouble. Futhermore, it is recommend to
-run InterCom in a Xubuntu 21.04 (Hirsute Hippo) \cite{xubuntu},
+run InterCom in a Xubuntu 21.10 (Impish Indri) \cite{xubuntu},
 running natively
-(no \href{https://en.wikipedia.org/wiki/Virtualization}{virtualization}). Xubuntu
+(no \href{https://en.wikipedia.org/wiki/Virtualization}{virtualization}),
+if possible. Xubuntu
 is fully functional (at least for developing our project) and demand a
 low amount of hardware resources.
 
@@ -68,7 +69,7 @@ nvme0n1     259:0    0 238,5G  0 disk
 +-nvme0n1p2 259:2    0     8G  0 part [SWAP]
 +-nvme0n1p3 259:3    0   513M  0 part /boot/efi
 +-nvme0n1p4 259:4    0  31,5G  0 part /
-[vruiz@pluton Descargas]$ sudo dd bs=4M if=xubuntu-21.04-desktop-amd64.iso of=/dev/sda conv=fsync oflag=direct status=progress
+[vruiz@pluton Descargas]$ sudo dd bs=4M if=xubuntu-21.10-desktop-amd64.iso of=/dev/sda conv=fsync oflag=direct status=progress
 1929379840 bytes (1,9 GB, 1,8 GiB) copied, 151 s, 12,8 MB/s
 466+1 registros leídos
 466+1 registros escritos
@@ -79,7 +80,7 @@ nvme0n1     259:0    0 238,5G  0 disk
   F12-key when the PC is booting. On a Mac, you need to keep pressed
   the alt-key when it is booting.
   
-\item Select the option \texttt{Try Xubuntu without installing}.
+\item Select the option \texttt{Try Xubuntu} (without installing).
 
 \item Check the current storage devices (example):
 
@@ -118,7 +119,7 @@ sda           8:0    1  29.2G  0 disk
 +-sda2        8:2    1   4.9M  0 part
 +-sda3        8:3    1   300K  0 part
 +-sda4        8:4    1  27.4G  0 part /var/crash
-sdb           8:16   1 115.8G  0 disk  # <-- This is the >8GB USB disk (with an old Xubuntu)
+sdb           8:16   1 115.8G  0 disk  # <-- This is the >16GB USB disk (with an old Xubuntu)
 +-sdb1        8:17   1   512M  0 part
 +-sdb2        8:18   1   7.6G  0 part
 +-sdb3        8:19   1  30.5G  0 part /media/xubuntu/dc7d42a4-b4d3-4628-9532-f40
@@ -138,7 +139,7 @@ nvme0n1     259:0    0 238.5G  0 disk
   \href{https://en.wikipedia.org/wiki/Disk_partitioning}{partition
     table}).
   
-\item Select \texttt{Install Xubuntu 21.04}.
+\item Select \texttt{Install Xubuntu 21.10}.
   
 \item Select English as the language used during the installation and the
   installed system. This will help in the case you need to search
@@ -171,7 +172,9 @@ nvme0n1     259:0    0 238.5G  0 disk
 \item Choose \texttt{Download updates while installing Xubuntu} and
   \texttt{Install third-party software for graphics and Wi-Fi hardware
     and additional media formats}, in order to have access to the
-    ultimate software available for Ubuntu (and derivatives).
+  ultimate software available for Ubuntu (and derivatives). Notice
+  that at the UAL all non secure traffic is forbiden (for example, you
+  will not able to connect to \verb|http:| servers.
 
 \item Choose \texttt{Erase disk and install Xubuntu}. Ignore the
   \verb|Advanced Features|. Then, wait for a couple of minutes :-/
@@ -192,7 +195,7 @@ nvme0n1     259:0    0 238.5G  0 disk
   at least 5GB are needed for a Xubuntu installation. Anyway, keep in
   mind that this step is optional because you can always perform
   swapping on a file (a process slightly slower than using the
-  dedicated partition). Consider also that InterCom requires only some
+  dedicated partition). Consider also that project requires only some
   MB of memory for running and therefore, probably you are not going
   to need to swap any
   \href{https://en.wikipedia.org/wiki/Page_(computer_memory)}{memory
@@ -236,7 +239,7 @@ The following partitions are going to be formatted:
 
 \section{Timming}
 
-You should reach this milestone at most in one week.
+You should finish this milestone before the next class.
 
 \section{Deliverables}
 
