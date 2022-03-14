@@ -150,46 +150,6 @@ output audio devices.
 
 \section{JACK}
 
-Like PulseAudio, \href{http://jackaudio.org/}{JACK} (JACK Audio
-Connection Kit) is sound server that proxies between the audio
-applications (that must use JACK) and ALSA. JACK is the right choice
-if latency is important for you because it can be configured. Another
-interesting feature of JACK is that allows to define the connections
-(audio flows) between JACK-client applications (like in a real mixer
-desk). Finally, if you use MIDI apps and/or MIDI hardware, rely on
-JACK.
-
-All the functionality of JACK can be get through running
-\href{https://qjackctl.sourceforge.io/}{QjackCtl}:
-\begin{verbatim}
-qjackctl &
-\end{verbatim}
-that is a GUI for configuring the JACK server parameters and define the audio flows. Usually, the following options are available:
-\begin{enumerate}
-\item \texttt{Start:} the server.
-\item \texttt{Stop:} the server.
-\item \texttt{Quit:} kill the server.
-\item \texttt{Messages:} from the server.
-\item \texttt{Session:} show/hide the session manager window.
-\item \texttt{Setup:} the server. 
-\item \texttt{Connect:} the audio
-  applications. \href{http://www.rncbc.org/drupal/node/76}{Notice
-    that} all connections made in the Connections interface are kept
-  as long you don't power-cycle the JACK server (jackd). That is, all
-  connections will be lost when the JACK server or any of the client
-  application programs are closed or terminated.
-\item \texttt{Patchbay:} will keep all declared connections
-  automatically, as long as QjackCtl is kept alive. Moreover, you can
-  declare typical connection configuration that are carried out when
-  the related clients are executed.
-\item Play: start transport
-  \href{https://jackaudio.org/api/group__MIDIAPI.html}{timming
-    events}.
-\item Pause: stop transport timming events.
-\item Forward: transport timming events.
-\item Backward: transport timming event.
-\item Rewind: transport timming event.
-\end{enumerate}
 
 \section{sounddevice}
 \href{https://python-sounddevice.readthedocs.io}{sounddevice} is a
