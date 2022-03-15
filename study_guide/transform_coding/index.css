@@ -216,5 +216,9 @@ div.lstinputlisting{ font-family: monospace,monospace; white-space: nowrap; }
 table[rules] {border-left:solid black 0.4pt; border-right:solid black 0.4pt; }
 div.longtable{text-align:center;}
 table.longtable{margin-left:auto; margin-right: auto;}
+.ovalbox { padding-left:3pt; padding-right:3pt; border:solid thin; }
+.Ovalbox-thick { padding-left:3pt; padding-right:3pt; border:solid thick; }
+.shadowbox { padding-left:3pt; padding-right:3pt; border:solid thin; border-right:solid thick; border-bottom:solid thick; }
+.doublebox { padding-left:3pt; padding-right:3pt; border-style:double; border:solid thick; }
 /* end css.sty */
 
