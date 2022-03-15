@@ -3929,27 +3929,15 @@ href="#Xlee2019pywavelets">6</a>&#x005D;</span>&#x0029; can have a high impact o
 amount of energy concentration achieved by the DWT, and therefore, on the
 e&#xFB03;ciency of coding system. Show such impact. Experiment also with the wavelet
 name.
-</p><!--l. 1025--><p class="indent" >   Visualize the e&#xFB00;ects &#x0028;in the DWT domain&#x0029; of quantization.
-                                                                  
-
-                                                                  
-</p>
-   <pre class="verbatim" id="verbatim-1">
-qjackctl&#x00A0;&#x0026;&#x00A0;#&#x00A0;Select&#x00A0;sampling&#x00A0;frequency&#x00A0;44100&#x00A0;Hz
-python&#x00A0;temporal_overlapped_DWT_coding.py&#x00A0;-i&#x00A0;6&#x00A0;-o&#x00A0;6&#x00A0;--show_stats&#x00A0;-q&#x00A0;8192
-#&#x00A0;Connect&#x00A0;the&#x00A0;output&#x00A0;of&#x00A0;temporal_overlapped_DWT_coding.py&#x00A0;to&#x00A0;the&#x00A0;input&#x00A0;of&#x00A0;dwt5.py
-python&#x00A0;dwt5.py&#x00A0;-d&#x00A0;9
-</pre>
-<!--l. 1031--><p class="nopar" >
-</p><!--l. 1035--><p class="noindent" >
+</p><!--l. 1027--><p class="noindent" >
 </p>
    <h4 class="subsectionHead"><span class="titlemark">2.3   </span> <a 
  id="x1-270002.3"></a>Determine the RD curves for the overlapped DWT</h4>
-<!--l. 1038--><p class="noindent" >
+<!--l. 1030--><p class="noindent" >
      </p><ol  class="enumerate1" >
 <li 
   class="enumerate" id="x1-27002x1">
-     <!--l. 1039--><p class="noindent" >In a module named <span class="obeylines-h"><span class="verb"><span 
+     <!--l. 1031--><p class="noindent" >In a module named <span class="obeylines-h"><span class="verb"><span 
 class="ectt-1000">temporal_overlapped_DWT_coding.py</span></span></span>, inherit from
      <span class="obeylines-h"><span class="verb"><span 
 class="ectt-1000">temporal_no_overlapped_DWT_coding.py</span></span></span>
@@ -3962,29 +3950,45 @@ href="#x1-200001.5">1.5<!--tex4ht:ref: sec:reducing --></a>.
      </p></li>
 <li 
   class="enumerate" id="x1-27004x2">
-     <!--l. 1044--><p class="noindent" >Build the RD curves to see how this improvement impacts on the e&#xFB03;ciency
+     <!--l. 1036--><p class="noindent" >Build the RD curves to see how this improvement impacts on the e&#xFB03;ciency
      of intercom.
      </p></li>
 <li 
   class="enumerate" id="x1-27006x3">
-     <!--l. 1046--><p class="noindent" >Determine which decoder is better from the RD perspective.
-     </p></li>
-<li 
-  class="enumerate" id="x1-27008x4">
-     <!--l. 1047--><p class="noindent" >Which  is  the  latency  of  the  encoder  and  the  decoders,  measured  in
-     chunk-times?</p></li></ol>
+     <!--l. 1038--><p class="noindent" >Determine which decoder is better from the RD perspective.
                                                                   
 
                                                                   
-<!--l. 1055--><p class="noindent" >
+     </p></li>
+<li 
+  class="enumerate" id="x1-27008x4">
+     <!--l. 1039--><p class="noindent" >Which  is  the  latency  of  the  encoder  and  the  decoders,  measured  in
+     chunk-times?</p></li></ol>
+<!--l. 1045--><p class="noindent" >
+</p>
+   <h4 class="subsectionHead"><span class="titlemark">2.4   </span> <a 
+ id="x1-280002.4"></a>Visualize</h4>
+<!--l. 1048--><p class="noindent" >Visualize the e&#xFB00;ects &#x0028;in the DWT domain&#x0029; of quantization.
+                                                                  
+
+                                                                  
+</p>
+   <pre class="verbatim" id="verbatim-1">
+qjackctl&#x00A0;&#x0026;&#x00A0;#&#x00A0;Select&#x00A0;sampling&#x00A0;frequency&#x00A0;44100&#x00A0;Hz
+python&#x00A0;temporal_overlapped_DWT_coding.py&#x00A0;-i&#x00A0;6&#x00A0;-o&#x00A0;6&#x00A0;--show_stats&#x00A0;-q&#x00A0;8192
+#&#x00A0;Connect&#x00A0;the&#x00A0;output&#x00A0;of&#x00A0;temporal_overlapped_DWT_coding.py&#x00A0;to&#x00A0;the&#x00A0;input&#x00A0;of&#x00A0;dwt5.py
+python&#x00A0;dwt5.py&#x00A0;-d&#x00A0;9
+</pre>
+<!--l. 1054--><p class="nopar" >
+</p><!--l. 1060--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
- id="x1-280003"></a>Deliverables</h3>
-<!--l. 1056--><p class="noindent" >A description of the experiments and the results proposed.
-</p><!--l. 1058--><p class="noindent" >
+ id="x1-290003"></a>Deliverables</h3>
+<!--l. 1061--><p class="noindent" >A description of the experiments and the results proposed.
+</p><!--l. 1063--><p class="noindent" >
 </p>
    <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
- id="x1-290004"></a>Resources</h3>
+ id="x1-300004"></a>Resources</h3>
     <div class="thebibliography">
     <p class="bibitem" ><span class="biblabel">
   &#x005B;1&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
@@ -4013,6 +4017,9 @@ class="ecti-1000">Transforms</span></a>. Rice University, 2013.
 href="https://greenteapress.com/thinkstats/thinkstats.pdf" ><span 
 class="ecti-1000">Think Stats Probability and Statistics for Programmers</span></a>.
     O&#x2019;Reilly, 2011.
+                                                                  
+
+                                                                  
     </p>
     <p class="bibitem" ><span class="biblabel">
   &#x005B;5&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
@@ -4036,9 +4043,6 @@ class="ecti-1000">Source Software</span>, 4&#x0028;36&#x0029;:1237, 2019.
 href="http://rahilshaikh.weebly.com/uploads/1/1/6/3/11635894/data_compression.pdf" ><span 
 class="ecti-1000">Introduction to Data Compression</span></a>.  Morgan Kaufmann,
     2017.
-                                                                  
-
-                                                                  
     </p>
     <p class="bibitem" ><span class="biblabel">
   &#x005B;8&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
@@ -4071,7 +4075,7 @@ class="ecti-1000">Processing</span></a>. Cambridge University Press, 2014.
 </p>
     </div>
 <a 
- id="Q1-1-35"></a>
+ id="Q1-1-36"></a>
     
 </body></html> 
 

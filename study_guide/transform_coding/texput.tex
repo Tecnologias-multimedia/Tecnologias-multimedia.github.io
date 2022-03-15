@@ -1022,14 +1022,6 @@ can have a high impact on the amount of energy concentration achieved
 by the DWT, and therefore, on the efficiency of coding system. Show
 such impact. Experiment also with the wavelet name.
 
-Visualize the effects (in the DWT domain) of quantization.
-\begin{verbatim}
-qjackctl & # Select sampling frequency 44100 Hz 
-python temporal_overlapped_DWT_coding.py -i 6 -o 6 --show_stats -q 8192
-# Connect the output of temporal_overlapped_DWT_coding.py to the input of dwt5.py
-python dwt5.py -d 9
-\end{verbatim}
-
 %}}}
 
 \subsection{Determine the RD curves for the overlapped DWT}
@@ -1047,6 +1039,19 @@ python dwt5.py -d 9
 \item Which is the latency of the encoder and the decoders, measured
   in chunk-times?
 \end{enumerate}
+
+%}}}
+
+\subsection{Visualize}
+%{{{
+
+Visualize the effects (in the DWT domain) of quantization.
+\begin{verbatim}
+qjackctl & # Select sampling frequency 44100 Hz 
+python temporal_overlapped_DWT_coding.py -i 6 -o 6 --show_stats -q 8192
+# Connect the output of temporal_overlapped_DWT_coding.py to the input of dwt5.py
+python dwt5.py -d 9
+\end{verbatim}
 
 %}}}
 
