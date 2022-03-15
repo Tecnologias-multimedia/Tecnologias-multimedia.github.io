@@ -24,15 +24,7 @@ this system. To handle the audio hardware we use
 
 \begin{enumerate}
 
-\item Refresh some (probably high-school) ideas about
-  \href{https://vicente-gonzalez-ruiz.github.io/the_sound/}{the
-    sound}, \href{https://vicente-gonzalez-ruiz.github.io/human_auditory_system/}{the
-    human auditory system},
-    and \href{https://vicente-gonzalez-ruiz.github.io/human_sound_perception/}{the
-    human sound perception}. %Notice that we are able to perceive
-    %sounds whose frequency ranges between 20 Hz and 20 KHz
-    %(approximately), and that a speaker is basically a microphone, and
-    %viceversa.
+\item 
   
 \item Download the Python
   \href{https://docs.python.org/3/tutorial/modules.html}{module}
@@ -43,58 +35,13 @@ sudo apt install curl
 curl https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire3.py > wire3.py
   \end{lstlisting}      
       
-  This module implements the algorithm:
 
-  \begin{lstlisting}[language=Python]
-while True:
-  chunk = sound_card.read(chunk_size = 1024)  # (1)
-  sound_card.write(chunk)  # (2)
-  \end{lstlisting}
-  
-  %\begin{pseudocode}[display]{}{}
-  %  \BEGIN
-  %    \mathtt{CHUNK\_SIZE} \GETS 1024\\
-  %    \WHILE \TRUE
-  %    \BEGIN
-  %      \mathtt{chunk} \GETS \mathtt{stream}.\mathtt{read}(\mathtt{CHUNK\_SIZE}) \STMTNUM{1in}{st.1}\\
-  %      \mathtt{stream}.\mathtt{write}(\mathtt{chunk}) \STMTNUM{1.03in}{st.2}
-  %    \END
-  %  \END
-  %\end{pseudocode}
-
-  where \texttt{(1)} captures 1024
-  \href{https://python-sounddevice.readthedocs.io/en/0.3.12/api.html}{frames}
-  from the ADC, and \texttt{(2)} plays the chunk of frames. In
-  \texttt{sounddevice} a frame is a collection of one or more samples
-  (typically, a frame is a single sample if the number of channels is
-  1, or two samples if the number of channels is 2).
-
-\item If you want to run this module right now and you are not using a
-  \href{https://en.wikipedia.org/wiki/Headset_(audio)}{headset}, check
-  first that the output volumen of your
-  \href{https://en.wikipedia.org/wiki/Headset_(audio)}{speakers} is
-  not too high, otherwise you could involuntary
-  \href{https://www.youtube.com/watch?v=rI90lhYAffo}{``couple''} the
-  speaker and the
-  \href{https://en.wikipedia.org/wiki/Microphone}{mic(rophone)} of
-  your computer, producing a loud and annoying
-  \href{https://www.cirrusresearch.co.uk/blog/2012/03/tonal-noise-analysis-with-the-optimus-green-sound-level-meters/}{tonal
-    sound}. In order to mitigate this
-  effect, you can also control the gain of your mic (if the
-  gain is 0, no feedback between the speaker and the mic will be
-  possible). In Xubuntu, these controls are available through clicking in
-  the speaker icon (situated in the top-right corner of your screen)
-  of the Xfce window manager.
+\item 
 
 \item OK, run the module with:
 
-  \begin{lstlisting}[language=Bash]
-pip install sounddevice  # Only once
-python wire3.py
-  \end{lstlisting}
 
-  Stop (killing) the module by clicking the CTRL- and c-keys (CTRL+c),
-  simultaneously.
+
 
   %If you obtain the message \texttt{ALSA lib
   %  pcm.c:8526:(snd\_pcm\_recover) underrun occurred}, ignore it (this
@@ -109,146 +56,6 @@ python wire3.py
 \item Now, lets compute, experimentally, the latency experimented by
   \texttt{wire3.py}.
 
-  \begin{enumerate} \item First, we need the
-  tools: \href{http://sox.sourceforge.net/}{SoX}, \href{https://www.audacityteam.org/}{Audacity},
-  and \href{https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/plot_input.py}{plot\_input.py}:
-  
-  \begin{lstlisting}[language=Bash]
-sudo apt install sox
-sudo apt install audacity
-sudo apt install curl
-curl https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/plot_input.py > plot_input.py
-  \end{lstlisting}
-
-  \item Run:
-    
-    \begin{lstlisting}[language=Bash]
-pip install matplotlib
-python plot_input.py
-    \end{lstlisting}
-
-    and check that the gain of the mic does not
-    produce \href{https://en.wikipedia.org/wiki/Clipping_(audio)}{clipping}
-    during the sound recording.
-
-  \item \label{start_point} In a terminal, run:
-
-    \begin{lstlisting}[language=Bash]
-python wire3.py
-    \end{lstlisting}
-
-    while you control the output volume of the speakers to produce a
-    decaying coupling noisy effect between both devices (the
-    speaker(s) and the mic). If your desktop has not these
-    \href{https://en.wikipedia.org/wiki/Transducer}{transducers}, we
-    can use a
-    \href{https://www.google.com/search?q=male+to+male+audio+jack+cable&client=firefox-b-d&sxsrf=ALeKk00GZUDGqiOfc0D8xkA_MIYgCuZmSA:1600270049146&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjdvsu-_u3rAhXl0eAKHS90DUoQ_AUoAXoECA0QAw&biw=4288&bih=972}{male-to-male
-      jack audio cable} and connect the line-output of your soundcard
-    to the input of your sound card.
-
-  \item In a different terminal (keep \texttt{python wire3.py}
-    running), run:
-
-    \begin{lstlisting}[language=Bash]
-sox -t alsa default test.wav
-    \end{lstlisting}
-
-    to save the ADC's output to the file \texttt{test.wav}.
-
-  \item While \texttt{sox} is recording, produce some short sound (for
-    example, hit your laptop or your micro with one or your nails). Do
-    this at least a couple of times more, to be sure that you record
-    the sound and also the feedback of such sound. It's important the
-    sound to be short (a few miliseconds) in order to visually
-    recognize it and it's replicas.
-
-  \item Stop \texttt{sox} by pressing the CTRL+c (at
-    the same time). This kills \texttt{sox}.
-
-  \item Kill \texttt{python wire3.pt} with CTRL+c.
-
-  \item Load the sound file into Audacity:
-    
-    \begin{lstlisting}[language=Bash]
-      audacity test.wav
-    \end{lstlisting}
-
-  \item Localize the first one of your hitting-nail sounds in the
-    \href{https://manual.audacityteam.org/man/audio_tracks.html}{audio
-      track} of Audacity.
-
-  \item Select (using the mouse) the region that contains your sound and a replica.
-
-  \item Use the
-    \href{https://manual.audacityteam.org/man/edit_toolbar.html#zoom_to_selection}{zoom
-      to selection buttom} to zoom-in the selected area.
-
-  \item Measure the time between the ocurrence of the hit (of the
-    nail) and the recording of its first replica produced by the
-    speaker-to-the-mic feedback. This time is the real latency of your
-    computer runing \texttt{wire3.py}.
-
-  \item Modify the constant $\mathtt{CHUNK\_SIZE}$ in the module and
-    repeat this process, starting at the Step
-    \ref{start_point}. Create an ASCII file (named
-    \texttt{latency\_vs\_chunk\_size.txt}) with the content (use
-    TAB-ulators to space the columns):
-\begin{verbatim}
-# CHUNK_SIZE    real
-32              ...
-64              ...
-128             ...
-256             ...
-512             ...
-1024            ...
-2048            ...
-4096            ...
-8192            ...
-\end{verbatim}
-    with the real (practical) latency.
-  \end{enumerate}
-
-\item At this point, we know the real latency of \texttt{wire3.py} as
-  a function of $\mathtt{CHUNK\_SIZE}$. Plot the file
-  \texttt{latency\_vs\_chunk\_size.txt} with:
-
-  \begin{lstlisting}[language=Bash]
- sudo apt install gnuplot
- echo "set terminal pdf; set output 'latency_vs_chunk_size.pdf'; set xlabel 'CHUNK\_SIZE (frames)'; set ylabel 'Latency (seconds)'; plot 'latency_vs_chunk_size.txt' title '' with linespoints" | gnuplot
-  \end{lstlisting}
-
-\item Let's compute now the buffering latency of a chunk (the
-  chunk-time). If $\mathtt{sampling\_rate}$ is the number of frames
-  per second during the recording process, it holds that:
-  
-%\begingroup
-%\Large
-  \begin{equation}
-    %\displaystyle
-    \mathtt{minimal\_buffering\_latency} = \mathtt{CHUNK\_SIZE} / \mathtt{sampling\_rate}
-  \end{equation}
-  %\endgroup
-
-  Add these calculations to \texttt{latency\_vs\_chunk\_size.txt} using
-  a third column (remember to use TABs).
-\begin{verbatim}
-# CHUNK_SIZE    real    minimal
-:               :       :
-\end{verbatim}
-
-\item Plot both latencies:
-
-  \begin{lstlisting}[language=Bash]
-echo "set terminal pdf; set output 'latency_vs_chunk_size.pdf'; set xlabel 'CHUNK\_SIZE (frames)'; set ylabel 'Latency (seconds)'; set key left; plot 'latency_vs_chunk_size.txt' using 1:2 title 'Real' with linespoints, 'latency_vs_chunk_size.txt' using 1:3 title 'Minimal' with linespoints" | gnuplot
-  \end{lstlisting}
-  
-\item Which seems to be the minimal practical (real) latency (the
-  latency obtained ideallly when $\mathtt{CHUNK\_SIZE}=1$ ... however,
-  notice that depending on your computer, this chunk size can be too
-  small, overwhelming the CPU) in your computer?  Justify your
-  answers. \label{question}
-
-\end{enumerate}
 
 \section{Timming}
 
