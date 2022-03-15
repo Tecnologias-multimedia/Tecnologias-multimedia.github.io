@@ -163,6 +163,32 @@ previous one, except that the chunk size is fixed.
 
 The current implementation of InterCom uses the Timer-based algorithm.
 
+\section{What you have to do?}
+
+\begin{enumerate}
+
+\item Read the source code of
+  \href{https://github.com/Tecnologias-multimedia/intercom/blob/master/src/minimal.py}{\texttt{minimal.py}}
+  and identify in the code the interruption handler that implements
+  the timer-based algorithm. Here you can find information about
+  \href{https://github.com/vicente-gonzalez-ruiz/YAPT/blob/master/03-IO/networking/sockets.ipynb}{sockets}~\cite{YAPT} in Python.
+  
+\item Evaluate the performance (quality of the sound) in different configurations:
+  \begin{enumerate}
+  \item When \verb|minimal.py| runs in the same computer.
+  \item When \verb|minimal.py| runs in different hosts. In this case,
+    try that the computers do not belong to the same local
+    network. This
+    \href{https://www.noip.com/support/knowledgebase/general-port-forwarding-guide/}{guide}
+    can help. Consider in your analysis that
+    \href{https://en.wikipedia.org/wiki/User_Datagram_Protocol}{UDP}~\cite{UDP}
+    is used to transport the audio data. If you cannot use different
+    local networks, create a WiFi zone using your mobile phone and try
+    to produce a loss of packets by separating the devices a
+    sufficient distance.
+  \end{enumerate}
+\end{enumerate}
+
 \section{Resources}
 
-\bibliography{python,sound}
+\bibliography{python,sound,networking}
