@@ -65,6 +65,7 @@ default:	$(HOME)/repos/ALSA/index.html \
 		$(HOME)/repos/using_GitHub/index.html \
 		$(HOME)/repos/Xubuntu_install/index.html \
 		index.html
+	./compile_references.sh
 
 #index.html:	index.md
 		#pandoc -c utf-8.css -c table.css -i index.md -o index.html
