@@ -8,8 +8,8 @@
 \subsection{Simultaneous masking}
 The HAS (Human Auditory System) has a finite frequency resolution,
 which basically means that two different tonal sounds with different
-amplitudes can be heared only as one (the loud one) when they are
-closed enought~\cite{bosi2003intro}. Whe this happens, the DWT
+amplitudes can be heared only as one (the louder one) when they are
+closed enought~\cite{bosi2003intro} (in frequency). When this happens, the DWT
 subband~\cite{vetterli1995wavelets} where the quiet sound is placed
 can be quantized more severly without perceiving that the quantization
 noise in such subband is higher (see the Figure~\ref{fig:SM}). Notice
@@ -19,10 +19,9 @@ ratio.
 \begin{figure}
   \centering
   \png{simultaneous_masking}{600}
-  \caption{Simultaneous masking.}
+  \caption{Simultaneous masking. The threshold of hearing has been modified (increased) in the in the vicinity of the pure tone of 1 KHz.}
   \label{fig:SM}
 \end{figure}
-
 
 \section{What you have to do?}
 
@@ -32,10 +31,6 @@ ratio.
   considering the simultaneous masking effect, the vector of
   quantization steps (one for subband)..
 \end{enumerate}
-
-\section{Timming}
-
-This is a extra milestone. Take your time.
 
 \section{Deliverables}
 
