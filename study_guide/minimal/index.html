@@ -1,18 +1,15 @@
-<?xml version="1.0" encoding="iso-8859-1" ?> 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN" 
-"http://www.w3.org/Math/DTD/mathml2/xhtml-math11-f.dtd" > 
-<html xmlns="http://www.w3.org/1999/xhtml"  
-> 
-<head><title>Meeting minimal InterCom</title> 
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
-<meta name="generator" content="TeX4ht (https://tug.org/tex4ht/)" /> 
-<meta name="originator" content="TeX4ht (https://tug.org/tex4ht/)" /> 
-<!-- xhtml,mathml,html --> 
-<meta name="src" content="index.tex" /> 
-<link rel="stylesheet" type="text/css" href="index.css" /> 
-</head><body 
->
-   <div class="maketitle">
+<!DOCTYPE html> 
+<html lang='en-US' xml:lang='en-US'> 
+<head> <title>Meeting minimal InterCom</title> 
+<meta charset='utf-8' /> 
+<meta content='TeX4ht (https://tug.org/tex4ht/)' name='generator' /> 
+<meta content='width=device-width,initial-scale=1' name='viewport' /> 
+<link href='index.css' rel='stylesheet' type='text/css' /> 
+<meta content='index.tex' name='src' /> 
+<script>window.MathJax = { tex: { tags: "ams", }, }; </script> 
+ <script async='async' id='MathJax-script' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js' type='text/javascript'></script>  
+</head><body>
+   <div class='maketitle'>
                                                                   
 
                                                                   
@@ -20,499 +17,169 @@
 
                                                                   
 
-<h2 class="titleHead">Meeting minimal InterCom</h2>
- <div class="author" ><a 
-href="https://cms.ual.es/UAL/personas/persona.htm?id=515256515553484875" ><span 
-class="ecrm-1200">Vicente Gonz</span><span 
-class="ecrm-1200">&#x00E1;</span><span 
-class="ecrm-1200">lez Ruiz</span></a> <span 
-class="ecrm-1200">- </span><a 
-href="https://cms.ual.es/UAL/universidad/departamentos/informatica/index.htm" ><span 
-class="ecrm-1200">Depto Inform</span><span 
-class="ecrm-1200">&#x00E1;</span><span 
-class="ecrm-1200">tica</span></a> <span 
-class="ecrm-1200">- </span><a 
-href="https://www.ual.es" ><span 
-class="ecrm-1200">UAL</span></a></div><br />
-<div class="date" ><span 
-class="ecrm-1200">March 15, 2022</span></div>
+<h2 class='titleHead'>Meeting minimal InterCom</h2>
+ <div class='author'><a href='https://cms.ual.es/UAL/personas/persona.htm?id=515256515553484875'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>- </span><a href='https://cms.ual.es/UAL/universidad/departamentos/informatica/index.htm'><span class='ecrm-1200'>Depto Informática</span></a> <span class='ecrm-1200'>- </span><a href='https://www.ual.es'><span class='ecrm-1200'>UAL</span></a></div><br />
+<div class='date'><span class='ecrm-1200'>September 14, 2022</span></div>
    </div>
-   <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
- id="x1-10001"></a>Description</h3>
-<!--l. 7--><p class="noindent" >InterCom is an application that captures and plays audio, and therefore, in Linux,
+   <h3 class='sectionHead'><span class='titlemark'>1   </span> <a id='x1-10001'></a>Description</h3>
+<!-- l. 7 --><p class='noindent'>InterCom is an application that captures and plays audio, and therefore, in Linux,
 runs on the top of one of the following audio services:
-     </p><ol  class="enumerate1" >
-<li 
-  class="enumerate" id="x1-1002x1">
-     <!--l. 9--><p class="noindent" ><a 
-href="https://vicente-gonzalez-ruiz.github.io/ALSA/" >ALSA</a>.
-     </p></li>
-<li 
-  class="enumerate" id="x1-1004x2">
-     <!--l. 11--><p class="noindent" ><a 
-href="https://vicente-gonzalez-ruiz.github.io/PulseAudio/" >PulseAudio</a> &#x0028;in the case of Xubuntu, this is the audio server that comes
-     with Xfce&#x0029;.
-     </p></li>
-<li 
-  class="enumerate" id="x1-1006x3">
-     <!--l. 14--><p class="noindent" ><a 
-href="https://vicente-gonzalez-ruiz.github.io/JACK/" >JACK</a>.</p></li></ol>
-<!--l. 17--><p class="indent" >   InterCom uses <a 
-href="https://vicente-gonzalez-ruiz.github.io/intro_to_sounddevice/" >sounddevice</a> to capture and play the audio. Using sounddevice we
+     </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-1002x1'><a href='https://vicente-gonzalez-ruiz.github.io/ALSA/'>ALSA</a>.
+     </li>
+<li class='enumerate' id='x1-1004x2'><a href='https://vicente-gonzalez-ruiz.github.io/PulseAudio/'>PulseAudio</a> (in the case of Xubuntu, this is the audio server that comes
+     with Xfce).
+     </li>
+<li class='enumerate' id='x1-1006x3'><a href='https://vicente-gonzalez-ruiz.github.io/JACK/'>JACK</a>.</li></ol>
+<!-- l. 17 --><p class='indent'>   InterCom uses <a href='https://vicente-gonzalez-ruiz.github.io/intro_to_sounddevice/'>sounddevice</a> to capture and play the audio. Using sounddevice we
 have two alternatives for implementing an intercom.
-</p><!--l. 21--><p class="noindent" >
+</p><!-- l. 21 --><p class='noindent'>
 </p>
-   <h4 class="subsectionHead"><span class="titlemark">1.1   </span> <a 
- id="x1-20001.1"></a>Loop-based algorithm</h4>
+   <h4 class='subsectionHead'><span class='titlemark'>1.1   </span> <a id='x1-20001.1'></a>Loop-based algorithm</h4>
                                                                   
 
                                                                   
-<!--l. 23--><p class="noindent" >Roughtly, InterCom can be divided in 6 steps:
+<!-- l. 23 --><p class='noindent'>Roughtly, InterCom can be divided in 6 steps:
 </p>
-   <!--l. 25-->
-   <div class="lstlisting" id="listing-1"><span class="label"><a 
- id="x1-2001r1"></a></span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">#</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">Loop</span><span 
-class="ecit-1000">-</span><span 
-class="ecit-1000">based</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">algorithm</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">&#x0028;</span><span 
-class="ecit-1000">to</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">be</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">called</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">in</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">a</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">loop</span><span 
-class="ecit-1000">&#x0029;</span><span 
-class="ectt-1000">&#x00A0;</span><br /> 
-<span class="label"><a 
- id="x1-2002r2"></a></span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">def</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">record_IO_and_play</span><span 
-class="ectt-1000">&#x0028;&#x0029;:</span><span 
-class="ectt-1000">&#x00A0;</span><br /> 
-<span class="label"><a 
- id="x1-2003r3"></a></span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">chunk</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">=</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">record</span><span 
-class="ectt-1000">&#x0028;&#x0029;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">#</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">&#x0028;1&#x0029;</span><span 
-class="ectt-1000">&#x00A0;</span><br /> 
-<span class="label"><a 
- id="x1-2004r4"></a></span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">packed_chunk</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">=</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">pack</span><span 
-class="ectt-1000">&#x0028;</span><span 
-class="ectt-1000">chunk</span><span 
-class="ectt-1000">&#x0029;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">#</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">&#x0028;2&#x0029;</span><span 
-class="ectt-1000">&#x00A0;</span><br /> 
-<span class="label"><a 
- id="x1-2005r5"></a></span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">send</span><span 
-class="ectt-1000">&#x0028;</span><span 
-class="ectt-1000">packed_chunk</span><span 
-class="ectt-1000">&#x0029;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">#</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">&#x0028;3&#x0029;</span><span 
-class="ectt-1000">&#x00A0;</span><br /> 
-<span class="label"><a 
- id="x1-2006r6"></a></span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">packed_chunk</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">=</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">receive</span><span 
-class="ectt-1000">&#x0028;&#x0029;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">#</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">&#x0028;4&#x0029;</span><span 
-class="ectt-1000">&#x00A0;</span><br /> 
-<span class="label"><a 
- id="x1-2007r7"></a></span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">chunk</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">=</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">unpack</span><span 
-class="ectt-1000">&#x0028;</span><span 
-class="ectt-1000">packed_chunk</span><span 
-class="ectt-1000">&#x0029;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">#</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">&#x0028;5&#x0029;</span><span 
-class="ectt-1000">&#x00A0;</span><br /> 
-<span class="label"><a 
- id="x1-2008r8"></a></span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">play</span><span 
-class="ectt-1000">&#x0028;</span><span 
-class="ectt-1000">chunk</span><span 
-class="ectt-1000">&#x0029;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">#</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">&#x0028;6&#x0029;</span></div>
+   <!-- l. 25 -->
+   <div class='lstlisting' id='listing-1'><span class='label'><a id='x1-2001r1'></a></span><span class='ecit-1000'>  </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>Loop</span></span><span style='color:#000000'><span class='ecit-1000'>-</span></span><span style='color:#000000'><span class='ecit-1000'>based</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>algorithm</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>(</span></span><span style='color:#000000'><span class='ecit-1000'>to</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>be</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>called</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>in</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>a</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>loop</span></span><span style='color:#000000'><span class='ecit-1000'>)</span></span><span class='ectt-1000'> </span><br /> 
+<span class='label'><a id='x1-2002r2'></a></span><span class='ectt-1000'>  </span><span style='color:#000000'><span class='ectt-1000'>def</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>record_IO_and_play</span></span><span style='color:#000000'><span class='ectt-1000'>():</span></span><span class='ectt-1000'> </span><br /> 
+<span class='label'><a id='x1-2003r3'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>chunk</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>=</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>record</span></span><span style='color:#000000'><span class='ectt-1000'>()</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>(1)</span></span><span class='ectt-1000'> </span><br /> 
+<span class='label'><a id='x1-2004r4'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>packed_chunk</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>=</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>pack</span></span><span style='color:#000000'><span class='ectt-1000'>(</span></span><span style='color:#000000'><span class='ectt-1000'>chunk</span></span><span style='color:#000000'><span class='ectt-1000'>)</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>(2)</span></span><span class='ectt-1000'> </span><br /> 
+<span class='label'><a id='x1-2005r5'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>send</span></span><span style='color:#000000'><span class='ectt-1000'>(</span></span><span style='color:#000000'><span class='ectt-1000'>packed_chunk</span></span><span style='color:#000000'><span class='ectt-1000'>)</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>(3)</span></span><span class='ectt-1000'> </span><br /> 
+<span class='label'><a id='x1-2006r6'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>packed_chunk</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>=</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>receive</span></span><span style='color:#000000'><span class='ectt-1000'>()</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>(4)</span></span><span class='ectt-1000'> </span><br /> 
+<span class='label'><a id='x1-2007r7'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>chunk</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>=</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>unpack</span></span><span style='color:#000000'><span class='ectt-1000'>(</span></span><span style='color:#000000'><span class='ectt-1000'>packed_chunk</span></span><span style='color:#000000'><span class='ectt-1000'>)</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>(5)</span></span><span class='ectt-1000'> </span><br /> 
+<span class='label'><a id='x1-2008r8'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>play</span></span><span style='color:#000000'><span class='ectt-1000'>(</span></span><span style='color:#000000'><span class='ectt-1000'>chunk</span></span><span style='color:#000000'><span class='ectt-1000'>)</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>(6)</span></span></div>
    
-<!--l. 49--><p class="indent" >   Where:
-</p><!--l. 51--><p class="indent" >
-     </p><ol  class="enumerate1" >
-<li 
-  class="enumerate" id="x1-2010x1">
-     <!--l. 52--><p class="noindent" >the <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">record&#x0028;&#x0029;</span></span></span> method captures a chunk of frames. In <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">sounddevice</span></span></span>, this
-     operation  is  carried  on  by  the  <a 
-href="https://python-sounddevice.readthedocs.io/en/0.4.0/api/streams.html#sounddevice.Stream.read" ><span 
-class="ectt-1000">read&#x0028;&#x0029; </span>method</a>.  As  it  can  be  seen  in
-     <a 
-href="https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire4.py" >wire4.py</a><span class="footnote-mark"><a 
-href="index2.html#fn1x0"><sup class="textsuperscript">1</sup></a></span><a 
- id="x1-2011f1"></a> 
-     and also in the documentation of <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">sounddevice</span></span></span>, if we read only the frames
-     that are available in the ADC&#x2019;s bu&#xFB00;er, this is a non-blocking operation
-     and the chunk size depends on the instant of time in which this method
-     is called. Otherwise, if we especify a number of frames di&#xFB00;erent to the
-     number of available frames, the operation is blocking and <a 
-href="https://en.wikipedia.org/wiki/I/O_bound" >I/O-bound</a> &#x0028;the
-     calling process sleeps until the required chunk size is returned&#x0029;.
-     </p></li>
-<li 
-  class="enumerate" id="x1-2013x2">
-     <!--l. 68--><p class="noindent" ><span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">pack&#x0028;chunk&#x0029;</span></span></span> process  the  chunk  to  create  a  <a 
-href="https://en.wikipedia.org/wiki/Network_packet" >packet</a>  &#x0028;or  a  sequence  of
-     packets&#x0029;, a structure that can be transmitted through the Internet using
-     the <a 
-href="https://en.wikipedia.org/wiki/Datagram" >Datagram</a> Model. In general, this is a <a 
-href="https://en.wikipedia.org/wiki/CPU-bound" >CPU-bounded</a> &#x0028;CPU-intensive&#x0029;
+<!-- l. 49 --><p class='indent'>   Where:
+</p><!-- l. 51 --><p class='indent'>
+     </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-2010x1'>The <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>record()</span></span></span> method captures a chunk of frames. In <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>sounddevice</span></span></span>, this
+     operation  is  carried  on  by  the  <a href='https://python-sounddevice.readthedocs.io/en/0.4.0/api/streams.html#sounddevice.Stream.read'><span class='ectt-1000'>read() </span>method</a>.  As  it  can  be  seen  in
+     <a href='https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire4.py'>wire4.py</a><span class='footnote-mark'><a href='#fn1x0' id='fn1x0-bk'><sup class='textsuperscript'>1</sup></a></span><a id='x1-2011f1'></a>
+     and also in the documentation of <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>sounddevice</span></span></span>, if we read only the frames
+     that  are  available  in  the  ADC’s  buffer,  this  generates  a  non-blocking
+     operation and the chunk size depends on the instant of time in which this
+     method is called. Otherwise, if we especify a number of frames different to
+     the number of available frames, the operation is blocking and <a href='https://en.wikipedia.org/wiki/I/O_bound'>I/O-bound</a>
+     (the calling process sleeps until the required chunk size is returned).
+     </li>
+<li class='enumerate' id='x1-2013x2'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>pack(chunk)</span></span></span> process  the  chunk  to  create  a  <a href='https://en.wikipedia.org/wiki/Network_packet'>packet</a>  (or  a  sequence  of
+     packets), a structure that can be transmitted through the Internet using
+     the <a href='https://en.wikipedia.org/wiki/Datagram'>Datagram</a> Model. In general, this is a <a href='https://en.wikipedia.org/wiki/CPU-bound'>CPU-bounded</a> (CPU-intensive)
      operation, and therefore, it reduces the number of executions/second that
-     the <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">record_IO_and_play&#x0028;&#x0029;</span></span></span> method can reach.
-     </p></li>
-<li 
-  class="enumerate" id="x1-2015x3">
-     <!--l. 79--><p class="noindent" ><span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">send&#x0028;packed_chunk&#x0029;</span></span></span>, sends the packet to the InterCom&#x2019;s interlocutor.
+     the <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>record_IO_and_play()</span></span></span> method can reach.
+     </li>
+<li class='enumerate' id='x1-2015x3'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>send(packed_chunk)</span></span></span>, sends the packet to the InterCom’s interlocutor.
      When datagrams are used, this step is not blocking neither CPU-bounding
-     &#x0028;the CPU usage is very low&#x0029;, as long as the number of packets/second
+     (the CPU usage is very low), as long as the number of packets/second
      is small and the sizes of the payloads are also small, as it is expected in
      InterCom.
-     </p></li>
-<li 
-  class="enumerate" id="x1-2017x4">
+     </li>
+<li class='enumerate' id='x1-2017x4'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>receive()</span></span></span>, waits (blocking the calling process) for an incoming packet,
+     and therefore, this operation is IO-bound. However, most <a href='https://docs.python.org/3/library/socket.html'>socket API</a>s <span class='cite'>[<a href='#Xpython'>2</a>]</span>
+     offeer  a  <a href='https://docs.python.org/3.8/library/socket.html#socket.socket.setblocking'>non-blocking  option</a>  where  when  a  packet  is  not  available  in
                                                                   
 
                                                                   
-     <!--l. 85--><p class="noindent" ><span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">receive&#x0028;&#x0029;</span></span></span>,  waits  &#x0028;blocking&#x0029;  for  an  incoming  packet,  and  therefore,
-     this  operation  is  IO-bound.  However,  most  <a 
-href="https://docs.python.org/3/library/socket.html" >socket  API</a>s&#x00A0;<span class="cite">&#x005B;<a 
-href="#Xpython">2</a>&#x005D;</span>  o&#xFB00;eer  a
-     <a 
-href="https://docs.python.org/3.8/library/socket.html#socket.socket.setblocking" >non-blocking option</a> where when a packet is not available in the kernel&#x2019;s
-     bu&#xFB00;er associated to the corresponding socket, some kind of exception is
-     generated and, in this case, it is resposabability of the programmer to
-     generate an &#x201C;alternative&#x201D; chunk &#x0028;in our case, for example, a chunk &#xFB01;lled
-     with zeros that will not produce any sound when it is played&#x0029;.
-     </p></li>
-<li 
-  class="enumerate" id="x1-2019x5">
-     <!--l. 97--><p class="noindent" ><span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">unpack&#x0028;packed_chunk&#x0029;</span></span></span>       is           &#x0028;like           the           method
-     <span 
-class="ectt-1000">pack&#x0028;chunk&#x0029;</span>&#x0029; a CPU-intensive step that transforms a packed chunk into
+     the  kernel’s  buffer  associated  to  the  corresponding  socket,  some  kind
+     of exception is generated and, in this case, it is resposabability of the
+     programmer to generate an “alternative” chunk (in our case, for example, a
+     chunk filled with zeros that will not produce any sound when it is played).
+     </li>
+<li class='enumerate' id='x1-2019x5'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>unpack(packed_chunk)</span></span></span>       is           (like           the           method
+     <span class='ectt-1000'>pack(chunk)</span>) a CPU-intensive step that transforms a packed chunk into
      a chunk of audio.
-     </p></li>
-<li 
-  class="enumerate" id="x1-2021x6">
-     <!--l. 101--><p class="noindent" ><span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">play&#x0028;chunk&#x0029;</span></span></span> renders the chunk. In general, this is an I/O-bound <a 
-href="https://python-sounddevice.readthedocs.io/en/0.4.0/api/streams.html#sounddevice.Stream.write" >blocking</a>
-     action. However, if <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">play&#x0028;&#x0029;</span></span></span> is called at the same pace than <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">record&#x0028;&#x0029;</span></span></span>, and
-     the record and play parameters are exactely the same &#x0028;as happens in our
-     algorithm&#x0029;, the playing of the chunk will return inmediately because the
-     time that the <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">play&#x0028;&#x0029;</span></span></span> method needs to complete would exactly match the
-     time that the <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">record&#x0028;&#x0029;</span></span></span> method requires &#x0028;see <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">wire4.py</span></span></span>&#x0029;.</p></li></ol>
-<!--l. 113--><p class="indent" >   This algorithm works &#xFB01;ne if the chunk size is controlled by <a 
-href="http://www.portaudio.com/" >PortAudio</a>&#x00A0;<span class="cite">&#x005B;<a 
-href="#Xportaudio">1</a>&#x005D;</span>
-&#x0028;<span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">sounddevice</span></span></span>&#x0029; and also, the run-time required by <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">pack&#x0028;chunk&#x0029;</span></span></span> and <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">unpack&#x0028;packet&#x0029;</span></span></span>
-operations is smaller than the chunk-time. The &#xFB01;rst premise &#x0028;that we can use varying
-chunk sizes&#x0029; complicates slightly the implementation because we would work with
-chunks of constantly changing lenghts &#x0028;that as you can see running <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">wire4.py</span></span></span>, in
-most of the iterations are 0&#x0029;. This also complicates the control of the latency
+     </li>
+<li class='enumerate' id='x1-2021x6'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>play(chunk)</span></span></span> renders the chunk. In general, this is an I/O-bound <a href='https://python-sounddevice.readthedocs.io/en/0.4.0/api/streams.html#sounddevice.Stream.write'>blocking</a>
+     action. However, if <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>play()</span></span></span> is called at the same pace than <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>record()</span></span></span>, and
+     the record and play parameters are exactely the same (as happens in our
+     algorithm), the playing of the chunk will return inmediately because the
+     time that the <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>play()</span></span></span> method needs to complete would exactly match the
+     time that the <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>record()</span></span></span> method requires (see <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>wire4.py</span></span></span>).</li></ol>
+<!-- l. 113 --><p class='indent'>   This algorithm works fine if the chunk size is controlled by <a href='http://www.portaudio.com/'>PortAudio</a> <span class='cite'>[<a href='#Xportaudio'>1</a>]</span>
+(<span class='obeylines-h'><span class='verb'><span class='ectt-1000'>sounddevice</span></span></span>) and also, the run-time required by <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>pack(chunk)</span></span></span> and <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>unpack(packet)</span></span></span>
+operations is smaller than the chunk-time. The first premise (that we can use varying
+the chunk sizes) complicates slightly the implementation because we would work with
+chunks of constantly changing lenghts (that as you can see running <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>wire4.py</span></span></span>, in
+most of the iterations are 0). This also complicates the control of the latency
 because the chunk size is variable. However, the real problem appears when
 our computer is not able to satisfy the second requirement, i.e., when the
 chunk time is smaller than the time that we need to process the chunks. This
-only can be addressed through optimizing &#x0028;for example, parallelizing&#x0029; the
+only can be addressed through optimizing (for example, parallelizing) the
 code.
-</p><!--l. 128--><p class="noindent" >
+</p><!-- l. 128 --><p class='noindent'>
 </p>
-   <h4 class="subsectionHead"><span class="titlemark">1.2   </span> <a 
- id="x1-30001.2"></a>Timer-based algorithm</h4>
-<!--l. 130--><p class="noindent" >In this algorithm, the task dedicated to record and play the chunks of audio is called
-periodically &#x0028;probably, using some timer provided by the sound hardware&#x0029;. This
+   <h4 class='subsectionHead'><span class='titlemark'>1.2   </span> <a id='x1-30001.2'></a>Timer-based algorithm</h4>
+<!-- l. 130 --><p class='noindent'>In this algorithm, the task dedicated to record and play the chunks of audio is called
+periodically (probably, using some timer provided by the sound hardware). This
 procedure guarantees a gliches-free audio-IO when constant chunk sizes are used
 because the timer interruption coincides exactly with the instant of time in which the
-<span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">record&#x0028;&#x0029;</span></span></span> and the <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">play&#x0028;&#x0029;</span></span></span> methods we are going to handle a chunk of audio &#x0028;of a
+<span class='obeylines-h'><span class='verb'><span class='ectt-1000'>record()</span></span></span> and the <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>play()</span></span></span> methods we are going to handle a chunk of audio (of a
+known size without blocking). The following algorithm describes the new
+algorithm that is basically the previous one, except that the chunk size is
+fixed.
                                                                   
 
                                                                   
-known size without blocking&#x0029;. The following algorithm describes the new
-algorithm that is basically the previous one, except that the chunk size is
-&#xFB01;xed.
 </p>
-   <!--l. 140-->
-   <div class="lstlisting" id="listing-2"><span class="label"><a 
- id="x1-3001r1"></a></span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">#</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">Timer</span><span 
-class="ecit-1000">-</span><span 
-class="ecit-1000">based</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">algorithm</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">&#x0028;</span><span 
-class="ecit-1000">to</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">be</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">called</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">periodically</span><span 
-class="ecit-1000">&#x0029;</span><span 
-class="ectt-1000">&#x00A0;</span><br /> 
-<span class="label"><a 
- id="x1-3002r2"></a></span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">def</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">record_IO_and_play</span><span 
-class="ectt-1000">&#x0028;</span><span 
-class="ectt-1000">chunk_size</span><span 
-class="ectt-1000">&#x0029;:</span><span 
-class="ectt-1000">&#x00A0;</span><br /> 
-<span class="label"><a 
- id="x1-3003r3"></a></span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">chunk</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">=</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">record</span><span 
-class="ectt-1000">&#x0028;</span><span 
-class="ectt-1000">chunk_size</span><span 
-class="ectt-1000">&#x0029;</span><span 
-class="ectt-1000">&#x00A0;</span><br /> 
-<span class="label"><a 
- id="x1-3004r4"></a></span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">packed_chunk</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">=</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">pack</span><span 
-class="ectt-1000">&#x0028;</span><span 
-class="ectt-1000">chunk</span><span 
-class="ectt-1000">&#x0029;</span><span 
-class="ectt-1000">&#x00A0;</span><br /> 
-<span class="label"><a 
- id="x1-3005r5"></a></span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">send</span><span 
-class="ectt-1000">&#x0028;</span><span 
-class="ectt-1000">packed_chunk</span><span 
-class="ectt-1000">&#x0029;</span><span 
-class="ectt-1000">&#x00A0;</span><br /> 
-<span class="label"><a 
- id="x1-3006r6"></a></span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">packed_chunk</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">=</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">receive</span><span 
-class="ectt-1000">&#x0028;&#x0029;</span><span 
-class="ectt-1000">&#x00A0;</span><br /> 
-<span class="label"><a 
- id="x1-3007r7"></a></span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">chunk</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">=</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">unpack</span><span 
-class="ectt-1000">&#x0028;</span><span 
-class="ectt-1000">packed_chunk</span><span 
-class="ectt-1000">&#x0029;</span><span 
-class="ectt-1000">&#x00A0;</span><br /> 
-<span class="label"><a 
- id="x1-3008r8"></a></span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">play</span><span 
-class="ectt-1000">&#x0028;</span><span 
-class="ectt-1000">chunk</span><span 
-class="ectt-1000">&#x0029;</span></div>
+   <!-- l. 140 -->
+   <div class='lstlisting' id='listing-2'><span class='label'><a id='x1-3001r1'></a></span><span class='ecit-1000'>  </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>Timer</span></span><span style='color:#000000'><span class='ecit-1000'>-</span></span><span style='color:#000000'><span class='ecit-1000'>based</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>algorithm</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>(</span></span><span style='color:#000000'><span class='ecit-1000'>to</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>be</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>called</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>periodically</span></span><span style='color:#000000'><span class='ecit-1000'>)</span></span><span class='ectt-1000'> </span><br /> 
+<span class='label'><a id='x1-3002r2'></a></span><span class='ectt-1000'>  </span><span style='color:#000000'><span class='ectt-1000'>def</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>record_IO_and_play</span></span><span style='color:#000000'><span class='ectt-1000'>(</span></span><span style='color:#000000'><span class='ectt-1000'>chunk_size</span></span><span style='color:#000000'><span class='ectt-1000'>):</span></span><span class='ectt-1000'> </span><br /> 
+<span class='label'><a id='x1-3003r3'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>chunk</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>=</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>record</span></span><span style='color:#000000'><span class='ectt-1000'>(</span></span><span style='color:#000000'><span class='ectt-1000'>chunk_size</span></span><span style='color:#000000'><span class='ectt-1000'>)</span></span><span class='ectt-1000'> </span><br /> 
+<span class='label'><a id='x1-3004r4'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>packed_chunk</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>=</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>pack</span></span><span style='color:#000000'><span class='ectt-1000'>(</span></span><span style='color:#000000'><span class='ectt-1000'>chunk</span></span><span style='color:#000000'><span class='ectt-1000'>)</span></span><span class='ectt-1000'> </span><br /> 
+<span class='label'><a id='x1-3005r5'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>send</span></span><span style='color:#000000'><span class='ectt-1000'>(</span></span><span style='color:#000000'><span class='ectt-1000'>packed_chunk</span></span><span style='color:#000000'><span class='ectt-1000'>)</span></span><span class='ectt-1000'> </span><br /> 
+<span class='label'><a id='x1-3006r6'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>packed_chunk</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>=</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>receive</span></span><span style='color:#000000'><span class='ectt-1000'>()</span></span><span class='ectt-1000'> </span><br /> 
+<span class='label'><a id='x1-3007r7'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>chunk</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>=</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>unpack</span></span><span style='color:#000000'><span class='ectt-1000'>(</span></span><span style='color:#000000'><span class='ectt-1000'>packed_chunk</span></span><span style='color:#000000'><span class='ectt-1000'>)</span></span><span class='ectt-1000'> </span><br /> 
+<span class='label'><a id='x1-3008r8'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>play</span></span><span style='color:#000000'><span class='ectt-1000'>(</span></span><span style='color:#000000'><span class='ectt-1000'>chunk</span></span><span style='color:#000000'><span class='ectt-1000'>)</span></span></div>
    
-<!--l. 164--><p class="indent" >   The current implementation of InterCom uses the Timer-based algorithm.
-</p><!--l. 166--><p class="noindent" >
+<!-- l. 164 --><p class='indent'>   The current implementation of InterCom uses the Timer-based algorithm.
+</p><!-- l. 166 --><p class='noindent'>
 </p>
-   <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
- id="x1-40002"></a>What you have to do?</h3>
-<!--l. 168--><p class="noindent" >
-     </p><ol  class="enumerate1" >
-<li 
-  class="enumerate" id="x1-4002x1">
-     <!--l. 170--><p class="noindent" >Read  the  source  code  of  <a 
-href="https://github.com/Tecnologias-multimedia/intercom/blob/master/src/minimal.py" ><span 
-class="ectt-1000">minimal.py</span></a> and  identify  in  the  code  the
+   <h3 class='sectionHead'><span class='titlemark'>2   </span> <a id='x1-40002'></a>What do you have to do?</h3>
+<!-- l. 168 --><p class='noindent'>
+     </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-4002x1'>Read  the  source  code  of  <a href='https://github.com/Tecnologias-multimedia/intercom/blob/master/src/minimal.py'><span class='ectt-1000'>minimal.py</span></a> and  identify  in  the  code  the
      interruption handler that implements the timer-based algorithm. Here you
-     can &#xFB01;nd information about <a 
-href="https://github.com/vicente-gonzalez-ruiz/YAPT/blob/master/03-IO/networking/sockets.ipynb" >sockets</a>&#x00A0;<span class="cite">&#x005B;<a 
-href="#XYAPT">3</a>&#x005D;</span> in Python.
-     </p></li>
-<li 
-  class="enumerate" id="x1-4004x2">
-     <!--l. 176--><p class="noindent" >Evaluate the performance &#x0028;quality of the sound&#x0029; in di&#xFB00;erent con&#xFB01;gurations:
-         </p><ol  class="enumerate2" >
-<li 
-  class="enumerate" id="x1-4006x1">
-         <!--l. 178--><p class="noindent" >When <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">minimal.py</span></span></span> runs in the same computer.
-         </p></li>
-<li 
-  class="enumerate" id="x1-4008x2">
-         <!--l. 179--><p class="noindent" >When <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">minimal.py</span></span></span> runs in di&#xFB00;erent hosts. In this case, try that the
-         computers do not belong to the same local network. This <a 
-href="https://www.noip.com/support/knowledgebase/general-port-forwarding-guide/" >guide</a> can
-         help. Consider in your analysis that <a 
-href="https://en.wikipedia.org/wiki/User_Datagram_Protocol" >UDP</a>&#x00A0;<span class="cite">&#x005B;<a 
-href="#XUDP">4</a>&#x005D;</span> is used to transport the
-         audio data. If you cannot use di&#xFB00;erent local networks, create a WiFi
+     can find information about <a href='https://github.com/vicente-gonzalez-ruiz/YAPT/blob/master/03-IO/networking/sockets.ipynb'>sockets</a> <span class='cite'>[<a href='#XYAPT'>3</a>]</span> in Python.
+     </li>
+<li class='enumerate' id='x1-4004x2'>
+     <!-- l. 176 --><p class='noindent'>Evaluate the performance (quality of the sound) in different configurations:
+         </p><ol class='enumerate2'>
+<li class='enumerate' id='x1-4006x1'>When <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>minimal.py</span></span></span> runs in the same computer.
+         </li>
+<li class='enumerate' id='x1-4008x2'>When <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>minimal.py</span></span></span> runs in different hosts. In this case, try that the
+         computers do not belong to the same local network. This <a href='https://www.noip.com/support/knowledgebase/general-port-forwarding-guide/'>guide</a> can
+         help. Consider in your analysis that <a href='https://en.wikipedia.org/wiki/User_Datagram_Protocol'>UDP</a> <span class='cite'>[<a href='#XUDP'>4</a>]</span> is used to transport the
+         audio data. If you cannot use different local networks, create a WiFi
          zone using your mobile phone and try to produce a loss of packets
-         by separating the devices a su&#xFB03;cient distance.</p></li></ol>
+         by separating the devices a sufficient distance.</li></ol>
      </li></ol>
                                                                   
 
                                                                   
-<!--l. 192--><p class="noindent" >
+<!-- l. 192 --><p class='noindent'>
 </p>
-   <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
- id="x1-50003"></a>Resources</h3>
-   <div class="thebibliography">
-   <p class="bibitem" ><span class="biblabel">
- &#x005B;1&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
- id="Xportaudio"></a><a 
-href="http://www.portaudio.com/" >PortAudio</a>.
+   <h3 class='sectionHead'><span class='titlemark'>3   </span> <a id='x1-50003'></a>Resources</h3>
+   <div class='thebibliography'>
+   <p class='bibitem'><span class='biblabel'>
+ [1]<span class='bibsp'>   </span></span><a id='Xportaudio'></a><a href='http://www.portaudio.com/'>PortAudio</a>.
    </p>
-   <p class="bibitem" ><span class="biblabel">
- &#x005B;2&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
- id="Xpython"></a>The&#x00A0;Python Foundation. <a 
-href="https://www.python.org/" >The Python Website</a>.
+   <p class='bibitem'><span class='biblabel'>
+ [2]<span class='bibsp'>   </span></span><a id='Xpython'></a>The Python Foundation. <a href='https://www.python.org/'>The Python Website</a>.
    </p>
-   <p class="bibitem" ><span class="biblabel">
- &#x005B;3&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
- id="XYAPT"></a>V.&#x00A0;Gonz&#x00E1;lez&#x00A0;Ruiz. <a 
-href="https://github.com/vicente-gonzalez-ruiz/YAPT/" >YAPT</a>.
+   <p class='bibitem'><span class='biblabel'>
+ [3]<span class='bibsp'>   </span></span><a id='XYAPT'></a>V. González Ruiz. <a href='https://github.com/vicente-gonzalez-ruiz/YAPT/'>YAPT</a>.
    </p>
-   <p class="bibitem" ><span class="biblabel">
- &#x005B;4&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
- id="XUDP"></a>J.&#x00A0;Postel.
-   <span 
-class="ecti-1000">RFC 768. The User Datagram Protocol &#x0028;UDP&#x0029;</span>. USC/Information Sciences
-   Institute, <a 
-href="http://www.rfc-editor.org/rfc/rfc768.txt" class="url" ><span 
-class="ectt-1000">http://www.rfc-editor.org/rfc/rfc768.txt</span></a>, 1980.
+   <p class='bibitem'><span class='biblabel'>
+ [4]<span class='bibsp'>   </span></span><a id='XUDP'></a>J. Postel.
+   <span class='ecti-1000'>RFC 768. The User Datagram Protocol (UDP)</span>. USC/Information Sciences
+   Institute, <a class='url' href='http://www.rfc-editor.org/rfc/rfc768.txt'><span class='ectt-1000'>http://www.rfc-editor.org/rfc/rfc768.txt</span></a>, 1980.
 </p>
    </div>
-<a 
- id="Q1-1-6"></a>
-    
-</body></html> 
-
-                                                                  
-
-
+<p><a id='Q1-1-6'></a></p>
+   <div class='footnotes'><!-- l. 59 --><p class='noindent'><span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='ectt-0800'>curl https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire4.py
+</span><span class='ectt-0800'>&gt; wire4.py</span></p>                                                                       </div>
+ 
+</body> 
+</html>
