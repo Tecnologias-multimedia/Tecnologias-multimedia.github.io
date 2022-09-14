@@ -1,18 +1,15 @@
-<?xml version="1.0" encoding="iso-8859-1" ?> 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN" 
-"http://www.w3.org/Math/DTD/mathml2/xhtml-math11-f.dtd" > 
-<html xmlns="http://www.w3.org/1999/xhtml"  
-> 
-<head><title>Removing psychoacoustical redundancy</title> 
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
-<meta name="generator" content="TeX4ht (https://tug.org/tex4ht/)" /> 
-<meta name="originator" content="TeX4ht (https://tug.org/tex4ht/)" /> 
-<!-- xhtml,mathml,html --> 
-<meta name="src" content="index.tex" /> 
-<link rel="stylesheet" type="text/css" href="index.css" /> 
-</head><body 
->
-   <div class="maketitle">
+<!DOCTYPE html> 
+<html lang='en-US' xml:lang='en-US'> 
+<head> <title>Removing psychoacoustical redundancy</title> 
+<meta charset='utf-8' /> 
+<meta content='TeX4ht (https://tug.org/tex4ht/)' name='generator' /> 
+<meta content='width=device-width,initial-scale=1' name='viewport' /> 
+<link href='index.css' rel='stylesheet' type='text/css' /> 
+<meta content='index.tex' name='src' /> 
+<script>window.MathJax = { tex: { tags: "ams", }, }; </script> 
+ <script async='async' id='MathJax-script' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js' type='text/javascript'></script>  
+</head><body>
+   <div class='maketitle'>
                                                                   
 
                                                                   
@@ -20,328 +17,84 @@
 
                                                                   
 
-<h2 class="titleHead">Removing psychoacoustical redundancy</h2>
- <div class="author" ><a 
-href="https://cms.ual.es/UAL/personas/persona.htm?id=515256515553484875" ><span 
-class="ecrm-1200">Vicente Gonz</span><span 
-class="ecrm-1200">&#x00E1;</span><span 
-class="ecrm-1200">lez Ruiz</span></a> <span 
-class="ecrm-1200">- </span><a 
-href="https://cms.ual.es/UAL/universidad/departamentos/informatica/index.htm" ><span 
-class="ecrm-1200">Depto Inform</span><span 
-class="ecrm-1200">&#x00E1;</span><span 
-class="ecrm-1200">tica</span></a> <span 
-class="ecrm-1200">- </span><a 
-href="https://www.ual.es" ><span 
-class="ecrm-1200">UAL</span></a></div><br />
-<div class="date" ><span 
-class="ecrm-1200">March 15, 2022</span></div>
+<h2 class='titleHead'>Removing psychoacoustical redundancy</h2>
+ <div class='author'><a href='https://cms.ual.es/UAL/personas/persona.htm?id=515256515553484875'><span class='ecrm-1200'>Vicente González Ruiz</span></a><br class='newline' /><a href='https://cms.ual.es/UAL/universidad/departamentos/informatica/index.htm'><span class='ecrm-1200'>Depto Informática</span></a> <span class='ecrm-1200'>- </span><a href='https://www.ual.es'><span class='ecrm-1200'>UAL</span></a></div><br />
+<div class='date'><span class='ecrm-1200'>September 14, 2022</span></div>
    </div>
-   <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
- id="x1-10001"></a>Description</h3>
-<!--l. 7--><p class="noindent" >
+   <h3 class='sectionHead'><span class='titlemark'>1   </span> <a id='x1-10001'></a>Description</h3>
+<!-- l. 7 --><p class='noindent'>
 </p>
-   <h4 class="subsectionHead"><span class="titlemark">1.1   </span> <a 
- id="x1-20001.1"></a>Threshold of Human Hearing &#x0028;THH&#x0029;</h4>
-<!--l. 10--><p class="noindent" >Psychoacoustics &#x0028;see <a 
-href="https://vicente-gonzalez-ruiz.github.io/the_sound/" >the sound</a>, <a 
-href="https://vicente-gonzalez-ruiz.github.io/human_auditory_system/" >the human auditory system</a>, and <a 
-href="https://vicente-gonzalez-ruiz.github.io/human_sound_perception/" >the human sound
-perception</a>&#x0029; has determined that the HAS &#x0028;Human Auditory System&#x0029; has a
-sensitivity that depends on the frequency of the sound, the so called THH &#x0028;<a 
-href="https://en.wikipedia.org/wiki/Absolute_threshold_of_hearing" >Threshold
-of Human Hearing</a>&#x0029;. This basically means that some subbands can be quantized with
-a larger quantization step than others without a noticeable increase &#x0028;from a
-perfection perspective&#x0029; of the quantization noise.
+   <h4 class='subsectionHead'><span class='titlemark'>1.1   </span> <a id='x1-20001.1'></a>Threshold of Human Hearing (THH)</h4>
+<!-- l. 10 --><p class='noindent'>Psychoacoustics (see <a href='https://vicente-gonzalez-ruiz.github.io/the_sound/'>the sound</a>, <a href='https://vicente-gonzalez-ruiz.github.io/human_auditory_system/'>the human auditory system</a>, and <a href='https://vicente-gonzalez-ruiz.github.io/human_sound_perception/'>the human sound
+perception</a>) has determined that the HAS (Human Auditory System) has a
+sensitivity that depends on the frequency of the sound, the so called THH (<a href='https://en.wikipedia.org/wiki/Absolute_threshold_of_hearing'>Threshold
+of Human Hearing</a>). This basically means that some subbands can be quantized with
+a larger quantization step than others without a noticeable increase (from a
+perfection perspective) of the quantization noise.
 </p>
-   <hr class="figure" /><div class="figure" 
->
+   <figure class='figure'> 
+
                                                                   
 
                                                                   
                                                                   
 
                                                                   
-<!--l. 26--><p class="noindent" ><div style="text-align:center;"> <img width=600 src="graphics/ToHH.svg" /> </div>  <a 
- id="x1-2001r1"></a>
-<a 
- id="x1-2002"></a>
-<br />                                                                  </p><div class="caption" 
-><span class="id">
-Figure&#x00A0;1: </span><span  
-class="content">Absolute threshold of human hearing.                          </span></div><!--tex4ht:label?: x1-2001r1 -->
-                                                                  
-
-                                                                  
-   </div><hr class="endfigure" />
-<!--l. 31--><p class="indent" >   A good approximation of the THH &#x0028;Threshold of Human Hearing&#x0029; for a 20-years
-old person can be obtained with&#x00A0;<span class="cite">&#x005B;<a 
-href="#Xbosi2003intro">1</a>&#x005D;</span> </p><table class="equation"><tr><td>
-<!--l. 33--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="block" class="equation">
-      <mstyle 
-   id="x1-2003r1"  class="label" ></mstyle><!--endlabel--><mo 
-class="MathClass-open" stretchy="false">T</mo><mo 
-class="MathClass-open" stretchy="false">&#x0028;</mo><mi 
->f</mi><mo 
-class="MathClass-close" stretchy="false">&#x0029;</mo><mstyle 
-class="text"><mtext  >&#x005B;dB&#x005D;</mtext></mstyle> <mo 
-class="MathClass-rel">=</mo> <mn>3</mn><mo 
-class="MathClass-punc">.</mo><mn>6</mn><mn>4</mn><msup><mrow 
-><mo 
-class="MathClass-open" stretchy="false">&#x0028;</mo><mi 
->f</mi><mstyle 
-class="text"><mtext  >&#x005B;kHz&#x005D;</mtext></mstyle><mo 
-class="MathClass-close" stretchy="false">&#x0029;</mo></mrow><mrow 
-><mo 
-class="MathClass-bin">&#x2212;</mo><mn>0</mn><mo 
-class="MathClass-punc">.</mo><mn>8</mn></mrow></msup 
-> <mo 
-class="MathClass-bin">&#x2212;</mo> <mn>6</mn><mo 
-class="MathClass-punc">.</mo><mn>5</mn><msup><mrow 
-><mi 
->e</mi></mrow><mrow 
-><mi 
->f</mi><mstyle 
-class="text"><mtext  >&#x005B;kHz&#x005D;</mtext></mstyle><mo 
-class="MathClass-bin">&#x2212;</mo><mn>3</mn><mo 
-class="MathClass-punc">.</mo><mn>3</mn><msup><mrow 
-><mo 
-class="MathClass-close" stretchy="false">&#x0029;</mo></mrow><mrow 
-><mn>2</mn></mrow></msup 
->
-                      </mrow></msup 
-> <mo 
-class="MathClass-bin">+</mo> <mn>1</mn><msup><mrow 
-><mn>0</mn></mrow><mrow 
-><mo 
-class="MathClass-bin">&#x2212;</mo><mn>3</mn></mrow></msup 
-><msup><mrow 
-><mo 
-class="MathClass-open" stretchy="false">&#x0028;</mo><mi 
->f</mi><mstyle 
-class="text"><mtext  >&#x005B;kHz&#x005D;</mtext></mstyle><mo 
-class="MathClass-close" stretchy="false">&#x0029;</mo></mrow><mrow 
-><mn>4</mn></mrow></msup 
-><mo 
-class="MathClass-punc">.</mo>
-</math></td><td class="eq-no">&#x0028;1&#x0029;</td></tr></table>
-<!--l. 37--><p class="indent" >   This equation has been plotted in the Fig.&#x00A0;<a 
-href="#x1-2001r1">1<!--tex4ht:ref: fig:ToHH --></a>.
+<!-- l. 26 --><p class='noindent'><div style='text-align:center;'> <img src='graphics/ToHH.svg' /> </div>  <a id='x1-2001r1'></a>
+<a id='x1-2002'></a>
 </p>
-   <h4 class="subsectionHead"><span class="titlemark">1.2   </span> <a 
- id="x1-30001.2"></a>DWT subbands and quantization steps</h4>
-<!--l. 43--><p class="noindent" >The number of DWT subbands </p><table class="equation"><tr><td>
-<!--l. 44--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="block" class="equation">
-                         <mstyle 
-   id="x1-3001r2"  class="label" ></mstyle><!--endlabel--><msub><mrow 
-><mo 
-class="MathClass-open" stretchy="false">N</mo></mrow><mrow 
-><mstyle 
-class="text"><mtext  >sb</mtext></mstyle></mrow></msub 
-> <mo 
-class="MathClass-rel">=</mo> <msub><mrow 
-><mi 
->N</mi></mrow><mrow 
-><mstyle 
-class="text"><mtext  >levels</mtext></mstyle></mrow></msub 
-> <mo 
-class="MathClass-bin">+</mo> <mn>1</mn>
-</math></td><td class="eq-no">&#x0028;2&#x0029;</td></tr></table>
-<!--l. 47--><p class="indent" >   where <!--l. 47--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><msub><mrow 
-><mi 
->N</mi></mrow><mrow 
-><mstyle 
-class="text"><mtext  >levels</mtext></mstyle></mrow></msub 
-></math>
-is the number of levels of the DWT. Except for the
-<!--l. 48--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><msup><mrow 
-><mstyle mathvariant="bold"><mi 
->l</mi></mstyle></mrow><mrow 
-><msub><mrow 
-><mi 
->N</mi></mrow><mrow 
-><mstyle 
-class="text"><mtext  >levels</mtext></mstyle></mrow></msub 
-></mrow></msup 
-></math>
-subband &#x0028;the lowest-pass frequency of the decomposition&#x0029;, it holds that
-</p><table class="equation"><tr><td>
+<figcaption class='caption'><span class='id'>Figure 1: </span><span class='content'>Absolute threshold of human hearing.                          </span></figcaption><!-- tex4ht:label?: x1-2001r1  -->
                                                                   
 
                                                                   
-<!--l. 50--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="block" class="equation">
-                        <mstyle 
-   id="x1-3002r3"  class="label" ></mstyle><!--endlabel--><mo 
-class="MathClass-open" stretchy="false">W</mo><mo 
-class="MathClass-open" stretchy="false">&#x0028;</mo><msup><mrow 
-><mstyle mathvariant="bold"><mi 
->h</mi></mstyle></mrow><mrow 
-><mi 
->s</mi></mrow></msup 
-><mo 
-class="MathClass-close" stretchy="false">&#x0029;</mo> <mo 
-class="MathClass-rel">=</mo> <mfrac><mrow 
-><mn>1</mn></mrow> 
-<mrow 
-><mn>2</mn></mrow></mfrac><mi 
->W</mi><mo 
-class="MathClass-open" stretchy="false">&#x0028;</mo><msup><mrow 
-><mstyle mathvariant="bold"><mi 
->h</mi></mstyle></mrow><mrow 
-><mi 
->s</mi><mo 
-class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msup 
-><mo 
-class="MathClass-close" stretchy="false">&#x0029;</mo><mo 
-class="MathClass-punc">,</mo>
-</math></td><td class="eq-no">&#x0028;3&#x0029;</td></tr></table>
-<!--l. 53--><p class="indent" >   being <!--l. 53--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->W</mi><mo 
-class="MathClass-open" stretchy="false">&#x0028;</mo><mo 
-class="MathClass-bin">&#x22C5;</mo><mo 
-class="MathClass-close" stretchy="false">&#x0029;</mo></math> the bandwidth of
-the corresponding subband <!--l. 54--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->s</mi></math>.
-Therefore, considering that the bandwidth of the audio signal is
-<!--l. 55--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mn>2</mn><mn>2</mn><mn>0</mn><mn>5</mn><mn>0</mn></math> Hz, the
-bandwidth <!--l. 55--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->W</mi><mo 
-class="MathClass-open" stretchy="false">&#x0028;</mo><msup><mrow 
-><mstyle mathvariant="bold"><mi 
->h</mi></mstyle></mrow><mrow 
-><mn>1</mn></mrow></msup 
-><mo 
-class="MathClass-close" stretchy="false">&#x0029;</mo></math>
-of the <!--l. 55--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><msup><mrow 
-><mstyle mathvariant="bold"><mi 
->h</mi></mstyle></mrow><mrow 
-><mn>1</mn></mrow></msup 
-></math>
-subband is <!--l. 55--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mn>1</mn><mn>1</mn><mn>0</mn><mn>2</mn><mn>5</mn></math>
-Hz, <!--l. 56--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->W</mi><mo 
-class="MathClass-open" stretchy="false">&#x0028;</mo><msup><mrow 
-><mstyle mathvariant="bold"><mi 
->h</mi></mstyle></mrow><mrow 
-><mn>2</mn></mrow></msup 
-><mo 
-class="MathClass-close" stretchy="false">&#x0029;</mo> <mo 
-class="MathClass-rel">=</mo> <mn>2</mn><mn>2</mn><mn>0</mn><mn>2</mn><mn>5</mn><mo 
-class="MathClass-bin">&#x2215;</mo><mn>4</mn></math>,
-and so on. It also holds that </p><table class="equation"><tr><td>
-<!--l. 57--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="block" class="equation">
-                     <mstyle 
-   id="x1-3003r4"  class="label" ></mstyle><!--endlabel--><mo 
-class="MathClass-open" stretchy="false">W</mo><mo 
-class="MathClass-open" stretchy="false">&#x0028;</mo><msup><mrow 
-><mstyle mathvariant="bold"><mi 
->l</mi></mstyle></mrow><mrow 
-><msub><mrow 
-><mi 
->N</mi></mrow><mrow 
-><mstyle 
-class="text"><mtext  >levels</mtext></mstyle></mrow></msub 
-></mrow></msup 
-><mo 
-class="MathClass-close" stretchy="false">&#x0029;</mo> <mo 
-class="MathClass-rel">=</mo> <mi 
->W</mi><mo 
-class="MathClass-open" stretchy="false">&#x0028;</mo><msup><mrow 
-><mstyle mathvariant="bold"><mi 
->h</mi></mstyle></mrow><mrow 
-><msub><mrow 
-><mi 
->N</mi></mrow><mrow 
-><mstyle 
-class="text"><mtext  >levels</mtext></mstyle></mrow></msub 
-></mrow></msup 
-><mo 
-class="MathClass-close" stretchy="false">&#x0029;</mo><mo 
-class="MathClass-punc">.</mo>
-</math></td><td class="eq-no">&#x0028;4&#x0029;</td></tr></table>
-<!--l. 61--><p class="indent" >   The idea is to determine, knowning the frequencies represented in each DWT
+   </figure>
+<!-- l. 31 --><p class='indent'>   A good approximation of the THH (Threshold of Human Hearing) for a 20-years
+old person can be obtained with <span class='cite'>[<a href='#Xbosi2003intro'>1</a>]</span> \begin {equation}  T(f)\text {[dB]} = 3.64(f\text {[kHz]})^{-0.8} - 6.5e^{f\text {[kHz]}-3.3)^2} + 10^{-3}(f\text {[kHz]})^4. \label {eq:ToHH}  \end {equation}
+This equation has been plotted in the Fig. <a href='#x1-2001r1'>1<!-- tex4ht:ref: fig:ToHH  --></a>.
+</p>
+   <h4 class='subsectionHead'><span class='titlemark'>1.2   </span> <a id='x1-30001.2'></a>DWT subbands and quantization steps</h4>
+<!-- l. 43 --><p class='noindent'>The number of DWT subbands \begin {equation}  N_{\text {sb}} = N_{\text {levels}} + 1  \end {equation}
+where \(N_{\text {levels}}\) is the number of levels of the DWT. Except for the \({\mathbf l}^{N_{\text {levels}}}\) subband (the lowest-pass
+frequency of the decomposition), it holds that \begin {equation}  W({\mathbf h}^s) = \frac {1}{2}W({\mathbf h}^{s-1}),  \end {equation}
+being \(W(\cdot )\) the bandwidth of the corresponding subband \(s\). Therefore, considering that the
+bandwidth of the audio signal is \(22050\) Hz, the bandwidth \(W({\mathbf h}^1)\) of the \({\mathbf h}^1\) subband is \(11025\) Hz, \(W({\mathbf h} ^2)=22025/4\), and so
+on. It also holds that \begin {equation}  W({\mathbf l}^{N_{\text {levels}}}) = W({\mathbf h}^{N_{\text {levels}}}).  \end {equation}
+</p><!-- l. 61 --><p class='indent'>   The idea is to determine, knowning the frequencies represented in each DWT
 subband and the THH curve, the quantization step that should be applied to each
 subband.
-</p><!--l. 67--><p class="noindent" >
+</p><!-- l. 67 --><p class='noindent'>
 </p>
-   <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
- id="x1-40002"></a>What you have to do?</h3>
-<!--l. 70--><p class="noindent" >
+   <h3 class='sectionHead'><span class='titlemark'>2   </span> <a id='x1-40002'></a>What you have to do?</h3>
+<!-- l. 70 --><p class='noindent'>
 </p>
-   <h4 class="subsectionHead"><span class="titlemark">2.1   </span> <a 
- id="x1-50002.1"></a>Subjective comparison</h4>
-<!--l. 73--><p class="noindent" >
+   <h4 class='subsectionHead'><span class='titlemark'>2.1   </span> <a id='x1-50002.1'></a>Subjective comparison</h4>
+<!-- l. 73 --><p class='noindent'>
+     </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-5002x1'>Using a recording tool such as <a href='http://audacity.sourceforge.net'>Audacity</a> or <a href='http://plugin.org.uk/timemachine/'>JACK Timemachine</a>, record the
+     simulated transmission of a piece of audio and create a <span class='ectt-1000'>.wav </span>file, when the
+     audio has been transmitted using <span class='ectt-1000'>temporal_overlapped_DWT_coding.py</span>
+     and <span class='ectt-1000'>threshold.py</span>, using in both cases the same transmission bit-rate.
+     Use the quantization step for controlling the bit-rate.
+     </li>
+<li class='enumerate' id='x1-5004x2'>Determine which audio sounds better, from a subjective point of view.
+     Repeat this step the number of times you consider necessary.</li></ol>
                                                                   
 
                                                                   
-     </p><ol  class="enumerate1" >
-<li 
-  class="enumerate" id="x1-5002x1">
-     <!--l. 74--><p class="noindent" >Using a recording tool such as <a 
-href="http://audacity.sourceforge.net" >Audacity</a> or <a 
-href="http://plugin.org.uk/timemachine/" >JACK Timemachine</a>, record the
-     simulated transmission of a piece of audio and create a <span 
-class="ectt-1000">.wav </span>&#xFB01;le, when the
-     audio has been transmitted using <span 
-class="ectt-1000">temporal_overlapped_DWT_coding.py</span>
-     and <span 
-class="ectt-1000">threshold.py</span>, using in both cases the same transmission bit-rate.
-     Use the quantization step for controlling the bit-rate.
-     </p></li>
-<li 
-  class="enumerate" id="x1-5004x2">
-     <!--l. 82--><p class="noindent" >Determine which audio sounds better, from a subjective point of view.
-     Repeat this step the number of times you consider necessary.</p></li></ol>
-<!--l. 90--><p class="noindent" >
+<!-- l. 90 --><p class='noindent'>
 </p>
-   <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
- id="x1-60003"></a>Deliverables</h3>
-<!--l. 92--><p class="noindent" >The results of your experiments.
-</p><!--l. 94--><p class="noindent" >
+   <h3 class='sectionHead'><span class='titlemark'>3   </span> <a id='x1-60003'></a>Deliverables</h3>
+<!-- l. 92 --><p class='noindent'>The results of your experiments.
+</p><!-- l. 94 --><p class='noindent'>
 </p>
-   <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
- id="x1-70004"></a>Resources</h3>
-   <div class="thebibliography">
-   <p class="bibitem" ><span class="biblabel">
- &#x005B;1&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
- id="Xbosi2003intro"></a>M.&#x00A0;Bosi and R.E. Goldberd.  <a 
-href="https://last.hit.bme.hu/download/vidtechlab/fcc/literature/audio/audio_coding_standards_book.pdf" ><span 
-class="ecti-1000">Introduction to Digital Audio Coding and</span>
-   <span 
-class="ecti-1000">Standards</span></a>. Kluwer Academic Publishers, 2003.
+   <h3 class='sectionHead'><span class='titlemark'>4   </span> <a id='x1-70004'></a>Resources</h3>
+   <div class='thebibliography'>
+   <p class='bibitem'><span class='biblabel'>
+ [1]<span class='bibsp'>   </span></span><a id='Xbosi2003intro'></a>M. Bosi and R.E. Goldberd.  <a href='https://last.hit.bme.hu/download/vidtechlab/fcc/literature/audio/audio_coding_standards_book.pdf'><span class='ecti-1000'>Introduction to Digital Audio Coding and
+   </span><span class='ecti-1000'>Standards</span></a>. Kluwer Academic Publishers, 2003.
 </p>
    </div>
-<a 
- id="Q1-1-9"></a>
+<p><a id='Q1-1-9'></a></p>
     
-</body></html> 
-
-                                                                  
-
-
+</body> 
+</html>
