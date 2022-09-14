@@ -9,8 +9,18 @@
 .ectt-1000{ font-family: monospace,monospace;}
 .ectt-1000{ font-family: monospace,monospace;}
 .ectt-1000{ font-family: monospace,monospace;}
+.ectt-1000{ font-family: monospace,monospace;}
+.ecit-1000{ font-style: italic; font-family: monospace,monospace;}
+.ecit-1000{ font-style: italic; font-family: monospace,monospace;}
+.ecit-1000{ font-style: italic; font-family: monospace,monospace;}
+.ecit-1000{ font-style: italic; font-family: monospace,monospace;}
+.ecit-1000{ font-style: italic; font-family: monospace,monospace;}
+.ecit-1000{ font-style: italic; font-family: monospace,monospace;}
+.ecit-1000{ font-style: italic; font-family: monospace,monospace;}
+.ecit-1000{ font-style: italic; font-family: monospace,monospace;}
 .ecrm-0900{font-size:90%;}
 .ecrm-0800{font-size:80%;}
+.ecti-1000{ font-style: italic;}
 .ecti-1000{ font-style: italic;}
 .ecti-1000{ font-style: italic;}
 .ecti-1000{ font-style: italic;}
@@ -172,14 +182,11 @@ table[rules] {border-left:solid black 0.4pt; border-right:solid black 0.4pt; }
 .hline {border-top: 1px solid black;}
 div.array {text-align:center;}
 .supertabular {text-align:center}
-code.lstinline{font-family:monospace,monospace;}
-pre.listings{font-family: monospace,monospace; white-space: pre-wrap; margin-top:0.5em; margin-bottom:0.5em; }
 .lstlisting .label{margin-right:0.5em; }
-pre.lstlisting{font-family: monospace,monospace; white-space: pre-wrap; margin-top:0.5em; margin-bottom:0.5em; }
-pre.lstinputlisting{ font-family: monospace,monospace; white-space: pre-wrap; }
+div.lstlisting{font-family: monospace,monospace; white-space: nowrap; margin-top:0.5em; margin-bottom:0.5em; }
+div.lstinputlisting{ font-family: monospace,monospace; white-space: nowrap; }
 .lstinputlisting .label{margin-right:0.5em;}
 table[rules] {border-left:solid black 0.4pt; border-right:solid black 0.4pt; }
-table.longtable{border-collapse: collapse; border-spacing: 0;}
 div.longtable{text-align:center;}
 table.longtable{margin-left:auto; margin-right: auto;}
 .ovalbox { padding-left:3pt; padding-right:3pt; border:solid thin; }

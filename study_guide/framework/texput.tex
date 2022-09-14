@@ -32,15 +32,30 @@ introduction to Python such as this
 \href{https://github.com/vicente-gonzalez-ruiz/YAPT/tree/master/workshops/programacion_python_ESO}{workshop
   of YAPT} \cite{YAPT} could also be helpful. See also
 \href{http://zetcode.com/lang/python/}{ZetCode's Python
-  Tutorial}. Follow this to
-\href{https://vicente-gonzalez-ruiz.github.io/Python_install/}{install
-  Python}. Alternatively (but reducing the chances of solving any
-possible issue), you can use the Python interpreter shipped with your
-OS. In this case, it is strongly recommended to use an specific Python
-\href{https://docs.python.org/3/library/venv.html}{environment} for
-the InterCom project.
+  Tutorial}.
 
-Finally, to work in the
+To run InterCom, the following alternatives should work:
+\begin{enumerate}
+\item Use the Python interpreter shipped with your OS. If you are
+  using the recommended Xubuntu version in this guide, the Python
+  interpreter is fine. In this case, use a virtual
+  \href{https://docs.python.org/3/library/venv.html}{environment} for
+  InterCom. To do this, run:
+  \begin{lstlisting}[language=Bash]
+    python3 -m venv ~/enviroments/intercom     # Create (only the first time)
+    source ~/enviroments/intercom/bin/activate # Activate (allways you run InterCom)
+  \end{lstlisting}
+  And to deactivate the environment, run:
+  \begin{lstlisting}[language=Bash]
+    deactivate
+  \end{lstlisting}
+  
+\item Use a specific version of Python installed in a virtual environment. In this case, follow this 
+\href{https://vicente-gonzalez-ruiz.github.io/Python_install/}{guide}.
+
+\end{enumerate}
+
+Finally, if you want to contribute to the
 \href{https://github.com/Tecnologias-multimedia/intercom}{InterCom}
 project \cite{intercom} you must understand the basics of Git
 \cite{Git-book} and \href{https://github.com/}{GitHub}\footnote{There
