@@ -1,4 +1,4 @@
-export BIBINPUTS=":.:/home/vruiz/bibs/:"
+#export BIBINPUTS=":.:/home/vruiz/bibs/:"
 make clean
 make index.pdf
 rm -f references
