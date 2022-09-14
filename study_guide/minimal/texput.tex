@@ -49,7 +49,7 @@ Roughtly, InterCom can be divided in 6 steps:
 Where:
 
 \begin{enumerate}
-\item the \verb|record()| method captures a chunk of frames. In
+\item The \verb|record()| method captures a chunk of frames. In
   \verb|sounddevice|, this operation is carried on by the
   \href{https://python-sounddevice.readthedocs.io/en/0.4.0/api/streams.html#sounddevice.Stream.read}{\texttt{read()}
     method}. As it can be seen in
@@ -58,7 +58,7 @@ Where:
     https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire4.py
     > wire4.py}} and also in the documentation of
   \verb|sounddevice|, if we read only the frames that are available
-  in the ADC's buffer, this is a non-blocking operation and the chunk
+  in the ADC's buffer, this generates a non-blocking operation and the chunk
   size depends on the instant of time in which this method is
   called. Otherwise, if we especify a number of frames different to
   the number of available frames, the operation is blocking and
@@ -82,9 +82,9 @@ Where:
   long as the number of packets/second is small and the sizes of the
   payloads are also small, as it is expected in InterCom.
 
-\item \verb|receive()|, waits (blocking) for an incoming packet, and
-  therefore, this operation is IO-bound. However, most
-  \href{https://docs.python.org/3/library/socket.html}{socket
+\item \verb|receive()|, waits (blocking the calling process) for an
+  incoming packet, and therefore, this operation is IO-bound. However,
+  most \href{https://docs.python.org/3/library/socket.html}{socket
     API}s~\cite{python} offeer a
   \href{https://docs.python.org/3.8/library/socket.html#socket.socket.setblocking}{non-blocking
     option} where when a packet is not available in the kernel's
@@ -114,9 +114,9 @@ This algorithm works fine if the chunk size is controlled by
 \href{http://www.portaudio.com/}{PortAudio}~\cite{portaudio}
 (\verb|sounddevice|) and also, the run-time required by
 \verb|pack(chunk)| and \verb|unpack(packet)| operations is smaller
-than the chunk-time. The first premise (that we can use varying chunk
-sizes) complicates slightly the implementation because we would work
-with chunks of constantly changing lenghts (that as you can see
+than the chunk-time. The first premise (that we can use varying the
+chunk sizes) complicates slightly the implementation because we would
+work with chunks of constantly changing lenghts (that as you can see
 running \verb|wire4.py|, in most of the iterations are 0). This also
 complicates the control of the latency because the chunk size is
 variable. However, the real problem appears when our computer is not
@@ -163,7 +163,7 @@ previous one, except that the chunk size is fixed.
 
 The current implementation of InterCom uses the Timer-based algorithm.
 
-\section{What you have to do?}
+\section{What do you have to do?}
 
 \begin{enumerate}
 
