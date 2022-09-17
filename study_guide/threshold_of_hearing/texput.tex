@@ -1,3 +1,5 @@
+% Emacs, this is -*-latex-*-
+
 \title{Considering the Threshold of Hearing}
 
 \maketitle
@@ -66,19 +68,55 @@ threshold.py.
 The threshold of hearing plotted in the Fig.~\ref{fig:ToHH} can be
 different to the curve which corresponds with your current ``hearing
 capabilities''.\footnote{For example, your speakers could not have a
-  flat frequency response, or your room could attenuate more, some
-  freqencies.} For this reason, in the module threshold.py, implement
-a procedure for determining your threshold curve. The idea is to
-generate a sequence of pure tones localized at different
-frequencies. Each tone should start with an amplitude of zero, and
-progressively (linearly) increase the amplitude until the user hit a
-key when he start listening the tone. After this procedure, you should
-be able to plot your threshold curve similar to the depicted in the
-Fig.~\ref{fig:ToHH}. Finally, notice that such threshold curve should
-be used by your interlocutor, and you should use your intercolutor's
-threshold curve. Please, modify threshold.py to implement such
-extra\footnote{This fine tunning of the threshold of hearing should be
-  optional when you run InterCom.} functionality.
+flat frequency response, or your room could attenuate more, some
+freqencies.} For this reason, in the module threshold.py, implement a
+procedure for deciding the quantization step sizes used in each
+Wavelet subband\footnote{Remember that when the
+\href{https://en.wikipedia.org/wiki/Wavelet_transform}{Wavalet
+  transform} is
+\href{https://en.wikipedia.org/wiki/Dyadic_rational}{dyadic}, the
+\href{https://en.wikipedia.org/wiki/Discrete_wavelet_transform}{Wavelet
+  space} is analyzed by
+\href{https://en.wikipedia.org/wiki/Octave_band}{octaves}, and
+therefore the
+\href{https://en.wikipedia.org/wiki/Filter_bank}{subbands} doubles the
+size when we increase the frequency.}.
+  
+To find out such quantization step sizes, we can simulate
+\href{https://en.wikipedia.org/wiki/Quantization_(signal_processing)}{quantization
+  noise} in each subband and determine the amplitude of the noise when
+it starts to be noticeable. Supposing that the quantization noise
+follows a
+\href{https://en.wikipedia.org/wiki/Continuous_uniform_distribution}{uniform
+  distribution}, the following algorithm can de implemented:
+
+\begin{enumerate}
+\item Let $\{{\mathbf l}^{N_{\text{levels}}}, {\mathbf
+  h}^{N_{\text{levels}}}, {\mathbf h}^{N_{\text{levels}}-1},\cdots,
+  {\mathbf h}^1\}$ the Wavelet space of a chunk, being ${\mathbf
+    l}^{N_{\text{levels}}}$ the lowest frequency subband. Starting
+  with ${\mathbf l}^{N_{\text{levels}}}$ (at the first iteration the
+  rest of subbands are zero), while the noise stays imperceptible:
+  \begin{enumerate}
+  \item Increase the amplitude of the noise in the subband.
+  \item Compute the inverse Wavelet transform of $\{{\mathbf
+    l}^{N_{\text{levels}}}, {\mathbf h}^{N_{\text{levels}}}, {\mathbf
+    h}^{N_{\text{levels}}-1},\cdots, {\mathbf h}^1\}$.
+  \item Reproduce the generated data, alternating every second with
+    the play of an empty chunk.
+  \end{enumerate}
+  \item Continue with the next subband, but keeping the lowest
+    perceptible uniform noise in the previously processed ones. In
+    this way, for the subband ${\mathbf h}^1$ (the last one to be
+    processed), the rest of subbands should have already stored noise.
+\end{enumerate}
+
+Notice that the quantization step sizes are determined for the sound
+that you are going to play. Therefore, you should use your
+interlocutor's quantization step sizes and viceversa.
+
+Finally, this extra functionality should be optional (the ``standard''
+ToHH, see Fig.~\ref{fig:ToHH}, should be used by default).
 
 \subsection{Subjective performance}
 
