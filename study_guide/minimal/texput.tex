@@ -144,7 +144,7 @@ chunk of audio (of a known size without blocking). The following
 algorithm describes the new algorithm that is basically the previous
 one, except that the chunk size is fixed.
 
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python,numbers=left]
   # Timer-based algorithm (to be called periodically)
   def record_IO_and_play(chunk_size):
     chunk = record(chunk_size)
@@ -182,7 +182,8 @@ The current implementation of InterCom uses the Timer-based algorithm.
   
 \item Evaluate the performance (quality of the sound) in different configurations:
   \begin{enumerate}
-  \item When \verb|minimal.py| runs in the same computer.
+  \item When \verb|minimal.py| runs in the same computer. Can you
+    describe how the parameter \verb|FRAMES_PER_SECOND| is modified?
   \item When \verb|minimal.py| runs in different hosts. In this case,
     try that the computers do not belong to the same local
     network. This
