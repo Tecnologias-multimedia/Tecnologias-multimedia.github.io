@@ -22,7 +22,7 @@ to capture and play the audio. Using sounddevice we have two alternatives for im
 
 Roughtly, InterCom can be divided in 6 steps:
 
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python,numbers=left]
   # Loop-based algorithm (to be called in a loop)
   def record_IO_and_play():
     chunk = record()  # (1)
@@ -54,15 +54,18 @@ Where:
   \href{https://python-sounddevice.readthedocs.io/en/0.4.0/api/streams.html#sounddevice.Stream.read}{\texttt{read()}
     method}. As it can be seen in
   \href{https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire4.py}{wire4.py}\footnote{
-  \texttt{curl
-    https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire4.py
-    > wire4.py}} and also in the documentation of
-  \verb|sounddevice|, if we read only the frames that are available
-  in the ADC's buffer, this generates a non-blocking operation and the chunk
-  size depends on the instant of time in which this method is
+    \texttt{curl
+      https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire4.py
+      > wire4.py}} and also in the documentation of
+  \verb|sounddevice|, if we read only the frames that are available in
+  the ADC's buffer, this generates a non-blocking operation and the
+  chunk size depends on the instant of time in which this method is
   called. Otherwise, if we especify a number of frames different to
-  the number of available frames, the operation is blocking and
-  \href{https://en.wikipedia.org/wiki/I/O_bound}{I/O-bound} (the
+  the number of available frames, the operation can\footnote{The
+    reading will be blocking if the number of requested frames is
+    larger than the number of available frames.} be
+  \href{https://python-sounddevice.readthedocs.io/en/0.4.0/api/streams.html#sounddevice.Stream.write}{blocking}
+  and \href{https://en.wikipedia.org/wiki/I/O_bound}{I/O-bound} (the
   calling process sleeps until the required chunk size is returned).
 
 \item \verb|pack(chunk)| process the chunk to create a
@@ -72,9 +75,11 @@ Where:
   \href{https://en.wikipedia.org/wiki/Datagram}{Datagram} Model. In
   general, this is a
   \href{https://en.wikipedia.org/wiki/CPU-bound}{CPU-bounded}
-  (CPU-intensive) operation, and therefore, it reduces the number of
-  executions/second that the \verb|record_IO_and_play()| method can
-  reach.
+  (CPU-intensive) operation because the payload of the packet can be
+  compressed in order to minimize the transmission
+  \href{https://en.wikipedia.org/wiki/Bit_rate}{bit-rate}, and
+  therefore, it reduces the number of executions/second that the
+  \verb|record_IO_and_play()| method can reach.
 
 \item \verb|send(packed_chunk)|, sends the packet to the
   InterCom's interlocutor. When datagrams are used, this step is
@@ -99,43 +104,43 @@ Where:
   packed chunk into a chunk of audio.
 
 \item \verb|play(chunk)| renders the chunk. In general, this is an
-  I/O-bound
-  \href{https://python-sounddevice.readthedocs.io/en/0.4.0/api/streams.html#sounddevice.Stream.write}{blocking}
-  action. However, if \verb|play()| is called at the same pace
-  than \verb|record()|, and the record and play parameters are
-  exactely the same (as happens in our algorithm), the playing of the
-  chunk will return inmediately because the time that the
-  \verb|play()| method needs to complete would exactly match the
+  I/O-bound blocking action. However, if \verb|play()| is called at
+  the same pace than \verb|record()|, and the record and play
+  parameters are exactely the same (as happens in our algorithm), the
+  playing of the chunk will return inmediately because the time that
+  the \verb|play()| method needs to complete would exactly match the
   time that the \verb|record()| method requires (see
-  \verb|wire4.py|).
+  \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/test/sounddevice/wire4.py}{wire4.py}).
 \end{enumerate}
 
 This algorithm works fine if the chunk size is controlled by
 \href{http://www.portaudio.com/}{PortAudio}~\cite{portaudio}
 (\verb|sounddevice|) and also, the run-time required by
 \verb|pack(chunk)| and \verb|unpack(packet)| operations is smaller
-than the chunk-time. The first premise (that we can use varying the
-chunk sizes) complicates slightly the implementation because we would
-work with chunks of constantly changing lenghts (that as you can see
-running \verb|wire4.py|, in most of the iterations are 0). This also
-complicates the control of the latency because the chunk size is
-variable. However, the real problem appears when our computer is not
-able to satisfy the second requirement, i.e., when the chunk time is
-smaller than the time that we need to process the chunks. This only
-can be addressed through optimizing (for example, parallelizing) the
-code.
+than the chunk-time. Unfortunately, the first premise (that we can use
+varying the chunk sizes) complicates slightly the implementation
+because we would work with chunks of constantly changing lenghts (that
+as you can see running \verb|wire4.py|, in most of the iterations are
+0). This also complicates the control of the latency because the chunk
+size is variable. However, the real problem appears when our computer
+is not able to satisfy the second requirement, i.e., when the chunk
+time is smaller than the time that we need to process the chunks. This
+only can be addressed through optimizing (for example, parallelizing)
+the code.
 
 \subsection{Timer-based algorithm}
 
 In this algorithm, the task dedicated to record and play the chunks of
-audio is called periodically (probably, using some timer provided by
-the sound hardware). This procedure guarantees a gliches-free audio-IO
+audio is called periodically (probably, using some
+\href{https://en.wikipedia.org/wiki/Timer}{timer} provided by the
+sound hardware). This procedure guarantees a
+\href{https://en.wikipedia.org/wiki/Glitch}{gliches}-free audio-IO
 when constant chunk sizes are used because the timer interruption
 coincides exactly with the instant of time in which the
-\verb|record()| and the \verb|play()| methods we are going to
-handle a chunk of audio (of a known size without blocking). The
-following algorithm describes the new algorithm that is basically the
-previous one, except that the chunk size is fixed.
+\verb|record()| and the \verb|play()| methods we are going to handle a
+chunk of audio (of a known size without blocking). The following
+algorithm describes the new algorithm that is basically the previous
+one, except that the chunk size is fixed.
 
 \begin{lstlisting}[language=Python]
   # Timer-based algorithm (to be called periodically)
