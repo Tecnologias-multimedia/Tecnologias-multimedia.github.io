@@ -140,19 +140,19 @@ sound hardware). This procedure guarantees a
 when constant chunk sizes are used because the timer interruption
 coincides exactly with the instant of time in which the
 \verb|record()| and the \verb|play()| methods we are going to handle a
-chunk of audio (of a known size without blocking). The following
+chunk of audio of a known size, and therefore, without blocking. The following
 algorithm describes the new algorithm that is basically the previous
 one, except that the chunk size is fixed.
 
 \begin{lstlisting}[language=Python,numbers=left]
   # Timer-based algorithm (to be called periodically)
   def record_IO_and_play(chunk_size):
-    chunk = record(chunk_size)
+    chunk = record(chunk_size)  # The chunk has chunk_size frames
     packed_chunk = pack(chunk)
     send(packed_chunk)
     packed_chunk = receive()
     chunk = unpack(packed_chunk)
-    play(chunk)
+    play(chunk)  # I play chunk_size frames
 \end{lstlisting}
 
 %\begin{pseudocode}{Timer-based\_InterCom}{~}
