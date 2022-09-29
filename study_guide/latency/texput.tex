@@ -288,7 +288,8 @@ sudo tc qdisc add dev lo root netem delay <average_delay_in_miliseconds>ms <maxi
     traffic (it's the root rule of the possible tree of rules).
   \item [\texttt{netem}:] Use the
     \href{https://wiki.linuxfoundation.org/networking/netem}{network
-      emulator} to emulate a WAN property.
+      emulator} to emulate a
+    \href{https://en.wikipedia.org/wiki/Wide_area_network}{WAN}.
   \end{description}
 
   Example:
@@ -306,7 +307,7 @@ sudo tc qdisc add dev lo root netem delay 100ms 10ms 25% distribution normal
 tc qdisc show dev lo
     \end{lstlisting}
     
-    that should output:
+    that should output (or something very similar):
     
     \begin{lstlisting}{language=bash}
 qdisc netem 8009: root refcnt 2 limit 1000 delay 100ms  10ms 25%
@@ -333,12 +334,10 @@ sudo tc qdisc change dev lo root netem delay <average_dalay_in_miliseconds>ms <m
 
 For our application, InterCom, a chunk is lost when it arrives too
 late or it never arrives. Therefore, the results of a packet loss or a
-packet delay are almost indistinguishable, except by the average
-latency experimented by the user (the higher the network latency, the
-higher the perceived latency).
-
-For example, a packet loss ratio of $10\%$ can be configured with
-\verb|tc| by running:
+packet delay are almost indistinguishable\footnote{Except by the
+  average latency experimented by the user (the higher the network
+  latency, the higher the perceived latency).}. For example, a packet
+loss ratio of $10\%$ can be configured with \verb|tc| by running:
 
   \begin{lstlisting}{language=bash}
 sudo tc qdisc add dev lo root netem loss 10%
@@ -346,10 +345,10 @@ sudo tc qdisc add dev lo root netem loss 10%
 
 \section{Using a buffer to hidden the jitter}
 
-As exmplained before, we can consider that the QoE provided by
-InterCom is inversely proportional to the network jitter (see
+As explained before, we can consider that the QoE provided by InterCom
+is inversely proportional to the network jitter (see
 Fig.~\ref{fig:timelines}-a). One solution (see
-Fig.~\ref{fig:timelines}-b) to this drawback is the use of a
+Fig.~\ref{fig:timelines}-b) is the use of a
 \href{https://en.wikipedia.org/wiki/Random_access}{random access}
 \href{https://en.wikipedia.org/wiki/Data_buffer}{buffer} at the
 receiver side, where the chunks are stored for a time large enough to
@@ -406,10 +405,9 @@ The following guidelines have been used to implement the
 \emph{buffered} version of InterCom:
 
 \begin{enumerate}
-\item The class Minimal
-  (\href{https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)}{inherit}
-  from) has been inherited (extended) to implement a new class
-  Buffering.
+\item The class Minimal has been
+  \href{https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)}{inherited}
+  (extended) to implement a new class Buffering.
 \item In the payload of the UDP packets a chunk number has been
   included in order to provide to the receiver the information to
   determine where to store the corresponding chunk in the circular
@@ -455,7 +453,7 @@ This is an overview of the implementation:
     chunk = unbuffer_next_chunk()  # (4)
     play(chunk)  # (5)
 
-  # (Main, not a new) thread
+  # Main (not a new) thread
   def receive_and_buffer():
     packed_chunk = receive()  # (1)
     chunk_number, chunk = unpack(packed_chunk)  # (2)
@@ -467,7 +465,7 @@ extractcs from the buffer an unpacked\footnote{Chunks will be
 compressed in a posterior milestone, and uncompressing is performed in
 this step.} chunk. The chunks are buffered in the Step (3) of the
 method \verb|receive_and_buffer()|. Notice also that the Step (1) of
-\verb|receive_and_buffer()| is a blocking method that will return with
+\verb|receive_and_buffer()| is a blocking method that should return with
 every new received chunk.
 
 %\begin{pseudocode}{Buffering\_InterCom}{~}

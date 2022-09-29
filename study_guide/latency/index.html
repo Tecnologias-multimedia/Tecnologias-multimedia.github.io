@@ -95,10 +95,10 @@ link is high, then \(t_p\gg t_t.\) For this type of link (a simple wire), it als
                                                                   
 <div class='center'>
 <!-- l. 107 --><p class='noindent'>
-</p><!-- l. 109 --><p class='noindent'><div style='text-align:center;'> <img src='graphics/ping_timeline.svg' /> </div>  </p></div>
+</p><!-- l. 108 --><p class='noindent'><div style='text-align:center;'> <img src='graphics/ping_timeline.svg' /> </div>  </p></div>
 <a id='x1-3001r1'></a>
 <a id='x1-3002'></a>
-<figcaption class='caption'><span class='id'>Figure 1:  </span><span class='content'>Timeline  of  a  ping  interaction  between  two  host  A  and  B,
+<figcaption class='caption'><span class='id'>Figure 1:  </span><span class='content'>Timeline  of  a  ping  interaction  between  two  hosts  A  and  B,
 interconnected by simple communication link.
 </span></figcaption><!-- tex4ht:label?: x1-3001r1  -->
                                                                   
@@ -120,7 +120,7 @@ interconnected by simple communication link.
 <a id='x1-6003'></a>
      <div class='lstlisting' id='listing-1'><span class='label'><a id='x1-6004r1'></a></span><span style='color:#000000'><span class='ectt-1000'>ping</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>localhost</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>-</span></span><span style='color:#000000'><span class='ectt-1000'>c</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>100</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>-</span></span><span style='color:#000000'><span class='ectt-1000'>s</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>&lt;</span></span><span style='color:#000000'><span class='ectt-1000'>payload_length_in_bytes</span></span><span style='color:#000000'><span class='ectt-1000'>&gt;</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>&gt;</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>/</span></span><span style='color:#000000'><span class='ectt-1000'>tmp</span></span><span style='color:#000000'><span class='ectt-1000'>/</span></span><span style='color:#000000'><span class='ectt-1000'>ping</span></span><span style='color:#000000'><span class='ectt-1000'>.</span></span><span style='color:#000000'><span class='ectt-1000'>txt</span></span></div>
      
-     <!-- l. 130 --><p class='noindent'>Use a payload size compared to the chunk size that you expect to use in your
+     <!-- l. 130 --><p class='noindent'>Use a payload size similar to the chunk size that you expect to use in your
      InterCom experiments.
      </p></li>
 <li class='enumerate' id='x1-6006x2'>Compute the expected (considering that the RTT should double the) latency to
@@ -286,29 +286,29 @@ local networks, without any traffic control.
          </p></dd><dt class='description'>
          <!-- l. 289 --><p class='noindent'>
      <span class='ectt-1000'>netem</span><span class='ecbx-1000'>:</span> </p></dt><dd class='description'>
-         <!-- l. 289 --><p class='noindent'>Use the <a href='https://wiki.linuxfoundation.org/networking/netem'>network emulator</a> to emulate a WAN property.</p></dd></dl>
+         <!-- l. 289 --><p class='noindent'>Use the <a href='https://wiki.linuxfoundation.org/networking/netem'>network emulator</a> to emulate a <a href='https://en.wikipedia.org/wiki/Wide_area_network'>WAN</a>.</p></dd></dl>
                                                                   
 
                                                                   
-     <!-- l. 294 --><p class='noindent'>Example:
-     </p><!-- l. 296 --><p class='noindent'>
+     <!-- l. 295 --><p class='noindent'>Example:
+     </p><!-- l. 297 --><p class='noindent'>
          </p><ol class='enumerate2'>
 <li class='enumerate' id='x1-11009x1'>
-         <!-- l. 297 --><p class='noindent'>Add the rule:
+         <!-- l. 298 --><p class='noindent'>Add the rule:
 </p>
-         <!-- l. 299 -->
+         <!-- l. 300 -->
          <div class='lstlisting' id='listing-9'><span class='label'><a id='x1-11010r26'></a></span><span style='color:#000000'><span class='ectt-1000'>sudo</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>tc</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>qdisc</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>add</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>dev</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>lo</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>root</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>netem</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>delay</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>100</span></span><span style='color:#000000'><span class='ectt-1000'>ms</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>10</span></span><span style='color:#000000'><span class='ectt-1000'>ms</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>25%</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>distribution</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>normal</span></span></div>
          
          </li>
 <li class='enumerate' id='x1-11012x2'>
-         <!-- l. 303 --><p class='noindent'>Check that the rule has been installed with the command:
+         <!-- l. 304 --><p class='noindent'>Check that the rule has been installed with the command:
 </p>
-         <!-- l. 305 -->
+         <!-- l. 306 -->
          <div class='lstlisting' id='listing-10'><span class='label'><a id='x1-11013r27'></a></span><span style='color:#000000'><span class='ectt-1000'>tc</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>qdisc</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>show</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>dev</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>lo</span></span></div>
          
-         <!-- l. 309 --><p class='noindent'>that should output:
+         <!-- l. 310 --><p class='noindent'>that should output (or something very similar):
 </p>
-         <!-- l. 311 -->
+         <!-- l. 312 -->
          <div class='lstlisting' id='listing-11'><span class='label'><a id='x1-11014r28'></a></span><span style='color:#000000'><span class='ectt-1000'>qdisc</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>netem</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>8009:</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>root</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>refcnt</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>2</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>limit</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>1000</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>delay</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>100</span></span><span style='color:#000000'><span class='ectt-1000'>ms</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span class='ectt-1000'> </span><span style='color:#000000'><span class='ectt-1000'>10</span></span><span style='color:#000000'><span class='ectt-1000'>ms</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>25%</span></span></div>
          
          </li></ol>
@@ -316,9 +316,9 @@ local networks, without any traffic control.
 <li class='enumerate' id='x1-11016x3'>Measure the QoE.
      </li>
 <li class='enumerate' id='x1-11018x4'>
-     <!-- l. 318 --><p class='noindent'>Delete the <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>tc</span></span></span> rule with:
+     <!-- l. 319 --><p class='noindent'>Delete the <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>tc</span></span></span> rule with:
 </p>
-     <!-- l. 320 -->
+     <!-- l. 321 -->
      <div class='lstlisting' id='listing-12'><span class='label'><a id='x1-11019r29'></a></span><span style='color:#000000'><span class='ectt-1000'>sudo</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>tc</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>qdisc</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>delete</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>dev</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>lo</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>root</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>netem</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>delay</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>&lt;</span></span><span style='color:#000000'><span class='ectt-1000'>average_dalay_in_miliseconds</span></span><span style='color:#000000'><span class='ectt-1000'>&gt;</span></span><span style='color:#000000'><span class='ectt-1000'>ms</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>&lt;</span></span><span style='color:#000000'><span class='ectt-1000'>maximum_average_deviation_in_miliseconds</span></span><span style='color:#000000'><span class='ectt-1000'>&gt;</span></span><span style='color:#000000'><span class='ectt-1000'>ms</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>&lt;</span></span><span style='color:#000000'><span class='ectt-1000'>Pearson_correlation_coefficient_expressed_as_a_percentage</span></span><span style='color:#000000'><span class='ectt-1000'>&gt;%</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>distribution</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>&lt;</span></span><span style='color:#000000'><span class='ectt-1000'>uniform</span></span><span style='color:#000000'><span class='ectt-1000'>|</span></span><span style='color:#000000'><span class='ectt-1000'>normal</span></span><span style='color:#000000'><span class='ectt-1000'>|</span></span><span style='color:#000000'><span class='ectt-1000'>pareto</span></span><span style='color:#000000'><span class='ectt-1000'>|</span></span><span style='color:#000000'><span class='ectt-1000'>paretonormal</span></span><span style='color:#000000'><span class='ectt-1000'>&gt;</span></span></div>
      
                                                                   
@@ -326,32 +326,30 @@ local networks, without any traffic control.
                                                                   
      </li>
 <li class='enumerate' id='x1-11021x5'>
-     <!-- l. 324 --><p class='noindent'>(Optional) It’s possible to change a working rule with:
+     <!-- l. 325 --><p class='noindent'>(Optional) It’s possible to change a working rule with:
 </p>
-     <!-- l. 326 -->
+     <!-- l. 327 -->
      <div class='lstlisting' id='listing-13'><span class='label'><a id='x1-11022r30'></a></span><span style='color:#000000'><span class='ectt-1000'>sudo</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>tc</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>qdisc</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>change</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>dev</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>lo</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>root</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>netem</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>delay</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>&lt;</span></span><span style='color:#000000'><span class='ectt-1000'>average_dalay_in_miliseconds</span></span><span style='color:#000000'><span class='ectt-1000'>&gt;</span></span><span style='color:#000000'><span class='ectt-1000'>ms</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>&lt;</span></span><span style='color:#000000'><span class='ectt-1000'>maximum_average_deviation_in_miliseconds</span></span><span style='color:#000000'><span class='ectt-1000'>&gt;</span></span><span style='color:#000000'><span class='ectt-1000'>ms</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>&lt;</span></span><span style='color:#000000'><span class='ectt-1000'>Pearson_correlation_coefficient_expressed_as_a_percentage</span></span><span style='color:#000000'><span class='ectt-1000'>&gt;%</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>distribution</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>&lt;</span></span><span style='color:#000000'><span class='ectt-1000'>uniform</span></span><span style='color:#000000'><span class='ectt-1000'>|</span></span><span style='color:#000000'><span class='ectt-1000'>normal</span></span><span style='color:#000000'><span class='ectt-1000'>|</span></span><span style='color:#000000'><span class='ectt-1000'>pareto</span></span><span style='color:#000000'><span class='ectt-1000'>|</span></span><span style='color:#000000'><span class='ectt-1000'>paretonormal</span></span><span style='color:#000000'><span class='ectt-1000'>&gt;</span></span></div>
      
      </li></ol>
-<!-- l. 332 --><p class='noindent'>
+<!-- l. 333 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead'><span class='titlemark'>2.3   </span> <a id='x1-120002.3'></a>(Optional) QoE considering the packet loss</h4>
-<!-- l. 334 --><p class='noindent'>For our application, InterCom, a chunk is lost when it arrives too late or it never
+<!-- l. 335 --><p class='noindent'>For our application, InterCom, a chunk is lost when it arrives too late or it never
 arrives. Therefore, the results of a packet loss or a packet delay are almost
-indistinguishable, except by the average latency experimented by the user (the higher
-the network latency, the higher the perceived latency).
-</p><!-- l. 340 --><p class='indent'>   For example, a packet loss ratio of \(10\%\) can be configured with <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>tc</span></span></span> by running:
+indistinguishable<span class='footnote-mark'><a href='#fn5x0' id='fn5x0-bk'><sup class='textsuperscript'>5</sup></a></span><a id='x1-12001f5'></a>.
+For example, a packet loss ratio of \(10\%\) can be configured with <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>tc</span></span></span> by running:
 </p>
-   <!-- l. 343 -->
-   <div class='lstlisting' id='listing-14'><span class='label'><a id='x1-12001r31'></a></span><span style='color:#000000'><span class='ectt-1000'>sudo</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>tc</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>qdisc</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>add</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>dev</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>lo</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>root</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>netem</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>loss</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>10%</span></span></div>
+   <!-- l. 342 -->
+   <div class='lstlisting' id='listing-14'><span class='label'><a id='x1-12002r31'></a></span><span style='color:#000000'><span class='ectt-1000'>sudo</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>tc</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>qdisc</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>add</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>dev</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>lo</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>root</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>netem</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>loss</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>10%</span></span></div>
    
-<!-- l. 347 --><p class='noindent'>
+<!-- l. 346 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>3   </span> <a id='x1-130003'></a>Using a buffer to hidden the jitter</h3>
-<!-- l. 349 --><p class='noindent'>As exmplained before, we can consider that the QoE provided by InterCom is
-inversely proportional to the network jitter (see Fig. <a href='#x1-13001r2'>2<!-- tex4ht:ref: fig:timelines  --></a>-a). One solution (see Fig. <a href='#x1-13001r2'>2<!-- tex4ht:ref: fig:timelines  --></a>-b)
-to this drawback is the use of a <a href='https://en.wikipedia.org/wiki/Random_access'>random access</a> <a href='https://en.wikipedia.org/wiki/Data_buffer'>buffer</a> at the receiver side,
-where the chunks are stored for a time large enough to hidde the jitter to the
-user <span class='cite'>[<a href='#XKurose-Ross'>4</a>]</span>.
+<!-- l. 348 --><p class='noindent'>As explained before, we can consider that the QoE provided by InterCom is inversely
+proportional to the network jitter (see Fig. <a href='#x1-13001r2'>2<!-- tex4ht:ref: fig:timelines  --></a>-a). One solution (see Fig. <a href='#x1-13001r2'>2<!-- tex4ht:ref: fig:timelines  --></a>-b) is the
+use of a <a href='https://en.wikipedia.org/wiki/Random_access'>random access</a> <a href='https://en.wikipedia.org/wiki/Data_buffer'>buffer</a> at the receiver side, where the chunks are stored for a
+time large enough to hidde the jitter to the user <span class='cite'>[<a href='#XKurose-Ross'>4</a>]</span>.
 </p>
    <figure class='figure'> 
 
@@ -362,8 +360,8 @@ user <span class='cite'>[<a href='#XKurose-Ross'>4</a>]</span>.
 
                                                                   
 <div class='center'>
-<!-- l. 359 --><p class='noindent'>
-</p><!-- l. 360 --><p class='noindent'><div style='text-align:center;'> <img src='graphics/timelines.svg' /> </div>  </p></div>
+<!-- l. 358 --><p class='noindent'>
+</p><!-- l. 359 --><p class='noindent'><div style='text-align:center;'> <img src='graphics/timelines.svg' /> </div>  </p></div>
 <a id='x1-13001r2'></a>
 <a id='x1-13002'></a>
 <figcaption class='caption'><span class='id'>Figure 2: </span><span class='content'>Timelines of two InterCom interactions. On the left, the playback is
@@ -375,12 +373,12 @@ example).
 
                                                                   
    </figure>
-<!-- l. 370 --><p class='indent'>   <a href='https://en.wikipedia.org/wiki/Jitter#Jitter_buffers'><span class='ecti-1000'>Dejitterizing </span>buffers</a> are typically implemented with a circular buffer structure
+<!-- l. 369 --><p class='indent'>   <a href='https://en.wikipedia.org/wiki/Jitter#Jitter_buffers'><span class='ecti-1000'>Dejitterizing </span>buffers</a> are typically implemented with a circular buffer structure
 (see Fig. <a href='#x1-13004r3'>3<!-- tex4ht:ref: fig:circular_buffer  --></a>). In an ideal situation (as the depicted in the figure), the number of
 pending-to-be-played chunks available in the buffer is half of the number of cells in
 the buffer, and the chunks have arrived on time. In this example, the receiver (where
 the chunks are buffered) waits for 3 chunks before to start playing the chunk number
-0.<span class='footnote-mark'><a href='#fn5x0' id='fn5x0-bk'><sup class='textsuperscript'>5</sup></a></span><a id='x1-13003f5'></a>
+0.<span class='footnote-mark'><a href='#fn6x0' id='fn6x0-bk'><sup class='textsuperscript'>6</sup></a></span><a id='x1-13003f6'></a>
 Notice that the number of cells in the buffer \(2N\) must double the number of the chunks
 buffered during the buffering time proportional to \(N\), in order to hide a \(N\) chunk-times
 jitter. Notice also that this technique introduces also a \(N\) chunk-times delay in the
@@ -394,7 +392,7 @@ playback.
                                                                   
 
                                                                   
-<div class='tabular'> <table class='tabular' id='TBL-2'><colgroup id='TBL-2-1g'><col id='TBL-2-1' /><col id='TBL-2-2' /><col id='TBL-2-3' /></colgroup><tr id='TBL-2-1-' style='vertical-align:baseline;'><td class='td11' id='TBL-2-1-1' style='white-space:nowrap; text-align:center;'> <!-- l. 388 --><p class='noindent'><div style='text-align:center;'> <img src='graphics/circular_buffer1.svg' /> </div>                                                                    </p></td><td class='td11' id='TBL-2-1-2' style='white-space:nowrap; text-align:center;'> <!-- l. 388 --><p class='noindent'><div style='text-align:center;'> <img src='graphics/circular_buffer2.svg' /> </div>                                                                    </p></td><td class='td11' id='TBL-2-1-3' style='white-space:nowrap; text-align:center;'> <!-- l. 388 --><p class='noindent'><div style='text-align:center;'> <img src='graphics/circular_buffer3.svg' /> </div>                                                                    </p></td>
+<div class='tabular'> <table class='tabular' id='TBL-2'><colgroup id='TBL-2-1g'><col id='TBL-2-1' /><col id='TBL-2-2' /><col id='TBL-2-3' /></colgroup><tr id='TBL-2-1-' style='vertical-align:baseline;'><td class='td11' id='TBL-2-1-1' style='white-space:nowrap; text-align:center;'> <!-- l. 387 --><p class='noindent'><div style='text-align:center;'> <img src='graphics/circular_buffer1.svg' /> </div>                                                                    </p></td><td class='td11' id='TBL-2-1-2' style='white-space:nowrap; text-align:center;'> <!-- l. 387 --><p class='noindent'><div style='text-align:center;'> <img src='graphics/circular_buffer2.svg' /> </div>                                                                    </p></td><td class='td11' id='TBL-2-1-3' style='white-space:nowrap; text-align:center;'> <!-- l. 387 --><p class='noindent'><div style='text-align:center;'> <img src='graphics/circular_buffer3.svg' /> </div>                                                                    </p></td>
 </tr><tr id='TBL-2-2-' style='vertical-align:baseline;'><td class='td11' id='TBL-2-2-1' style='white-space:nowrap; text-align:center;'>                                 (a)                                                    </td><td class='td11' id='TBL-2-2-2' style='white-space:nowrap; text-align:center;'>                                 (b)                                                    </td><td class='td11' id='TBL-2-2-3' style='white-space:nowrap; text-align:center;'>                                 (c)                                                    </td></tr></table>
 </div> <a id='x1-13004r3'></a>
 <a id='x1-13005'></a>
@@ -408,15 +406,15 @@ Then, a new chunk (chunk number 3) is received and buffered (subfigure (c)).
 
                                                                   
    </figure>
-<!-- l. 400 --><p class='indent'>   For this new improved InterCom a parameter with the <span class='ecti-1000'>buffering time </span>must be
+<!-- l. 399 --><p class='indent'>   For this new improved InterCom a parameter with the <span class='ecti-1000'>buffering time </span>must be
 provided by the users. This value (typically expressed in miliseconds) should be large
 enough to hide the network jitter, but small enough to minimize the end-to-end
 (user) latency.
-</p><!-- l. 405 --><p class='indent'>   The following guidelines have been used to implement the <span class='ecti-1000'>buffered </span>version of
+</p><!-- l. 404 --><p class='indent'>   The following guidelines have been used to implement the <span class='ecti-1000'>buffered </span>version of
 InterCom:
      </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-13007x1'>The  class  Minimal  (<a href='https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)'>inherit</a>  from)  has  been  inherited  (extended)  to
-     implement a new class Buffering.
+<li class='enumerate' id='x1-13007x1'>The class Minimal has been <a href='https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)'>inherited</a> (extended) to implement a new class
+     Buffering.
      </li>
 <li class='enumerate' id='x1-13009x2'>In the payload of the UDP packets a chunk number has been included
      in order to provide to the receiver the information to determine where to
@@ -424,7 +422,7 @@ InterCom:
      of 16 bits has been used for representing the chunk numbers.
      </li>
 <li class='enumerate' id='x1-13011x3'>
-     <!-- l. 418 --><p class='noindent'>It has been taken into consideration that the critical part of InterCom (the
+     <!-- l. 416 --><p class='noindent'>It has been taken into consideration that the critical part of InterCom (the
      method <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>record_send_and_play()</span></span></span>) is a method that runs as an <a href='https://en.wikipedia.org/wiki/Interrupt_handler'>interrup
      handler</a> that could be called each time a new chunk is available in the ADC (see
      the previuous milestone). More precisely:
@@ -448,9 +446,9 @@ InterCom:
      or <a href='https://docs.python.org/3/library/multiprocessing.html'>multiprocessing</a> packages because the interruption handler (the
      so called <span class='ecti-1000'>callback</span>() function) already runs in parallel with the main
      thread.</li></ol>
-<!-- l. 447 --><p class='indent'>   This is an overview of the implementation:
+<!-- l. 445 --><p class='indent'>   This is an overview of the implementation:
 </p>
-   <!-- l. 449 -->
+   <!-- l. 447 -->
    <div class='lstlisting' id='listing-15'><span class='label'><a id='x1-13020r1'></a></span><span class='ecit-1000'>  </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>Interruption</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>handler</span></span><span class='ectt-1000'> </span><br /> 
 <span class='label'><a id='x1-13021r2'></a></span><span class='ectt-1000'>  </span><span style='color:#000000'><span class='ectt-1000'>def</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>record_send_and_play</span></span><span style='color:#000000'><span class='ectt-1000'>():</span></span><span class='ectt-1000'> </span><br /> 
 <span class='label'><a id='x1-13022r3'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>chunk</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>=</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>record</span></span><span style='color:#000000'><span class='ectt-1000'>()</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>(1)</span></span><span class='ectt-1000'> </span><br /> 
@@ -459,30 +457,30 @@ InterCom:
 <span class='label'><a id='x1-13025r6'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>chunk</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>=</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>unbuffer_next_chunk</span></span><span style='color:#000000'><span class='ectt-1000'>()</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>(4)</span></span><span class='ectt-1000'> </span><br /> 
 <span class='label'><a id='x1-13026r7'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>play</span></span><span style='color:#000000'><span class='ectt-1000'>(</span></span><span style='color:#000000'><span class='ectt-1000'>chunk</span></span><span style='color:#000000'><span class='ectt-1000'>)</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>(5)</span></span><span class='ectt-1000'> </span><br /> 
 <span class='label'><a id='x1-13027r8'></a></span><span class='ectt-1000'> </span><br /> 
-<span class='label'><a id='x1-13028r9'></a></span><span class='ecit-1000'>  </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>(</span></span><span style='color:#000000'><span class='ecit-1000'>Main</span></span><span style='color:#000000'><span class='ecit-1000'>,</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>not</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>a</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>new</span></span><span style='color:#000000'><span class='ecit-1000'>)</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>thread</span></span><span class='ectt-1000'> </span><br /> 
+<span class='label'><a id='x1-13028r9'></a></span><span class='ecit-1000'>  </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>Main</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>(</span></span><span style='color:#000000'><span class='ecit-1000'>not</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>a</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>new</span></span><span style='color:#000000'><span class='ecit-1000'>)</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>thread</span></span><span class='ectt-1000'> </span><br /> 
 <span class='label'><a id='x1-13029r10'></a></span><span class='ectt-1000'>  </span><span style='color:#000000'><span class='ectt-1000'>def</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>receive_and_buffer</span></span><span style='color:#000000'><span class='ectt-1000'>():</span></span><span class='ectt-1000'> </span><br /> 
 <span class='label'><a id='x1-13030r11'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>packed_chunk</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>=</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>receive</span></span><span style='color:#000000'><span class='ectt-1000'>()</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>(1)</span></span><span class='ectt-1000'> </span><br /> 
 <span class='label'><a id='x1-13031r12'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>chunk_number</span></span><span style='color:#000000'><span class='ectt-1000'>,</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>chunk</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>=</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>unpack</span></span><span style='color:#000000'><span class='ectt-1000'>(</span></span><span style='color:#000000'><span class='ectt-1000'>packed_chunk</span></span><span style='color:#000000'><span class='ectt-1000'>)</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>(2)</span></span><span class='ectt-1000'> </span><br /> 
 <span class='label'><a id='x1-13032r13'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>buffer</span></span><span style='color:#000000'><span class='ectt-1000'>(</span></span><span style='color:#000000'><span class='ectt-1000'>chunk_number</span></span><span style='color:#000000'><span class='ectt-1000'>,</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>chunk</span></span><span style='color:#000000'><span class='ectt-1000'>)</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>(3)</span></span></div>
    
-<!-- l. 465 --><p class='indent'>   Notice that the Step (4) of the method <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>record_send_and_play()</span></span></span> extractcs from the buffer
-an unpacked<span class='footnote-mark'><a href='#fn6x0' id='fn6x0-bk'><sup class='textsuperscript'>6</sup></a></span><a id='x1-13033f6'></a>
+<!-- l. 463 --><p class='indent'>   Notice that the Step (4) of the method <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>record_send_and_play()</span></span></span> extractcs from the buffer
+an unpacked<span class='footnote-mark'><a href='#fn7x0' id='fn7x0-bk'><sup class='textsuperscript'>7</sup></a></span><a id='x1-13033f7'></a>
 chunk. The chunks are buffered in the Step (3) of the method <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>receive_and_buffer()</span></span></span>.
 Notice also that the Step (1) of <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>receive_and_buffer()</span></span></span> is a blocking method that
-will return with every new received chunk.
+should return with every new received chunk.
 </p>
    <h4 class='subsectionHead'><span class='titlemark'>3.1   </span> <a id='x1-140003.1'></a>Control of the buffer size in <span class='ectt-1000'>intercom</span></h4>
-<!-- l. 494 --><p class='noindent'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>buffer.py</span></span></span> can be run to inter-communicate two users (one user in the case of a
+<!-- l. 492 --><p class='noindent'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>buffer.py</span></span></span> can be run to inter-communicate two users (one user in the case of a
 simulation), and the buffering time can be controlled with the <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>--buffering_time</span></span></span>
 parameter. Using a real o simulated environment, find the minimum buffering time
 that allows to hide the jitter in your environment. In the case of using a
 simulated one, test different jitter configurations (value, correlation, and
 distribution).
-</p><!-- l. 502 --><p class='noindent'>
+</p><!-- l. 500 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>4   </span> <a id='x1-150004'></a>Deliverables</h3>
-<!-- l. 504 --><p class='noindent'>The results of the experiments proposed in the Section <a href='#x1-40002'>2<!-- tex4ht:ref: sec:homework  --></a> and the Section <a href='#x1-140003.1'>3.1<!-- tex4ht:ref: sec:homework2  --></a>.
-</p><!-- l. 507 --><p class='noindent'>
+<!-- l. 502 --><p class='noindent'>The results of the experiments proposed in the Section <a href='#x1-40002'>2<!-- tex4ht:ref: sec:homework  --></a> and the Section <a href='#x1-140003.1'>3.1<!-- tex4ht:ref: sec:homework2  --></a>.
+</p><!-- l. 505 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>5   </span> <a id='x1-160005'></a>Resources</h3>
                                                                   
@@ -493,7 +491,7 @@ distribution).
  [1]<span class='bibsp'>   </span></span><a id='Xdordal2020intro'></a>Peter L. Dordal. <a href='http://intronetworks.cs.luc.edu/current/ComputerNetworks.pdf'><span class='ecti-1000'>An Introduction to Computer Networks</span></a>. 2020.
    </p>
    <p class='bibitem'><span class='biblabel'>
- [2]<span class='bibsp'>   </span></span><a id='XForouzan'></a>Behrouz   Forouzan.      <a href='https://docs.google.com/viewer?a=v&amp;pid=sites&amp;srcid=ZWNjaGFuZ2EuYWMuaW58Y2hpbnRhbnxneDo4MDNlMGUwZmQ0ZmU1YmI'><span class='ecti-1000'>Introduction  to  Data  Communications  and
+ [2]<span class='bibsp'>   </span></span><a id='XForouzan'></a>Behrouz   Forouzan.      <a href='https://github.com/aboelkassem/References_Books/blob/master/Data%20Communications%20and%20Networking%20By%20Behrouz%20A.Forouzan.pdf'><span class='ecti-1000'>Introduction  to  Data  Communications  and
    </span><span class='ecti-1000'>Networking</span></a>. McGraw-Hill, 2007.
    </p>
    <p class='bibitem'><span class='biblabel'>
@@ -519,15 +517,21 @@ distribution).
 </p>
    </div>
 <p><a id='Q1-1-21'></a></p>
+                                                                  
+
+                                                                  
    <div class='footnotes'><!-- l. 35 --><p class='indent'>     <span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='ecrm-0800'>Something that is not available to normal network users.</span></p>
 <!-- l. 176 --><p class='indent'>     <span class='footnote-mark'><a href='#fn2x0-bk' id='fn2x0'><sup class='textsuperscript'>2</sup></a></span><span class='ecrm-0800'>If you are unable to use two different local networks, try to run InterCom in two hosts
 </span><span class='ecrm-0800'>connected to the same router.</span></p>
 <!-- l. 193 --><p class='noindent'><span class='footnote-mark'><a href='#fn3x0-bk' id='fn3x0'><sup class='textsuperscript'>3</sup></a></span><span class='ecrm-0800'>Notice that the private IP addres of your router could be different.</span></p>
 <!-- l. 251 --><p class='indent'>     <span class='footnote-mark'><a href='#fn4x0-bk' id='fn4x0'><sup class='textsuperscript'>4</sup></a></span><span class='ecrm-0800'>If you are unable to use two different local networks, try to run InterCom in two hosts
-</span><span class='ecrm-0800'>connected to the same router.</span></p><!-- l. 380 --><p class='indent'> <span class='footnote-mark'><a href='#fn5x0-bk' id='fn5x0'><sup class='textsuperscript'>5</sup></a></span><span class='ecrm-0800'>Implementation tip: in a system where for each recorded chunk a chunk must be
+</span><span class='ecrm-0800'>connected to the same router.</span></p>
+<!-- l. 339 --><p class='indent'>     <span class='footnote-mark'><a href='#fn5x0-bk' id='fn5x0'><sup class='textsuperscript'>5</sup></a></span><span class='ecrm-0800'>Except by the average latency experimented by the user (the higher the network latency, the
+</span><span class='ecrm-0800'>higher the perceived latency).</span></p>
+<!-- l. 379 --><p class='indent'>     <span class='footnote-mark'><a href='#fn6x0-bk' id='fn6x0'><sup class='textsuperscript'>6</sup></a></span><span class='ecrm-0800'>Implementation tip: in a system where for each recorded chunk a chunk must be
 </span><span class='ecrm-0800'>also played, a delay in the playback can be generated by sending zero-chunks to the
 </span><span class='ecrm-0800'>DAC and then, after the delay, start sending the received chunk of audio, in the right
-</span><span class='ecrm-0800'>order.</span></p><!-- l. 468 --><p class='indent'> <span class='footnote-mark'><a href='#fn6x0-bk' id='fn6x0'><sup class='textsuperscript'>6</sup></a></span><span class='ecrm-0800'>Chunks will be compressed in a posterior milestone, and uncompressing is performed in this
+</span><span class='ecrm-0800'>order.</span></p><!-- l. 466 --><p class='indent'> <span class='footnote-mark'><a href='#fn7x0-bk' id='fn7x0'><sup class='textsuperscript'>7</sup></a></span><span class='ecrm-0800'>Chunks will be compressed in a posterior milestone, and uncompressing is performed in this
 </span><span class='ecrm-0800'>step.</span></p>                                                                                                                    </div>
  
 </body> 
