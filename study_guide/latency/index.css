@@ -20,6 +20,8 @@
 .ecti-1000{ font-style: italic;}
 .ecti-1000{ font-style: italic;}
 .ecti-1000{ font-style: italic;}
+.ecrm-0900{font-size:90%;}
+.ecrm-0800{font-size:80%;}
 .ecbx-1000{ font-weight: bold;}
 .ecbx-1000{ font-weight: bold;}
 .ecbx-1000{ font-weight: bold;}
@@ -30,8 +32,6 @@
 .ecbx-1000{ font-weight: bold;}
 .ecbx-1000{ font-weight: bold;}
 .tctt-1000{font-family: monospace,monospace;}
-.ecrm-0900{font-size:90%;}
-.ecrm-0800{font-size:80%;}
 .ecit-1000{ font-style: italic; font-family: monospace,monospace;}
 .ecit-1000{ font-style: italic; font-family: monospace,monospace;}
 .ecit-1000{ font-style: italic; font-family: monospace,monospace;}
@@ -41,12 +41,11 @@
 .ecit-1000{ font-style: italic; font-family: monospace,monospace;}
 .ecit-1000{ font-style: italic; font-family: monospace,monospace;}
 .ecit-1000{ font-style: italic; font-family: monospace,monospace;}
-p.noindent { text-indent: 0em }
-td p.noindent { text-indent: 0em; margin-top:0em; }
-p.nopar { text-indent: 0em; }
-p.indent{ text-indent: 1.5em }
 p{margin-top:0;margin-bottom:0}
-p.noindent + p.noindent{margin-top:1em;}
+p.indent{text-indent:0;}
+p + p{margin-top:1em;}
+p + div, p + pre {margin-top:1em;}
+div + p, pre + p {margin-top:1em;}
 a { overflow-wrap: break-word; word-wrap: break-word; word-break: break-word; hyphens: auto; }
 @media print {div.crosslinks {visibility:hidden;}}
 table.tabular{border-collapse: collapse; border-spacing: 0;}
@@ -197,19 +196,15 @@ table[rules] {border-left:solid black 0.4pt; border-right:solid black 0.4pt; }
 div.array {text-align:center;}
 .supertabular {text-align:center}
 .lstlisting .label{margin-right:0.5em; }
-pre.lstlisting{font-family: monospace,monospace; white-space: nowrap; margin-top:0.5em; margin-bottom:0.5em; }
-pre.lstinputlisting{ font-family: monospace,monospace; white-space: nowrap; }
+div.lstlisting{font-family: monospace,monospace; white-space: nowrap; margin-top:0.5em; margin-bottom:0.5em; }
+div.lstinputlisting{ font-family: monospace,monospace; white-space: nowrap; }
 .lstinputlisting .label{margin-right:0.5em;}
 table[rules] {border-left:solid black 0.4pt; border-right:solid black 0.4pt; }
-table.longtable{border-collapse: collapse; border-spacing: 0;}
 div.longtable{text-align:center;}
 table.longtable{margin-left:auto; margin-right: auto;}
 .ovalbox { padding-left:3pt; padding-right:3pt; border:solid thin; }
 .Ovalbox-thick { padding-left:3pt; padding-right:3pt; border:solid thick; }
 .shadowbox { padding-left:3pt; padding-right:3pt; border:solid thin; border-right:solid thick; border-bottom:solid thick; }
 .doublebox { padding-left:3pt; padding-right:3pt; border-style:double; border:solid thick; }
-p.indent {text-indent:1.5em;}
-.columns-3 p.indent {text-indent:0em;}
-p.bibitem-p { text-indent: 1.5em; margin-left: 2em; margin-top:0em; margin-bottom:0em; background:#F0F0F0; color:#000000;}
 /* end css.sty */
 
