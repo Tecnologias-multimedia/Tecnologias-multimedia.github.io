@@ -6,6 +6,8 @@
 
 \maketitle
 
+\tableofcontents
+
 \section{Description}
 %{{{ 
 \subsection{Impact of the transmission bit-rate}
@@ -35,18 +37,18 @@ transmission bit-rate on the
 \href{https://en.wikipedia.org/wiki/Quality_of_experience}{QoE}\footnote{Follow
 the same rubric than in the case of the measurement of the impact of
 the latency.} provided by the current implementation of InterCom
-(\verb|buffer.py|). Similarly to the procedure used for measuring the impact
-of the latency and the jitter, we will use
+(\href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/buffer.py}{\texttt{buffer.py}}. Similarly
+to the procedure used for measuring the impact of the latency and the
+jitter, we will use
 \href{https://man7.org/linux/man-pages/man8/tc.8.html}{\texttt{tc}}~\cite{bert2012lartc}
 to control the amount of data that an InterCom instance will be
 allowed to send in a local environment, with the aim of simulating a
-real running environment. Notice that this upper bound in the bit-rate
-will also affect to the loss of chunks because if the transmission
-bit-rate is smaller than the audio bit-rate, sooner of later the link
-will discard those chunks that can not be buffered in the
-retransmission nodes (routers and switches)\footnote{Notice that, in
-this case, we would be at least contributing, if not causing, the link
-congestion.}.
+real environment. Notice that this upper bound in the bit-rate will
+also affect to the loss of chunks because if the transmission bit-rate
+is smaller than the audio bit-rate, sooner of later the link will
+discard those chunks that can not be buffered in the retransmission
+nodes (routers and switches)\footnote{Notice that, in this case, we
+would be at least contributing, if not causing, the link congestion.}.
 %}}}
 
 \subsection{Compressing the audio data with \href{https://zlib.net/}{zlib}}
@@ -75,10 +77,15 @@ avobe methods are implemented in the following modules, with a different
 functionality:
 
 \begin{enumerate}
-\item \verb|DEFLATE_raw.py|: Compress the raw chunks with DEFLATE.
-\item \verb|DEFLATE_serial.py|: Compress the chunk after concatenating
-  the channels (see Fig.~\ref{fig:reordering}). Notice that with this
-  shuffling, the samples are not interleaved and the correlation
+\item
+  \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/DEFLATE\_raw.py}{\texttt{DEFLATE\_raw.py}}:
+  Compress the raw chunks with DEFLATE.
+\item
+  \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/DEFLATE\_serial.py}{\texttt{DEFLATE\_serial.py}}:
+  Compress the chunk after concatenating the channels (see
+  Fig.~\ref{fig:reordering}). Notice that with this shuffling, the
+  samples are not interleaved and the
+  \href{https://en.wikipedia.org/wiki/Correlation}{correlation}
   between consecutive bytes is slighly increased. This should increase
   the
   \href{https://en.wikipedia.org/wiki/Data_compression_ratio}{(data)
@@ -90,26 +97,33 @@ functionality:
   \caption{Sample reordering to create two independent channels.}
   \label{fig:reordering}
 \end{figure}
-\item \verb|DEFLATE_serial2.py|: Similar to \verb|compress_serial.py|, but
-  reseting DEFLATE at each new chunk-channel, i.e., compressing each
-  chunk-channel independtly. The idea here is to see if DEFLATE is
-  exploiting the redundancy between the consecutive channels.
-\item \verb|DEFLATE_byteplanes2.py|: Similar to
-  \verb|compress_serial.py| (samples are de-interleaved), but 2
-  code-streams are generated, one for the LSB (Low Significant Byte)
-  plane and another for the MSB (Most Significant Byte) plane, working
-  with 16 bits/sample. The idea here is to see if the MSB can be
-  compressed more efficiently because it can contain runs of zeros,
+\item
+  \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/DEFLATE\_serial2.py}{\texttt{DEFLATE\_serial2.py}}:
+  Similar to \verb|compress_serial.py|, but reseting DEFLATE at each
+  new chunk-channel, i.e., compressing each chunk-channel
+  independtly. The idea here is to see if DEFLATE is exploiting the
+  redundancy between the consecutive channels.
+\item
+  \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/DEFLATE\_byteplanes2.py}{\texttt{DEFLATE\_byteplanes2.py}}:
+  Similar to \verb|compress_serial.py| (samples are de-interleaved),
+  but 2 code-streams are generated, one for the LSB (Low Significant
+  Byte) plane and another for the MSB (Most Significant Byte) plane,
+  working with 16 bits/sample. The idea here is to see if the MSB can
+  be compressed more efficiently because it can contain runs of zeros,
   especially when the audio sequence is \emph{quiet}.
-\item \verb|DEFLATE_byteplanes3.py|: Similar to
-  \verb|DEFLATE_byteplanes2.py| but considering three
+\item
+  \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/DEFLATE\_byteplanes3.py}{\texttt{DEFLATE\_byteplanes3.py}}:
+  Similar to \verb|DEFLATE_byteplanes2.py| but considering three
   byte-planes. This would enable the compression of
   \emph{coefficients}\footnote{Used in a future improvements of
-    intercom.} that require more than two bytes to be represented.
-\item \verb|DEFLATE_byteplanes4.py|: Considers four byte-planes.
-\item \verb|DEFLATE_byteplanes2_interlaced.py|: Similar to
-  \verb|DEFLATE_byteplanes2.py| but using the raw chunks (without
-  concatenating the channels).
+  intercom.} that require more than two bytes to be represented.
+\item
+  \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/DEFLATE\_byteplanes4.py}{\texttt{DEFLATE\_byteplanes4.py}}:
+  Considers four byte-planes.
+\item
+  \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/DEFLATE_byteplanes2\_interlaced.py}{\texttt{DEFLATE\_byteplanes2\_interlaced.py}}:
+  Similar to \verb|DEFLATE_byteplanes2.py| but using the raw chunks
+  (without concatenating the channels).
 \end{enumerate}
 
 Finally, notice that the number of sent UDP packets (that now will be
@@ -126,8 +140,8 @@ the signal can take depends on the
   bits/sample} (16 bits in our case).
 
 Another key aspect to consider is that the processing that the
-\href{https://en.wikipedia.org/wiki/Auditory_system}{Human Auditory
-  System (HAS)} performs to understand audio signals has several
+\href{https://en.wikipedia.org/wiki/Auditory_system}{HAS (Human
+  Auditory System)} performs to understand audio signals has several
 \href{https://en.wikipedia.org/wiki/Psychoacoustics}{\emph{sources} of
   perceptual redundancy}. One of these sources is the
 \href{https://en.wikipedia.org/wiki/Equal-loudness_contour}{finite
@@ -137,7 +151,7 @@ that fact to decrease the transmission bit-rate by sacrificing
 quality.  In most
 \href{https://en.wikipedia.org/wiki/Lossy_compression}{lossy
   compression} systems, quantization is the only source of
-distortion~\cite{taubman2002jpeg2000}.
+\href{https://en.wikipedia.org/wiki/Distortion}{distortion}~\cite{taubman2002jpeg2000}.
 
 \href{https://en.wikipedia.org/wiki/Quantization_(signal_processing)}{Scalar
   Quantization} (SQ) is the process of decreasing the number of
