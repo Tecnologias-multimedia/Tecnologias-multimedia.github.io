@@ -1,18 +1,17 @@
-<?xml version="1.0" encoding="iso-8859-1" ?> 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN" 
-"http://www.w3.org/Math/DTD/mathml2/xhtml-math11-f.dtd" > 
-<html xmlns="http://www.w3.org/1999/xhtml"  
-> 
-<head><title>Bit-Rate Control in InterCom</title> 
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
-<meta name="generator" content="TeX4ht (https://tug.org/tex4ht/)" /> 
-<meta name="originator" content="TeX4ht (https://tug.org/tex4ht/)" /> 
-<!-- xhtml,mathml,html --> 
-<meta name="src" content="index.tex" /> 
-<link rel="stylesheet" type="text/css" href="index.css" /> 
-</head><body 
->
-   <div class="maketitle">
+<!DOCTYPE html> 
+<html lang='en-US' xml:lang='en-US'> 
+<head> <title>Bit-Rate Control in InterCom</title> 
+<meta charset='utf-8' /> 
+<meta content='TeX4ht (https://tug.org/tex4ht/)' name='generator' /> 
+<meta content='width=device-width,initial-scale=1' name='viewport' /> 
+<link href='index.css' rel='stylesheet' type='text/css' /> 
+<meta content='index.tex' name='src' /> 
+<script>window.MathJax = { tex: { tags: "ams", }, }; </script> 
+ <script async='async' id='MathJax-script' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js' type='text/javascript'></script>  
+</head><body>
+<!-- l. 5 --><p class='noindent'>USE 16 bits/coefficient (2 byte-planes).
+</p>
+   <div class='maketitle'>
                                                                   
 
                                                                   
@@ -20,1349 +19,415 @@
 
                                                                   
 
-<h2 class="titleHead">Bit-Rate Control in InterCom</h2>
- <div class="author" ><a 
-href="https://cms.ual.es/UAL/personas/persona.htm?id=515256515553484875" ><span 
-class="ecrm-1200">Vicente Gonz</span><span 
-class="ecrm-1200">&#x00E1;</span><span 
-class="ecrm-1200">lez Ruiz</span></a> <span 
-class="ecrm-1200">- </span><a 
-href="https://cms.ual.es/UAL/universidad/departamentos/informatica/index.htm" ><span 
-class="ecrm-1200">Depto Inform</span><span 
-class="ecrm-1200">&#x00E1;</span><span 
-class="ecrm-1200">tica</span></a> <span 
-class="ecrm-1200">- </span><a 
-href="https://www.ual.es" ><span 
-class="ecrm-1200">UAL</span></a></div><br />
-<div class="date" ><span 
-class="ecrm-1200">March 15, 2022</span></div>
+<h2 class='titleHead'>Bit-Rate Control in InterCom</h2>
+ <div class='author'><a href='https://cms.ual.es/UAL/personas/persona.htm?id=515256515553484875'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>- </span><a href='https://cms.ual.es/UAL/universidad/departamentos/informatica/index.htm'><span class='ecrm-1200'>Depto Informática</span></a> <span class='ecrm-1200'>- </span><a href='https://www.ual.es'><span class='ecrm-1200'>UAL</span></a></div><br />
+<div class='date'><span class='ecrm-1200'>October 13, 2022</span></div>
    </div>
-   <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
- id="x1-10001"></a>Description</h3>
-<!--l. 7--><p class="noindent" >
+   <h3 class='sectionHead' id='description'><span class='titlemark'>1   </span> <a id='x1-10001'></a>Description</h3>
+<!-- l. 11 --><p class='noindent'>
 </p>
-   <h4 class="subsectionHead"><span class="titlemark">1.1   </span> <a 
- id="x1-20001.1"></a>Impact of the transmission bit-rate</h4>
-<!--l. 9--><p class="noindent" >Along with the latency and its variation &#x0028;jitter&#x0029;, another main
-aspect to consider about the <a 
-href="https://en.wikipedia.org/wiki/Telecommunications_link" >transmission link</a> used in an InterCom
-session is the <a 
-href="https://en.wikipedia.org/wiki/Bit_rate" >transmission bit-rate</a> &#x0028;measured in bits per second or a
-<!--l. 14--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mn>1</mn><mn>0</mn></math>-multiple
-of this transmission capacity&#x0029; that it can provide&#x00A0;<span class="cite">&#x005B;<a 
-href="#XForouzan">2</a>,&#x00A0;<a 
-href="#XTanenbaum">6</a>&#x005D;</span>. This bit-rate depend on the
-maximum <a 
-href="https://en.wikipedia.org/wiki/Bandwidth_(computing)" >capacity</a> &#x0028;a characteristic closely related with the available <a 
-href="https://en.wikipedia.org/wiki/Bandwidth_(signal_processing)" >bandwidth</a>&#x0029; and
-the <a 
-href="https://en.wikipedia.org/wiki/Network_congestion" >congestion level</a> &#x0028;that basically depends on the load&#x0029; of the link. In general, we
-can suppose that the capacity is constant along the time &#x0028;the bandwidth provided by
-the link does not vary with the time&#x0029;. On the contrary, the congestion level is
-time-variying and quite unpredictable, because it depends on the behaviour of the
-network users.
-</p><!--l. 29--><p class="indent" >   In this milestone we are going to measure the impact of the transmission bit-rate on
-the <a 
-href="https://en.wikipedia.org/wiki/Quality_of_experience" >QoE</a><span class="footnote-mark"><a 
-href="index2.html#fn1x0"><sup class="textsuperscript">1</sup></a></span><a 
- id="x1-2001f1"></a> 
-provided by the minimal implementation of InterCom. Similarly to the
+   <h4 class='subsectionHead' id='impact-of-the-transmission-bitrate'><span class='titlemark'>1.1   </span> <a id='x1-20001.1'></a>Impact of the transmission bit-rate</h4>
+<!-- l. 13 --><p class='noindent'>Along with the latency and its variation (jitter), another main aspect to consider
+about the <a href='https://en.wikipedia.org/wiki/Telecommunications_link'>transmission link</a> used in an InterCom session is the <a href='https://en.wikipedia.org/wiki/Bit_rate'>transmission bit-rate</a>
+(measured in bits per second or a \(10\)-multiple of this transmission <a href='https://en.wikipedia.org/wiki/Bandwidth_(computing)'>capacity</a>) that it can
+provide <span class='cite'>[<a href='#XForouzan'>2</a>, <a href='#XTanenbaum'>6</a>]</span>. This bit-rate depend on the maximum capacity (a characteristic
+closely related with the available <a href='https://en.wikipedia.org/wiki/Bandwidth_(signal_processing)'>bandwidth</a>) and the <a href='https://en.wikipedia.org/wiki/Network_congestion'>congestion level</a> (that basically
+depends on the load) of the link. In general, we can suppose that the capacity is
+constant along the time (the bandwidth provided by the link does not vary
+with the time). On the contrary, the congestion level is time-variying and
+quite unpredictable, because it depends on the behaviour of the network
+users.
+</p><!-- l. 33 --><p class='indent'>   In this milestone we are going to measure the impact of the transmission bit-rate on
+the <a href='https://en.wikipedia.org/wiki/Quality_of_experience'>QoE</a><span class='footnote-mark'><a href='#fn1x0' id='fn1x0-bk'><sup class='textsuperscript'>1</sup></a></span><a id='x1-2001f1'></a>
+provided by the current implementation of InterCom (<span class='obeylines-h'><span class='verb'><span class='ectt-1000'>buffer.py</span></span></span>). Similarly to the
 procedure used for measuring the impact of the latency and the jitter, we
-will use <a 
-href="https://man7.org/linux/man-pages/man8/tc.8.html" ><span 
-class="ectt-1000">tc</span></a>&#x00A0;<span class="cite">&#x005B;<a 
-href="#Xbert2012lartc">3</a>&#x005D;</span> to control the amount of data that an InterCom instance
+will use <a href='https://man7.org/linux/man-pages/man8/tc.8.html'><span class='ectt-1000'>tc</span></a> <span class='cite'>[<a href='#Xbert2012lartc'>3</a>]</span> to control the amount of data that an InterCom instance
 will be allowed to send in a local environment, with the aim of simulating
-                                                                  
-
-                                                                  
 a real running environment. Notice that this upper bound in the bit-rate
-will also a&#xFB00;ect to the loss of chunks because if the transmission bit-rate is
+will also affect to the loss of chunks because if the transmission bit-rate is
 smaller than the audio bit-rate, sooner of later the link will discard those
-chunks that can not be bu&#xFB00;ered in the retransmission nodes &#x0028;routers and
-switches&#x0029;<span class="footnote-mark"><a 
-href="index3.html#fn2x0"><sup class="textsuperscript">2</sup></a></span><a 
- id="x1-2002f2"></a> .
-</p>
-   <h4 class="subsectionHead"><span class="titlemark">1.2   </span> <a 
- id="x1-30001.2"></a>Compressing the audio data with <a 
-href="https://zlib.net/" >zlib</a></h4>
-<!--l. 48--><p class="noindent" >To provide bit-rate control, we need some way of compressing the data, action that
-also will reduce the bandwidth comsumption in InterCom. The <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">pack&#x0028;&#x0029;</span></span></span> and the
-<span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">unpack&#x0028;&#x0029;</span></span></span> methods can compress and decompress, respectively, the chunks that are
-processed. To compress and decompress, we will use a free <a 
-href="https://en.wikipedia.org/wiki/Codec" >codec</a> named <a 
-href="https://en.wikipedia.org/wiki/DEFLATE" >DEFLATE</a>,
-which is based on <a 
-href="https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Storer%E2%80%93Szymanski" >LZSS</a> and <a 
-href="https://en.wikipedia.org/wiki/Huffman_coding" >Hu&#xFB00;man Coding</a>&#x00A0;<span class="cite">&#x005B;<a 
-href="#Xnelson96datacompression">4</a>&#x005D;</span>. See this <a 
-href="https://github.com/vicente-gonzalez-ruiz/LZ77" >notebook</a> and this
-<a 
-href="https://vicente-gonzalez-ruiz.github.io/Huffman_coding/" >notebook</a>.
-</p><!--l. 62--><p class="indent" >   The DEFLATE algorithm is implemented in the Python&#x2019;s standard library <a 
-href="https://docs.python.org/3/library/zlib.html" ><span 
-class="ectt-1000">zlib</span></a>.
-We have used this facility for compressing and decompressing the chunks that we are
-sending and receiving in the methods <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">pack&#x0028;&#x0029;</span></span></span> and <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">unpack&#x0028;&#x0029;</span></span></span>, respectively. These
-methods are implemented in the modules:
-</p><!--l. 69--><p class="indent" >
-     </p><ol  class="enumerate1" >
-<li 
-  class="enumerate" id="x1-3002x1">
-     <!--l. 70--><p class="noindent" ><span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">DEFLATE_raw.py</span></span></span>: Compress the raw chunks with DEFLATE.
-     </p></li>
-<li 
-  class="enumerate" id="x1-3004x2">
-     <!--l. 71--><p class="noindent" ><span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">DEFLATE_serial.py</span></span></span>: Compress the chunk after concatenating the channels &#x0028;see
-     Fig.&#x00A0;<a 
-href="#x1-3005r1">1<!--tex4ht:ref: fig:reordering --></a>&#x0029;. Notice that with this shu&#xFB04;ing, the samples are not interleaved and the
-     correlation between consecutive bytes is slighly increased. This should increase
-     the <a 
-href="https://en.wikipedia.org/wiki/Data_compression_ratio" >&#x0028;data&#x0029; compression ratio</a>. </p><hr class="figure" /><div class="figure" 
->
-<div class="center" 
->
-<!--l. 79--><p class="noindent" >
-</p><!--l. 80--><p class="noindent" ><div style="text-align:center;"> <img width=500 src="graphics/reordering.svg" /> </div>  </p></div>
-<a 
- id="x1-3005r1"></a>
-<a 
- id="x1-3006"></a>
-     <br /> <div class="caption" 
-><span class="id">Figure&#x00A0;1: </span><span  
-class="content">Sample reordering to create two independent channels.
-     </span></div><!--tex4ht:label?: x1-3005r1 -->
+chunks that can not be buffered in the retransmission nodes (routers and
+switches)<span class='footnote-mark'><a href='#fn2x0' id='fn2x0-bk'><sup class='textsuperscript'>2</sup></a></span><a id='x1-2002f2'></a>.
                                                                   
 
                                                                   
-     </div><hr class="endfigure" />
+</p><!-- l. 52 --><p class='noindent'>
+</p>
+   <h4 class='subsectionHead' id='compressing-the-audio-data-with-httpszlibnetzlib'><span class='titlemark'>1.2   </span> <a id='x1-30001.2'></a>Compressing the audio data with <a href='https://zlib.net/'>zlib</a></h4>
+<!-- l. 54 --><p class='noindent'>To reduce the bit-rate, we need some way of compressing the data, action that also
+will reduce the bandwidth comsumption in InterCom. The <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>pack()</span></span></span> and the <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>unpack()</span></span></span>
+methods can compress and decompress, respectively, the chunks that are processed.
+To compress and decompress, we will use a free <a href='https://en.wikipedia.org/wiki/Codec'>codec</a> named <a href='https://en.wikipedia.org/wiki/DEFLATE'>DEFLATE</a>, which is
+based on <a href='https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Storer%E2%80%93Szymanski'>LZSS</a> and <a href='https://en.wikipedia.org/wiki/Huffman_coding'>Huffman Coding</a> <span class='cite'>[<a href='#Xnelson96datacompression'>4</a>]</span> (see this <a href='https://github.com/vicente-gonzalez-ruiz/LZ77'>notebook</a> and this <a href='https://vicente-gonzalez-ruiz.github.io/Huffman_coding/'>notebook</a>).
+The DEFLATE algorithm is implemented in the Python’s standard library
+<a href='https://docs.python.org/3/library/zlib.html'><span class='ectt-1000'>zlib</span></a>.
+</p><!-- l. 73 --><p class='indent'>   In order to compare the performance of different alternatives, the avobe methods
+are implemented in the following modules, with a different functionality:
+</p><!-- l. 77 --><p class='indent'>
+     </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-3002x1'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>DEFLATE_raw.py</span></span></span>: Compress the raw chunks with DEFLATE.
      </li>
-<li 
-  class="enumerate" id="x1-3008x3">
-     <!--l. 85--><p class="noindent" ><span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">DEFLATE_serial2.py</span></span></span>: Similar to <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">compress_serial.py</span></span></span>, but reseting
+<li class='enumerate' id='x1-3004x2'>
+     <!-- l. 79 --><p class='noindent'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>DEFLATE_serial.py</span></span></span>: Compress the chunk after concatenating the channels (see
+     Fig. <a href='#x1-3005r1'>1<!-- tex4ht:ref: fig:reordering  --></a>). Notice that with this shuffling, the samples are not interleaved and the
+     correlation between consecutive bytes is slighly increased. This should increase
+     the <a href='https://en.wikipedia.org/wiki/Data_compression_ratio'>(data) compression ratio</a>. </p><figure class='figure' id='-sample-reordering-to-create-two-independent-channels-'> 
+
+<div class='center'>
+<!-- l. 87 --><p class='noindent'>
+</p><!-- l. 88 --><p class='noindent'><div style='text-align:center;'> <img src='graphics/reordering.svg' /> </div>  </p></div>
+<a id='x1-3005r1'></a>
+<a id='x1-3006'></a>
+     <figcaption class='caption'><span class='id'>Figure 1: </span><span class='content'>Sample reordering to create two independent channels.
+     </span></figcaption><!-- tex4ht:label?: x1-3005r1  -->
+     </figure>
+     </li>
+<li class='enumerate' id='x1-3008x3'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>DEFLATE_serial2.py</span></span></span>: Similar to <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>compress_serial.py</span></span></span>, but reseting
      DEFLATE at each new chunk-channel, i.e., compressing each chunk-channel
      independtly. The idea here is to see if DEFLATE is exploiting the redundancy
      between the consecutive channels.
-     </p></li>
-<li 
-  class="enumerate" id="x1-3010x4">
-     <!--l. 89--><p class="noindent" ><span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">DEFLATE_byteplanes2.py</span></span></span>: Similar to <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">compress_serial.py</span></span></span> &#x0028;samples are
-     de-interleaved&#x0029;, but 2 code-streams are generated, one for the LSB &#x0028;Low
-     Signi&#xFB01;cant Byte&#x0029; plane and another for the MSB &#x0028;Most Signi&#xFB01;cant Byte&#x0029; plane,
+                                                                  
+
+                                                                  
+     </li>
+<li class='enumerate' id='x1-3010x4'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>DEFLATE_byteplanes2.py</span></span></span>: Similar to <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>compress_serial.py</span></span></span> (samples are
+     de-interleaved), but 2 code-streams are generated, one for the LSB (Low
+     Significant Byte) plane and another for the MSB (Most Significant Byte) plane,
      working with 16 bits/sample. The idea here is to see if the MSB can be
-     compressed more e&#xFB03;ciently because it can contain runs of zeros, especially
-     when the audio sequence is <span 
-class="ecti-1000">quiet</span>.
-     </p></li>
-<li 
-  class="enumerate" id="x1-3012x5">
-     <!--l. 96--><p class="noindent" ><span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">DEFLATE_byteplanes3.py</span></span></span>: Similar to <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">DEFLATE_byteplanes2.py</span></span></span> but
+     compressed more efficiently because it can contain runs of zeros, especially
+     when the audio sequence is <span class='ecti-1000'>quiet</span>.
+     </li>
+<li class='enumerate' id='x1-3012x5'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>DEFLATE_byteplanes3.py</span></span></span>: Similar to <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>DEFLATE_byteplanes2.py</span></span></span> but
      considering three byte-planes. This would enable the compression of
-     <span 
-class="ecti-1000">coe&#xFB03;cients</span><span class="footnote-mark"><a 
-href="index4.html#fn3x0"><sup class="textsuperscript">3</sup></a></span><a 
- id="x1-3013f3"></a> 
+     <span class='ecti-1000'>coefficients</span><span class='footnote-mark'><a href='#fn3x0' id='fn3x0-bk'><sup class='textsuperscript'>3</sup></a></span><a id='x1-3013f3'></a>
      that require more than two bytes to be represented.
-     </p></li>
-<li 
-  class="enumerate" id="x1-3015x6">
-     <!--l. 101--><p class="noindent" ><span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">DEFLATE_byteplanes4.py</span></span></span>: Considers four byte-planes.
-     </p></li>
-<li 
-  class="enumerate" id="x1-3017x7">
-     <!--l. 102--><p class="noindent" ><span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">DEFLATE_byteplanes2_interlaced.py</span></span></span>: Similar to <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">DEFLATE_byteplanes2.py</span></span></span>
-     but using the raw chunks &#x0028;without concatenating the channels&#x0029;.</p></li></ol>
-<!--l. 107--><p class="indent" >   Finally, notice that the number of sent UDP packets &#x0028;that now will be
-length-variying&#x0029; remain constant respect to <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">buffer.py</span></span></span>.
+     </li>
+<li class='enumerate' id='x1-3015x6'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>DEFLATE_byteplanes4.py</span></span></span>: Considers four byte-planes.
+     </li>
+<li class='enumerate' id='x1-3017x7'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>DEFLATE_byteplanes2_interlaced.py</span></span></span>: Similar to <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>DEFLATE_byteplanes2.py</span></span></span>
+     but using the raw chunks (without concatenating the channels).</li></ol>
+<!-- l. 115 --><p class='indent'>   Finally, notice that the number of sent UDP packets (that now will be
+length-variying) remain constant respect to <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>buffer.py</span></span></span>.
+</p><!-- l. 119 --><p class='noindent'>
+</p>
+   <h4 class='subsectionHead' id='quantization'><span class='titlemark'>1.3   </span> <a id='x1-40001.3'></a>Quantization</h4>
+<!-- l. 121 --><p class='noindent'>At the hardware level, the samples of audio are usually represented using
+<a href='https://en.wikipedia.org/wiki/Pulse-code_modulation'>PCM (Pulse Code Modulation)</a>. In a PCM sample, the number of levels that
+the signal can take depends on the <a href='https://en.wikipedia.org/wiki/Audio_bit_depth'>number of bits/sample</a> (16 bits in our
+case).
+</p><!-- l. 128 --><p class='indent'>   Another key aspect to consider is that the processing that the <a href='https://en.wikipedia.org/wiki/Auditory_system'>Human Auditory
+System (HAS)</a> performs to understand audio signals has several <a href='https://en.wikipedia.org/wiki/Psychoacoustics'><span class='ecti-1000'>sources </span>of
+perceptual redundancy</a>. One of these sources is the <a href='https://en.wikipedia.org/wiki/Equal-loudness_contour'>finite number of different
+volumen levels that a human being can recognize</a> <span class='cite'>[<a href='#Xbosi2003intro'>1</a>]</span>. In this milestone we
+will profit of that fact to decrease the transmission bit-rate by sacrificing
                                                                   
 
                                                                   
-</p><!--l. 111--><p class="noindent" >
-</p>
-   <h4 class="subsectionHead"><span class="titlemark">1.3   </span> <a 
- id="x1-40001.3"></a>Quantization</h4>
-<!--l. 113--><p class="noindent" >At the hardware level, the samples of audio are usually represented using
-<a 
-href="https://en.wikipedia.org/wiki/Pulse-code_modulation" >PCM &#x0028;Pulse Code Modulation&#x0029;</a>. In a PCM sample, the number of levels that
-the signal can take depends on the <a 
-href="https://en.wikipedia.org/wiki/Audio_bit_depth" >number of bits/sample</a> &#x0028;16 bits in our
-case&#x0029;.
-</p><!--l. 120--><p class="indent" >   Another key aspect to consider is that the processing that the <a 
-href="https://en.wikipedia.org/wiki/Auditory_system" >Human Auditory
-System &#x0028;HAS&#x0029;</a> performs to understand audio signals has several <a 
-href="https://en.wikipedia.org/wiki/Psychoacoustics" ><span 
-class="ecti-1000">sources </span>of
-perceptual redundancy</a>. One of these sources is the <a 
-href="https://en.wikipedia.org/wiki/Equal-loudness_contour" >&#xFB01;nite number of di&#xFB00;erent
-volumen levels that a human being can recognize</a>&#x00A0;<span class="cite">&#x005B;<a 
-href="#Xbosi2003intro">1</a>&#x005D;</span>. In this milestone we
-will pro&#xFB01;t of that fact to decrease the transmission bit-rate by sacri&#xFB01;cing
-quality. In most lossy compression systems, quantization is the only source of
-distortion&#x00A0;<span class="cite">&#x005B;<a 
-href="#Xtaubman2002jpeg2000">7</a>&#x005D;</span>.
-</p><!--l. 133--><p class="indent" >   <a 
-href="https://en.wikipedia.org/wiki/Quantization_(signal_processing)" >Scalar Quantization</a> &#x0028;SQ&#x0029; is the process of decreasing the number of discrete levels
-that a signal can take&#x00A0;<span class="cite">&#x005B;<a 
-href="#Xsayood2017introduction">5</a>&#x005D;</span>. <a 
-href="https://en.wikipedia.org/wiki/Vector_quantization" >Vector Quantization</a> &#x0028;VQ&#x0029; is similar, but is applied to
-tuples of samples at the same time&#x00A0;<span class="cite">&#x005B;<a 
-href="#Xvetterli2014foundations">8</a>&#x005D;</span>. SQ is used when the samples are decorrelated
-or althought are correlated, the decorrelation will be exploited in a <a 
-href="https://en.wikipedia.org/wiki/Entropy_encoding" >entropy coding</a>
-stage &#x0028;which in our case is DEFLATE&#x0029;, because the <a 
-href="https://en.wikipedia.org/wiki/Quantization_(signal_processing)#Rate%E2%80%93distortion_optimization" >coding e&#xFB03;ciency</a> provided by VQ
-is marginal in this context&#x00A0;<span class="cite">&#x005B;<a 
-href="#Xvetterli2014foundations">8</a>&#x005D;</span>.
-</p><!--l. 146--><p class="indent" >   Quantizers can also be classi&#xFB01;ed into <a 
-href="https://en.wikipedia.org/wiki/Quantization_(signal_processing)#Mid-riser_and_mid-tread_uniform_quantizers" >uniform</a> and <a 
-href="https://nptel.ac.in/content/storage2/courses/117104069/chapter_5/5_5.html" >non-uniform</a>&#x00A0;<span class="cite">&#x005B;<a 
-href="#Xsayood2017introduction">5</a>,&#x00A0;<a 
-href="#Xvetterli2014foundations">8</a>&#x005D;</span>. An
-uniform quantizer distributes the available representation levels uniformely
-over the range of input values. Non-uniform quantizers use higher density of
-representation levels &#x0028;more output levels per input di&#xFB00;erent values&#x0029; to those
-intervals of input values that occur more often. Non-uniform quantizers
-can also be classi&#xFB01;ed into static and <a 
-href="https://en.wikipedia.org/wiki/Adaptive_differential_pulse-code_modulation" >adaptive quantizers</a>. In the &#xFB01;rst case,
-the <a 
-href="https://en.wikipedia.org/wiki/Probability_distribution" >distribution</a> of the representation levels remains constant during the
-quantization stage, and in the second case, the quantizer parameters are adapted
-dinamically to the characteristics of the input signal. In this milestone we will use
-an <a 
-href="https://en.wikipedia.org/wiki/Quantization_(signal_processing)#Dead-zone_quantizers" >uniform dead-zone scalar static quantizer</a>, which can be implemented
-e&#xFB03;ciently for digital signals. Moreover, dead-zone quantiders tend to produce
-more quantization indices equal to 0 &#x0028;which increases compression rates&#x0029;
-at the cost of generating more quantization noise for values of the input
-signal close to 0, or what is the same, decreasing the <a 
-href="https://en.wikipedia.org/wiki/Signal-to-noise_ratio" >SNR</a> for small signal
-values. This may seem like a problem, but in reality it is not because precisely
+quality. In most <a href='https://en.wikipedia.org/wiki/Lossy_compression'>lossy compression</a> systems, quantization is the only source of
+distortion <span class='cite'>[<a href='#Xtaubman2002jpeg2000'>7</a>]</span>.
+</p><!-- l. 143 --><p class='indent'>   <a href='https://en.wikipedia.org/wiki/Quantization_(signal_processing)'>Scalar Quantization</a> (SQ) is the process of decreasing the number of discrete levels
+that a signal can take <span class='cite'>[<a href='#Xsayood2017introduction'>5</a>]</span>. <a href='https://en.wikipedia.org/wiki/Vector_quantization'>Vector Quantization</a> (VQ) is similar, but is applied to
+tuples of samples at the same time <span class='cite'>[<a href='#Xvetterli2014foundations'>8</a>]</span>. SQ is used when the samples are decorrelated
+or althought are correlated, the decorrelation will be exploited in a <a href='https://en.wikipedia.org/wiki/Entropy_encoding'>entropy coding</a>
+stage (which in our case is DEFLATE), because the <a href='https://en.wikipedia.org/wiki/Quantization_(signal_processing)#Rate%E2%80%93distortion_optimization'>coding efficiency</a> provided by VQ
+is marginal in this context <span class='cite'>[<a href='#Xvetterli2014foundations'>8</a>]</span>, and requiring much higher computational
+resources.
+</p><!-- l. 157 --><p class='indent'>   Quantizers can also be classified into <a href='https://en.wikipedia.org/wiki/Quantization_(signal_processing)#Mid-riser_and_mid-tread_uniform_quantizers'>uniform</a> and <a href='https://nptel.ac.in/content/storage2/courses/117104069/chapter_5/5_5.html'>non-uniform</a> <span class='cite'>[<a href='#Xsayood2017introduction'>5</a>, <a href='#Xvetterli2014foundations'>8</a>]</span>. An uniform
+quantizer distributes the available representation levels uniformely over the range of
+input values. Non-uniform quantizers use higher density of representation levels
+(more output levels per input different values) to those intervals of input
+values that occur more often. Non-uniform quantizers can also be classified
+into static and <a href='https://en.wikipedia.org/wiki/Adaptive_differential_pulse-code_modulation'>adaptive quantizers</a>. In the first case, the <a href='https://en.wikipedia.org/wiki/Probability_distribution'>distribution</a> of the
+representation levels remains constant during the quantization stage, and in
+the second case, the quantizer parameters are adapted dinamically to the
+characteristics of the input signal. In this milestone we will use an <a href='https://en.wikipedia.org/wiki/Quantization_(signal_processing)#Dead-zone_quantizers'>uniform dead-zone
+scalar static quantizer</a>, which can be implemented efficiently (in software)
+for digital signals. Moreover, dead-zone quantizers tend to produce more
+quantization indices equal to 0 (which increases compression rates) at the cost of
+generating more quantization noise for values of the input signal close to 0,
+or what is the same, decreasing the <a href='https://en.wikipedia.org/wiki/Signal-to-noise_ratio'>SNR</a> for small signal values. A priori,
+this could be seen as a problem, but in reality it is not because precisely
 when the amplitude of the signal is small and the noise is independent of its
-amplitude &#x0028;which usually happens with electronic noise&#x0029;, the SNR of the input
+amplitude (which usually happens with electronic noise), the SNR of the input
 signal has its lowest value precisely for those values close to 0. Therefore, the
-quantizer basically is going to change the electronic noise for quantization
-noise. See <a 
-href="https://github.com/vicente-gonzalez-ruiz/quantization/blob/master/digital_quantization.ipynb" >this Jupyter notebook</a> and <a 
-href="https://vicente-gonzalez-ruiz.github.io/quantization/" >this quantization introduction</a> for more
-information.<span class="footnote-mark"><a 
-href="index5.html#fn4x0"><sup class="textsuperscript">4</sup></a></span><a 
- id="x1-4001f4"></a> 
+quantizer basically is going to change the electronic noise by quantization
+noise<span class='footnote-mark'><a href='#fn4x0' id='fn4x0-bk'><sup class='textsuperscript'>4</sup></a></span><a id='x1-4001f4'></a>
+(see this <a href='https://github.com/vicente-gonzalez-ruiz/signal_quantization'>introduction to signal quantization</a> and this <a href='https://github.com/vicente-gonzalez-ruiz/scalar_quantization'>comparative between digital
+scalar quantizers</a>).
+</p><!-- l. 196 --><p class='noindent'>
+</p>
+   <h4 class='subsectionHead' id='bit-rate-control-and-distortion'><span class='titlemark'>1.4   </span> <a id='x1-50001.4'></a>(Bit-) Rate control and distortion</h4>
+<!-- l. 198 --><p class='noindent'>The number of representation levels used by a quantizer depends basically on the so
+called quantization step (size), typically denoted by \(\Delta \). The higher the \(\Delta \), the smaller the
+number of representation levels, and therefore, the higher the distortion generated by
+the quantization error (see the previous notebooks), and the smaller the output
+bit-rate. This generates a <a href='https://en.wikipedia.org/wiki/Rate%E2%80%93distortion_theory'>rate/distortion</a> trade-off that is descriptive of all lossy
+compressors.
+</p><!-- l. 207 --><p class='indent'>   The control of the bit-rate through the \(\Delta \) values is a technique that can be used in
+real-time transmission systems to minimize the jitter and the loss of packets when
+<a href='https://en.wikipedia.org/wiki/Network_congestion'>congestion</a> occurs. However, notice that depending of the <a href='https://en.wikipedia.org/wiki/Entropy_(information_theory)'>entropy</a> coding stage
                                                                   
 
                                                                   
+and the characteristics of the signal (<a href='https://en.wikipedia.org/wiki/Variance'>variance</a>, entropy) may not exist a
+clear relationship between the \(\Delta \) and the output bit-rate. This happens using
+DEFLATE.
+</p><!-- l. 218 --><p class='indent'>   Notice that any rate-control algorithm based on quantization has a characteristic
+RD (Rate/Distortion) curve, in which the X axis represents the (in the case of
+InterCom, received) bit-rate and the Y axis the distortion in the reconstruction (in
+the case of InterCom, the played audio sequence) obtained after the quantization.
+Some examples can be found in <a href='https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/study_guide/10-br_control/audio_quantization.ipynb'>this notebook</a>.
+</p><!-- l. 228 --><p class='noindent'>
 </p>
-   <h4 class="subsectionHead"><span class="titlemark">1.4   </span> <a 
- id="x1-50001.4"></a>Rate-control and distortion</h4>
-<!--l. 186--><p class="noindent" >The number of representation levels used by a quantizer depends
-basically on the so called quantization step &#x0028;size&#x0029;, typically denoted by
-<!--l. 188--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi mathvariant="normal">&#x0394;</mi></math>. The
-higher the <!--l. 188--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi mathvariant="normal">&#x0394;</mi></math>,
-the smaller the number of representation levels, and therefore, the higher
-the distortion generated by the quantization error &#x0028;see <a 
-href="https://github.com/vicente-gonzalez-ruiz/quantization/blob/master/digital_quantization.ipynb" >the notebook</a>&#x0029;, and
-lileky &#x0028;depending &#xFB01;nally on the entropy encoder&#x0029;, the smaller the output
-bit-rate. This generates a <a 
-href="https://en.wikipedia.org/wiki/Rate%E2%80%93distortion_theory" >rate/distortion</a> trade-o&#xFB00; that is descriptive of all lossy
-compressors.
-</p><!--l. 195--><p class="indent" >   The control of the bit-rate through the
-<!--l. 195--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi mathvariant="normal">&#x0394;</mi></math> values
-is a technique that can be used in real-time transmission systems to minimize
-the jitter and the loss of packets when <a 
-href="https://en.wikipedia.org/wiki/Network_congestion" >congestion</a> occurs. However, notice
-that depending of the entropy coding stage and the characteristics of the
-signal &#x0028;variance, entropy&#x0029; may not exist a clear relationship between the
-<!--l. 201--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi mathvariant="normal">&#x0394;</mi></math> and
-the output bit-rate. This happens using DEFLATE.
-</p><!--l. 204--><p class="indent" >   Notice that any rate-control algorithm based on quantization has a characteristic
-RD &#x0028;Rate/Distortion&#x0029; curve, in which the X axis represents the &#x0028;in the case of
-InterCom, received&#x0029; bit-rate and the Y axis the distortion in the reconstruction &#x0028;in
-the case of InterCom, the played audio sequence&#x0029; obtained after the quantization.
-Some examples can be found in <a 
-href="https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/study_guide/10-br_control/audio_quantization.ipynb" >this notebook</a>.
-</p><!--l. 214--><p class="noindent" >
-</p>
-   <h4 class="subsectionHead"><span class="titlemark">1.5   </span> <a 
- id="x1-60001.5"></a>The current implementation&#x0028;s&#x0029;</h4>
-<!--l. 216--><p class="noindent" >Bit-Rate &#x0028;BR&#x0029; control through quantization has been implemented in the
-class <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">BR_Control*</span></span></span> of the modules <span 
-class="ectt-1000">BR_control*.py</span>. This class overrides
-the inherited methods <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">Compression.pack&#x0028;&#x0029;</span></span></span> and <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">Compression.unpack&#x0028;&#x0029;</span></span></span>,
+   <h4 class='subsectionHead' id='the-current-implementations'><span class='titlemark'>1.5   </span> <a id='x1-60001.5'></a>The current implementation(s)</h4>
+<!-- l. 230 --><p class='noindent'>Bit-Rate (BR) control through quantization has been implemented in the
+class <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>BR_Control*</span></span></span> of the modules <span class='ectt-1000'>BR_control*.py</span>. This class overrides
+the inherited methods <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>Compression.pack()</span></span></span> and <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>Compression.unpack()</span></span></span>,
 performing:
 </p>
-   <!--l. 222-->
-   <div class="lstlisting" id="listing-1"><span class="label"><a 
- id="x1-6001r1"></a></span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">def</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">pack</span><span 
-class="ectt-1000">&#x0028;</span><span 
-class="ectt-1000">chunk_number</span><span 
-class="ectt-1000">,</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">chunk</span><span 
-class="ectt-1000">&#x0029;:</span><span 
-class="ectt-1000">&#x00A0;</span><br /> 
-<span class="label"><a 
- id="x1-6002r2"></a></span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">quantized_chunk</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">=</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">quantize</span><span 
-class="ectt-1000">&#x0028;</span><span 
-class="ectt-1000">chunk</span><span 
-class="ectt-1000">&#x0029;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">#</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">&#x0028;1&#x0029;</span><span 
-class="ectt-1000">&#x00A0;</span><br /> 
-<span class="label"><a 
- id="x1-6003r3"></a></span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">packed_chunk</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">=</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">Buffering</span><span 
-class="ectt-1000">.</span><span 
-class="ectt-1000">pack</span><span 
-class="ectt-1000">&#x0028;</span><span 
-class="ectt-1000">chunk_number</span><span 
-class="ectt-1000">,</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">quantized_chunk</span><span 
-class="ectt-1000">&#x0029;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">#</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">&#x0028;2&#x0029;</span><span 
-class="ectt-1000">&#x00A0;</span><br /> 
-<span class="label"><a 
- id="x1-6004r4"></a></span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">return</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">packed_chunk</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">#</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">&#x0028;3&#x0029;</span></div>
+   <!-- l. 236 -->
+   <pre class='lstlisting' id='listing-1'><span class='label'><a id='x1-6001r1'></a></span><span class='ectt-1000'>  </span><span style='color:#000000'><span class='ectt-1000'>def</span></span><span style='color:#000000'> <span class='ectt-1000'>pack(chunk_number, </span><span class='ectt-1000'>chunk):</span> 
+</span><span class='label'><a id='x1-6002r2'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>quantized_chunk</span></span><span style='color:#000000'> <span class='ectt-1000'>= </span><span class='ectt-1000'>quantize(chunk)</span> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(1)</span> 
+</span><span class='label'><a id='x1-6003r3'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>packed_chunk</span></span><span style='color:#000000'> <span class='ectt-1000'>= </span><span class='ectt-1000'>Buffering.pack(chunk_number, </span><span class='ectt-1000'>quantized_chunk)</span> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(2)</span> 
+</span><span class='label'><a id='x1-6004r4'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>return</span></span><span style='color:#000000'> <span class='ectt-1000'>packed_chunk</span> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(3)</span></span></pre>
    
-   <!--l. 229-->
-   <div class="lstlisting" id="listing-2"><span class="label"><a 
- id="x1-6005r1"></a></span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">def</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">unpack</span><span 
-class="ectt-1000">&#x0028;</span><span 
-class="ectt-1000">packed_chunk</span><span 
-class="ectt-1000">&#x0029;:</span><span 
-class="ectt-1000">&#x00A0;</span><br /> 
-<span class="label"><a 
- id="x1-6006r2"></a></span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x0028;</span><span 
-class="ectt-1000">chunk_number</span><span 
-class="ectt-1000">,</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">quantized_chunk</span><span 
-class="ectt-1000">&#x0029;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">=</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">Buffering</span><span 
-class="ectt-1000">.</span><span 
-class="ectt-1000">unpack</span><span 
-class="ectt-1000">&#x0028;</span><span 
-class="ectt-1000">packed_chunk</span><span 
-class="ectt-1000">&#x0029;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">#</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">&#x0028;1&#x0029;</span><span 
-class="ectt-1000">&#x00A0;</span><br /> 
-<span class="label"><a 
- id="x1-6007r3"></a></span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">chunk</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">=</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">dequantize</span><span 
-class="ectt-1000">&#x0028;</span><span 
-class="ectt-1000">quantized_chunk</span><span 
-class="ectt-1000">&#x0029;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">#</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">&#x0028;2&#x0029;</span><span 
-class="ectt-1000">&#x00A0;</span><br /> 
-<span class="label"><a 
- id="x1-6008r4"></a></span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">return</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x0028;</span><span 
-class="ectt-1000">chunk_number</span><span 
-class="ectt-1000">,</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">chunk</span><span 
-class="ectt-1000">&#x0029;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">#</span><span 
-class="ecit-1000">&#x00A0;</span><span 
-class="ecit-1000">&#x0028;3&#x0029;</span></div>
+   <!-- l. 243 -->
+   <pre class='lstlisting' id='listing-2'><span class='label'><a id='x1-6005r1'></a></span><span class='ectt-1000'>  </span><span style='color:#000000'><span class='ectt-1000'>def</span></span><span style='color:#000000'> <span class='ectt-1000'>unpack(packed_chunk):</span> 
+</span><span class='label'><a id='x1-6006r2'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>(</span></span><span style='color:#000000'><span class='ectt-1000'>chunk_number</span></span><span style='color:#000000'><span class='ectt-1000'>,</span></span><span style='color:#000000'> <span class='ectt-1000'>quantized_chunk) </span><span class='ectt-1000'>= </span><span class='ectt-1000'>Buffering.unpack(packed_chunk)</span> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(1)</span> 
+</span><span class='label'><a id='x1-6007r3'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>chunk</span></span><span style='color:#000000'> <span class='ectt-1000'>= </span><span class='ectt-1000'>dequantize(quantized_chunk)</span> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(2)</span> 
+</span><span class='label'><a id='x1-6008r4'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>return</span></span><span style='color:#000000'> <span class='ectt-1000'>(chunk_number, </span><span class='ectt-1000'>chunk)</span> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(3)</span></span></pre>
    
-<!--l. 236--><p class="indent" >   Notice that you will &#xFB01;nd four implementations related to this milestone:
-                                                                  
-
-                                                                  
-     </p><ol  class="enumerate1" >
-<li 
-  class="enumerate" id="x1-6010x1">
-     <!--l. 238--><p class="noindent" ><span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">BR_control_no.py</span></span></span>: Uses a constant <!--l. 239--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi mathvariant="normal">&#x0394;</mi> <mo 
-class="MathClass-rel">&#x003E;</mo> <mn>0</mn></math>.<span class="footnote-mark"><a 
-href="index6.html#fn5x0"><sup class="textsuperscript">5</sup></a></span><a 
- id="x1-6011f5"></a> 
+<!-- l. 250 --><p class='indent'>   Notice that you will find four implementations related to this milestone:
+     </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-6010x1'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>BR_control_no.py</span></span></span>: Uses a constant \(\Delta &gt;0\).<span class='footnote-mark'><a href='#fn5x0' id='fn5x0-bk'><sup class='textsuperscript'>5</sup></a></span><a id='x1-6011f5'></a>
      There is not BR control.
-     </p></li>
-<li 
-  class="enumerate" id="x1-6013x2">
-     <!--l. 242--><p class="noindent" ><span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">BR_control_add_lost.py</span></span></span>: Every second runs: </p><table class="equation"><tr><td>
-     <!--l. 243--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="block" class="equation">
-                                           <mstyle 
-   id="x1-6014r1"  class="label" ></mstyle><!--endlabel--><mi mathvariant="normal">&#x0394;</mi> <mo 
-class="MathClass-rel">=</mo> <mi mathvariant="normal">&#x0394;</mi> <mo 
-class="MathClass-bin">+</mo> <mi 
->L</mi> <mo 
-class="MathClass-bin">&#x2212;</mo> <mn>1</mn>
-</math></td><td class="eq-no">&#x0028;1&#x0029;</td></tr></table>
-     <!--l. 246--><p class="noindent" >where <!--l. 246--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->L</mi></math>
-     is the number of lost &#x0028;received&#x0029; chunks in the previous second. Notice that this
-     heuristic supposes that the interlocutor is lossing &#x0028;on average&#x0029; the same number
-     of chunks.
-     </p></li>
-<li 
-  class="enumerate" id="x1-6016x3">
-     <!--l. 249--><p class="noindent" ><span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">BR_control_lost.py</span></span></span>: Every second runs: </p><table class="equation"><tr><td>
-     <!--l. 250--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="block" class="equation">
-                                             <mstyle 
-   id="x1-6017r2"  class="label" ></mstyle><!--endlabel--><mi mathvariant="normal">&#x0394;</mi> <mo 
-class="MathClass-rel">=</mo> <mi 
->L</mi> <mo 
-class="MathClass-bin">&#x2212;</mo> <mn>1</mn><mo 
-class="MathClass-punc">.</mo>
-</math></td><td class="eq-no">&#x0028;2&#x0029;</td></tr></table>
+     </li>
+<li class='enumerate' id='x1-6013x2'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>BR_control_add_lost.py</span></span></span>: Every second runs: \begin {equation}  \Delta = \Delta + L - 1  \end {equation}
+     where \(L\) is the number of lost (received) chunks in the previous second. Notice
+     that this heuristic supposes that the interlocutor is lossing (on average) the
+     same number of chunks.
+     </li>
+<li class='enumerate' id='x1-6015x3'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>BR_control_lost.py</span></span></span>: Every second runs: \begin {equation}  \Delta = L - 1.  \end {equation}
                                                                   
 
                                                                   
      </li>
-<li 
-  class="enumerate" id="x1-6019x4">
-     <!--l. 253--><p class="noindent" ><span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">BR_control_conservative.py</span></span></span>: Every second runs: </p><table class="equation"><tr><td>
-     <!--l. 254--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="block" class="equation">
-<mstyle 
-   id="x1-6020r3"  class="label" ></mstyle><!--endlabel--><mo 
-class="MathClass-open" stretchy="false"><mrow><mo fence="true" form="prefix"> {</mo><mrow> <mtable  align="axis" style=""  
-equalrows="false" columnlines="none" equalcolumns="false" class="array"> <mtr><mtd 
-class="array"  columnalign="left">  <mi mathvariant="normal">&#x0394;</mi> = 2<mi mathvariant="normal">&#x0394;</mi>  </mtd><mtd 
-class="array"  columnalign="left"> <mspace width="1em" class="quad"/><mstyle 
-class="text"><mtext  >if</mtext></mstyle>&#x00A0;L &#x003E; 1    </mtd>
-</mtr>  <mtr><mtd 
-class="array"  columnalign="left">  <mi mathvariant="normal">&#x0394;</mi> = <mfrac><mrow 
->1</mrow> 
-<mrow 
->2</mrow></mfrac><mi mathvariant="normal">&#x0394;</mi> </mtd><mtd 
-class="array"  columnalign="left"> <mspace width="1em" class="quad"/><mstyle 
-class="text"><mtext  >otherwise</mtext></mstyle>. </mtd></mtr><!--ll--></mtable></mo>                                                              </mrow><mo fence="true" form="postfix"></mo></mrow>
-</math></td><td class="eq-no">&#x0028;3&#x0029;</td></tr></table>
+<li class='enumerate' id='x1-6017x4'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>BR_control_conservative.py</span></span></span>: Every second runs: \begin {equation}  \left \{ \begin {array}{ll} \Delta = 2\Delta &amp; \quad \text {if}~L&gt;1 \\ \Delta = \frac {1}{2}\Delta &amp; \quad \text {otherwise}. \end {array} \right .  \end {equation}
      </li></ol>
-<!--l. 267--><p class="noindent" >
+<!-- l. 281 --><p class='noindent'>
 </p>
-   <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
- id="x1-70002"></a>What you have to do?</h3>
-<!--l. 269--><p class="noindent" >
+   <h3 class='sectionHead' id='what-you-have-to-do'><span class='titlemark'>2   </span> <a id='x1-70002'></a>What you have to do?</h3>
+<!-- l. 283 --><p class='noindent'>
 </p>
-   <h4 class="subsectionHead"><span class="titlemark">2.1   </span> <a 
- id="x1-80002.1"></a>Estimate the bit-rate in an Internet link</h4>
-<!--l. 271--><p class="noindent" >Usually, we need to use a tool such as <a 
-href="https://iperf.fr/" >iPerf</a> to <a 
-href="https://en.wikipedia.org/wiki/Measuring_network_throughput" >measure the transmission bit-rate</a>
-between two <a 
-href="https://datatracker.ietf.org/doc/html/rfc4113" >end-points</a> &#x0028;of di&#xFB00;erent <a 
-href="https://en.wikipedia.org/wiki/Host_(network)" >hosts</a>&#x0029; in the Internet. This proceduce implies
+   <h4 class='subsectionHead' id='estimate-the-bitrate-in-an-internet-link'><span class='titlemark'>2.1   </span> <a id='x1-80002.1'></a>Estimate the bit-rate in an Internet link</h4>
+<!-- l. 285 --><p class='noindent'>Usually, we need to use a tool such as <a href='https://iperf.fr/'>iPerf</a> to <a href='https://en.wikipedia.org/wiki/Measuring_network_throughput'>measure the transmission bit-rate</a>
+between two <a href='https://datatracker.ietf.org/doc/html/rfc4113'>end-points</a> (of different <a href='https://en.wikipedia.org/wiki/Host_(network)'>hosts</a>) in the Internet. This proceduce implies
 that we must have access to both hosts to install and run this program, privileges
 that are not always available.
-</p><!--l. 282--><p class="indent" >   Alternatively, we can estimate the <a 
-href="https://en.wikipedia.org/wiki/Throughput" >link throughput</a> using <a 
-href="https://github.com/torvalds/linux/blob/master/net/ipv4/ping.c" ><span 
-class="ectt-1000">ping</span></a> &#x0028;see the previous
-milestone&#x0029;. At this point is important to realize that <span 
-class="ectt-1000">ping </span>has been designed to
+</p><!-- l. 296 --><p class='indent'>   Alternatively, we can estimate the <a href='https://en.wikipedia.org/wiki/Throughput'>link throughput</a> using <a href='https://github.com/torvalds/linux/blob/master/net/ipv4/ping.c'><span class='ectt-1000'>ping</span></a> (see the previous
+milestone). At this point is important to realize that <span class='ectt-1000'>ping </span>has been designed to
 measure latencies, not bit-rates, and that for this reason, we will be able only to
 estimate throughputs, rougtly.
-</p><!--l. 290--><p class="indent" >   The transmission bitrate available between two directly reachable IP devices can
-be estimated as </p><table class="equation"><tr><td>
-                                                                  
-
-                                                                  
-<!--l. 292--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="block" class="equation">
-                              <mstyle 
-   id="x1-8001r4"  class="label" ></mstyle><!--endlabel--><mo 
-class="MathClass-open" stretchy="false">b</mo> <mo 
-class="MathClass-rel">=</mo> <mfrac><mrow 
-><mi 
->B</mi></mrow> 
-<mrow 
-><msub><mrow 
-><mi 
->t</mi></mrow><mrow 
-><mi 
->t</mi></mrow></msub 
-></mrow></mfrac> <mo 
-class="MathClass-punc">,</mo>
-</math></td><td class="eq-no">&#x0028;4&#x0029;</td></tr></table>
-<!--l. 296--><p class="indent" >   where <!--l. 296--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->B</mi></math>
-is the number of bits sent in a <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">ping</span></span></span> <a 
-href="https://en.wikipedia.org/wiki/Payload_(computing)" >payload</a>, and </p><table class="equation"><tr><td>
-<!--l. 298--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="block" class="equation">
-                          <mstyle 
-   id="x1-8002r5"  class="label" ></mstyle><!--endlabel--><msub><mrow 
-><mo 
-class="MathClass-open" stretchy="false">t</mo></mrow><mrow 
-><mi 
->t</mi></mrow></msub 
-> <mo 
-class="MathClass-rel">=</mo> <mfrac><mrow 
-><mstyle 
-class="text"><mtext  >RTT</mtext></mstyle> <mo 
-class="MathClass-bin">&#x2212;</mo> <mn>2</mn><msub><mrow 
-><mi 
->t</mi></mrow><mrow 
-><mi 
->p</mi></mrow></msub 
-></mrow> 
-      <mrow 
-><mn>2</mn></mrow></mfrac>       <mo 
-class="MathClass-punc">,</mo>
-</math></td><td class="eq-no">&#x0028;5&#x0029;</td></tr></table>
-<!--l. 302--><p class="indent" >   an equation that can be determined by revisiting the <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">ping</span></span></span> timeline &#x0028;Fig.&#x00A0;1&#x0029; and
-the Eq.&#x00A0;2 of the <a 
-href="https://tecnologias-multimedia.github.io/study_guide/06-jitter_impact/" >previous milestone</a>.
-</p><!--l. 307--><p class="indent" >   Notice that if the payload of the ping is small enough
-&#x0028;<!--l. 307--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mn>0</mn></math> bytes ideally,
-and therefore <!--l. 308--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><msub><mrow 
-><mi 
->t</mi></mrow><mrow 
-><mi 
->t</mi></mrow></msub 
-> <mo 
-class="MathClass-rel">=</mo> <mn>0</mn></math>&#x0029;,
-we can consider that </p><table class="equation"><tr><td>
-<!--l. 309--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="block" class="equation">
-                            <mstyle 
-   id="x1-8003r6"  class="label" ></mstyle><!--endlabel--><msub><mrow 
-><mo 
-class="MathClass-open" stretchy="false">t</mo></mrow><mrow 
-><mi 
->p</mi></mrow></msub 
-> <mo 
-class="MathClass-rel">&#x2248;</mo> <mfrac><mrow 
-><mstyle 
-class="text"><mtext  >RTT</mtext></mstyle></mrow> 
-  <mrow 
-><mn>2</mn></mrow></mfrac>   <mo 
-class="MathClass-punc">,</mo>
-</math></td><td class="eq-no">&#x0028;6&#x0029;</td></tr></table>
-<!--l. 313--><p class="indent" >   and that for measuring the <!--l. 313--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mstyle 
-class="text"><mtext  >RTT</mtext></mstyle></math>
-in Eq.&#x00A0;<a 
-href="#x1-8002r5">5<!--tex4ht:ref: eq:tt --></a>, we should use a payload as large as possible &#x0028;ideally, in&#xFB01;nite bytes&#x0029;, in order to
-make <!--l. 315--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><msub><mrow 
-><mi 
->t</mi></mrow><mrow 
-><mi 
->t</mi></mrow></msub 
-></math>
-a signi&#xFB01;cative amount of time, ease to measure. Notice also that we should use the
-smaller RTT value of a <span 
-class="ectt-1000">ping </span>session of measurements in the Eq.&#x00A0;<a 
-href="#x1-8003r6">6<!--tex4ht:ref: eq:tp --></a> because the
-                                                                  
-
-                                                                  
-minimum link latency is a constant and the congestion of the link always increases
+</p><!-- l. 304 --><p class='indent'>   The transmission bitrate available between two directly reachable IP devices can
+be estimated as \begin {equation}  b=\frac {B}{t_t}, \label {eq:b}  \end {equation}
+where \(B\) is the number of bits sent in a <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>ping</span></span></span> <a href='https://en.wikipedia.org/wiki/Payload_(computing)'>payload</a>, and \begin {equation}  t_t = \frac {\text {RTT}-2t_p}{2}, \label {eq:tt}  \end {equation}
+an equation that can be determined by revisiting the <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>ping</span></span></span> timeline (Fig. 1) and the
+Eq. 2 of the <a href='https://tecnologias-multimedia.github.io/study_guide/06-jitter_impact/'>previous milestone</a>.
+</p><!-- l. 321 --><p class='indent'>   Notice that if the payload of the ping is small enough (\(0\) bytes ideally, and
+therefore \(t_t=0\)), we can consider that \begin {equation}  t_p \approx \frac {\text {RTT}}{2}, \label {eq:tp}  \end {equation}
+and that for measuring the \(\text {RTT}\) in Eq. <span class='ecbx-1000'>??</span>, we should use a payload as large as
+possible (ideally, infinite bytes), in order to make \(t_t\) a significative amount
+of time, ease to measure. Notice also that we should use the smaller RTT
+value of a <span class='ectt-1000'>ping </span>session of measurements in the Eq. <span class='ecbx-1000'>??</span> because the minimum
+link latency is a constant and the congestion of the link always increases
 it.
-</p><!--l. 321--><p class="indent" >   Therefore, supposing that <!--l. 321--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><msub><mrow 
-><mi 
->t</mi></mrow><mrow 
-><mi 
->p</mi></mrow></msub 
-></math> is
-constant and using the average<span class="footnote-mark"><a 
-href="index7.html#fn6x0"><sup class="textsuperscript">6</sup></a></span><a 
- id="x1-8004f6"></a> 
-<!--l. 324--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mstyle 
-class="text"><mtext  >RTT</mtext></mstyle></math> for transmitting
-<!--l. 324--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->B</mi></math> bits
-&#x0028;<!--l. 324--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->B</mi></math> as large as possible&#x0029;,
-the bit-rate value <!--l. 325--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->b</mi></math>
-determined by Eq.&#x00A0;<a 
-href="#x1-8001r4">4<!--tex4ht:ref: eq:b --></a> can be considered as a good estimation for the link of the near
+</p><!-- l. 335 --><p class='indent'>   Therefore, supposing that \(t_p\) is constant and using the
+average<span class='footnote-mark'><a href='#fn6x0' id='fn6x0-bk'><sup class='textsuperscript'>6</sup></a></span><a id='x1-8001f6'></a> \(\text {RTT}\)
+for transmitting \(B\) bits (\(B\) as large as possible), the bit-rate value \(b\) determined
+by Eq. <span class='ecbx-1000'>??</span> can be considered as a good estimation for the link of the near
 future.
-</p><!--l. 329--><p class="indent" >   So, for determining <!--l. 329--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->b</mi></math>
-we must run the following steps:
-     </p><ol  class="enumerate1" >
-<li 
-  class="enumerate" id="x1-8006x1">
-     <!--l. 331--><p class="noindent" >Run <span 
-class="ectt-1000">ping </span>using the smallest possible payload that provides RTTs values.<span class="footnote-mark"><a 
-href="index8.html#fn7x0"><sup class="textsuperscript">7</sup></a></span><a 
- id="x1-8007f7"></a> 
-     Use it for computing <!--l. 335--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><msub><mrow 
-><mi 
->t</mi></mrow><mrow 
-><mi 
->p</mi></mrow></msub 
-></math>.
-     </p></li>
-<li 
-  class="enumerate" id="x1-8009x2">
-     <!--l. 337--><p class="noindent" >Run <span 
-class="ectt-1000">ping </span>using the largest possible payload to achieve that the most part
-     of the average RTT provided by <span 
-class="ectt-1000">ping </span>corresponds to <!--l. 339--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><msub><mrow 
-><mi 
->t</mi></mrow><mrow 
-><mi 
->t</mi></mrow></msub 
-></math>.
-     It is necessary to use the highest payload-size because the accuracy of the
-     cronometer used by <span 
-class="ectt-1000">ping</span>, in general, is not high enough.
-     </p></li>
-<li 
-  class="enumerate" id="x1-8011x3">
-     <!--l. 343--><p class="noindent" >Use Eq.&#x00A0;<a 
-href="#x1-8002r5">5<!--tex4ht:ref: eq:tt --></a> to &#xFB01;nd <!--l. 343--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><msub><mrow 
-><mi 
->t</mi></mrow><mrow 
-><mi 
->t</mi></mrow></msub 
-></math>
-     as a function of the average RTT and the minimal <!--l. 344--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><msub><mrow 
-><mi 
->t</mi></mrow><mrow 
-><mi 
->p</mi></mrow></msub 
-></math>.
-     </p></li>
-<li 
-  class="enumerate" id="x1-8013x4">
-     <!--l. 346--><p class="noindent" >Finally, use Eq.&#x00A0;<a 
-href="#x1-8001r4">4<!--tex4ht:ref: eq:b --></a> to determine <!--l. 346--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->b</mi></math>.</p></li></ol>
-<!--l. 349--><p class="indent" >   If the devices cannot <span 
-class="ectt-1000">ping </span>each other, and supposing that there is only one point
-in the communication link that is &#xFB01;ltering the ICMP Echo Request tra&#xFB03;c in each
-direction, then we can apply the same technique that was used in the previous
+</p><!-- l. 343 --><p class='indent'>   So, for determining \(b\) we must run the following steps:
                                                                   
 
                                                                   
+     </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-8003x1'>Run <span class='ectt-1000'>ping </span>using the smallest possible payload that provides RTTs values.<span class='footnote-mark'><a href='#fn7x0' id='fn7x0-bk'><sup class='textsuperscript'>7</sup></a></span><a id='x1-8004f7'></a>
+     Use it for computing \(t_p\).
+     </li>
+<li class='enumerate' id='x1-8006x2'>Run <span class='ectt-1000'>ping </span>using the largest possible payload to achieve that the most part
+     of the average RTT provided by <span class='ectt-1000'>ping </span>corresponds to \(t_t\). It is necessary to
+     use the highest payload-size because the accuracy of the cronometer used
+     by <span class='ectt-1000'>ping</span>, in general, is not high enough.
+     </li>
+<li class='enumerate' id='x1-8008x3'>Use Eq. <span class='ecbx-1000'>??</span> to find \(t_t\) as a function of the average RTT and the minimal \(t_p\).
+     </li>
+<li class='enumerate' id='x1-8010x4'>Finally, use Eq. <span class='ecbx-1000'>??</span> to determine \(b\).</li></ol>
+<!-- l. 363 --><p class='indent'>   If the devices cannot <span class='ectt-1000'>ping </span>each other, and supposing that there is only one point
+in the communication link that is filtering the ICMP Echo Request traffic in each
+direction, then we can apply the same technique that was used in the previous
 milestone, which basically consists in computing the total RTT as the sum of the
-RTTs from the devices that we want to connect &#x0028;where the InterCom is it supposed
-to be run&#x0029; to the &#xFB01;lter &#x0028;possiblely, one of your home routers&#x0029;. A similar capacity
+RTTs from the devices that we want to connect (where the InterCom is it supposed
+to be run) to the filter (possiblely, one of your home routers). A similar capacity
 estimation should be obtained considering only the slower part of the total
 link.
-</p><!--l. 359--><p class="indent" >   &#x0028;Optional&#x0029; In order to gain experience with all this stu&#xFB00;, measure your bandwith
-&#x0028;using your local host&#x0029; with di&#xFB00;erent <span 
-class="ectt-1000">ping </span>servers, try to compute the transmission
+</p><!-- l. 373 --><p class='indent'>   (Optional) In order to gain experience with all this stuff, measure your bandwith
+(using your local host) with different <span class='ectt-1000'>ping </span>servers, try to compute the transmission
 bit-rate:
-     </p><ol  class="enumerate1" >
-<li 
-  class="enumerate" id="x1-8015x1">
-     <!--l. 363--><p class="noindent" >In <a 
-href="https://en.wikipedia.org/wiki/Localhost" ><span 
-class="ectt-1000">localhost</span></a>.
-     </p></li>
-<li 
-  class="enumerate" id="x1-8017x2">
-     <!--l. 364--><p class="noindent" >In <span 
-class="ectt-1000">localhost</span>, limiting the bit-rate with <span 
-class="ectt-1000">tc</span>.
-     </p></li>
-<li 
-  class="enumerate" id="x1-8019x3">
-     <!--l. 365--><p class="noindent" >Between two hosts in your <a 
-href="https://en.wikipedia.org/wiki/Local_area_network" >local network</a> &#x0028;your host and your router, for
-     example&#x0029;. Notice that in this case, you should not obtain a bit-rate higher
-     than the capacity of your <a 
-href="https://en.wikipedia.org/wiki/Network_interface_controller" >network adapter</a>.
-     </p></li>
-<li 
-  class="enumerate" id="x1-8021x4">
-     <!--l. 372--><p class="noindent" >Between your host and a public host of the Internet. Try <a 
-href="https://www.meter.net/" ><span 
-class="ectt-1000">www.meter.net</span></a>
-     for example.</p></li></ol>
-   <h4 class="subsectionHead"><span class="titlemark">2.2   </span> <a 
- id="x1-90002.2"></a>Simulate the link</h4>
-<!--l. 379--><p class="noindent" >With the bit-rate value <!--l. 379--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mi 
->b</mi></math>
-computed from the previous section, simulate such link &#x0028;locally&#x0029; with:
+     </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-8012x1'>In <a href='https://en.wikipedia.org/wiki/Localhost'><span class='ectt-1000'>localhost</span></a>.
+     </li>
+<li class='enumerate' id='x1-8014x2'>In <span class='ectt-1000'>localhost</span>, limiting the bit-rate with <span class='ectt-1000'>tc</span>.
+                                                                  
+
+                                                                  
+     </li>
+<li class='enumerate' id='x1-8016x3'>Between two hosts in your <a href='https://en.wikipedia.org/wiki/Local_area_network'>local network</a> (your host and your router, for
+     example). Notice that in this case, you should not obtain a bit-rate higher
+     than the capacity of your <a href='https://en.wikipedia.org/wiki/Network_interface_controller'>network adapter</a>.
+     </li>
+<li class='enumerate' id='x1-8018x4'>Between your host and a public host of the Internet. Try <a href='https://www.meter.net/'><span class='ectt-1000'>www.meter.net</span></a>
+     for example.</li></ol>
+<!-- l. 391 --><p class='noindent'>
 </p>
-   <!--l. 382-->
-<a 
- id="x1-9001"></a>
-   <div class="lstlisting" id="listing-3"><span class="label"><a 
- id="x1-9002r1"></a></span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">sudo</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">tc</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">qdisc</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">add</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">dev</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">lo</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">root</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">handle</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">1:</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">tbf</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">rate</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x003C;</span><span 
-class="ectt-1000">bit</span><span 
-class="ectt-1000">-</span><span 
-class="ectt-1000">rate_in_kbps</span><span 
-class="ectt-1000">&#x003E;</span><span 
-class="ectt-1000">kbit</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">burst</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">32</span><span 
-class="ectt-1000">kbit</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">limit</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">32</span><span 
-class="ectt-1000">kbit</span><span 
-class="ectt-1000">&#x00A0;</span><br /> 
-<span class="label"><a 
- id="x1-9003r2"></a></span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">sudo</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">tc</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">qdisc</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">add</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">dev</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">lo</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">root</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">parent</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">1:1</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">handle</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">10:</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">netem</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">delay</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x003C;</span><span 
-class="ectt-1000">average_delay_in_miliseconds</span><span 
-class="ectt-1000">&#x003E;</span><span 
-class="ectt-1000">ms</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x003C;</span><span 
-class="ectt-1000">maximum_average_deviation_in_miliseconds</span><span 
-class="ectt-1000">&#x003E;</span><span 
-class="ectt-1000">ms</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x003C;</span><span 
-class="ectt-1000">Pearson_correlation_coefficient_expressed_as_a_percentage</span><span 
-class="ectt-1000">&#x003E;%</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">distribution</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x003C;</span><span 
-class="ectt-1000">uniform</span><span 
-class="ectt-1000">|</span><span 
-class="ectt-1000">normal</span><span 
-class="ectt-1000">|</span><span 
-class="ectt-1000">pareto</span><span 
-class="ectt-1000">|</span><span 
-class="ectt-1000">paretonormal</span><span 
-class="ectt-1000">&#x003E;</span></div>
+   <h4 class='subsectionHead' id='simulate-the-link'><span class='titlemark'>2.2   </span> <a id='x1-90002.2'></a>Simulate the link</h4>
+<!-- l. 393 --><p class='noindent'>With the bit-rate value \(b\) computed from the previous section, simulate such link
+(locally) with:
+</p>
+   <!-- l. 396 -->
+<p id='languagebash'><a id='x1-9001'></a>
+   </p><pre class='lstlisting' id='listing-3'><span class='label'><a id='x1-9002r1'></a></span><span class='ectt-1000'>  </span><span style='color:#000000'><span class='ectt-1000'>sudo</span></span><span style='color:#000000'> <span class='ectt-1000'>tc </span><span class='ectt-1000'>qdisc </span><span class='ectt-1000'>add </span><span class='ectt-1000'>dev </span><span class='ectt-1000'>lo </span><span class='ectt-1000'>root </span><span class='ectt-1000'>handle </span><span class='ectt-1000'>1: </span><span class='ectt-1000'>tbf </span><span class='ectt-1000'>rate </span><span class='ectt-1000'>&lt;bit-rate_in_kbps&gt;kbit </span><span class='ectt-1000'>burst </span><span class='ectt-1000'>32kbit </span><span class='ectt-1000'>limit </span><span class='ectt-1000'>32kbit</span> 
+</span><span class='label'><a id='x1-9003r2'></a></span><span class='ectt-1000'>  </span><span style='color:#000000'><span class='ectt-1000'>sudo</span></span><span style='color:#000000'> <span class='ectt-1000'>tc </span><span class='ectt-1000'>qdisc </span><span class='ectt-1000'>add </span><span class='ectt-1000'>dev </span><span class='ectt-1000'>lo </span><span class='ectt-1000'>root </span><span class='ectt-1000'>parent </span><span class='ectt-1000'>1:1 </span><span class='ectt-1000'>handle </span><span class='ectt-1000'>10: </span><span class='ectt-1000'>netem </span><span class='ectt-1000'>delay </span><span class='ectt-1000'>&lt;average_delay_in_miliseconds&gt;ms </span><span class='ectt-1000'>&lt;maximum_average_deviation_in_miliseconds&gt;ms </span><span class='ectt-1000'>&lt;Pearson_correlation_coefficient_expressed_as_a_percentage&gt;% </span><span class='ectt-1000'>distribution </span><span class='ectt-1000'>&lt;uniform|normal|pareto|paretonormal&gt;</span></span></pre>
    
-<!--l. 387--><p class="indent" >   Examples:
-</p><!--l. 389--><p class="indent" >
-                                                                  
-
-                                                                  
-     </p><ol  class="enumerate1" >
-<li 
-  class="enumerate" id="x1-9005x1">
-     <!--l. 390--><p class="noindent" >Check the current con&#xFB01;guration:
+<!-- l. 401 --><p class='indent'>   Examples:
+</p><!-- l. 403 --><p class='indent'>
+     </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-9005x1'>
+     <!-- l. 404 --><p class='noindent'>Check the current configuration:
 </p>
-     <!--l. 392-->
-     <div class="lstlisting" id="listing-4"><span class="label"><a 
- id="x1-9006r3"></a></span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">tc</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">qdisc</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">show</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">dev</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">lo</span></div>
+     <!-- l. 406 -->
+     <pre class='lstlisting' id='listing-4'><span class='label'><a id='x1-9006r3'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>tc</span></span><span style='color:#000000'> <span class='ectt-1000'>qdisc </span><span class='ectt-1000'>show </span><span class='ectt-1000'>dev </span><span class='ectt-1000'>lo</span></span></pre>
      
-     <!--l. 396--><p class="noindent" >The output should be something like:
+     <!-- l. 410 --><p class='noindent'>The output should be something like:
 </p>
-     <!--l. 398-->
-     <div class="lstlisting" id="listing-5"><span class="label"><a 
- id="x1-9007r4"></a></span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">qdisc</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">noqueue</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">0:</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">root</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">refcnt</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">2</span></div>
-     
-     </li>
-<li 
-  class="enumerate" id="x1-9009x2">
-     <!--l. 402--><p class="noindent" >De&#xFB01;ne the rule for the bit-rate control &#x0028;example for
-     <!--l. 402--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mn>2</mn><mn>0</mn><mn>0</mn></math>
-     kbps&#x0029;:
-</p>
-     <!--l. 404-->
-     <div class="lstlisting" id="listing-6"><span class="label"><a 
- id="x1-9010r5"></a></span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">sudo</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">tc</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">qdisc</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">add</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">dev</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">lo</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">root</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">handle</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">1:</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">tbf</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">rate</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">200</span><span 
-class="ectt-1000">kbit</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">burst</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">32</span><span 
-class="ectt-1000">kbit</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">limit</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">32</span><span 
-class="ectt-1000">kbit</span></div>
-     
-     </li>
-<li 
-  class="enumerate" id="x1-9012x3">
-     <!--l. 408--><p class="noindent" >De&#xFB01;ne the rule for the latency control &#x0028;see previous milestone&#x0029; &#x0028;example for
-     <!--l. 409--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mn>1</mn><mn>0</mn><mn>0</mn></math> ms,
-     <!--l. 409--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mn>1</mn><mn>0</mn></math>
-     ms of jitter, and <a 
-href="https://wiki.linuxfoundation.org/networking/netem" >with the next random transmission depending
-     <!--l. 411--><math 
- xmlns="http://www.w3.org/1998/Math/MathML"  
-display="inline" ><mn>2</mn><mn>5</mn></math>%
-     on the last one</a>&#x0029;:
-</p>
-     <!--l. 413-->
-     <div class="lstlisting" id="listing-7"><span class="label"><a 
- id="x1-9013r6"></a></span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">sudo</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">tc</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">qdisc</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">add</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">dev</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">lo</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">parent</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">1:1</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">handle</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">10:</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">netem</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">delay</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">100</span><span 
-class="ectt-1000">ms</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">10</span><span 
-class="ectt-1000">ms</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">25%</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">distribution</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">normal</span></div>
+     <!-- l. 412 -->
+     <pre class='lstlisting' id='listing-5'><span class='label'><a id='x1-9007r4'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>qdisc</span></span><span style='color:#000000'> <span class='ectt-1000'>noqueue </span><span class='ectt-1000'>0: </span><span class='ectt-1000'>root </span><span class='ectt-1000'>refcnt </span><span class='ectt-1000'>2</span></span></pre>
      
                                                                   
 
                                                                   
      </li>
-<li 
-  class="enumerate" id="x1-9015x4">
-     <!--l. 417--><p class="noindent" >After adding these rules, this should be the con&#xFB01;guration:
+<li class='enumerate' id='x1-9009x2'>
+     <!-- l. 416 --><p class='noindent'>Define the rule for the bit-rate control (example for \(200\) kbps):
 </p>
-     <!--l. 419-->
-     <div class="lstlisting" id="listing-8"><span class="label"><a 
- id="x1-9016r7"></a></span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">tc</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">qdisc</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">show</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">dev</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">lo</span></div>
+     <!-- l. 418 -->
+     <pre class='lstlisting' id='listing-6'><span class='label'><a id='x1-9010r5'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>sudo</span></span><span style='color:#000000'> <span class='ectt-1000'>tc </span><span class='ectt-1000'>qdisc </span><span class='ectt-1000'>add </span><span class='ectt-1000'>dev </span><span class='ectt-1000'>lo </span><span class='ectt-1000'>root </span><span class='ectt-1000'>handle </span><span class='ectt-1000'>1: </span><span class='ectt-1000'>tbf </span><span class='ectt-1000'>rate </span><span class='ectt-1000'>200kbit </span><span class='ectt-1000'>burst </span><span class='ectt-1000'>32kbit </span><span class='ectt-1000'>limit </span><span class='ectt-1000'>32kbit</span></span></pre>
      
-     <!--l. 423--><p class="noindent" >The output should be something like:
+     </li>
+<li class='enumerate' id='x1-9012x3'>
+     <!-- l. 422 --><p class='noindent'>Define the rule for the latency control (see previous milestone) (example for \(100\)
+     ms, \(10\) ms of jitter, and <a href='https://wiki.linuxfoundation.org/networking/netem'>with the next random transmission depending \(25\)% on the
+     last one</a>):
 </p>
-     <!--l. 425-->
-     <div class="lstlisting" id="listing-9"><span class="label"><a 
- id="x1-9017r8"></a></span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">qdisc</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">tbf</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">1:</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">root</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">refcnt</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">2</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">rate</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">200</span><span 
-class="ectt-1000">Kbit</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">burst</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">4</span><span 
-class="ectt-1000">Kb</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">lat</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">0</span><span 
-class="ectt-1000">us</span><span 
-class="ectt-1000">&#x00A0;</span><br /> 
-<span class="label"><a 
- id="x1-9018r9"></a></span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">qdisc</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">netem</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">10:</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">parent</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">1:1</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">limit</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">1000</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">delay</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">100</span><span 
-class="ectt-1000">ms</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">10</span><span 
-class="ectt-1000">ms</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">25%</span></div>
+     <!-- l. 427 -->
+     <pre class='lstlisting' id='listing-7'><span class='label'><a id='x1-9013r6'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>sudo</span></span><span style='color:#000000'> <span class='ectt-1000'>tc </span><span class='ectt-1000'>qdisc </span><span class='ectt-1000'>add </span><span class='ectt-1000'>dev </span><span class='ectt-1000'>lo </span><span class='ectt-1000'>parent </span><span class='ectt-1000'>1:1 </span><span class='ectt-1000'>handle </span><span class='ectt-1000'>10: </span><span class='ectt-1000'>netem </span><span class='ectt-1000'>delay </span><span class='ectt-1000'>100ms </span><span class='ectt-1000'>10ms </span><span class='ectt-1000'>25% </span><span class='ectt-1000'>distribution </span><span class='ectt-1000'>normal</span></span></pre>
+     
+     </li>
+<li class='enumerate' id='x1-9015x4'>
+     <!-- l. 431 --><p class='noindent'>After adding these rules, this should be the configuration:
+</p>
+     <!-- l. 433 -->
+     <pre class='lstlisting' id='listing-8'><span class='label'><a id='x1-9016r7'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>tc</span></span><span style='color:#000000'> <span class='ectt-1000'>qdisc </span><span class='ectt-1000'>show </span><span class='ectt-1000'>dev </span><span class='ectt-1000'>lo</span></span></pre>
+     
+     <!-- l. 437 --><p class='noindent'>The output should be something like:
+</p>
+     <!-- l. 439 -->
+     <pre class='lstlisting' id='listing-9'><span class='label'><a id='x1-9017r8'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>qdisc</span></span><span style='color:#000000'> <span class='ectt-1000'>tbf </span><span class='ectt-1000'>1: </span><span class='ectt-1000'>root </span><span class='ectt-1000'>refcnt </span><span class='ectt-1000'>2 </span><span class='ectt-1000'>rate </span><span class='ectt-1000'>200Kbit </span><span class='ectt-1000'>burst </span><span class='ectt-1000'>4Kb </span><span class='ectt-1000'>lat </span><span class='ectt-1000'>0us</span> 
+</span><span class='label'><a id='x1-9018r9'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>qdisc</span></span><span style='color:#000000'> <span class='ectt-1000'>netem </span><span class='ectt-1000'>10: </span><span class='ectt-1000'>parent </span><span class='ectt-1000'>1:1 </span><span class='ectt-1000'>limit </span><span class='ectt-1000'>1000 </span><span class='ectt-1000'>delay </span><span class='ectt-1000'>100ms</span> </span><span class='ectt-1000'> </span><span style='color:#000000'><span class='ectt-1000'>10</span></span><span style='color:#000000'><span class='ectt-1000'>ms</span></span><span style='color:#000000'> <span class='ectt-1000'>25%</span></span></pre>
      
      </li></ol>
-<!--l. 432--><p class="indent" >   Remember to delete the rules after their are unnecessary &#x0028;example to delete the
-previous rules&#x0029;:
+<!-- l. 446 --><p class='indent'>   Remember to delete the rules after their are unnecessary (example to delete the
+previous rules):
 </p>
-   <!--l. 434-->
-   <div class="lstlisting" id="listing-10"><span class="label"><a 
- id="x1-9019r10"></a></span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">sudo</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">tc</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">qdisc</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">delete</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">dev</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">lo</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">parent</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">1:1</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">handle</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">10:</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">netem</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">delay</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">100</span><span 
-class="ectt-1000">ms</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">10</span><span 
-class="ectt-1000">ms</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">25%</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">distribution</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">normal</span><span 
-class="ectt-1000">&#x00A0;</span><br /> 
-<span class="label"><a 
- id="x1-9020r11"></a></span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">sudo</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">tc</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">qdisc</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">delete</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">dev</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">lo</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">root</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">handle</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">1:</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">tbf</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">rate</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">200</span><span 
-class="ectt-1000">kbit</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">burst</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">32</span><span 
-class="ectt-1000">kbit</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">limit</span><span 
-class="ectt-1000">&#x00A0;</span><span 
-class="ectt-1000">32</span><span 
-class="ectt-1000">kbit</span></div>
+   <!-- l. 448 -->
+   <pre class='lstlisting' id='listing-10'><span class='label'><a id='x1-9019r10'></a></span><span class='ectt-1000'>  </span><span style='color:#000000'><span class='ectt-1000'>sudo</span></span><span style='color:#000000'> <span class='ectt-1000'>tc </span><span class='ectt-1000'>qdisc </span><span class='ectt-1000'>delete </span><span class='ectt-1000'>dev </span><span class='ectt-1000'>lo </span><span class='ectt-1000'>parent </span><span class='ectt-1000'>1:1 </span><span class='ectt-1000'>handle </span><span class='ectt-1000'>10: </span><span class='ectt-1000'>netem </span><span class='ectt-1000'>delay </span><span class='ectt-1000'>100ms </span><span class='ectt-1000'>10ms </span><span class='ectt-1000'>25% </span><span class='ectt-1000'>distribution </span><span class='ectt-1000'>normal</span> 
+</span><span class='label'><a id='x1-9020r11'></a></span><span class='ectt-1000'>  </span><span style='color:#000000'><span class='ectt-1000'>sudo</span></span><span style='color:#000000'> <span class='ectt-1000'>tc </span><span class='ectt-1000'>qdisc </span><span class='ectt-1000'>delete </span><span class='ectt-1000'>dev </span><span class='ectt-1000'>lo </span><span class='ectt-1000'>root </span><span class='ectt-1000'>handle </span><span class='ectt-1000'>1: </span><span class='ectt-1000'>tbf </span><span class='ectt-1000'>rate </span><span class='ectt-1000'>200kbit </span><span class='ectt-1000'>burst </span><span class='ectt-1000'>32kbit </span><span class='ectt-1000'>limit </span><span class='ectt-1000'>32kbit</span></span></pre>
    
-<!--l. 440--><p class="noindent" >
-</p>
-   <h4 class="subsectionHead"><span class="titlemark">2.3   </span> <a 
- id="x1-100002.3"></a>Which data-ordering performs better?</h4>
-<!--l. 442--><p class="noindent" >Determine empirically which ordering of the chunk data is the most e&#xFB03;cient from a
-lossless data compression point of view &#x0028;the smaller the bit-rates, the higher the
-compression&#x0029;. Use the audio sequence you want. Some samples are stored in the <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">data</span></span></span>
-directory of intercom.
-</p><!--l. 449--><p class="noindent" >
-</p>
-   <h4 class="subsectionHead"><span class="titlemark">2.4   </span> <a 
- id="x1-110002.4"></a>Compute RD &#x0028;Rate/Distortion&#x0029; curves</h4>
-<!--l. 451--><p class="noindent" >Considering the <a 
-href="https://en.wikipedia.org/wiki/Root-mean-square_deviation" >RMSE &#x0028;Root Mean Square Error&#x0029;</a> as distortion measure between the
-sent and the received audio signal, generate the RD curve considering a set of
-di&#xFB00;erent simulated transmission environments &#x0028;use <a 
-href="https://man7.org/linux/man-pages/man8/tc.8.html" >tc</a>&#x0029; of one audio sequence
-&#x0028;remember that you can use one of the samples found in the <span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">data</span></span></span> directory of the
-intercom&#x2019;s repo&#x0029;, for the four implementations. Notice that you can use the
-<span class="obeylines-h"><span class="verb"><span 
-class="ectt-1000">--minimal_quantization_step</span></span></span> parameter to generate the di&#xFB00;erent points of the RD
-curves.
                                                                   
 
                                                                   
-</p><!--l. 466--><p class="noindent" >
+<!-- l. 454 --><p class='noindent'>
 </p>
-   <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
- id="x1-120003"></a>Deliverables</h3>
-<!--l. 468--><p class="noindent" >A report documenting the experiments and the results.
-</p><!--l. 470--><p class="noindent" >
+   <h4 class='subsectionHead' id='which-dataordering-performs-better'><span class='titlemark'>2.3   </span> <a id='x1-100002.3'></a>Which data-ordering performs better?</h4>
+<!-- l. 456 --><p class='noindent'>Determine empirically which ordering of the chunk data is the most efficient from a
+lossless data compression point of view (the smaller the bit-rates, the higher the
+compression). Use the audio sequence you want. Some samples are stored in the <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>data</span></span></span>
+directory of intercom.
+</p><!-- l. 463 --><p class='noindent'>
 </p>
-   <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
- id="x1-130004"></a>Resources</h3>
-   <div class="thebibliography">
-   <p class="bibitem" ><span class="biblabel">
- &#x005B;1&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
- id="Xbosi2003intro"></a>M.&#x00A0;Bosi and R.E. Goldberd.  <a 
-href="https://last.hit.bme.hu/download/vidtechlab/fcc/literature/audio/audio_coding_standards_book.pdf" ><span 
-class="ecti-1000">Introduction to Digital Audio Coding and</span>
-   <span 
-class="ecti-1000">Standards</span></a>. Kluwer Academic Publishers, 2003.
+   <h4 class='subsectionHead' id='compute-rd-ratedistortion-curves'><span class='titlemark'>2.4   </span> <a id='x1-110002.4'></a>Compute RD (Rate/Distortion) curves</h4>
+<!-- l. 465 --><p class='noindent'>Considering the <a href='https://en.wikipedia.org/wiki/Root-mean-square_deviation'>RMSE (Root Mean Square Error)</a> as distortion measure between the
+sent and the received audio signal, generate the RD curve considering a set of
+different simulated transmission environments (use <a href='https://man7.org/linux/man-pages/man8/tc.8.html'>tc</a>) of one audio sequence
+(remember that you can use one of the samples found in the <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>data</span></span></span> directory of the
+intercom’s repo), for the four implementations. Notice that you can use the
+<span class='obeylines-h'><span class='verb'><span class='ectt-1000'>--minimal_quantization_step</span></span></span> parameter to generate the different points of the RD
+curves.
+</p><!-- l. 480 --><p class='noindent'>
+</p>
+   <h3 class='sectionHead' id='deliverables'><span class='titlemark'>3   </span> <a id='x1-120003'></a>Deliverables</h3>
+<!-- l. 482 --><p class='noindent'>A report documenting the experiments and the results.
+</p><!-- l. 484 --><p class='noindent'>
+</p>
+   <h3 class='sectionHead' id='resources'><span class='titlemark'>4   </span> <a id='x1-130004'></a>Resources</h3>
+   <div class='thebibliography'>
+   <p class='bibitem'><span class='biblabel'>
+ [1]<span class='bibsp'>   </span></span><a id='Xbosi2003intro'></a>M. Bosi and R.E. Goldberd.  <a href='https://last.hit.bme.hu/download/vidtechlab/fcc/literature/audio/audio_coding_standards_book.pdf'><span class='ecti-1000'>Introduction to Digital Audio Coding and
+   </span><span class='ecti-1000'>Standards</span></a>. Kluwer Academic Publishers, 2003.
    </p>
-   <p class="bibitem" ><span class="biblabel">
- &#x005B;2&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
- id="XForouzan"></a>Behrouz   Forouzan.      <a 
-href="https://docs.google.com/viewer?a=v&pid=sites&srcid=ZWNjaGFuZ2EuYWMuaW58Y2hpbnRhbnxneDo4MDNlMGUwZmQ0ZmU1YmI" ><span 
-class="ecti-1000">Introduction  to  Data  Communications  and</span>
-   <span 
-class="ecti-1000">Networking</span></a>. McGraw-Hill, 2007.
+   <p class='bibitem'><span class='biblabel'>
+ [2]<span class='bibsp'>   </span></span><a id='XForouzan'></a>Behrouz   Forouzan.      <a href='https://docs.google.com/viewer?a=v&amp;pid=sites&amp;srcid=ZWNjaGFuZ2EuYWMuaW58Y2hpbnRhbnxneDo4MDNlMGUwZmQ0ZmU1YmI'><span class='ecti-1000'>Introduction  to  Data  Communications  and
+   </span><span class='ecti-1000'>Networking</span></a>. McGraw-Hill, 2007.
    </p>
-   <p class="bibitem" ><span class="biblabel">
- &#x005B;3&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
- id="Xbert2012lartc"></a>Bert Hubert, Thomas Graf, Greg Maxwell, Remco van Mook, Martijn
-   van Oosterhout, Paul&#x00A0;B. Schroeder, Jasper Spaans, and Pedro Larroy. <a 
-href="https://lartc.org/" ><span 
-class="ecti-1000">Linux</span>
-   <span 
-class="ecti-1000">Advanced Routing &#x0026; Tra&#xFB03;c Control</span></a>. Publisher: Bert Humbert et al., 2012.
+                                                                  
+
+                                                                  
+   <p class='bibitem'><span class='biblabel'>
+ [3]<span class='bibsp'>   </span></span><a id='Xbert2012lartc'></a>Bert Hubert, Thomas Graf, Greg Maxwell, Remco van Mook, Martijn
+   van Oosterhout, Paul B. Schroeder, Jasper Spaans, and Pedro Larroy. <a href='https://lartc.org/'><span class='ecti-1000'>Linux
+   </span><span class='ecti-1000'>Advanced Routing &amp; Traffic Control</span></a>. Publisher: Bert Humbert et al., 2012.
    </p>
-   <p class="bibitem" ><span class="biblabel">
- &#x005B;4&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
- id="Xnelson96datacompression"></a>Nelson M. and Gailly J.  <a 
-href="http://index-of.co.uk/Information-Theory/The%20Data%20Compression%20Book%202nd%20Ed%20-%20Mark%20Nelson.pdf" ><span 
-class="ecti-1000">The Data Compression Book</span></a>.  M&#x0026;T Books,
+   <p class='bibitem'><span class='biblabel'>
+ [4]<span class='bibsp'>   </span></span><a id='Xnelson96datacompression'></a>Nelson M. and Gailly J.  <a href='https://theswissbay.ch/pdf/Gentoomen%20Library/Information%20Theory/Compression/The%20Data%20Compression%20Book%202nd%20Ed%20-%20Mark%20Nelson.pdf'><span class='ecti-1000'>The Data Compression Book</span></a>.  M&amp;T Books,
    1996.
    </p>
-   <p class="bibitem" ><span class="biblabel">
- &#x005B;5&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
- id="Xsayood2017introduction"></a>K.&#x00A0;Sayood.   <a 
-href="http://rahilshaikh.weebly.com/uploads/1/1/6/3/11635894/data_compression.pdf" ><span 
-class="ecti-1000">Introduction to Data Compression</span></a>.   Morgan  Kaufmann,
+   <p class='bibitem'><span class='biblabel'>
+ [5]<span class='bibsp'>   </span></span><a id='Xsayood2017introduction'></a>K. Sayood.   <a href='http://rahilshaikh.weebly.com/uploads/1/1/6/3/11635894/data_compression.pdf'><span class='ecti-1000'>Introduction to Data Compression</span></a>.   Morgan  Kaufmann,
    2017.
    </p>
-   <p class="bibitem" ><span class="biblabel">
- &#x005B;6&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
- id="XTanenbaum"></a>Andrew&#x00A0;S. Tanenbaum. <a 
-href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwj9857DgLvsAhUTA2MBHTJfCZ4QFjAAegQIBBAC&url=https%3A%2F%2Fdocs.google.com%2Fviewer%3Fa%3Dv%26pid%3Dsites%26srcid%3DZGVmYXVsdGRvbWFpbnxza21pbmh8Z3g6NjQxMTI2MmYxMTAwZmNjZQ&usg=AOvVaw3m5WEH7H2923_hOFl1e-W-" ><span 
-class="ecti-1000">Computer Networks</span></a>. Prentice Hall, 2011.
-                                                                  
-
-                                                                  
+   <p class='bibitem'><span class='biblabel'>
+ [6]<span class='bibsp'>   </span></span><a id='XTanenbaum'></a>Andrew S. Tanenbaum. <a href='https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=&amp;cad=rja&amp;uact=8&amp;ved=2ahUKEwj9857DgLvsAhUTA2MBHTJfCZ4QFjAAegQIBBAC&amp;url=https%3A%2F%2Fdocs.google.com%2Fviewer%3Fa%3Dv%26pid%3Dsites%26srcid%3DZGVmYXVsdGRvbWFpbnxza21pbmh8Z3g6NjQxMTI2MmYxMTAwZmNjZQ&amp;usg=AOvVaw3m5WEH7H2923_hOFl1e-W-'><span class='ecti-1000'>Computer Networks</span></a>. Prentice Hall, 2011.
    </p>
-   <p class="bibitem" ><span class="biblabel">
- &#x005B;7&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
- id="Xtaubman2002jpeg2000"></a>D.S. Taubman and W.M. Marcellin.   <a 
-href="https://last.hit.bme.hu/download/firtha/video/JPEG2000/David%20S.%20Taubman,%20%20Michael%20W.%20Marcellin%20%20(auth.)%20JPEG2000%20Image%20Compression%20Fundamentals,%20Standards%20and%20Practice%20%202002.pdf" ><span 
-class="ecti-1000">JPEG2000. Image Compression</span>
-   <span 
-class="ecti-1000">Fundamentals, Standards and Practice</span></a>. Kluwer Academic Publishers, 2002.
+   <p class='bibitem'><span class='biblabel'>
+ [7]<span class='bibsp'>   </span></span><a id='Xtaubman2002jpeg2000'></a>D.S. Taubman and W.M. Marcellin.   <a href='https://last.hit.bme.hu/download/firtha/video/JPEG2000/David%20S.%20Taubman,%20%20Michael%20W.%20Marcellin%20%20(auth.)%20JPEG2000%20Image%20Compression%20Fundamentals,%20Standards%20and%20Practice%20%202002.pdf'><span class='ecti-1000'>JPEG2000. Image Compression
+   </span><span class='ecti-1000'>Fundamentals, Standards and Practice</span></a>. Kluwer Academic Publishers, 2002.
    </p>
-   <p class="bibitem" ><span class="biblabel">
- &#x005B;8&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
- id="Xvetterli2014foundations"></a>M.&#x00A0;Vetterli, J.&#x00A0;Kova&#x010D;evi&#x0107;, and V.K. Goyal.  <a 
-href="http://www.fourierandwavelets.org/FSP_v1.1_2014.pdf" ><span 
-class="ecti-1000">Foundations of Signal</span>
-   <span 
-class="ecti-1000">Processing</span></a>. Cambridge University Press, 2014.
+   <p class='bibitem'><span class='biblabel'>
+ [8]<span class='bibsp'>   </span></span><a id='Xvetterli2014foundations'></a>M. Vetterli, J. Kovačević, and V.K. Goyal.  <a href='http://www.fourierandwavelets.org/FSP_v1.1_2014.pdf'><span class='ecti-1000'>Foundations of Signal
+   </span><span class='ecti-1000'>Processing</span></a>. Cambridge University Press, 2014.
 </p>
    </div>
-<a 
- id="Q1-1-16"></a>
-    
-</body></html> 
-
-                                                                  
-
-
+<p id='references'><a id='Q1-1-16'></a>
+   </p><div class='footnotes'><!-- l. 37 --><p class='indent'>     <span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='ecrm-0800'>Follow the same rubric than in the case of the measurement of the impact of the
+</span><span class='ecrm-0800'>latency.</span></p>
+<!-- l. 49 --><p class='indent'>     <span class='footnote-mark'><a href='#fn2x0-bk' id='fn2x0'><sup class='textsuperscript'>2</sup></a></span><span class='ecrm-0800'>Notice that, in this case, we would be at least contributing, if not causing, the link
+</span><span class='ecrm-0800'>congestion.</span></p>
+<!-- l. 108 --><p class='noindent'><span class='footnote-mark'><a href='#fn3x0-bk' id='fn3x0'><sup class='textsuperscript'>3</sup></a></span><span class='ecrm-0800'>Used in a future improvements of intercom.</span></p>
+<!-- l. 188 --><p class='indent'>     <span class='footnote-mark'><a href='#fn4x0-bk' id='fn4x0'><sup class='textsuperscript'>4</sup></a></span><span class='ecrm-0800'>The error generated by the quantization stage.</span></p>
+<!-- l. 254 --><p class='noindent'><span class='footnote-mark'><a href='#fn5x0-bk' id='fn5x0'><sup class='textsuperscript'>5</sup></a></span>\(\Delta \) <span class='ecrm-0800'>must be always bigger than</span> \(0\)<span class='ecrm-0800'>, by definition, and this does not depend on the bit-rate
+</span><span class='ecrm-0800'>control.</span></p><!-- l. 337 --><p class='indent'> <span class='footnote-mark'><a href='#fn6x0-bk' id='fn6x0'><sup class='textsuperscript'>6</sup></a></span><span class='ecrm-0800'>Remember that with the </span><span class='ectt-0800'>ping </span><span class='ecrm-0800'>command we iterate several times and the tool returns
+</span><span class='ecrm-0800'>average values.</span></p>
+<!-- l. 349 --><p class='noindent'><span class='footnote-mark'><a href='#fn7x0-bk' id='fn7x0'><sup class='textsuperscript'>7</sup></a></span><span class='ecrm-0800'>The minimal payload for a </span><span class='ectt-0800'>ping </span><span class='ecrm-0800'>message can be 0, but depending on the implementation
+</span><span class='ecrm-0800'>of </span><span class='ectt-0800'>ping </span><span class='ecrm-0800'>you may be forzed to use a larger value.</span></p>                                                           </div>
+ 
+</body> 
+</html>
