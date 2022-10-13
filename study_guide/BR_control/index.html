@@ -9,8 +9,6 @@
 <script>window.MathJax = { tex: { tags: "ams", }, }; </script> 
  <script async='async' id='MathJax-script' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js' type='text/javascript'></script>  
 </head><body>
-<!-- l. 5 --><p class='noindent'>USE 16 bits/coefficient (2 byte-planes).
-</p>
    <div class='maketitle'>
                                                                   
 
@@ -180,24 +178,23 @@ the quantization. Some examples can be found in <a href='https://github.com/Tecn
 </p><!-- l. 228 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead' id='the-current-implementations'><span class='titlemark'>1.5   </span> <a id='x1-60001.5'></a>The current implementation(s)</h4>
-<!-- l. 230 --><p class='noindent'>Bit-Rate (BR) control through quantization has been implemented in the
-class <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>BR_Control*</span></span></span> of the modules <span class='ectt-1000'>BR_control*.py</span>. This class overrides
-the inherited methods <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>Compression.pack()</span></span></span> and <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>Compression.unpack()</span></span></span>,
-performing:
+<!-- l. 230 --><p class='noindent'>Bit-Rate (BR) control through quantization has been implemented in the class
+<span class='obeylines-h'><span class='verb'><span class='ectt-1000'>BR_Control*</span></span></span> of the modules <span class='ectt-1000'>BR_control*.py</span>. This class overrides the inherited
+methods <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>pack()</span></span></span> and <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>unpack()</span></span></span>, performing:
 </p>
-   <!-- l. 236 -->
+   <!-- l. 235 -->
    <pre class='lstlisting' id='listing-1'><span class='label'><a id='x1-6001r1'></a></span><span class='ectt-1000'>  </span><span style='color:#000000'><span class='ectt-1000'>def</span></span><span style='color:#000000'> <span class='ectt-1000'>pack(chunk_number, </span><span class='ectt-1000'>chunk):</span> 
 </span><span class='label'><a id='x1-6002r2'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>quantized_chunk</span></span><span style='color:#000000'> <span class='ectt-1000'>= </span><span class='ectt-1000'>quantize(chunk)</span> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(1)</span> 
 </span><span class='label'><a id='x1-6003r3'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>packed_chunk</span></span><span style='color:#000000'> <span class='ectt-1000'>= </span><span class='ectt-1000'>Buffering.pack(chunk_number, </span><span class='ectt-1000'>quantized_chunk)</span> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(2)</span> 
 </span><span class='label'><a id='x1-6004r4'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>return</span></span><span style='color:#000000'> <span class='ectt-1000'>packed_chunk</span> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(3)</span></span></pre>
    
-   <!-- l. 243 -->
+   <!-- l. 242 -->
    <pre class='lstlisting' id='listing-2'><span class='label'><a id='x1-6005r1'></a></span><span class='ectt-1000'>  </span><span style='color:#000000'><span class='ectt-1000'>def</span></span><span style='color:#000000'> <span class='ectt-1000'>unpack(packed_chunk):</span> 
 </span><span class='label'><a id='x1-6006r2'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>(</span></span><span style='color:#000000'><span class='ectt-1000'>chunk_number</span></span><span style='color:#000000'><span class='ectt-1000'>,</span></span><span style='color:#000000'> <span class='ectt-1000'>quantized_chunk) </span><span class='ectt-1000'>= </span><span class='ectt-1000'>Buffering.unpack(packed_chunk)</span> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(1)</span> 
 </span><span class='label'><a id='x1-6007r3'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>chunk</span></span><span style='color:#000000'> <span class='ectt-1000'>= </span><span class='ectt-1000'>dequantize(quantized_chunk)</span> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(2)</span> 
 </span><span class='label'><a id='x1-6008r4'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>return</span></span><span style='color:#000000'> <span class='ectt-1000'>(chunk_number, </span><span class='ectt-1000'>chunk)</span> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(3)</span></span></pre>
    
-<!-- l. 250 --><p class='indent'>   Notice that you will find four implementations related to this milestone:
+<!-- l. 249 --><p class='indent'>   Notice that you will find four implementations related to this milestone:
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-6010x1'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>BR_control_no.py</span></span></span>: Uses a constant \(\Delta &gt;0\).<span class='footnote-mark'><a href='#fn5x0' id='fn5x0-bk'><sup class='textsuperscript'>5</sup></a></span><a id='x1-6011f5'></a>
      There is not BR control.
@@ -214,39 +211,39 @@ performing:
      </li>
 <li class='enumerate' id='x1-6017x4'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>BR_control_conservative.py</span></span></span>: Every second runs: \begin {equation}  \left \{ \begin {array}{ll} \Delta = 2\Delta &amp; \quad \text {if}~L&gt;1 \\ \Delta = \frac {1}{2}\Delta &amp; \quad \text {otherwise}. \end {array} \right .  \end {equation}
      </li></ol>
-<!-- l. 281 --><p class='noindent'>
+<!-- l. 280 --><p class='noindent'>
 </p>
    <h3 class='sectionHead' id='what-you-have-to-do'><span class='titlemark'>2   </span> <a id='x1-70002'></a>What you have to do?</h3>
-<!-- l. 283 --><p class='noindent'>
+<!-- l. 282 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead' id='estimate-the-bitrate-in-an-internet-link'><span class='titlemark'>2.1   </span> <a id='x1-80002.1'></a>Estimate the bit-rate in an Internet link</h4>
-<!-- l. 285 --><p class='noindent'>Usually, we need to use a tool such as <a href='https://iperf.fr/'>iPerf</a> to <a href='https://en.wikipedia.org/wiki/Measuring_network_throughput'>measure the transmission bit-rate</a>
+<!-- l. 284 --><p class='noindent'>Usually, we need to use a tool such as <a href='https://iperf.fr/'>iPerf</a> to <a href='https://en.wikipedia.org/wiki/Measuring_network_throughput'>measure the transmission bit-rate</a>
 between two <a href='https://datatracker.ietf.org/doc/html/rfc4113'>end-points</a> (of different <a href='https://en.wikipedia.org/wiki/Host_(network)'>hosts</a>) in the Internet. This proceduce implies
 that we must have access to both hosts to install and run this program, privileges
 that are not always available.
-</p><!-- l. 296 --><p class='indent'>   Alternatively, we can estimate the <a href='https://en.wikipedia.org/wiki/Throughput'>link throughput</a> using <a href='https://github.com/torvalds/linux/blob/master/net/ipv4/ping.c'><span class='ectt-1000'>ping</span></a> (see the previous
+</p><!-- l. 295 --><p class='indent'>   Alternatively, we can estimate the <a href='https://en.wikipedia.org/wiki/Throughput'>link throughput</a> using <a href='https://github.com/torvalds/linux/blob/master/net/ipv4/ping.c'><span class='ectt-1000'>ping</span></a> (see the previous
 milestone). At this point is important to realize that <span class='ectt-1000'>ping </span>has been designed to
 measure latencies, not bit-rates, and that for this reason, we will be able only to
 estimate throughputs, rougtly.
-</p><!-- l. 304 --><p class='indent'>   The transmission bitrate available between two directly reachable IP devices can
+</p><!-- l. 303 --><p class='indent'>   The transmission bitrate available between two directly reachable IP devices can
 be estimated as \begin {equation}  b=\frac {B}{t_t}, \label {eq:b}  \end {equation}
 where \(B\) is the number of bits sent in a <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>ping</span></span></span> <a href='https://en.wikipedia.org/wiki/Payload_(computing)'>payload</a>, and \begin {equation}  t_t = \frac {\text {RTT}-2t_p}{2}, \label {eq:tt}  \end {equation}
 an equation that can be determined by revisiting the <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>ping</span></span></span> timeline (Fig. 1) and the
-Eq. 2 of the <a href='https://tecnologias-multimedia.github.io/study_guide/06-jitter_impact/'>previous milestone</a>.
-</p><!-- l. 321 --><p class='indent'>   Notice that if the payload of the ping is small enough (\(0\) bytes ideally, and
+Eq. 2 of the <a href='https://tecnologias-multimedia.github.io/study_guide/latency/'>previous milestone</a>.
+</p><!-- l. 320 --><p class='indent'>   Notice that if the payload of the ping is small enough (\(0\) bytes ideally, and
 therefore \(t_t=0\)), we can consider that \begin {equation}  t_p \approx \frac {\text {RTT}}{2}, \label {eq:tp}  \end {equation}
-and that for measuring the \(\text {RTT}\) in Eq. <span class='ecbx-1000'>??</span>, we should use a payload as large as
-possible (ideally, infinite bytes), in order to make \(t_t\) a significative amount
-of time, ease to measure. Notice also that we should use the smaller RTT
-value of a <span class='ectt-1000'>ping </span>session of measurements in the Eq. <span class='ecbx-1000'>??</span> because the minimum
+and that for measuring the \(\text {RTT}\) in Eq. \eqref{eq:tt}, we should use a payload as large as
+possible (ideally, infinite bytes), in order to make \(t_t\) a significative amount of time, ease
+to measure. Notice also that we should use the smaller RTT value of a <span class='ectt-1000'>ping</span>
+session of measurements in the Eq. \eqref{eq:tp} because the minimum
 link latency is a constant and the congestion of the link always increases
 it.
-</p><!-- l. 335 --><p class='indent'>   Therefore, supposing that \(t_p\) is constant and using the
+</p><!-- l. 334 --><p class='indent'>   Therefore, supposing that \(t_p\) is constant and using the
 average<span class='footnote-mark'><a href='#fn6x0' id='fn6x0-bk'><sup class='textsuperscript'>6</sup></a></span><a id='x1-8001f6'></a> \(\text {RTT}\)
-for transmitting \(B\) bits (\(B\) as large as possible), the bit-rate value \(b\) determined
-by Eq. <span class='ecbx-1000'>??</span> can be considered as a good estimation for the link of the near
+for transmitting \(B\) bits (\(B\) as large as possible), the bit-rate value \(b\) determined by
+Eq. \eqref{eq:b} can be considered as a good estimation for the link of the near
 future.
-</p><!-- l. 343 --><p class='indent'>   So, for determining \(b\) we must run the following steps:
+</p><!-- l. 341 --><p class='indent'>   So, for determining \(b\) we must run the following steps:
                                                                   
 
                                                                   
@@ -259,18 +256,19 @@ future.
      use the highest payload-size because the accuracy of the cronometer used
      by <span class='ectt-1000'>ping</span>, in general, is not high enough.
      </li>
-<li class='enumerate' id='x1-8008x3'>Use Eq. <span class='ecbx-1000'>??</span> to find \(t_t\) as a function of the average RTT and the minimal \(t_p\).
+<li class='enumerate' id='x1-8008x3'>Use Eq. \eqref{eq:tt} to find \(t_t\) as a function of the average RTT and the
+     minimal \(t_p\).
      </li>
-<li class='enumerate' id='x1-8010x4'>Finally, use Eq. <span class='ecbx-1000'>??</span> to determine \(b\).</li></ol>
-<!-- l. 363 --><p class='indent'>   If the devices cannot <span class='ectt-1000'>ping </span>each other, and supposing that there is only one point
-in the communication link that is filtering the ICMP Echo Request traffic in each
+<li class='enumerate' id='x1-8010x4'>Finally, use Eq. \eqref{eq:b} to determine \(b\).</li></ol>
+<!-- l. 361 --><p class='indent'>   If the devices cannot be <span class='ectt-1000'>ping</span>-ed, and supposing that there is only one point in
+the communication link that is filtering the ICMP Echo Request traffic in each
 direction, then we can apply the same technique that was used in the previous
 milestone, which basically consists in computing the total RTT as the sum of the
 RTTs from the devices that we want to connect (where the InterCom is it supposed
 to be run) to the filter (possiblely, one of your home routers). A similar capacity
 estimation should be obtained considering only the slower part of the total
 link.
-</p><!-- l. 373 --><p class='indent'>   (Optional) In order to gain experience with all this stuff, measure your bandwith
+</p><!-- l. 371 --><p class='indent'>   (Optional) In order to gain experience with all this stuff, measure your bandwith
 (using your local host) with different <span class='ectt-1000'>ping </span>servers, try to compute the transmission
 bit-rate:
      </p><ol class='enumerate1'>
@@ -287,29 +285,29 @@ bit-rate:
      </li>
 <li class='enumerate' id='x1-8018x4'>Between your host and a public host of the Internet. Try <a href='https://www.meter.net/'><span class='ectt-1000'>www.meter.net</span></a>
      for example.</li></ol>
-<!-- l. 391 --><p class='noindent'>
+<!-- l. 389 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead' id='simulate-the-link'><span class='titlemark'>2.2   </span> <a id='x1-90002.2'></a>Simulate the link</h4>
-<!-- l. 393 --><p class='noindent'>With the bit-rate value \(b\) computed from the previous section, simulate such link
+<!-- l. 391 --><p class='noindent'>With the bit-rate value \(b\) computed from the previous section, simulate such link
 (locally) with:
 </p>
-   <!-- l. 396 -->
+   <!-- l. 394 -->
 <p id='languagebash'><a id='x1-9001'></a>
    </p><pre class='lstlisting' id='listing-3'><span class='label'><a id='x1-9002r1'></a></span><span class='ectt-1000'>  </span><span style='color:#000000'><span class='ectt-1000'>sudo</span></span><span style='color:#000000'> <span class='ectt-1000'>tc </span><span class='ectt-1000'>qdisc </span><span class='ectt-1000'>add </span><span class='ectt-1000'>dev </span><span class='ectt-1000'>lo </span><span class='ectt-1000'>root </span><span class='ectt-1000'>handle </span><span class='ectt-1000'>1: </span><span class='ectt-1000'>tbf </span><span class='ectt-1000'>rate </span><span class='ectt-1000'>&lt;bit-rate_in_kbps&gt;kbit </span><span class='ectt-1000'>burst </span><span class='ectt-1000'>32kbit </span><span class='ectt-1000'>limit </span><span class='ectt-1000'>32kbit</span> 
 </span><span class='label'><a id='x1-9003r2'></a></span><span class='ectt-1000'>  </span><span style='color:#000000'><span class='ectt-1000'>sudo</span></span><span style='color:#000000'> <span class='ectt-1000'>tc </span><span class='ectt-1000'>qdisc </span><span class='ectt-1000'>add </span><span class='ectt-1000'>dev </span><span class='ectt-1000'>lo </span><span class='ectt-1000'>root </span><span class='ectt-1000'>parent </span><span class='ectt-1000'>1:1 </span><span class='ectt-1000'>handle </span><span class='ectt-1000'>10: </span><span class='ectt-1000'>netem </span><span class='ectt-1000'>delay </span><span class='ectt-1000'>&lt;average_delay_in_miliseconds&gt;ms </span><span class='ectt-1000'>&lt;maximum_average_deviation_in_miliseconds&gt;ms </span><span class='ectt-1000'>&lt;Pearson_correlation_coefficient_expressed_as_a_percentage&gt;% </span><span class='ectt-1000'>distribution </span><span class='ectt-1000'>&lt;uniform|normal|pareto|paretonormal&gt;</span></span></pre>
    
-<!-- l. 401 --><p class='indent'>   Examples:
-</p><!-- l. 403 --><p class='indent'>
+<!-- l. 399 --><p class='indent'>   Examples:
+</p><!-- l. 401 --><p class='indent'>
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-9005x1'>
-     <!-- l. 404 --><p class='noindent'>Check the current configuration:
+     <!-- l. 402 --><p class='noindent'>Check the current configuration:
 </p>
-     <!-- l. 406 -->
+     <!-- l. 404 -->
      <pre class='lstlisting' id='listing-4'><span class='label'><a id='x1-9006r3'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>tc</span></span><span style='color:#000000'> <span class='ectt-1000'>qdisc </span><span class='ectt-1000'>show </span><span class='ectt-1000'>dev </span><span class='ectt-1000'>lo</span></span></pre>
      
-     <!-- l. 410 --><p class='noindent'>The output should be something like:
+     <!-- l. 408 --><p class='noindent'>The output should be something like:
 </p>
-     <!-- l. 412 -->
+     <!-- l. 410 -->
      <pre class='lstlisting' id='listing-5'><span class='label'><a id='x1-9007r4'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>qdisc</span></span><span style='color:#000000'> <span class='ectt-1000'>noqueue </span><span class='ectt-1000'>0: </span><span class='ectt-1000'>root </span><span class='ectt-1000'>refcnt </span><span class='ectt-1000'>2</span></span></pre>
      
                                                                   
@@ -317,66 +315,66 @@ bit-rate:
                                                                   
      </li>
 <li class='enumerate' id='x1-9009x2'>
-     <!-- l. 416 --><p class='noindent'>Define the rule for the bit-rate control (example for \(200\) kbps):
+     <!-- l. 414 --><p class='noindent'>Define the rule for the bit-rate control (example for \(200\) kbps):
 </p>
-     <!-- l. 418 -->
+     <!-- l. 416 -->
      <pre class='lstlisting' id='listing-6'><span class='label'><a id='x1-9010r5'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>sudo</span></span><span style='color:#000000'> <span class='ectt-1000'>tc </span><span class='ectt-1000'>qdisc </span><span class='ectt-1000'>add </span><span class='ectt-1000'>dev </span><span class='ectt-1000'>lo </span><span class='ectt-1000'>root </span><span class='ectt-1000'>handle </span><span class='ectt-1000'>1: </span><span class='ectt-1000'>tbf </span><span class='ectt-1000'>rate </span><span class='ectt-1000'>200kbit </span><span class='ectt-1000'>burst </span><span class='ectt-1000'>32kbit </span><span class='ectt-1000'>limit </span><span class='ectt-1000'>32kbit</span></span></pre>
      
      </li>
 <li class='enumerate' id='x1-9012x3'>
-     <!-- l. 422 --><p class='noindent'>Define the rule for the latency control (see previous milestone) (example for \(100\)
+     <!-- l. 420 --><p class='noindent'>Define the rule for the latency control (see previous milestone) (example for \(100\)
      ms, \(10\) ms of jitter, and <a href='https://wiki.linuxfoundation.org/networking/netem'>with the next random transmission depending \(25\)% on the
      last one</a>):
 </p>
-     <!-- l. 427 -->
+     <!-- l. 425 -->
      <pre class='lstlisting' id='listing-7'><span class='label'><a id='x1-9013r6'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>sudo</span></span><span style='color:#000000'> <span class='ectt-1000'>tc </span><span class='ectt-1000'>qdisc </span><span class='ectt-1000'>add </span><span class='ectt-1000'>dev </span><span class='ectt-1000'>lo </span><span class='ectt-1000'>parent </span><span class='ectt-1000'>1:1 </span><span class='ectt-1000'>handle </span><span class='ectt-1000'>10: </span><span class='ectt-1000'>netem </span><span class='ectt-1000'>delay </span><span class='ectt-1000'>100ms </span><span class='ectt-1000'>10ms </span><span class='ectt-1000'>25% </span><span class='ectt-1000'>distribution </span><span class='ectt-1000'>normal</span></span></pre>
      
      </li>
 <li class='enumerate' id='x1-9015x4'>
-     <!-- l. 431 --><p class='noindent'>After adding these rules, this should be the configuration:
+     <!-- l. 429 --><p class='noindent'>After adding these rules, this should be the configuration:
 </p>
-     <!-- l. 433 -->
+     <!-- l. 431 -->
      <pre class='lstlisting' id='listing-8'><span class='label'><a id='x1-9016r7'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>tc</span></span><span style='color:#000000'> <span class='ectt-1000'>qdisc </span><span class='ectt-1000'>show </span><span class='ectt-1000'>dev </span><span class='ectt-1000'>lo</span></span></pre>
      
-     <!-- l. 437 --><p class='noindent'>The output should be something like:
+     <!-- l. 435 --><p class='noindent'>The output should be something like:
 </p>
-     <!-- l. 439 -->
+     <!-- l. 437 -->
      <pre class='lstlisting' id='listing-9'><span class='label'><a id='x1-9017r8'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>qdisc</span></span><span style='color:#000000'> <span class='ectt-1000'>tbf </span><span class='ectt-1000'>1: </span><span class='ectt-1000'>root </span><span class='ectt-1000'>refcnt </span><span class='ectt-1000'>2 </span><span class='ectt-1000'>rate </span><span class='ectt-1000'>200Kbit </span><span class='ectt-1000'>burst </span><span class='ectt-1000'>4Kb </span><span class='ectt-1000'>lat </span><span class='ectt-1000'>0us</span> 
 </span><span class='label'><a id='x1-9018r9'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>qdisc</span></span><span style='color:#000000'> <span class='ectt-1000'>netem </span><span class='ectt-1000'>10: </span><span class='ectt-1000'>parent </span><span class='ectt-1000'>1:1 </span><span class='ectt-1000'>limit </span><span class='ectt-1000'>1000 </span><span class='ectt-1000'>delay </span><span class='ectt-1000'>100ms</span> </span><span class='ectt-1000'> </span><span style='color:#000000'><span class='ectt-1000'>10</span></span><span style='color:#000000'><span class='ectt-1000'>ms</span></span><span style='color:#000000'> <span class='ectt-1000'>25%</span></span></pre>
      
      </li></ol>
-<!-- l. 446 --><p class='indent'>   Remember to delete the rules after their are unnecessary (example to delete the
+<!-- l. 444 --><p class='indent'>   Remember to delete the rules after their are unnecessary (example to delete the
 previous rules):
 </p>
-   <!-- l. 448 -->
+   <!-- l. 446 -->
    <pre class='lstlisting' id='listing-10'><span class='label'><a id='x1-9019r10'></a></span><span class='ectt-1000'>  </span><span style='color:#000000'><span class='ectt-1000'>sudo</span></span><span style='color:#000000'> <span class='ectt-1000'>tc </span><span class='ectt-1000'>qdisc </span><span class='ectt-1000'>delete </span><span class='ectt-1000'>dev </span><span class='ectt-1000'>lo </span><span class='ectt-1000'>parent </span><span class='ectt-1000'>1:1 </span><span class='ectt-1000'>handle </span><span class='ectt-1000'>10: </span><span class='ectt-1000'>netem </span><span class='ectt-1000'>delay </span><span class='ectt-1000'>100ms </span><span class='ectt-1000'>10ms </span><span class='ectt-1000'>25% </span><span class='ectt-1000'>distribution </span><span class='ectt-1000'>normal</span> 
 </span><span class='label'><a id='x1-9020r11'></a></span><span class='ectt-1000'>  </span><span style='color:#000000'><span class='ectt-1000'>sudo</span></span><span style='color:#000000'> <span class='ectt-1000'>tc </span><span class='ectt-1000'>qdisc </span><span class='ectt-1000'>delete </span><span class='ectt-1000'>dev </span><span class='ectt-1000'>lo </span><span class='ectt-1000'>root </span><span class='ectt-1000'>handle </span><span class='ectt-1000'>1: </span><span class='ectt-1000'>tbf </span><span class='ectt-1000'>rate </span><span class='ectt-1000'>200kbit </span><span class='ectt-1000'>burst </span><span class='ectt-1000'>32kbit </span><span class='ectt-1000'>limit </span><span class='ectt-1000'>32kbit</span></span></pre>
    
                                                                   
 
                                                                   
-<!-- l. 454 --><p class='noindent'>
+<!-- l. 452 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead' id='which-dataordering-performs-better'><span class='titlemark'>2.3   </span> <a id='x1-100002.3'></a>Which data-ordering performs better?</h4>
-<!-- l. 456 --><p class='noindent'>Determine empirically which ordering of the chunk data is the most efficient from a
+<!-- l. 454 --><p class='noindent'>Determine empirically which ordering of the chunk data is the most efficient from a
 lossless data compression point of view (the smaller the bit-rates, the higher the
 compression). Use the audio sequence you want. Some samples are stored in the <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>data</span></span></span>
 directory of intercom.
-</p><!-- l. 463 --><p class='noindent'>
+</p><!-- l. 461 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead' id='compute-rd-ratedistortion-curves'><span class='titlemark'>2.4   </span> <a id='x1-110002.4'></a>Compute RD (Rate/Distortion) curves</h4>
-<!-- l. 465 --><p class='noindent'>Considering the <a href='https://en.wikipedia.org/wiki/Root-mean-square_deviation'>RMSE (Root Mean Square Error)</a> as distortion measure between the
+<!-- l. 463 --><p class='noindent'>Considering the <a href='https://en.wikipedia.org/wiki/Root-mean-square_deviation'>RMSE (Root Mean Square Error)</a> as distortion measure between the
 sent and the received audio signal, generate the RD curve considering a set of
 different simulated transmission environments (use <a href='https://man7.org/linux/man-pages/man8/tc.8.html'>tc</a>) of one audio sequence
 (remember that you can use one of the samples found in the <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>data</span></span></span> directory of the
 intercom’s repo), for the four implementations. Notice that you can use the
 <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>--minimal_quantization_step</span></span></span> parameter to generate the different points of the RD
 curves.
-</p><!-- l. 480 --><p class='noindent'>
+</p><!-- l. 478 --><p class='noindent'>
 </p>
    <h3 class='sectionHead' id='deliverables'><span class='titlemark'>3   </span> <a id='x1-120003'></a>Deliverables</h3>
-<!-- l. 482 --><p class='noindent'>A report documenting the experiments and the results.
-</p><!-- l. 484 --><p class='noindent'>
+<!-- l. 480 --><p class='noindent'>A report documenting the experiments and the results.
+</p><!-- l. 482 --><p class='noindent'>
 </p>
    <h3 class='sectionHead' id='resources'><span class='titlemark'>4   </span> <a id='x1-130004'></a>Resources</h3>
    <div class='thebibliography'>
@@ -423,10 +421,10 @@ curves.
 </span><span class='ecrm-0800'>congestion.</span></p>
 <!-- l. 108 --><p class='noindent'><span class='footnote-mark'><a href='#fn3x0-bk' id='fn3x0'><sup class='textsuperscript'>3</sup></a></span><span class='ecrm-0800'>Used in a future improvements of intercom.</span></p>
 <!-- l. 188 --><p class='indent'>     <span class='footnote-mark'><a href='#fn4x0-bk' id='fn4x0'><sup class='textsuperscript'>4</sup></a></span><span class='ecrm-0800'>The error generated by the quantization stage.</span></p>
-<!-- l. 254 --><p class='noindent'><span class='footnote-mark'><a href='#fn5x0-bk' id='fn5x0'><sup class='textsuperscript'>5</sup></a></span>\(\Delta \) <span class='ecrm-0800'>must be always bigger than</span> \(0\)<span class='ecrm-0800'>, by definition, and this does not depend on the bit-rate
-</span><span class='ecrm-0800'>control.</span></p><!-- l. 337 --><p class='indent'> <span class='footnote-mark'><a href='#fn6x0-bk' id='fn6x0'><sup class='textsuperscript'>6</sup></a></span><span class='ecrm-0800'>Remember that with the </span><span class='ectt-0800'>ping </span><span class='ecrm-0800'>command we iterate several times and the tool returns
+<!-- l. 253 --><p class='noindent'><span class='footnote-mark'><a href='#fn5x0-bk' id='fn5x0'><sup class='textsuperscript'>5</sup></a></span>\(\Delta \) <span class='ecrm-0800'>must be always bigger than</span> \(0\)<span class='ecrm-0800'>, by definition, and this does not depend on the bit-rate
+</span><span class='ecrm-0800'>control.</span></p><!-- l. 336 --><p class='indent'> <span class='footnote-mark'><a href='#fn6x0-bk' id='fn6x0'><sup class='textsuperscript'>6</sup></a></span><span class='ecrm-0800'>Remember that with the </span><span class='ectt-0800'>ping </span><span class='ecrm-0800'>command we iterate several times and the tool returns
 </span><span class='ecrm-0800'>average values.</span></p>
-<!-- l. 349 --><p class='noindent'><span class='footnote-mark'><a href='#fn7x0-bk' id='fn7x0'><sup class='textsuperscript'>7</sup></a></span><span class='ecrm-0800'>The minimal payload for a </span><span class='ectt-0800'>ping </span><span class='ecrm-0800'>message can be 0, but depending on the implementation
+<!-- l. 347 --><p class='noindent'><span class='footnote-mark'><a href='#fn7x0-bk' id='fn7x0'><sup class='textsuperscript'>7</sup></a></span><span class='ecrm-0800'>The minimal payload for a </span><span class='ectt-0800'>ping </span><span class='ecrm-0800'>message can be 0, but depending on the implementation
 </span><span class='ecrm-0800'>of </span><span class='ectt-0800'>ping </span><span class='ecrm-0800'>you may be forzed to use a larger value.</span></p>                                                           </div>
  
 </body> 

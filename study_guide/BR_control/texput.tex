@@ -2,7 +2,7 @@
 
 \title{Bit-Rate Control in InterCom}
 
-USE 16 bits/coefficient (2 byte-planes).
+% USE 16 bits/coefficient (2 byte-planes).
 
 \maketitle
 
@@ -228,10 +228,9 @@ notebook}.
 \subsection{The current implementation(s)}
 %{{{ 
 Bit-Rate (BR) control through quantization has been implemented in the
-class \verb|BR_Control*| of the modules
-\texttt{BR\_control*.py}. This class overrides the inherited
-methods \verb|Compression.pack()| and \verb|Compression.unpack()|,
-performing:
+class \verb|BR_Control*| of the modules \texttt{BR\_control*.py}. This
+class overrides the inherited methods \verb|pack()| and
+\verb|unpack()|, performing:
 
 \begin{lstlisting}[language=Python]
   def pack(chunk_number, chunk):
@@ -315,7 +314,7 @@ where $B$ is the number of bits sent in a \verb|ping|
 \end{equation}
 an equation that can be determined by revisiting the \verb|ping|
 timeline (Fig.~1) and the Eq.~2 of the
-\href{https://tecnologias-multimedia.github.io/study_guide/06-jitter_impact/}{previous
+\href{https://tecnologias-multimedia.github.io/study_guide/latency/}{previous
   milestone}.
 
 Notice that if the payload of the ping is small enough ($0$ bytes
@@ -324,21 +323,20 @@ ideally, and therefore $t_t=0$), we can consider that
   t_p \approx \frac{\text{RTT}}{2},
   \label{eq:tp}
 \end{equation}
-and that for measuring the $\text{RTT}$ in
-Eq.~\ref{eq:tt}, we should use a payload as large as possible
-(ideally, infinite bytes), in order to make $t_t$ a significative
-amount of time, ease to measure. Notice also that we should use the
-smaller RTT value of a \texttt{ping} session of measurements in the
-Eq.~\ref{eq:tp} because the minimum link latency is a constant and the
-congestion of the link always increases it.
+and that for measuring the $\text{RTT}$ in Eq.~\eqref{eq:tt}, we
+should use a payload as large as possible (ideally, infinite bytes),
+in order to make $t_t$ a significative amount of time, ease to
+measure. Notice also that we should use the smaller RTT value of a
+\texttt{ping} session of measurements in the Eq.~\eqref{eq:tp} because
+the minimum link latency is a constant and the congestion of the link
+always increases it.
 
 Therefore, supposing that $t_p$ is constant and using the
 average\footnote{Remember that with the \texttt{ping} command we
 iterate several times and the tool returns average values.}
-$\text{RTT}$ for transmitting $B$ bits ($B$ as
-large as possible), the bit-rate value $b$ determined by
-Eq.~\ref{eq:b} can be considered as a good estimation for the link of
-the near future.
+$\text{RTT}$ for transmitting $B$ bits ($B$ as large as possible), the
+bit-rate value $b$ determined by Eq.~\eqref{eq:b} can be considered as
+a good estimation for the link of the near future.
 
 So, for determining $b$ we must run the following steps:
 \begin{enumerate}
@@ -354,13 +352,13 @@ So, for determining $b$ we must run the following steps:
   payload-size because the accuracy of the cronometer used by
   \texttt{ping}, in general, is not high enough.
   
-\item Use Eq.~\ref{eq:tt} to find $t_t$ as a function of the average
+\item Use Eq.~\eqref{eq:tt} to find $t_t$ as a function of the average
   RTT and the minimal $t_p$.
   
-\item Finally, use Eq.~\ref{eq:b} to determine $b$.
+\item Finally, use Eq.~\eqref{eq:b} to determine $b$.
 \end{enumerate}
 
-If the devices cannot \texttt{ping} each other, and supposing that
+If the devices cannot be \texttt{ping}-ed, and supposing that
 there is only one point in the communication link that is filtering
 the ICMP Echo Request traffic in each direction, then we can apply the
 same technique that was used in the previous milestone, which
