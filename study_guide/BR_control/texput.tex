@@ -16,9 +16,10 @@ Along with the latency and its variation (jitter), another main aspect
 to consider about the
 \href{https://en.wikipedia.org/wiki/Telecommunications_link}{transmission
   link} used in an InterCom session is the
-\href{https://en.wikipedia.org/wiki/Bit_rate}{transmission bit-rate}
-(measured in bits per second or a $10$-multiple of this transmission
-\href{https://en.wikipedia.org/wiki/Bandwidth_(computing)}{capacity})
+\href{https://en.wikipedia.org/wiki/Bit_rate}{transmission
+  bit-rate}\footnote{Measured in bits per second or a $10$-multiple of
+  this transmission
+  \href{https://en.wikipedia.org/wiki/Bandwidth_(computing)}{capacity}.}
 that it can provide~\cite{Forouzan,Tanenbaum}. This bit-rate depend on
 the maximum capacity (a characteristic closely related with the
 available
@@ -205,6 +206,11 @@ stage.} (see this
 \href{https://github.com/vicente-gonzalez-ruiz/scalar_quantization}{comparative
   between digital scalar quantizers}).
 
+Notice, however, that the previous reasoning does not considers what a
+human being would, from a purely subjective point of view,
+prefer\footnote{For example, in quiet scenarios, low amplitudes are
+  usually important for us ...}.
+
 %}}}
 
 \subsection{(Bit-) Rate control and distortion}
@@ -291,7 +297,7 @@ definition, and this does not depend on the bit-rate control.} There
 
 %}}}
 
-\section{What you have to do?}
+\section{What do you have to do?}
 %{{{ 
 \subsection{Estimate the bit-rate in an Internet link}
 %{{{ 
@@ -323,7 +329,7 @@ devices can be estimated as
 where $B$ is the number of bits sent in a \verb|ping|
 \href{https://en.wikipedia.org/wiki/Payload_(computing)}{payload}, and
 \begin{equation}
-  t_t = \frac{\text{RTT}-2t_p}{2},
+  t_t = \frac{\text{RTT}_{\text{max}}-2t_p}{2},
   \label{eq:tt}
 \end{equation}
 an equation that can be determined by revisiting the \verb|ping|
@@ -334,7 +340,7 @@ timeline (Fig.~1) and the Eq.~2 of the
 Notice that if the payload of the ping is small enough ($0$ bytes
 ideally, and therefore $t_t=0$), we can consider that
 \begin{equation}
-  t_p \approx \frac{\text{RTT}}{2},
+  t_p \approx \frac{\text{RTT}_{\text{min}}}{2},
   \label{eq:tp}
 \end{equation}
 and that for measuring the $\text{RTT}$ in Eq.~\eqref{eq:tt}, we
