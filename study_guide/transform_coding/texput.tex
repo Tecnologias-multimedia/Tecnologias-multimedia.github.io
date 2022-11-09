@@ -2,7 +2,7 @@
 
 \title{Transform Coding for Redundancy Removal}
 
-Use 16 bits/coefficient and CTE (Chunk Truncation Encoding).
+% Use 16 bits/coefficient and CTE (Chunk Truncation Encoding).
 
 \maketitle
 
@@ -49,7 +49,7 @@ that can be also written as
   \label{eq:forward_transform_matrix_form2}
 \end{equation}
 where ${\mathbf x}\in\mathbb{Z}^2$ is a stereo frame, ${\mathbf K}$ is
-the (forward or analysis) transform matrix, and ${\mathbf
+the forward (or analysis) transform matrix, and ${\mathbf
   w}=\begin{bmatrix} {\mathbf w}_0 & {\mathbf w}_1\end{bmatrix}^{\text
   T}$ is the corresponding
 \href{https://en.wikipedia.org/wiki/Discrete_wavelet_transform#Example_in_image_processing}{decomposition}. In
@@ -61,7 +61,8 @@ that ${\mathbf x}\in\mathbb{Z}^2$ is a vector space\footnote{Adding
 two vectors in the plane produces a third one also in the plane;
 multiplying a vector by a real scalar produces a second vector also in
 the plane. These two ingrained facts make the real plane be a vector
-space.~\cite{vetterli2014foundations}}.
+space.~\cite{vetterli2014foundations}} if we consider also the
+required operations.
 
 The proposed matrix ${\mathbf K}$ corresponds to the transform used in
 \href{https://en.wikipedia.org/wiki/Joint_encoding#M/S_stereo_coding}{Mid/Side
@@ -75,8 +76,8 @@ The proposed matrix ${\mathbf K}$ corresponds to the transform used in
   Walsh-Hadamard Transform}~\cite{sayood2017introduction}.
 
 In general (for all the linear transforms),
-Eqs.~\ref{eq:forward_transform_matrix_form} and
-\ref{eq:forward_transform_matrix_form2} can be also expressed as
+Eqs.~\eqref{eq:forward_transform_matrix_form} and
+\eqref{eq:forward_transform_matrix_form2} can be also expressed as
 \begin{equation}
   {\mathbf w}_u = \sum_i {\mathbf K}_{u,i}{\mathbf x}_i,
   \label{eq:forward_transform_linear_combination_form}
@@ -109,7 +110,7 @@ The inverse (or synthesis) transform
   {\mathbf x} = {\mathbf K}^{-1}{\mathbf w}
   \label{eq:inverse_transform}
 \end{equation}
-can be found from Eq. \ref{eq:forward_transform_matrix_form}, where we
+can be deduced from Eq.~\eqref{eq:forward_transform_matrix_form}, where we
 get that
 \begin{equation}
   \begin{array}{rcl}
@@ -229,22 +230,23 @@ the filter ${\mathbf K}_i$. These
 can help you with this key idea.
 
 Orthogonality is important in compression applications because the
-\href{https://en.wikipedia.org/wiki/Correlation_and_dependence}{correlation}
-between subbands is 0, and therefore, the contributions of the
-subbands to the reconstruction of the original signal are
+\href{https://en.wikipedia.org/wiki/Correlation_and_dependence}{statistical
+  correlation} between subbands is 0, and therefore, the contributions
+of the subbands to the reconstruction of the original signal are
 independent\footnote{The total
-  \href{https://en.wikipedia.org/wiki/Distortion}{distortion} is the
-  sum of the distortion contribution of each
-  subband~\cite{sayood2017introduction}.}. Another interesting
-property satisfied by a lot of famous transforms (such as the
+\href{https://en.wikipedia.org/wiki/Distortion}{distortion} is the sum
+of the distortion contribution of each
+subband~\cite{sayood2017introduction}.}. Another interesting property
+satisfied by a lot of famous transforms (such as the
 \href{https://en.wikipedia.org/wiki/Fourier_transform}{Fourier
   Transform}) is
 \href{https://en.wikipedia.org/wiki/Orthonormality}{orthonormality},
 which means that the transform is
 \href{https://en.wikipedia.org/wiki/Energy_(signal_processing)}{energy}
 preserving~\cite{sayood2017introduction} (or that the
-\href{https://en.wikipedia.org/wiki/Parseval%27s_theorem}{Parseval's theorem}
-  is satisfied, in both, the analysis and the synthesis transform).
+\href{https://en.wikipedia.org/wiki/Parseval%27s_theorem}{Parseval's
+  theorem} is satisfied, in both, the analysis and the synthesis
+transform).
 
 The MST analysis is not orthonormal, because
 \begin{equation}
@@ -256,16 +258,17 @@ The MST analysis is not orthonormal, because
   \label{eq:No_Parseval}
 \end{equation}
 For this reason, we must divide the synthesized samples by $2$ (see
-Eq.~\ref{eq:inverse_transform_matrix_form}). On the contrary, we would
+Eq.~\eqref{eq:inverse_transform_matrix_form}). On the contrary, we would
 get $2{\mathbf x}$ as the reconstructed signal instead of ${\mathbf x}$.
 %}}}
 
 \subsubsection{Quantization of the subbands}
 %{{{ 
-Ideally, the quantization step $\Delta_i$ used for a subband ${\mathbf w}_i$
-must operate in the RD curve $f_i$ with the same
-slope~\cite{vetterli2014foundations,sayood2017introduction} (this is
-the same to say that we must satisfy that $f'_0(x)=f'_1(x)$, where
+Ideally, the quantization step size $\Delta_i$ used for a subband
+${\mathbf w}_i$ must operate in the RD curve $f_i$ with the same slope
+than the rest of
+subbands~\cite{vetterli2014foundations,sayood2017introduction} (this
+is the same to say that we must satisfy that $f'_0(x)=f'_1(x)$, where
 $f'$ denotes the derivative of $f$). The main drawback of this
 approach is that the finding of $f_i$ is computationally intensive (we
 must analyze, quantize, compress, decompress, dequantize, synthesize
@@ -293,16 +296,16 @@ reconstruction of the signal ${\mathbf x}$ is proportional to the
 \href{https://en.wikipedia.org/wiki/Filter_(signal_processing)}{gain}
 of each analysis filter of ${\mathbf K}$ (remember that we are working
 with orthogonal transforms and therefore, the contribution of the
-subbands are independent), or what is the same, proportional to the gain of each
-column of the syntesis matrix\footnote{Notice that the quantization
-error is generated in the transform domain and perceived in the signal
-domain after appliying the inverse transform.}. Thus, if the filters
-had different gains, the quantization steps should consider this
-fact.\footnote{Notice that the important here is the relative gain of
-each subband. For example, if the gain of ${\mathbf K}_0$ were $2$ and
-the gain of ${\mathbf K}_1$ were $1$, and the dynamic range of
-${\mathbf w}_0$ and ${\mathbf w}_1$ is the same, we could use
-$\Delta_1=2\Delta_0$ and expect to minimize the distortion.}
+subbands are independent), or what is the same, proportional to the
+gain of each column of the synthesis matrix\footnote{Notice that the
+quantization error is generated in the transform domain and perceived
+in the signal domain after appliying the inverse transform.}. Thus, if
+the filters had different gains, the quantization steps should
+consider this fact.\footnote{Notice that the important here is the
+relative gain of each subband. For example, if the gain of ${\mathbf
+  K}_0$ were $2$ and the gain of ${\mathbf K}_1$ were $1$, and the
+dynamic range of ${\mathbf w}_0$ and ${\mathbf w}_1$ is the same, we
+could use $\Delta_1=2\Delta_0$ and expect to minimize the distortion.}
 
 By definition, the gain of the subband ${\mathbf w}_i$ is the
 \href{https://en.wikipedia.org/wiki/Lp_space}{L$_2$
@@ -333,7 +336,8 @@ matrix). Thus
 \end{equation}
 resulting that both subbands ${\mathbf w}_1$ and ${\mathbf w}_2$ have
 the same gain ($\sqrt{2}$). This result tell us that both subbands
-could use the same quantization step ($\Delta_0=\Delta_1$). In the
+could use the same quantization step size ($\Delta_0=\Delta_1$). In
+the
 \href{https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/study_guide/11-stereo_coding/stereo_transforms_RD.ipynb}{notebook}
 there are some evidences of this.
 
@@ -344,7 +348,7 @@ matrix-vector operations, but using
 \href{https://en.wikipedia.org/wiki/Butterfly_diagram}{computational
   bufferflies} or filter
 \href{https://en.wikipedia.org/wiki/Filter_(signal_processing)}{convolutions}
-(and therefore, we don't know ${\mathbf K}$). In general, we can
+(and therefore, we don't know ${\mathbf K}$). Fortunately, we can
 determine ${\mathbf K}_i$ simply by computing the inverse transform of
 the decomposition
 $\begin{bmatrix} 0 & \cdots & 0 & 1 & 0 & \cdots &
@@ -391,7 +395,7 @@ that
 that as you can see, correspond to the columns of the inverse
 transform matrix ${\mathbf K}^{-1}$. Notice that this is true for all
 the orthogonal transforms whose analysis and synthesis matrices are
-simmetrical.% because in that case ${\mathbf K}^{-1}={\mathbf K}^{\text T}$.
+symmetrical.% because in that case ${\mathbf K}^{-1}={\mathbf K}^{\text T}$.
 %}}}
 
 %}}}
@@ -402,14 +406,14 @@ simmetrical.% because in that case ${\mathbf K}^{-1}={\mathbf K}^{\text T}$.
 \subsubsection{About temporal redundancy in audio}
 %{{{
 
-After exploiting the spatial (stereo) redundancy in the previous
-milestone, the next natural step in the development of InterCom is to
-remove the temporal redundancy that can be found inside of each
-subband\footnote{Notice that, beacuse the MST and the transform used
-  in this milestone are both lineal, the order in which the transforms
-  are applied is irrelevant. For this reason, we could also have used
-  the temporal transform inside of each channel of samples, and then,
-  remove the spatial redundancy.}. As it can be seen in this
+After exploiting the spatial (stereo) redundancy, the next natural
+step in the development of InterCom is to remove the temporal
+redundancy that can be found inside of each subband\footnote{Notice
+that, beacuse the MST and the transform used in this milestone are
+both lineal, the order in which the transforms are applied is
+irrelevant. For this reason, we could also have used the temporal
+transform inside of each channel of samples, and then, remove the
+spatial redundancy.}. As it can be seen in this
 \href{https://github.com/Tecnologias-multimedia/intercom/blob/master/tools/audio_viewer.ipynb}{notebook},
 most audio signals show ``patterns'' of samples that tends to repeat,
 especially locally. Another clear source of temporal redundancy is
@@ -424,7 +428,8 @@ straightforward is
   (DPCM)~\cite{sayood2017introduction}}. However, there are more
 efficient decorrelation algorithms based on
 \href{https://en.wikipedia.org/wiki/Transform_coding}{transform
-  coding}, such as the used in the previous milestone and in this one.
+  coding}, such as the described in the previous section and in this
+one.
 
 % Another decorrelating technique: transform coding
 Transform coding is based on the idea that we can decompose (we can
@@ -458,7 +463,7 @@ removed from the signal will be those with a smaller energy.}
 The name that has been given to the previous process is
 \href{https://en.wikipedia.org/wiki/Sub-band_coding}{subband
   coding}. In this context, our analysis transform matrix
-${\mathbf K}$ (see the previous milestone) represents the taps of a
+${\mathbf K}$ (see the previous section) represents the taps of a
 2-channels analysis
 \href{https://en.wikipedia.org/wiki/Filter_bank}{Filter Bank
   (FB)}~\cite{vetterli1995wavelets}, and the forward transform is in
@@ -492,7 +497,7 @@ is a high-pass filter, and that the
   Reconstruction Filter Bank (PRFB)}, and ${\mathbf x}$ can be
 recovered (perfectly) from a subsampled version (in this case
 \href{https://en.wikipedia.org/wiki/Downsampling_(signal_processing)}{decimating}
-by 2) of ${\mathbf w}_0$ and ${\mathbf w}_1$ (see the
+by 2) of ${\mathbf w}_0$ and ${\mathbf w}_1$ (see this
 \href{https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/PRFB.ipynb}{notebook}). Notice
 that this subsampling is possible because the
 \href{https://en.wikipedia.org/wiki/Aliasing}{aliasing}\footnote{Because
@@ -645,9 +650,9 @@ DWT using the MST filters and lifting.
   $2^n=N$ the number of samples in ${\mathbf x}$, and where, by
   definition, ${\mathbf l}^0={\mathbf x}$, the original resolution
   level of the signal. The subbands ${\mathbf l}^1$ and
-  ${\mathbf h}^1$ computed by Eq.~\ref{eq:1dwt} are the same than the
+  ${\mathbf h}^1$ computed by Eq.~\eqref{eq:1dwt} are the same than the
   decimated subbands computed by a 1-levels PRFB (based on that
-  filters), and we say, therefore, that Eq.~\ref{eq:1dwt} computes the
+  filters), and we say, therefore, that Eq.~\eqref{eq:1dwt} computes the
   1-levels DWT.
 
   Based on the 1-levels DWT, we define the 2-levels DWT as
@@ -658,7 +663,7 @@ DWT using the MST filters and lifting.
     \end{array}
     \label{eq:2dwt}
   \end{equation}
-  that, as we can see, uses as input the output of Eq.~\ref{eq:1dwt}.
+  that, as we can see, uses as input the output of Eq.~\eqref{eq:1dwt}.
 
   In general, for a $l$-levels DWT, we get
     \begin{equation}
@@ -690,14 +695,14 @@ DWT using the MST filters and lifting.
     subbands as a prediction error (that in general should be
     minimized) between the even samples (usually, the values used to
     predict) and the odd samples (usually, the values predicted). For
-    the MST filters, we have that (see Eq.~\ref{eq:ldwt})
+    the MST filters, we have that (see Eq.~\eqref{eq:ldwt})
     \begin{equation}
       {\mathbf h}^l_i = {\mathbf l}^{l-1}_{2i+1} - {\mathbf l}^{l-1}_{2i}.
     \end{equation}
     
   \item An \textbf{update step}, which computes the ${\mathbf l}$
-    subbands considering (only) the even samples and the prediction
-    errors. For the MST, we have that (see also Eq.~\ref{eq:ldwt})
+    subband considering (only) the even samples and the prediction
+    errors. For the MST, we have that (see also Eq.~\eqref{eq:ldwt})
     \begin{equation}
       {\mathbf l}^l_i = 2{\mathbf l}^{l-1}_{2i} + {\mathbf h}^l_i.
     \end{equation}
@@ -763,18 +768,17 @@ and the update step as
 where the factor $1/4$ is used to preserve the
 energy~\cite{sweldens1997building}. This transform is known as the
 \href{https://en.wikipedia.org/wiki/Biorthogonal_wavelet}{biorthogonal}
-(2,2) of Cohen-Daubechies-Feauveau, and also as the linear transform.
-Biorthogonal\footnote{All transforms express a change of basis. When
-  the basis are not orthogonal, the synthesis transform is not the
-  transpose of the analysis transform. When the synthesis filters are
-  orthogonal to their corresponding \emph{dual} analysis filters, the
-  transform is said biorthogonal.~\cite{vetterli2014foundations}}
-filters can be \href{http://wavelets.pybytes.com/}{easely recognized}
-because they are always symmetric. When the filters of the PRFB are
-biorthogonal, they also satisfy that $\psi\bot\tilde\phi$ and
-$\phi\bot\tilde\psi$.
+(2,2) of Cohen-Daubechies-Feauveau.  Biorthogonal\footnote{All
+transforms express a change of basis. When the basis are not
+orthogonal, the synthesis transform is not the transpose of the
+analysis transform. When the synthesis filters are orthogonal to their
+corresponding \emph{dual} analysis filters, the transform is said
+biorthogonal.~\cite{vetterli2014foundations}} filters can be
+\href{http://wavelets.pybytes.com/}{easely recognized} because they
+are always symmetric. When the filters of the PRFB are biorthogonal,
+they also satisfy that $\psi\bot\tilde\phi$ and $\phi\bot\tilde\psi$.
 
-The linear transform is also invertible by simply reversing the steps:
+This linear transform is also invertible by simply reversing the steps:
 \begin{equation}
   \begin{array}{rcl}
     {\mathbf l}^{l-1}_{2i} & = & {\mathbf l}^l_i - \frac{1}{4}({\mathbf h}^l_{i-1} + {\mathbf h}^l_i)\\
@@ -796,9 +800,10 @@ Transform coding implies to split the signal into blocks of data
 (chunks), and to compute the transform of each chunk. When the output
 coefficients are quantized, it is possible that significative (and
 unpleasant) distortions may appear in the border frames of the chunks
-(see Fig~\ref{fig:3_chunks}). This is a consequence of that in the
+(see Fig.~\ref{fig:3_chunks}). This is a consequence of that in the
 prediction step used by the DWT in the limits of the chunks generate
-different predictions at the beginning and the end of the chunks.
+different predictions at the beginning and the end of the adjacent
+chunks.
 
 \begin{figure}
   \centering
@@ -1046,7 +1051,7 @@ such impact. Experiment also with the wavelet name.
 
 %}}}
 
-\subsection{Implement a Chunk Truncation Encoding (CTE)}
+%\subsection{Implement a Chunk Truncation Encoding (CTE)}
 %{{{
 
 %}}}
@@ -1067,7 +1072,7 @@ python dwt5.py -d 9
 %}}}
 
 \section{Deliverables}
-A description of the experiments and the results proposed.
+A description of the experiments and their results.
 
 \section{Resources}
 
