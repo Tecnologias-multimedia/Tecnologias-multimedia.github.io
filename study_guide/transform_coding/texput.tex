@@ -11,8 +11,6 @@
 
 \subsection{Spatial decorrelation in stereo audio signals}
 %{{{
-NOTE: see if the transform is orthonormal. Otherwise, quantization should be used considering the subband gains.
-
 
 \subsubsection{An analysis transform}
 %{{{ 
@@ -49,26 +47,26 @@ that can be also written as
   \label{eq:forward_transform_matrix_form2}
 \end{equation}
 where ${\mathbf x}\in\mathbb{Z}^2$ is a stereo frame, ${\mathbf K}$ is
-the forward (or analysis) transform matrix, and ${\mathbf
-  w}=\begin{bmatrix} {\mathbf w}_0 & {\mathbf w}_1\end{bmatrix}^{\text
-  T}$ is the corresponding
-\href{https://en.wikipedia.org/wiki/Discrete_wavelet_transform#Example_in_image_processing}{decomposition}. In
+the forward (or analysis) transform matrix, and
+${\mathbf w}=\begin{bmatrix} {\mathbf w}_0 & {\mathbf
+    w}_1\end{bmatrix}^{\text T}$ is the corresponding
+\href{https://en.wikipedia.org/wiki/Discrete_wavelet_transform}{decomposition}. In
 this particular transform, the decomposition has two
 \href{https://en.wikipedia.org/wiki/Sub-band_coding}{subbands}
 ${\mathbf w}_0$ and ${\mathbf w}_1$, and each subband has only one
 \href{https://web.stanford.edu/class/ee398a/handouts/lectures/07-TransformCoding.pdf}{coefficient}. Notice
 that ${\mathbf x}\in\mathbb{Z}^2$ is a vector space\footnote{Adding
-two vectors in the plane produces a third one also in the plane;
-multiplying a vector by a real scalar produces a second vector also in
-the plane. These two ingrained facts make the real plane be a vector
-space.~\cite{vetterli2014foundations}} if we consider also the
-required operations.
+  two vectors in the plane produces a third one also in the plane;
+  multiplying a vector by a real scalar produces a second vector also
+  in the plane. These two ingrained facts make the real plane be a
+  vector space.~\cite{vetterli2014foundations}} if we consider also
+the required operations.
 
 The proposed matrix ${\mathbf K}$ corresponds to the transform used in
 \href{https://en.wikipedia.org/wiki/Joint_encoding#M/S_stereo_coding}{Mid/Side
   (M/S) stereo coding}~\cite{bosi2003intro} that we will call MST
 (Mid/Side Transform). This is similar to the $2\times 2$ KLT
-\href{http://fourier.eng.hmc.edu/e161/lectures/klt/node3.html}{(Karhunen-Lo\`eve
+\href{https://en.wikipedia.org/wiki/Kosambi%E2%80%93Karhunen%E2%80%93Lo%C3%A8ve_theorem}{(Karhunen-Lo\`eve
   Transform)}, the
 \href{http://wavelets.pybytes.com/wavelet/haar/}{Haar
   Transform}~\cite{vetterli1995wavelets} and the $2\times 2$
@@ -98,7 +96,7 @@ the values of ${\mathbf K}_1$ describe a
 \href{https://en.wikipedia.org/wiki/High-pass_filter}{high-pass
   filter}, and ${\mathbf K}$ represents the
 \href{https://en.wikipedia.org/wiki/Digital_filter}{filters} of a
-\href{https://en.wikipedia.org/wiki/Filter_bank}{filter bank} with two
+\href{https://en.wikipedia.org/wiki/Filter_bank}{filter bank (FB)} with two
 filters. This can be also seen in this
 \href{https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/study_guide/11-stereo_coding/stereo_transforms_RD.ipynb}{notebook}.
 %}}}
