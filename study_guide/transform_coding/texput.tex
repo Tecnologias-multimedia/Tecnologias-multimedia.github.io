@@ -433,16 +433,15 @@ straightforward is
   Pulse Code Modulation
   (DPCM)~\cite{sayood2017introduction}}. However, there are more
 efficient decorrelation algorithms based on
-\href{https://en.wikipedia.org/wiki/Transform_coding}{transform
-  coding}, such as the described in the previous section and in this
+\href{https://en.wikipedia.org/wiki/Transform_coding}{Transform
+  Coding}, such as the described in the previous section and in this
 one.
 
 % Another decorrelating technique: transform coding
-As it has been explained before, transform coding is based on the idea
-that we can decompose (we can generate a decomposition from) the input
-signal into a set of subbands, and if the used filters are the
-adecuate ones for removing the (in this case, temporal) redundancy, we
-can achieve a high Transform Coding
+As it has been explained before, Transform Coding is based on the idea
+that we can decompose the input signal into a set of subbands, and if
+the used filters are the adecuate ones for removing the (in this case,
+temporal) redundancy, we can achieve a high Transform Coding
 Gain~\cite{sayood2017introduction}, accumulating the most part of the
 signal energy (and presumably most of the information) in a small
 number of subbands. When this happens, the quantization of the
@@ -463,7 +462,10 @@ samples.\footnote{Notice that is we dead-zone quantize a decomposition
 % Relation between transform coding and subband coding
 The name that has been given to the previous process is
 \href{https://en.wikipedia.org/wiki/Sub-band_coding}{Subband
-  Coding}. In this context, our analysis transform matrix
+  Coding}\footnote{\href{https://en.wikipedia.org/wiki/Sub-band_coding}{In
+    signal processing, sub-band coding (SBC) is any form of transform
+    coding that breaks a signal into a number of different frequency
+    bands}.}. In this context, our analysis transform matrix
 ${\mathbf K}$ (see the previous section) represents the taps of a
 2-channels analysis
 \href{https://en.wikipedia.org/wiki/Filter_bank}{Filter Bank
@@ -507,16 +509,17 @@ recovered (perfectly) from a subsampled version (in this case
 \href{https://en.wikipedia.org/wiki/Downsampling_(signal_processing)}{decimating}
 by 2 because we have two channels in the FB) of ${\mathbf w}_0$ and
 ${\mathbf w}_1$ (see the notebook
-\href{https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/PRFB.ipynb}{A Perfect Reconstruction Filter Bank (PRFB)}). Notice
-that this subsampling is possible because the
+\href{https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/PRFB.ipynb}{A
+  Perfect Reconstruction Filter Bank (PRFB)}). Notice that this
+subsampling is possible because the
 \href{https://en.wikipedia.org/wiki/Aliasing}{aliasing}\footnote{Because
   the filters are not ideal, the bandwidth of the filtered signals
   ${\mathbf w}_0$ and ${\mathbf w}_1$ is bigger than half of the
   bandwidth of ${\mathbf x}$. Therefore, subsampling at a ratio of one
   of each two coefficients, we are generating aliasing. See the
   \href{https://en.wikipedia.org/wiki/Nyquist-Shannon_sampling_theorem}{sampling
-    theorem}.}  generated in the low-pass subband is compensated by
-the aliasing generated in the high-pass subband. To achieve this, the
+    theorem}.}  generated in the low-pass subband is attenuated by the
+aliasing generated in the high-pass subband. To achieve this, the
 \href{https://en.wikipedia.org/wiki/Filter_(signal_processing)#The_transfer_function}{frequency
   response} of ${\mathbf K}_0$ must be equal to the mirrored frequency
 response of ${\mathbf K}_1$, and obviously, both filters must have the
