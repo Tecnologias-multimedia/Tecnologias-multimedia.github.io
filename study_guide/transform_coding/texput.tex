@@ -1,6 +1,6 @@
 % Emacs, this is -*-latex-*-
 
-\title{Transform Coding for Redundancy Removal}
+\title{\href{https://en.wikipedia.org/wiki/Transform_coding}{Transform Coding} for \href{https://en.wikipedia.org/wiki/Data_redundancy}{Redundancy} Removal}
 
 % Use 16 bits/coefficient and CTE (Chunk Truncation Encoding).
 
@@ -98,8 +98,8 @@ the values of ${\mathbf K}_1$ describe a
   filter}, and ${\mathbf K}$ represents the
 \href{https://en.wikipedia.org/wiki/Digital_filter}{filters} of a
 \href{https://en.wikipedia.org/wiki/Filter_bank}{filter bank (FB)} with two
-filters. This can be also seen in this
-\href{https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/study_guide/transform_coding/stereo_transforms_RD.ipynb}{notebook}.
+filters. This can be also seen in the notebook
+\href{https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/study_guide/transform_coding/stereo_transforms_RD.ipynb}{A RD-comparison of ``Stereo'' Transforms}.
 %}}}
 
 \subsubsection{The synthesis transform}
@@ -287,45 +287,48 @@ to the curves of previous pieces, that has already been compressed and
 transmitted, and therefore, we can compute also the distortion. Using
 this information, we can estimate a RD curve for the current piece,
 and estimate the ``optimal'' quantization step sizes. This procedure
-is much faster than the described in the previou paragraph, but it may
+is much faster than the described in the previous paragraph, but it may
 still be time-consuming.
 
-For this reason, in the 
-\href{https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/study_guide/11-stereo_coding/stereo_transforms_RD.ipynb}{notebook}
-we explore a different solution based on the idea of that the
-contribution (in terms of energy) of the subbands to the
-reconstruction of the signal ${\mathbf x}$ should be proportional to the
+For this reason, in the notebook
+\href{https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/study_guide/transform_coding/stereo_transforms_RD.ipynb}{A
+  RD-comparison of ``Stereo'' Transforms} we explore a different
+solution based on the idea that the contribution (in terms of
+energy) of the subbands to the reconstruction of the signal
+${\mathbf x}$ should be proportional to the
 \href{https://en.wikipedia.org/wiki/Filter_(signal_processing)}{gain}
 of each analysis filter of ${\mathbf K}$ (remember that we are working
 with orthogonal transforms and therefore, the contribution of the
 subbands are independent), or what is the same, proportional to the
 gain of each column of the synthesis matrix\footnote{Notice that the
-quantization error is generated in the transform domain and perceived
-in the signal domain after appliying the inverse transform.}. Thus, if
-the filters had different gains, the quantization steps should
-consider this fact.\footnote{Notice that the important here is the
-relative gain of each subband. For example, if the gain of ${\mathbf
-  K}_0$ were $2$ and the gain of ${\mathbf K}_1$ were $1$, and the
-dynamic range of ${\mathbf w}_0$ and ${\mathbf w}_1$ is the same, we
-could use $\Delta_1=2\Delta_0$ and expect to minimize the distortion.}
+  quantization error is generated in the transform domain and
+  perceived in the signal domain after appliying the inverse
+  transform.}. Thus, if the filters had different gains, the
+quantization steps should consider this fact.\footnote{Notice that the
+  important here is the relative gain of each subband. For example, if
+  the gain of ${\mathbf K}_0$ were $2$ and the gain of ${\mathbf K}_1$
+  were $1$, and the dynamic range of ${\mathbf w}_0$ and
+  ${\mathbf w}_1$ is the same, we could use $\Delta_1=2\Delta_0$ and
+  expect to minimize the distortion.}
 
-By definition, the gain of the subband ${\mathbf w}_i$ is the
+By definition, the gain generated in the subband ${\mathbf w}_i$ is
+proportional to the
 \href{https://en.wikipedia.org/wiki/Lp_space}{L$_2$
   norm}\footnote{L$_2(f)$ (where $f$ is a function) is the set of all
-functions with finite energy and constitues a vector
-space~\cite{sayood2017introduction}. $L_2({\mathbb R})$ of simply
-$L_2$ is the space of all functions $f(t)$ with a well defined
-integral of the square of the modulus of the function. The $L$
-signifies a Lebesque integral, the ``2'' denotes the integral of the
-square of the modulus of the function, and ${\mathbb R}$ states that
-the independent variable of integration is a number over the whole
-real line. For a function $g(t)$ to be a member of that space is
-denoted: $g\in L_2({\mathbb R})$ or simply $g\in
-L_2$~\cite{burrus2013wavelets}. The computation of the L$_2$ form is
-equivalent to compute the
-\href{https://en.wikipedia.org/wiki/Euclidean_distance}{Euclidean
-  distance} in $N$-dimensional (in our case, $N=2$)
-\href{https://en.wikipedia.org/wiki/Vector_space}{spaces}.} of the
+  functions with finite energy and constitues a vector
+  space~\cite{sayood2017introduction}. $L_2({\mathbb R})$ of simply
+  $L_2$ is the space of all functions $f(t)$ with a well defined
+  integral of the square of the modulus of the function. The $L$
+  signifies a Lebesque integral, the ``2'' denotes the integral of the
+  square of the modulus of the function, and ${\mathbb R}$ states that
+  the independent variable of integration is a number over the whole
+  real line. For a function $g(t)$ to be a member of that space is
+  denoted: $g\in L_2({\mathbb R})$ or simply
+  $g\in L_2$~\cite{burrus2013wavelets}. The computation of the L$_2$
+  form is equivalent to compute the
+  \href{https://en.wikipedia.org/wiki/Euclidean_distance}{Euclidean
+    distance} in $N$-dimensional (in our case, $N=2$)
+  \href{https://en.wikipedia.org/wiki/Vector_space}{spaces}.} of the
 filter ${\mathbf K}_i$ (remember that for the MST, the rows of the
 analysis matrix are equal to the columns of the synthesis
 matrix). Thus
@@ -339,9 +342,10 @@ matrix). Thus
 resulting that both subbands ${\mathbf w}_1$ and ${\mathbf w}_2$ have
 the same gain ($\sqrt{2}$). This result tell us that both subbands
 could use the same quantization step size ($\Delta_0=\Delta_1$). In
-the
-\href{https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/study_guide/11-stereo_coding/stereo_transforms_RD.ipynb}{notebook}
-there are some evidences of this.
+the notebook
+\href{https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/study_guide/transform_coding/stereo_transforms_RD.ipynb}{A
+  RD-comparison of "Stereo" Transforms} there are some evidences of
+this.
 
 Unfortunately, most of the transform are not implemented using
 matrix-vector operations, but using
@@ -402,7 +406,7 @@ symmetrical.% because in that case ${\mathbf K}^{-1}={\mathbf K}^{\text T}$.
 
 %}}}
 
-\subsection{Temporal Coding (without chunks overlapping)}
+\subsection{Temporal coding using the DWT (Discrete Wavelet Transform)}
 %{{{
 
 \subsubsection{About temporal redundancy in audio}
@@ -415,8 +419,8 @@ that, beacuse the MST and the transform used in this milestone are
 both lineal, the order in which the transforms are applied is
 irrelevant. For this reason, we could also have used the temporal
 transform inside of each channel of samples, and then, remove the
-spatial redundancy.}. As it can be seen in this
-\href{https://github.com/Tecnologias-multimedia/intercom/blob/master/tools/audio_viewer.ipynb}{notebook},
+spatial redundancy.}. As it can be seen in the notebook
+\href{https://github.com/Tecnologias-multimedia/intercom/blob/master/tools/audio_viewer.ipynb}{Audio viewer},
 most audio signals show ``patterns'' of samples that tends to repeat,
 especially locally. Another clear source of temporal redundancy is
 that the neighbor audio samples usually show similar amplitude values.
@@ -434,27 +438,22 @@ efficient decorrelation algorithms based on
 one.
 
 % Another decorrelating technique: transform coding
-Transform coding is based on the idea that we can decompose (we can
-generate a decomposition from) the input signal into a set of
-subbands, and if the used filters are the adecuate ones for removing
-the temporal redundancy, we can achieve a high transform coding
-gain~\cite{sayood2017introduction}, accumulating most of the signal
-energy (and presumably most of the information) in a small number of
-subbands. When this happens, the quantization of the subbands will
-remove basically the least significant information (usually
+As it has been explained before, transform coding is based on the idea
+that we can decompose (we can generate a decomposition from) the input
+signal into a set of subbands, and if the used filters are the
+adecuate ones for removing the (in this case, temporal) redundancy, we
+can achieve a high Transform Coding
+Gain~\cite{sayood2017introduction}, accumulating the most part of the
+signal energy (and presumably most of the information) in a small
+number of subbands. When this happens, the quantization of the
+subbands will remove basically the least significant information
+(usually
 \href{https://en.wikipedia.org/wiki/Noise_(electronics)}{electronic
   noise}), allowing better compression ratios than those in which we
 apply the same quantization process to the original
 samples.\footnote{Notice that is we dead-zone quantize a decomposition
-and most of the coefficients are close to zero, the information
-removed from the signal will be those with a smaller energy.}
-
-\begin{figure}
-  \centering
-  \myfig{graphics/PRFB}{4cm}{400}
-  \caption{A 2-channels PRFB (Perfect Reconstruction Filter Bank).}
-  \label{fig:PRFB}
-\end{figure}
+  and most of the coefficients are close to zero, the information
+  removed from the signal will be those with a smaller energy.}
 
 %}}}
 
@@ -463,35 +462,42 @@ removed from the signal will be those with a smaller energy.}
 
 % Relation between transform coding and subband coding
 The name that has been given to the previous process is
-\href{https://en.wikipedia.org/wiki/Sub-band_coding}{subband
-  coding}. In this context, our analysis transform matrix
+\href{https://en.wikipedia.org/wiki/Sub-band_coding}{Subband
+  Coding}. In this context, our analysis transform matrix
 ${\mathbf K}$ (see the previous section) represents the taps of a
 2-channels analysis
 \href{https://en.wikipedia.org/wiki/Filter_bank}{Filter Bank
   (FB)}~\cite{vetterli1995wavelets}, and the forward transform is in
 fact ``descomposing'' ${\mathbf x}$ into two subbands ${\mathbf w}_0$
-and ${\mathbf w}_1$ (see the Figure~\ref{fig:PRFB}, and this
-\href{https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/PRFB.ipynb}{notebook}). On
-the other hand, the synthesis transform matrix ${\mathbf K}^{-1}$
-denotes the taps of the corresponding synthesis FB that allows to
-recover ${\mathbf x}$ (notice that in the figure,
-${\mathbf x}={\mathbf l}^i$, ${\mathbf w}_0={\mathbf l}^{i+1}$,
-${\mathbf w}_1={\mathbf h}^{i+1}$, $\tilde\phi={\mathbf K}_0$,
-$\tilde\psi={\mathbf K}_1$, $\phi={\mathbf K}^{-1}_0$, and
-$\psi={\mathbf K}^{-1}_1$).
+and ${\mathbf w}_1$ (see the Figure~\ref{fig:PRFB}, and the notebook
+\href{https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/PRFB.ipynb}{A
+  Perfect Reconstruction Filter Bank (PRFB)}). On the other hand, the
+synthesis transform matrix ${\mathbf K}^{-1}$ denotes the taps of the
+corresponding synthesis FB that allows to recover ${\mathbf x}$
+(notice that in the figure, ${\mathbf x}={\mathbf l}^i$,
+${\mathbf w}_0={\mathbf l}^{i+1}$, ${\mathbf w}_1={\mathbf h}^{i+1}$,
+$\tilde\phi={\mathbf K}_0$, $\tilde\psi={\mathbf K}_1$,
+$\phi={\mathbf K}^{-1}_0$, and $\psi={\mathbf K}^{-1}_1$).
+
+\begin{figure}
+  \centering
+  \myfig{graphics/PRFB}{4cm}{400}
+  \caption{A 2-channels PRFB (Perfect Reconstruction Filter Bank).}
+  \label{fig:PRFB}
+\end{figure}
 
 % An intro to PRFBs
 Let's suppose now that the analysis filters (represented by the taps
 of) ${\mathbf K}_0$ and ${\mathbf K}_1$ are applied to the input
 signal ${\mathbf x}$ (now a sequence of $N$ samples) using a
 \href{https://en.wikipedia.org/wiki/Kernel_(image_processing)}{convolution}
-(without splitting $x$ into blocks). Let's also suppose (as happens in
-the MST) that ${\mathbf K}_0$ is a low-pass filter and ${\mathbf K}_1$
-is a high-pass filter, and that the
+(without splitting $\mathbf{x}$ into blocks). Let's also suppose (as
+happens in the MST) that ${\mathbf K}_0$ is a low-pass filter and
+${\mathbf K}_1$ is a high-pass filter, and that the
 \href{https://en.wikipedia.org/wiki/Filter_(signal_processing)#The_transfer_function}{transfer
   function}\footnote{The response of the filter to the
-\href{https://en.wikipedia.org/?title=Unit_impulse&redirect=no}{unit
-  impulse}.} of both filters
+  \href{https://en.wikipedia.org/?title=Unit_impulse&redirect=no}{unit
+    impulse}.} of both filters
 \href{https://en.wikipedia.org/wiki/Filter_bank#Perfect_reconstruction_filter_banks}{are
   one the inverse of the other}. Under these assumptions, the complete
 (analysis/synthesis) transform is called a (2-channels)
@@ -499,17 +505,18 @@ is a high-pass filter, and that the
   Reconstruction Filter Bank (PRFB)}, and ${\mathbf x}$ can be
 recovered (perfectly) from a subsampled version (in this case
 \href{https://en.wikipedia.org/wiki/Downsampling_(signal_processing)}{decimating}
-by 2) of ${\mathbf w}_0$ and ${\mathbf w}_1$ (see this
-\href{https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/PRFB.ipynb}{notebook}). Notice
+by 2 because we have two channels in the FB) of ${\mathbf w}_0$ and
+${\mathbf w}_1$ (see the notebook
+\href{https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/PRFB.ipynb}{A Perfect Reconstruction Filter Bank (PRFB)}). Notice
 that this subsampling is possible because the
 \href{https://en.wikipedia.org/wiki/Aliasing}{aliasing}\footnote{Because
-the filters are not ideal, the bandwidth of the filtered signals
-${\mathbf w}_0$ and ${\mathbf w}_1$ is bigger than half of the
-bandwidth of ${\mathbf x}$. Therefore, subsampling at a ratio of one
-of each two coefficients, we are generating aliasing. See the
-\href{https://en.wikipedia.org/wiki/Nyquist-Shannon_sampling_theorem}{sampling
-  theorem}.}  generated in the low-pass subband is compensated by the
-aliasing generated in the high-pass subband. To achieve this, the
+  the filters are not ideal, the bandwidth of the filtered signals
+  ${\mathbf w}_0$ and ${\mathbf w}_1$ is bigger than half of the
+  bandwidth of ${\mathbf x}$. Therefore, subsampling at a ratio of one
+  of each two coefficients, we are generating aliasing. See the
+  \href{https://en.wikipedia.org/wiki/Nyquist-Shannon_sampling_theorem}{sampling
+    theorem}.}  generated in the low-pass subband is compensated by
+the aliasing generated in the high-pass subband. To achieve this, the
 \href{https://en.wikipedia.org/wiki/Filter_(signal_processing)#The_transfer_function}{frequency
   response} of ${\mathbf K}_0$ must be equal to the mirrored frequency
 response of ${\mathbf K}_1$, and obviously, both filters must have the
@@ -802,7 +809,7 @@ Transform coding implies to split the signal into blocks of data
 (chunks), and to compute the transform of each chunk. When the output
 coefficients are quantized, it is possible that significative (and
 unpleasant) distortions may appear in the border frames of the chunks
-(see Fig.~\ref{fig:3_chunks}). This is a consequence of that in the
+(see Fig.~\ref{fig:3_chunks}). This is a consequence that in the
 prediction step used by the DWT in the limits of the chunks generate
 different predictions at the beginning and the end of the adjacent
 chunks.
