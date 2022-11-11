@@ -10,10 +10,10 @@
 \section{Description}
 %{{{
 
-\subsection{Spatial decorrelation in stereo audio signals}
+\subsection{Spatial (stereo) decorrelation with the MST (Mid/Side Transform)}
 %{{{
 
-\subsubsection{An analysis transform}
+\subsubsection{Analysis transform}
 %{{{ 
 InterCom transmits a
 \href{https://en.wikipedia.org/wiki/Stereophonic_sound}{stereo} (two
@@ -103,7 +103,7 @@ filters. This can be also seen in the notebook
 \href{https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/study_guide/transform_coding/stereo_transforms_RD.ipynb}{A RD-comparison of ``Stereo'' Transforms}.
 %}}}
 
-\subsubsection{The synthesis transform}
+\subsubsection{Synthesis transform}
 %{{{ 
 The inverse (or synthesis) transform
 \begin{equation}
@@ -250,7 +250,7 @@ preserving~\cite{sayood2017introduction} (or that the
   theorem} is satisfied, in both, the analysis and the synthesis
 transform).
 
-The MST analysis is not orthonormal, because
+The MST is not orthonormal, because
 \begin{equation}
   \sum_i {{\mathbf w}_i}^2 =
   ({\mathbf x}_0 + {\mathbf x}_1)^2 + ({\mathbf x}_0 - {\mathbf x}_1)^2 =
@@ -266,7 +266,8 @@ get $2{\mathbf x}$ as the reconstructed signal instead of ${\mathbf x}$.
 
 \subsubsection{Quantization of the subbands}
 \label{sec:quantization_subbands_spatial}
-%{{{ 
+% {{{
+
 Ideally, the quantization step size $\Delta_i$ used for a subband
 ${\mathbf w}_i$ must operate in the RD curve $f_i$ with the same slope
 than the rest of
@@ -334,7 +335,6 @@ proportional to the
 filter ${\mathbf K}_i$ (remember that for the MST, the rows of the
 analysis matrix are equal to the columns of the synthesis
 matrix). Thus
-
 \begin{equation}
   \begin{array}{l}
     \left\| {\mathbf K}_0 \right\|_2 := \sqrt{\langle \begin{bmatrix}1 & 1\end{bmatrix}, \begin{bmatrix}1 & 1\end{bmatrix} \rangle} = \sqrt{\begin{bmatrix}1 & 1\end{bmatrix} \cdot \begin{bmatrix}1 & 1\end{bmatrix}} = \sqrt{2},\\
@@ -404,11 +404,12 @@ that as you can see, correspond to the columns of the inverse
 transform matrix ${\mathbf K}^{-1}$. Notice that this is true for all
 the orthogonal transforms whose analysis and synthesis matrices are
 symmetrical.% because in that case ${\mathbf K}^{-1}={\mathbf K}^{\text T}$.
-%}}}
 
 %}}}
 
-\subsection{Temporal coding using the DWT (Discrete Wavelet Transform)}
+%}}}
+
+\subsection{Temporal decorrelation using the DWT (Discrete Wavelet Transform)}
 %{{{
 
 \subsubsection{About temporal redundancy in audio}

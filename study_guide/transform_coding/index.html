@@ -21,49 +21,36 @@
  <div class='author'><a href='https://cms.ual.es/UAL/personas/persona.htm?id=515256515553484875'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>- </span><a href='https://cms.ual.es/UAL/universidad/departamentos/informatica/index.htm'><span class='ecrm-1200'>Depto Informática</span></a> <span class='ecrm-1200'>- </span><a href='https://www.ual.es'><span class='ecrm-1200'>UAL</span></a></div><br />
 <div class='date'><span class='ecrm-1200'>November 11, 2022</span></div>
    </div>
-   <h3 class='likesectionHead' id='contents'><a id='x1-1000'></a>Contents</h3>
+   <h3 class='likesectionHead'><a id='x1-1000'></a>Contents</h3>
    <div class='tableofcontents'>
-    <span class='sectionToc'>1 <a href='#description' id='QQ2-1-2'>Description</a></span>
-<br />     <span class='subsectionToc'>1.1 <a href='#spatial-decorrelation-in-stereo-audio-signals' id='QQ2-1-3'>Spatial decorrelation in stereo audio signals</a></span>
-<br />      <span class='subsubsectionToc'>1.1.1 <a href='#an-analysis-transform' id='QQ2-1-4'>An analysis transform</a></span>
-<br />      <span class='subsubsectionToc'>1.1.2 <a href='#the-synthesis-transform' id='QQ2-1-5'>The synthesis transform</a></span>
-<br />      <span class='subsubsectionToc'>1.1.3 <a href='#orthogonality-of-the-transform' id='QQ2-1-6'>Orthogonality of the transform</a></span>
-<br />      <span class='subsubsectionToc'>1.1.4 <a href='#quantization-of-the-subbands' id='QQ2-1-7'>Quantization of the subbands</a></span>
-<br />     <span class='subsectionToc'>1.2 <a href='#temporal-coding-using-the-dwt-discrete-wavelet-transform' id='QQ2-1-8'>Temporal coding using the DWT (Discrete Wavelet Transform)</a></span>
-<br />      <span class='subsubsectionToc'>1.2.1 <a href='#about-temporal-redundancy-in-audio' id='QQ2-1-9'>About temporal redundancy in audio</a></span>
-<br />      <span class='subsubsectionToc'>1.2.2 <a href='#transform-and-subband-coding' id='QQ2-1-10'>Transform and subband coding</a></span>
-<br />      <span class='subsubsectionToc'>1.2.3 <a href='#multichannel-filter-banks-and-psychoacoustic-frequency-resolution' id='QQ2-1-12'>Multichannel filter banks and psychoacoustic frequency resolution</a></span>
-<br />      <span class='subsubsectionToc'>1.2.4 <a href='#the-discrete-wavelet-transform' id='QQ2-1-13'>The Discrete Wavelet Transform</a></span>
-<br />      <span class='subsubsectionToc'>1.2.5 <a href='#implementation-of-the-dwt' id='QQ2-1-15'>Implementation of the DWT</a></span>
-<br />      <span class='subsubsectionToc'>1.2.6 <a href='#example-of-a-dwt-using-the-mst-filters' id='QQ2-1-16'>Example of a DWT using the MST filters</a></span>
-<br />      <span class='subsubsectionToc'>1.2.7 <a href='#wavelets-and-filter-banks' id='QQ2-1-17'>Wavelets and filter banks</a></span>
-<br />      <span class='subsubsectionToc'>1.2.8 <a href='#example-of-a-dwt-using-highorder-filters' id='QQ2-1-18'>Example of a DWT using “high”-order filters</a></span>
-<br />      <span class='subsubsectionToc'>1.2.9 <a href='#quantization-of-the-subbands1' id='QQ2-1-19'>Quantization of the subbands</a></span>
-<br />     <span class='subsectionToc'>1.3 <a href='#overlapping-the-dwt' id='QQ2-1-20'>Overlapping the DWT</a></span>
-<br />     <span class='subsectionToc'>1.4 <a href='#-httpsenwikipediaorgwikilappedtransformoverlapped-block-transforms-for-minimizing-the-distortion' id='QQ2-1-21'>Overlapped block transforms for minimizing the distortion</a></span>
-<br />     <span class='subsectionToc'>1.5 <a href='#reducing-the-data-overhead' id='QQ2-1-26'>Reducing the data overhead</a></span>
-<br />    <span class='sectionToc'>2 <a href='#what-you-have-to-do' id='QQ2-1-31'>What you have to do?</a></span>
-<br />     <span class='subsectionToc'>2.1 <a href='#determine-the-rd-curves-for-the-mst' id='QQ2-1-32'>Determine the RD curves for the MST</a></span>
-<br />     <span class='subsectionToc'>2.2 <a href='#determine-the-rd-curves-for-the-dwt' id='QQ2-1-33'>Determine the RD curves for the DWT</a></span>
-<br />     <span class='subsectionToc'>2.3 <a href='#determine-the-rd-curves-for-the-overlapped-dwt' id='QQ2-1-34'>Determine the RD curves for the overlapped DWT</a></span>
-<br />     <span class='subsectionToc'>2.4 <a href='#answer-these-questions' id='QQ2-1-35'>Answer these questions</a></span>
-<br />     <span class='subsectionToc'>2.5 <a href='#visualize' id='QQ2-1-36'>Visualize</a></span>
-                                                                  
-
-                                                                  
-<br />    <span class='sectionToc'>3 <a href='#deliverables' id='QQ2-1-37'>Deliverables</a></span>
-<br />    <span class='sectionToc'>4 <a href='#resources' id='QQ2-1-38'>Resources</a></span>
-<br />    <span class='sectionToc'><a href='#references'>References</a></span>
+    <span class='sectionToc'>1 <a href='#x1-20001' id='QQ2-1-2'>Description</a></span>
+<br />     <span class='subsectionToc'>1.1 <a href='#x1-30001.1' id='QQ2-1-3'>Spatial (stereo) decorrelation with the MST (Mid/Side Transform)</a></span>
+<br />     <span class='subsectionToc'>1.2 <a href='#x1-80001.2' id='QQ2-1-8'>Temporal decorrelation using the DWT (Discrete Wavelet Transform)</a></span>
+<br />     <span class='subsectionToc'>1.3 <a href='#x1-180001.3' id='QQ2-1-20'>Overlapping the DWT</a></span>
+<br />     <span class='subsectionToc'>1.4 <a href='#x1-190001.4' id='QQ2-1-21'>Overlapped block transforms for minimizing the distortion</a></span>
+<br />     <span class='subsectionToc'>1.5 <a href='#x1-220001.5' id='QQ2-1-26'>Reducing the data overhead</a></span>
+<br />    <span class='sectionToc'>2 <a href='#x1-260002' id='QQ2-1-31'>What you have to do?</a></span>
+<br />     <span class='subsectionToc'>2.1 <a href='#x1-270002.1' id='QQ2-1-32'>Determine the RD curves for the MST</a></span>
+<br />     <span class='subsectionToc'>2.2 <a href='#x1-280002.2' id='QQ2-1-33'>Determine the RD curves for the DWT</a></span>
+<br />     <span class='subsectionToc'>2.3 <a href='#x1-290002.3' id='QQ2-1-34'>Determine the RD curves for the overlapped DWT</a></span>
+<br />     <span class='subsectionToc'>2.4 <a href='#x1-300002.4' id='QQ2-1-35'>Answer these questions</a></span>
+<br />     <span class='subsectionToc'>2.5 <a href='#x1-310002.5' id='QQ2-1-36'>Visualize</a></span>
+<br />    <span class='sectionToc'>3 <a href='#x1-320003' id='QQ2-1-37'>Deliverables</a></span>
+<br />    <span class='sectionToc'>4 <a href='#x1-330004' id='QQ2-1-38'>Resources</a></span>
+<br />    <span class='sectionToc'><a href='#Q1-1-39'>References</a></span>
    </div>
 <!-- l. 10 --><p class='noindent'>
 </p>
-   <h3 class='sectionHead' id='description'><span class='titlemark'>1   </span> <a id='x1-20001'></a>Description</h3>
+   <h3 class='sectionHead'><span class='titlemark'>1   </span> <a id='x1-20001'></a>Description</h3>
+                                                                  
+
+                                                                  
 <!-- l. 13 --><p class='noindent'>
 </p>
-   <h4 class='subsectionHead' id='spatial-decorrelation-in-stereo-audio-signals'><span class='titlemark'>1.1   </span> <a id='x1-30001.1'></a>Spatial decorrelation in stereo audio signals</h4>
+   <h4 class='subsectionHead'><span class='titlemark'>1.1   </span> <a id='x1-30001.1'></a>Spatial (stereo) decorrelation with the MST (Mid/Side Transform)</h4>
 <!-- l. 16 --><p class='noindent'>
 </p>
-   <h5 class='subsubsectionHead' id='an-analysis-transform'><span class='titlemark'>1.1.1   </span> <a id='x1-40001.1.1'></a>An analysis transform</h5>
+   <h5 class='subsubsectionHead'><span class='titlemark'>1.1.1   </span> <a id='x1-40001.1.1'></a>Analysis transform</h5>
 <!-- l. 18 --><p class='noindent'>InterCom transmits a <a href='https://en.wikipedia.org/wiki/Stereophonic_sound'>stereo</a> (two channels) <a href='https://en.wikipedia.org/wiki/Pulse-code_modulation'>PCM signal</a>. In most cases, the channels
 are <a href='https://en.wikipedia.org/wiki/Binaural_recording'>highly correlated</a> (especially when the microphone is mono because both channels
 are identical), which means that we can find a more efficient representation. To
@@ -88,25 +75,25 @@ the characteristics of the elements of \(\mathbf w\) are determined by their pos
 decomposition \(\mathbf w\) <span class='cite'>[<a href='#Xsayood2017introduction'>7</a>]</span>. Thus, as a consequence of how the matrix has been defined, the
 subband \({\mathbf w}_0\) represents (very roughly) the low frequencies of \(\mathbf x\), and \({\mathbf w}_1\) the high frequencies.
 Therefore, the values of \({\mathbf K}_0\) (the row 0 of \(\mathbf K\)) describe a <a href='https://en.wikipedia.org/wiki/Low-pass_filter'>low-pass filter</a>, the values of \({\mathbf K}_1\)
-                                                                  
-
-                                                                  
 describe a <a href='https://en.wikipedia.org/wiki/High-pass_filter'>high-pass filter</a>, and \(\mathbf K\) represents the <a href='https://en.wikipedia.org/wiki/Digital_filter'>filters</a> of a <a href='https://en.wikipedia.org/wiki/Filter_bank'>filter bank (FB)</a> with two
 filters. This can be also seen in the notebook <a href='https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/study_guide/transform_coding/stereo_transforms_RD.ipynb'>A RD-comparison of “Stereo”
 Transforms</a>.
 </p><!-- l. 106 --><p class='noindent'>
 </p>
-   <h5 class='subsubsectionHead' id='the-synthesis-transform'><span class='titlemark'>1.1.2   </span> <a id='x1-50001.1.2'></a>The synthesis transform</h5>
+   <h5 class='subsubsectionHead'><span class='titlemark'>1.1.2   </span> <a id='x1-50001.1.2'></a>Synthesis transform</h5>
 <!-- l. 108 --><p class='noindent'>The inverse (or synthesis) transform \begin {equation}  {\mathbf x} = {\mathbf K}^{-1}{\mathbf w} \label {eq:inverse_transform}  \end {equation}
 can be deduced from Eq. \eqref{eq:forward_transform_matrix_form}, where we get
 that \begin {equation}  \begin {array}{rcl} {\mathbf w}_0 &amp; = &amp; {\mathbf x}_0 + {\mathbf x}_1\\ {\mathbf w}_1 &amp; = &amp; {\mathbf x}_0 - {\mathbf x}_1. \end {array}  \end {equation}
 By solving \({\mathbf x}_0\) (adding) and \({\mathbf x}_1\) (substracting) in these equations, we obtain that
 \begin {equation}  \begin {array}{rcl} {\mathbf x}_0 &amp; = &amp; \frac {1}{2}({\mathbf w}_0 + {\mathbf w}_1)\\ {\mathbf x}_1 &amp; = &amp; \frac {1}{2}({\mathbf w}_0 - {\mathbf w}_1), \end {array}  \end {equation}
+                                                                  
+
+                                                                  
 that in matrix form becomes \begin {equation}  \begin {bmatrix} {\mathbf x}_0 \\ {\mathbf x}_1 \end {bmatrix} = \frac {1}{2} \begin {bmatrix} 1 &amp; 1 \\ 1 &amp; -1 \end {bmatrix} \begin {bmatrix} {\mathbf w}_0 \\ {\mathbf w}_1 \end {bmatrix}.  \end {equation}
 Therefore, \begin {equation}  {\mathbf x} = {\mathbf K}^{-1}{\mathbf w} = \frac {1}{2}{\mathbf K}^{\text T}{\mathbf w} = \frac {1}{2}{\mathbf K}{\mathbf w} = \frac {1}{2}\begin {bmatrix} 1 &amp; 1 \\ 1 &amp; -1 \end {bmatrix}{\mathbf w}. \label {eq:inverse_transform_matrix_form}  \end {equation}
 </p><!-- l. 149 --><p class='noindent'>
 </p>
-   <h5 class='subsubsectionHead' id='orthogonality-of-the-transform'><span class='titlemark'>1.1.3   </span> <a id='x1-60001.1.3'></a>Orthogonality of the transform</h5>
+   <h5 class='subsubsectionHead'><span class='titlemark'>1.1.3   </span> <a id='x1-60001.1.3'></a>Orthogonality of the transform</h5>
 <!-- l. 151 --><p class='noindent'>As can be seen (if we ignore the \(\frac {1}{2}\) scale factor) the inverse transform is the
 transpose of the forward transform (\({\mathbf K}^{-1}={\mathbf K}^{\text T}\)). This is a characteristic of all <a href='https://en.wikipedia.org/wiki/Orthogonal_transformation'>orthogonal
 transforms</a> <span class='cite'>[<a href='#Xsayood2017introduction'>7</a>]</span>. For the MST, specifically, it also holds that \({\mathbf K}^{\text T}={\mathbf K}\) because \(\mathbf K\) is
@@ -131,25 +118,25 @@ Another interesting property satisfied by a lot of famous transforms (such as th
 <a href='https://en.wikipedia.org/wiki/Fourier_transform'>Fourier Transform</a>) is <a href='https://en.wikipedia.org/wiki/Orthonormality'>orthonormality</a>, which means that the transform is <a href='https://en.wikipedia.org/wiki/Energy_(signal_processing)'>energy</a>
 preserving <span class='cite'>[<a href='#Xsayood2017introduction'>7</a>]</span> (or that the <a href='https://en.wikipedia.org/wiki/Parseval%27s_theorem'>Parseval’s theorem</a> is satisfied, in both, the analysis and
 the synthesis transform).
-                                                                  
-
-                                                                  
-</p><!-- l. 253 --><p class='indent'>   The MST analysis is not orthonormal, because \begin {equation}  \sum _i {{\mathbf w}_i}^2 = ({\mathbf x}_0 + {\mathbf x}_1)^2 + ({\mathbf x}_0 - {\mathbf x}_1)^2 = ({\mathbf x}_0^2 + 2{\mathbf x}_0{\mathbf x}_1+{\mathbf x}_1^2) + ({\mathbf x}_0^2-{\mathbf 2}x_0{\mathbf x}_1+{\mathbf x}_1^2) = 2({\mathbf x}_0^2+{\mathbf x}_1^2) = 2\sum _i {{\mathbf x}_i}^2. \label {eq:No_Parseval}  \end {equation}
+</p><!-- l. 253 --><p class='indent'>   The MST is not orthonormal, because \begin {equation}  \sum _i {{\mathbf w}_i}^2 = ({\mathbf x}_0 + {\mathbf x}_1)^2 + ({\mathbf x}_0 - {\mathbf x}_1)^2 = ({\mathbf x}_0^2 + 2{\mathbf x}_0{\mathbf x}_1+{\mathbf x}_1^2) + ({\mathbf x}_0^2-{\mathbf 2}x_0{\mathbf x}_1+{\mathbf x}_1^2) = 2({\mathbf x}_0^2+{\mathbf x}_1^2) = 2\sum _i {{\mathbf x}_i}^2. \label {eq:No_Parseval}  \end {equation}
 For this reason, we must divide the synthesized samples by \(2\) (see
 Eq. \eqref{eq:inverse_transform_matrix_form}). On the contrary, we would get \(2{\mathbf x}\) as
 the reconstructed signal instead of \(\mathbf x\).
 </p><!-- l. 267 --><p class='noindent'>
 </p>
-   <h5 class='subsubsectionHead' id='quantization-of-the-subbands'><span class='titlemark'>1.1.4   </span> <a id='x1-70001.1.4'></a>Quantization of the subbands</h5>
-<!-- l. 270 --><p class='noindent'>Ideally, the quantization step size \(\Delta _i\) used for a subband \({\mathbf w}_i\) must operate in the RD curve \(f_i\)
+   <h5 class='subsubsectionHead'><span class='titlemark'>1.1.4   </span> <a id='x1-70001.1.4'></a>Quantization of the subbands</h5>
+<!-- l. 271 --><p class='noindent'>Ideally, the quantization step size \(\Delta _i\) used for a subband \({\mathbf w}_i\) must operate in the RD curve \(f_i\)
 with the same slope than the rest of subbands <span class='cite'>[<a href='#Xvetterli2014foundations'>11</a>, <a href='#Xsayood2017introduction'>7</a>]</span> (this is the same
 to say that we must satisfy that \(f'_0(x)=f'_1(x)\), where \(f'\) denotes the derivative of \(f\)). The
 main drawback of this approach is that the finding of \(f_i\) is computationally
+                                                                  
+
+                                                                  
 intensive (we must analyze, quantize, compress, decompress, dequantize,
 synthesize and compute the distortion of the data for a enoughly high
 number of quantization steps), and usually we cannot do that in real-time
 applications.<span class='footnote-mark'><a href='#fn8x0' id='fn8x0-bk'><sup class='textsuperscript'>8</sup></a></span><a id='x1-7001f8'></a>
-</p><!-- l. 284 --><p class='indent'>   An approximation to this could be to suppose that the RD
+</p><!-- l. 285 --><p class='indent'>   An approximation to this could be to suppose that the RD
 curves of the subbands resulting from the analysis of our current
 piece<span class='footnote-mark'><a href='#fn9x0' id='fn9x0-bk'><sup class='textsuperscript'>9</sup></a></span><a id='x1-7002f9'></a>
 of data are similar to the curves of previous pieces, that has already been compressed
@@ -157,7 +144,7 @@ and transmitted, and therefore, we can compute also the distortion. Using this
 information, we can estimate a RD curve for the current piece, and estimate the
 “optimal” quantization step sizes. This procedure is much faster than the described in
 the previous paragraph, but it may still be time-consuming.
-</p><!-- l. 295 --><p class='indent'>   For this reason, in the notebook <a href='https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/study_guide/transform_coding/stereo_transforms_RD.ipynb'>A RD-comparison of “Stereo” Transforms</a> we
+</p><!-- l. 296 --><p class='indent'>   For this reason, in the notebook <a href='https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/study_guide/transform_coding/stereo_transforms_RD.ipynb'>A RD-comparison of “Stereo” Transforms</a> we
 explore a different solution based on the idea that the contribution (in terms of
 energy) of the subbands to the reconstruction of the signal \(\mathbf x\) should be proportional to
 the <a href='https://en.wikipedia.org/wiki/Filter_(signal_processing)'>gain</a> of each analysis filter of \(\mathbf K\) (remember that we are working with orthogonal
@@ -166,20 +153,16 @@ what is the same, proportional to the gain of each column of the synthesis
 matrix<span class='footnote-mark'><a href='#fn10x0' id='fn10x0-bk'><sup class='textsuperscript'>10</sup></a></span><a id='x1-7003f10'></a>.
 Thus, if the filters had different gains, the quantization steps should consider this
 fact.<span class='footnote-mark'><a href='#fn11x0' id='fn11x0-bk'><sup class='textsuperscript'>11</sup></a></span><a id='x1-7004f11'></a>
-</p><!-- l. 316 --><p class='indent'>   By definition, the gain generated in the subband \({\mathbf w}_i\) is proportional to the <a href='https://en.wikipedia.org/wiki/Lp_space'>L\(_2\)
+</p><!-- l. 317 --><p class='indent'>   By definition, the gain generated in the subband \({\mathbf w}_i\) is proportional to the <a href='https://en.wikipedia.org/wiki/Lp_space'>L\(_2\)
 norm</a><span class='footnote-mark'><a href='#fn12x0' id='fn12x0-bk'><sup class='textsuperscript'>12</sup></a></span><a id='x1-7005f12'></a>
 of the filter \({\mathbf K}_i\) (remember that for the MST, the rows of the analysis matrix are equal
-to the columns of the synthesis matrix). Thus
-</p><!-- l. 343 --><p class='indent'>   \begin {equation}  \begin {array}{l} \left \| {\mathbf K}_0 \right \|_2 := \sqrt {\langle \begin {bmatrix}1 &amp; 1\end {bmatrix}, \begin {bmatrix}1 &amp; 1\end {bmatrix} \rangle } = \sqrt {\begin {bmatrix}1 &amp; 1\end {bmatrix} \cdot \begin {bmatrix}1 &amp; 1\end {bmatrix}} = \sqrt {2},\\ \left \| {\mathbf K}_1 \right \|_2 := \sqrt {\langle \begin {bmatrix}1 &amp; -1\end {bmatrix}, \begin {bmatrix}1 &amp; -1\end {bmatrix} \rangle } = \sqrt {\begin {bmatrix}1 &amp; -1\end {bmatrix}\cdot \begin {bmatrix}1 &amp; -1\end {bmatrix}} = \sqrt {2}, \end {array}  \end {equation}
+to the columns of the synthesis matrix). Thus \begin {equation}  \begin {array}{l} \left \| {\mathbf K}_0 \right \|_2 := \sqrt {\langle \begin {bmatrix}1 &amp; 1\end {bmatrix}, \begin {bmatrix}1 &amp; 1\end {bmatrix} \rangle } = \sqrt {\begin {bmatrix}1 &amp; 1\end {bmatrix} \cdot \begin {bmatrix}1 &amp; 1\end {bmatrix}} = \sqrt {2},\\ \left \| {\mathbf K}_1 \right \|_2 := \sqrt {\langle \begin {bmatrix}1 &amp; -1\end {bmatrix}, \begin {bmatrix}1 &amp; -1\end {bmatrix} \rangle } = \sqrt {\begin {bmatrix}1 &amp; -1\end {bmatrix}\cdot \begin {bmatrix}1 &amp; -1\end {bmatrix}} = \sqrt {2}, \end {array}  \end {equation}
 resulting that both subbands \({\mathbf w}_1\) and \({\mathbf w}_2\) have the same gain (\(\sqrt {2}\)). This result tell us
 that both subbands could use the same quantization step size (\(\Delta _0=\Delta _1\)). In the
 notebook <a href='https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/study_guide/transform_coding/stereo_transforms_RD.ipynb'>A RD-comparison of "Stereo" Transforms</a> there are some evidences of
 this.
 </p><!-- l. 352 --><p class='indent'>   Unfortunately, most of the transform are not implemented using matrix-vector
 operations, but using <a href='https://en.wikipedia.org/wiki/Fast_Fourier_transform'>faster algorithms</a> based on a lattice of <a href='https://en.wikipedia.org/wiki/Butterfly_diagram'>computational bufferflies</a>
-                                                                  
-
-                                                                  
 or filter <a href='https://en.wikipedia.org/wiki/Filter_(signal_processing)'>convolutions</a> (and therefore, we don’t know \(\mathbf K\)). Fortunately, we can
 determine \({\mathbf K}_i\) simply by computing the inverse transform of the decomposition
 \(\begin {bmatrix} 0 &amp; \cdots &amp; 0 &amp; 1 &amp; 0 &amp; \cdots &amp; 0 \end {bmatrix}^{\text T}\), where the \(1\) value is in the position \(i\) (only the subband \({\mathbf w}_i=1\), the rest are
@@ -189,25 +172,28 @@ In our example, we get that
 that as you can see, correspond to the columns of the inverse transform matrix \({\mathbf K}^{-1}\).
 Notice that this is true for all the orthogonal transforms whose analysis and synthesis
 matrices are symmetrical.
-</p><!-- l. 411 --><p class='noindent'>
+</p><!-- l. 412 --><p class='noindent'>
 </p>
-   <h4 class='subsectionHead' id='temporal-coding-using-the-dwt-discrete-wavelet-transform'><span class='titlemark'>1.2   </span> <a id='x1-80001.2'></a>Temporal coding using the DWT (Discrete Wavelet Transform)</h4>
-<!-- l. 414 --><p class='noindent'>
+   <h4 class='subsectionHead'><span class='titlemark'>1.2   </span> <a id='x1-80001.2'></a>Temporal decorrelation using the DWT (Discrete Wavelet Transform)</h4>
+                                                                  
+
+                                                                  
+<!-- l. 415 --><p class='noindent'>
 </p>
-   <h5 class='subsubsectionHead' id='about-temporal-redundancy-in-audio'><span class='titlemark'>1.2.1   </span> <a id='x1-90001.2.1'></a>About temporal redundancy in audio</h5>
-<!-- l. 417 --><p class='noindent'>After exploiting the spatial (stereo) redundancy, the next natural step in the development
+   <h5 class='subsubsectionHead'><span class='titlemark'>1.2.1   </span> <a id='x1-90001.2.1'></a>About temporal redundancy in audio</h5>
+<!-- l. 418 --><p class='noindent'>After exploiting the spatial (stereo) redundancy, the next natural step in the development
 of InterCom is to remove the temporal redundancy that can be found inside of each
 subband<span class='footnote-mark'><a href='#fn14x0' id='fn14x0-bk'><sup class='textsuperscript'>14</sup></a></span><a id='x1-9001f14'></a>.
 As it can be seen in the notebook <a href='https://github.com/Tecnologias-multimedia/intercom/blob/master/tools/audio_viewer.ipynb'>Audio viewer</a>, most audio signals show “patterns”
 of samples that tends to repeat, especially locally. Another clear source of temporal
 redundancy is that the neighbor audio samples usually show similar amplitude
 values.
-</p><!-- l. 431 --><p class='indent'>   There are several techniques that can be used for removing the temporal
+</p><!-- l. 432 --><p class='indent'>   There are several techniques that can be used for removing the temporal
 redundancy of a sequence of audio. One of the most straightforward is <a href='https://en.wikipedia.org/wiki/Differential_pulse-code_modulation'>Differential
 Pulse Code Modulation (DPCM) <span class='cite'>[<a href='#Xsayood2017introduction'>7</a>]</span></a>. However, there are more efficient decorrelation
 algorithms based on <a href='https://en.wikipedia.org/wiki/Transform_coding'>Transform Coding</a>, such as the described in the previous section
 and in this one.
-</p><!-- l. 443 --><p class='indent'>   As it has been explained before, Transform Coding is based on the idea that we
+</p><!-- l. 444 --><p class='indent'>   As it has been explained before, Transform Coding is based on the idea that we
 can decompose the input signal into a set of subbands, and if the used filters are the
 adecuate ones for removing the (in this case, temporal) redundancy, we can achieve a
 high Transform Coding Gain <span class='cite'>[<a href='#Xsayood2017introduction'>7</a>]</span>, accumulating the most part of the signal energy
@@ -216,13 +202,10 @@ happens, the quantization of the subbands will remove basically the least signif
 information (usually <a href='https://en.wikipedia.org/wiki/Noise_(electronics)'>electronic noise</a>), allowing better compression ratios
 than those in which we apply the same quantization process to the original
 samples.<span class='footnote-mark'><a href='#fn15x0' id='fn15x0-bk'><sup class='textsuperscript'>15</sup></a></span><a id='x1-9002f15'></a>
-</p><!-- l. 461 --><p class='noindent'>
+</p><!-- l. 462 --><p class='noindent'>
 </p>
-   <h5 class='subsubsectionHead' id='transform-and-subband-coding'><span class='titlemark'>1.2.2   </span> <a id='x1-100001.2.2'></a>Transform and subband coding</h5>
-                                                                  
-
-                                                                  
-<!-- l. 465 --><p class='noindent'>The name that has been given to the previous process is <a href='https://en.wikipedia.org/wiki/Sub-band_coding'>Subband
+   <h5 class='subsubsectionHead'><span class='titlemark'>1.2.2   </span> <a id='x1-100001.2.2'></a>Transform and subband coding</h5>
+<!-- l. 466 --><p class='noindent'>The name that has been given to the previous process is <a href='https://en.wikipedia.org/wiki/Sub-band_coding'>Subband
 Coding</a><span class='footnote-mark'><a href='#fn16x0' id='fn16x0-bk'><sup class='textsuperscript'>16</sup></a></span><a id='x1-10001f16'></a>.
 In this context, our analysis transform matrix \(\mathbf K\) (see the previous section) represents
 the taps of a 2-channels analysis <a href='https://en.wikipedia.org/wiki/Filter_bank'>Filter Bank (FB)</a> <span class='cite'>[<a href='#Xvetterli1995wavelets'>10</a>]</span>, and the forward transform is
@@ -240,7 +223,7 @@ synthesis FB that allows to recover \(\mathbf x\) (notice that in the figure, \(
                                                                   
 
                                                                   
-<!-- l. 488 --><p class='noindent' id='-a-channels-prfb-perfect-reconstruction-filter-bank-'><div style='text-align:center;'> <img src='graphics/PRFB.svg' /> </div>  <a id='x1-10002r1'></a>
+<!-- l. 489 --><p class='noindent'><div style='text-align:center;'> <img src='graphics/PRFB.svg' /> </div>  <a id='x1-10002r1'></a>
 <a id='x1-10003'></a>
 </p>
 <figcaption class='caption'><span class='id'>Figure 1: </span><span class='content'>A 2-channels PRFB (Perfect Reconstruction Filter Bank).         </span></figcaption><!-- tex4ht:label?: x1-10002r1  -->
@@ -248,7 +231,7 @@ synthesis FB that allows to recover \(\mathbf x\) (notice that in the figure, \(
 
                                                                   
    </figure>
-<!-- l. 494 --><p class='indent'>   Let’s suppose now that the analysis filters (represented by the taps of) \({\mathbf K}_0\)
+<!-- l. 495 --><p class='indent'>   Let’s suppose now that the analysis filters (represented by the taps of) \({\mathbf K}_0\)
 and \({\mathbf K}_1\) are applied to the input signal \(\mathbf x\) (now a sequence of \(N\) samples) using a
 <a href='https://en.wikipedia.org/wiki/Kernel_(image_processing)'>convolution</a> (without splitting \(\mathbf {x}\) into blocks). Let’s also suppose (as happens in the
 MST) that \({\mathbf K}_0\) is a low-pass filter and \({\mathbf K}_1\) is a high-pass filter, and that the <a href='https://en.wikipedia.org/wiki/Filter_(signal_processing)#The_transfer_function'>transfer
@@ -267,8 +250,8 @@ must have the same <a href='https://en.wikipedia.org/wiki/Bandwidth_(signal_proc
 mirror filters, we say that they form a <a href='https://en.wikipedia.org/wiki/Quadrature_mirror_filter'>Quadrature Mirror Filters (QMF)
 Bank</a>.
 </p>
-   <h5 class='subsubsectionHead' id='multichannel-filter-banks-and-psychoacoustic-frequency-resolution'><span class='titlemark'>1.2.3   </span> <a id='x1-110001.2.3'></a>Multichannel filter banks and psychoacoustic frequency resolution</h5>
-<!-- l. 541 --><p class='noindent'>Using the suitable filters, it is possible to build \(M\)-channels
+   <h5 class='subsubsectionHead'><span class='titlemark'>1.2.3   </span> <a id='x1-110001.2.3'></a>Multichannel filter banks and psychoacoustic frequency resolution</h5>
+<!-- l. 542 --><p class='noindent'>Using the suitable filters, it is possible to build \(M\)-channels
 PRFBs.<span class='footnote-mark'><a href='#fn19x0' id='fn19x0-bk'><sup class='textsuperscript'>19</sup></a></span><a id='x1-11001f19'></a>
 These filters can analyze (and synthesize) the signal \(\mathbf x\), decomposing it in (<a href='https://en.wikipedia.org/wiki/Low-pass_filter#Ideal_and_real_filters'>almost for
 sure</a>) overlaping frequency subbands with different bandwidth. The question here is
@@ -280,10 +263,10 @@ notebook <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master
 sound is low<span class='footnote-mark'><a href='#fn21x0' id='fn21x0-bk'><sup class='textsuperscript'>21</sup></a></span><a id='x1-11003f21'></a>.
 This fact is related with the way in which the <a href='https://en.wikipedia.org/wiki/Critical_band'>critical bands</a> are distributed in <a href='https://en.wikipedia.org/wiki/Bark_scale'>the
 bark scale</a>.
-</p><!-- l. 569 --><p class='noindent'>
+</p><!-- l. 570 --><p class='noindent'>
 </p>
-   <h5 class='subsubsectionHead' id='the-discrete-wavelet-transform'><span class='titlemark'>1.2.4   </span> <a id='x1-120001.2.4'></a>The Discrete Wavelet Transform</h5>
-<!-- l. 573 --><p class='noindent'>As it can be seen, the bark scale divides the audible spectrum into 24 subband of (a
+   <h5 class='subsubsectionHead'><span class='titlemark'>1.2.4   </span> <a id='x1-120001.2.4'></a>The Discrete Wavelet Transform</h5>
+<!-- l. 574 --><p class='noindent'>As it can be seen, the bark scale divides the audible spectrum into 24 subband of (a
 priori) “whimsical” bandwidths. However, it’s clear that a <a href='https://en.wikipedia.org/wiki/Octave_band'>dyadic partition of the
 spectrum</a> fits better than <a href='https://en.wikipedia.org/wiki/Wavelet_transform#Principle'>a lineal partition</a>. Considering this reason, from all
 the families of transforms designed to date, the most suitable one, from a
@@ -292,7 +275,7 @@ frequency partitioning point of view, is the Discrete Wavelet Transform
 
                                                                   
 (DWT).
-</p><!-- l. 583 --><p class='indent'>   The DWT has also other interesting features:
+</p><!-- l. 584 --><p class='indent'>   The DWT has also other interesting features:
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-12002x1'>It is <a href='https://en.wikipedia.org/wiki/Discrete_wavelet_transform#Time_complexity'>fast</a> (\(O(N)\), where \(N\) is the number of “transformed” samples).
      </li>
@@ -310,7 +293,7 @@ frequency partitioning point of view, is the Discrete Wavelet Transform
                                                                   
 
                                                                   
-<!-- l. 600 --><p class='noindent' id='-a-dyadic-levels-cascade-of-prfbs-'><div style='text-align:center;'> <img src='graphics/cascade.svg' /> </div>  <a id='x1-12007r2'></a>
+<!-- l. 601 --><p class='noindent'><div style='text-align:center;'> <img src='graphics/cascade.svg' /> </div>  <a id='x1-12007r2'></a>
 <a id='x1-12008'></a>
 </p>
 <figcaption class='caption'><span class='id'>Figure 2: </span><span class='content'>A dyadic 2-levels cascade of PRFBs.                           </span></figcaption><!-- tex4ht:label?: x1-12007r1  -->
@@ -318,8 +301,8 @@ frequency partitioning point of view, is the Discrete Wavelet Transform
 
                                                                   
    </figure>
-   <h5 class='subsubsectionHead' id='implementation-of-the-dwt'><span class='titlemark'>1.2.5   </span> <a id='x1-130001.2.5'></a>Implementation of the DWT</h5>
-<!-- l. 611 --><p class='noindent'>The DWT can be implemented in different ways:
+   <h5 class='subsubsectionHead'><span class='titlemark'>1.2.5   </span> <a id='x1-130001.2.5'></a>Implementation of the DWT</h5>
+<!-- l. 612 --><p class='noindent'>The DWT can be implemented in different ways:
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-13002x1'>Defining  the  transform  matrix  \(\mathbf K\)  (see  these  <a href='https://cseweb.ucsd.edu/classes/fa17/cse166-a/lec13.pdf'>slides</a>)  and  computing
      matrix-vector   multiplications,   which   requires   a   calculation   time
@@ -338,19 +321,19 @@ frequency partitioning point of view, is the Discrete Wavelet Transform
      to the FB implementation. DWTs implemented with lifting do not need
      to downsample and upsample the subbands, an operation that is wasting
      the calculus of half of the coefficients at each level of the cascade.</li></ol>
-<!-- l. 640 --><p class='noindent'>e
-</p><!-- l. 643 --><p class='noindent'>
+<!-- l. 641 --><p class='noindent'>e
+</p><!-- l. 644 --><p class='noindent'>
 </p>
-   <h5 class='subsubsectionHead' id='example-of-a-dwt-using-the-mst-filters'><span class='titlemark'>1.2.6   </span> <a id='x1-140001.2.6'></a>Example of a DWT using the MST filters</h5>
-<!-- l. 647 --><p class='noindent'>In order to clarify the previously introduced concepts, let’s build a DWT using the
+   <h5 class='subsubsectionHead'><span class='titlemark'>1.2.6   </span> <a id='x1-140001.2.6'></a>Example of a DWT using the MST filters</h5>
+<!-- l. 648 --><p class='noindent'>In order to clarify the previously introduced concepts, let’s build a DWT using the
 MST filters and lifting.
-</p><!-- l. 650 --><p class='indent'>
+</p><!-- l. 651 --><p class='indent'>
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-14002x1'>
                                                                   
 
                                                                   
-     <!-- l. 651 --><p class='noindent'>Lifting is based on the concept of dyadic <a href='https://en.wikipedia.org/wiki/Multiresolution_analysis'>multiresolution analysis</a>, and also with
+     <!-- l. 652 --><p class='noindent'>Lifting is based on the concept of dyadic <a href='https://en.wikipedia.org/wiki/Multiresolution_analysis'>multiresolution analysis</a>, and also with
      the so called <a href='https://en.wikipedia.org/wiki/Polyphase_matrix'>polyphase representation</a> of signals. In order to do that, we can
      rewrite the MST filter equations (our \({\mathbf K}_0\) and \(-{\mathbf K}_1\) filters in the previous section) as
      \begin {equation}  \begin {array}{rcl} {\mathbf l}^1_i &amp; = &amp; {\mathbf x}_{2i} + {\mathbf x}_{2i+1} \\ {\mathbf h}^1_i &amp; = &amp; {\mathbf x}_{2i+1} - {\mathbf x}_{2i}, \end {array} \label {eq:1dwt}  \end {equation}
@@ -359,17 +342,17 @@ MST filters and lifting.
      computed by Eq. \eqref{eq:1dwt} are the same than the decimated subbands
      computed by a 1-levels PRFB (based on that filters), and we say, therefore,
      that Eq. \eqref{eq:1dwt} computes the 1-levels DWT.
-     </p><!-- l. 675 --><p class='noindent'>Based on the 1-levels DWT, we define the 2-levels DWT as \begin {equation}  \begin {array}{rcl} {\mathbf l}^2_i &amp; = &amp; {\mathbf l}^1_{2i} + {\mathbf l}^1_{2i+1} \\ {\mathbf h}^2_i &amp; = &amp; {\mathbf l}^1_{2i+1} - {\mathbf l}^1_{2i}, \end {array} \label {eq:2dwt}  \end {equation}
+     </p><!-- l. 676 --><p class='noindent'>Based on the 1-levels DWT, we define the 2-levels DWT as \begin {equation}  \begin {array}{rcl} {\mathbf l}^2_i &amp; = &amp; {\mathbf l}^1_{2i} + {\mathbf l}^1_{2i+1} \\ {\mathbf h}^2_i &amp; = &amp; {\mathbf l}^1_{2i+1} - {\mathbf l}^1_{2i}, \end {array} \label {eq:2dwt}  \end {equation}
      that, as we can see, uses as input the output of Eq. \eqref{eq:1dwt}.
-     </p><!-- l. 685 --><p class='noindent'>In general, for a \(l\)-levels DWT, we get \begin {equation}  \begin {array}{rcl} {\mathbf l}^l_i &amp; = &amp; {\mathbf l}^{l-1}_{2i} + {\mathbf l}^{l-1}_{2i+1} \\ {\mathbf h}^l_i &amp; = &amp; {\mathbf l}^{l-1}_{2i+1} - {\mathbf l}^{l-1}_{2i}. \end {array} \label {eq:ldwt}  \end {equation}
-     </p><!-- l. 694 --><p class='noindent'>The \(l\)-levels DWT splits the signal spectrum in \(l+1\) subbands. If \(l=n\) (where \(N=2^n\)), we have
+     </p><!-- l. 686 --><p class='noindent'>In general, for a \(l\)-levels DWT, we get \begin {equation}  \begin {array}{rcl} {\mathbf l}^l_i &amp; = &amp; {\mathbf l}^{l-1}_{2i} + {\mathbf l}^{l-1}_{2i+1} \\ {\mathbf h}^l_i &amp; = &amp; {\mathbf l}^{l-1}_{2i+1} - {\mathbf l}^{l-1}_{2i}. \end {array} \label {eq:ldwt}  \end {equation}
+     </p><!-- l. 695 --><p class='noindent'>The \(l\)-levels DWT splits the signal spectrum in \(l+1\) subbands. If \(l=n\) (where \(N=2^n\)), we have
      the spectrum partition \begin {equation*}  | {\mathbf l}^l_0 | {\mathbf h}^l_0 | {\mathbf h}^{l-1}_0 {\mathbf h}^{l-1}_1 | {\mathbf h}^{l-2}_0 {\mathbf h}^{l-2}_1 {\mathbf h}^{l-2}_2 {\mathbf h}^{l-2}_3 | \cdots | {\mathbf h}^1_0 {\mathbf h}^1_1 \cdots {\mathbf h}^1_{2^{n-1}-1} |,  \end {equation*}
      where<span class='footnote-mark'><a href='#fn23x0' id='fn23x0-bk'><sup class='textsuperscript'>23</sup></a></span><a id='x1-14003f23'></a>
      it holds that \begin {equation}  1+\sum _{j=1}^l 2^{j-1}=2^n,  \end {equation}
      i.e., the number of DWT coefficients is also \(N\).
      </p></li>
 <li class='enumerate' id='x1-14005x2'>
-     <!-- l. 708 --><p class='noindent'>DWT performs a number of lifting steps, each one with 2 (sub)steps:
+     <!-- l. 709 --><p class='noindent'>DWT performs a number of lifting steps, each one with 2 (sub)steps:
          </p><ol class='enumerate2'>
 <li class='enumerate' id='x1-14007x1'>A <span class='ecbx-1000'>predict step</span>, that computes the \(\mathbf h\) subbands as a prediction error (that
          in general should be minimized) between the even samples (usually, the
@@ -380,28 +363,28 @@ MST filters and lifting.
          even samples and the prediction errors. For the MST, we have that (see
          also Eq. \eqref{eq:ldwt}) \begin {equation}  {\mathbf l}^l_i = 2{\mathbf l}^{l-1}_{2i} + {\mathbf h}^l_i.  \end {equation}
          </li></ol>
-     <!-- l. 728 --><p class='noindent'>Notice that these steps are invertible: \begin {equation}  \begin {array}{rcl} {\mathbf l}^{l-1}_{2i} &amp; = &amp; \frac {1}{2}({\mathbf l}^l_i - {\mathbf h}^l_i)\\ {\mathbf l}^{l-1}_{2i+1} &amp; = &amp; {\mathbf l}^{l-1}_{2i} + {\mathbf h}^l_i. \end {array}  \end {equation}
+     <!-- l. 729 --><p class='noindent'>Notice that these steps are invertible: \begin {equation}  \begin {array}{rcl} {\mathbf l}^{l-1}_{2i} &amp; = &amp; \frac {1}{2}({\mathbf l}^l_i - {\mathbf h}^l_i)\\ {\mathbf l}^{l-1}_{2i+1} &amp; = &amp; {\mathbf l}^{l-1}_{2i} + {\mathbf h}^l_i. \end {array}  \end {equation}
 </p>
      </li></ol>
                                                                   
 
                                                                   
-<!-- l. 740 --><p class='noindent'>
+<!-- l. 741 --><p class='noindent'>
 </p>
-   <h5 class='subsubsectionHead' id='wavelets-and-filter-banks'><span class='titlemark'>1.2.7   </span> <a id='x1-150001.2.7'></a>Wavelets and filter banks</h5>
-<!-- l. 743 --><p class='noindent'>In the context of the wavelet theory <span class='cite'>[<a href='#Xburrus2013wavelets'>3</a>]</span>, the response of the analysis low-pass filter (\({\mathbf K}_0\) in the MST) to
+   <h5 class='subsubsectionHead'><span class='titlemark'>1.2.7   </span> <a id='x1-150001.2.7'></a>Wavelets and filter banks</h5>
+<!-- l. 744 --><p class='noindent'>In the context of the wavelet theory <span class='cite'>[<a href='#Xburrus2013wavelets'>3</a>]</span>, the response of the analysis low-pass filter (\({\mathbf K}_0\) in the MST) to
 the <a href='https://en.wikipedia.org/?title=Unit_impulse&amp;redirect=no'>unit impulse</a><span class='footnote-mark'><a href='#fn24x0' id='fn24x0-bk'><sup class='textsuperscript'>24</sup></a></span><a id='x1-15001f24'></a>
 is known as the <span class='ecti-1000'>scaling function </span>and is usually denoted by \(\tilde \phi \), the response of the
 analysis high-pass filter (\({\mathbf K}_1\)) is known as the <span class='ecti-1000'>wavelet function </span>and it is usually denoted
 by \(\tilde \psi \), the response of the synthesis low-pass filter (\({\mathbf K}^{-1}_0\)) is denoted by \(\phi \) and the synthesis
 high-pass filter (\({\mathbf K}^{-1}_1\)) is represented by \(\psi \).
-</p><!-- l. 757 --><p class='indent'>   For the MST it holds that \(\tilde \phi \bot \tilde \psi \), \(\tilde \phi =\psi \) and \(\tilde \psi =\phi \), and this is also true for all orthogonal DWTs.
+</p><!-- l. 758 --><p class='indent'>   For the MST it holds that \(\tilde \phi \bot \tilde \psi \), \(\tilde \phi =\psi \) and \(\tilde \psi =\phi \), and this is also true for all orthogonal DWTs.
 Another important characteristic of orthogonal DWTs is that the filters cannot be
 <a href='https://en.wikipedia.org/wiki/Symmetry'>symmetric</a>.<span class='footnote-mark'><a href='#fn25x0' id='fn25x0-bk'><sup class='textsuperscript'>25</sup></a></span><a id='x1-15002f25'></a>
-</p><!-- l. 770 --><p class='noindent'>
+</p><!-- l. 771 --><p class='noindent'>
 </p>
-   <h5 class='subsubsectionHead' id='example-of-a-dwt-using-highorder-filters'><span class='titlemark'>1.2.8   </span> <a id='x1-160001.2.8'></a>Example of a DWT using “high”-order filters</h5>
-<!-- l. 773 --><p class='noindent'>The previous MST-based DWT is similar to other transforms such as the <a href='https://en.wikipedia.org/wiki/Haar_wavelet'>Haar
+   <h5 class='subsubsectionHead'><span class='titlemark'>1.2.8   </span> <a id='x1-160001.2.8'></a>Example of a DWT using “high”-order filters</h5>
+<!-- l. 774 --><p class='noindent'>The previous MST-based DWT is similar to other transforms such as the <a href='https://en.wikipedia.org/wiki/Haar_wavelet'>Haar
 transform</a>, in which we are using an 1-order predictor for removing the temporal
 redundancy. Let’s extend the idea of lifting to a prediction of order two. For that, we
 define the predict step as \begin {equation}  {\mathbf h}^l_i = {\mathbf l}^{l-1}_{2i+1} - \frac {1}{2}({\mathbf l}^{l-1}_{2i} + {\mathbf l}^{l-1}_{2i+2})  \end {equation}
@@ -411,30 +394,30 @@ is known as the <a href='https://en.wikipedia.org/wiki/Biorthogonal_wavelet'>bio
 Biorthogonal<span class='footnote-mark'><a href='#fn26x0' id='fn26x0-bk'><sup class='textsuperscript'>26</sup></a></span><a id='x1-16001f26'></a>
 filters can be <a href='http://wavelets.pybytes.com/'>easely recognized</a> because they are always symmetric. When the filters
 of the PRFB are biorthogonal, they also satisfy that \(\psi \bot \tilde \phi \) and \(\phi \bot \tilde \psi \).
-</p><!-- l. 798 --><p class='indent'>   This linear transform is also invertible by simply reversing the steps: \begin {equation}  \begin {array}{rcl} {\mathbf l}^{l-1}_{2i} &amp; = &amp; {\mathbf l}^l_i - \frac {1}{4}({\mathbf h}^l_{i-1} + {\mathbf h}^l_i)\\ {\mathbf l}^{l-1}_{2i+1} &amp; = &amp; {\mathbf h}^l_i + \frac {1}{2}({\mathbf l}^{l-1}_{2i} + {\mathbf l}^{l-1}_{2i+2}). \end {array}  \end {equation}
-</p><!-- l. 808 --><p class='noindent'>
+</p><!-- l. 799 --><p class='indent'>   This linear transform is also invertible by simply reversing the steps: \begin {equation}  \begin {array}{rcl} {\mathbf l}^{l-1}_{2i} &amp; = &amp; {\mathbf l}^l_i - \frac {1}{4}({\mathbf h}^l_{i-1} + {\mathbf h}^l_i)\\ {\mathbf l}^{l-1}_{2i+1} &amp; = &amp; {\mathbf h}^l_i + \frac {1}{2}({\mathbf l}^{l-1}_{2i} + {\mathbf l}^{l-1}_{2i+2}). \end {array}  \end {equation}
+</p><!-- l. 809 --><p class='noindent'>
 </p>
-   <h5 class='subsubsectionHead' id='quantization-of-the-subbands1'><span class='titlemark'>1.2.9   </span> <a id='x1-170001.2.9'></a>Quantization of the subbands</h5>
-<!-- l. 810 --><p class='noindent'>To determine the quantization step size to be used in the different subbands of a
+   <h5 class='subsubsectionHead'><span class='titlemark'>1.2.9   </span> <a id='x1-170001.2.9'></a>Quantization of the subbands</h5>
+<!-- l. 811 --><p class='noindent'>To determine the quantization step size to be used in the different subbands of a
 (always orthogonal) decomposition should be proportional the gain of the filters used
 (usually only two). The gain of a filter correspond to the L\(_2\) norm of its taps. And the
 final gain applied to a subband depends logically on the number of times that we
 have applied the filter in the cascade.
-</p><!-- l. 817 --><p class='indent'>   If we don’t know the taps, we can use the algorithm described in the
-Section <a href='#quantization-of-the-subbands'>1.1.4<!-- tex4ht:ref: sec:quantization_subbands_spatial  --></a> to find the gain of the subbands.
+</p><!-- l. 818 --><p class='indent'>   If we don’t know the taps, we can use the algorithm described in the
+Section <a href='#x1-70001.1.4'>1.1.4<!-- tex4ht:ref: sec:quantization_subbands_spatial  --></a> to find the gain of the subbands.
                                                                   
 
                                                                   
-</p><!-- l. 821 --><p class='indent'>   Finally, notice that if the transform in orthonormal, by definition, the gain of the
+</p><!-- l. 822 --><p class='indent'>   Finally, notice that if the transform in orthonormal, by definition, the gain of the
 analysis and synthesis filters is always 1, and also this is the gain of the
 subbands.
-</p><!-- l. 827 --><p class='noindent'>
+</p><!-- l. 828 --><p class='noindent'>
 </p>
-   <h4 class='subsectionHead' id='overlapping-the-dwt'><span class='titlemark'>1.3   </span> <a id='x1-180001.3'></a>Overlapping the DWT</h4>
-<!-- l. 830 --><p class='noindent'>
+   <h4 class='subsectionHead'><span class='titlemark'>1.3   </span> <a id='x1-180001.3'></a>Overlapping the DWT</h4>
+<!-- l. 831 --><p class='noindent'>
 </p>
-   <h4 class='subsectionHead' id='-httpsenwikipediaorgwikilappedtransformoverlapped-block-transforms-for-minimizing-the-distortion'><span class='titlemark'>1.4   </span> <a id='x1-190001.4'></a><a href='https://en.wikipedia.org/wiki/Lapped_transform'>Overlapped block transforms</a> for minimizing the distortion</h4>
-<!-- l. 833 --><p class='noindent'>Transform coding implies to split the signal into blocks of data (chunks), and to
+   <h4 class='subsectionHead'><span class='titlemark'>1.4   </span> <a id='x1-190001.4'></a><a href='https://en.wikipedia.org/wiki/Lapped_transform'>Overlapped block transforms</a> for minimizing the distortion</h4>
+<!-- l. 834 --><p class='noindent'>Transform coding implies to split the signal into blocks of data (chunks), and to
 compute the transform of each chunk. When the output coefficients are
 quantized, it is possible that significative (and unpleasant) distortions may
 appear in the border frames of the chunks (see Fig. <a href='#x1-19001r3'>3<!-- tex4ht:ref: fig:3_chunks  --></a>). This is a consequence
@@ -442,7 +425,7 @@ that in the prediction step used by the DWT in the limits of the chunks
 generate different predictions at the beginning and the end of the adjacent
 chunks.
 </p>
-   <figure class='figure' id='-on-the-topleft-three-consecutive-chunks-of-a-real-mono-audio-sequence-on-the-topright-the-reconstruction-of-the-chunks-without-overlapping-on-the-bottomleft-the-extended-central-chunk-on-the-bottomright-the-reconstruction-of-the-extended-chunk-see-the-notebook-httpsgithubcomtecnologiasmultimediaintercomblobmasterdocsquantizationdwtipynbquantization-in-the-dwt-domain-'> 
+   <figure class='figure'> 
 
                                                                   
 
@@ -465,21 +448,21 @@ bottom-right,  the  reconstruction  of  the  extended  chunk.  See  the  noteboo
 
                                                                   
    </figure>
-<!-- l. 858 --><p class='indent'>   One solution to avoid signal discontinuitites between chunks is to overlap the
+<!-- l. 859 --><p class='indent'>   One solution to avoid signal discontinuitites between chunks is to overlap the
 chunks. Thus, the current (\(i\)-th) chunk uses also the last frames of the previous (\((i-1)\)-th)
 chunk and the first frames of the next (\((i+1)\)-th) chunk to compute the transform of the
 current extended (\(i\)-th) chunk (see the Fig. <a href='#x1-21009r4'>4<!-- tex4ht:ref: fig:subbands  --></a>). This has been described in the
 following algorithm:
 </p>
-   <h4 class='likesubsectionHead' id='encoder'><a id='x1-200001.4'></a>Encoder:</h4>
-<!-- l. 866 --><p class='noindent'>
+   <h4 class='likesubsectionHead'><a id='x1-200001.4'></a>Encoder:</h4>
+<!-- l. 867 --><p class='noindent'>
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-20002x1'>\({\mathbf C}_{-1}\leftarrow {\mathbf 0}\), a zero chunk.
      </li>
 <li class='enumerate' id='x1-20004x2'>Input \({\mathbf C}_0\).
      </li>
 <li class='enumerate' id='x1-20006x3'>
-     <!-- l. 869 --><p class='noindent'>For \(i\in \{0,1,\cdots \}\):
+     <!-- l. 870 --><p class='noindent'>For \(i\in \{0,1,\cdots \}\):
          </p><ol class='enumerate2'>
 <li class='enumerate' id='x1-20008x1'>Input \({\mathbf C}_{i+1}\).
          </li>
@@ -499,14 +482,14 @@ following algorithm:
          </li>
 <li class='enumerate' id='x1-20018x6'>\({\mathbf C}_i\leftarrow {\mathbf C}_{i+1}\).</li></ol>
      </li></ol>
-<!-- l. 888 --><p class='noindent'>Notice that we are following the <a href='https://numpy.org/doc/stable/reference/'>NumPy</a> <span class='cite'>[<a href='#Xnumpy'>1</a>, <a href='#Xharris2020array'>5</a>]</span> <a href='https://www.pythoninformer.com/python-libraries/numpy/index-and-slice/'>slicing</a> notation.
-</p><!-- l. 897 --><p class='noindent'>
+<!-- l. 889 --><p class='noindent'>Notice that we are following the <a href='https://numpy.org/doc/stable/reference/'>NumPy</a> <span class='cite'>[<a href='#Xnumpy'>1</a>, <a href='#Xharris2020array'>5</a>]</span> <a href='https://www.pythoninformer.com/python-libraries/numpy/index-and-slice/'>slicing</a> notation.
+</p><!-- l. 898 --><p class='noindent'>
 </p>
-   <h4 class='likesubsectionHead' id='decoder'><a id='x1-210001.4'></a>Decoder:</h4>
-<!-- l. 898 --><p class='noindent'>
+   <h4 class='likesubsectionHead'><a id='x1-210001.4'></a>Decoder:</h4>
+<!-- l. 899 --><p class='noindent'>
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-21002x1'>
-     <!-- l. 899 --><p class='noindent'>For \(i\in \{0,1,\cdots \}\):
+     <!-- l. 900 --><p class='noindent'>For \(i\in \{0,1,\cdots \}\):
          </p><ol class='enumerate2'>
 <li class='enumerate' id='x1-21004x1'>Input decomposition \({\mathbf D}_i\).
          </li>
@@ -522,7 +505,7 @@ following algorithm:
                                                                   
 
                                                                   
-<!-- l. 918 --><p class='noindent' id='-structure-in-the-dwt-domain-of-an-extended-chunk-for-l-o-is-the-number-of-overlapped-frames-between-adajacent-chunks-cio-represents-the-last-o-frames-of-chunk-ci-and-cio-the-first-o-frames-of-the-chunk-ci-'><div style='text-align:center;'> <img src='graphics/subbands.svg' /> </div>  <a id='x1-21009r4'></a>
+<!-- l. 919 --><p class='noindent'><div style='text-align:center;'> <img src='graphics/subbands.svg' /> </div>  <a id='x1-21009r4'></a>
 <a id='x1-21010'></a>
 </p>
 <figcaption class='caption'><span class='id'>Figure 4: </span><span class='content'>Structure in the DWT domain of an extended chunk for \(l=2\). \(o\) is the
@@ -532,11 +515,11 @@ frames of chunk \({\mathbf C}_{i-1}\), and \({\mathbf C}_{i+1}[:o]\) the first \
 
                                                                   
    </figure>
-<!-- l. 927 --><p class='indent'>   This idea has been implemented in the notebook <a href='https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/overlapped_DWT_I.ipynb'>Overlapped DWT</a>, and the
+<!-- l. 928 --><p class='indent'>   This idea has been implemented in the notebook <a href='https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/overlapped_DWT_I.ipynb'>Overlapped DWT</a>, and the
 result can be seen in the Fig. <a href='#x1-19001r3'>3<!-- tex4ht:ref: fig:3_chunks  --></a>.
 </p>
-   <h4 class='subsectionHead' id='reducing-the-data-overhead'><span class='titlemark'>1.5   </span> <a id='x1-220001.5'></a>Reducing the data overhead</h4>
-<!-- l. 938 --><p class='noindent'>Unfortunately, the previous algorithm sends twice the DWT coefficients of the
+   <h4 class='subsectionHead'><span class='titlemark'>1.5   </span> <a id='x1-220001.5'></a>Reducing the data overhead</h4>
+<!-- l. 939 --><p class='noindent'>Unfortunately, the previous algorithm sends twice the DWT coefficients of the
 overlapped areas (in the Fig. <a href='#x1-21009r4'>4<!-- tex4ht:ref: fig:subbands  --></a>, \(\{{\mathbf D}_i.{\mathbf l}^2[-o/4:], {\mathbf D}_i.{\mathbf l}^2[:o/4], {\mathbf D}_i.{\mathbf h}^2[-o/4:], {\mathbf D}_i.{\mathbf h}^2[:o/4], {\mathbf D}_i.{\mathbf h}^1[-o/2:], {\mathbf D}_i.{\mathbf h}^1[:o/2]\}\)). To avoid this waste of bandwidth, we can reuse the
 received coefficients of the overlapped areas. This procedure has been described in
 the Fig. <a href='#x1-22001r5'>5<!-- tex4ht:ref: fig:overlapping  --></a>, and, as it can be seen, the encoding algorithm is identical to the
@@ -554,7 +537,7 @@ Notice that now, the number of sent coefficients is \(\text {len}({\mathbf C}_i)
                                                                   
 
                                                                   
-<!-- l. 955 --><p class='noindent' id='-block-overlapping-in-the-dwt-domain-for-l-only-the-shadded-coefficients-are-transmitted-notice-that-to-be-reconstructed-each-chunk-depends-on-some-coefficients-of-the-adjacent-blocks-only-some-dependencies-have-been-indicated-'><div style='text-align:center;'> <img src='graphics/overlapping.svg' /> </div>  <a id='x1-22001r5'></a>
+<!-- l. 956 --><p class='noindent'><div style='text-align:center;'> <img src='graphics/overlapping.svg' /> </div>  <a id='x1-22001r5'></a>
 <a id='x1-22002'></a>
 </p>
 <figcaption class='caption'><span class='id'>Figure 5:  </span><span class='content'>Block  overlapping  in  the  DWT  domain  for  \(l=2\).  Only  the  shadded
@@ -565,17 +548,17 @@ have been indicated).                                                </span></fi
 
                                                                   
    </figure>
-<!-- l. 975 --><p class='indent'>   The codec now can be described by:
+<!-- l. 976 --><p class='indent'>   The codec now can be described by:
 </p>
-   <h4 class='likesubsectionHead' id='encoder1'><a id='x1-230001.5'></a>Encoder:</h4>
-<!-- l. 978 --><p class='noindent'>
+   <h4 class='likesubsectionHead'><a id='x1-230001.5'></a>Encoder:</h4>
+<!-- l. 979 --><p class='noindent'>
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-23002x1'>\({\mathbf C}_{-1}\leftarrow {\mathbf 0}\), a zero chunk.
      </li>
 <li class='enumerate' id='x1-23004x2'>Input \({\mathbf C}_0\).
      </li>
 <li class='enumerate' id='x1-23006x3'>
-     <!-- l. 981 --><p class='noindent'>For \(i\in \{0,1,\cdots \}\):
+     <!-- l. 982 --><p class='noindent'>For \(i\in \{0,1,\cdots \}\):
          </p><ol class='enumerate2'>
 <li class='enumerate' id='x1-23008x1'>Input \({\mathbf C}_{i+1}\).
          </li>
@@ -592,16 +575,16 @@ have been indicated).                                                </span></fi
          </li>
 <li class='enumerate' id='x1-23018x6'>\({\mathbf C}_i\leftarrow {\mathbf C}_{i+1}\).</li></ol>
      </li></ol>
-<!-- l. 1007 --><p class='noindent'>
+<!-- l. 1008 --><p class='noindent'>
 </p>
-   <h4 class='likesubsectionHead' id='decoder-ignores-overlapping'><a id='x1-240001.5'></a>Decoder (ignores overlapping):</h4>
-<!-- l. 1008 --><p class='noindent'>This decoder ignores the adjacent chunks in the DWT domain, but notice that it uses
+   <h4 class='likesubsectionHead'><a id='x1-240001.5'></a>Decoder (ignores overlapping):</h4>
+<!-- l. 1009 --><p class='noindent'>This decoder ignores the adjacent chunks in the DWT domain, but notice that it uses
 the right coefficients (those computed using overlapping chunks). This should provide
 reconstructions of the chunks with a higher quality that in the previous
 milestone.
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-24002x1'>
-     <!-- l. 1010 --><p class='noindent'>For \(i\in \{0,1,\cdots \}\):
+     <!-- l. 1011 --><p class='noindent'>For \(i\in \{0,1,\cdots \}\):
          </p><ol class='enumerate2'>
 <li class='enumerate' id='x1-24004x1'>Input the decomposition subset \({\mathbf D}_i\).
          </li>
@@ -609,10 +592,10 @@ milestone.
          </li>
 <li class='enumerate' id='x1-24008x3'>Output \({\mathbf C}_i\).</li></ol>
      </li></ol>
-<!-- l. 1018 --><p class='noindent'>
+<!-- l. 1019 --><p class='noindent'>
 </p>
-   <h4 class='likesubsectionHead' id='decoder-uses-overlapping'><a id='x1-250001.5'></a>Decoder (uses overlapping):</h4>
-<!-- l. 1020 --><p class='noindent'>
+   <h4 class='likesubsectionHead'><a id='x1-250001.5'></a>Decoder (uses overlapping):</h4>
+<!-- l. 1021 --><p class='noindent'>
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-25002x1'>\({\mathbf D}_{-1}\leftarrow {\mathbf 0}\).
                                                                   
@@ -622,7 +605,7 @@ milestone.
 <li class='enumerate' id='x1-25004x2'>Input decomposition \({\mathbf D}_0\).
      </li>
 <li class='enumerate' id='x1-25006x3'>
-     <!-- l. 1023 --><p class='noindent'>For \(i\in \{0,1,\cdots \}\):
+     <!-- l. 1024 --><p class='noindent'>For \(i\in \{0,1,\cdots \}\):
          </p><ol class='enumerate2'>
 <li class='enumerate' id='x1-25008x1'>Input decomposition \({\mathbf D}_{i+1}\).
          </li>
@@ -636,37 +619,37 @@ milestone.
          </li>
 <li class='enumerate' id='x1-25018x6'>\({\mathbf D}_i \leftarrow {\mathbf D}_{i+1}\).</li></ol>
      </li></ol>
-<!-- l. 1047 --><p class='noindent'>
+<!-- l. 1048 --><p class='noindent'>
 </p>
-   <h3 class='sectionHead' id='what-you-have-to-do'><span class='titlemark'>2   </span> <a id='x1-260002'></a>What you have to do?</h3>
+   <h3 class='sectionHead'><span class='titlemark'>2   </span> <a id='x1-260002'></a>What you have to do?</h3>
                                                                   
 
                                                                   
-<!-- l. 1050 --><p class='noindent'>
+<!-- l. 1051 --><p class='noindent'>
 </p>
-   <h4 class='subsectionHead' id='determine-the-rd-curves-for-the-mst'><span class='titlemark'>2.1   </span> <a id='x1-270002.1'></a>Determine the RD curves for the MST</h4>
-<!-- l. 1052 --><p class='noindent'>As we did in the previous milestone, generate the RD curves for a set of simulated
+   <h4 class='subsectionHead'><span class='titlemark'>2.1   </span> <a id='x1-270002.1'></a>Determine the RD curves for the MST</h4>
+<!-- l. 1053 --><p class='noindent'>As we did in the previous milestone, generate the RD curves for a set of simulated
 transmission contexts. Use the modules <span class='ectt-1000'>stereo_MST_coding{|_16|_32}.py</span>. As you
 can see, they differs in how the transform has been implemented.
-</p><!-- l. 1058 --><p class='noindent'>
+</p><!-- l. 1059 --><p class='noindent'>
 </p>
-   <h4 class='subsectionHead' id='determine-the-rd-curves-for-the-dwt'><span class='titlemark'>2.2   </span> <a id='x1-280002.2'></a>Determine the RD curves for the DWT</h4>
-<!-- l. 1061 --><p class='noindent'>Rebuild the RD curves considering also the temporal decorrelation. Use
+   <h4 class='subsectionHead'><span class='titlemark'>2.2   </span> <a id='x1-280002.2'></a>Determine the RD curves for the DWT</h4>
+<!-- l. 1062 --><p class='noindent'>Rebuild the RD curves considering also the temporal decorrelation. Use
 <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>temporal_no_overlapped_DWT_coding.py</span></span></span>. Notice that the number of levels \(l\) of
 the DWT (computed using <a href='https://pywavelets.readthedocs.io/en/latest/'>PyWavelets</a> <span class='cite'>[<a href='#Xlee2019pywavelets'>6</a>]</span>) can have a high impact on the
 amount of energy concentration achieved by the DWT, and therefore, on the
 efficiency of coding system. Show such impact. Experiment also with the wavelet
 name.
-</p><!-- l. 1071 --><p class='noindent'>
+</p><!-- l. 1072 --><p class='noindent'>
 </p>
-   <h4 class='subsectionHead' id='determine-the-rd-curves-for-the-overlapped-dwt'><span class='titlemark'>2.3   </span> <a id='x1-290002.3'></a>Determine the RD curves for the overlapped DWT</h4>
-<!-- l. 1074 --><p class='noindent'>Finally, redo the curves considering now the block overlapping
+   <h4 class='subsectionHead'><span class='titlemark'>2.3   </span> <a id='x1-290002.3'></a>Determine the RD curves for the overlapped DWT</h4>
+<!-- l. 1075 --><p class='noindent'>Finally, redo the curves considering now the block overlapping
 (<span class='obeylines-h'><span class='verb'><span class='ectt-1000'>temporal_overlapped_DWT_coding.py</span></span></span>). It is a good idea to put all the RD curves
 together (in the same graph), to compare easely,
-</p><!-- l. 1080 --><p class='noindent'>
+</p><!-- l. 1081 --><p class='noindent'>
 </p>
-   <h4 class='subsectionHead' id='answer-these-questions'><span class='titlemark'>2.4   </span> <a id='x1-300002.4'></a>Answer these questions</h4>
-<!-- l. 1083 --><p class='noindent'>
+   <h4 class='subsectionHead'><span class='titlemark'>2.4   </span> <a id='x1-300002.4'></a>Answer these questions</h4>
+<!-- l. 1084 --><p class='noindent'>
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-30002x1'>Which has been the gain of the filters used in your experiments?
      </li>
@@ -680,10 +663,10 @@ together (in the same graph), to compare easely,
      MP3) for exploiting the temporal redundancy? Enumerate the systems
      and the used transform(s).
 </li></ol>
-<!-- l. 1102 --><p class='noindent'>
+<!-- l. 1103 --><p class='noindent'>
 </p>
-   <h4 class='subsectionHead' id='visualize'><span class='titlemark'>2.5   </span> <a id='x1-310002.5'></a>Visualize</h4>
-<!-- l. 1105 --><p class='noindent'>Visualize the effects (in the DWT domain) of quantization.
+   <h4 class='subsectionHead'><span class='titlemark'>2.5   </span> <a id='x1-310002.5'></a>Visualize</h4>
+<!-- l. 1106 --><p class='noindent'>Visualize the effects (in the DWT domain) of quantization.
                                                                   
 
                                                                   
@@ -694,14 +677,14 @@ python temporal_overlapped_DWT_coding.py -i 6 -o 6 --show_stats -q 8192
 # Connect the output of temporal_overlapped_DWT_coding.py to the input of dwt5.py
 python dwt5.py -d 9
 </pre>
-<!-- l. 1111 --><p class='nopar'>
-</p><!-- l. 1117 --><p class='noindent'>
+<!-- l. 1112 --><p class='nopar'>
+</p><!-- l. 1118 --><p class='noindent'>
 </p>
-   <h3 class='sectionHead' id='deliverables'><span class='titlemark'>3   </span> <a id='x1-320003'></a>Deliverables</h3>
-<!-- l. 1118 --><p class='noindent'>A description of the experiments and their results.
-</p><!-- l. 1120 --><p class='noindent'>
+   <h3 class='sectionHead'><span class='titlemark'>3   </span> <a id='x1-320003'></a>Deliverables</h3>
+<!-- l. 1119 --><p class='noindent'>A description of the experiments and their results.
+</p><!-- l. 1121 --><p class='noindent'>
 </p>
-   <h3 class='sectionHead' id='resources'><span class='titlemark'>4   </span> <a id='x1-330004'></a>Resources</h3>
+   <h3 class='sectionHead'><span class='titlemark'>4   </span> <a id='x1-330004'></a>Resources</h3>
     <div class='thebibliography'>
     <p class='bibitem'><span class='biblabel'>
   [1]<span class='bibsp'>   </span></span><a id='Xnumpy'></a>S. Berg et al. <a href='https://numpy.org/'>The NumPy project</a>.
@@ -732,8 +715,8 @@ python dwt5.py -d 9
     </span><span class='ecti-1000'>Source Software</span>, 4(36):1237, 2019.
     </p>
     <p class='bibitem'><span class='biblabel'>
-  [7]<span class='bibsp'>   </span></span><a id='Xsayood2017introduction'></a>K. Sayood.    <a href='http://rahilshaikh.weebly.com/uploads/1/1/6/3/11635894/data_compression.pdf'><span class='ecti-1000'>Introduction  to  Data  Compression</span></a>  <a href='https://people.cs.nctu.edu.tw/~cmliu/Courses/Compression/'><span class='ecti-1000'>(Slides)</span></a>.    Morgan
-    Kaufmann, 2017.
+  [7]<span class='bibsp'>   </span></span><a id='Xsayood2017introduction'></a>K. Sayood.  <a href='http://rahilshaikh.weebly.com/uploads/1/1/6/3/11635894/data_compression.pdf'><span class='ecti-1000'>Introduction to Data Compression</span></a>.  Morgan Kaufmann,
+    2017.
     </p>
     <p class='bibitem'><span class='biblabel'>
   [8]<span class='bibsp'>   </span></span><a id='Xstrang4linear'></a>G. Strang.    <a href='https://ia802906.us.archive.org/18/items/StrangG.LinearAlgebraAndItsApplications45881001/%5BStrang_G.%5D_Linear_algebra_and_its_applications%284%29%5B5881001%5D.pdf'><span class='ecti-1000'>Linear  Algebra  and  Its  Applications</span></a>.    Belmont,  CA:
@@ -752,11 +735,11 @@ python dwt5.py -d 9
     </span><span class='ecti-1000'>Processing</span></a>. Cambridge University Press, 2014.
 </p>
     </div>
-<p id='references'><a id='Q1-1-39'></a>
+<p><a id='Q1-1-39'></a></p>
                                                                   
 
                                                                   
-   </p><div class='footnotes'><!-- l. 64 --><p class='indent'>     <span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='ecrm-0800'>Adding two vectors in the plane produces a third one also in the plane; multiplying a vector
+   <div class='footnotes'><!-- l. 64 --><p class='indent'>     <span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='ecrm-0800'>Adding two vectors in the plane produces a third one also in the plane; multiplying a vector
 </span><span class='ecrm-0800'>by a real scalar produces a second vector also in the plane. These two ingrained facts make the real
 </span><span class='ecrm-0800'>plane be a vector space. </span><span class='cite'><span class='ecrm-0800'>[</span><a href='#Xvetterli2014foundations'><span class='ecrm-0800'>11</span></a><span class='ecrm-0800'>]</span></span></p>
 <!-- l. 174 --><p class='indent'>     <span class='footnote-mark'><a href='#fn2x0-bk' id='fn2x0'><sup class='textsuperscript'>2</sup></a></span><span class='ecrm-0800'>The inner product between two vectors is in some sense a measure of how “similar” they are
@@ -778,16 +761,16 @@ python dwt5.py -d 9
 </span><span class='ecrm-0800'>be made up of more than one coefficient and therefore, we would be speaking of the coefficients of
 </span><span class='ecrm-0800'>the subband, instead of only one coefficient.</span></p>
 <!-- l. 241 --><p class='indent'>     <span class='footnote-mark'><a href='#fn7x0-bk' id='fn7x0'><sup class='textsuperscript'>7</sup></a></span><span class='ecrm-0800'>The total </span><a href='https://en.wikipedia.org/wiki/Distortion'><span class='ecrm-0800'>distortion</span></a> <span class='ecrm-0800'>is the sum of the distortion contribution of each subband </span><span class='cite'><span class='ecrm-0800'>[</span><a href='#Xsayood2017introduction'><span class='ecrm-0800'>7</span></a><span class='ecrm-0800'>]</span></span><span class='ecrm-0800'>.</span></p>
-<!-- l. 282 --><p class='indent'>     <span class='footnote-mark'><a href='#fn8x0-bk' id='fn8x0'><sup class='textsuperscript'>8</sup></a></span><span class='ecrm-0800'>Notice, however, that this would solve the problem of controlling the bit-rate because using
+<!-- l. 283 --><p class='indent'>     <span class='footnote-mark'><a href='#fn8x0-bk' id='fn8x0'><sup class='textsuperscript'>8</sup></a></span><span class='ecrm-0800'>Notice, however, that this would solve the problem of controlling the bit-rate because using
 </span><span class='ecrm-0800'>the RD curves we know how many bits will require each subband.</span></p>
-<!-- l. 287 --><p class='indent'>     <span class='footnote-mark'><a href='#fn9x0-bk' id='fn9x0'><sup class='textsuperscript'>9</sup></a></span><span class='ecrm-0800'>Remember, two samples of a stereo frame in our case because we are removing the spatial
+<!-- l. 288 --><p class='indent'>     <span class='footnote-mark'><a href='#fn9x0-bk' id='fn9x0'><sup class='textsuperscript'>9</sup></a></span><span class='ecrm-0800'>Remember, two samples of a stereo frame in our case because we are removing the spatial
 </span><span class='ecrm-0800'>redundancy.</span></p>
-<!-- l. 308 --><p class='indent'>     <span class='footnote-mark'><a href='#fn10x0-bk' id='fn10x0'><sup class='textsuperscript'>10</sup></a></span><span class='ecrm-0800'>Notice that the quantization error is generated in the transform domain and perceived in the
+<!-- l. 309 --><p class='indent'>     <span class='footnote-mark'><a href='#fn10x0-bk' id='fn10x0'><sup class='textsuperscript'>10</sup></a></span><span class='ecrm-0800'>Notice that the quantization error is generated in the transform domain and perceived in the
 </span><span class='ecrm-0800'>signal domain after appliying the inverse transform.</span></p>
-<!-- l. 314 --><p class='indent'>     <span class='footnote-mark'><a href='#fn11x0-bk' id='fn11x0'><sup class='textsuperscript'>11</sup></a></span><span class='ecrm-0800'>Notice that the important here is the relative gain of each subband. For example, if the gain
+<!-- l. 315 --><p class='indent'>     <span class='footnote-mark'><a href='#fn11x0-bk' id='fn11x0'><sup class='textsuperscript'>11</sup></a></span><span class='ecrm-0800'>Notice that the important here is the relative gain of each subband. For example, if the gain
 </span><span class='ecrm-0800'>of</span> \({\mathbf K}_0\) <span class='ecrm-0800'>were</span> \(2\) <span class='ecrm-0800'>and the gain of</span> \({\mathbf K}_1\) <span class='ecrm-0800'>were</span> \(1\)<span class='ecrm-0800'>, and the dynamic range of</span> \({\mathbf w}_0\) <span class='ecrm-0800'>and</span> \({\mathbf w}_1\) <span class='ecrm-0800'>is the same, we could use</span> \(\Delta _1=2\Delta _0\) <span class='ecrm-0800'>and
 </span><span class='ecrm-0800'>expect to minimize the distortion.</span></p>
-<!-- l. 333 --><p class='indent'>     <span class='footnote-mark'><a href='#fn12x0-bk' id='fn12x0'><sup class='textsuperscript'>12</sup></a></span><span class='ecrm-0800'>L</span>\(_2(f)\) <span class='ecrm-0800'>(where</span> \(f\) <span class='ecrm-0800'>is a function) is the set of all functions with finite energy and constitues a
+<!-- l. 334 --><p class='indent'>     <span class='footnote-mark'><a href='#fn12x0-bk' id='fn12x0'><sup class='textsuperscript'>12</sup></a></span><span class='ecrm-0800'>L</span>\(_2(f)\) <span class='ecrm-0800'>(where</span> \(f\) <span class='ecrm-0800'>is a function) is the set of all functions with finite energy and constitues a
 </span><span class='ecrm-0800'>vector space </span><span class='cite'><span class='ecrm-0800'>[</span><a href='#Xsayood2017introduction'><span class='ecrm-0800'>7</span></a><span class='ecrm-0800'>]</span></span><span class='ecrm-0800'>.</span> \(L_2({\mathbb R})\) <span class='ecrm-0800'>of simply</span> \(L_2\) <span class='ecrm-0800'>is the space of all functions</span> \(f(t)\) <span class='ecrm-0800'>with a well defined integral of
 </span><span class='ecrm-0800'>the square of the modulus of the function. The</span> \(L\) <span class='ecrm-0800'>signifies a Lebesque integral, the “2”
 </span><span class='ecrm-0800'>denotes the integral of the square of the modulus of the function, and</span> \(\mathbb R\) <span class='ecrm-0800'>states that the
@@ -798,32 +781,32 @@ python dwt5.py -d 9
 <!-- l. 369 --><p class='indent'>     <span class='footnote-mark'><a href='#fn13x0-bk' id='fn13x0'><sup class='textsuperscript'>13</sup></a></span><span class='ecrm-0800'>Notice that this operation will “extract” the</span> \(i\)<span class='ecrm-0800'>-th column from</span> \({\mathbf K}^{-1}\) <span class='ecrm-0800'>that is equivalent
 </span><span class='ecrm-0800'>to say that will “extract” the</span> \(i\)<span class='ecrm-0800'>-th row of</span> \(\mathbf K\)<span class='ecrm-0800'>,</span> \({\mathbf K}_i\) <span class='ecrm-0800'>(remember that for orthogonal transforms,</span>
 \({\mathbf K}^{-1}={\mathbf K}^{\text T}\)<span class='ecrm-0800'>).</span></p>
-<!-- l. 424 --><p class='indent'>     <span class='footnote-mark'><a href='#fn14x0-bk' id='fn14x0'><sup class='textsuperscript'>14</sup></a></span><span class='ecrm-0800'>Notice that, beacuse the MST and the transform used in this milestone are both lineal, the
+<!-- l. 425 --><p class='indent'>     <span class='footnote-mark'><a href='#fn14x0-bk' id='fn14x0'><sup class='textsuperscript'>14</sup></a></span><span class='ecrm-0800'>Notice that, beacuse the MST and the transform used in this milestone are both lineal, the
 </span><span class='ecrm-0800'>order in which the transforms are applied is irrelevant. For this reason, we could also have used
 </span><span class='ecrm-0800'>the temporal transform inside of each channel of samples, and then, remove the spatial
 </span><span class='ecrm-0800'>redundancy.</span></p>
-<!-- l. 457 --><p class='indent'>     <span class='footnote-mark'><a href='#fn15x0-bk' id='fn15x0'><sup class='textsuperscript'>15</sup></a></span><span class='ecrm-0800'>Notice that is we dead-zone quantize a decomposition and most of the coefficients
+<!-- l. 458 --><p class='indent'>     <span class='footnote-mark'><a href='#fn15x0-bk' id='fn15x0'><sup class='textsuperscript'>15</sup></a></span><span class='ecrm-0800'>Notice that is we dead-zone quantize a decomposition and most of the coefficients
 </span><span class='ecrm-0800'>are close to zero, the information removed from the signal will be those with a smaller
 </span><span class='ecrm-0800'>energy.</span></p>
-<!-- l. 470 --><p class='indent'>     <span class='footnote-mark'><a href='#fn16x0-bk' id='fn16x0'><sup class='textsuperscript'>16</sup></a></span><a href='https://en.wikipedia.org/wiki/Sub-band_coding'><span class='ecrm-0800'>In signal processing, sub-band coding (SBC) is any form of transform coding that breaks a
+<!-- l. 471 --><p class='indent'>     <span class='footnote-mark'><a href='#fn16x0-bk' id='fn16x0'><sup class='textsuperscript'>16</sup></a></span><a href='https://en.wikipedia.org/wiki/Sub-band_coding'><span class='ecrm-0800'>In signal processing, sub-band coding (SBC) is any form of transform coding that breaks a
 </span><span class='ecrm-0800'>signal into a number of different frequency bands</span></a><span class='ecrm-0800'>.</span></p>
-<!-- l. 504 --><p class='indent'>     <span class='footnote-mark'><a href='#fn17x0-bk' id='fn17x0'><sup class='textsuperscript'>17</sup></a></span><span class='ecrm-0800'>The response of the filter to the </span><a href='https://en.wikipedia.org/?title=Unit_impulse&amp;redirect=no'><span class='ecrm-0800'>unit impulse</span></a><span class='ecrm-0800'>.</span></p>
-<!-- l. 523 --><p class='indent'>     <span class='footnote-mark'><a href='#fn18x0-bk' id='fn18x0'><sup class='textsuperscript'>18</sup></a></span><span class='ecrm-0800'>Because the filters are not ideal, the bandwidth of the filtered signals</span> \({\mathbf w}_0\) <span class='ecrm-0800'>and</span> \({\mathbf w}_1\) <span class='ecrm-0800'>is bigger than
+<!-- l. 505 --><p class='indent'>     <span class='footnote-mark'><a href='#fn17x0-bk' id='fn17x0'><sup class='textsuperscript'>17</sup></a></span><span class='ecrm-0800'>The response of the filter to the </span><a href='https://en.wikipedia.org/?title=Unit_impulse&amp;redirect=no'><span class='ecrm-0800'>unit impulse</span></a><span class='ecrm-0800'>.</span></p>
+<!-- l. 524 --><p class='indent'>     <span class='footnote-mark'><a href='#fn18x0-bk' id='fn18x0'><sup class='textsuperscript'>18</sup></a></span><span class='ecrm-0800'>Because the filters are not ideal, the bandwidth of the filtered signals</span> \({\mathbf w}_0\) <span class='ecrm-0800'>and</span> \({\mathbf w}_1\) <span class='ecrm-0800'>is bigger than
 </span><span class='ecrm-0800'>half of the bandwidth of</span> \(\mathbf x\)<span class='ecrm-0800'>. Therefore, subsampling at a ratio of one of each two coefficients, we are
 </span><span class='ecrm-0800'>generating aliasing. See the </span><a href='https://en.wikipedia.org/wiki/Nyquist-Shannon_sampling_theorem'><span class='ecrm-0800'>sampling theorem</span></a><span class='ecrm-0800'>.</span></p>
-<!-- l. 545 --><p class='indent'>     <span class='footnote-mark'><a href='#fn19x0-bk' id='fn19x0'><sup class='textsuperscript'>19</sup></a></span><span class='ecrm-0800'>Notice that our matrix</span> \(K\) <span class='ecrm-0800'>would have</span> \(M\) <span class='ecrm-0800'>rows in this case, and also</span> \(M\) <span class='ecrm-0800'>colums, to satisfy that</span> \({\mathbf K}^{-1}={\mathbf K}^{\text T}\) <span class='ecrm-0800'>if we
+<!-- l. 546 --><p class='indent'>     <span class='footnote-mark'><a href='#fn19x0-bk' id='fn19x0'><sup class='textsuperscript'>19</sup></a></span><span class='ecrm-0800'>Notice that our matrix</span> \(K\) <span class='ecrm-0800'>would have</span> \(M\) <span class='ecrm-0800'>rows in this case, and also</span> \(M\) <span class='ecrm-0800'>colums, to satisfy that</span> \({\mathbf K}^{-1}={\mathbf K}^{\text T}\) <span class='ecrm-0800'>if we
 </span><span class='ecrm-0800'>are implementing an orthogonal transform.</span></p>
-<!-- l. 557 --><p class='indent'>     <span class='footnote-mark'><a href='#fn20x0-bk' id='fn20x0'><sup class='textsuperscript'>20</sup></a></span><span class='ecrm-0800'>You need to generate tonal sounds with different frequency and amplitudes.</span></p>
-<!-- l. 561 --><p class='indent'>     <span class='footnote-mark'><a href='#fn21x0-bk' id='fn21x0'><sup class='textsuperscript'>21</sup></a></span><span class='ecrm-0800'>And also, we are more sensitive to low frequencies that to high ones.</span></p>
-<!-- l. 631 --><p class='noindent'><span class='footnote-mark'><a href='#fn22x0-bk' id='fn22x0'><sup class='textsuperscript'>22</sup></a></span><span class='ecrm-0800'>Notice that in a typical cascade, the filters are always the same. Therefore, we only need
+<!-- l. 558 --><p class='indent'>     <span class='footnote-mark'><a href='#fn20x0-bk' id='fn20x0'><sup class='textsuperscript'>20</sup></a></span><span class='ecrm-0800'>You need to generate tonal sounds with different frequency and amplitudes.</span></p>
+<!-- l. 562 --><p class='indent'>     <span class='footnote-mark'><a href='#fn21x0-bk' id='fn21x0'><sup class='textsuperscript'>21</sup></a></span><span class='ecrm-0800'>And also, we are more sensitive to low frequencies that to high ones.</span></p>
+<!-- l. 632 --><p class='noindent'><span class='footnote-mark'><a href='#fn22x0-bk' id='fn22x0'><sup class='textsuperscript'>22</sup></a></span><span class='ecrm-0800'>Notice that in a typical cascade, the filters are always the same. Therefore, we only need
 </span><span class='ecrm-0800'>to store in memory only a copy of each different filter.</span></p>
-<!-- l. 701 --><p class='noindent'><span class='footnote-mark'><a href='#fn23x0-bk' id='fn23x0'><sup class='textsuperscript'>23</sup></a></span><span class='ecrm-0800'>The coefficient</span> \({\mathbf l}^l_0\) <span class='ecrm-0800'>is called the DC (Direct Current) coefficient, and the rest of</span> \(\mathbf h\) <span class='ecrm-0800'>coefficients are
+<!-- l. 702 --><p class='noindent'><span class='footnote-mark'><a href='#fn23x0-bk' id='fn23x0'><sup class='textsuperscript'>23</sup></a></span><span class='ecrm-0800'>The coefficient</span> \({\mathbf l}^l_0\) <span class='ecrm-0800'>is called the DC (Direct Current) coefficient, and the rest of</span> \(\mathbf h\) <span class='ecrm-0800'>coefficients are
 </span><span class='ecrm-0800'>called AC (Alternating Current) coefficients.</span></p>
-<!-- l. 749 --><p class='indent'>     <span class='footnote-mark'><a href='#fn24x0-bk' id='fn24x0'><sup class='textsuperscript'>24</sup></a></span><span class='ecrm-0800'>The response of a filter to the unit impulse characterize the filter because the output of the
+<!-- l. 750 --><p class='indent'>     <span class='footnote-mark'><a href='#fn24x0-bk' id='fn24x0'><sup class='textsuperscript'>24</sup></a></span><span class='ecrm-0800'>The response of a filter to the unit impulse characterize the filter because the output of the
 </span><span class='ecrm-0800'>filter is the set of taps of the filter.</span></p>
-<!-- l. 763 --><p class='indent'>     <span class='footnote-mark'><a href='#fn25x0-bk' id='fn25x0'><sup class='textsuperscript'>25</sup></a></span><span class='ecrm-0800'>The symmetry of the filters is important to produce the same type of artifacts in the
+<!-- l. 764 --><p class='indent'>     <span class='footnote-mark'><a href='#fn25x0-bk' id='fn25x0'><sup class='textsuperscript'>25</sup></a></span><span class='ecrm-0800'>The symmetry of the filters is important to produce the same type of artifacts in the
 </span><span class='ecrm-0800'>boundaries of the signal.</span></p>
-<!-- l. 793 --><p class='indent'>     <span class='footnote-mark'><a href='#fn26x0-bk' id='fn26x0'><sup class='textsuperscript'>26</sup></a></span><span class='ecrm-0800'>All transforms express a change of basis. When the basis are not orthogonal, the
+<!-- l. 794 --><p class='indent'>     <span class='footnote-mark'><a href='#fn26x0-bk' id='fn26x0'><sup class='textsuperscript'>26</sup></a></span><span class='ecrm-0800'>All transforms express a change of basis. When the basis are not orthogonal, the
 </span><span class='ecrm-0800'>synthesis transform is not the transpose of the analysis transform. When the synthesis
 </span><span class='ecrm-0800'>filters are orthogonal to their corresponding </span><span class='ecti-0800'>dual </span><span class='ecrm-0800'>analysis filters, the transform is said
 </span><span class='ecrm-0800'>biorthogonal. </span><span class='cite'><span class='ecrm-0800'>[</span><a href='#Xvetterli2014foundations'><span class='ecrm-0800'>11</span></a><span class='ecrm-0800'>]</span></span></p>                                                                                                  </div>
