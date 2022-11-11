@@ -5,6 +5,7 @@
 % Use 16 bits/coefficient and CTE (Chunk Truncation Encoding).
 
 \maketitle
+\tableofcontents
 
 \section{Description}
 %{{{
@@ -264,6 +265,7 @@ get $2{\mathbf x}$ as the reconstructed signal instead of ${\mathbf x}$.
 %}}}
 
 \subsubsection{Quantization of the subbands}
+\label{sec:quantization_subbands_spatial}
 %{{{ 
 Ideally, the quantization step size $\Delta_i$ used for a subband
 ${\mathbf w}_i$ must operate in the RD curve $f_i$ with the same slope
@@ -765,7 +767,7 @@ artifacts in the boundaries of the signal.}
 
 %}}}
 
-\subsubsection{Example of a DWT using high-order filters}
+\subsubsection{Example of a DWT using ``high''-order filters}
 %{{{
 
 The previous MST-based DWT is similar to other transforms such as the
@@ -803,6 +805,23 @@ This linear transform is also invertible by simply reversing the steps:
 
 %}}}
 
+\subsubsection{Quantization of the subbands}
+
+To determine the quantization step size to be used in the different
+subbands of a (always orthogonal) decomposition should be proportional
+the gain of the filters used (usually only two). The gain of a filter
+correspond to the L$_2$ norm of its taps. And the final gain applied
+to a subband depends logically on the number of times that we have
+applied the filter in the cascade.
+
+If we don't know the taps, we can use the algorithm described in the
+Section~\ref{sec:quantization_subbands_spatial} to find the gain of
+the subbands.
+
+Finally, notice that if the transform in orthonormal, by definition,
+the gain of the analysis and synthesis filters is always 1, and also
+this is the gain of the subbands.
+
 %}}}
 
 \subsection{Overlapping the DWT}
@@ -828,10 +847,11 @@ chunks.
   \end{tabular}
   \caption{On the top-left, three consecutive chunks of a real mono
     audio sequence. On the top-right, the reconstruction of the chunks
-    without overlapping. On the bottom-left, the extended central chunk. On
-    the bottom-right, the reconstruction of the extended chunk. See
-    this
-    \href{https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/quantization_DWT.ipynb}{notebook}.}
+    without overlapping. On the bottom-left, the extended central
+    chunk. On the bottom-right, the reconstruction of the extended
+    chunk. See the notebook
+    \href{https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/quantization_DWT.ipynb}{Quantization
+      in the DWT domain}.}
   \label{fig:3_chunks}
 \end{figure}
 
@@ -849,17 +869,17 @@ been described in the following algorithm:
 \item For $i\in\{0,1,\cdots\}$:   
   \begin{enumerate}               
   \item Input ${\mathbf C}_{i+1}$.
-  \item Build extended chunk ${\mathbf E}={\mathbf
+  \item Build the extended chunk ${\mathbf E}={\mathbf
     C}_{i-1}[-o:]|{\mathbf C}_i|{\mathbf C}_{i+1}[:o]$, where
     $\cdot|\cdot$ denotes the concatenation of chunks, $o$ is the
     overlapped area size in frames, ${\mathbf C}_{i-1}[-o:]$ the last
     $o$ frames of chunk ${\mathbf C}_{i-1}$, and ${\mathbf
       C}_{i+1}[:o]$ are the first $o$ frames of the chunk ${\mathbf
       C}_{i+1}$.
-  \item Compute decomposition ${\mathbf D}_i \leftarrow
+  \item Compute the decomposition ${\mathbf D}_i \leftarrow
     \text{DWT}^l({\mathbf E})$, where $l$ is the number of levels of
     the DWT ($l=2$ in the Fig.~\ref{fig:subbands}).
-  \item Output decomposition ${\mathbf D}_i$.
+  \item Output the decomposition ${\mathbf D}_i$.
   \item ${\mathbf C}_{i-1}\leftarrow {\mathbf C}_i$ (notice that we can assign the pointers, not the contents).
   \item ${\mathbf C}_i\leftarrow {\mathbf C}_{i+1}$.
   \end{enumerate}
@@ -904,8 +924,8 @@ notation.
   \label{fig:subbands}
 \end{figure}
 
-This idea has been implemented in this
-\href{https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/overlapped_DWT_I.ipynb}{notebook},
+This idea has been implemented in the notebook
+\href{https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/overlapped_DWT_I.ipynb}{Overlapped DWT},
 and the result can be seen in the Fig.~\ref{fig:3_chunks}.
 
 %}}}
@@ -961,11 +981,11 @@ The codec now can be described by:
 \item For $i\in\{0,1,\cdots\}$:   
   \begin{enumerate}               
   \item Input ${\mathbf C}_{i+1}$.
-  \item Build extended chunk ${\mathbf E} = {\mathbf
+  \item Build the extended chunk ${\mathbf E} = {\mathbf
     C}_{i-1}[-o:]|{\mathbf C}_i|{\mathbf C}_{i+1}[:o]$.
-  \item Compute decomposition ${\mathbf D}_i \leftarrow
+  \item Compute the decomposition ${\mathbf D}_i \leftarrow
     \text{DWT}^l({\mathbf E})$.
-  \item Output decomposition subset
+  \item Output the decomposition subset
     $\Big\{{\mathbf D}_i.{\mathbf l}^l[\frac{o}{2^l}:-\frac{o}{2^l}], {\mathbf
       D}_i.{\mathbf h}^l[\frac{o}{2^l}:-\frac{o}{2^l}], {\mathbf D}_i.{\mathbf
       h}^{l-1}[\frac{o}{2^{l-1}}:-\frac{o}{2^{l-1}}], \cdots, {\mathbf D}_i.{\mathbf
@@ -989,8 +1009,8 @@ This decoder ignores the adjacent chunks in the DWT domain, but notice that it u
 \begin{enumerate}
 \item For $i\in\{0,1,\cdots\}$:
   \begin{enumerate}
-  \item Input decomposition subset ${\mathbf D}_i$.
-  \item Compute chunk ${\mathbf C}_i\leftarrow\text{DWT}^{-l}({\mathbf D}_i)$.
+  \item Input the decomposition subset ${\mathbf D}_i$.
+  \item Compute the chunk ${\mathbf C}_i\leftarrow\text{DWT}^{-l}({\mathbf D}_i)$.
   \item Output ${\mathbf C}_i$.
   \end{enumerate}
 \end{enumerate}
@@ -1003,9 +1023,9 @@ This decoder ignores the adjacent chunks in the DWT domain, but notice that it u
 \item For $i\in\{0,1,\cdots\}$:
   \begin{enumerate}
   \item Input decomposition ${\mathbf D}_{i+1}$.
-  \item Build extended decomposition ${\mathbf E}_i =
+  \item Build the extended decomposition ${\mathbf E}_i =
     {\mathbf D}_{i-1}.{\mathbf l}^l[-\frac{o}{2^l}:]|{\mathbf D}_i.{\mathbf l}^l|{\mathbf D}_{i+1}.{\mathbf l}^l[:\frac{o}{2^l}]|{\mathbf D}_{i-1}.{\mathbf h}^l[-\frac{o}{2^l}:]|{\mathbf D}_i.{\mathbf h}^l|{\mathbf D}_{i+1}.{\mathbf h}^l[:\frac{o}{2^l}]|\cdots|{\mathbf D}_{i-1}.{\mathbf h}^1[-\frac{o}{2^1}:]|{\mathbf D}_i.{\mathbf h}^1|{\mathbf D}_{i+1}.{\mathbf h}^1[:\frac{o}{2^1}]$.
-  \item Compute extended chunk ${\mathbf C}_i\leftarrow\text{DWT}^{-l}({\mathbf E}_i)$.
+  \item Compute the extended chunk ${\mathbf C}_i\leftarrow\text{DWT}^{-l}({\mathbf E}_i)$.
   \item Output ${\mathbf C}_i[o:-o]$.
   \item ${\mathbf D}_{i-1} \leftarrow {\mathbf D}_i$.
   \item ${\mathbf D}_i \leftarrow {\mathbf D}_{i+1}$.
@@ -1051,20 +1071,28 @@ such impact. Experiment also with the wavelet name.
 \subsection{Determine the RD curves for the overlapped DWT}
 %{{{
 
-\begin{enumerate}
-\item In a module named \verb|temporal_overlapped_DWT_coding.py|,
-  inherit from \verb|temporal_no_overlapped_DWT_coding.py| the class
-  \verb|Temporal_No_Overlapped_DWT|, and create a class named
-  \verb|Temporal_Overlapped_DWT| which must implement the codec
-  described in the Section~\ref{sec:reducing}.
-\item Build the RD curves to see how this improvement impacts on the
-  efficiency of intercom.
-\item Determine which decoder is better from the RD perspective.
-\item Which is the latency of the encoder and the decoders, measured
-  in chunk-times?
-\end{enumerate}
+Finally, redo the curves considering now the block overlapping
+(\verb|temporal_overlapped_DWT_coding.py|). It is a good idea to put
+all the RD curves together (in the same graph), to compare easely,
 
 %}}}
+
+\subsection{Answer these questions}
+%{{{
+
+\begin{enumerate}
+  
+\item Which has been the gain of the filters used in your experiments?
+
+\item Does the computation of the DWT using chunk overlapping increase
+  the latency of the whole system? And the jitter? In which amount?
+
+\item Which other transform(s) are used in audio encoding systems
+  (such as MP3) for exploiting the temporal redundancy? Enumerate the
+  systems and the used transform(s).
+
+%}}}
+\end{enumerate}
 
 %\subsection{Implement a Chunk Truncation Encoding (CTE)}
 %{{{
