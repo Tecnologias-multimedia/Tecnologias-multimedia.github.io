@@ -499,8 +499,9 @@ signal ${\mathbf x}$ (now a sequence of $N$ samples) using a
 (without splitting $\mathbf{x}$ into blocks). Let's also suppose (as
 happens in the MST) that ${\mathbf K}_0$ is a low-pass filter and
 ${\mathbf K}_1$ is a high-pass filter, and that the
-\href{https://en.wikipedia.org/wiki/Filter_(signal_processing)#The_transfer_function}{transfer
-  function}\footnote{The response of the filter to the
+\href{https://en.wikipedia.org/wiki/Filter_(signal_processing)}{frequency
+  response}\footnote{The response (in the frequency domain) of the
+  filter to the
   \href{https://en.wikipedia.org/?title=Unit_impulse&redirect=no}{unit
     impulse}.} of both filters
 \href{https://en.wikipedia.org/wiki/Filter_bank#Perfect_reconstruction_filter_banks}{are
@@ -523,7 +524,7 @@ subsampling is possible because the
   \href{https://en.wikipedia.org/wiki/Nyquist-Shannon_sampling_theorem}{sampling
     theorem}.}  generated in the low-pass subband is attenuated by the
 aliasing generated in the high-pass subband. To achieve this, the
-\href{https://en.wikipedia.org/wiki/Filter_(signal_processing)#The_transfer_function}{frequency
+\href{https://en.wikipedia.org/wiki/Filter_(signal_processing)}{frequency
   response} of ${\mathbf K}_0$ must be equal to the mirrored frequency
 response of ${\mathbf K}_1$, and obviously, both filters must have the
 same
