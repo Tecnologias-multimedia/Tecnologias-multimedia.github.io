@@ -788,14 +788,16 @@ where the factor $1/4$ is used to preserve the
 energy~\cite{sweldens1997building}. This transform is known as the
 \href{https://en.wikipedia.org/wiki/Biorthogonal_wavelet}{biorthogonal}
 (2,2) of Cohen-Daubechies-Feauveau.  Biorthogonal\footnote{All
-transforms express a change of basis. When the basis are not
-orthogonal, the synthesis transform is not the transpose of the
-analysis transform. When the synthesis filters are orthogonal to their
-corresponding \emph{dual} analysis filters, the transform is said
-biorthogonal.~\cite{vetterli2014foundations}} filters can be
+  transforms express a change of basis. When the basis are not
+  orthogonal, the synthesis transform is not the transpose of the
+  analysis transform. When the synthesis filters are orthogonal to
+  their corresponding \emph{dual} analysis filters, the transform is
+  said biorthogonal.~\cite{vetterli2014foundations}} filters can be
 \href{http://wavelets.pybytes.com/}{easely recognized} because they
 are always symmetric. When the filters of the PRFB are biorthogonal,
-they also satisfy that $\psi\bot\tilde\phi$ and $\phi\bot\tilde\psi$.
+they also satisfy that $\psi\bot\tilde\phi$ and
+$\phi\bot\tilde\psi$. Notice however, that in general, biorthogonal
+filters not necessaryly are fully orthogonal.
 
 This linear transform is also invertible by simply reversing the steps:
 \begin{equation}
