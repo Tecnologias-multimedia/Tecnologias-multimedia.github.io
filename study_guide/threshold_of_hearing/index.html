@@ -1,6 +1,6 @@
 <!DOCTYPE html> 
 <html lang='en-US' xml:lang='en-US'> 
-<head> <title>Considering the Threshold of Hearing</title> 
+<head> <title>Perceptual Coding Considering the Threshold of Hearing</title> 
 <meta charset='utf-8' /> 
 <meta content='TeX4ht (https://tug.org/tex4ht/)' name='generator' /> 
 <meta content='width=device-width,initial-scale=1' name='viewport' /> 
@@ -17,14 +17,15 @@
 
                                                                   
 
-<h2 class='titleHead'>Considering the Threshold of Hearing</h2>
+<h2 class='titleHead'>Perceptual Coding Considering the Threshold of
+Hearing</h2>
  <div class='author'><span class='ecrm-1200'>Vicente González Ruiz</span></div><br />
-<div class='date'><span class='ecrm-1200'>September 17, 2022</span></div>
+<div class='date'><span class='ecrm-1200'>November 14, 2022</span></div>
    </div>
-   <h3 class='sectionHead' id='description'><span class='titlemark'>1   </span> <a id='x1-10001'></a>Description</h3>
+   <h3 class='sectionHead'><span class='titlemark'>1   </span> <a id='x1-10001'></a>Description</h3>
 <!-- l. 9 --><p class='noindent'>
 </p>
-   <h4 class='subsectionHead' id='a-model-of-the-threshold-of-human-hearing'><span class='titlemark'>1.1   </span> <a id='x1-20001.1'></a>A model of the Threshold of Human Hearing</h4>
+   <h4 class='subsectionHead'><span class='titlemark'>1.1   </span> <a id='x1-20001.1'></a>A model of the Threshold of Human Hearing</h4>
 <!-- l. 11 --><p class='noindent'>Psychoacoustics (see <a href='https://vicente-gonzalez-ruiz.github.io/the_sound/'>the sound</a>, <a href='https://vicente-gonzalez-ruiz.github.io/human_auditory_system/'>the human auditory system</a>, and <a href='https://vicente-gonzalez-ruiz.github.io/human_sound_perception/'>the human sound
 perception</a>) has determined that the HAS (Human Auditory System) has a
 sensitivity that depends on the frequency of the sound, the so called THH (<a href='https://en.wikipedia.org/wiki/Absolute_threshold_of_hearing'>Threshold
@@ -40,7 +41,7 @@ perfection perspective) of the quantization noise.
                                                                   
 
                                                                   
-<!-- l. 27 --><p class='noindent' id='-a-model-for-the-threshold-of-human-hearing-'><div style='text-align:center;'> <img src='graphics/ToHH.svg' /> </div>  <a id='x1-2001r1'></a>
+<!-- l. 28 --><p class='noindent'><div style='text-align:center;'> <img src='graphics/ToHH.svg' /> </div>  <a id='x1-2001r1'></a>
 <a id='x1-2002'></a>
 </p>
 <figcaption class='caption'><span class='id'>Figure 1: </span><span class='content'>A model for the threshold of human hearing.                    </span></figcaption><!-- tex4ht:label?: x1-2001r1  -->
@@ -48,46 +49,45 @@ perfection perspective) of the quantization noise.
 
                                                                   
    </figure>
-<!-- l. 32 --><p class='indent'>   A good approximation of the THH (Threshold of Human Hearing) for a 20-years
-old person can be obtained with <span class='cite'>[<a href='#Xbosi2003intro'>1</a>]</span> \begin {equation}  T(f)\text {[dB]} = 3.64(f\text {[kHz]})^{-0.8} - 6.5e^{f\text {[kHz]}-3.3)^2} + 10^{-3}(f\text {[kHz]})^4. \label {eq:ToHH}  \end {equation}
+<!-- l. 33 --><p class='indent'>   A good approximation of the THH for a 20-years old person can be obtained
+with <span class='cite'>[<a href='#Xbosi2003intro'>1</a>]</span> \begin {equation}  T(f)\text {[dB]} = 3.64(f\text {[kHz]})^{-0.8} - 6.5e^{f\text {[kHz]}-3.3)^2} + 10^{-3}(f\text {[kHz]})^4. \label {eq:ToHH}  \end {equation}
 This equation has been plotted in the Fig. <a href='#x1-2001r1'>1<!-- tex4ht:ref: fig:ToHH  --></a>.
 </p>
-   <h4 class='subsectionHead' id='dwt-subbands-and-quantization-steps'><span class='titlemark'>1.2   </span> <a id='x1-30001.2'></a>DWT subbands and quantization steps</h4>
-<!-- l. 41 --><p class='noindent'>The number of DWT subbands \begin {equation}  N_{\text {sb}} = N_{\text {levels}} + 1  \end {equation}
+   <h4 class='subsectionHead'><span class='titlemark'>1.2   </span> <a id='x1-30001.2'></a>DWT subbands and quantization steps</h4>
+<!-- l. 42 --><p class='noindent'>The number of DWT subbands \begin {equation}  N_{\text {sb}} = N_{\text {levels}} + 1  \end {equation}
 where \(N_{\text {levels}}\) is the number of levels of the DWT. Except for the \({\mathbf l}^{N_{\text {levels}}}\) subband (the lowest-pass
 frequency of the decomposition), it holds that \begin {equation}  W({\mathbf h}^s) = \frac {1}{2}W({\mathbf h}^{s-1}),  \end {equation}
 being \(W(\cdot )\) the bandwidth of the corresponding subband \(s\). Therefore, considering that the
 bandwidth of the audio signal is \(22050\) Hz, the bandwidth \(W({\mathbf h}^1)\) of the \({\mathbf h}^1\) subband is \(11025\) Hz, \(W({\mathbf h} ^2)=22025/4\), and so
 on. It also holds that \begin {equation}  W({\mathbf l}^{N_{\text {levels}}}) = W({\mathbf h}^{N_{\text {levels}}}).  \end {equation}
-</p><!-- l. 59 --><p class='indent'>   The idea is to determine, knowing the frequencies represented in each
-DWT subband and the THH curve, the quantization step that should be
-applied to each subband. This idea has been implemented in the module
-threshold.py.
-</p><!-- l. 64 --><p class='noindent'>
+</p><!-- l. 60 --><p class='indent'>   The idea is to decide, knowing the frequencies represented in each DWT subband
+and the THH curve, the quantization step that should be applied to each subband.
+This idea has been implemented in the module <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>threshold.py</span></span></span>.
+</p><!-- l. 65 --><p class='noindent'>
 </p>
-   <h3 class='sectionHead' id='what-you-have-to-do'><span class='titlemark'>2   </span> <a id='x1-40002'></a>What you have to do?</h3>
-<!-- l. 66 --><p class='noindent'>
+   <h3 class='sectionHead'><span class='titlemark'>2   </span> <a id='x1-40002'></a>What you have to do?</h3>
+<!-- l. 67 --><p class='noindent'>
 </p>
-   <h4 class='subsectionHead' id='determining-your-threshold-of-hearing'><span class='titlemark'>2.1   </span> <a id='x1-50002.1'></a>Determining your threshold of hearing</h4>
-<!-- l. 68 --><p class='noindent'>The threshold of hearing plotted in the Fig. <a href='#x1-2001r1'>1<!-- tex4ht:ref: fig:ToHH  --></a> can be different
+   <h4 class='subsectionHead'><span class='titlemark'>2.1   </span> <a id='x1-50002.1'></a>Determine your threshold of hearing</h4>
+<!-- l. 69 --><p class='noindent'>The threshold of hearing plotted in the Fig. <a href='#x1-2001r1'>1<!-- tex4ht:ref: fig:ToHH  --></a> can be different
 to the curve which corresponds with your current “hearing
 capabilities”.<span class='footnote-mark'><a href='#fn1x0' id='fn1x0-bk'><sup class='textsuperscript'>1</sup></a></span><a id='x1-5001f1'></a>
-For this reason, in the module threshold.py, implement a procedure
-for deciding the quantization step sizes used in each Wavelet
+For this reason, in the module <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>threshold.py</span></span></span>, implement a procedure
+for determining the quantization step sizes used in each Wavelet
 subband<span class='footnote-mark'><a href='#fn2x0' id='fn2x0-bk'><sup class='textsuperscript'>2</sup></a></span><a id='x1-5002f2'></a>.
-</p><!-- l. 85 --><p class='indent'>   To find out such quantization step sizes, we can simulate <a href='https://en.wikipedia.org/wiki/Quantization_(signal_processing)'>quantization noise</a> in
-each subband and determine the amplitude of the noise when it starts to be
-noticeable. Supposing that the quantization noise follows a <a href='https://en.wikipedia.org/wiki/Continuous_uniform_distribution'>uniform distribution</a>, the
-following algorithm can de implemented:
-</p><!-- l. 93 --><p class='indent'>
+</p><!-- l. 86 --><p class='indent'>   To find out such quantization step sizes, we can simulate <a href='https://en.wikipedia.org/wiki/Quantization_(signal_processing)'>quantization noise</a> in
+each subband and measure the amplitude of the noise when it starts to be noticeable.
+Supposing that the quantization noise follows an <a href='https://en.wikipedia.org/wiki/Continuous_uniform_distribution'>uniform distribution</a>, the next
+algorithm can de implemented:
+</p><!-- l. 94 --><p class='indent'>
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-5004x1'>
                                                                   
 
                                                                   
-     <!-- l. 94 --><p class='noindent'>Let \(\{{\mathbf l}^{N_{\text {levels}}}, {\mathbf h}^{N_{\text {levels}}}, {\mathbf h}^{N_{\text {levels}}-1},\cdots , {\mathbf h}^1\}\) the Wavelet space of a chunk, being \({\mathbf l}^{N_{\text {levels}}}\) the lowest frequency subband.
-     Starting with \({\mathbf l}^{N_{\text {levels}}}\) (at the first iteration the rest of subbands are zero), while the
-     noise stays imperceptible:
+     <!-- l. 95 --><p class='noindent'>Let \(\{{\mathbf l}^{N_{\text {levels}}}, {\mathbf h}^{N_{\text {levels}}}, {\mathbf h}^{N_{\text {levels}}-1},\cdots , {\mathbf h}^1\}\) the Wavelet representation of a chunk. Starting with \({\mathbf l}^{N_{\text {levels}}}\) (at the
+     first iteration the rest of subbands are zero), while the noise stays
+     imperceptible:
          </p><ol class='enumerate2'>
 <li class='enumerate' id='x1-5006x1'>Increase the amplitude of the noise in the subband.
          </li>
@@ -100,45 +100,45 @@ following algorithm can de implemented:
      noise in the previously processed ones. In this way, for the subband \({\mathbf h}^1\) (the last
      one to be processed), the rest of subbands should have already stored
      noise.</li></ol>
-<!-- l. 114 --><p class='indent'>   Notice that the quantization step sizes are determined for the sound that you are
+<!-- l. 117 --><p class='indent'>   Notice that the quantization step sizes are determined for the sound that you are
 going to play. Therefore, you should use your interlocutor’s quantization step sizes
 and viceversa.
-</p><!-- l. 118 --><p class='indent'>   Finally, this extra functionality should be optional (the “standard” ToHH, see
-Fig. <a href='#x1-2001r1'>1<!-- tex4ht:ref: fig:ToHH  --></a>, should be used by default).
-</p><!-- l. 121 --><p class='noindent'>
+</p><!-- l. 121 --><p class='indent'>   Finally, this extra functionality should be optional for the user of InterCom (the
+“standard” ToHH, see Fig. <a href='#x1-2001r1'>1<!-- tex4ht:ref: fig:ToHH  --></a>, should be used by default).
+</p><!-- l. 125 --><p class='noindent'>
 </p>
-   <h4 class='subsectionHead' id='subjective-performance'><span class='titlemark'>2.2   </span> <a id='x1-60002.2'></a>Subjective performance</h4>
-<!-- l. 123 --><p class='noindent'>
+   <h4 class='subsectionHead'><span class='titlemark'>2.2   </span> <a id='x1-60002.2'></a>Subjective performance</h4>
+<!-- l. 127 --><p class='noindent'>
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-6002x1'>Using a recording tool such as <a href='http://audacity.sourceforge.net'>Audacity</a> or <a href='http://plugin.org.uk/timemachine/'>JACK Timemachine</a>, record the
      simulated transmission of a piece of audio and create a <span class='ectt-1000'>.wav </span>file, when the
      audio has been transmitted using <span class='ectt-1000'>temporal_overlapped_DWT_coding.py</span>
      and <span class='ectt-1000'>threshold.py</span>, using in both cases the same transmission bit-rate.
-     Use the quantization step for controlling the bit-rate.
+     Vary the quantization step size for controlling the bit-rate.
                                                                   
 
                                                                   
      </li>
 <li class='enumerate' id='x1-6004x2'>Determine which audio sounds better, from a subjective point of view.
      Repeat this step the number of times you consider necessary.</li></ol>
-<!-- l. 136 --><p class='noindent'>
+<!-- l. 141 --><p class='noindent'>
 </p>
-   <h3 class='sectionHead' id='deliverables'><span class='titlemark'>3   </span> <a id='x1-70003'></a>Deliverables</h3>
-<!-- l. 138 --><p class='noindent'>The module threshold.py and a report of how your proposal works, including a
+   <h3 class='sectionHead'><span class='titlemark'>3   </span> <a id='x1-70003'></a>Deliverables</h3>
+<!-- l. 143 --><p class='noindent'>The module threshold.py and a report of how your proposal works, including a
 subjective performance comparison.
-</p><!-- l. 141 --><p class='noindent'>
+</p><!-- l. 146 --><p class='noindent'>
 </p>
-   <h3 class='sectionHead' id='resources'><span class='titlemark'>4   </span> <a id='x1-80004'></a>Resources</h3>
+   <h3 class='sectionHead'><span class='titlemark'>4   </span> <a id='x1-80004'></a>Resources</h3>
    <div class='thebibliography'>
    <p class='bibitem'><span class='biblabel'>
  [1]<span class='bibsp'>   </span></span><a id='Xbosi2003intro'></a>M. Bosi and R.E. Goldberd.  <a href='https://last.hit.bme.hu/download/vidtechlab/fcc/literature/audio/audio_coding_standards_book.pdf'><span class='ecti-1000'>Introduction to Digital Audio Coding and
    </span><span class='ecti-1000'>Standards</span></a>. Kluwer Academic Publishers, 2003.
 </p>
    </div>
-<p id='references'><a id='Q1-1-10'></a>
-   </p><div class='footnotes'><!-- l. 72 --><p class='indent'>     <span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='ecrm-0800'>For example, your speakers could not have a flat frequency response, or your room could
+<p><a id='Q1-1-10'></a></p>
+   <div class='footnotes'><!-- l. 73 --><p class='indent'>     <span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='ecrm-0800'>For example, your speakers could not have a flat frequency response, or your room could
 </span><span class='ecrm-0800'>attenuate more, some freqencies.</span></p>
-<!-- l. 83 --><p class='indent'>     <span class='footnote-mark'><a href='#fn2x0-bk' id='fn2x0'><sup class='textsuperscript'>2</sup></a></span><span class='ecrm-0800'>Remember that when the </span><a href='https://en.wikipedia.org/wiki/Wavelet_transform'><span class='ecrm-0800'>Wavalet transform</span></a> <span class='ecrm-0800'>is </span><a href='https://en.wikipedia.org/wiki/Dyadic_rational'><span class='ecrm-0800'>dyadic</span></a><span class='ecrm-0800'>, the </span><a href='https://en.wikipedia.org/wiki/Discrete_wavelet_transform'><span class='ecrm-0800'>Wavelet space</span></a> <span class='ecrm-0800'>is
+<!-- l. 84 --><p class='indent'>     <span class='footnote-mark'><a href='#fn2x0-bk' id='fn2x0'><sup class='textsuperscript'>2</sup></a></span><span class='ecrm-0800'>Remember that when the </span><a href='https://en.wikipedia.org/wiki/Wavelet_transform'><span class='ecrm-0800'>Wavalet transform</span></a> <span class='ecrm-0800'>is </span><a href='https://en.wikipedia.org/wiki/Dyadic_rational'><span class='ecrm-0800'>dyadic</span></a><span class='ecrm-0800'>, the </span><a href='https://en.wikipedia.org/wiki/Discrete_wavelet_transform'><span class='ecrm-0800'>Wavelet space</span></a> <span class='ecrm-0800'>is
 </span><span class='ecrm-0800'>analyzed by </span><a href='https://en.wikipedia.org/wiki/Octave_band'><span class='ecrm-0800'>octaves</span></a><span class='ecrm-0800'>, and therefore the </span><a href='https://en.wikipedia.org/wiki/Filter_bank'><span class='ecrm-0800'>subbands</span></a> <span class='ecrm-0800'>doubles the size when we increase the
 </span><span class='ecrm-0800'>frequency.</span></p>                                                                                                             </div>
  
