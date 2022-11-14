@@ -22,13 +22,13 @@ simultaneous masking</title>
 Milestone 15: Considering the simultaneous
 masking</h2>
  <div class='author'><span class='ecrm-1200'>Vicente González Ruiz</span></div><br />
-<div class='date'><span class='ecrm-1200'>September 14, 2022</span></div>
+<div class='date'><span class='ecrm-1200'>November 14, 2022</span></div>
    </div>
    <h3 class='sectionHead'><span class='titlemark'>1   </span> <a id='x1-10001'></a>Description</h3>
-<!-- l. 8 --><p class='noindent'>
+<!-- l. 10 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead'><span class='titlemark'>1.1   </span> <a id='x1-20001.1'></a>Simultaneous masking</h4>
-<!-- l. 9 --><p class='noindent'>The HAS (Human Auditory System) has a finite frequency resolution, which
+<!-- l. 11 --><p class='noindent'>The HAS (Human Auditory System) has a finite frequency resolution, which
 basically means that two different tonal sounds with different amplitudes can be
 heared only as one (the louder one) when they are closed enought <span class='cite'>[<a href='#Xbosi2003intro'>1</a>]</span> (in frequency).
 When this happens, the DWT subband <span class='cite'>[<a href='#Xvetterli1995wavelets'>2</a>]</span> where the quiet sound is placed can be
@@ -44,7 +44,7 @@ the higher the compression ratio.
                                                                   
 
                                                                   
-<!-- l. 21 --><p class='noindent'><div style='text-align:center;'> <img src='simultaneous_masking.png' /> </div>  <a id='x1-2001r1'></a>
+<!-- l. 23 --><p class='noindent'><div style='text-align:center;'> <img src='simultaneous_masking.png' /> </div>  <a id='x1-2001r1'></a>
 <a id='x1-2002'></a>
 </p>
 <figcaption class='caption'><span class='id'>Figure 1: </span><span class='content'>Simultaneous masking. The threshold of hearing has been modified
@@ -54,18 +54,18 @@ the higher the compression ratio.
                                                                   
    </figure>
    <h3 class='sectionHead'><span class='titlemark'>2   </span> <a id='x1-30002'></a>What you have to do?</h3>
-<!-- l. 28 --><p class='noindent'>
+<!-- l. 30 --><p class='noindent'>
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-3002x1'>Write a generator of vectors of quantization steps. The generator should
      analyze the energy of each DWT subband and decide, considering the
      simultaneous  masking  effect,  the  vector  of  quantization  steps  (one  for
      subband)..</li></ol>
-<!-- l. 35 --><p class='noindent'>
+<!-- l. 37 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>3   </span> <a id='x1-40003'></a>Deliverables</h3>
-<!-- l. 37 --><p class='noindent'>The module <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>simultaneous_masking.py</span></span></span> (inheriting from <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>threshold.py</span></span></span>). Store it at
+<!-- l. 39 --><p class='noindent'>The module <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>simultaneous_masking.py</span></span></span> (inheriting from <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>threshold.py</span></span></span>). Store it at
 the <a href='https://github.com/Tecnologias-multimedia/intercom'>root directory</a> of your InterCom’s repo.
-</p><!-- l. 42 --><p class='noindent'>
+</p><!-- l. 44 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>4   </span> <a id='x1-50004'></a>Resources</h3>
    <div class='thebibliography'>
