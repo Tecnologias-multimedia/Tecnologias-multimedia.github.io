@@ -1,4 +1,4 @@
-set terminal fig color textspecial big fontsize 20
+set terminal fig color textspecial big fontsize 16
 set xlabel "$f$ [Hz]"
 set ylabel "SPL (Sound Pressure Level) [dB]"
 set output "ToHH.fig"
