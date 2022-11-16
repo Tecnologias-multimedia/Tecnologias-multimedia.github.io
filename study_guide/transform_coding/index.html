@@ -26,18 +26,17 @@
     <span class='sectionToc'>1 <a href='#x1-20001' id='QQ2-1-2'>Description</a></span>
 <br />     <span class='subsectionToc'>1.1 <a href='#x1-30001.1' id='QQ2-1-3'>Spatial (stereo) decorrelation with the MST (Mid/Side Transform)</a></span>
 <br />     <span class='subsectionToc'>1.2 <a href='#x1-80001.2' id='QQ2-1-8'>Temporal decorrelation using the DWT (Discrete Wavelet Transform)</a></span>
-<br />     <span class='subsectionToc'>1.3 <a href='#x1-180001.3' id='QQ2-1-20'>Overlapping the DWT</a></span>
-<br />     <span class='subsectionToc'>1.4 <a href='#x1-190001.4' id='QQ2-1-21'>Overlapped block transforms for minimizing the distortion</a></span>
-<br />     <span class='subsectionToc'>1.5 <a href='#x1-220001.5' id='QQ2-1-26'>Reducing the data overhead</a></span>
-<br />    <span class='sectionToc'>2 <a href='#x1-260002' id='QQ2-1-31'>What you have to do?</a></span>
-<br />     <span class='subsectionToc'>2.1 <a href='#x1-270002.1' id='QQ2-1-32'>Determine the RD curves for the MST</a></span>
-<br />     <span class='subsectionToc'>2.2 <a href='#x1-280002.2' id='QQ2-1-33'>Determine the RD curves for the DWT</a></span>
-<br />     <span class='subsectionToc'>2.3 <a href='#x1-290002.3' id='QQ2-1-34'>Determine the RD curves for the overlapped DWT</a></span>
-<br />     <span class='subsectionToc'>2.4 <a href='#x1-300002.4' id='QQ2-1-35'>Answer these questions</a></span>
-<br />     <span class='subsectionToc'>2.5 <a href='#x1-310002.5' id='QQ2-1-36'>Visualize</a></span>
-<br />    <span class='sectionToc'>3 <a href='#x1-320003' id='QQ2-1-37'>Deliverables</a></span>
-<br />    <span class='sectionToc'>4 <a href='#x1-330004' id='QQ2-1-38'>Resources</a></span>
-<br />    <span class='sectionToc'><a href='#Q1-1-39'>References</a></span>
+<br />     <span class='subsectionToc'>1.3 <a href='#x1-180001.3' id='QQ2-1-20'>Overlapped block transforms for minimizing the distortion</a></span>
+<br />     <span class='subsectionToc'>1.4 <a href='#x1-210001.4' id='QQ2-1-25'>Reducing the data overhead</a></span>
+<br />    <span class='sectionToc'>2 <a href='#x1-250002' id='QQ2-1-30'>What you have to do?</a></span>
+<br />     <span class='subsectionToc'>2.1 <a href='#x1-260002.1' id='QQ2-1-31'>Determine the RD curves for the MST</a></span>
+<br />     <span class='subsectionToc'>2.2 <a href='#x1-270002.2' id='QQ2-1-32'>Determine the RD curves for the DWT</a></span>
+<br />     <span class='subsectionToc'>2.3 <a href='#x1-280002.3' id='QQ2-1-33'>Determine the RD curves for the overlapped DWT</a></span>
+<br />     <span class='subsectionToc'>2.4 <a href='#x1-290002.4' id='QQ2-1-34'>Answer these questions</a></span>
+<br />     <span class='subsectionToc'>2.5 <a href='#x1-300002.5' id='QQ2-1-35'>Visualize</a></span>
+<br />    <span class='sectionToc'>3 <a href='#x1-310003' id='QQ2-1-36'>Deliverables</a></span>
+<br />    <span class='sectionToc'>4 <a href='#x1-320004' id='QQ2-1-37'>Resources</a></span>
+<br />    <span class='sectionToc'><a href='#Q1-1-38'>References</a></span>
    </div>
 <!-- l. 10 --><p class='noindent'>
 </p>
@@ -335,7 +334,7 @@ MST filters and lifting.
      that, as we can see, uses as input the output of Eq. \eqref{eq:1dwt}.
      </p><!-- l. 698 --><p class='noindent'>In general, for a \(l\)-levels DWT, we get \begin {equation}  \begin {array}{rcl} {\mathbf l}^l_i &amp; = &amp; {\mathbf l}^{l-1}_{2i} + {\mathbf l}^{l-1}_{2i+1} \\ {\mathbf h}^l_i &amp; = &amp; {\mathbf l}^{l-1}_{2i+1} - {\mathbf l}^{l-1}_{2i}. \end {array} \label {eq:ldwt}  \end {equation}
      </p><!-- l. 707 --><p class='noindent'>The \(l\)-levels DWT splits the signal spectrum in \(l+1\) subbands. If \(l=n\) (where \(N=2^n\)), we have
-     the spectrum partition \begin {equation*}  | {\mathbf l}^l_0 | {\mathbf h}^l_0 | {\mathbf h}^{l-1}_0 {\mathbf h}^{l-1}_1 | {\mathbf h}^{l-2}_0 {\mathbf h}^{l-2}_1 {\mathbf h}^{l-2}_2 {\mathbf h}^{l-2}_3 | \cdots | {\mathbf h}^1_0 {\mathbf h}^1_1 \cdots {\mathbf h}^1_{2^{n-1}-1} |,  \end {equation*}
+     the spectrum partition \begin {equation*}  | \mathbf {l}^s_0 | \mathbf {h}^s_0 | \mathbf {h}^{s-1}_0 \mathbf {h}^{s-1}_1 | \mathbf {h}^{s-2}_0 \mathbf {h}^{s-2}_1 \mathbf {h}^{s-2}_2 \mathbf {h}^{s-2}_3 | \cdots | \mathbf {h}^1_0 \mathbf {h}^1_1 \cdots \mathbf {h}^1_{2^{n-1}-1} |,  \end {equation*}
      where<span class='footnote-mark'><a href='#fn23x0' id='fn23x0-bk'><sup class='textsuperscript'>23</sup></a></span><a id='x1-14003f23'></a>
      it holds that \begin {equation}  1+\sum _{j=1}^l 2^{j-1}=2^n,  \end {equation}
      i.e., the number of DWT coefficients is also \(N\).
@@ -401,16 +400,13 @@ the gain of the subbands.
 </p><!-- l. 837 --><p class='indent'>   Finally, notice that if the transform in orthonormal, by definition, the gain of the
 analysis and synthesis filters is always 1, and also this is the gain of the
 subbands.
-</p><!-- l. 843 --><p class='noindent'>
+</p><!-- l. 845 --><p class='noindent'>
 </p>
-   <h4 class='subsectionHead'><span class='titlemark'>1.3   </span> <a id='x1-180001.3'></a>Overlapping the DWT</h4>
-<!-- l. 846 --><p class='noindent'>
-</p>
-   <h4 class='subsectionHead'><span class='titlemark'>1.4   </span> <a id='x1-190001.4'></a><a href='https://en.wikipedia.org/wiki/Lapped_transform'>Overlapped block transforms</a> for minimizing the distortion</h4>
-<!-- l. 849 --><p class='noindent'>Transform Coding implies to split the signal into blocks of data (chunks), and to
+   <h4 class='subsectionHead'><span class='titlemark'>1.3   </span> <a id='x1-180001.3'></a><a href='https://en.wikipedia.org/wiki/Lapped_transform'>Overlapped block transforms</a> for minimizing the distortion</h4>
+<!-- l. 848 --><p class='noindent'>Transform Coding implies to split the signal into blocks of data (chunks), and to
 compute the transform of each chunk. When the output coefficients are
 quantized, it is possible that significative (and unpleasant) distortions may
-appear in the border frames of the chunks (see Fig. <a href='#x1-19001r3'>3<!-- tex4ht:ref: fig:3_chunks  --></a>). This is a consequence
+appear in the border frames of the chunks (see Fig. <a href='#x1-18001r3'>3<!-- tex4ht:ref: fig:3_chunks  --></a>). This is a consequence
 that in the prediction step used by the DWT in the limits of the chunks
 generate different predictions at the beginning and the end of the adjacent
 chunks.
@@ -426,66 +422,66 @@ chunks.
 <div class='tabular'> <table class='tabular' id='TBL-2'><colgroup id='TBL-2-1g'><col id='TBL-2-1' /><col id='TBL-2-2' /></colgroup><tr id='TBL-2-1-' style='vertical-align:baseline;'><td class='td11' id='TBL-2-1-1' style='white-space:nowrap; text-align:center;'> <div style='text-align:center;'> <img src='3_chunks.svg' /> </div>   </td><td class='td11' id='TBL-2-1-2' style='white-space:nowrap; text-align:center;'> <div style='text-align:center;'> <img src='without.svg' /> </div>   </td>
 </tr><tr id='TBL-2-2-' style='vertical-align:baseline;'><td class='td11' id='TBL-2-2-1' style='white-space:nowrap; text-align:center;'> <div style='text-align:center;'> <img src='extended.svg' /> </div>   </td><td class='td11' id='TBL-2-2-2' style='white-space:nowrap; text-align:center;'> <div style='text-align:center;'> <img src='reconstructed.svg' /> </div>   </td>
 </tr></table>
-</div> <a id='x1-19001r3'></a>
-<a id='x1-19002'></a>
+</div> <a id='x1-18001r3'></a>
+<a id='x1-18002'></a>
 <figcaption class='caption'><span class='id'>Figure 3:  </span><span class='content'>On  the  top-left,  three  consecutive  chunks  of  a  real  mono  audio
 sequence.  On  the  top-right,  the  reconstruction  of  the  chunks  without
 overlapping.  On  the  bottom-left,  the  extended  central  chunk.  On  the
 bottom-right,  the  reconstruction  of  the  extended  chunk.  See  the  notebook
 <a href='https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/quantization_DWT.ipynb'>Quantization in the DWT domain</a>.
-</span></figcaption><!-- tex4ht:label?: x1-19001r1  -->
+</span></figcaption><!-- tex4ht:label?: x1-18001r1  -->
                                                                   
 
                                                                   
    </figure>
-<!-- l. 874 --><p class='indent'>   One solution to avoid signal discontinuitites between chunks is to overlap the
+<!-- l. 873 --><p class='indent'>   One solution to avoid signal discontinuitites between chunks is to overlap the
 chunks. Thus, the current (\(i\)-th) chunk uses also the last frames of the previous (\((i-1)\)-th)
 chunk and the first frames of the next (\((i+1)\)-th) chunk to compute the transform of the
-current extended (\(i\)-th) chunk (see the Fig. <a href='#x1-21009r4'>4<!-- tex4ht:ref: fig:subbands  --></a>). This has been described in the
+current extended (\(i\)-th) chunk (see the Fig. <a href='#x1-20009r4'>4<!-- tex4ht:ref: fig:subbands  --></a>). This has been described in the
 following algorithm:
 </p>
-   <h4 class='likesubsectionHead'><a id='x1-200001.4'></a>Encoder:</h4>
-<!-- l. 882 --><p class='noindent'>
+   <h4 class='likesubsectionHead'><a id='x1-190001.3'></a>Encoder:</h4>
+<!-- l. 881 --><p class='noindent'>
      </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-20002x1'>\({\mathbf C}_{-1}\leftarrow {\mathbf 0}\), a zero chunk.
+<li class='enumerate' id='x1-19002x1'>\({\mathbf C}_{-1}\leftarrow {\mathbf 0}\), a zero chunk.
      </li>
-<li class='enumerate' id='x1-20004x2'>Input \({\mathbf C}_0\).
+<li class='enumerate' id='x1-19004x2'>Input \({\mathbf C}_0\).
      </li>
-<li class='enumerate' id='x1-20006x3'>
-     <!-- l. 885 --><p class='noindent'>For \(i\in \{0,1,\cdots \}\):
+<li class='enumerate' id='x1-19006x3'>
+     <!-- l. 884 --><p class='noindent'>For \(i\in \{0,1,\cdots \}\):
          </p><ol class='enumerate2'>
-<li class='enumerate' id='x1-20008x1'>Input \({\mathbf C}_{i+1}\).
+<li class='enumerate' id='x1-19008x1'>Input \({\mathbf C}_{i+1}\).
          </li>
-<li class='enumerate' id='x1-20010x2'>Build  the  extended  chunk  \({\mathbf E}={\mathbf C}_{i-1}[-o:]|{\mathbf C}_i|{\mathbf C}_{i+1}[:o]\),  where  \(\cdot |\cdot \)  denotes  the  concatenation  of
+<li class='enumerate' id='x1-19010x2'>Build  the  extended  chunk  \({\mathbf E}={\mathbf C}_{i-1}[-o:]|{\mathbf C}_i|{\mathbf C}_{i+1}[:o]\),  where  \(\cdot |\cdot \)  denotes  the  concatenation  of
          chunks, \(o\) is the overlapped area size in frames, \({\mathbf C}_{i-1}[-o:]\) the last \(o\) frames of
          chunk \({\mathbf C}_{i-1}\), and \({\mathbf C}_{i+1}[:o]\) are the first \(o\) frames of the chunk \({\mathbf C}_{i+1}\).
          </li>
-<li class='enumerate' id='x1-20012x3'>Compute the decomposition \({\mathbf D}_i \leftarrow \text {DWT}^l({\mathbf E})\), where \(l\) is the number of levels of the
-         DWT (\(l=2\) in the Fig. <a href='#x1-21009r4'>4<!-- tex4ht:ref: fig:subbands  --></a>).
+<li class='enumerate' id='x1-19012x3'>Compute the decomposition \({\mathbf D}_i \leftarrow \text {DWT}^l({\mathbf E})\), where \(l\) is the number of levels of the
+         DWT (\(l=2\) in the Fig. <a href='#x1-20009r4'>4<!-- tex4ht:ref: fig:subbands  --></a>).
          </li>
                                                                   
 
                                                                   
-<li class='enumerate' id='x1-20014x4'>Output the decomposition \({\mathbf D}_i\).
+<li class='enumerate' id='x1-19014x4'>Output the decomposition \({\mathbf D}_i\).
          </li>
-<li class='enumerate' id='x1-20016x5'>\({\mathbf C}_{i-1}\leftarrow {\mathbf C}_i\) (notice that we can assign the pointers, not the contents).
+<li class='enumerate' id='x1-19016x5'>\({\mathbf C}_{i-1}\leftarrow {\mathbf C}_i\) (notice that we can assign the pointers, not the contents).
          </li>
-<li class='enumerate' id='x1-20018x6'>\({\mathbf C}_i\leftarrow {\mathbf C}_{i+1}\).</li></ol>
+<li class='enumerate' id='x1-19018x6'>\({\mathbf C}_i\leftarrow {\mathbf C}_{i+1}\).</li></ol>
      </li></ol>
-<!-- l. 904 --><p class='noindent'>Notice that we are following the <a href='https://numpy.org/doc/stable/reference/'>NumPy</a> <span class='cite'>[<a href='#Xnumpy'>1</a>, <a href='#Xharris2020array'>5</a>]</span> <a href='https://www.pythoninformer.com/python-libraries/numpy/index-and-slice/'>slicing</a> notation.
-</p><!-- l. 913 --><p class='noindent'>
+<!-- l. 903 --><p class='noindent'>Notice that we are following the <a href='https://numpy.org/doc/stable/reference/'>NumPy</a> <span class='cite'>[<a href='#Xnumpy'>1</a>, <a href='#Xharris2020array'>5</a>]</span> <a href='https://www.pythoninformer.com/python-libraries/numpy/index-and-slice/'>slicing</a> notation.
+</p><!-- l. 912 --><p class='noindent'>
 </p>
-   <h4 class='likesubsectionHead'><a id='x1-210001.4'></a>Decoder:</h4>
-<!-- l. 914 --><p class='noindent'>
+   <h4 class='likesubsectionHead'><a id='x1-200001.3'></a>Decoder:</h4>
+<!-- l. 913 --><p class='noindent'>
      </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-21002x1'>
-     <!-- l. 915 --><p class='noindent'>For \(i\in \{0,1,\cdots \}\):
+<li class='enumerate' id='x1-20002x1'>
+     <!-- l. 914 --><p class='noindent'>For \(i\in \{0,1,\cdots \}\):
          </p><ol class='enumerate2'>
-<li class='enumerate' id='x1-21004x1'>Input decomposition \({\mathbf D}_i\).
+<li class='enumerate' id='x1-20004x1'>Input decomposition \({\mathbf D}_i\).
          </li>
-<li class='enumerate' id='x1-21006x2'>Compute extended chunk \({\mathbf E}\leftarrow \text {DWT}^{-l}({\mathbf D}_i)\).
+<li class='enumerate' id='x1-20006x2'>Compute extended chunk \({\mathbf E}\leftarrow \text {DWT}^{-l}({\mathbf D}_i)\).
          </li>
-<li class='enumerate' id='x1-21008x3'>Output chunk \({\mathbf C}_i={\mathbf E}[o:-o]\).</li></ol>
+<li class='enumerate' id='x1-20008x3'>Output chunk \({\mathbf C}_i={\mathbf E}[o:-o]\).</li></ol>
      </li></ol>
    <figure class='figure'> 
 
@@ -495,24 +491,24 @@ following algorithm:
                                                                   
 
                                                                   
-<!-- l. 934 --><p class='noindent'><div style='text-align:center;'> <img src='graphics/subbands.svg' /> </div>  <a id='x1-21009r4'></a>
-<a id='x1-21010'></a>
+<!-- l. 933 --><p class='noindent'><div style='text-align:center;'> <img src='graphics/subbands.svg' /> </div>  <a id='x1-20009r4'></a>
+<a id='x1-20010'></a>
 </p>
 <figcaption class='caption'><span class='id'>Figure 4: </span><span class='content'>Structure in the DWT domain of an extended chunk for \(l=2\). \(o\) is the
 number of overlapped frames between adajacent chunks. \({\mathbf C}_{i-1}[-o:]\) represents the last \(o\)
-frames of chunk \({\mathbf C}_{i-1}\), and \({\mathbf C}_{i+1}[:o]\) the first \(o\) frames of the chunk \({\mathbf C}_{i+1}\).                     </span></figcaption><!-- tex4ht:label?: x1-21009r1  -->
+frames of chunk \({\mathbf C}_{i-1}\), and \({\mathbf C}_{i+1}[:o]\) the first \(o\) frames of the chunk \({\mathbf C}_{i+1}\).                     </span></figcaption><!-- tex4ht:label?: x1-20009r1  -->
                                                                   
 
                                                                   
    </figure>
-<!-- l. 943 --><p class='indent'>   This idea has been implemented in the notebook <a href='https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/overlapped_DWT_I.ipynb'>Overlapped DWT</a>, and the
-result can be seen in the Fig. <a href='#x1-19001r3'>3<!-- tex4ht:ref: fig:3_chunks  --></a>.
+<!-- l. 942 --><p class='indent'>   This idea has been implemented in the notebook <a href='https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/overlapped_DWT_I.ipynb'>Overlapped DWT</a>, and the
+result can be seen in the Fig. <a href='#x1-18001r3'>3<!-- tex4ht:ref: fig:3_chunks  --></a>.
 </p>
-   <h4 class='subsectionHead'><span class='titlemark'>1.5   </span> <a id='x1-220001.5'></a>Reducing the data overhead</h4>
-<!-- l. 954 --><p class='noindent'>Unfortunately, the previous algorithm sends twice the DWT coefficients of the
-overlapped areas (in the Fig. <a href='#x1-21009r4'>4<!-- tex4ht:ref: fig:subbands  --></a>, \(\{{\mathbf D}_i.{\mathbf l}^2[-o/4:], {\mathbf D}_i.{\mathbf l}^2[:o/4], {\mathbf D}_i.{\mathbf h}^2[-o/4:], {\mathbf D}_i.{\mathbf h}^2[:o/4], {\mathbf D}_i.{\mathbf h}^1[-o/2:], {\mathbf D}_i.{\mathbf h}^1[:o/2]\}\)). To avoid this waste of bandwidth, we can reuse the
+   <h4 class='subsectionHead'><span class='titlemark'>1.4   </span> <a id='x1-210001.4'></a>Reducing the data overhead</h4>
+<!-- l. 953 --><p class='noindent'>Unfortunately, the previous algorithm sends twice the DWT coefficients of the
+overlapped areas (in the Fig. <a href='#x1-20009r4'>4<!-- tex4ht:ref: fig:subbands  --></a>, \(\{{\mathbf D}_i.{\mathbf l}^2[-o/4:], {\mathbf D}_i.{\mathbf l}^2[:o/4], {\mathbf D}_i.{\mathbf h}^2[-o/4:], {\mathbf D}_i.{\mathbf h}^2[:o/4], {\mathbf D}_i.{\mathbf h}^1[-o/2:], {\mathbf D}_i.{\mathbf h}^1[:o/2]\}\)). To avoid this waste of bandwidth, we can reuse the
 received coefficients of the overlapped areas. This procedure has been described in
-the Fig. <a href='#x1-22001r5'>5<!-- tex4ht:ref: fig:overlapping  --></a>, and, as it can be seen, the encoding algorithm is identical to the
+the Fig. <a href='#x1-21001r5'>5<!-- tex4ht:ref: fig:overlapping  --></a>, and, as it can be seen, the encoding algorithm is identical to the
 previous one except in that only the central (stereo) coefficients are sent.
 The rest of coefficients that are needed to compute the inverse transform
 are extracted from the neighbor chunks (represented in the DWT domain).
@@ -527,136 +523,136 @@ Notice that now, the number of sent coefficients is \(\text {len}({\mathbf C}_i)
                                                                   
 
                                                                   
-<!-- l. 971 --><p class='noindent'><div style='text-align:center;'> <img src='graphics/overlapping.svg' /> </div>  <a id='x1-22001r5'></a>
-<a id='x1-22002'></a>
+<!-- l. 970 --><p class='noindent'><div style='text-align:center;'> <img src='graphics/overlapping.svg' /> </div>  <a id='x1-21001r5'></a>
+<a id='x1-21002'></a>
 </p>
 <figcaption class='caption'><span class='id'>Figure 5:  </span><span class='content'>Block  overlapping  in  the  DWT  domain  for  \(l=2\).  Only  the  shadded
 coefficients  are  transmitted.  Notice  that,  to  be  reconstructed,  each  chunk
 depends on some coefficients of the adjacent blocks (only some dependencies
-have been indicated).                                                </span></figcaption><!-- tex4ht:label?: x1-22001r1  -->
+have been indicated).                                                </span></figcaption><!-- tex4ht:label?: x1-21001r1  -->
                                                                   
 
                                                                   
    </figure>
-<!-- l. 991 --><p class='indent'>   The codec now can be described by:
+<!-- l. 990 --><p class='indent'>   The codec now can be described by:
 </p>
-   <h4 class='likesubsectionHead'><a id='x1-230001.5'></a>Encoder:</h4>
-<!-- l. 994 --><p class='noindent'>
+   <h4 class='likesubsectionHead'><a id='x1-220001.4'></a>Encoder:</h4>
+<!-- l. 993 --><p class='noindent'>
      </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-23002x1'>\({\mathbf C}_{-1}\leftarrow {\mathbf 0}\), a zero chunk.
+<li class='enumerate' id='x1-22002x1'>\({\mathbf C}_{-1}\leftarrow {\mathbf 0}\), a zero chunk.
      </li>
-<li class='enumerate' id='x1-23004x2'>Input \({\mathbf C}_0\).
+<li class='enumerate' id='x1-22004x2'>Input \({\mathbf C}_0\).
      </li>
-<li class='enumerate' id='x1-23006x3'>
-     <!-- l. 997 --><p class='noindent'>For \(i\in \{0,1,\cdots \}\):
+<li class='enumerate' id='x1-22006x3'>
+     <!-- l. 996 --><p class='noindent'>For \(i\in \{0,1,\cdots \}\):
          </p><ol class='enumerate2'>
-<li class='enumerate' id='x1-23008x1'>Input \({\mathbf C}_{i+1}\).
+<li class='enumerate' id='x1-22008x1'>Input \({\mathbf C}_{i+1}\).
          </li>
-<li class='enumerate' id='x1-23010x2'>Build the extended chunk \({\mathbf E} = {\mathbf C}_{i-1}[-o:]|{\mathbf C}_i|{\mathbf C}_{i+1}[:o]\).
+<li class='enumerate' id='x1-22010x2'>Build the extended chunk \({\mathbf E} = {\mathbf C}_{i-1}[-o:]|{\mathbf C}_i|{\mathbf C}_{i+1}[:o]\).
          </li>
-<li class='enumerate' id='x1-23012x3'>Compute the decomposition \({\mathbf D}_i \leftarrow \text {DWT}^l({\mathbf E})\).
+<li class='enumerate' id='x1-22012x3'>Compute the decomposition \({\mathbf D}_i \leftarrow \text {DWT}^l({\mathbf E})\).
          </li>
-<li class='enumerate' id='x1-23014x4'>Output the decomposition subset \(\Big \{{\mathbf D}_i.{\mathbf l}^l[\frac {o}{2^l}:-\frac {o}{2^l}], {\mathbf D}_i.{\mathbf h}^l[\frac {o}{2^l}:-\frac {o}{2^l}], {\mathbf D}_i.{\mathbf h}^{l-1}[\frac {o}{2^{l-1}}:-\frac {o}{2^{l-1}}], \cdots , {\mathbf D}_i.{\mathbf h}^1[\frac {o}{2^1}:-\frac {o}{2^1}]\Big \}\).
+<li class='enumerate' id='x1-22014x4'>Output the decomposition subset \(\Big \{{\mathbf D}_i.{\mathbf l}^l[\frac {o}{2^l}:-\frac {o}{2^l}], {\mathbf D}_i.{\mathbf h}^l[\frac {o}{2^l}:-\frac {o}{2^l}], {\mathbf D}_i.{\mathbf h}^{l-1}[\frac {o}{2^{l-1}}:-\frac {o}{2^{l-1}}], \cdots , {\mathbf D}_i.{\mathbf h}^1[\frac {o}{2^1}:-\frac {o}{2^1}]\Big \}\).
          </li>
-<li class='enumerate' id='x1-23016x5'>\({\mathbf C}_{i-1}\leftarrow {\mathbf C}_i\).
+<li class='enumerate' id='x1-22016x5'>\({\mathbf C}_{i-1}\leftarrow {\mathbf C}_i\).
                                                                   
 
                                                                   
          </li>
-<li class='enumerate' id='x1-23018x6'>\({\mathbf C}_i\leftarrow {\mathbf C}_{i+1}\).</li></ol>
+<li class='enumerate' id='x1-22018x6'>\({\mathbf C}_i\leftarrow {\mathbf C}_{i+1}\).</li></ol>
      </li></ol>
-<!-- l. 1023 --><p class='noindent'>
+<!-- l. 1022 --><p class='noindent'>
 </p>
-   <h4 class='likesubsectionHead'><a id='x1-240001.5'></a>Decoder (ignores overlapping):</h4>
-<!-- l. 1024 --><p class='noindent'>This decoder ignores the adjacent chunks in the DWT domain, but notice that it uses
+   <h4 class='likesubsectionHead'><a id='x1-230001.4'></a>Decoder (ignores overlapping):</h4>
+<!-- l. 1023 --><p class='noindent'>This decoder ignores the adjacent chunks in the DWT domain, but notice that it uses
 the right coefficients (those computed using overlapping chunks). This should provide
 reconstructions of the chunks with a higher quality that in the previous
 milestone.
      </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-24002x1'>
-     <!-- l. 1026 --><p class='noindent'>For \(i\in \{0,1,\cdots \}\):
+<li class='enumerate' id='x1-23002x1'>
+     <!-- l. 1025 --><p class='noindent'>For \(i\in \{0,1,\cdots \}\):
          </p><ol class='enumerate2'>
-<li class='enumerate' id='x1-24004x1'>Input the decomposition subset \({\mathbf D}_i\).
+<li class='enumerate' id='x1-23004x1'>Input the decomposition subset \({\mathbf D}_i\).
          </li>
-<li class='enumerate' id='x1-24006x2'>Compute the chunk \({\mathbf C}_i\leftarrow \text {DWT}^{-l}({\mathbf D}_i)\).
+<li class='enumerate' id='x1-23006x2'>Compute the chunk \({\mathbf C}_i\leftarrow \text {DWT}^{-l}({\mathbf D}_i)\).
          </li>
-<li class='enumerate' id='x1-24008x3'>Output \({\mathbf C}_i\).</li></ol>
+<li class='enumerate' id='x1-23008x3'>Output \({\mathbf C}_i\).</li></ol>
      </li></ol>
-<!-- l. 1034 --><p class='noindent'>
+<!-- l. 1033 --><p class='noindent'>
 </p>
-   <h4 class='likesubsectionHead'><a id='x1-250001.5'></a>Decoder (uses overlapping):</h4>
-<!-- l. 1036 --><p class='noindent'>
+   <h4 class='likesubsectionHead'><a id='x1-240001.4'></a>Decoder (uses overlapping):</h4>
+<!-- l. 1035 --><p class='noindent'>
      </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-25002x1'>\({\mathbf D}_{-1}\leftarrow {\mathbf 0}\).
+<li class='enumerate' id='x1-24002x1'>\({\mathbf D}_{-1}\leftarrow {\mathbf 0}\).
                                                                   
 
                                                                   
      </li>
-<li class='enumerate' id='x1-25004x2'>Input decomposition \({\mathbf D}_0\).
+<li class='enumerate' id='x1-24004x2'>Input decomposition \({\mathbf D}_0\).
      </li>
-<li class='enumerate' id='x1-25006x3'>
-     <!-- l. 1039 --><p class='noindent'>For \(i\in \{0,1,\cdots \}\):
+<li class='enumerate' id='x1-24006x3'>
+     <!-- l. 1038 --><p class='noindent'>For \(i\in \{0,1,\cdots \}\):
          </p><ol class='enumerate2'>
-<li class='enumerate' id='x1-25008x1'>Input decomposition \({\mathbf D}_{i+1}\).
+<li class='enumerate' id='x1-24008x1'>Input decomposition \({\mathbf D}_{i+1}\).
          </li>
-<li class='enumerate' id='x1-25010x2'>Build the extended decomposition \({\mathbf E}_i = {\mathbf D}_{i-1}.{\mathbf l}^l[-\frac {o}{2^l}:]|{\mathbf D}_i.{\mathbf l}^l|{\mathbf D}_{i+1}.{\mathbf l}^l[:\frac {o}{2^l}]|{\mathbf D}_{i-1}.{\mathbf h}^l[-\frac {o}{2^l}:]|{\mathbf D}_i.{\mathbf h}^l|{\mathbf D}_{i+1}.{\mathbf h}^l[:\frac {o}{2^l}]|\cdots |{\mathbf D}_{i-1}.{\mathbf h}^1[-\frac {o}{2^1}:]|{\mathbf D}_i.{\mathbf h}^1|{\mathbf D}_{i+1}.{\mathbf h}^1[:\frac {o}{2^1}]\).
+<li class='enumerate' id='x1-24010x2'>Build the extended decomposition \({\mathbf E}_i = {\mathbf D}_{i-1}.{\mathbf l}^l[-\frac {o}{2^l}:]|{\mathbf D}_i.{\mathbf l}^l|{\mathbf D}_{i+1}.{\mathbf l}^l[:\frac {o}{2^l}]|{\mathbf D}_{i-1}.{\mathbf h}^l[-\frac {o}{2^l}:]|{\mathbf D}_i.{\mathbf h}^l|{\mathbf D}_{i+1}.{\mathbf h}^l[:\frac {o}{2^l}]|\cdots |{\mathbf D}_{i-1}.{\mathbf h}^1[-\frac {o}{2^1}:]|{\mathbf D}_i.{\mathbf h}^1|{\mathbf D}_{i+1}.{\mathbf h}^1[:\frac {o}{2^1}]\).
          </li>
-<li class='enumerate' id='x1-25012x3'>Compute the extended chunk \({\mathbf C}_i\leftarrow \text {DWT}^{-l}({\mathbf E}_i)\).
+<li class='enumerate' id='x1-24012x3'>Compute the extended chunk \({\mathbf C}_i\leftarrow \text {DWT}^{-l}({\mathbf E}_i)\).
          </li>
-<li class='enumerate' id='x1-25014x4'>Output \({\mathbf C}_i[o:-o]\).
+<li class='enumerate' id='x1-24014x4'>Output \({\mathbf C}_i[o:-o]\).
          </li>
-<li class='enumerate' id='x1-25016x5'>\({\mathbf D}_{i-1} \leftarrow {\mathbf D}_i\).
+<li class='enumerate' id='x1-24016x5'>\({\mathbf D}_{i-1} \leftarrow {\mathbf D}_i\).
          </li>
-<li class='enumerate' id='x1-25018x6'>\({\mathbf D}_i \leftarrow {\mathbf D}_{i+1}\).</li></ol>
+<li class='enumerate' id='x1-24018x6'>\({\mathbf D}_i \leftarrow {\mathbf D}_{i+1}\).</li></ol>
      </li></ol>
-<!-- l. 1063 --><p class='noindent'>
+<!-- l. 1062 --><p class='noindent'>
 </p>
-   <h3 class='sectionHead'><span class='titlemark'>2   </span> <a id='x1-260002'></a>What you have to do?</h3>
+   <h3 class='sectionHead'><span class='titlemark'>2   </span> <a id='x1-250002'></a>What you have to do?</h3>
                                                                   
 
                                                                   
-<!-- l. 1066 --><p class='noindent'>
+<!-- l. 1065 --><p class='noindent'>
 </p>
-   <h4 class='subsectionHead'><span class='titlemark'>2.1   </span> <a id='x1-270002.1'></a>Determine the RD curves for the MST</h4>
-<!-- l. 1068 --><p class='noindent'>As we did in the previous milestone, generate the RD curves for a set of simulated
+   <h4 class='subsectionHead'><span class='titlemark'>2.1   </span> <a id='x1-260002.1'></a>Determine the RD curves for the MST</h4>
+<!-- l. 1067 --><p class='noindent'>As we did in the previous milestone, generate the RD curves for a set of simulated
 transmission contexts. Use the modules <span class='ectt-1000'>stereo_MST_coding{|_16|_32}.py</span>. As you
 can see, they differs in how the transform has been implemented.
-</p><!-- l. 1074 --><p class='noindent'>
+</p><!-- l. 1073 --><p class='noindent'>
 </p>
-   <h4 class='subsectionHead'><span class='titlemark'>2.2   </span> <a id='x1-280002.2'></a>Determine the RD curves for the DWT</h4>
-<!-- l. 1077 --><p class='noindent'>Rebuild the RD curves considering also the temporal decorrelation. Use
+   <h4 class='subsectionHead'><span class='titlemark'>2.2   </span> <a id='x1-270002.2'></a>Determine the RD curves for the DWT</h4>
+<!-- l. 1076 --><p class='noindent'>Rebuild the RD curves considering also the temporal decorrelation. Use
 <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>temporal_no_overlapped_DWT_coding.py</span></span></span>. Notice that the number of levels \(l\) of
 the DWT (computed using <a href='https://pywavelets.readthedocs.io/en/latest/'>PyWavelets</a> <span class='cite'>[<a href='#Xlee2019pywavelets'>6</a>]</span>) can have a high impact on the
 amount of energy concentration achieved by the DWT, and therefore, on the
 efficiency of coding system. Show such impact. Experiment also with the wavelet
 name.
-</p><!-- l. 1087 --><p class='noindent'>
+</p><!-- l. 1086 --><p class='noindent'>
 </p>
-   <h4 class='subsectionHead'><span class='titlemark'>2.3   </span> <a id='x1-290002.3'></a>Determine the RD curves for the overlapped DWT</h4>
-<!-- l. 1090 --><p class='noindent'>Finally, redo the curves considering now the block overlapping
+   <h4 class='subsectionHead'><span class='titlemark'>2.3   </span> <a id='x1-280002.3'></a>Determine the RD curves for the overlapped DWT</h4>
+<!-- l. 1089 --><p class='noindent'>Finally, redo the curves considering now the block overlapping
 (<span class='obeylines-h'><span class='verb'><span class='ectt-1000'>temporal_overlapped_DWT_coding.py</span></span></span>). It is a good idea to put all the RD curves
 together (in the same graph), to compare easely,
-</p><!-- l. 1096 --><p class='noindent'>
+</p><!-- l. 1095 --><p class='noindent'>
 </p>
-   <h4 class='subsectionHead'><span class='titlemark'>2.4   </span> <a id='x1-300002.4'></a>Answer these questions</h4>
-<!-- l. 1099 --><p class='noindent'>
+   <h4 class='subsectionHead'><span class='titlemark'>2.4   </span> <a id='x1-290002.4'></a>Answer these questions</h4>
+<!-- l. 1098 --><p class='noindent'>
      </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-30002x1'>Which has been the gain of the filters used in your experiments?
+<li class='enumerate' id='x1-29002x1'>Which has been the gain of the filters used in your experiments?
      </li>
-<li class='enumerate' id='x1-30004x2'>Does the computation of the DWT using chunk overlapping increase the
+<li class='enumerate' id='x1-29004x2'>Does the computation of the DWT using chunk overlapping increase the
      latency of the whole system? And the jitter? In which amount?
      </li>
                                                                   
 
                                                                   
-<li class='enumerate' id='x1-30006x3'>Which other transform(s) are used in audio encoding systems (such as
+<li class='enumerate' id='x1-29006x3'>Which other transform(s) are used in audio encoding systems (such as
      MP3) for exploiting the temporal redundancy? Enumerate the systems
      and the used transform(s).
 </li></ol>
-<!-- l. 1118 --><p class='noindent'>
+<!-- l. 1117 --><p class='noindent'>
 </p>
-   <h4 class='subsectionHead'><span class='titlemark'>2.5   </span> <a id='x1-310002.5'></a>Visualize</h4>
-<!-- l. 1121 --><p class='noindent'>Visualize the effects (in the DWT domain) of quantization.
+   <h4 class='subsectionHead'><span class='titlemark'>2.5   </span> <a id='x1-300002.5'></a>Visualize</h4>
+<!-- l. 1120 --><p class='noindent'>Visualize the effects (in the DWT domain) of quantization.
                                                                   
 
                                                                   
@@ -667,14 +663,14 @@ python temporal_overlapped_DWT_coding.py -i 6 -o 6 --show_stats -q 8192
 # Connect the output of temporal_overlapped_DWT_coding.py to the input of dwt5.py
 python dwt5.py -d 9
 </pre>
-<!-- l. 1127 --><p class='nopar'>
-</p><!-- l. 1133 --><p class='noindent'>
+<!-- l. 1126 --><p class='nopar'>
+</p><!-- l. 1132 --><p class='noindent'>
 </p>
-   <h3 class='sectionHead'><span class='titlemark'>3   </span> <a id='x1-320003'></a>Deliverables</h3>
-<!-- l. 1134 --><p class='noindent'>A description of the experiments and their results.
-</p><!-- l. 1136 --><p class='noindent'>
+   <h3 class='sectionHead'><span class='titlemark'>3   </span> <a id='x1-310003'></a>Deliverables</h3>
+<!-- l. 1133 --><p class='noindent'>A description of the experiments and their results.
+</p><!-- l. 1135 --><p class='noindent'>
 </p>
-   <h3 class='sectionHead'><span class='titlemark'>4   </span> <a id='x1-330004'></a>Resources</h3>
+   <h3 class='sectionHead'><span class='titlemark'>4   </span> <a id='x1-320004'></a>Resources</h3>
     <div class='thebibliography'>
     <p class='bibitem'><span class='biblabel'>
   [1]<span class='bibsp'>   </span></span><a id='Xnumpy'></a>S. Berg et al. <a href='https://numpy.org/'>The NumPy project</a>.
@@ -725,7 +721,7 @@ python dwt5.py -d 9
     </span><span class='ecti-1000'>Processing</span></a>. Cambridge University Press, 2014.
 </p>
     </div>
-<p><a id='Q1-1-39'></a></p>
+<p><a id='Q1-1-38'></a></p>
                                                                   
 
                                                                   
