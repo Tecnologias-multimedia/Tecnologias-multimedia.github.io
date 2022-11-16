@@ -19,7 +19,7 @@
 
 <h2 class='titleHead'>Bit-Rate Control in InterCom</h2>
  <div class='author'><a href='https://cms.ual.es/UAL/personas/persona.htm?id=515256515553484875'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>- </span><a href='https://cms.ual.es/UAL/universidad/departamentos/informatica/index.htm'><span class='ecrm-1200'>Depto Informática</span></a> <span class='ecrm-1200'>- </span><a href='https://www.ual.es'><span class='ecrm-1200'>UAL</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>November 15, 2022</span></div>
+<div class='date'><span class='ecrm-1200'>November 16, 2022</span></div>
    </div>
    <h3 class='likesectionHead'><a id='x1-1000'></a>Contents</h3>
    <div class='tableofcontents'>
@@ -233,7 +233,7 @@ related to this milestone:
      </li>
 <li class='enumerate' id='x1-7015x3'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>BR_control_lost.py</span></span></span>: Every second runs: \begin {equation}  \Delta = L - 1.  \end {equation}
      </li>
-<li class='enumerate' id='x1-7017x4'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>BR_control_conservative.py</span></span></span>: Every second runs: \begin {equation}  \left \{ \begin {array}{ll} \Delta = 2\Delta &amp; \quad \text {if}~L&gt;1 \\ \Delta = \frac {1}{2}\Delta &amp; \quad \text {otherwise}. \end {array} \right .  \end {equation}
+<li class='enumerate' id='x1-7017x4'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>BR_control_conservative.py</span></span></span>: Every second runs: \begin {equation}  \left \{ \begin {array}{ll} \Delta = 2\Delta &amp; \quad \text {if}~L&gt;2 \\ \Delta = \frac {10}{11}\Delta &amp; \quad \text {always}. \end {array} \right .  \end {equation}
      </li></ol>
 <!-- l. 309 --><p class='noindent'>
 </p>
