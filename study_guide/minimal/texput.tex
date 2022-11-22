@@ -1,0 +1,202 @@
+% Emacs, this is -*-latex-*-
+
+\title{Meeting \texttt{minimal} InterCom}
+
+\maketitle
+
+\section{Description}
+
+InterCom is an application that captures and plays audio, and therefore, in Linux, runs on the top of one of the following audio services:
+\begin{enumerate}
+\item \href{https://vicente-gonzalez-ruiz.github.io/ALSA/}{ALSA}.
+\item
+  \href{https://vicente-gonzalez-ruiz.github.io/PulseAudio/}{PulseAudio}
+  (in the case of Xubuntu, this is the audio server that comes with
+  Xfce).
+\item \href{https://vicente-gonzalez-ruiz.github.io/JACK/}{JACK}.
+\end{enumerate}
+
+InterCom uses
+\href{https://vicente-gonzalez-ruiz.github.io/intro_to_sounddevice/}{sounddevice}
+to capture and play the audio. Using sounddevice we have two alternatives for implementing an intercom.
+
+\subsection{Loop-based algorithm}
+
+Roughtly, InterCom can be divided in 6 steps:
+
+\begin{lstlisting}[language=Python,numbers=left]
+  # Loop-based algorithm (to be called in a loop)
+  def record_IO_and_play():
+    chunk = record()  # (1)
+    packed_chunk = pack(chunk)  # (2)
+    send(packed_chunk)  # (3)
+    packed_chunk = receive()  # (4)
+    chunk = unpack(packed_chunk)  # (5)
+    play(chunk)  # (6)
+\end{lstlisting}
+
+%\begin{pseudocode}{Sequential\_InterCom}{~}
+%  \PROCEDURE{Record\_IO\_and\_Play}{~}
+%  \BEGIN
+%    \mathtt{chunk} \GETS \mathtt{record()}\\
+%    \mathtt{packed\_chunk} \GETS \mathtt{pack(chunk)}\\
+%    \mathtt{send(packed\_chunk)}\\
+%    \mathtt{packed\_chunk} \GETS \mathtt{receive()}\\
+%    \mathtt{chunk} \GETS \mathtt{unpack(packed\_chunk)}\\
+%    \mathtt{play(chunk)}
+%  \END
+%  \ENDPROCEDURE
+%\end{pseudocode}
+
+Where:
+
+\begin{enumerate}
+\item The \verb|record()| method captures a chunk of frames. In
+  \verb|sounddevice|, this operation is carried on by the
+  \href{https://python-sounddevice.readthedocs.io/en/0.4.0/api/streams.html#sounddevice.Stream.read}{\texttt{read()}
+    method}. As it can be seen in
+  \href{https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire4.py}{wire4.py}\footnote{
+    \texttt{curl
+      https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire4.py
+      > wire4.py}} and also in the documentation of
+  \verb|sounddevice|, if we read only the frames that are available in
+  the ADC's buffer, this generates a non-blocking operation and the
+  chunk size depends on the instant of time in which this method is
+  called. Otherwise, if we especify a number of frames different to
+  the number of available frames, the operation can\footnote{The
+    reading will be blocking if the number of requested frames is
+    larger than the number of available frames.} be
+  \href{https://python-sounddevice.readthedocs.io/en/0.4.0/api/streams.html#sounddevice.Stream.write}{blocking}
+  and \href{https://en.wikipedia.org/wiki/I/O_bound}{I/O-bound} (the
+  calling process sleeps until the required chunk size is returned).
+
+\item \verb|pack(chunk)| process the chunk to create a
+  \href{https://en.wikipedia.org/wiki/Network_packet}{packet} (or a
+  sequence of packets), a structure that can be transmitted through
+  the Internet using the
+  \href{https://en.wikipedia.org/wiki/Datagram}{Datagram} Model. In
+  general, this is a
+  \href{https://en.wikipedia.org/wiki/CPU-bound}{CPU-bounded}
+  (CPU-intensive) operation because the payload of the packet can be
+  compressed in order to minimize the transmission
+  \href{https://en.wikipedia.org/wiki/Bit_rate}{bit-rate}, and
+  therefore, it reduces the number of executions/second that the
+  \verb|record_IO_and_play()| method can reach.
+
+\item \verb|send(packed_chunk)|, sends the packet to the
+  InterCom's interlocutor. When datagrams are used, this step is
+  not blocking neither CPU-bounding (the CPU usage is very low), as
+  long as the number of packets/second is small and the sizes of the
+  payloads are also small, as it is expected in InterCom.
+
+\item \verb|receive()|, waits (blocking the calling process) for an
+  incoming packet, and therefore, this operation is IO-bound. However,
+  most \href{https://docs.python.org/3/library/socket.html}{socket
+    API}s~\cite{python} offeer a
+  \href{https://docs.python.org/3.8/library/socket.html#socket.socket.setblocking}{non-blocking
+    option} where when a packet is not available in the kernel's
+  buffer associated to the corresponding socket, some kind of
+  exception is generated and, in this case, it is resposabability of
+  the programmer to generate an ``alternative'' chunk (in our case,
+  for example, a chunk filled with zeros that will not produce any
+  sound when it is played).
+
+\item \verb|unpack(packed_chunk)| is (like the method
+  \texttt{pack(chunk)}) a CPU-intensive step that transforms a
+  packed chunk into a chunk of audio.
+
+\item \verb|play(chunk)| renders the chunk. In general, this is an
+  I/O-bound blocking action. However, if \verb|play()| is called at
+  the same pace than \verb|record()|, and the record and play
+  parameters are exactely the same (as happens in our algorithm), the
+  playing of the chunk will return inmediately because the time that
+  the \verb|play()| method needs to complete would exactly match the
+  time that the \verb|record()| method requires (see
+  \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/test/sounddevice/wire4.py}{wire4.py}).
+\end{enumerate}
+
+This algorithm works fine if the chunk size is controlled by
+\href{http://www.portaudio.com/}{PortAudio}~\cite{portaudio}
+(\verb|sounddevice|) and also, the run-time required by
+\verb|pack(chunk)| and \verb|unpack(packet)| operations is smaller
+than the chunk-time. Unfortunately, the first premise (that we can use
+varying the chunk sizes) complicates slightly the implementation
+because we would work with chunks of constantly changing lenghts (that
+as you can see running \verb|wire4.py|, in most of the iterations are
+0). This also complicates the control of the latency because the chunk
+size is variable. However, the real problem appears when our computer
+is not able to satisfy the second requirement, i.e., when the chunk
+time is smaller than the time that we need to process the chunks. This
+only can be addressed through optimizing (for example, parallelizing)
+the code.
+
+\subsection{Timer-based algorithm}
+
+In this algorithm, the task dedicated to record and play the chunks of
+audio is called periodically (probably, using some
+\href{https://en.wikipedia.org/wiki/Timer}{timer} provided by the
+sound hardware). This procedure guarantees a
+\href{https://en.wikipedia.org/wiki/Glitch}{gliches}-free audio-IO
+when constant chunk sizes are used because the timer interruption
+coincides exactly with the instant of time in which the
+\verb|record()| and the \verb|play()| methods we are going to handle a
+chunk of audio of a known size, and therefore, without blocking. The following
+algorithm describes the new algorithm that is basically the previous
+one, except that the chunk size is fixed.
+
+\begin{lstlisting}[language=Python,numbers=left]
+  # Timer-based algorithm (to be called periodically)
+  def record_IO_and_play(chunk_size):
+    chunk = record(chunk_size)  # The chunk has chunk_size frames
+    packed_chunk = pack(chunk)
+    send(packed_chunk)
+    packed_chunk = receive()
+    chunk = unpack(packed_chunk)
+    play(chunk)  # I play chunk_size frames
+\end{lstlisting}
+
+%\begin{pseudocode}{Timer-based\_InterCom}{~}
+%  \PROCEDURE{Record\_IO\_and\_Play}{\mathtt{chunk\_size}}
+%  \BEGIN
+%    \mathtt{chunk} \GETS \mathtt{record(chunk\_size)}\\
+%    \mathtt{packed\_chunk} \GETS \mathtt{pack(chunk)}\\
+%    \mathtt{send(packed\_chunk)}\\
+%    \mathtt{packed\_chunk} \GETS \mathtt{receive()}\\
+%    \mathtt{chunk} \GETS \mathtt{unpack(packed\_chunk)}\\
+%    \mathtt{play(chunk)}
+%  \END
+%  \ENDPROCEDURE
+%\end{pseudocode}
+
+The current implementation of InterCom uses the Timer-based algorithm.
+
+\section{What do you have to do?}
+
+\begin{enumerate}
+
+\item Read the source code of
+  \href{https://github.com/Tecnologias-multimedia/intercom/blob/master/src/minimal.py}{\texttt{minimal.py}}
+  and identify in the code the interruption handler that implements
+  the timer-based algorithm. Here you can find information about
+  \href{https://github.com/vicente-gonzalez-ruiz/YAPT/blob/master/03-IO/networking/sockets.ipynb}{sockets}~\cite{YAPT} in Python.
+  
+\item Evaluate the performance (quality of the sound) in different configurations:
+  \begin{enumerate}
+  \item When \verb|minimal.py| runs in the same computer. Can you
+    describe how the parameter \verb|FRAMES_PER_SECOND| is modified?
+  \item When \verb|minimal.py| runs in different hosts. In this case,
+    try that the computers do not belong to the same local
+    network. This
+    \href{https://www.noip.com/support/knowledgebase/general-port-forwarding-guide/}{guide}
+    can help. Consider in your analysis that
+    \href{https://en.wikipedia.org/wiki/User_Datagram_Protocol}{UDP}~\cite{UDP}
+    is used to transport the audio data. If you cannot use different
+    local networks, create a WiFi zone using your mobile phone and try
+    to produce a loss of packets by separating the devices a
+    sufficient distance.
+  \end{enumerate}
+\end{enumerate}
+
+\section{Resources}
+
+\bibliography{python,sound,networking}

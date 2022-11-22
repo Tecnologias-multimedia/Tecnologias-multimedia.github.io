@@ -1,8 +1,0 @@
-set terminal fig color textspecial
-set xlabel "$f$ [Hz]"
-set ylabel "SPL (Sound Pressure Level) [dB]"
-set output "ToHH.fig"
-set xrange[10:20000]
-set logscale x
-set title "A model of the Human Auditory System"
-plot 3.64*(x/1000)**(-0.8)-6.5*exp((-0.6)*(x/1000-3.3)**2) + 10**(-3)*(x/1000)**4 title "$3.64(\\frac{f}{1000})^{-0.8}-6.5e^{(-0.6)*(\\frac{f}{1000}-3.3)^2} + 10^{-3}(\\frac{f}{1000})^4$"

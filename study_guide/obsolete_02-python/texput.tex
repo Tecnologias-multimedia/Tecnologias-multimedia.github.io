@@ -1,0 +1,186 @@
+\input{../definitions}
+\title{\TM{} - Study Guide - Milestone 2: Installation and basic programming with Python}
+
+\maketitle
+
+\tableofcontents
+
+\section{Description}
+
+The InterCom project \cite{intercom} are a collection of
+\href{https://www.python.org/}{Python}
+\href{https://docs.python.org/3/tutorial/modules.html#modules}{modules}
+written in Python \cite{python}, that use a number of
+\href{https://docs.python.org/3/tutorial/modules.html#packages}{packages}. Therefore,
+you will need a
+\href{https://docs.python.org/3/tutorial/interpreter.html}{Python
+  interpreter} and know how to develop/run Python code.
+
+Most of the current Unix-based operating systems (Linux, FreeBSD and
+OSX) use Python for running some of their ``daily tasks'', which means
+that a Python interpreter is already available. However, usually it is
+better to use our own interpreter because:
+
+\begin{enumerate}
+
+\item We can chose the version of Python and have more flexibility
+  with the packages.
+
+\item We can optimize the compilation of the interpreter depending on
+  our needs (for example, including
+  \href{https://wiki.python.org/moin/TkInter}{Tk support} or not).
+
+\item By default, all the Python packages will be installed in a
+  different repository of the system packages, which eases the
+  system/user Python-isolation and the removal of the interpreter.
+
+\end{enumerate}
+
+In Windows you need to install Python, yes or yes, from the official
+\href{https://www.python.org/downloads/}{website}. However, notice
+that this ``guide'' only contemplates the installation of Python in
+Unix-based OS machines, and specifically, in a Xubuntu computer.
+
+As said before, it is very likely that your Unix-like OS has Python
+installed. However, in order to control the version of the Python
+interpreter, we will install a dedicated one.
+
+\section{What do I have to do?}
+
+\begin{enumerate}
+  
+\item Installation of Python.
+  
+  \begin{enumerate}
+    
+  \item Go to
+    \href{https://github.com/vicente-gonzalez-ruiz/YAPT/blob/master/01-hello_world/02-installation.ipynb}{YAPT/01-hello\_world/02-installation.ipynb}
+    \cite{YAPT} and follow the instructions to install the lastest
+    stable version
+    \href{https://en.wikipedia.org/wiki/CPython}{CPython}, and create
+    a new virtual environment called \texttt{tm} with
+    \href{https://github.com/pyenv/pyenv}{\texttt{pyenv}}. Basically
+    (example for \verb|Python 3.9.7|):
+
+    \begin{enumerate}
+    \item Install package dependencies for compiling Python:
+      
+      \begin{lstlisting}[mathescape=false, language=Bash]
+sudo apt-get update; sudo apt-get install make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+\end{lstlisting}
+
+\item Download Pyenv:
+  \begin{lstlisting}[mathescape=false, language=Bash]
+git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+\end{lstlisting}
+        
+\item (Optional) Compile a dynamic Bash extension to speed up Pyenv.
+  \begin{lstlisting}[mathescape=false, language=Bash]
+cd ~/.pyenv && src/configure && make -C src; cd ~
+\end{lstlisting}
+
+\item Define the \verb|PYENV_ROOT| environment variable to point to
+  the path where you cloned the Pyenv repo. For this, put these lines
+  into \verb|~/.profile|\footnote{This configuration file is sourced
+    by the \texttt{bash} interperter only when a login shell is done
+    (when the system requests your identity and you are able to
+    privide it.} before the part that sources
+  \verb|~/.bashrc|\footnote{This configuration file is sourced by the
+    \texttt{bash} interpreter when you request a non-login shell, i.e.,
+    when you reinstance the interpreter, for example, running a new
+    terminal.}.
+        
+  \begin{lstlisting}[mathescape=false, language=Bash]
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+\end{lstlisting}
+
+\item Run:
+  \begin{lstlisting}[mathescape=false, language=Bash]
+echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+echo 'eval "$(pyenv init --path)"' >> ~/.bashrc
+\end{lstlisting}
+to put these lines at the bottom of \verb|~/.bashrc| to enable
+autocompletion and all subcommands.
+
+\item Restart your login session for the changes to take
+  effect. E.g. if you're in a GUI session, you need to fully log out
+  and log back in.
+
+\item List the available Python interpreters:
+  \begin{lstlisting}[mathescape=false, language=Bash]
+pyenv install --list
+\end{lstlisting}
+
+\item Install the Python interpreter (and some basic tools such as \href{https://pypi.org/project/pip/}{pip}):
+  \begin{lstlisting}[mathescape=false, language=Bash]
+pyenv install -v 3.9.7
+\end{lstlisting}
+
+\item Check what it is currently available:
+  \begin{lstlisting}[mathescape=false, language=Bash]
+pyenv versions        
+\end{lstlisting}
+You should get something such as:
+\begin{lstlisting}[mathescape=false, language=Bash]
+* system (set by /home/<your_home_dir_here>/.pyenv/version)
+  3.9.7
+\end{lstlisting}
+
+\item Select the Python interperter:
+  \begin{lstlisting}[mathescape=false, language=Bash]
+pyenv global 3.9.7
+\end{lstlisting}
+
+\end{enumerate}
+    
+  \item Install an
+    \href{https://en.wikipedia.org/wiki/Integrated_development_environment}{IDE}
+    for programming with Python. I recommend
+    \href{https://thonny.org/}{Thonny} if you are not used to any
+    other.
+    
+    \begin{lstlisting}[language=Bash]
+pip install thonny
+    \end{lstlisting}
+
+  \end{enumerate}
+
+\item Alternatively (but reducing the chances of solving any possible
+  issue), you can use the Python interpreter shipped with your OS. In
+  this case, it is strongly recommended to use an specific Python
+  \href{https://docs.python.org/3/library/venv.html}{environment} for
+  the InterCom project.
+  
+\item Python programming.
+  
+  \begin{enumerate}
+    
+  \item You don't need to master Python to follow this course, but it
+    is convenient for you to follow some Python programming tutorial,
+    such as \href{https://docs.python.org/3/tutorial/}{The Python
+    Tutorial} \cite{python-tutorial} if you realize that the language
+    is a setback for you. If you need to start with Python from
+    scratch, an introduction to Python such as
+    this \href{https://github.com/vicente-gonzalez-ruiz/YAPT/tree/master/workshops/programacion_python_ESO}{workshop
+    of YAPT} \cite{YAPT} could also be helpful. See
+    also \href{http://zetcode.com/lang/python/}{ZetCode's Python
+    Tutorial}.
+    
+  \end{enumerate}
+
+\end{enumerate}
+
+\section{Timming}
+
+There is not time limit for finishing this milestone. Develop it at
+your own pace. However, notice that we will be using Python very soon.
+
+\section{Deliverables}
+
+None.
+
+\section{Resources}
+
+\renewcommand{\addcontentsline}[3]{}% Remove functionality of \addcontentsline
+\bibliography{python,intercom}

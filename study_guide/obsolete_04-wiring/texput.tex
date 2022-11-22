@@ -1,0 +1,72 @@
+\input{../definitions}
+\title{\TM{} - Study Guide - Milestone 4: ``wiring'' the ADC with the DAC, and measuring latencies (obsolete)}
+
+\maketitle
+
+\section{Description}
+
+Let's start our understanding of InterCom with a simple program that
+inputs digital audio (through the
+\href{https://en.wikipedia.org/wiki/Analog-to-digital_converter}{ADC}
+of your computer) and, as soon as possible, outputs the audio (through
+the
+\href{https://en.wikipedia.org/wiki/Digital-to-analog_converter}{DAC}). We
+are going to use a minimal ``wiring'' program, that when it is run and
+we feed back the audio output with the audio input of our computer,
+allows us to measure the
+\href{https://en.wikipedia.org/wiki/Latency_(engineering)}{latency} of
+this system. To handle the audio hardware we use
+\href{https://python-sounddevice.readthedocs.io}{\texttt{sounddevice}}
+\cite{sounddevice}, that is wrapper for the
+\href{http://www.portaudio.com/}{PortAudio} library.
+
+\section{What you have to do?}
+
+\begin{enumerate}
+
+\item 
+  
+\item Download the Python
+  \href{https://docs.python.org/3/tutorial/modules.html}{module}
+  \href{https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire3.py}{wire3.py} with:
+
+  \begin{lstlisting}[language=Bash]
+sudo apt install curl
+curl https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire3.py > wire3.py
+  \end{lstlisting}      
+      
+
+\item 
+
+\item OK, run the module with:
+
+
+
+
+  %If you obtain the message \texttt{ALSA lib
+  %  pcm.c:8526:(snd\_pcm\_recover) underrun occurred}, ignore it (this
+  %is a consequence of that you are using
+  %\href{https://www.freedesktop.org/wiki/Software/PulseAudio/}{PulseAudio}
+  %instead of \href{https://alsa-project.org/wiki/Main_Page}{ALSA}
+  %directly, and the used \href{https://www.kernel.org/}{kernel} has
+  %been compiled without
+  %\href{https://en.wikipedia.org/wiki/RTLinux}{real-time process
+  %  scheduling}).
+
+\item Now, lets compute, experimentally, the latency experimented by
+  \texttt{wire3.py}.
+
+
+\section{Timming}
+
+You should reach this milestone at most in one week.
+
+\section{Deliverables}
+
+Describe your experimental setup (CPU processor, RAM,
+soundcard chipset, etc.), plot the data, and answer the question
+enunciated in the Step ~\ref{question}.
+
+\section{Resources}
+
+\bibliography{python}

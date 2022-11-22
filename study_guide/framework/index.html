@@ -1,0 +1,104 @@
+<!DOCTYPE html> 
+<html lang='en-US' xml:lang='en-US'> 
+<head> <title>Framework</title> 
+<meta charset='utf-8' /> 
+<meta content='TeX4ht (https://tug.org/tex4ht/)' name='generator' /> 
+<meta content='width=device-width,initial-scale=1' name='viewport' /> 
+<link href='index.css' rel='stylesheet' type='text/css' /> 
+<meta content='index.tex' name='src' /> 
+<script>window.MathJax = { tex: { tags: "ams", }, }; </script> 
+ <script async='async' id='MathJax-script' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js' type='text/javascript'></script>  
+</head><body>
+   <div class='maketitle'>
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+
+<h2 class='titleHead'>Framework</h2>
+ <div class='author'><a href='https://cms.ual.es/UAL/personas/persona.htm?id=515256515553484875'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>- </span><a href='https://cms.ual.es/UAL/universidad/departamentos/informatica/index.htm'><span class='ecrm-1200'>Depto Informática</span></a> <span class='ecrm-1200'>- </span><a href='https://www.ual.es'><span class='ecrm-1200'>UAL</span></a></div><br />
+<div class='date'><span class='ecrm-1200'>September 14, 2022</span></div>
+   </div>
+   <h3 class='sectionHead'><span class='titlemark'>1   </span> <a id='x1-10001'></a>Description</h3>
+<!-- l. 9 --><p class='noindent'>The InterCom project <span class='cite'>[<a href='#Xintercom'>7</a>]</span> is a collection of <a href='https://www.python.org/'>Python</a> <a href='https://docs.python.org/3/tutorial/modules.html#modules'>modules</a> <span class='cite'>[<a href='#Xpython'>3</a>]</span>. Python has been
+ported to <a href='https://www.python.org/download/other/'>almost all</a> the current OSs, including mobile <a href='https://kivy.org/#home'>devices</a>. Among all
+available development environments, we will develop the project on Linux, and
+more concretely, on <a href='https://xubuntu.org/download/'>Xubuntu 22.04 (Jammy Jellyfish)</a> <span class='cite'>[<a href='#Xxubuntu'>5</a>]</span>, running natively
+(no <a href='https://en.wikipedia.org/wiki/Virtualization'>virtualization</a>), if possible. Please, follow for this, <a href='https://vicente-gonzalez-ruiz.github.io/Xubuntu_install/'>to install Xubuntu</a>.
+Alternatively, you can use any other Linux distribution (or even, any other OS), but
+you should be able to provide technical support yourself, in case you need
+it.
+</p><!-- l. 26 --><p class='indent'>   You don’t need to master Python to follow this course, but it is convenient for
+you to rely on some Python programming tutorial, such as <a href='https://docs.python.org/3/tutorial/'>The Python
+Tutorial</a> <span class='cite'>[<a href='#Xpython-tutorial'>2</a>]</span> if you realize that the language is a setback for you. If you need to
+start with Python from scratch, an introduction to Python such as this
+<a href='https://github.com/vicente-gonzalez-ruiz/YAPT/tree/master/workshops/programacion_python_ESO'>workshop of YAPT</a> <span class='cite'>[<a href='#XYAPT'>4</a>]</span> could also be helpful. See also <a href='http://zetcode.com/lang/python/'>ZetCode’s Python
+Tutorial</a>.
+</p><!-- l. 37 --><p class='indent'>   To run InterCom, the following alternatives should work:
+     </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-1002x1'>
+     <!-- l. 39 --><p class='noindent'>Use the Python interpreter shipped with your OS. If you are using the
+     recommended Xubuntu version in this guide, the Python interpreter is fine. In
+     this case, use a virtual <a href='https://docs.python.org/3/library/venv.html'>environment</a> for InterCom. To do this, run:
+     </p><!-- l. 44 -->
+     <div class='lstlisting' id='listing-1'><span class='label'><a id='x1-1003r1'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>python3</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>-</span></span><span style='color:#000000'><span class='ectt-1000'>m</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>venv</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>~/</span></span><span style='color:#000000'><span class='ectt-1000'>enviroments</span></span><span style='color:#000000'><span class='ectt-1000'>/</span></span><span style='color:#000000'><span class='ectt-1000'>intercom</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span class='ecit-1000'>   </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>Create</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>(</span></span><span style='color:#000000'><span class='ecit-1000'>only</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>the</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>first</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>time</span></span><span style='color:#000000'><span class='ecit-1000'>)</span></span><span class='ectt-1000'> </span><br /> 
+<span class='label'><a id='x1-1004r2'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>source</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>~/</span></span><span style='color:#000000'><span class='ectt-1000'>enviroments</span></span><span style='color:#000000'><span class='ectt-1000'>/</span></span><span style='color:#000000'><span class='ectt-1000'>intercom</span></span><span style='color:#000000'><span class='ectt-1000'>/</span></span><span style='color:#000000'><span class='ectt-1000'>bin</span></span><span style='color:#000000'><span class='ectt-1000'>/</span></span><span style='color:#000000'><span class='ectt-1000'>activate</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>Activate</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>(</span></span><span style='color:#000000'><span class='ecit-1000'>allways</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>you</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>run</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>InterCom</span></span><span style='color:#000000'><span class='ecit-1000'>)</span></span></div>
+     
+                                                                  
+
+                                                                  
+     <!-- l. 48 --><p class='noindent'>And to deactivate the environment, run: </p><!-- l. 49 -->
+     <div class='lstlisting' id='listing-2'><span class='label'><a id='x1-1005r1'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>deactivate</span></span></div>
+     
+     </li>
+<li class='enumerate' id='x1-1007x2'>Use a specific version of Python installed in a virtual environment. In this case,
+     follow this <a href='https://vicente-gonzalez-ruiz.github.io/Python_install/'>guide</a>.
+</li></ol>
+<!-- l. 58 --><p class='indent'>   Finally, if you want to contribute to the <a href='https://github.com/Tecnologias-multimedia/intercom'>InterCom</a> project <span class='cite'>[<a href='#Xintercom'>7</a>]</span> you must understand the basics of
+Git <span class='cite'>[<a href='#XGit-book'>1</a>]</span> and <a href='https://github.com/'>GitHub</a><span class='footnote-mark'><a href='#fn1x0' id='fn1x0-bk'><sup class='textsuperscript'>1</sup></a></span><a id='x1-1008f1'></a>
+<span class='cite'>[<a href='#XGitHub'>8</a>]</span>, and how to use the <a href='https://guides.github.com/introduction/flow/index.html'>The GitHub (Work-)Flow</a> and the <a href='https://github.com/vicente-gonzalez-ruiz/fork_and_branch_git_workflow'>Fork-and-Branch Git
+Workflow</a> <span class='cite'>[<a href='#Xfork-and-branch-git-workflow'>6</a>]</span>. Be aware that to contribute to InterCom, an GitHub account is
+required. Please, follow this <a href='https://vicente-gonzalez-ruiz.github.io/using_GitHub/'>minimal Git guide</a>. In the guide, you must consider that
+the <span class='ectt-1000'>&lt;organization_name&gt; </span>is <span class='ectt-1000'>Tecnologias-multimedia </span>and that the <span class='ectt-1000'>&lt;repo_name&gt; </span>is
+<span class='ectt-1000'>intercom</span>.
+</p><!-- l. 77 --><p class='noindent'>
+</p>
+   <h3 class='sectionHead'><span class='titlemark'>2   </span> <a id='x1-20002'></a>Resources</h3>
+   <div class='thebibliography'>
+   <p class='bibitem'><span class='biblabel'>
+ [1]<span class='bibsp'>   </span></span><a id='XGit-book'></a>Scott Chacon and Ben Straub. <a href='https://git-scm.com/book/en/v2'><span class='ecti-1000'>Pro Git</span></a>. Apress, 2020.
+   </p>
+   <p class='bibitem'><span class='biblabel'>
+ [2]<span class='bibsp'>   </span></span><a id='Xpython-tutorial'></a>The Python Foundation. <a href='https://docs.python.org/3/tutorial/'>The Python Tutorial</a>.
+   </p>
+   <p class='bibitem'><span class='biblabel'>
+ [3]<span class='bibsp'>   </span></span><a id='Xpython'></a>The Python Foundation. <a href='https://www.python.org/'>The Python Website</a>.
+   </p>
+   <p class='bibitem'><span class='biblabel'>
+ [4]<span class='bibsp'>   </span></span><a id='XYAPT'></a>V. González Ruiz. <a href='https://github.com/vicente-gonzalez-ruiz/YAPT/'>YAPT</a>.
+   </p>
+   <p class='bibitem'><span class='biblabel'>
+ [5]<span class='bibsp'>   </span></span><a id='Xxubuntu'></a>Canonical Ltd. <a href='https://xubuntu.org/'>xubuntu</a>.
+                                                                  
+
+                                                                  
+   </p>
+   <p class='bibitem'><span class='biblabel'>
+ [6]<span class='bibsp'>   </span></span><a id='Xfork-and-branch-git-workflow'></a>Scott. <a href='https://github.com/vicente-gonzalez-ruiz/fork_and_branch_git_workflow'>The Fork and Branch Git Workflow</a>.
+   </p>
+   <p class='bibitem'><span class='biblabel'>
+ [7]<span class='bibsp'>   </span></span><a id='Xintercom'></a>The students of <a href='https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN'>Tecnologías Multimedia</a> at the UAL.  The <a href='https://github.com/Tecnologias-multimedia/intercom'>InterCom</a>
+   project.
+   </p>
+   <p class='bibitem'><span class='biblabel'>
+ [8]<span class='bibsp'>   </span></span><a id='XGitHub'></a>C. Wanstrath, P.J. Hyett, T. Preston-Werner, and S. Chacon. <a href='https://github.com'>GitHub</a>.
+</p>
+   </div>
+<p><a id='Q1-1-3'></a></p>
+   <div class='footnotes'><!-- l. 65 --><p class='indent'>     <span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='ecrm-0800'>There are other Git-based hosting services such as </span><a href='https://about.gitlab.com/'><span class='ecrm-0800'>GitLab</span></a> <span class='ecrm-0800'>and </span><a href='https://www.atlassian.com/git'><span class='ecrm-0800'>Altassian</span></a><span class='ecrm-0800'>/</span><a href='https://bitbucket.org/product'><span class='ecrm-0800'>BitBucket</span></a><span class='ecrm-0800'>, but
+</span><span class='ecrm-0800'>GitHub is the most used one.</span></p>                                                                                   </div>
+ 
+</body> 
+</html>

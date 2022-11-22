@@ -1,0 +1,100 @@
+\documentclass[tikz, border=5mm, 10pt]{standalone}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+\usetikzlibrary{arrows.meta,shadows,positioning,calc,decorations.markings}
+
+\pgfdeclarelayer{timelines}
+\pgfsetlayers{timelines,main}
+
+\begin{document}
+
+\begin{tikzpicture}
+  
+  \tikzstyle{every node}=[font=\normalsize]
+
+  \tikzset{myptr/.style={decoration={markings,mark=at position 1
+        with %
+        {\arrow[black,scale=1.0,>=Latex]{>}}}, postaction={decorate}}}
+  
+  % Entities
+  \node[] (Host A) {Host A};
+  \node[right=5.0 of Host A] (Host B) {Host B};
+
+  % Timelines
+  \begin{pgfonlayer}{timelines}
+    \coordinate (HA) at ($(Host A.center) + (0.0,-4.0)$);
+    \draw[myptr] ($(Host A.center) + (0,-2ex)$) -- (HA);  
+    \coordinate (HB) at ($(Host B.center) + (0.0,-4.0)$);
+    \draw[myptr] ($(Host B.center) + (0,-2ex)$) -- (HB);
+  \end{pgfonlayer}
+
+  % Horizontal dashed line representing the same time in both timelines
+  \coordinate (A sends first bit) at ($(Host A) + (0, -2ex)$);
+  \coordinate (waiting for ping) at ($(Host B) + (0, -2ex)$);
+  \draw[dashed] (A sends first bit) -- (waiting for ping);
+
+  % Oblique line with the transmission of the first bit
+  \coordinate (B receives first bit) at ($(Host B) + (0, -6ex)$);
+  \coordinate (A sends last bit) at ($(Host A) + (0, -8ex)$);
+  \coordinate (B receives last bit) at ($(Host B) + (0, -12ex)$);
+  \filldraw[gray] (A sends first bit) -- (B receives first bit) -- (B receives last bit) -- (A sends last bit);
+
+  % Second horizontal dashed line representing the same time in both timelines
+  \coordinate (B receives last bit at A) at ($(Host A) + (0, -12ex)$);
+  \draw[dashed] (B receives last bit) -- (B receives last bit at A);
+
+  % Response
+  \coordinate (A receives first bit) at ($(Host A) + (0, -16ex)$);
+  \coordinate (A receives last bit) at ($(Host A) + (0, -22ex)$);
+  \coordinate (B sends last bit) at ($(Host B) + (0, -18ex)$);
+  \filldraw[gray] (B receives last bit) -- (A receives first bit) -- (A receives last bit) -- (B sends last bit);
+
+  % Second horizontal dashed line representing the same time in both timelines
+  \coordinate (A receives last bit at B) at ($(Host B) + (0, -22ex)$);
+  \draw[dashed] (A receives last bit) -- (A receives last bit at B);
+
+  % For host A
+  
+  % t_t = transmission delay
+  \coordinate (center sent A) at ($(Host A) + (0, -5ex)$);
+  \node[left=0 of center sent A] (tt) {$t_t$};
+
+  % t_p = propagation delay
+  \coordinate (half minimum RTT A) at ($(Host A) + (0, -10ex)$);
+  \node[left=0 of half minimum RTT A] (tp) {$t_p$};
+  
+  % t_p = propagation delay
+  \coordinate (second half minimum RTT A) at ($(Host A) + (0, -14ex)$);
+  \node[left=0 of second half minimum RTT A] (tp) {$t_p$};
+  
+  % t_t = transmission delay
+  \coordinate (center received A) at ($(Host A) + (0, -19ex)$);
+  \node[left=0 of center received A] (tt) {$t_t$};
+
+  % For host B
+  
+  % t_p = propagation delay
+  \coordinate (half minimum RTT B) at ($(Host B) + (0, -4ex)$);
+  \node[right=0 of half minimum RTT B] (tp) {$t_p$};
+  
+  % t_t = transmission delay
+  \coordinate (center sent B) at ($(Host B) + (0, -9ex)$);
+  \node[right=0 of center sent B] (tt) {$t_t$};
+
+  % t_t = transmission delay
+  \coordinate (center received B) at ($(Host B) + (0, -15ex)$);
+  \node[right=0 of center received B] (tt) {$t_t$};
+  % t_p = propagation delay
+  \coordinate (second half minimum RTT B) at ($(Host B) + (0, -20ex)$);
+  \node[right=0 of second half minimum RTT B] (tp) {$t_p$};
+  
+  % line RTT
+  \draw[dashed] (A sends first bit) -- ($(A sends first bit) + (-4ex, 0)$) -- ($(A receives last bit) + (-4ex, 0)$) -- (A receives last bit);
+
+  % RTT
+  \node[right=-10ex of B receives last bit at A] (rtt) {RTT};
+
+\end{tikzpicture}
+
+\end{document}

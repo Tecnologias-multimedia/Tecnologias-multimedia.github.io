@@ -1,0 +1,384 @@
+\input{../definitions}
+\title{Linux audio basics and \texttt{sounddevice}}
+
+\maketitle
+
+\section{The Linux Audio (probably partial) Stack}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\multicolumn{2}{c}{\href{https://en.wikipedia.org/wiki/List\_of\_Linux\_audio\_software}{Linux Audio Applications}} \\
+\hline
+\href{https://jackaudio.org/}{JACK} & \href{https://www.freedesktop.org/wiki/Software/PulseAudio/}{Pulse Audio} \\
+\hline
+\multicolumn{2}{c}{\href{https://www.alsa-project.org}{ALSA}} \\
+\hline
+\multicolumn{2}{c}{\href{https://www.alsa-project.org/wiki/Matrix:Main}{Sound hardware}} \\
+\hline
+\end{tabular}
+\end{center}
+
+\section{Advanced Linux Sound Architecture (ALSA)}
+ALSA is a software
+\href{https://docs.kernel.org/sound/kernel-api/index.html}{framework}
+and part of the Linux kernel (as a set of
+\href{https://wiki.archlinux.org/title/Kernel_module}{modules}) that
+provides an application programming interface (API), in
+\href{https://en.wikipedia.org/wiki/C_(programming_language)}{C}, for
+sound device drivers~\cite{phillips2005user}. For example, to show the
+modules related with ALSA currently loaded, run:
+\begin{verbatim}
+lsmod | grep '^snd' | column -t
+\end{verbatim}
+
+\subsection{\texttt{amixer} and \texttt{alsamixer}}
+\texttt{\href{https://linux.die.net/man/1/amixer}{amixer}} (through the command line) and \texttt{\href{https://en.wikipedia.org/wiki/Alsamixer}{alsamixer}} (using also the command line but being ncurses-based) can be used to control the gain of the audio inputs and outputs. For example, to run \texttt{alsamixer}, in your terminal write:
+\begin{verbatim}
+alsamixer
+\end{verbatim}
+
+\subsection{\texttt{arecord}}
+\texttt{\href{https://linux.die.net/man/1/arecord}{arecord}} runs on
+ALSA to capture
+\href{https://en.wikipedia.org/wiki/Pulse-code_modulation}{PCM (Pulse
+  Code Modulation)} (by default, using the
+\href{https://en.wikipedia.org/wiki/WAV}{WAV} audio format) audio
+data, and provides information about the hardware, and also, about the
+audio servers. Some examples of use are:
+
+\begin{itemize}
+
+\item List the physical audio \href{https://en.wikipedia.org/wiki/Analog-to-digital_converter}{ADC}(s):
+\begin{verbatim}
+arecord -l      
+\end{verbatim}
+
+\item Show information about the ADC(s) capabilities (if \href{https://www.freedesktop.org/wiki/Software/PulseAudio/}{PulseAudio} is not running, remove \texttt{pasuspender --}):
+\begin{verbatim}
+pasuspender -- arecord -D hw:0,0 --dump-hw-params
+\end{verbatim}
+
+\item Idem, but using the default audio server (usually, PulseAudio):
+\begin{verbatim}
+arecord --dump-hw-params > /dev/null
+\end{verbatim}
+Usually, the software capabilities are higher than the hardware ones.
+
+\item List the virtual ADC(s) (\href{https://alsa.opensrc.org/Pcm-device}{PCM} outputs):
+\begin{verbatim}
+arecord -L
+\end{verbatim}
+
+\item Record raw (without header) audio in \href{https://en.wikipedia.org/wiki/Compact_Disc_Digital_Audio#Audio_format}{CD audio format}:
+\begin{verbatim}
+arecord -t raw -f cd > signed_int16_bits__little_endian__44100_frames_per_second__2_samples_per_frame.raw
+\end{verbatim}
+
+\end{itemize}
+
+\subsection{\texttt{aplay}}
+\texttt{\href{https://linux.die.net/man/1/aplay}{aplay}} is the
+companion PCM player of \texttt{arecord}. The playing capabilities
+used to be exactly the same than the provides by \texttt{arecord}.
+
+\begin{itemize}
+
+\item List the physical audio \href{https://en.wikipedia.org/wiki/Digital-to-analog_converter}{DAC}(s):
+\begin{verbatim}
+aplay -l      
+\end{verbatim}
+
+\item Idem, but listing the virtual DACs (PCM outputs):
+\begin{verbatim}
+aplay -L
+\end{verbatim}
+
+\item (Recording and) Playing directly through ALSA, using the physical DAC and DAC:
+\begin{verbatim}
+arecord -t raw -f cd | aplay -t raw -f cd
+pasuspender -- arecord -D hw:0,0 -t raw -f cd | pasuspender -- aplay -D hw:0,0 -t raw -f cd
+\end{verbatim}
+
+\item (Recording and) Playing throught the default sound server (usually PulseAudio), using the virtual DAC and DAC:
+\begin{verbatim}
+arecord -t raw -f cd | aplay -t raw -f cd
+\end{verbatim}
+\end{itemize}
+
+\subsection{\texttt{speaker-test}}
+\texttt{\href{https://linux.die.net/man/1/speaker-test}{speaker-test}} allows to generate (by default) \href{https://en.wikipedia.org/wiki/Pink_noise}{pink noise} or a pure tone through the audio outputs. Examples:
+\begin{verbatim}
+speaker-test                       # Analog (copper or Bluetooth, if available) mono
+speaker-test -c 2                  # Analog (copper of Bluethooh, if available) stereo
+speaker-test -Dplug:spdif -c2      # Digital (SPDIF) stereo, if available
+speaker-test -c 8                  # Surround (usually through HDMI) 7.1, if available
+\end{verbatim}
+
+\section{PulseAudio}
+
+\href{https://www.freedesktop.org/wiki/Software/PulseAudio/}{PulseAudio
+  is a sound server system for POSIX OSes, meaning that it is a proxy
+  for your sound applications. It is an integral part of all relevant
+  modern Linux distributions and is used in various mobile devices, by
+  multiple vendors. It performs advanced operations on sound data as
+  it passes between your application and hardware. Things like
+  transferring audio to a different machine, changing the sample
+  format or channel count, or mixing several sounds into one
+  input/output, are easily achieved using
+  PulseAudio.}~\cite{newmarch2017pulseaudio}
+
+Like ALSA, PulseAudio is dinamically configured using
+PulseAudio\href{https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/Modules/}{modules}. \texttt{\href{https://linux.die.net/man/1/pactl}{pactl}}
+is the command line tool for loading and downloading modules. For
+example, to use the equalizer
+\texttt{\href{https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/Equalizer/}{qpaeq}}
+that should be already installed in your computer if you are using
+PulseAudio, run:
+
+\begin{verbatim}
+pactl load-module module-equalizer-sink
+pulseaudio --kill && pulseaudio --start
+qpaeq &
+\end{verbatim}
+% Ver también: pulseaudio-equalizer-ladspa
+
+Another important PulseAudio application is the
+\texttt{\href{https://freedesktop.org/software/pulseaudio/pavucontrol/}{pavcontrol}}
+that is a mixer/VU-meter that handles sound applications, input and
+output audio devices.
+
+\section{JACK}
+
+
+\section{sounddevice}
+\href{https://python-sounddevice.readthedocs.io}{sounddevice} is a
+Python \href{https://docs.python.org/3/tutorial/modules.html}{module}
+that provides bindings for the
+\href{http://www.portaudio.com/}{PortAudio
+  library}~\cite{sounddevice}.
+
+Let's see some examples of what sounddevice can do:
+
+\subsection*{Wiring the ADC and the DAC using a loop}
+\lstinputlisting[language=Python]{/home/vruiz/intercom/test/sounddevice/wire5.py}
+
+\subsection*{Wiring the ADC and the DAC using an interruption handler}
+\lstinputlisting[language=Python]{/home/vruiz/intercom/test/sounddevice/wire.py}
+
+\section{Measuring latencies}
+Both examples are ``wiring'' programs which input digital audio
+(through the
+\href{https://en.wikipedia.org/wiki/Analog-to-digital_converter}{ADC}
+of your computer) and, as soon as possible, outputs the audio (through
+the
+\href{https://en.wikipedia.org/wiki/Digital-to-analog_converter}{DAC}), which means that we will listen the signal captured by the mic(rophone) after a delay, that in this context is usually called \href{https://en.wikipedia.org/wiki/Latency_(engineering)}{latency}. In our implementations, the latency can be controlled by variying the buffer size. In the terminology of \texttt{sounddevice}, the number of \href{https://python-sounddevice.readthedocs.io/en/0.3.12/api.html}{frames} that are in a chunk. Notice that each frame represents a stereo sample using the audio CD format (2 channels, 16 bits/sample, signed integers where the ausence of energy is represented by the zero value).
+
+\begin{enumerate}
+
+\item Refresh some (probably high-school) ideas about
+  \href{https://vicente-gonzalez-ruiz.github.io/the_sound/}{the
+    sound}, \href{https://vicente-gonzalez-ruiz.github.io/human_auditory_system/}{the
+    human auditory system},
+    and \href{https://vicente-gonzalez-ruiz.github.io/human_sound_perception/}{the
+    human sound perception}. %Notice that we are able to perceive
+    %sounds whose frequency ranges between 20 Hz and 20 KHz
+    %(approximately), and that a speaker is basically a microphone, and
+    %viceversa.
+  
+\item Download the Python
+  \href{https://docs.python.org/3/tutorial/modules.html}{module}
+  \href{https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire3.py}{wire3.py} with:
+
+  \begin{lstlisting}[language=Bash]
+sudo apt install curl
+curl https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire5.py > wire5.py
+  \end{lstlisting}      
+
+\item If you want to run this module right now and you are not using a
+  \href{https://en.wikipedia.org/wiki/Headset_(audio)}{headset}, check
+  first that the output volumen of your
+  \href{https://en.wikipedia.org/wiki/Headset_(audio)}{speakers} is
+  not too high, otherwise you could involuntary
+  \href{https://www.youtube.com/watch?v=rI90lhYAffo}{``couple''} the
+  speaker and the
+  \href{https://en.wikipedia.org/wiki/Microphone}{mic(rophone)} of
+  your computer, producing a loud and annoying
+  \href{https://www.cirrusresearch.co.uk/blog/2012/03/tonal-noise-analysis-with-the-optimus-green-sound-level-meters/}{tonal
+    sound}. In order to mitigate this
+  effect, you can also control the gain of your mic (if the
+  gain is 0, no feedback between the speaker and the mic will be
+  possible). In Xubuntu, these controls are available through clicking in
+  the speaker icon (situated in the top-right corner of your screen)
+  of the \href{https://www.xfce.org/}{Xfce window manager}.
+
+\item Run the module with:
+
+  \begin{lstlisting}[language=Bash]
+pip install sounddevice  # Only once
+python wire5.py
+  \end{lstlisting}
+
+  Stop (killing) the module by clicking the CTRL- and c-keys (CTRL+c),
+  simultaneously.
+
+  %If you obtain the message \texttt{ALSA lib
+  %  pcm.c:8526:(snd\_pcm\_recover) underrun occurred}, ignore it (this
+  %is a consequence of that you are using
+  %\href{https://www.freedesktop.org/wiki/Software/PulseAudio/}{PulseAudio}
+  %instead of \href{https://alsa-project.org/wiki/Main_Page}{ALSA}
+  %directly, and the used \href{https://www.kernel.org/}{kernel} has
+  %been compiled without
+  %\href{https://en.wikipedia.org/wiki/RTLinux}{real-time process
+  %  scheduling}).
+
+
+\item Now, lets compute, experimentally, the latency experimented by
+  \texttt{wire5.py}.
+
+  \begin{enumerate}
+  \item First, we need the
+    tools: \href{http://sox.sourceforge.net/}{SoX}, \href{https://www.audacityteam.org/}{Audacity},
+    and \href{https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/plot_input.py}{plot\_input.py}:
+    
+    \begin{lstlisting}[language=Bash]
+      sudo apt install sox
+      sudo apt install audacity
+      curl https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/plot_input.py > plot_input.py
+    \end{lstlisting}
+    
+  \item Run:
+    
+    \begin{lstlisting}[language=Bash]
+pip install matplotlib
+python plot_input.py
+    \end{lstlisting}
+
+    and check that the gain of the mic does not
+    produce \href{https://en.wikipedia.org/wiki/Clipping_(audio)}{clipping}
+    during the sound recording.
+
+  \item \label{start_point} In a terminal, run:
+
+    \begin{lstlisting}[language=Bash]
+python wire3.py
+    \end{lstlisting}
+
+    while you control the output volume of the speakers to produce a
+    decaying coupling noisy effect between both devices (the
+    speaker(s) and the mic). If your desktop has not these
+    \href{https://en.wikipedia.org/wiki/Transducer}{transducers}, we
+    can use a
+    \href{https://www.google.com/search?q=male+to+male+audio+jack+cable&client=firefox-b-d&sxsrf=ALeKk00GZUDGqiOfc0D8xkA_MIYgCuZmSA:1600270049146&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjdvsu-_u3rAhXl0eAKHS90DUoQ_AUoAXoECA0QAw&biw=4288&bih=972}{male-to-male
+      jack audio cable} and connect the line-output of your soundcard
+    to the input of your sound card.
+
+  \item In a different terminal (keep \texttt{python wire3.py}
+    running), run:
+
+    \begin{lstlisting}[language=Bash]
+sox -t alsa default test.wav
+    \end{lstlisting}
+
+    to save the ADC's output to the file \texttt{test.wav}.
+
+  \item While \texttt{sox} is recording, produce some short sound (for
+    example, hit your laptop or your micro with one or your nails). Do
+    this at least a couple of times more, to be sure that you record
+    the sound and also the feedback of such sound. It's important the
+    sound to be short (a few miliseconds) in order to visually
+    recognize it and it's replicas.
+
+  \item Stop \texttt{sox} by pressing the CTRL+c (at
+    the same time). This kills \texttt{sox}.
+
+  \item Kill \texttt{python wire3.pt} with CTRL+c.
+
+  \item Load the sound file into Audacity:
+    
+    \begin{lstlisting}[language=Bash]
+      audacity test.wav
+    \end{lstlisting}
+
+  \item Localize the first one of your hitting-nail sounds in the
+    \href{https://manual.audacityteam.org/man/audio_tracks.html}{audio
+      track} of Audacity.
+
+  \item Select (using the mouse) the region that contains your sound and a replica.
+
+  \item Use the
+    \href{https://manual.audacityteam.org/man/edit_toolbar.html#zoom_to_selection}{zoom
+      to selection buttom} to zoom-in the selected area.
+
+  \item Measure the time between the ocurrence of the hit (of the
+    nail) and the recording of its first replica produced by the
+    speaker-to-the-mic feedback. This time is the real latency of your
+    computer runing \texttt{wire3.py}.
+
+  \item Modify the constant $\mathtt{CHUNK\_SIZE}$ in the module and
+    repeat this process, starting at the Step
+    \ref{start_point}. Create an ASCII file (named
+    \texttt{latency\_vs\_chunk\_size.txt}) with the content (use
+    TAB-ulators to space the columns):
+\begin{verbatim}
+# CHUNK_SIZE    real
+32              ...
+64              ...
+128             ...
+256             ...
+512             ...
+1024            ...
+2048            ...
+4096            ...
+8192            ...
+\end{verbatim}
+    with the real (practical) latency.
+  \end{enumerate}
+
+\item At this point, we know the real latency of \texttt{wire3.py} as
+  a function of $\mathtt{CHUNK\_SIZE}$. Plot the file
+  \texttt{latency\_vs\_chunk\_size.txt} with:
+
+  \begin{lstlisting}[language=Bash]
+ sudo apt install gnuplot
+ echo "set terminal pdf; set output 'latency_vs_chunk_size.pdf'; set xlabel 'CHUNK\_SIZE (frames)'; set ylabel 'Latency (seconds)'; plot 'latency_vs_chunk_size.txt' title '' with linespoints" | gnuplot
+  \end{lstlisting}
+
+\item Let's compute now the buffering latency of a chunk (the
+  chunk-time). If $\mathtt{sampling\_rate}$ is the number of frames
+  per second during the recording process, it holds that:
+  
+%\begingroup
+%\Large
+  \begin{equation}
+    %\displaystyle
+    \mathtt{minimal\_buffering\_latency} = \mathtt{CHUNK\_SIZE} / \mathtt{sampling\_rate}
+  \end{equation}
+  %\endgroup
+
+  Add these calculations to \texttt{latency\_vs\_chunk\_size.txt} using
+  a third column (remember to use TABs).
+\begin{verbatim}
+# CHUNK_SIZE    real    minimal
+:               :       :
+\end{verbatim}
+
+\item Plot both latencies:
+
+  \begin{lstlisting}[language=Bash]
+echo "set terminal pdf; set output 'latency_vs_chunk_size.pdf'; set xlabel 'CHUNK\_SIZE (frames)'; set ylabel 'Latency (seconds)'; set key left; plot 'latency_vs_chunk_size.txt' using 1:2 title 'Real' with linespoints, 'latency_vs_chunk_size.txt' using 1:3 title 'Minimal' with linespoints" | gnuplot
+  \end{lstlisting}
+  
+\item Which seems to be the minimal practical (real) latency (the
+  latency obtained ideallly when $\mathtt{CHUNK\_SIZE}=1$ ... however,
+  notice that depending on your computer, this chunk size can be too
+  small, overwhelming the CPU) in your computer?  Justify your
+  answers. \label{question}
+
+\end{enumerate}
+
+    
+      
+\section{Resources}
+
+\bibliography{python,sound}

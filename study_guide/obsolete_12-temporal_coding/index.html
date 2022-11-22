@@ -1,0 +1,1563 @@
+<?xml version="1.0" encoding="iso-8859-1" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN" 
+"http://www.w3.org/Math/DTD/mathml2/xhtml-math11-f.dtd" > 
+<html xmlns="http://www.w3.org/1999/xhtml"  
+> 
+<head><title>Tecnolog&#x00C3;&#x014B;as Multimedia - Study Guide - Milestone 12: Temporal Coding
+&#x0028;without chunks overlapping&#x0029;</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
+<meta name="generator" content="TeX4ht (https://tug.org/tex4ht/)" /> 
+<meta name="originator" content="TeX4ht (https://tug.org/tex4ht/)" /> 
+<!-- xhtml,mathml,html --> 
+<meta name="src" content="index.tex" /> 
+<link rel="stylesheet" type="text/css" href="index.css" /> 
+</head><body 
+>
+   <div class="maketitle">
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+
+<h2 class="titleHead"><a 
+href="https://www.ual.es/estudios/grados/presentacion/plandeestudios/asignatura/4015/40154321?idioma=zh_CN" >Tecnolog&#x00ED;as Multimedia</a> - Study Guide -
+Milestone 12: Temporal Coding &#x0028;without chunks
+overlapping&#x0029;</h2>
+ <div class="author" ><a 
+href="https://cms.ual.es/UAL/personas/persona.htm?id=515256515553484875" ><span 
+class="ecrm-1200">Vicente Gonz</span><span 
+class="ecrm-1200">&#x00E1;</span><span 
+class="ecrm-1200">lez Ruiz</span></a> <span 
+class="ecrm-1200">- </span><a 
+href="https://cms.ual.es/UAL/universidad/departamentos/informatica/index.htm" ><span 
+class="ecrm-1200">Depto Inform</span><span 
+class="ecrm-1200">&#x00E1;</span><span 
+class="ecrm-1200">tica</span></a> <span 
+class="ecrm-1200">- </span><a 
+href="https://www.ual.es" ><span 
+class="ecrm-1200">UAL</span></a></div><br />
+<div class="date" ><span 
+class="ecrm-1200">December 1, 2021</span></div>
+   </div>
+   <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
+ id="x1-10001"></a>Description</h3>
+<!--l. 8--><p class="noindent" >
+</p>
+   <h4 class="subsectionHead"><span class="titlemark">1.1   </span> <a 
+ id="x1-20001.1"></a>About temporal redundancy in audio</h4>
+<!--l. 9--><p class="noindent" >After exploiting the spatial &#x0028;stereo&#x0029; redundancy in the previous
+milestone, the next natural step in the development of InterCom is
+to remove the temporal redundancy that can be found inside of each
+subband<span class="footnote-mark"><a 
+href="index2.html#fn1x0"><sup class="textsuperscript">1</sup></a></span><a 
+ id="x1-2001f1"></a> .
+As it can be seen in this <a 
+href="https://github.com/Tecnologias-multimedia/intercom/blob/master/tools/audio_viewer.ipynb" >notebook</a>, most audio signals show &#x201C;patterns&#x201D; of samples
+that tends to repeat, especially locally. Another clear source of temporal
+redundancy is that the neighbor audio samples usually show similar amplitude
+values.
+</p><!--l. 23--><p class="indent" >   There are several techniques that can be used for removing the temporal
+redundancy of a sequence of audio. One of the most straightforward is <a 
+href="https://en.wikipedia.org/wiki/Differential_pulse-code_modulation" >Di&#xFB00;erential
+Pulse Code Modulation &#x0028;DPCM&#x0029;&#x00A0;<span class="cite">&#x005B;<a 
+href="#Xsayood2017introduction">3</a>&#x005D;</span></a>. However, there are more e&#xFB03;cient decorrelation
+algorithms based on <a 
+href="https://en.wikipedia.org/wiki/Transform_coding" >transform coding</a>, such as the used in the previous milestone and
+                                                                  
+
+                                                                  
+in this one.
+</p><!--l. 34--><p class="indent" >   Transform coding is based on the idea that we can decompose &#x0028;we can generate a
+decomposition from&#x0029; the input signal into a set of subbands, and if the used &#xFB01;lters
+are the adecuate ones for removing the temporal redundancy, we can achieve a high
+transform coding gain&#x00A0;<span class="cite">&#x005B;<a 
+href="#Xsayood2017introduction">3</a>&#x005D;</span>, accumulating most of the signal energy &#x0028;and presumably
+most of the information&#x0029; in a small number of subbands. When this happens,
+the quantization of the subbands will remove basically the least signi&#xFB01;cant
+information &#x0028;usually <a 
+href="https://en.wikipedia.org/wiki/Noise_(electronics)" >electronic noise</a>&#x0029;, allowing better compression ratios
+than those in which we apply the same quantization process to the original
+samples.<span class="footnote-mark"><a 
+href="index3.html#fn2x0"><sup class="textsuperscript">2</sup></a></span><a 
+ id="x1-2002f2"></a> 
+</p>
+   <hr class="figure" /><div class="figure" 
+>
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+<!--l. 51--><p class="noindent" ><div style="text-align:center;"> <img width=400 src="graphics/PRFB.svg" /> </div>  <a 
+ id="x1-2003r1"></a>
+<a 
+ id="x1-2004"></a>
+<br />                                                                  </p><div class="caption" 
+><span class="id">
+Figure&#x00A0;1: </span><span  
+class="content">A 2-channels PRFB &#x0028;Perfect Reconstruction Filter Bank&#x0029;.         </span></div><!--tex4ht:label?: x1-2003r1 -->
+                                                                  
+
+                                                                  
+   </div><hr class="endfigure" />
+   <h4 class="subsectionHead"><span class="titlemark">1.2   </span> <a 
+ id="x1-30001.2"></a>Transform and subband coding</h4>
+<!--l. 58--><p class="noindent" >The name that has been given to the previous process is
+<a 
+href="https://en.wikipedia.org/wiki/Sub-band_coding" >subband coding</a>. In this context, our analysis transform matrix
+<!--l. 61--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="bold"><mi 
+>K</mi></mstyle></math>
+&#x0028;see the previous milestone&#x0029; represents the taps of a 2-channels analysis
+<a 
+href="https://en.wikipedia.org/wiki/Filter_bank" >Filter Bank &#x0028;FB&#x0029;</a>&#x00A0;<span class="cite">&#x005B;<a 
+href="#Xvetterli1995wavelets">5</a>&#x005D;</span>, and the forward transform is in fact &#x201C;descomposing&#x201D;
+<!--l. 65--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="bold"><mi 
+>x</mi></mstyle></math> into two
+subbands <!--l. 65--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mstyle mathvariant="bold"><mi 
+>w</mi></mstyle></mrow><mrow 
+><mn>0</mn></mrow></msub 
+></math>
+and <!--l. 66--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mstyle mathvariant="bold"><mi 
+>w</mi></mstyle></mrow><mrow 
+><mn>1</mn></mrow></msub 
+></math> &#x0028;see
+the Figure&#x00A0;<a 
+href="#x1-2003r1">1<!--tex4ht:ref: fig:PRFB --></a>, and this <a 
+href="https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/PRFB.ipynb" >notebook</a>&#x0029;. On the other hand, the synthesis transform matrix
+<!--l. 68--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msup><mrow 
+><mstyle mathvariant="bold"><mi 
+>K</mi></mstyle></mrow><mrow 
+><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msup 
+></math>
+denotes the taps of the corresponding synthesis FB that allows to recover
+<!--l. 70--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="bold"><mi 
+>x</mi></mstyle></math> &#x0028;notice that
+in the &#xFB01;gure, <!--l. 71--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="bold"><mi 
+>x</mi></mstyle> <mo 
+class="MathClass-rel">=</mo><msup><mrow 
+> <mstyle mathvariant="bold"><mi 
+>l</mi></mstyle></mrow><mrow 
+><mi 
+>i</mi></mrow></msup 
+></math>,
+<!--l. 71--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mstyle mathvariant="bold"><mi 
+>w</mi></mstyle></mrow><mrow 
+><mn>0</mn></mrow></msub 
+> <mo 
+class="MathClass-rel">=</mo><msup><mrow 
+> <mstyle mathvariant="bold"><mi 
+>l</mi></mstyle></mrow><mrow 
+><mi 
+>i</mi><mo 
+class="MathClass-bin">+</mo><mn>1</mn></mrow></msup 
+></math>,
+<!--l. 72--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mstyle mathvariant="bold"><mi 
+>w</mi></mstyle></mrow><mrow 
+><mn>1</mn></mrow></msub 
+> <mo 
+class="MathClass-rel">=</mo><msup><mrow 
+> <mstyle mathvariant="bold"><mi 
+>h</mi></mstyle></mrow><mrow 
+><mi 
+>i</mi><mo 
+class="MathClass-bin">+</mo><mn>1</mn></mrow></msup 
+></math>,
+<!--l. 72--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mover 
+accent="true"><mrow 
+><mi 
+>&#x03D5;</mi></mrow><mo accent="true">&#x007E;</mo></mover> <mo 
+class="MathClass-rel">=</mo><msub><mrow 
+> <mstyle mathvariant="bold"><mi 
+>K</mi></mstyle></mrow><mrow 
+><mn>0</mn></mrow></msub 
+></math>,
+<!--l. 73--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mover 
+accent="true"><mrow 
+><mi 
+>&#x03C8;</mi></mrow><mo accent="true">&#x007E;</mo></mover> <mo 
+class="MathClass-rel">=</mo><msub><mrow 
+> <mstyle mathvariant="bold"><mi 
+>K</mi></mstyle></mrow><mrow 
+><mn>1</mn></mrow></msub 
+></math>,
+<!--l. 73--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>&#x03D5;</mi> <mo 
+class="MathClass-rel">=</mo><msubsup><mrow 
+> <mstyle mathvariant="bold"><mi 
+>K</mi></mstyle></mrow><mrow 
+><mn>0</mn></mrow><mrow 
+><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msubsup 
+></math>, and
+<!--l. 74--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>&#x03C8;</mi> <mo 
+class="MathClass-rel">=</mo><msubsup><mrow 
+> <mstyle mathvariant="bold"><mi 
+>K</mi></mstyle></mrow><mrow 
+><mn>1</mn></mrow><mrow 
+><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msubsup 
+></math>&#x0029;.
+</p><!--l. 77--><p class="indent" >   Let&#x2019;s suppose now that the analysis &#xFB01;lters &#x0028;represented by the taps of&#x0029;
+<!--l. 78--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mstyle mathvariant="bold"><mi 
+>K</mi></mstyle></mrow><mrow 
+><mn>0</mn></mrow></msub 
+></math> and
+<!--l. 78--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mstyle mathvariant="bold"><mi 
+>K</mi></mstyle></mrow><mrow 
+><mn>1</mn></mrow></msub 
+></math> are applied to
+the input signal <!--l. 79--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="bold"><mi 
+>x</mi></mstyle></math>
+&#x0028;now a sequence of <!--l. 79--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>N</mi></math>
+samples&#x0029; using a <a 
+href="https://en.wikipedia.org/wiki/Kernel_(image_processing)" >convolution</a> &#x0028;without splitting
+<!--l. 81--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>x</mi></math>
+into blocks&#x0029;. Let&#x2019;s also suppose &#x0028;as happens in the MST&#x0029; that
+<!--l. 82--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mstyle mathvariant="bold"><mi 
+>K</mi></mstyle></mrow><mrow 
+><mn>0</mn></mrow></msub 
+></math> is a low-pass &#xFB01;lter and
+<!--l. 82--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mstyle mathvariant="bold"><mi 
+>K</mi></mstyle></mrow><mrow 
+><mn>1</mn></mrow></msub 
+></math> is a high-pass &#xFB01;lter, and
+that the <a 
+href="https://en.wikipedia.org/wiki/Filter_(signal_processing)#The_transfer_function" >transfer function</a><span class="footnote-mark"><a 
+href="index4.html#fn3x0"><sup class="textsuperscript">3</sup></a></span><a 
+ id="x1-3001f3"></a> 
+of both &#xFB01;lters <a 
+href="https://en.wikipedia.org/wiki/Filter_bank#Perfect_reconstruction_filter_banks" >are one the inverse of the other</a>. Under these assumptions, the complete
+&#x0028;analysis/synthesis&#x0029; transform is called a &#x0028;2-channels&#x0029; <a 
+href="https://en.wikipedia.org/wiki/Filter_bank#Perfect_reconstruction_filter_banks" >Perfect Reconstruction Filter Bank
+&#x0028;PRFB&#x0029;</a>, and <!--l. 92--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="bold"><mi 
+>x</mi></mstyle></math>
+can be recovered &#x0028;perfectly&#x0029; from a subsampled version &#x0028;in this case <a 
+href="https://en.wikipedia.org/wiki/Downsampling_(signal_processing)" >decimating</a> by 2&#x0029;
+of <!--l. 95--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mstyle mathvariant="bold"><mi 
+>w</mi></mstyle></mrow><mrow 
+><mn>0</mn></mrow></msub 
+></math>
+and <!--l. 95--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mstyle mathvariant="bold"><mi 
+>w</mi></mstyle></mrow><mrow 
+><mn>1</mn></mrow></msub 
+></math>
+&#x0028;see the <a 
+href="https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/PRFB.ipynb" >notebook</a>&#x0029;. Notice that this subsampling is possible because the
+                                                                  
+
+                                                                  
+<a 
+href="https://en.wikipedia.org/wiki/Aliasing" >aliasing</a><span class="footnote-mark"><a 
+href="index5.html#fn4x0"><sup class="textsuperscript">4</sup></a></span><a 
+ id="x1-3002f4"></a> 
+generated in the low-pass subband is compensated by the aliasing generated
+in the high-pass subband. To achieve this, the <a 
+href="https://en.wikipedia.org/wiki/Filter_(signal_processing)#The_transfer_function" >frequency response</a> of
+<!--l. 107--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mstyle mathvariant="bold"><mi 
+>K</mi></mstyle></mrow><mrow 
+><mn>0</mn></mrow></msub 
+></math>
+must be equal to the mirrored frequency response of
+<!--l. 108--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mstyle mathvariant="bold"><mi 
+>K</mi></mstyle></mrow><mrow 
+><mn>1</mn></mrow></msub 
+></math>, and
+obviously, both &#xFB01;lters must have the same <a 
+href="https://en.wikipedia.org/wiki/Bandwidth_(signal_processing)" >bandwidth</a>&#x00A0;<span class="cite">&#x005B;<a 
+href="#Xsayood2017introduction">3</a>&#x005D;</span>. In this situation, in which
+<!--l. 111--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mstyle mathvariant="bold"><mi 
+>K</mi></mstyle></mrow><mrow 
+><mn>1</mn></mrow></msub 
+></math> and
+<!--l. 111--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mstyle mathvariant="bold"><mi 
+>K</mi></mstyle></mrow><mrow 
+><mn>2</mn></mrow></msub 
+></math> are
+mirror &#xFB01;lters, we say that they form a <a 
+href="https://en.wikipedia.org/wiki/Quadrature_mirror_filter" >Quadrature Mirror Filters &#x0028;QMF&#x0029;
+Bank</a>.
+</p>
+   <h4 class="subsectionHead"><span class="titlemark">1.3   </span> <a 
+ id="x1-40001.3"></a>Multichannel &#xFB01;lter banks and psychoacoustic frequency resolution</h4>
+<!--l. 118--><p class="noindent" >Using the suitable &#xFB01;lters, it is possible to build
+<!--l. 118--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>M</mi></math>-channels
+PRFBs.<span class="footnote-mark"><a 
+href="index6.html#fn5x0"><sup class="textsuperscript">5</sup></a></span><a 
+ id="x1-4001f5"></a> 
+These &#xFB01;lters can analyze &#x0028;and synthesize&#x0029; the signal
+<!--l. 123--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="bold"><mi 
+>x</mi></mstyle></math>,
+decomposing it in &#x0028;<a 
+href="https://en.wikipedia.org/wiki/Low-pass_filter#Ideal_and_real_filters" >almost for sure</a>&#x0029; overlaping frequency subbands with di&#xFB00;erent
+bandwidth. The question here is to know how many &#xFB01;lters should be used and what
+<a 
+href="https://en.wikipedia.org/wiki/Band-pass_filter" >pass-band</a> width should they have. At this design point, we must also consider
+that the accuracy of the <a 
+href="https://en.wikipedia.org/wiki/Psychoacoustics" >humman perception of the sound</a> depends on the
+frequency: &#x0028;as it can be checked in this <a 
+href="https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/frequency_resolution.ipynb" >notebook</a>&#x0029; we are more sensitive to
+frequency variations when the frequency of the sound is low. This fact is
+related with the way in which the <a 
+href="https://en.wikipedia.org/wiki/Critical_band" >critical bands</a> are distributed in <a 
+href="https://en.wikipedia.org/wiki/Bark_scale" >the bark
+scale</a>.
+</p>
+   <h4 class="subsectionHead"><span class="titlemark">1.4   </span> <a 
+ id="x1-50001.4"></a>The Discrete Wavelet Transform</h4>
+<!--l. 143--><p class="noindent" >As it can be seen, the bark scale divides the audible spectrum into 24 subband of &#x0028;a
+                                                                  
+
+                                                                  
+priori&#x0029; &#x201C;whimsical&#x201D; bandwidths. However, it&#x2019;s clear that a <a 
+href="https://en.wikipedia.org/wiki/Octave_band" >dyadic partition of the
+spectrum</a> &#xFB01;ts better than <a 
+href="https://en.wikipedia.org/wiki/Wavelet_transform#Principle" >a lineal partition</a>. Considering this reason, from all
+the families of transforms designed to date, the most suitable one, from a
+frequency partitioning point of view, is the Discrete Wavelet Transform
+&#x0028;DWT&#x0029;.
+</p><!--l. 153--><p class="indent" >   The DWT has also other interesting features:
+     </p><ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x1-5002x1">It is <a 
+href="https://en.wikipedia.org/wiki/Discrete_wavelet_transform#Time_complexity" >fast</a> &#x0028;<!--l. 157--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>O</mi><mo 
+class="MathClass-open">&#x0028;</mo><mi 
+>N</mi><mo 
+class="MathClass-close">&#x0029;</mo></math>,
+     where <!--l. 157--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>N</mi></math>
+     is the number of &#x201C;transformed&#x201D; samples&#x0029;.
+     </li>
+     <li 
+  class="enumerate" id="x1-5004x2">It can represent e&#xFB03;cienty <a 
+href="https://en.wikipedia.org/wiki/Transient_(oscillation)" >transient</a> signals, which can happen frequently
+     in audio.
+     </li>
+     <li 
+  class="enumerate" id="x1-5006x3">Although we are not going to take advantage of the following characteristic
+     &#x0028;for now&#x0029;, one of the most interesting features of the DWT is that it can
+     used to &#xFB01;nd a <a 
+href="https://en.wikipedia.org/wiki/Multiresolution_analysis" >multiresolution representation</a> of the signal.</li></ol>
+   <hr class="figure" /><div class="figure" 
+>
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+<!--l. 170--><p class="noindent" ><div style="text-align:center;"> <img width=800 src="graphics/cascade.svg" /> </div>  <a 
+ id="x1-5007r2"></a>
+<a 
+ id="x1-5008"></a>
+<br />                                                                  </p><div class="caption" 
+><span class="id">
+Figure&#x00A0;2: </span><span  
+class="content">A dyadic 2-levels cascade of PRFBs.                           </span></div><!--tex4ht:label?: x1-5007r1 -->
+                                                                  
+
+                                                                  
+   </div><hr class="endfigure" />
+   <h4 class="subsectionHead"><span class="titlemark">1.5   </span> <a 
+ id="x1-60001.5"></a>Implementation of the DWT</h4>
+<!--l. 177--><p class="noindent" >The DWT can be implemented in di&#xFB00;erent ways:
+     </p><ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x1-6002x1">De&#xFB01;ning the transform matrix <!--l. 179--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="bold"><mi 
+>K</mi></mstyle></math>
+     &#x0028;see these <a 
+href="https://cseweb.ucsd.edu/classes/fa17/cse166-a/lec13.pdf" >slides</a>&#x0029; and computing vector-matrix multiplications, which requires
+     a calculation time proportional to <!--l. 182--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>O</mi><mo 
+class="MathClass-open">&#x0028;</mo><msup><mrow 
+><mi 
+>N</mi></mrow><mrow 
+><mn>2</mn></mrow></msup 
+><mo 
+class="MathClass-close">&#x0029;</mo></math>.
+     However, the main problem of this type of implementation is generated by
+     the amount of memory that <!--l. 184--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="bold"><mi 
+>K</mi></mstyle></math>
+     requires, that is proportional to <!--l. 184--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msup><mrow 
+><mi 
+>N</mi></mrow><mrow 
+><mn>2</mn></mrow></msup 
+></math>.
+     </li>
+     <li 
+  class="enumerate" id="x1-6004x2"><a 
+href="https://en.wikipedia.org/wiki/Discrete_wavelet_transform#Cascading_and_filter_banks" >Cascading PRFBs</a> &#x0028;see the Figure&#x00A0;<a 
+href="#x1-5007r2">2<!--tex4ht:ref: fig:cascade --></a>&#x0029;. Considering that the <a 
+href="https://en.wikipedia.org/wiki/Convolution" >convolution</a> is
+     a <!--l. 189--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>O</mi><mo 
+class="MathClass-open">&#x0028;</mo><mi 
+>N</mi><msub><mrow 
+><mi class="qopname">log</mi><mo> &ApplyFunction;<!--FUNCTION APPLICATION--> </mo><!--nolimits--></mrow><mrow 
+><mn>2</mn></mrow></msub 
+><mi 
+>N</mi><mo 
+class="MathClass-close">&#x0029;</mo></math>
+     operation &#x0028;if it is <a 
+href="https://en.wikipedia.org/wiki/Convolution_theorem" >implemented in the frequency domain</a>&#x0029;, and that the
+     number of levels in the cascade is generally small &#x0028;5 for example&#x0029;, this
+     implementation is faster than the based in vector-matrix arithmetic. And
+     most importantly, we don&#x2019;t need to store <!--l. 194--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="bold"><mi 
+>K</mi></mstyle></math>,
+     but only the taps of the &#xFB01;lters that in a software implementation of a
+     cascade can be as small as the number of di&#xFB00;erent &#xFB01;lters.<span class="footnote-mark"><a 
+href="index7.html#fn6x0"><sup class="textsuperscript">6</sup></a></span><a 
+ id="x1-6005f6"></a> 
+     </li>
+     <li 
+  class="enumerate" id="x1-6007x3">Using <a 
+href="https://en.wikipedia.org/wiki/Lifting_scheme" >lifting</a>&#x00A0;<span class="cite">&#x005B;<a 
+href="#Xsweldens1997building">4</a>&#x005D;</span>, which provides an extra speed-up factor of 2 compared
+     to the FB implementation. DWTs implemented with lifting do not need
+     to downsample and upsample the subbands, an operation that is wasting
+     the calculus of half of the coe&#xFB03;cients at each level of the cascade.</li></ol>
+<!--l. 207--><p class="noindent" >
+</p>
+   <h4 class="subsectionHead"><span class="titlemark">1.6   </span> <a 
+ id="x1-70001.6"></a>Example of a DWT using the MST &#xFB01;lters</h4>
+<!--l. 209--><p class="noindent" >In order to clarify the previously introduced concepts, let&#x2019;s build a DWT using the
+MST &#xFB01;lters and lifting.
+</p><!--l. 212--><p class="indent" >
+     </p><ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x1-7002x1">Lifting is based on the concept of dyadic <a 
+href="https://en.wikipedia.org/wiki/Multiresolution_analysis" >multiresolution analysis</a>,
+     and also with the so called <a 
+href="https://en.wikipedia.org/wiki/Polyphase_matrix" >polyphase representation</a> of signals. In
+     order to do that, we can rewrite the MST &#xFB01;lter equations &#x0028;our
+     <!--l. 218--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mstyle mathvariant="bold"><mi 
+>K</mi></mstyle></mrow><mrow 
+><mn>0</mn></mrow></msub 
+></math> and
+     <!--l. 218--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" > <mo 
+class="MathClass-bin">&#x2212;</mo><msub><mrow 
+><mstyle mathvariant="bold"><mi 
+>K</mi></mstyle></mrow><mrow 
+><mn>1</mn></mrow></msub 
+></math>
+     &#xFB01;lters in the previous milestone&#x0029; as <table class="equation"><tr><td> <a 
+ id="x1-7003r1"></a>
+                                                                  
+
+                                                                  
+     <!--l. 220--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="block" class="equation">
+ <mtable  align="axis" style=""  
+equalrows="false" columnlines="none none" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="right">  <msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>l</mi></mstyle></mrow><mrow 
+><mi 
+>i</mi></mrow><mrow 
+><mn>1</mn></mrow></msubsup 
+>  </mtd><mtd 
+class="array"  columnalign="center">   <mo 
+class="MathClass-rel">=</mo> </mtd><mtd 
+class="array"  columnalign="left">  <msub><mrow 
+><mstyle mathvariant="bold"><mi 
+>x</mi></mstyle></mrow><mrow 
+><mn>2</mn><mi 
+>i</mi></mrow></msub 
+> <mo 
+class="MathClass-bin">+</mo><msub><mrow 
+> <mstyle mathvariant="bold"><mi 
+>x</mi></mstyle></mrow><mrow 
+><mn>2</mn><mi 
+>i</mi><mo 
+class="MathClass-bin">+</mo><mn>1</mn></mrow></msub 
+>   </mtd>
+</mtr>  <mtr><mtd 
+class="array"  columnalign="right">  <msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>h</mi></mstyle></mrow><mrow 
+><mi 
+>i</mi></mrow><mrow 
+><mn>1</mn></mrow></msubsup 
+>  </mtd><mtd 
+class="array"  columnalign="center">   <mo 
+class="MathClass-rel">=</mo> </mtd><mtd 
+class="array"  columnalign="left">  <msub><mrow 
+><mstyle mathvariant="bold"><mi 
+>x</mi></mstyle></mrow><mrow 
+><mn>2</mn><mi 
+>i</mi><mo 
+class="MathClass-bin">+</mo><mn>1</mn></mrow></msub 
+> <mo 
+class="MathClass-bin">&#x2212;</mo><msub><mrow 
+><mstyle mathvariant="bold"><mi 
+>x</mi></mstyle></mrow><mrow 
+><mn>2</mn><mi 
+>i</mi></mrow></msub 
+><mo 
+class="MathClass-punc">,</mo> </mtd></mtr><!--rcl--></mtable>
+</math></td><td class="eq-no">&#x0028;1&#x0029;</td></tr></table>
+     <!--l. 227--><p class="noindent" >where the <!--l. 227--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>l</mi></math>-th
+     subband <!--l. 228--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msup><mrow 
+><mstyle mathvariant="bold"><mi 
+>z</mi></mstyle></mrow><mrow 
+><mi 
+>l</mi></mrow></msup 
+> <mo 
+class="MathClass-rel">=</mo> <mo 
+class="MathClass-open">&#x007B;</mo><msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>z</mi></mstyle></mrow><mrow 
+><mi 
+>i</mi></mrow><mrow 
+><mi 
+>l</mi></mrow></msubsup 
+><mi 
+>&#x00A0;</mi><mo 
+class="MathClass-rel">&#x007C;</mo><mi 
+>&#x00A0;</mi><mn>0</mn> <mo 
+class="MathClass-rel">&#x2264;</mo> <mi 
+>i</mi> <mo 
+class="MathClass-rel">&#x2264;</mo> <msup><mrow 
+><mn>2</mn></mrow><mrow 
+><mi 
+>n</mi><mo 
+class="MathClass-bin">&#x2212;</mo><mi 
+>l</mi></mrow></msup 
+><mo 
+class="MathClass-close">&#x007D;</mo></math>, being
+     <!--l. 229--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msup><mrow 
+><mn>2</mn></mrow><mrow 
+><mi 
+>n</mi></mrow></msup 
+> <mo 
+class="MathClass-rel">=</mo> <mi 
+>N</mi></math> the number of
+     samples in <!--l. 229--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="bold"><mi 
+>x</mi></mstyle></math>, and
+     where, by de&#xFB01;nition, <!--l. 230--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msup><mrow 
+><mstyle mathvariant="bold"><mi 
+>l</mi></mstyle></mrow><mrow 
+><mn>0</mn></mrow></msup 
+> <mo 
+class="MathClass-rel">=</mo> <mstyle mathvariant="bold"><mi 
+>x</mi></mstyle></math>,
+     the original resolution level of the signal. The subbands
+     <!--l. 231--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msup><mrow 
+><mstyle mathvariant="bold"><mi 
+>l</mi></mstyle></mrow><mrow 
+><mn>1</mn></mrow></msup 
+></math> and
+     <!--l. 232--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msup><mrow 
+><mstyle mathvariant="bold"><mi 
+>h</mi></mstyle></mrow><mrow 
+><mn>1</mn></mrow></msup 
+></math>
+     computed by Eq.&#x00A0;<a 
+href="#x1-7003r1">1<!--tex4ht:ref: eq:1dwt --></a> are the same than the decimated subbands computed by a
+     1-levels PRFB &#x0028;based on that &#xFB01;lters&#x0029;, and we say, therefore, that Eq.&#x00A0;<a 
+href="#x1-7003r1">1<!--tex4ht:ref: eq:1dwt --></a>
+     computes the 1-levels DWT.
+     </p><!--l. 237--><p class="noindent" >Based on the 1-levels DWT, we de&#xFB01;ne the 2-levels DWT as </p><table class="equation"><tr><td> <a 
+ id="x1-7004r2"></a>
+     <!--l. 238--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="block" class="equation">
+ <mtable  align="axis" style=""  
+equalrows="false" columnlines="none none" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="right">  <msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>l</mi></mstyle></mrow><mrow 
+><mi 
+>i</mi></mrow><mrow 
+><mn>2</mn></mrow></msubsup 
+>  </mtd><mtd 
+class="array"  columnalign="center">   <mo 
+class="MathClass-rel">=</mo> </mtd><mtd 
+class="array"  columnalign="left">  <msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>l</mi></mstyle></mrow><mrow 
+><mn>2</mn><mi 
+>i</mi></mrow><mrow 
+><mn>1</mn></mrow></msubsup 
+> <mo 
+class="MathClass-bin">+</mo><msubsup><mrow 
+> <mstyle mathvariant="bold"><mi 
+>l</mi></mstyle></mrow><mrow 
+><mn>2</mn><mi 
+>i</mi><mo 
+class="MathClass-bin">+</mo><mn>1</mn></mrow><mrow 
+><mn>1</mn></mrow></msubsup 
+>   </mtd>
+</mtr>  <mtr><mtd 
+class="array"  columnalign="right">  <msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>h</mi></mstyle></mrow><mrow 
+><mi 
+>i</mi></mrow><mrow 
+><mn>2</mn></mrow></msubsup 
+>  </mtd><mtd 
+class="array"  columnalign="center">   <mo 
+class="MathClass-rel">=</mo> </mtd><mtd 
+class="array"  columnalign="left">  <msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>l</mi></mstyle></mrow><mrow 
+><mn>2</mn><mi 
+>i</mi><mo 
+class="MathClass-bin">+</mo><mn>1</mn></mrow><mrow 
+><mn>1</mn></mrow></msubsup 
+> <mo 
+class="MathClass-bin">&#x2212;</mo><msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>l</mi></mstyle></mrow><mrow 
+><mn>2</mn><mi 
+>i</mi></mrow><mrow 
+><mn>1</mn></mrow></msubsup 
+><mo 
+class="MathClass-punc">,</mo> </mtd></mtr><!--rcl--></mtable>
+</math></td><td class="eq-no">&#x0028;2&#x0029;</td></tr></table>
+     <!--l. 245--><p class="noindent" >that, as we can see, uses as input the output of Eq.&#x00A0;<a 
+href="#x1-7003r1">1<!--tex4ht:ref: eq:1dwt --></a>.
+     </p><!--l. 247--><p class="noindent" >In general, for a <!--l. 247--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>l</mi></math>-levels
+     DWT, we get </p><table class="equation"><tr><td> <a 
+ id="x1-7005r3"></a>
+                                                                  
+
+                                                                  
+     <!--l. 248--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="block" class="equation">
+ <mtable  align="axis" style=""  
+equalrows="false" columnlines="none none" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="right">  <msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>l</mi></mstyle></mrow><mrow 
+><mi 
+>i</mi></mrow><mrow 
+><mi 
+>l</mi></mrow></msubsup 
+>  </mtd><mtd 
+class="array"  columnalign="center">   <mo 
+class="MathClass-rel">=</mo> </mtd><mtd 
+class="array"  columnalign="left">  <msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>l</mi></mstyle></mrow><mrow 
+><mn>2</mn><mi 
+>i</mi></mrow><mrow 
+><mi 
+>l</mi><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msubsup 
+> <mo 
+class="MathClass-bin">+</mo><msubsup><mrow 
+> <mstyle mathvariant="bold"><mi 
+>l</mi></mstyle></mrow><mrow 
+><mn>2</mn><mi 
+>i</mi><mo 
+class="MathClass-bin">+</mo><mn>1</mn></mrow><mrow 
+><mi 
+>l</mi><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msubsup 
+>   </mtd>
+</mtr>  <mtr><mtd 
+class="array"  columnalign="right">  <msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>h</mi></mstyle></mrow><mrow 
+><mi 
+>i</mi></mrow><mrow 
+><mi 
+>l</mi></mrow></msubsup 
+>  </mtd><mtd 
+class="array"  columnalign="center">   <mo 
+class="MathClass-rel">=</mo> </mtd><mtd 
+class="array"  columnalign="left">  <msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>l</mi></mstyle></mrow><mrow 
+><mn>2</mn><mi 
+>i</mi><mo 
+class="MathClass-bin">+</mo><mn>1</mn></mrow><mrow 
+><mi 
+>l</mi><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msubsup 
+> <mo 
+class="MathClass-bin">&#x2212;</mo><msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>l</mi></mstyle></mrow><mrow 
+><mn>2</mn><mi 
+>i</mi></mrow><mrow 
+><mi 
+>l</mi><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msubsup 
+><mo 
+class="MathClass-punc">.</mo> </mtd></mtr><!--rcl--></mtable>
+</math></td><td class="eq-no">&#x0028;3&#x0029;</td></tr></table>
+     <!--l. 256--><p class="noindent" >The <!--l. 256--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>l</mi></math>-levels DWT splits
+     the signal spectrum in <!--l. 256--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>l</mi> <mo 
+class="MathClass-bin">+</mo> <mn>1</mn></math>
+     subbands. If <!--l. 257--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>l</mi> <mo 
+class="MathClass-rel">=</mo> <mi 
+>n</mi></math>
+     &#x0028;where <!--l. 257--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>N</mi> <mo 
+class="MathClass-rel">=</mo> <msup><mrow 
+><mn>2</mn></mrow><mrow 
+><mi 
+>n</mi></mrow></msup 
+></math>&#x0029;,
+     we have the spectrum partition </p><table class="equation-star"><tr><td>
+     <!--l. 258--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="block" class="equation">
+           <mo 
+class="MathClass-rel">&#x007C;</mo><msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>l</mi></mstyle></mrow><mrow 
+><mn>0</mn></mrow><mrow 
+><mi 
+>l</mi></mrow></msubsup 
+><mo 
+class="MathClass-rel">&#x007C;</mo><msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>h</mi></mstyle></mrow><mrow 
+>
+<mn>0</mn></mrow><mrow 
+><mi 
+>l</mi></mrow></msubsup 
+><mo 
+class="MathClass-rel">&#x007C;</mo><msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>h</mi></mstyle></mrow><mrow 
+>
+<mn>0</mn></mrow><mrow 
+><mi 
+>l</mi><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msubsup 
+><msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>h</mi></mstyle></mrow><mrow 
+>
+<mn>1</mn></mrow><mrow 
+><mi 
+>l</mi><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msubsup 
+><mo 
+class="MathClass-rel">&#x007C;</mo><msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>h</mi></mstyle></mrow><mrow 
+>
+<mn>0</mn></mrow><mrow 
+><mi 
+>l</mi><mo 
+class="MathClass-bin">&#x2212;</mo><mn>2</mn></mrow></msubsup 
+><msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>h</mi></mstyle></mrow><mrow 
+>
+<mn>1</mn></mrow><mrow 
+><mi 
+>l</mi><mo 
+class="MathClass-bin">&#x2212;</mo><mn>2</mn></mrow></msubsup 
+><msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>h</mi></mstyle></mrow><mrow 
+>
+<mn>2</mn></mrow><mrow 
+><mi 
+>l</mi><mo 
+class="MathClass-bin">&#x2212;</mo><mn>2</mn></mrow></msubsup 
+><msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>h</mi></mstyle></mrow><mrow 
+>
+<mn>3</mn></mrow><mrow 
+><mi 
+>l</mi><mo 
+class="MathClass-bin">&#x2212;</mo><mn>2</mn></mrow></msubsup 
+><mo 
+class="MathClass-rel">&#x007C;</mo><mo 
+class="MathClass-rel">&#x22EF;</mo><mo 
+class="MathClass-rel">&#x007C;</mo><msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>h</mi></mstyle></mrow><mrow 
+>
+<mn>0</mn></mrow><mrow 
+><mn>1</mn></mrow></msubsup 
+><msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>h</mi></mstyle></mrow><mrow 
+>
+<mn>1</mn></mrow><mrow 
+><mn>1</mn></mrow></msubsup 
+><mo 
+class="MathClass-rel">&#x22EF;</mo><msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>h</mi></mstyle></mrow><mrow 
+><msup><mrow 
+>
+<mn>2</mn></mrow><mrow 
+><mi 
+>n</mi><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msup 
+><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow><mrow 
+><mn>1</mn></mrow></msubsup 
+><mo 
+class="MathClass-rel">&#x007C;</mo><mo 
+class="MathClass-punc">,</mo>
+</math></td></tr></table>
+     <!--l. 261--><p class="noindent" >where<span class="footnote-mark"><a 
+href="index8.html#fn7x0"><sup class="textsuperscript">7</sup></a></span><a 
+ id="x1-7006f7"></a> 
+     it holds that </p><table class="equation"><tr><td> <a 
+ id="x1-7007r4"></a>
+     <!--l. 265--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="block" class="equation">
+                                     <mn>1</mn> <mo 
+class="MathClass-bin">+</mo><munderover accentunder="false" accent="false"><mrow  
+><mo  
+> &#x2211;</mo>
+  </mrow><mrow 
+><mi 
+>j</mi><mo 
+class="MathClass-rel">=</mo><mn>1</mn></mrow><mrow 
+><mi 
+>l</mi></mrow></munderover 
+><msup><mrow 
+><mn>2</mn></mrow><mrow 
+><mi 
+>j</mi><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msup 
+> <mo 
+class="MathClass-rel">=</mo> <msup><mrow 
+><mn>2</mn></mrow><mrow 
+><mi 
+>n</mi></mrow></msup 
+><mo 
+class="MathClass-punc">,</mo>
+</math></td><td class="eq-no">&#x0028;4&#x0029;</td></tr></table>
+     <!--l. 268--><p class="noindent" >i.e., the number of DWT coe&#xFB03;cients is also
+     <!--l. 268--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>N</mi></math>.
+                                                                  
+
+                                                                  
+     </p></li>
+     <li 
+  class="enumerate" id="x1-7009x2">DWT performs a number of lifting steps, each one with 2 &#x0028;sub&#x0029;steps:
+         <ol  class="enumerate2" >
+         <li 
+  class="enumerate" id="x1-7011x1">A <span 
+class="ecbx-1000">predict step</span>, that computes the
+         <!--l. 273--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="bold"><mi 
+>h</mi></mstyle></math>
+         subbands as a prediction error &#x0028;that in general should be minimized&#x0029;
+         between the even samples &#x0028;usually, the values used to predict&#x0029; and the odd
+         samples &#x0028;usually, the values predicted&#x0029;. For the MST &#xFB01;lters, we have that
+         &#x0028;see Eq.&#x00A0;<a 
+href="#x1-7005r3">3<!--tex4ht:ref: eq:ldwt --></a>&#x0029; <table class="equation"><tr><td> <a 
+ id="x1-7012r5"></a>
+         <!--l. 278--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="block" class="equation"><msubsup><mrow 
+>
+                                     <mstyle mathvariant="bold"><mi 
+>h</mi></mstyle></mrow><mrow 
+><mi 
+>i</mi></mrow><mrow 
+><mi 
+>l</mi></mrow></msubsup 
+> <mo 
+class="MathClass-rel">=</mo><msubsup><mrow 
+> <mstyle mathvariant="bold"><mi 
+>l</mi></mstyle></mrow><mrow 
+>
+<mn>2</mn><mi 
+>i</mi><mo 
+class="MathClass-bin">+</mo><mn>1</mn></mrow><mrow 
+><mi 
+>l</mi><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msubsup 
+> <mo 
+class="MathClass-bin">&#x2212;</mo><msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>l</mi></mstyle></mrow><mrow 
+>
+<mn>2</mn><mi 
+>i</mi></mrow><mrow 
+><mi 
+>l</mi><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msubsup 
+><mo 
+class="MathClass-punc">.</mo>
+</math></td><td class="eq-no">&#x0028;5&#x0029;</td></tr></table>
+         </li>
+         <li 
+  class="enumerate" id="x1-7014x2">An <span 
+class="ecbx-1000">update step</span>, which computes the
+         <!--l. 282--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle mathvariant="bold"><mi 
+>l</mi></mstyle></math>
+         subbands considering &#x0028;only&#x0029; the even samples and the prediction errors.
+         For the MST, we have that &#x0028;see also Eq.&#x00A0;<a 
+href="#x1-7005r3">3<!--tex4ht:ref: eq:ldwt --></a>&#x0029; <table class="equation"><tr><td> <a 
+ id="x1-7015r6"></a>
+         <!--l. 285--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="block" class="equation"><msubsup><mrow 
+>
+                                        <mstyle mathvariant="bold"><mi 
+>l</mi></mstyle></mrow><mrow 
+><mi 
+>i</mi></mrow><mrow 
+><mi 
+>l</mi></mrow></msubsup 
+> <mo 
+class="MathClass-rel">=</mo> <mn>2</mn><msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>l</mi></mstyle></mrow><mrow 
+>
+<mn>2</mn><mi 
+>i</mi></mrow><mrow 
+><mi 
+>l</mi><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msubsup 
+> <mo 
+class="MathClass-bin">+</mo><msubsup><mrow 
+> <mstyle mathvariant="bold"><mi 
+>h</mi></mstyle></mrow><mrow 
+>
+<mi 
+>i</mi></mrow><mrow 
+><mi 
+>l</mi></mrow></msubsup 
+><mo 
+class="MathClass-punc">.</mo>
+</math></td><td class="eq-no">&#x0028;6&#x0029;</td></tr></table>
+         </li></ol>
+     <!--l. 290--><p class="noindent" >Notice that these steps are invertible: </p><table class="equation"><tr><td> <a 
+ id="x1-7016r7"></a>
+                                                                  
+
+                                                                  
+     <!--l. 291--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="block" class="equation">
+ <mtable  align="axis" style=""  
+equalrows="false" columnlines="none none" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="right">     <msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>l</mi></mstyle></mrow><mrow 
+><mn>2</mn><mi 
+>i</mi></mrow><mrow 
+><mi 
+>l</mi><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msubsup 
+>  </mtd><mtd 
+class="array"  columnalign="center">   <mo 
+class="MathClass-rel">=</mo> </mtd><mtd 
+class="array"  columnalign="left">  <mfrac><mrow 
+><mn>1</mn></mrow> 
+<mrow 
+><mn>2</mn></mrow></mfrac><mo 
+class="MathClass-open">&#x0028;</mo><msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>l</mi></mstyle></mrow><mrow 
+><mi 
+>i</mi></mrow><mrow 
+><mi 
+>l</mi></mrow></msubsup 
+> <mo 
+class="MathClass-bin">&#x2212;</mo><msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>h</mi></mstyle></mrow><mrow 
+>
+<mi 
+>i</mi></mrow><mrow 
+><mi 
+>l</mi></mrow></msubsup 
+><mo 
+class="MathClass-close">&#x0029;</mo>  </mtd>
+</mtr>  <mtr><mtd 
+class="array"  columnalign="right">  <msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>l</mi></mstyle></mrow><mrow 
+><mn>2</mn><mi 
+>i</mi><mo 
+class="MathClass-bin">+</mo><mn>1</mn></mrow><mrow 
+><mi 
+>l</mi><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msubsup 
+>  </mtd><mtd 
+class="array"  columnalign="center">   <mo 
+class="MathClass-rel">=</mo> </mtd><mtd 
+class="array"  columnalign="left">  <msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>l</mi></mstyle></mrow><mrow 
+><mn>2</mn><mi 
+>i</mi></mrow><mrow 
+><mi 
+>l</mi><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msubsup 
+> <mo 
+class="MathClass-bin">+</mo><msubsup><mrow 
+> <mstyle mathvariant="bold"><mi 
+>h</mi></mstyle></mrow><mrow 
+><mi 
+>i</mi></mrow><mrow 
+><mi 
+>l</mi></mrow></msubsup 
+><mo 
+class="MathClass-punc">.</mo> </mtd></mtr><!--rcl--></mtable>
+</math></td><td class="eq-no">&#x0028;7&#x0029;</td></tr></table>
+     </li></ol>
+<!--l. 300--><p class="noindent" >
+</p>
+   <h4 class="subsectionHead"><span class="titlemark">1.7   </span> <a 
+ id="x1-80001.7"></a>Wavelets and &#xFB01;lter banks</h4>
+<!--l. 301--><p class="noindent" >In the context of the wavelet theory&#x00A0;<span class="cite">&#x005B;<a 
+href="#Xburrus2013wavelets">1</a>&#x005D;</span>, the response of the analysis low-pass &#xFB01;lter
+&#x0028;<!--l. 302--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mstyle mathvariant="bold"><mi 
+>K</mi></mstyle></mrow><mrow 
+><mn>0</mn></mrow></msub 
+></math> in the MST&#x0029; to
+the <a 
+href="https://en.wikipedia.org/?title=Unit_impulse&redirect=no" >unit impulse</a><span class="footnote-mark"><a 
+href="index9.html#fn8x0"><sup class="textsuperscript">8</sup></a></span><a 
+ id="x1-8001f8"></a> 
+is known as the <span 
+class="ecti-1000">scaling function </span>and is usually denoted by
+<!--l. 308--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mover 
+accent="true"><mrow 
+><mi 
+>&#x03D5;</mi></mrow><mo accent="true">&#x007E;</mo></mover></math>, the response of the
+analysis high-pass &#xFB01;lter &#x0028;<!--l. 309--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msub><mrow 
+><mstyle mathvariant="bold"><mi 
+>K</mi></mstyle></mrow><mrow 
+><mn>1</mn></mrow></msub 
+></math>&#x0029;
+is known as the <span 
+class="ecti-1000">wavelet function </span>and it is usually denoted by
+<!--l. 310--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mover 
+accent="true"><mrow 
+><mi 
+>&#x03C8;</mi></mrow><mo accent="true">&#x007E;</mo></mover></math>, the response of the
+synthesis low-pass &#xFB01;lter &#x0028;<!--l. 311--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>K</mi></mstyle></mrow><mrow 
+><mn>0</mn></mrow><mrow 
+><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msubsup 
+></math>&#x0029;
+is denoted by <!--l. 312--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>&#x03D5;</mi></math> and the
+synthesis high-pass &#xFB01;lter &#x0028;<!--l. 312--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>K</mi></mstyle></mrow><mrow 
+><mn>1</mn></mrow><mrow 
+><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msubsup 
+></math>&#x0029;
+is represented by <!--l. 313--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>&#x03C8;</mi></math>.
+</p><!--l. 315--><p class="indent" >   For the MST it holds that <!--l. 315--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mover 
+accent="true"><mrow 
+><mi 
+>&#x03D5;</mi></mrow><mo accent="true">&#x007E;</mo></mover><mo 
+class="MathClass-rel">&#x22A5;</mo><mover 
+accent="true"><mrow 
+><mi 
+>&#x03C8;</mi></mrow><mo accent="true">&#x007E;</mo></mover></math>,
+<!--l. 316--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mover 
+accent="true"><mrow 
+><mi 
+>&#x03D5;</mi></mrow><mo accent="true">&#x007E;</mo></mover> <mo 
+class="MathClass-rel">=</mo> <mi 
+>&#x03C8;</mi></math> and
+<!--l. 316--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mover 
+accent="true"><mrow 
+><mi 
+>&#x03C8;</mi></mrow><mo accent="true">&#x007E;</mo></mover> <mo 
+class="MathClass-rel">=</mo> <mi 
+>&#x03D5;</mi></math>,
+and this is also true for all orthogonal DWTs. Another important
+characteristic of orthogonal DWTs is that the &#xFB01;lters cannot be
+<a 
+href="https://en.wikipedia.org/wiki/Symmetry" >symmetric</a>.<span class="footnote-mark"><a 
+href="index10.html#fn9x0"><sup class="textsuperscript">9</sup></a></span><a 
+ id="x1-8002f9"></a> 
+</p>
+   <h4 class="subsectionHead"><span class="titlemark">1.8   </span> <a 
+ id="x1-90001.8"></a>Example of a DWT using high-order &#xFB01;lters</h4>
+                                                                  
+
+                                                                  
+<!--l. 327--><p class="noindent" >The previous MST-based DWT is similar to other transforms such as the <a 
+href="https://en.wikipedia.org/wiki/Haar_wavelet" >Haar
+transform</a>, in which we are using an 1-order predictor for removing the temporal
+redundancy. Let&#x2019;s extend the idea of lifting to a prediction of order two. For that, we
+de&#xFB01;ne the predict step as </p><table class="equation"><tr><td> <a 
+ id="x1-9001r8"></a>
+<!--l. 332--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="block" class="equation"><msubsup><mrow 
+>
+                  <mstyle mathvariant="bold"><mi 
+>h</mi></mstyle></mrow><mrow 
+><mi 
+>i</mi></mrow><mrow 
+><mi 
+>l</mi></mrow></msubsup 
+> <mo 
+class="MathClass-rel">=</mo><msubsup><mrow 
+> <mstyle mathvariant="bold"><mi 
+>l</mi></mstyle></mrow><mrow 
+>
+<mn>2</mn><mi 
+>i</mi><mo 
+class="MathClass-bin">+</mo><mn>1</mn></mrow><mrow 
+><mi 
+>l</mi><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msubsup 
+> <mo 
+class="MathClass-bin">&#x2212;</mo><mfrac><mrow 
+><mn>1</mn></mrow> 
+<mrow 
+><mn>2</mn></mrow></mfrac><mo 
+class="MathClass-open">&#x0028;</mo><msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>l</mi></mstyle></mrow><mrow 
+><mn>2</mn><mi 
+>i</mi></mrow><mrow 
+><mi 
+>l</mi><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msubsup 
+> <mo 
+class="MathClass-bin">+</mo><msubsup><mrow 
+> <mstyle mathvariant="bold"><mi 
+>l</mi></mstyle></mrow><mrow 
+>
+<mn>2</mn><mi 
+>i</mi><mo 
+class="MathClass-bin">+</mo><mn>2</mn></mrow><mrow 
+><mi 
+>l</mi><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msubsup 
+><mo 
+class="MathClass-close">&#x0029;</mo>
+</math></td><td class="eq-no">&#x0028;8&#x0029;</td></tr></table>
+<!--l. 335--><p class="indent" >   and the update step as </p><table class="equation"><tr><td> <a 
+ id="x1-9002r9"></a>
+<!--l. 336--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="block" class="equation"><msubsup><mrow 
+>
+                     <mstyle mathvariant="bold"><mi 
+>l</mi></mstyle></mrow><mrow 
+><mi 
+>i</mi></mrow><mrow 
+><mi 
+>l</mi></mrow></msubsup 
+> <mo 
+class="MathClass-rel">=</mo><msubsup><mrow 
+> <mstyle mathvariant="bold"><mi 
+>l</mi></mstyle></mrow><mrow 
+>
+<mn>2</mn><mi 
+>i</mi></mrow><mrow 
+><mi 
+>l</mi><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msubsup 
+> <mo 
+class="MathClass-bin">+</mo> <mfrac><mrow 
+><mn>1</mn></mrow> 
+<mrow 
+><mn>4</mn></mrow></mfrac><mo 
+class="MathClass-open">&#x0028;</mo><msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>h</mi></mstyle></mrow><mrow 
+><mi 
+>i</mi><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow><mrow 
+><mi 
+>l</mi></mrow></msubsup 
+> <mo 
+class="MathClass-bin">+</mo><msubsup><mrow 
+> <mstyle mathvariant="bold"><mi 
+>h</mi></mstyle></mrow><mrow 
+>
+<mi 
+>i</mi></mrow><mrow 
+><mi 
+>l</mi></mrow></msubsup 
+><mo 
+class="MathClass-close">&#x0029;</mo><mo 
+class="MathClass-punc">,</mo>
+</math></td><td class="eq-no">&#x0028;9&#x0029;</td></tr></table>
+<!--l. 339--><p class="indent" >   where the factor <!--l. 339--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mn>1</mn><mo 
+class="MathClass-bin">&#x2215;</mo><mn>4</mn></math>
+is used to preserve the energy&#x00A0;<span class="cite">&#x005B;<a 
+href="#Xsweldens1997building">4</a>&#x005D;</span>. This transform is known as the <a 
+href="https://en.wikipedia.org/wiki/Biorthogonal_wavelet" >biorthogonal</a>
+&#x0028;2,2&#x0029; of Cohen-Daubechies-Feauveau, and also as the linear transform.
+Biorthogonal<span class="footnote-mark"><a 
+href="index11.html#fn10x0"><sup class="textsuperscript">10</sup></a></span><a 
+ id="x1-9003f10"></a> 
+&#xFB01;lters can be <a 
+href="http://wavelets.pybytes.com/" >easely recognized</a> because they are always symmetric.
+When the &#xFB01;lters of the PRFB are biorthogonal, they also satisfy that
+<!--l. 350--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>&#x03C8;</mi><mo 
+class="MathClass-rel">&#x22A5;</mo><mover 
+accent="true"><mrow 
+><mi 
+>&#x03D5;</mi></mrow><mo accent="true">&#x007E;</mo></mover></math> and
+<!--l. 351--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>&#x03D5;</mi><mo 
+class="MathClass-rel">&#x22A5;</mo><mover 
+accent="true"><mrow 
+><mi 
+>&#x03C8;</mi></mrow><mo accent="true">&#x007E;</mo></mover></math>.
+</p><!--l. 353--><p class="indent" >   The linear transform is also invertible by simply reversing the steps: </p><table class="equation"><tr><td>
+<a 
+ id="x1-9004r10"></a>
+                                                                  
+
+                                                                  
+<!--l. 354--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="block" class="equation">
+ <mtable  align="axis" style=""  
+equalrows="false" columnlines="none none" equalcolumns="false" class="array"> <mtr><mtd 
+class="array"  columnalign="right">     <msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>l</mi></mstyle></mrow><mrow 
+><mn>2</mn><mi 
+>i</mi></mrow><mrow 
+><mi 
+>l</mi><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msubsup 
+>  </mtd><mtd 
+class="array"  columnalign="center">  <mo 
+class="MathClass-rel">=</mo> </mtd><mtd 
+class="array"  columnalign="left"> <msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>l</mi></mstyle></mrow><mrow 
+><mi 
+>i</mi></mrow><mrow 
+><mi 
+>l</mi></mrow></msubsup 
+> <mo 
+class="MathClass-bin">&#x2212;</mo><mfrac><mrow 
+><mn>1</mn></mrow> 
+<mrow 
+><mn>4</mn></mrow></mfrac><mo 
+class="MathClass-open">&#x0028;</mo><msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>h</mi></mstyle></mrow><mrow 
+><mi 
+>i</mi><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow><mrow 
+><mi 
+>l</mi></mrow></msubsup 
+> <mo 
+class="MathClass-bin">+</mo><msubsup><mrow 
+> <mstyle mathvariant="bold"><mi 
+>h</mi></mstyle></mrow><mrow 
+>
+<mi 
+>i</mi></mrow><mrow 
+><mi 
+>l</mi></mrow></msubsup 
+><mo 
+class="MathClass-close">&#x0029;</mo>          </mtd>
+</mtr>  <mtr><mtd 
+class="array"  columnalign="right">  <msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>l</mi></mstyle></mrow><mrow 
+><mn>2</mn><mi 
+>i</mi><mo 
+class="MathClass-bin">+</mo><mn>1</mn></mrow><mrow 
+><mi 
+>l</mi><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msubsup 
+>  </mtd><mtd 
+class="array"  columnalign="center">  <mo 
+class="MathClass-rel">=</mo> </mtd><mtd 
+class="array"  columnalign="left"> <msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>h</mi></mstyle></mrow><mrow 
+><mi 
+>i</mi></mrow><mrow 
+><mi 
+>l</mi></mrow></msubsup 
+> <mo 
+class="MathClass-bin">+</mo> <mfrac><mrow 
+><mn>1</mn></mrow> 
+<mrow 
+><mn>2</mn></mrow></mfrac><mo 
+class="MathClass-open">&#x0028;</mo><msubsup><mrow 
+><mstyle mathvariant="bold"><mi 
+>l</mi></mstyle></mrow><mrow 
+><mn>2</mn><mi 
+>i</mi></mrow><mrow 
+><mi 
+>l</mi><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msubsup 
+> <mo 
+class="MathClass-bin">+</mo><msubsup><mrow 
+> <mstyle mathvariant="bold"><mi 
+>l</mi></mstyle></mrow><mrow 
+>
+<mn>2</mn><mi 
+>i</mi><mo 
+class="MathClass-bin">+</mo><mn>2</mn></mrow><mrow 
+><mi 
+>l</mi><mo 
+class="MathClass-bin">&#x2212;</mo><mn>1</mn></mrow></msubsup 
+><mo 
+class="MathClass-close">&#x0029;</mo><mo 
+class="MathClass-punc">.</mo> </mtd></mtr><!--rcl--></mtable>
+</math></td><td class="eq-no">&#x0028;10&#x0029;</td></tr></table>
+   <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
+ id="x1-100002"></a>What you have to do?</h3>
+<!--l. 363--><p class="noindent" >As usually, please, rebuild the RD curves considering also the temporal decorrelation.
+Use <span class="obeylines-h"><span class="verb"><span 
+class="ectt-1000">temporal_no_overlapped_DWT_coding.py</span></span></span>. Notice that the number of levels
+<!--l. 366--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>l</mi></math> of
+the DWT &#x0028;computed using <a 
+href="https://pywavelets.readthedocs.io/en/latest/" >PyWavelets</a>&#x00A0;<span class="cite">&#x005B;<a 
+href="#Xlee2019pywavelets">2</a>&#x005D;</span>&#x0029; can have a high impact on the
+amount of energy concentration achieved by the DWT, and therefore, on the
+e&#xFB03;ciency of coding system. Show such impact. Experiment also with the wavelet
+name.
+</p><!--l. 398--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
+ id="x1-110003"></a>Timming</h3>
+<!--l. 400--><p class="noindent" >Please, present your results in one week.
+</p><!--l. 402--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
+ id="x1-120004"></a>Deliverables</h3>
+<!--l. 404--><p class="noindent" >A report showing your results.
+</p><!--l. 406--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
+ id="x1-130005"></a>Resources</h3>
+   <div class="thebibliography">
+   <p class="bibitem" ><span class="biblabel">
+ &#x005B;1&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xburrus2013wavelets"></a>C.S.  Burrus,  R.&#x00A0;Gopinath,  and  H.&#x00A0;Guo.     <a 
+href="https://cnx.org/contents/EQurkhlI@6.9:ZcNjPhDo@15/Preface" ><span 
+class="ecti-1000">Wavelets  and  Wavelet</span>
+   <span 
+class="ecti-1000">Transforms</span></a>. Rice University, 2013.
+                                                                  
+
+                                                                  
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ &#x005B;2&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xlee2019pywavelets"></a>G.&#x00A0;Lee, R.&#x00A0;Gommers, F.&#x00A0;Waselewski, K.&#x00A0;Wohlfahrt, and A.&#x00A0;O&#x2019;Leary.
+   PyWavelets: A Python package for wavelet analysis. <span 
+class="ecti-1000">Journal of Open Source</span>
+   <span 
+class="ecti-1000">Software</span>, 4&#x0028;36&#x0029;:1237, 2019.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ &#x005B;3&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xsayood2017introduction"></a>K.&#x00A0;Sayood.   <a 
+href="http://rahilshaikh.weebly.com/uploads/1/1/6/3/11635894/data_compression.pdf" ><span 
+class="ecti-1000">Introduction to Data Compression</span></a>.   Morgan  Kaufmann,
+   2017.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ &#x005B;4&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xsweldens1997building"></a>W.&#x00A0;Sweldens and P.&#x00A0;Schr&#x00F6;der. <a 
+href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.54.5600&rep=rep1&type=pdf" >Building Your Own Wavelets at Home</a>.
+   <span 
+class="ecti-1000">Wavelets in Computer Graphics</span>, 1997.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ &#x005B;5&#x005D;<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xvetterli1995wavelets"></a>M.&#x00A0;Vetterli  and  J.&#x00A0;Kova&#x010D;evi&#x0107;.     <a 
+href="http://waveletsandsubbandcoding.org/Repository/VetterliKovacevic95_Manuscript.pdf" ><span 
+class="ecti-1000">Wavelets  and  Subband  Coding</span></a>.
+   Prentice-hall, 1995.
+</p>
+   </div>
+<a 
+ id="Q1-1-14"></a>
+    
+</body></html> 
+
+                                                                  
+
+

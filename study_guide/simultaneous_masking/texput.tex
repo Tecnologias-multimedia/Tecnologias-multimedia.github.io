@@ -1,0 +1,47 @@
+% Emacs, this is -*-latex-*-
+
+\input{../definitions}
+\title{\TM{} - Study Guide - Milestone 15: Considering the simultaneous masking}
+
+\maketitle
+
+\section{Description}
+
+\subsection{Simultaneous masking}
+The HAS (Human Auditory System) has a finite frequency resolution,
+which basically means that two different tonal sounds with different
+amplitudes can be heared only as one (the louder one) when they are
+closed enought~\cite{bosi2003intro} (in frequency). When this happens, the DWT
+subband~\cite{vetterli1995wavelets} where the quiet sound is placed
+can be quantized more severly without perceiving that the quantization
+noise in such subband is higher (see the Figure~\ref{fig:SM}). Notice
+that, the higher the quantization step, the higher the compression
+ratio.
+
+\begin{figure}
+  \centering
+  \png{simultaneous_masking}{600}
+  \caption{Simultaneous masking. The threshold of hearing has been modified (increased) in the in the vicinity of the pure tone of 1 KHz.}
+  \label{fig:SM}
+\end{figure}
+
+\section{What you have to do?}
+
+\begin{enumerate}
+\item Write a generator of vectors of quantization steps. The
+  generator should analyze the energy of each DWT subband and decide,
+  considering the simultaneous masking effect, the vector of
+  quantization steps (one for subband)..
+\end{enumerate}
+
+\section{Deliverables}
+
+The module \verb|simultaneous_masking.py| (inheriting from
+\verb|threshold.py|). Store it at the
+\href{https://github.com/Tecnologias-multimedia/intercom}{root
+  directory} of your InterCom's repo.
+
+\section{Resources}
+
+\bibliography{maths,data-compression,DWT,audio-coding}
+
