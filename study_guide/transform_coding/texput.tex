@@ -770,10 +770,12 @@ the synthesis low-pass filter (${\mathbf K}^{-1}_0$) is denoted by
 $\phi$ and the synthesis high-pass filter (${\mathbf K}^{-1}_1$) is
 represented by $\psi$, that are the dual scaling and wavelet functions.
 
-For the MST it holds that $\tilde\phi\bot\tilde\psi$,
-$\tilde\phi=\psi$ and $\tilde\psi=\phi$, and this is also true for all
-orthogonal DWTs. Another important characteristic of orthogonal DWTs
-is that the filters cannot be
+For the MST it holds that $\tilde\phi\bot\tilde\psi$, $\tilde\phi$ is
+equal to the mirror\footnote{In the $Z$-domain, it holds that
+  ${\mathcal Z}\{\tilde\phi\}(z)={\mathcal Z}\{\phi\}(-z)$.} of $\phi$
+and $\tilde\psi$ is equal to the mirror of $\psi$, and this is also
+true for all orthogonal DWTs. Another important characteristic of
+orthogonal DWTs is that the filters cannot be
 \href{https://en.wikipedia.org/wiki/Symmetry}{symmetric}.\footnote{The
   symmetry of the filters is important to produce the same type of
   artifacts in the boundaries of the signal and also to avoid the

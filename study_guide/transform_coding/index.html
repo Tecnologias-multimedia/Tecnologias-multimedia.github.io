@@ -371,45 +371,47 @@ analysis high-pass filter (\({\mathbf K}_1\)) is known as the <span class='ecti-
 by \(\tilde \psi \), the response of the synthesis low-pass filter (\({\mathbf K}^{-1}_0\)) is denoted by \(\phi \) and the synthesis
 high-pass filter (\({\mathbf K}^{-1}_1\)) is represented by \(\psi \), that are the dual scaling and wavelet
 functions.
-</p><!-- l. 773 --><p class='indent'>   For the MST it holds that \(\tilde \phi \bot \tilde \psi \), \(\tilde \phi =\psi \) and \(\tilde \psi =\phi \), and this is also true for all orthogonal DWTs.
+</p><!-- l. 773 --><p class='indent'>   For the MST it holds that \(\tilde \phi \bot \tilde \psi \), \(\tilde \phi \) is equal to the
+mirror<span class='footnote-mark'><a href='#fn25x0' id='fn25x0-bk'><sup class='textsuperscript'>25</sup></a></span><a id='x1-15002f25'></a>
+of \(\phi \) and \(\tilde \psi \) is equal to the mirror of \(\psi \), and this is also true for all orthogonal DWTs.
 Another important characteristic of orthogonal DWTs is that the filters cannot be
-<a href='https://en.wikipedia.org/wiki/Symmetry'>symmetric</a>.<span class='footnote-mark'><a href='#fn25x0' id='fn25x0-bk'><sup class='textsuperscript'>25</sup></a></span><a id='x1-15002f25'></a>
-</p><!-- l. 787 --><p class='noindent'>
+<a href='https://en.wikipedia.org/wiki/Symmetry'>symmetric</a>.<span class='footnote-mark'><a href='#fn26x0' id='fn26x0-bk'><sup class='textsuperscript'>26</sup></a></span><a id='x1-15003f26'></a>
+</p><!-- l. 789 --><p class='noindent'>
 </p>
    <h5 class='subsubsectionHead'><span class='titlemark'>1.2.8   </span> <a id='x1-160001.2.8'></a>Example of a DWT using “high”-order filters</h5>
-<!-- l. 790 --><p class='noindent'>The previous MST-based DWT is similar to other transforms such as the <a href='https://en.wikipedia.org/wiki/Haar_wavelet'>Haar
+<!-- l. 792 --><p class='noindent'>The previous MST-based DWT is similar to other transforms such as the <a href='https://en.wikipedia.org/wiki/Haar_wavelet'>Haar
 transform</a>, in which we are using an 1-order predictor for removing the temporal
 redundancy. Let’s extend the idea of lifting to a prediction of order two. For that, we
 define the predict step as \begin {equation}  {\mathbf h}^l_i = {\mathbf l}^{l-1}_{2i+1} - \frac {1}{2}({\mathbf l}^{l-1}_{2i} + {\mathbf l}^{l-1}_{2i+2})  \end {equation}
 and the update step as \begin {equation}  {\mathbf l}^l_i = {\mathbf l}^{l-1}_{2i} + \frac {1}{4}({\mathbf h}^l_{i-1} + {\mathbf h}^l_i),  \end {equation}
 where the factor \(1/4\) is used to preserve the energy <span class='cite'>[<a href='#Xsweldens1997building'>9</a>]</span>. This transform
 is known as the <a href='https://en.wikipedia.org/wiki/Biorthogonal_wavelet'>biorthogonal</a> (2,2) of Cohen-Daubechies-Feauveau.
-Biorthogonal<span class='footnote-mark'><a href='#fn26x0' id='fn26x0-bk'><sup class='textsuperscript'>26</sup></a></span><a id='x1-16001f26'></a>
+Biorthogonal<span class='footnote-mark'><a href='#fn27x0' id='fn27x0-bk'><sup class='textsuperscript'>27</sup></a></span><a id='x1-16001f27'></a>
 filters can be <a href='http://wavelets.pybytes.com/'>easely recognized</a> because they are always symmetric. When the filters
 of the PRFB are biorthogonal, they also satisfy that \(\psi \bot \tilde \phi \) and \(\phi \bot \tilde \psi \).
-</p><!-- l. 816 --><p class='indent'>   This linear transform is also invertible by simply reversing the steps: \begin {equation}  \begin {array}{rcl} {\mathbf l}^{l-1}_{2i} &amp; = &amp; {\mathbf l}^l_i - \frac {1}{4}({\mathbf h}^l_{i-1} + {\mathbf h}^l_i)\\ {\mathbf l}^{l-1}_{2i+1} &amp; = &amp; {\mathbf h}^l_i + \frac {1}{2}({\mathbf l}^{l-1}_{2i} + {\mathbf l}^{l-1}_{2i+2}). \end {array}  \end {equation}
-</p><!-- l. 826 --><p class='noindent'>
+</p><!-- l. 818 --><p class='indent'>   This linear transform is also invertible by simply reversing the steps: \begin {equation}  \begin {array}{rcl} {\mathbf l}^{l-1}_{2i} &amp; = &amp; {\mathbf l}^l_i - \frac {1}{4}({\mathbf h}^l_{i-1} + {\mathbf h}^l_i)\\ {\mathbf l}^{l-1}_{2i+1} &amp; = &amp; {\mathbf h}^l_i + \frac {1}{2}({\mathbf l}^{l-1}_{2i} + {\mathbf l}^{l-1}_{2i+2}). \end {array}  \end {equation}
+</p><!-- l. 828 --><p class='noindent'>
 </p>
    <h5 class='subsubsectionHead'><span class='titlemark'>1.2.9   </span> <a id='x1-170001.2.9'></a>Quantization of the DWT subbands</h5>
-<!-- l. 828 --><p class='noindent'>The QSSs to be used in the different subbands of a (orthogonal) decomposition should be
-inversely<span class='footnote-mark'><a href='#fn27x0' id='fn27x0-bk'><sup class='textsuperscript'>27</sup></a></span><a id='x1-17001f27'></a>
                                                                   
 
                                                                   
+<!-- l. 830 --><p class='noindent'>The QSSs to be used in the different subbands of a (orthogonal) decomposition should be
+inversely<span class='footnote-mark'><a href='#fn28x0' id='fn28x0-bk'><sup class='textsuperscript'>28</sup></a></span><a id='x1-17001f28'></a>
 proportional the gain of the synthesis filters. The gain of a filter correspond to the L\(^2\)
 norm of its taps, and the final gain applied to a subband depends logically on the
 number of times that we have applied the filter in the cascade. Notice that, if we
 don’t know the taps, we can use the algorithm described in the Section <a href='#x1-70001.1.4'>1.1.4<!-- tex4ht:ref: sec:quantization_subbands_spatial  --></a> to find
 the gain of the subbands.
-</p><!-- l. 840 --><p class='indent'>   Finally, notice that if the transform in orthonormal, by definition, the
+</p><!-- l. 842 --><p class='indent'>   Finally, notice that if the transform in orthonormal, by definition, the
 gain of the analysis and synthesis filters is always 1, and also this is the
 gain of the subbands. In the notebook <a href='https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/study_guide/transform_coding/DWT_RD.ipynb'>A RD-comparison of DWTs</a> there
 is more information about the QSS that can be used in the quantization
 process.
-</p><!-- l. 851 --><p class='noindent'>
+</p><!-- l. 853 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead'><span class='titlemark'>1.3   </span> <a id='x1-180001.3'></a><a href='https://en.wikipedia.org/wiki/Lapped_transform'>Overlapped block transforms</a> for minimizing the distortion</h4>
-<!-- l. 854 --><p class='noindent'>Transform Coding implies to split the signal into blocks of data (chunks), and to
+<!-- l. 856 --><p class='noindent'>Transform Coding implies to split the signal into blocks of data (chunks), and to
 compute the transform of each chunk. When the output coefficients are
 quantized, it is possible that significative (and unpleasant) distortions may
 appear in the border frames of the chunks (see Fig. <a href='#x1-18001r3'>3<!-- tex4ht:ref: fig:3_chunks  --></a>). This is a consequence
@@ -440,21 +442,21 @@ bottom-right,  the  reconstruction  of  the  extended  chunk.  See  the  noteboo
 
                                                                   
    </figure>
-<!-- l. 879 --><p class='indent'>   One solution to avoid signal discontinuitites between chunks is to overlap the
+<!-- l. 881 --><p class='indent'>   One solution to avoid signal discontinuitites between chunks is to overlap the
 chunks. Thus, the current (\(i\)-th) chunk uses also the last frames of the previous (\((i-1)\)-th)
 chunk and the first frames of the next (\((i+1)\)-th) chunk to compute the transform of the
 current extended (\(i\)-th) chunk (see the Fig. <a href='#x1-20009r4'>4<!-- tex4ht:ref: fig:subbands  --></a>). This has been described in the
 following algorithm:
 </p>
    <h4 class='likesubsectionHead'><a id='x1-190001.3'></a>Encoder:</h4>
-<!-- l. 887 --><p class='noindent'>
+<!-- l. 889 --><p class='noindent'>
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-19002x1'>\({\mathbf C}_{-1}\leftarrow {\mathbf 0}\), a zero chunk.
      </li>
 <li class='enumerate' id='x1-19004x2'>Input \({\mathbf C}_0\).
      </li>
 <li class='enumerate' id='x1-19006x3'>
-     <!-- l. 890 --><p class='noindent'>For \(i\in \{0,1,\cdots \}\):
+     <!-- l. 892 --><p class='noindent'>For \(i\in \{0,1,\cdots \}\):
          </p><ol class='enumerate2'>
 <li class='enumerate' id='x1-19008x1'>Input \({\mathbf C}_{i+1}\).
          </li>
@@ -474,14 +476,14 @@ following algorithm:
          </li>
 <li class='enumerate' id='x1-19018x6'>\({\mathbf C}_i\leftarrow {\mathbf C}_{i+1}\).</li></ol>
      </li></ol>
-<!-- l. 909 --><p class='noindent'>Notice that we are following the <a href='https://numpy.org/doc/stable/reference/'>NumPy</a> <span class='cite'>[<a href='#Xnumpy'>1</a>, <a href='#Xharris2020array'>5</a>]</span> <a href='https://www.pythoninformer.com/python-libraries/numpy/index-and-slice/'>slicing</a> notation.
-</p><!-- l. 918 --><p class='noindent'>
+<!-- l. 911 --><p class='noindent'>Notice that we are following the <a href='https://numpy.org/doc/stable/reference/'>NumPy</a> <span class='cite'>[<a href='#Xnumpy'>1</a>, <a href='#Xharris2020array'>5</a>]</span> <a href='https://www.pythoninformer.com/python-libraries/numpy/index-and-slice/'>slicing</a> notation.
+</p><!-- l. 920 --><p class='noindent'>
 </p>
    <h4 class='likesubsectionHead'><a id='x1-200001.3'></a>Decoder:</h4>
-<!-- l. 919 --><p class='noindent'>
+<!-- l. 921 --><p class='noindent'>
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-20002x1'>
-     <!-- l. 920 --><p class='noindent'>For \(i\in \{0,1,\cdots \}\):
+     <!-- l. 922 --><p class='noindent'>For \(i\in \{0,1,\cdots \}\):
          </p><ol class='enumerate2'>
 <li class='enumerate' id='x1-20004x1'>Input decomposition \({\mathbf D}_i\).
          </li>
@@ -497,7 +499,7 @@ following algorithm:
                                                                   
 
                                                                   
-<!-- l. 939 --><p class='noindent'><div style='text-align:center;'> <img src='graphics/subbands.svg' /> </div>  <a id='x1-20009r4'></a>
+<!-- l. 941 --><p class='noindent'><div style='text-align:center;'> <img src='graphics/subbands.svg' /> </div>  <a id='x1-20009r4'></a>
 <a id='x1-20010'></a>
 </p>
 <figcaption class='caption'><span class='id'>Figure 4: </span><span class='content'>Structure in the DWT domain of an extended chunk for \(l=2\). \(o\) is the
@@ -507,11 +509,11 @@ frames of chunk \({\mathbf C}_{i-1}\), and \({\mathbf C}_{i+1}[:o]\) the first \
 
                                                                   
    </figure>
-<!-- l. 948 --><p class='indent'>   This idea has been implemented in the notebook <a href='https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/study_guide/transform_coding/overlapped_DWT_I.ipynb'>Overlapped DWT</a>, and the
+<!-- l. 950 --><p class='indent'>   This idea has been implemented in the notebook <a href='https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/study_guide/transform_coding/overlapped_DWT_I.ipynb'>Overlapped DWT</a>, and the
 result can be seen in the Fig. <a href='#x1-18001r3'>3<!-- tex4ht:ref: fig:3_chunks  --></a>.
 </p>
    <h4 class='subsectionHead'><span class='titlemark'>1.4   </span> <a id='x1-210001.4'></a>Reducing the data overhead</h4>
-<!-- l. 959 --><p class='noindent'>Unfortunately, the previous algorithm sends twice the DWT coefficients of the
+<!-- l. 961 --><p class='noindent'>Unfortunately, the previous algorithm sends twice the DWT coefficients of the
 overlapped areas (in the Fig. <a href='#x1-20009r4'>4<!-- tex4ht:ref: fig:subbands  --></a>, \(\{{\mathbf D}_i.{\mathbf l}^2[-o/4:], {\mathbf D}_i.{\mathbf l}^2[:o/4], {\mathbf D}_i.{\mathbf h}^2[-o/4:], {\mathbf D}_i.{\mathbf h}^2[:o/4], {\mathbf D}_i.{\mathbf h}^1[-o/2:], {\mathbf D}_i.{\mathbf h}^1[:o/2]\}\)). To avoid this waste of bandwidth, we can reuse the
 received coefficients of the overlapped areas. This procedure has been described in
 the Fig. <a href='#x1-21001r5'>5<!-- tex4ht:ref: fig:overlapping  --></a>, and, as it can be seen, the encoding algorithm is identical to the
@@ -529,7 +531,7 @@ Notice that now, the number of sent coefficients is \(\text {len}({\mathbf C}_i)
                                                                   
 
                                                                   
-<!-- l. 976 --><p class='noindent'><div style='text-align:center;'> <img src='graphics/overlapping.svg' /> </div>  <a id='x1-21001r5'></a>
+<!-- l. 978 --><p class='noindent'><div style='text-align:center;'> <img src='graphics/overlapping.svg' /> </div>  <a id='x1-21001r5'></a>
 <a id='x1-21002'></a>
 </p>
 <figcaption class='caption'><span class='id'>Figure 5:  </span><span class='content'>Block  overlapping  in  the  DWT  domain  for  \(l=2\).  Only  the  shadded
@@ -540,17 +542,17 @@ have been indicated).                                                </span></fi
 
                                                                   
    </figure>
-<!-- l. 996 --><p class='indent'>   The codec now can be described by:
+<!-- l. 998 --><p class='indent'>   The codec now can be described by:
 </p>
    <h4 class='likesubsectionHead'><a id='x1-220001.4'></a>Encoder:</h4>
-<!-- l. 999 --><p class='noindent'>
+<!-- l. 1001 --><p class='noindent'>
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-22002x1'>\({\mathbf C}_{-1}\leftarrow {\mathbf 0}\), a zero chunk.
      </li>
 <li class='enumerate' id='x1-22004x2'>Input \({\mathbf C}_0\).
      </li>
 <li class='enumerate' id='x1-22006x3'>
-     <!-- l. 1002 --><p class='noindent'>For \(i\in \{0,1,\cdots \}\):
+     <!-- l. 1004 --><p class='noindent'>For \(i\in \{0,1,\cdots \}\):
          </p><ol class='enumerate2'>
 <li class='enumerate' id='x1-22008x1'>Input \({\mathbf C}_{i+1}\).
          </li>
@@ -567,16 +569,16 @@ have been indicated).                                                </span></fi
          </li>
 <li class='enumerate' id='x1-22018x6'>\({\mathbf C}_i\leftarrow {\mathbf C}_{i+1}\).</li></ol>
      </li></ol>
-<!-- l. 1028 --><p class='noindent'>
+<!-- l. 1030 --><p class='noindent'>
 </p>
    <h4 class='likesubsectionHead'><a id='x1-230001.4'></a>Decoder (ignores overlapping):</h4>
-<!-- l. 1029 --><p class='noindent'>This decoder ignores the adjacent chunks in the DWT domain, but notice that it uses
+<!-- l. 1031 --><p class='noindent'>This decoder ignores the adjacent chunks in the DWT domain, but notice that it uses
 the right coefficients (those computed using overlapping chunks). This should provide
 reconstructions of the chunks with a higher quality that in the previous
 milestone.
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-23002x1'>
-     <!-- l. 1031 --><p class='noindent'>For \(i\in \{0,1,\cdots \}\):
+     <!-- l. 1033 --><p class='noindent'>For \(i\in \{0,1,\cdots \}\):
          </p><ol class='enumerate2'>
 <li class='enumerate' id='x1-23004x1'>Input the decomposition subset \({\mathbf D}_i\).
          </li>
@@ -584,10 +586,10 @@ milestone.
          </li>
 <li class='enumerate' id='x1-23008x3'>Output \({\mathbf C}_i\).</li></ol>
      </li></ol>
-<!-- l. 1039 --><p class='noindent'>
+<!-- l. 1041 --><p class='noindent'>
 </p>
    <h4 class='likesubsectionHead'><a id='x1-240001.4'></a>Decoder (uses overlapping):</h4>
-<!-- l. 1041 --><p class='noindent'>
+<!-- l. 1043 --><p class='noindent'>
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-24002x1'>\({\mathbf D}_{-1}\leftarrow {\mathbf 0}\).
                                                                   
@@ -597,7 +599,7 @@ milestone.
 <li class='enumerate' id='x1-24004x2'>Input decomposition \({\mathbf D}_0\).
      </li>
 <li class='enumerate' id='x1-24006x3'>
-     <!-- l. 1044 --><p class='noindent'>For \(i\in \{0,1,\cdots \}\):
+     <!-- l. 1046 --><p class='noindent'>For \(i\in \{0,1,\cdots \}\):
          </p><ol class='enumerate2'>
 <li class='enumerate' id='x1-24008x1'>Input decomposition \({\mathbf D}_{i+1}\).
          </li>
@@ -611,37 +613,37 @@ milestone.
          </li>
 <li class='enumerate' id='x1-24018x6'>\({\mathbf D}_i \leftarrow {\mathbf D}_{i+1}\).</li></ol>
      </li></ol>
-<!-- l. 1068 --><p class='noindent'>
+<!-- l. 1070 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>2   </span> <a id='x1-250002'></a>What you have to do?</h3>
                                                                   
 
                                                                   
-<!-- l. 1071 --><p class='noindent'>
+<!-- l. 1073 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead'><span class='titlemark'>2.1   </span> <a id='x1-260002.1'></a>Determine the RD curves for the MST</h4>
-<!-- l. 1073 --><p class='noindent'>As we did in the previous milestone, generate the RD curves for a set of simulated
+<!-- l. 1075 --><p class='noindent'>As we did in the previous milestone, generate the RD curves for a set of simulated
 transmission contexts. Use the modules <span class='ectt-1000'>stereo_MST_coding{|_16|_32}.py</span>. As you
 can see, they differs in how the transform has been implemented.
-</p><!-- l. 1079 --><p class='noindent'>
+</p><!-- l. 1081 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead'><span class='titlemark'>2.2   </span> <a id='x1-270002.2'></a>Determine the RD curves for the DWT</h4>
-<!-- l. 1082 --><p class='noindent'>Rebuild the RD curves considering also the temporal decorrelation. Use
+<!-- l. 1084 --><p class='noindent'>Rebuild the RD curves considering also the temporal decorrelation. Use
 <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>temporal_no_overlapped_DWT_coding.py</span></span></span>. Notice that the number of levels \(l\) of
 the DWT (computed using <a href='https://pywavelets.readthedocs.io/en/latest/'>PyWavelets</a> <span class='cite'>[<a href='#Xlee2019pywavelets'>6</a>]</span>) can have a high impact on the
 amount of energy concentration achieved by the DWT, and therefore, on the
 efficiency of coding system. Show such impact. Experiment also with the wavelet
 name.
-</p><!-- l. 1092 --><p class='noindent'>
+</p><!-- l. 1094 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead'><span class='titlemark'>2.3   </span> <a id='x1-280002.3'></a>Determine the RD curves for the overlapped DWT</h4>
-<!-- l. 1095 --><p class='noindent'>Finally, redo the curves considering now the block overlapping
+<!-- l. 1097 --><p class='noindent'>Finally, redo the curves considering now the block overlapping
 (<span class='obeylines-h'><span class='verb'><span class='ectt-1000'>temporal_overlapped_DWT_coding.py</span></span></span>). It is a good idea to put all the RD curves
 together (in the same graph), to compare easely,
-</p><!-- l. 1101 --><p class='noindent'>
+</p><!-- l. 1103 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead'><span class='titlemark'>2.4   </span> <a id='x1-290002.4'></a>Answer these questions</h4>
-<!-- l. 1104 --><p class='noindent'>
+<!-- l. 1106 --><p class='noindent'>
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-29002x1'>Which has been the gain of the filters used in your experiments?
      </li>
@@ -655,10 +657,10 @@ together (in the same graph), to compare easely,
      MP3) for exploiting the temporal redundancy? Enumerate the systems
      and the used transform(s).
 </li></ol>
-<!-- l. 1123 --><p class='noindent'>
+<!-- l. 1125 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead'><span class='titlemark'>2.5   </span> <a id='x1-300002.5'></a>Visualize</h4>
-<!-- l. 1126 --><p class='noindent'>Visualize the effects (in the DWT domain) of quantization.
+<!-- l. 1128 --><p class='noindent'>Visualize the effects (in the DWT domain) of quantization.
                                                                   
 
                                                                   
@@ -669,12 +671,12 @@ python temporal_overlapped_DWT_coding.py -i 6 -o 6 --show_stats -q 8192
 # Connect the output of temporal_overlapped_DWT_coding.py to the input of dwt5.py
 python dwt5.py -d 9
 </pre>
-<!-- l. 1132 --><p class='nopar'>
-</p><!-- l. 1138 --><p class='noindent'>
+<!-- l. 1134 --><p class='nopar'>
+</p><!-- l. 1140 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>3   </span> <a id='x1-310003'></a>Deliverables</h3>
-<!-- l. 1139 --><p class='noindent'>A description of the experiments and their results.
-</p><!-- l. 1141 --><p class='noindent'>
+<!-- l. 1141 --><p class='noindent'>A description of the experiments and their results.
+</p><!-- l. 1143 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>4   </span> <a id='x1-320004'></a>Resources</h3>
     <div class='thebibliography'>
@@ -797,13 +799,14 @@ python dwt5.py -d 9
 </span><span class='ecrm-0800'>called AC (Alternating Current) coefficients.</span></p>
 <!-- l. 765 --><p class='indent'>     <span class='footnote-mark'><a href='#fn24x0-bk' id='fn24x0'><sup class='textsuperscript'>24</sup></a></span><span class='ecrm-0800'>The response of a filter to the unit impulse characterize the filter because the output of the
 </span><span class='ecrm-0800'>filter is the set of taps of the filter.</span></p>
-<!-- l. 780 --><p class='indent'>     <span class='footnote-mark'><a href='#fn25x0-bk' id='fn25x0'><sup class='textsuperscript'>25</sup></a></span><span class='ecrm-0800'>The symmetry of the filters is important to produce the same type of artifacts in the
+<!-- l. 775 --><p class='indent'>     <span class='footnote-mark'><a href='#fn25x0-bk' id='fn25x0'><sup class='textsuperscript'>25</sup></a></span><span class='ecrm-0800'>In the</span> \(Z\)<span class='ecrm-0800'>-domain, it holds that</span> \({\mathcal Z}\{\tilde \phi \}(z)={\mathcal Z}\{\phi \}(-z)\)<span class='ecrm-0800'>.</span></p>
+<!-- l. 782 --><p class='indent'>     <span class='footnote-mark'><a href='#fn26x0-bk' id='fn26x0'><sup class='textsuperscript'>26</sup></a></span><span class='ecrm-0800'>The symmetry of the filters is important to produce the same type of artifacts in the
 </span><span class='ecrm-0800'>boundaries of the signal and also to avoid the phase-shifting of the coefficients in the wavelet
-</span><span class='ecrm-0800'>domain.</span></p><!-- l. 810 --><p class='indent'> <span class='footnote-mark'><a href='#fn26x0-bk' id='fn26x0'><sup class='textsuperscript'>26</sup></a></span><span class='ecrm-0800'>All transforms express a change of basis. When the basis are not orthogonal, the
+</span><span class='ecrm-0800'>domain.</span></p><!-- l. 812 --><p class='indent'> <span class='footnote-mark'><a href='#fn27x0-bk' id='fn27x0'><sup class='textsuperscript'>27</sup></a></span><span class='ecrm-0800'>All transforms express a change of basis. When the basis are not orthogonal, the
 </span><span class='ecrm-0800'>synthesis transform is not the transpose of the analysis transform. When the synthesis
 </span><span class='ecrm-0800'>filters are orthogonal to their corresponding “</span><span class='ecti-0800'>dual</span><span class='ecrm-0800'>” analysis filters, the transform is said
 </span><span class='ecrm-0800'>biorthogonal. </span><span class='cite'><span class='ecrm-0800'>[</span><a href='#Xvetterli2014foundations'><span class='ecrm-0800'>11</span></a><span class='ecrm-0800'>]</span></span></p>
-<!-- l. 832 --><p class='indent'>     <span class='footnote-mark'><a href='#fn27x0-bk' id='fn27x0'><sup class='textsuperscript'>27</sup></a></span><span class='ecrm-0800'>Remember that if the QSS is higher, the quantization error is also higher. Therefore,
+<!-- l. 834 --><p class='indent'>     <span class='footnote-mark'><a href='#fn28x0-bk' id='fn28x0'><sup class='textsuperscript'>28</sup></a></span><span class='ecrm-0800'>Remember that if the QSS is higher, the quantization error is also higher. Therefore,
 </span><span class='ecrm-0800'>those subbands with a higher amplification in the inverse transform should be quantized
 </span><span class='ecrm-0800'>less.</span></p>                                                                                                                    </div>
                                                                   
