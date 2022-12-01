@@ -20,7 +20,7 @@ to consider about the
   throughput}\footnote{Measured in bits per second or a $10$-multiple
   of this transmission
   \href{https://en.wikipedia.org/wiki/Bandwidth_(computing)}{capacity}.}
-that it can provide~\cite{Forouzan,Tanenbaum}. This bit-rate depend on
+that it can provide~\cite{Forouzan,Tanenbaum}. This bit-rate depends on
 the maximum
 \href{https://en.wikipedia.org/wiki/Channel_capacity}{capacity} (a
 characteristic closely related with the available
@@ -296,8 +296,8 @@ definition, and this does not depend on the bit-rate control.} There
   \begin{equation}
     \left\{
     \begin{array}{ll}
-      \Delta = 2\Delta & \quad\text{if}~L>1 \\
-      \Delta = \frac{1}{2}\Delta & \quad\text{otherwise}.
+      \Delta = 2\Delta & \quad\text{if}~L>2 \\
+      \Delta = \frac{10}{11}\Delta & \quad\text{always}.
     \end{array}
     \right.
   \end{equation}
@@ -425,7 +425,7 @@ such link (locally) with:
 
 \begin{lstlisting}{language=bash}
   sudo tc qdisc add dev lo root handle 1: tbf rate <bit-rate_in_kbps>kbit burst 32kbit limit 32kbit
-  sudo tc qdisc add dev lo root parent 1:1 handle 10: netem delay <average_delay_in_miliseconds>ms <maximum_average_deviation_in_miliseconds>ms <Pearson_correlation_coefficient_expressed_as_a_percentage>% distribution <uniform|normal|pareto|paretonormal>
+  sudo tc qdisc add dev lo parent 1:1 handle 10: netem delay <average_delay_in_miliseconds>ms <maximum_average_deviation_in_miliseconds>ms <Pearson_correlation_coefficient_expressed_as_a_percentage>% distribution <uniform|normal|pareto|paretonormal>
 \end{lstlisting}
 
 Examples:
