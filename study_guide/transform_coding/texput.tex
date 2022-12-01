@@ -666,7 +666,7 @@ DWT using the MST filters and lifting.
 
 \item Lifting is based on the concept of dyadic
   \href{https://en.wikipedia.org/wiki/Multiresolution_analysis}{multiresolution
-    analysis}, and also with the so called
+    analysis}, and also related to the so called
   \href{https://en.wikipedia.org/wiki/Polyphase_matrix}{polyphase
     representation} of signals. In order to do that, we can rewrite
   the MST filter equations (our ${\mathbf K}_0$ and $-{\mathbf K}_1$
@@ -683,9 +683,9 @@ DWT using the MST filters and lifting.
   $2^n=N$ the number of samples in ${\mathbf x}$, and where, by
   definition, ${\mathbf l}^0={\mathbf x}$, the original resolution
   level of the signal. The subbands ${\mathbf l}^1$ and
-  ${\mathbf h}^1$ computed by Eq.~\eqref{eq:1dwt} are the same than the
-  decimated subbands computed by a 1-levels PRFB (based on that
-  filters), and we say, therefore, that Eq.~\eqref{eq:1dwt} computes the
+  ${\mathbf h}^1$ computed by Eq.~\eqref{eq:1dwt} are the same than
+  the decimated subbands computed by the corresponding 1-levels PRFB,
+  and we say, therefore, that Eq.~\eqref{eq:1dwt} computes the
   1-levels DWT.
 
   Based on the 1-levels DWT, we define the 2-levels DWT as
@@ -825,7 +825,7 @@ This linear transform is also invertible by simply reversing the steps:
 
 \subsubsection{Quantization of the DWT subbands}
 
-The QSSe to be used in the different subbands of a (orthogonal)
+The QSSs to be used in the different subbands of a (orthogonal)
 decomposition should be inversely\footnote{Remember that if the QSS is
   higher, the quantization error is also higher. Therefore, those
   subbands with a higher amplification in the inverse transform should

@@ -19,7 +19,7 @@
 
 <h2 class='titleHead'><a href='https://en.wikipedia.org/wiki/Transform_coding'>Transform Coding</a> for <a href='https://en.wikipedia.org/wiki/Data_redundancy'>Redundancy</a> Removal</h2>
  <div class='author'><a href='https://cms.ual.es/UAL/personas/persona.htm?id=515256515553484875'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>- </span><a href='https://cms.ual.es/UAL/universidad/departamentos/informatica/index.htm'><span class='ecrm-1200'>Depto Informática</span></a> <span class='ecrm-1200'>- </span><a href='https://www.ual.es'><span class='ecrm-1200'>UAL</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>November 18, 2022</span></div>
+<div class='date'><span class='ecrm-1200'>December 1, 2022</span></div>
    </div>
    <h3 class='likesectionHead'><a id='x1-1000'></a>Contents</h3>
    <div class='tableofcontents'>
@@ -249,7 +249,7 @@ to know how many filters should be used and what <a href='https://en.wikipedia.o
 have. At this design point, we must also consider that the accuracy of the
 <a href='https://en.wikipedia.org/wiki/Psychoacoustics'>humman perception of the sound</a> depends on the frequency: (as it can be
 checked<span class='footnote-mark'><a href='#fn20x0' id='fn20x0-bk'><sup class='textsuperscript'>20</sup></a></span><a id='x1-11002f20'></a>
-with the notebook <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/docs/tonal_generator.ipynb'>Tonal Generator</a>) we are more sensitive
+with the notebook <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/tools/tonal_generator.ipynb'>Tonal Generator</a>) we are more sensitive
 to frequency variations when the frequency of the sound is
 low<span class='footnote-mark'><a href='#fn21x0' id='fn21x0-bk'><sup class='textsuperscript'>21</sup></a></span><a id='x1-11003f21'></a>.
 This fact is related with the way in which the <a href='https://en.wikipedia.org/wiki/Critical_band'>critical bands</a> are distributed in <a href='https://en.wikipedia.org/wiki/Bark_scale'>the
@@ -325,15 +325,15 @@ MST filters and lifting.
                                                                   
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-14002x1'>
-     <!-- l. 667 --><p class='noindent'>Lifting is based on the concept of dyadic <a href='https://en.wikipedia.org/wiki/Multiresolution_analysis'>multiresolution analysis</a>, and also with
-     the so called <a href='https://en.wikipedia.org/wiki/Polyphase_matrix'>polyphase representation</a> of signals. In order to do that, we can
-     rewrite the MST filter equations (our \({\mathbf K}_0\) and \(-{\mathbf K}_1\) filters in the previous section) as
-     \begin {equation}  \begin {array}{rcl} {\mathbf l}^1_i &amp; = &amp; {\mathbf x}_{2i} + {\mathbf x}_{2i+1} \\ {\mathbf h}^1_i &amp; = &amp; {\mathbf x}_{2i+1} - {\mathbf x}_{2i}, \end {array} \label {eq:1dwt}  \end {equation}
+     <!-- l. 667 --><p class='noindent'>Lifting is based on the concept of dyadic <a href='https://en.wikipedia.org/wiki/Multiresolution_analysis'>multiresolution analysis</a>, and also
+     related to the so called <a href='https://en.wikipedia.org/wiki/Polyphase_matrix'>polyphase representation</a> of signals. In order to do that,
+     we can rewrite the MST filter equations (our \({\mathbf K}_0\) and \(-{\mathbf K}_1\) filters in the previous
+     section) as \begin {equation}  \begin {array}{rcl} {\mathbf l}^1_i &amp; = &amp; {\mathbf x}_{2i} + {\mathbf x}_{2i+1} \\ {\mathbf h}^1_i &amp; = &amp; {\mathbf x}_{2i+1} - {\mathbf x}_{2i}, \end {array} \label {eq:1dwt}  \end {equation}
      where the \(l\)-th subband \({\mathbf z}^l=\{{\mathbf z}_i^l~|~0\le i\le 2^{n-l}\}\), being \(2^n=N\) the number of samples in \(\mathbf x\), and where, by
      definition, \({\mathbf l}^0={\mathbf x}\), the original resolution level of the signal. The subbands \({\mathbf l}^1\) and \({\mathbf h}^1\)
      computed by Eq. \eqref{eq:1dwt} are the same than the decimated subbands
-     computed by a 1-levels PRFB (based on that filters), and we say, therefore,
-     that Eq. \eqref{eq:1dwt} computes the 1-levels DWT.
+     computed by the corresponding 1-levels PRFB, and we say, therefore, that
+     Eq. \eqref{eq:1dwt} computes the 1-levels DWT.
      </p><!-- l. 691 --><p class='noindent'>Based on the 1-levels DWT, we define the 2-levels DWT as \begin {equation}  \begin {array}{rcl} {\mathbf l}^2_i &amp; = &amp; {\mathbf l}^1_{2i} + {\mathbf l}^1_{2i+1} \\ {\mathbf h}^2_i &amp; = &amp; {\mathbf l}^1_{2i+1} - {\mathbf l}^1_{2i}, \end {array} \label {eq:2dwt}  \end {equation}
      that, as we can see, uses as input the output of Eq. \eqref{eq:1dwt}.
      </p><!-- l. 701 --><p class='noindent'>In general, for a \(l\)-levels DWT, we get \begin {equation}  \begin {array}{rcl} {\mathbf l}^l_i &amp; = &amp; {\mathbf l}^{l-1}_{2i} + {\mathbf l}^{l-1}_{2i+1} \\ {\mathbf h}^l_i &amp; = &amp; {\mathbf l}^{l-1}_{2i+1} - {\mathbf l}^{l-1}_{2i}. \end {array} \label {eq:ldwt}  \end {equation}
@@ -391,7 +391,7 @@ of the PRFB are biorthogonal, they also satisfy that \(\psi \bot \tilde \phi \) 
 </p><!-- l. 826 --><p class='noindent'>
 </p>
    <h5 class='subsubsectionHead'><span class='titlemark'>1.2.9   </span> <a id='x1-170001.2.9'></a>Quantization of the DWT subbands</h5>
-<!-- l. 828 --><p class='noindent'>The QSSe to be used in the different subbands of a (orthogonal) decomposition should be
+<!-- l. 828 --><p class='noindent'>The QSSs to be used in the different subbands of a (orthogonal) decomposition should be
 inversely<span class='footnote-mark'><a href='#fn27x0' id='fn27x0-bk'><sup class='textsuperscript'>27</sup></a></span><a id='x1-17001f27'></a>
                                                                   
 
@@ -403,7 +403,7 @@ don’t know the taps, we can use the algorithm described in the Section <a hre
 the gain of the subbands.
 </p><!-- l. 840 --><p class='indent'>   Finally, notice that if the transform in orthonormal, by definition, the
 gain of the analysis and synthesis filters is always 1, and also this is the
-gain of the subbands. In the notebook <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/docs/DWT_RD.ipynb'>A RD-comparison of DWTs</a> there
+gain of the subbands. In the notebook <a href='https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/study_guide/transform_coding/DWT_RD.ipynb'>A RD-comparison of DWTs</a> there
 is more information about the QSS that can be used in the quantization
 process.
 </p><!-- l. 851 --><p class='noindent'>
@@ -507,7 +507,7 @@ frames of chunk \({\mathbf C}_{i-1}\), and \({\mathbf C}_{i+1}[:o]\) the first \
 
                                                                   
    </figure>
-<!-- l. 948 --><p class='indent'>   This idea has been implemented in the notebook <a href='https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/overlapped_DWT_I.ipynb'>Overlapped DWT</a>, and the
+<!-- l. 948 --><p class='indent'>   This idea has been implemented in the notebook <a href='https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/study_guide/transform_coding/overlapped_DWT_I.ipynb'>Overlapped DWT</a>, and the
 result can be seen in the Fig. <a href='#x1-18001r3'>3<!-- tex4ht:ref: fig:3_chunks  --></a>.
 </p>
    <h4 class='subsectionHead'><span class='titlemark'>1.4   </span> <a id='x1-210001.4'></a>Reducing the data overhead</h4>
