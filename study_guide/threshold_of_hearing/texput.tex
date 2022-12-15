@@ -64,7 +64,7 @@ subband and the ToH curve (see
   InterCom: a Real-Time Digital Audio Full-Duplex
   Transmitter/Receiver}), the QSS (Quantization Step Size) that should
 be applied to each subband. This idea has been implemented in the
-module \verb|threshold.py|.
+module \verb|basic_ToH.py|.
 
 \section{A higher frequency-resolution approach}
 \label{sec:FFT}
@@ -97,7 +97,7 @@ The ToH plotted in the Fig.~\ref{fig:ToHH} can be
 different to the curve which corresponds with your current ``hearing
 capabilities''.\footnote{For example, your speakers could not have a
   flat frequency response, or your room could attenuate more, some
-  freqencies.} For this reason, in the module \verb|threshold.py|,
+  freqencies.} For this reason, in the module \verb|advanced_ToH.py|,
 implement a procedure for determining the QSSs used in
 each Fourier subband\footnote{Remember that when the
   \href{https://en.wikipedia.org/wiki/Wavelet_transform}{Wavalet
@@ -179,7 +179,7 @@ Implement the functionality described in Sections~\ref{sec:FFT} and
 
 \section{Deliverables}
 
-The improved module \verb|threshold.py| and a report of how your proposal works,
+The improved module \verb|advanced_ToH.py| and a report of how your proposal works,
 including a subjective performance comparison.
 
 \section{Resources}

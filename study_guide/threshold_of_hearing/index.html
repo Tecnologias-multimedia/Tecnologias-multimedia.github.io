@@ -20,7 +20,7 @@
 <h2 class='titleHead'>Perceptual Coding Considering the Threshold of
 Hearing</h2>
  <div class='author'><span class='ecrm-1200'>Vicente González Ruiz</span></div><br />
-<div class='date'><span class='ecrm-1200'>December 5, 2022</span></div>
+<div class='date'><span class='ecrm-1200'>December 15, 2022</span></div>
    </div>
    <h3 class='sectionHead'><span class='titlemark'>1   </span> <a id='x1-10001'></a>Description</h3>
 <!-- l. 9 --><p class='noindent'>
@@ -64,7 +64,7 @@ that \begin {equation}  W({\mathbf l}^{N_{\text {levels}}}) = W({\mathbf h}^{N_{
 and the ToH curve (see <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/docs/2-hours_seminar.ipynb'>InterCom: a Real-Time Digital Audio Full-Duplex
 Transmitter/Receiver</a>), the QSS (Quantization Step Size) that should be
 applied to each subband. This idea has been implemented in the module
-<span class='obeylines-h'><span class='verb'><span class='ectt-1000'>threshold.py</span></span></span>.
+<span class='obeylines-h'><span class='verb'><span class='ectt-1000'>basic_ToH.py</span></span></span>.
 </p><!-- l. 69 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>2   </span> <a id='x1-40002'></a>A higher frequency-resolution approach</h3>
@@ -88,7 +88,7 @@ technique</a>) should be used to minimize the <a href='https://en.wikipedia.org/
                                                                   
 
                                                                   
-For this reason, in the module <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>threshold.py</span></span></span>, implement
+For this reason, in the module <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>advanced_ToH.py</span></span></span>, implement
 a procedure for determining the QSSs used in each Fourier
 subband<span class='footnote-mark'><a href='#fn2x0' id='fn2x0-bk'><sup class='textsuperscript'>2</sup></a></span><a id='x1-5002f2'></a>.
 </p><!-- l. 115 --><p class='indent'>   To find out such QSSs, we can simulate <a href='https://en.wikipedia.org/wiki/Quantization_(signal_processing)'>quantization noise</a> in each FFT subband
@@ -131,7 +131,7 @@ InterCom (the “standard” ToH, see Fig. <a href='#x1-2001r1'>1<!-- tex4ht:re
 </p><!-- l. 180 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>5   </span> <a id='x1-70005'></a>Deliverables</h3>
-<!-- l. 182 --><p class='noindent'>The improved module <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>threshold.py</span></span></span> and a report of how your proposal works,
+<!-- l. 182 --><p class='noindent'>The improved module <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>advanced_ToH.py</span></span></span> and a report of how your proposal works,
 including a subjective performance comparison.
 </p><!-- l. 185 --><p class='noindent'>
 </p>
