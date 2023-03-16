@@ -14,11 +14,13 @@ InterCom is an application that captures and plays audio, and therefore, in Linu
   (in the case of Xubuntu, this is the audio server that comes with
   Xfce).
 \item \href{https://vicente-gonzalez-ruiz.github.io/JACK/}{JACK}.
+\item \href{https://pipewire.org/}{Pipewire}.
 \end{enumerate}
 
-InterCom uses
+To abstract InterCom from the available audio resources, InterCom uses
 \href{https://vicente-gonzalez-ruiz.github.io/intro_to_sounddevice/}{sounddevice}
-to capture and play the audio. Using sounddevice we have two alternatives for implementing an intercom.
+to capture and play the audio. Using sounddevice we have two
+alternatives for implementation:
 
 \subsection{Loop-based algorithm}
 
@@ -127,8 +129,8 @@ as you can see running \verb|wire4.py|, in most of the iterations are
 size is variable. However, the real problem appears when our computer
 is not able to satisfy the second requirement, i.e., when the chunk
 time is smaller than the time that we need to process the chunks. This
-only can be addressed through optimizing (for example, parallelizing)
-the code.
+only can be addressed through code optimization, for example,
+parallelizing.
 
 \subsection{Timer-based algorithm}
 
@@ -170,6 +172,7 @@ one, except that the chunk size is fixed.
 
 The current implementation of InterCom uses the Timer-based algorithm.
 
+\begin{comment}
 \section{What do you have to do?}
 
 \begin{enumerate}
@@ -196,6 +199,7 @@ The current implementation of InterCom uses the Timer-based algorithm.
     sufficient distance.
   \end{enumerate}
 \end{enumerate}
+\end{comment}
 
 \section{Resources}
 
