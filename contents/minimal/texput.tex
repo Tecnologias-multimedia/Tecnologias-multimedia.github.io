@@ -19,12 +19,12 @@ InterCom is an application that captures and plays audio, and therefore, in Linu
 
 To abstract InterCom from the available audio resources, InterCom uses
 \href{https://vicente-gonzalez-ruiz.github.io/intro_to_sounddevice/}{sounddevice}
-to capture and play the audio. Using sounddevice we have two
+to capture and play the audio. Using sounddevice, we have two
 alternatives for implementation:
 
 \subsection{Loop-based algorithm}
 
-Roughtly, InterCom can be divided in 6 steps:
+Roughtly, InterCom can be divided into 6 steps:
 
 \begin{lstlisting}[language=Python,numbers=left]
   # Loop-based algorithm (to be called in a loop)
@@ -50,13 +50,13 @@ Roughtly, InterCom can be divided in 6 steps:
 %  \ENDPROCEDURE
 %\end{pseudocode}
 
-Where:
+where:
 
 \begin{enumerate}
-\item The \verb|record()| method captures a chunk of frames. In
+\item The \verb|record()| method captures a chunk (a fragment) of frames. In
   \verb|sounddevice|, this operation is carried on by the
   \href{https://python-sounddevice.readthedocs.io/en/0.4.0/api/streams.html#sounddevice.Stream.read}{\texttt{read()}
-    method}. As it can be seen in
+    method}. As can be seen in
   \href{https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire4.py}{wire4.py}\footnote{
     \texttt{curl
       https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire4.py
@@ -64,7 +64,7 @@ Where:
   \verb|sounddevice|, if we read only the frames that are available in
   the ADC's buffer, this generates a non-blocking operation and the
   chunk size depends on the instant of time in which this method is
-  called. Otherwise, if we especify a number of frames different to
+  called. Otherwise, if we specify a number of frames different to
   the number of available frames, the operation can\footnote{The
     reading will be blocking if the number of requested frames is
     larger than the number of available frames.} be
@@ -87,9 +87,9 @@ Where:
 
 \item \verb|send(packed_chunk)|, sends the packet to the
   InterCom's interlocutor. When datagrams are used, this step is
-  not blocking neither CPU-bounding (the CPU usage is very low), as
+  not blocking nor CPU-bounding (the CPU usage is very low), as
   long as the number of packets/second is small and the sizes of the
-  payloads are also small, as it is expected in InterCom.
+  payloads are also small, as is expected in InterCom.
 
 \item \verb|receive()|, waits (blocking the calling process) for an
   incoming packet, and therefore, this operation is IO-bound. However,
@@ -97,8 +97,8 @@ Where:
     API}s~\cite{python} offeer a
   \href{https://docs.python.org/3.8/library/socket.html#socket.socket.setblocking}{non-blocking
     option} where when a packet is not available in the kernel's
-  buffer associated to the corresponding socket, some kind of
-  exception is generated and, in this case, it is resposabability of
+  buffer associated with the corresponding socket, some kind of
+  exception is generated, and, in this case, it is resposabability of
   the programmer to generate an ``alternative'' chunk (in our case,
   for example, a chunk filled with zeros that will not produce any
   sound when it is played).
@@ -109,9 +109,9 @@ Where:
 
 \item \verb|play(chunk)| renders the chunk. In general, this is an
   I/O-bound blocking action. However, if \verb|play()| is called at
-  the same pace than \verb|record()|, and the record and play
-  parameters are exactely the same (as happens in our algorithm), the
-  playing of the chunk will return inmediately because the time that
+  the same pace as \verb | record() |, and the record and play
+  parameters are exactly the same (as happens in our algorithm), the
+  playing of the chunk will return immediately because the time that
   the \verb|play()| method needs to complete would exactly match the
   time that the \verb|record()| method requires (see
   \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/test/sounddevice/wire4.py}{wire4.py}).
@@ -120,17 +120,16 @@ Where:
 This algorithm works fine if the chunk size is controlled by
 \href{http://www.portaudio.com/}{PortAudio}~\cite{portaudio}
 (\verb|sounddevice|) and also, the run-time required by
-\verb|pack(chunk)| and \verb|unpack(packet)| operations is smaller
-than the chunk-time. Unfortunately, the first premise (that we can use
+the operations \verb | pack (chunk) | and \verb | unpack (packet) | is shorter than the chunk time. Unfortunately, the first premise (that we can use
 varying the chunk sizes) complicates slightly the implementation
-because we would work with chunks of constantly changing lenghts (that
+because we would work with chunks of constantly changing lengths (that
 as you can see running \verb|wire4.py|, in most of the iterations are
 0). This also complicates the control of the latency because the chunk
 size is variable. However, the real problem appears when our computer
 is not able to satisfy the second requirement, i.e., when the chunk
 time is smaller than the time that we need to process the chunks. This
-only can be addressed through code optimization, for example,
-parallelizing.
+can only be addressed through code optimization, for example,
+parallelization.
 
 \subsection{Timer-based algorithm}
 
@@ -143,7 +142,7 @@ when constant chunk sizes are used because the timer interruption
 coincides exactly with the instant of time in which the
 \verb|record()| and the \verb|play()| methods we are going to handle a
 chunk of audio of a known size, and therefore, without blocking. The following
-algorithm describes the new algorithm that is basically the previous
+algorithm describes the new algorithm, which is basically the previous
 one, except that the chunk size is fixed.
 
 \begin{lstlisting}[language=Python,numbers=left]
@@ -179,13 +178,13 @@ The current implementation of InterCom uses the Timer-based algorithm.
 
 \item Read the source code of
   \href{https://github.com/Tecnologias-multimedia/intercom/blob/master/src/minimal.py}{\texttt{minimal.py}}
-  and identify in the code the interruption handler that implements
+  and identify in the code the interrupt handler that implements
   the timer-based algorithm. Here you can find information about
   \href{https://github.com/vicente-gonzalez-ruiz/YAPT/blob/master/03-IO/networking/sockets.ipynb}{sockets}~\cite{YAPT} in Python.
   
-\item Evaluate the performance (quality of the sound) in different configurations:
+\item Evaluate the performance (quality of sound) in different configurations:
   \begin{enumerate}
-  \item When \verb|minimal.py| runs in the same computer. Can you
+  \item When \verb|minimal.py| runs on the same computer. Can you
     describe how the parameter \verb|FRAMES_PER_SECOND| is modified?
   \item When \verb|minimal.py| runs in different hosts. In this case,
     try that the computers do not belong to the same local
@@ -195,7 +194,7 @@ The current implementation of InterCom uses the Timer-based algorithm.
     \href{https://en.wikipedia.org/wiki/User_Datagram_Protocol}{UDP}~\cite{UDP}
     is used to transport the audio data. If you cannot use different
     local networks, create a WiFi zone using your mobile phone and try
-    to produce a loss of packets by separating the devices a
+    to produce a packet loss by separating the devices a
     sufficient distance.
   \end{enumerate}
 \end{enumerate}
