@@ -20,7 +20,7 @@ to consider about the
   throughput}\footnote{Measured in bits per second or a $10$-multiple
   of this transmission
   \href{https://en.wikipedia.org/wiki/Bandwidth_(computing)}{capacity}.}
-that it can provide~\cite{Forouzan,Tanenbaum}. This bit-rate depends on
+that it can provide~\cite{Forouzan,Tanenbaum}. This bit rate depends on
 the maximum
 \href{https://en.wikipedia.org/wiki/Channel_capacity}{capacity} (a
 characteristic closely related with the available
@@ -28,27 +28,27 @@ characteristic closely related with the available
 and the
 \href{https://en.wikipedia.org/wiki/Network_congestion}{congestion
   level} (that basically depends on the load) of the link. In general,
-we can suppose that the capacity is constant along the time (the
-bandwidth provided by the link does not vary with the time). On the
-contrary, the throughput is time-variying and quite unpredictable,
-because it depends on the congestion level that which in turn depdends
-on the behaviour of the network users.
+we can suppose that the capacity is constant over time (the
+bandwidth provided by the link does not vary with time). On the
+contrary, the throughput is time-variating and quite unpredictable,
+because it depends on the congestion level that, in turn, depends
+on the behavior of the network users.
 
-In this milestone we are going to measure the impact of the link
+In this milestone, we will measure the impact of the link
 throughput on the
 \href{https://en.wikipedia.org/wiki/Quality_of_experience}{QoE}\footnote{Follow
   the same rubric than in the case of the measurement of the impact of
   the latency.} provided by the current implementation of InterCom
 (\href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/buffer.py}{\texttt{buffer.py}}). Similarly
-to the procedure used for measuring the impact of the latency and the
+to the procedure used to measure the impact of latency and
 jitter, we will use
 \href{https://man7.org/linux/man-pages/man8/tc.8.html}{\texttt{tc}}~\cite{bert2012lartc}
 to control the amount of data that an InterCom instance will be
 allowed to send in a local environment, with the aim of simulating a
-real environment. Notice that this upper bound in the bit-rate will
-also affect to the loss of chunks because if the link capacity is
-smaller than the audio bit-rate (the throughput), sooner of later the
-link will discard those chunks that can not be buffered in the
+real environment. Notice that this upper bound in the bit rate will
+also affect the loss of chunks because if the link capacity is
+smaller than the audio bit rate (throughput), sooner or later the
+link will discard those chunks that cannot be buffered in the
 retransmission nodes (routers and switches)\footnote{Notice that, in
   this case, we would be at least contributing, if not causing, the
   link congestion.}.
@@ -56,9 +56,9 @@ retransmission nodes (routers and switches)\footnote{Notice that, in
 
 \subsection{Compressing the audio data with \href{https://zlib.net/}{zlib}}
 %{{{ ...
-To reduce the bit-rate, we need some way of compressing the data,
+To reduce the bit rate, we need some way of compressing the data, an
 action that also will reduce the throughput in InterCom. The
-\verb|pack()| and the \verb|unpack()| methods can compress and
+\verb|pack() | and \verb|unpack() | methods can compress and
 decompress, respectively, the chunks that are processed. To compress
 and decompress, we will use a free
 \href{https://en.wikipedia.org/wiki/Codec}{codec} named
@@ -77,7 +77,7 @@ on
 %\verb|unpack()|, respectively.
 
 In order to compare the performance of different alternatives, the
-avobe methods are implemented in the following modules, with a different
+avobe methods are implemented in the following modules, with different
 functionality:
 
 \begin{enumerate}
@@ -87,10 +87,10 @@ functionality:
 \item
   \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/DEFLATE\_serial.py}{\texttt{DEFLATE\_serial.py}}:
   Compress the chunk after concatenating the channels (see
-  Fig.~\ref{fig:reordering}). Notice that with this data-shuffling,
+  Fig.~\ref{fig:reordering}). Note that with this data-shuffling,
   the samples are not interleaved and the
   \href{https://en.wikipedia.org/wiki/Correlation}{correlation}
-  between consecutive bytes is slighly increased. This should also
+  between consecutive bytes is slightly increased. This should also
   increase the
   \href{https://en.wikipedia.org/wiki/Data_compression_ratio}{(data)
     compression ratio}.
@@ -118,27 +118,27 @@ functionality:
 \item
   \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/DEFLATE\_byteplanes3.py}{\texttt{DEFLATE\_byteplanes3.py}}:
   Similar to \verb|DEFLATE_byteplanes2.py| but considering three
-  byte-planes. This would enable the compression of
+  byte-planes. This would allow compression of
   \emph{coefficients}\footnote{Used in a future improvements of
-  intercom.} that require more than two bytes to be represented.
+  intercom.} that requires more than two bytes to be represented.
 \item
   \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/DEFLATE\_byteplanes4.py}{\texttt{DEFLATE\_byteplanes4.py}}:
-  Considers four byte-planes.
+  Consider four-byte planes.
 \item
   \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/DEFLATE_byteplanes2\_interlaced.py}{\texttt{DEFLATE\_byteplanes2\_interlaced.py}}:
   Similar to \verb|DEFLATE_byteplanes2.py| but using the raw chunks
   (without concatenating the channels).
 \end{enumerate}
 
-Finally, notice that the number of sent UDP packets (that now will be
-length-variying) remains constant respect to \verb|buffer.py|.
+Finally, notice that the number of UDP packets sent (which will now be
+variable in length) remains constant with respect to \verb|buffer.py|.
 %}}}
 
 \subsection{Quantization}
 %{{{
-At the hardware level, the samples of audio are usually represented
+At the hardware level, audio samples are usually represented
 using \href{https://en.wikipedia.org/wiki/Pulse-code_modulation}{Pulse
-  Code Modulation (PCM)}. In a PCM sample, the number of levels that
+  Code Modulation (PCM)}. In a PCM sample, the number of levels
 the signal can take depends on the
 \href{https://en.wikipedia.org/wiki/Audio_bit_depth}{number of
   bits/sample} (16 bits in our case).
@@ -150,7 +150,7 @@ Another key aspect to consider is that the processing that the
   perceptual redundancy}. One of these sources is the
 \href{https://en.wikipedia.org/wiki/Equal-loudness_contour}{finite
   number of different volumen levels that a human being can
-  recognize}~\cite{bosi2003intro}. In this milestone we will profit of
+  recognize}~\cite{bosi2003intro}. In this milestone, we will profit from
 that fact to decrease the transmission bit-rate by sacrificing
 quality. In most
 \href{https://en.wikipedia.org/wiki/Lossy_compression}{lossy
@@ -162,14 +162,14 @@ quality. In most
 discrete levels that a signal can
 take~\cite{sayood2017introduction}. \href{https://en.wikipedia.org/wiki/Vector_quantization}{Vector
   Quantization} (VQ) is similar, but is applied to tuples of samples
-at the same time~\cite{vetterli2014foundations}. SQ is used when the
-samples are decorrelated or althought are correlated, the
+at the same time~\cite{vetterli2014foundations}. SQ is used when
+samples are decorrelated or, although correlated,
 decorrelation will be exploited in a
 \href{https://en.wikipedia.org/wiki/Entropy_encoding}{entropy coding}
 stage (which in our case is DEFLATE), because the
 \href{https://en.wikipedia.org/wiki/Quantization_(signal_processing)#Rate%E2%80%93distortion_optimization}{coding
   efficiency} provided by VQ is marginal in this
-context~\cite{vetterli2014foundations}, and requires in general higher
+context~\cite{vetterli2014foundations}, and generally requires higher
 computational resources.
 
 Quantizers can also be classified into
@@ -205,8 +205,7 @@ is small and the noise is independent of its amplitude (which usually
 happens with
 \href{https://en.wikipedia.org/wiki/Noise_(electronics)}{electronic
   noise}), the SNR of the input signal has its lowest value precisely
-for those values close to 0. Therefore, the quantizer basically is
-going to change the electronic noise by quantization
+for those values close to 0. Therefore, the quantizer will basically change electronic noise by quantization
 noise\footnote{The error generated by the quantization stage.} (see
 this
 \href{https://github.com/vicente-gonzalez-ruiz/signal_quantization}{introduction
@@ -214,7 +213,7 @@ this
 \href{https://github.com/vicente-gonzalez-ruiz/scalar_quantization}{comparative
   between digital scalar quantizers}). Finally, although this is a
 feature that we are not going to exploit for now, dead-zone quantizers
-extracts bit-planes when the quantization steps sizes are powers of
+extract bit-planes when the quantization steps sizes are powers of
 two, allowing the design of progressive entropy encoding schemes, if
 required.
 
@@ -222,16 +221,15 @@ required.
 
 \subsection{(Bit-) Rate control and distortion}
 %{{{ 
-The number of representation levels used by a quantizer depends
-basically on the quantization step (size), typically denoted
-by $\Delta$. The higher the $\Delta$, the smaller the number of
-representation levels, and therefore, the higher the distortion
+The number of representation levels used by a quantizer is basically dependent on the quantization step (size), typically denoted
+by $\Delta$. The higher $\Delta$, the smaller the number of
+representation levels, and therefore the higher the distortion
 generated by the quantization error (see the previous notebooks), and
-the smaller the output bit-rate. This generates a
+the smaller the output bit rate. This generates a
 \href{https://en.wikipedia.org/wiki/Rate%E2%80%93distortion_theory}{rate/distortion}
   trade-off that is descriptive of all lossy compressors.
 
-The control of the bit-rate through the $\Delta$ values is a technique
+Controlling the bit rate through the values of $\Delta$ is a technique
 that can be used in real-time transmission systems to minimize the
 jitter and the loss of packets when
 \href{https://en.wikipedia.org/wiki/Network_congestion}{congestion}
@@ -239,12 +237,12 @@ occurs. However, notice that depending of the
 \href{https://en.wikipedia.org/wiki/Entropy_(information_theory)}{entropy}
 coding stage and the characteristics of the signal
 (\href{https://en.wikipedia.org/wiki/Variance}{variance}, entropy) may
-not exist a clear relationship between the $\Delta$ and the output
-bit-rate. This happens using DEFLATE.
+not exist a clear relationship between $\Delta$ and the output
+bit rate. This happens using DEFLATE.
 
-Notice also that any rate-control algorithm based on quantization has a
+Notice also that any rate control algorithm based on quantization has a
 characteristic RD (Rate/Distortion) curve, in which the X axis
-represents the (in the case of InterCom, received) bit-rate and the Y
+represents the (in the case of InterCom, received) bit rate, and the Y
 axis the distortion in the reconstruction (in the case of InterCom,
 the played audio sequence) obtained after the quantization. Some
 examples can be found
@@ -286,7 +284,7 @@ definition, and this does not depend on the bit-rate control.} There
   \end{equation}
   where $L$ is the number of lost (received) chunks in the previous
   second. Notice that this heuristic (and the following ones) supposes
-  that the interlocutor is lossing (on average) the same number of
+  that the interlocutor is losing (on average) the same number of
   chunks.
 \item \verb|BR_control_lost.py|: Every second runs:
   \begin{equation}
@@ -317,7 +315,7 @@ to
 two \href{https://datatracker.ietf.org/doc/html/rfc4113}{end-points}
 (of
 different \href{https://en.wikipedia.org/wiki/Host_(network)}{hosts})
-in the Internet. This proceduce implies that we must have access to
+in the Internet. This procedure implies that we must have access to
 both hosts to install and run this program, privileges that are not
 always available.
 
@@ -326,9 +324,9 @@ Alternatively, we can estimate the
 \href{https://github.com/torvalds/linux/blob/master/net/ipv4/ping.c}{\texttt{ping}}
 (see the
 \href{https://tecnologias-multimedia.github.io/study_guide/latency/}{previous
-  milestone}). At this point is important to realize that
+  milestone}). At this point, it is important to realize that
 \texttt{ping} has been designed to measure latencies, not bit-rates,
-and that for this reason, we will be able only to estimate
+and that, for this reason, we will only be able to estimate
 throughputs, rougtly.
 
 The transmission bitrate available between two directly reachable IP
@@ -354,28 +352,28 @@ ideally, and therefore $t_t=0$), we can consider that
   t_p \approx \frac{\text{RTT}_{\text{min}}}{2},
   \label{eq:tp}
 \end{equation}
-and that for measuring the $\text{RTT}$ in Eq.~\eqref{eq:tt}, we
-should use a payload as large as possible (ideally, a infinite number
-of bytes), in order to make $t_t$ a significative amount of time, ease
-to measure. Notice also that we should use the smallest RTT value of a
+and that to measure $\text{RTT}$ in Eq.~\eqref{eq:tt}, we
+should use a payload as large as possible (ideally, an infinite number
+of bytes), in order to make $t_t$ a significant amount of time, which is easy
+to measure. Note also that we should use the smallest RTT value of a
 \texttt{ping} session of measurements in the Eq.~\eqref{eq:tp} because
-the minimum link latency is a constant and the congestion of the link
+the minimum link latency is a constant, and the congestion of the link
 always increases it.
 
 Therefore, supposing that $t_p$ is constant and using the
-average\footnote{Remember that with the \texttt{ping} command we
+average\footnote{Remember that with the \texttt{ping} command, we
 iterate several times and the tool returns average values.}
-$\text{RTT}$ for transmitting $B$ bits ($B$ as large as possible), the
-bit-rate value $b$ determined by Eq.~\eqref{eq:b} can be considered as
+$\text{RTT}$ to transmit $B$ bits ($B$ as large as possible), the
+bit rate value $b$ determined by Eq.~\eqref{eq:b} can be considered as
 a good estimation for the link of the near future.
 
-So, for determining $b$ we must run the following steps:
+So, to determine $b$, we must perform the following steps:
 \begin{enumerate}
 \item Run \texttt{ping} using the smallest possible payload that
   provides RTTs values.\footnote{The minimal payload for a
     \texttt{ping} message can be 0, but depending on the
-    implementation of \texttt{ping} you may be forzed to use a larger
-    value.} Use it for computing $t_p$.
+    implementation of \texttt{ping} you may be able to use a larger
+    value.} Use it to calculate $t_p$.
   
 \item Run \texttt{ping} using the largest possible payload to achieve
   that the most part of the average RTT provided by \texttt{ping}
@@ -400,16 +398,16 @@ the InterCom is it supposed to be run) to the filter (possiblely, one
 of your home routers). A similar throughput estimation should be
 obtained considering only the slower part of the total link.
 
-(Optional) In order to gain experience with all this stuff, measure
-your bandwith (using your local host) with different \texttt{ping}
-servers, try to compute the link throughput:
+(Optional) To gain experience with all this stuff, measure
+your bandwidth (using your local host) with different \texttt{ping}
+servers and try to compute the link throughput:
 \begin{enumerate}
 \item In \href{https://en.wikipedia.org/wiki/Localhost}{\texttt{localhost}}.
-\item In \texttt{localhost}, limiting the bit-rate with \texttt{tc}.
+\item In \texttt{localhost}, we limit the bit rate to \texttt{tc}.
 \item Between two hosts in your
   \href{https://en.wikipedia.org/wiki/Local_area_network}{local
     network} (your host and your router, for example). Notice that in
-  this case, you should not obtain a bit-rate higher than the capacity
+  this case, you should not obtain a bit rate higher than the capacity
   of your
   \href{https://en.wikipedia.org/wiki/Network_interface_controller}{network
     adapter}.
@@ -420,8 +418,8 @@ servers, try to compute the link throughput:
 
 \subsection{Simulate the link}
 %{{{ 
-With the bit-rate value $b$ computed from the previous section, simulate
-such link (locally) with:
+With the bitrate value $b$ calculated from the previous section, simulate
+this link (locally) with:
 
 \begin{lstlisting}{language=bash}
   sudo tc qdisc add dev lo root handle 1: tbf rate <bit-rate_in_kbps>kbit burst 32kbit limit 32kbit
@@ -443,16 +441,16 @@ Examples:
     qdisc noqueue 0: root refcnt 2
   \end{lstlisting}
   
-\item Define the rule for the bit-rate control (example for $200$ kbps):
+\item Define the rule for bit-rate control (example for $200$ kbps):
   
   \begin{lstlisting}{language=bash}
     sudo tc qdisc add dev lo root handle 1: tbf rate 200kbit burst 32kbit limit 32kbit
   \end{lstlisting}
   
-\item Define the rule for the latency control
+\item Define the rule for latency control
   (example for $100$ ms, $10$ ms of jitter, and
   \href{https://wiki.linuxfoundation.org/networking/netem}{with the
-    next random transmission depending $25$\% on the last one}):
+    next random transmission depending on $25$\% on the last}):
   
   \begin{lstlisting}{language=bash}
     sudo tc qdisc add dev lo parent 1:1 handle 10: netem delay 100ms 10ms 25% distribution normal
@@ -473,7 +471,7 @@ Examples:
 
 \end{enumerate}
 
-Remember to delete the rules after their are unnecessary (example to delete the previous rules):
+Recall to delete the rules after they are unnecessary (example to delete the previous rules):
 
 \begin{lstlisting}{language=bash}
   sudo tc qdisc delete dev lo parent 1:1 handle 10: netem delay 100ms 10ms 25% distribution normal
@@ -485,22 +483,22 @@ Remember to delete the rules after their are unnecessary (example to delete the 
 %{{{ 
 Determine empirically which ordering of the chunk data is the most
 efficient from a lossless data compression point of view (the smaller
-the bit-rates, the higher the compression). Use the audio sequence you
+the bit rates, the higher the compression). Use the audio sequence you
 want. Some samples are stored in the \verb|data| directory of
-intercom.
+InterCom.
 %}}}
 
 \subsection{Compute RD (Rate/Distortion) curves}
 %{{{ 
 Considering the
 \href{https://en.wikipedia.org/wiki/Root-mean-square_deviation}{RMSE
-  (Root Mean Square Error)} as distortion measure between the sent and
+  (Root Mean Square Error)} as a distortion measure between the sent and
 the received audio signal (using only one instance of InterCom),
 generate the RD curve considering a set of different simulated
 transmission environments (use
 \href{https://man7.org/linux/man-pages/man8/tc.8.html}{tc}) of one
 audio sequence (remember that you can use one of the samples found in
-the \verb|data| directory of the InterCom's repo), for the four
+the \verb|data| directory of the InterCom repo), for the four
 implementations. Notice that you can use the
 \verb|--minimal_quantization_step| parameter to generate the different
 points of the RD curves.
@@ -514,4 +512,4 @@ A report documenting the experiments and the results.
 
 \section{Resources}
 
-\bibliography{networking,text-compression,JPEG2000,audio-coding,data-compression,signal-processing}
+\bibliography{networking,text_compression,JPEG2000,audio_coding,data_compression,signal_processing}
