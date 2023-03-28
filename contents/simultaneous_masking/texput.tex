@@ -1,6 +1,6 @@
 % Emacs, this is -*-latex-*-
 
-\input{../definitions}
+\input{../../definitions}
 \title{\TM{} - Study Guide - Milestone 15: Considering the simultaneous masking}
 
 \maketitle
@@ -10,12 +10,12 @@
 \subsection{Simultaneous masking}
 The HAS (Human Auditory System) has a finite frequency resolution,
 which basically means that two different tonal sounds with different
-amplitudes can be heared only as one (the louder one) when they are
-closed enought~\cite{bosi2003intro} (in frequency). When this happens,
+amplitudes can be heard only as one (the louder) when they are
+closed enough~\cite{bosi2003intro} (in frequency). When this happens,
 the DWT subband~\cite{vetterli1995wavelets} where the quiet sound is
-placed can be quantized more severly without perceiving that the
-quantization noise in such subband is higher (see the
-Figure~\ref{fig:SM}). Notice that, the higher the quantization step,
+placed can be quantized more severely without perceiving that the
+quantization noise in such subband is higher (see
+Figure~\ref{fig:SM}). Note that the higher the quantization step,
 the higher the compression ratio.
 
 \begin{figure}
@@ -27,8 +27,8 @@ the higher the compression ratio.
 
 Masking depends on:
 \begin{enumerate}
-\item The frequency of the maskee and the masker signals.
-\item Their overlaping over time.
+\item The frequency of the maskee and masker signals.
+\item Their overlap over time.
 \end{enumerate}
 
 How much quantization noise can be generated without it being audible?
@@ -41,17 +41,17 @@ inaudible in the presence of (is masked by) a louder signal (masker signal).
 \item Write a generator of vectors of quantization steps. The
   generator should analyze the energy of each DWT subband and decide,
   considering the simultaneous masking effect, the vector of
-  quantization steps (one for subband)..
+  quantization steps (one for the subband).
 \end{enumerate}
 
 \section{Deliverables}
 
-The module \verb|simultaneous_masking.py| (inheriting from
+The module \verb|simultaneous_masking.py| (inherited from
 \verb|threshold.py|). Store it at the
 \href{https://github.com/Tecnologias-multimedia/intercom}{root
-  directory} of your InterCom's repo.
+  directory} of your InterCom repo.
 
 \section{Resources}
 
-\bibliography{maths,data-compression,DWT,audio-coding}
+\bibliography{maths,data_compression,DWT,audio_coding}
 

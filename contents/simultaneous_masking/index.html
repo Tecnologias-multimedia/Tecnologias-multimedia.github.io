@@ -22,7 +22,7 @@ simultaneous masking</title>
 Milestone 15: Considering the simultaneous
 masking</h2>
  <div class='author'><span class='ecrm-1200'>Vicente González Ruiz</span></div><br />
-<div class='date'><span class='ecrm-1200'>November 14, 2022</span></div>
+<div class='date'><span class='ecrm-1200'>March 28, 2023</span></div>
    </div>
    <h3 class='sectionHead'><span class='titlemark'>1   </span> <a id='x1-10001'></a>Description</h3>
 <!-- l. 10 --><p class='noindent'>
@@ -30,11 +30,11 @@ masking</h2>
    <h4 class='subsectionHead'><span class='titlemark'>1.1   </span> <a id='x1-20001.1'></a>Simultaneous masking</h4>
 <!-- l. 11 --><p class='noindent'>The HAS (Human Auditory System) has a finite frequency resolution, which
 basically means that two different tonal sounds with different amplitudes can be
-heared only as one (the louder one) when they are closed enought <span class='cite'>[<a href='#Xbosi2003intro'>1</a>]</span> (in frequency).
-When this happens, the DWT subband <span class='cite'>[<a href='#Xvetterli1995wavelets'>2</a>]</span> where the quiet sound is placed can be
-quantized more severly without perceiving that the quantization noise in such
-subband is higher (see the Figure <a href='#x1-2001r1'>1<!-- tex4ht:ref: fig:SM  --></a>). Notice that, the higher the quantization step,
-the higher the compression ratio.
+heard only as one (the louder) when they are closed enough <span class='cite'>[<a href='#Xbosi2003intro'>1</a>]</span> (in frequency). When
+this happens, the DWT subband <span class='cite'>[<a href='#Xvetterli1995wavelets'>2</a>]</span> where the quiet sound is placed can be
+quantized more severely without perceiving that the quantization noise in such
+subband is higher (see Figure <a href='#x1-2001r1'>1<!-- tex4ht:ref: fig:SM  --></a>). Note that the higher the quantization step, the
+higher the compression ratio.
 </p>
    <figure class='figure'> 
 
@@ -53,21 +53,33 @@ the higher the compression ratio.
 
                                                                   
    </figure>
+<!-- l. 28 --><p class='indent'>   Masking depends on:
+     </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-2004x1'>The frequency of the maskee and masker signals.
+     </li>
+<li class='enumerate' id='x1-2006x2'>Their overlap over time.</li></ol>
+<!-- l. 34 --><p class='indent'>   How much quantization noise can be generated without it being audible?
+Psychoacoustics has the answer: A weaker signal (maskee signal) becomes inaudible
+in the presence of (is masked by) a louder signal (masker signal).
+</p>
    <h3 class='sectionHead'><span class='titlemark'>2   </span> <a id='x1-30002'></a>What you have to do?</h3>
-<!-- l. 30 --><p class='noindent'>
+<!-- l. 40 --><p class='noindent'>
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-3002x1'>Write a generator of vectors of quantization steps. The generator should
      analyze the energy of each DWT subband and decide, considering the
-     simultaneous  masking  effect,  the  vector  of  quantization  steps  (one  for
-     subband)..</li></ol>
-<!-- l. 37 --><p class='noindent'>
+     simultaneous masking effect, the vector of quantization steps (one for the
+     subband).</li></ol>
+<!-- l. 47 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>3   </span> <a id='x1-40003'></a>Deliverables</h3>
-<!-- l. 39 --><p class='noindent'>The module <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>simultaneous_masking.py</span></span></span> (inheriting from <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>threshold.py</span></span></span>). Store it at
-the <a href='https://github.com/Tecnologias-multimedia/intercom'>root directory</a> of your InterCom’s repo.
-</p><!-- l. 44 --><p class='noindent'>
+<!-- l. 49 --><p class='noindent'>The module <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>simultaneous_masking.py</span></span></span> (inherited from <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>threshold.py</span></span></span>). Store it at
+the <a href='https://github.com/Tecnologias-multimedia/intercom'>root directory</a> of your InterCom repo.
+</p><!-- l. 54 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>4   </span> <a id='x1-50004'></a>Resources</h3>
+                                                                  
+
+                                                                  
    <div class='thebibliography'>
    <p class='bibitem'><span class='biblabel'>
  [1]<span class='bibsp'>   </span></span><a id='Xbosi2003intro'></a>M. Bosi and R.E. Goldberd.  <a href='https://last.hit.bme.hu/download/vidtechlab/fcc/literature/audio/audio_coding_standards_book.pdf'><span class='ecti-1000'>Introduction to Digital Audio Coding and
