@@ -1,0 +1,79 @@
+<!DOCTYPE html> 
+<html lang='en-US' xml:lang='en-US'> 
+<head> <title>Echo Cancellation</title> 
+<meta charset='utf-8' /> 
+<meta content='TeX4ht (https://tug.org/tex4ht/)' name='generator' /> 
+<meta content='width=device-width,initial-scale=1' name='viewport' /> 
+<link href='index.css' rel='stylesheet' type='text/css' /> 
+<meta content='index.tex' name='src' /> 
+<script>window.MathJax = { tex: { tags: "ams", }, }; </script> 
+ <script async='async' id='MathJax-script' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js' type='text/javascript'></script>  
+</head><body>
+   <div class='maketitle'>
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+
+<h2 class='titleHead'>Echo Cancellation</h2>
+ <div class='author'><a href='https://cms.ual.es/UAL/personas/persona.htm?id=515256515553484875'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>- </span><a href='https://cms.ual.es/UAL/universidad/departamentos/informatica/index.htm'><span class='ecrm-1200'>Depto Informática</span></a> <span class='ecrm-1200'>- </span><a href='https://www.ual.es'><span class='ecrm-1200'>UAL</span></a></div><br />
+<div class='date'><span class='ecrm-1200'>March 28, 2023</span></div>
+   </div>
+   <h3 class='sectionHead'><span class='titlemark'>1   </span> <a id='x1-10001'></a>Description</h3>
+<!-- l. 10 --><p class='noindent'>One of the first problems we encounter when we use the <span class='ectt-1000'>buffer.py </span>version of
+InterCom is that if we don’t use headphones, the sound that comes out of our PC’s
+speaker reaches our microphone and some time later, that sound reaches our
+interlocutor in the form of an echo, which is reproduced by his speaker, which is
+captured again by his microphone, and so on, until generating a rather unpleasant
+feedback.
+</p><!-- l. 18 --><p class='indent'>   One way to minimize this problem is (apart from using headphones) to
+reduce as much as possible (as long as it is audible, of course) the gain of the
+amplifier that feeds our speaker. Unfortunately, this is not always possible,
+among other reasons, because if the volume is too low, we will not hear our
+interlocutor.
+</p><!-- l. 24 --><p class='indent'>   Another way is to subtract from the signal that our microphone picks up \(\mathbf m\), the
+signal that our speaker is reproducing \(\mathbf s\), resulting in an echo cancellation, and
+therefore, of the coupling that it generates. The key in this process is to find
+out:
+</p><!-- l. 30 --><p class='indent'>
+     </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-1002x1'>What delay \(d\) exists between the time the received signal \(\mathbf s\) is reproduced by
+     our speaker until the said signal is captured by our ADC? This time will
+     depend fundamentally on the distance between the speaker/s and the mic
+     of our PC, and we can assume that it is constant.
+     </li>
+                                                                  
+
+                                                                  
+<li class='enumerate' id='x1-1004x2'>What attenuation \(a\) should be applied to \(\mathbf s\) to achieve the elimination of the
+     sent signal.</li></ol>
+<!-- l. 41 --><p class='indent'>   If we have calculated \(d\) and \(a\) correctly, echo cancellation will occur after performing
+the operation \begin {equation}  {\mathbf c}_i = {\mathbf m}_i - a{\mathbf s}_{i+d},  \end {equation}
+where \(\{{\mathbf c}_i\}\) is the signal sent with the echo cancelled.
+</p><!-- l. 48 --><p class='indent'>   Since \(d\) depends exclusively on the physical configuration of our PC (assuming that
+there are no other sources of echo, such as walls), we can estimate its value before
+starting the conversation by locally generating a sound through our speaker that it is
+easy to locate in time after being digitized by our microphone, and measuring with a
+stopwatch the time that elapses from when the sound is reproduced until it is
+registered again.
+</p><!-- l. 56 --><p class='indent'>   To calculate \(a\) what we can do is check if, in the absence of local sound (only
+having the speaker as sound source), \({\mathbf c}={\mathbf 0}\), that is, if we have canceled the echo. If the
+energy of \(\mathbf c\) is not zero, then the value of \(a\) is too high or too low. So what we will do is
+increase \(a\) and see if the energy decreases, and if it doesn’t, then we will decrease \(a\).
+In general we will never cancel the echo completely, but we should always
+be able to find a value for \(a\) that minimizes the energy \(\mathbf c\) (as long as we are
+silent).
+</p><!-- l. 66 --><p class='noindent'>
+</p>
+   <h3 class='sectionHead'><span class='titlemark'>2   </span> <a id='x1-20002'></a>Deliverables</h3>
+<!-- l. 68 --><p class='noindent'>A Python module called <span class='ectt-1000'>cancel_echo.py </span>that inherits from <span class='ectt-1000'>buffer.py </span>and that
+implements the previously presented idea.
+</p><!-- l. 71 --><p class='noindent'>
+</p>
+   <h3 class='sectionHead'><span class='titlemark'>3   </span> <a id='x1-30003'></a>Resources</h3>
+<p><a id='Q1-1-4'></a></p>
+    
+</body> 
+</html>

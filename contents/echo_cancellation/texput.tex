@@ -1,18 +1,19 @@
 % Emacs, this is -*-latex-*-
 
-\title{Hidding the network jitter}
+\title{Echo Cancellation}
 
 \maketitle
 
 \section{Description}
 
 
-One of the first problems we encounter when we use the buffer.py
-version of InterCom is that if we don't use headphones, the sound that
-comes out of our PC's speaker reaches our microphone and some time
-later, that sound reaches our interlocutor in the form of an echo,
-which is reproduced by his speaker, which is captured again by his
-microphone, and so on, until generating a rather unpleasant feedback.
+One of the first problems we encounter when we use the
+\texttt{buffer.py} version of InterCom is that if we don't use
+headphones, the sound that comes out of our PC's speaker reaches our
+microphone and some time later, that sound reaches our interlocutor in
+the form of an echo, which is reproduced by his speaker, which is
+captured again by his microphone, and so on, until generating a rather
+unpleasant feedback.
 
 One way to minimize this problem is (apart from using headphones) to
 reduce as much as possible (as long as it is audible, of course) the
@@ -64,9 +65,8 @@ ${\mathbf c}$ (as long as we are silent).
 
 \section{Deliverables}
 
-A Python module called \texttt{cancel_echo.py} that inherits from
-\texttt{buffering.py} and that implements the previously presented
-idea.
+A Python module called \texttt{cancel\_echo.py} that inherits from
+\texttt{buffer.py} and that implements the previously presented idea.
 
 \section{Resources}
 
