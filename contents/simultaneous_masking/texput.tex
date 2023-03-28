@@ -11,12 +11,12 @@
 The HAS (Human Auditory System) has a finite frequency resolution,
 which basically means that two different tonal sounds with different
 amplitudes can be heared only as one (the louder one) when they are
-closed enought~\cite{bosi2003intro} (in frequency). When this happens, the DWT
-subband~\cite{vetterli1995wavelets} where the quiet sound is placed
-can be quantized more severly without perceiving that the quantization
-noise in such subband is higher (see the Figure~\ref{fig:SM}). Notice
-that, the higher the quantization step, the higher the compression
-ratio.
+closed enought~\cite{bosi2003intro} (in frequency). When this happens,
+the DWT subband~\cite{vetterli1995wavelets} where the quiet sound is
+placed can be quantized more severly without perceiving that the
+quantization noise in such subband is higher (see the
+Figure~\ref{fig:SM}). Notice that, the higher the quantization step,
+the higher the compression ratio.
 
 \begin{figure}
   \centering
@@ -24,6 +24,16 @@ ratio.
   \caption{Simultaneous masking. The threshold of hearing has been modified (increased) in the in the vicinity of the pure tone of 1 KHz.}
   \label{fig:SM}
 \end{figure}
+
+Masking depends on:
+\begin{enumerate}
+\item The frequency of the maskee and the masker signals.
+\item Their overlaping over time.
+\end{enumerate}
+
+How much quantization noise can be generated without it being audible?
+Psychoacoustics has the answer: A weaker signal (maskee signal) becomes
+inaudible in the presence of (is masked by) a louder signal (masker signal). 
 
 \section{What you have to do?}
 
