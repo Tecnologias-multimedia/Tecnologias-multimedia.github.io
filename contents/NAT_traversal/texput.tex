@@ -1,0 +1,63 @@
+% Emacs, this is -*-latex-*-
+
+\title{NAT Traversal}
+
+\maketitle
+
+\section{NAT-ing for what?}
+
+One of the main problems that applications that transmit data over the
+Internet must face is the use of NATs (Network Address Translators). A
+NAT is a network device that converts public end-points\footnote{An
+  end-point is a tuple made up of an IP address and a port.} to
+private end-points and vice versa. Due to this, the consumption rate
+of IPv4 addresses has dropped drastically and has meant that IPv6 is
+still not the dominant network communication protocol, as expected.
+
+The real reason for this is that only public servers really need a
+public IP address, and the vast majority of Internet users use private
+IP addresses on their local devices. This basically means that in each
+of the companies that do not offer IP services from their corporate
+network, and that in each of our homes, where we do not install public
+servers either, we are reusing the same range of private IP addresses
+over and over again.
+
+\section{Negative consequences}
+
+The main drawback of using NAT devices is that for two network
+applications, A and B, that use IP and run on two hosts belonging to
+two different private networks, with NAT-A and NAT-B respectively, to
+be able to communicate, it is necessary for A to know the end-point
+used in NAT-B for incoming traffic from NAT-A to B (through NAT-A),
+and obviously, B must know the end-point used in NAT-A for incoming
+traffic to A (from NAT-B).
+
+\section{NAT configuration}
+
+But how do we tell NAT-A to let traffic to A from NAT-B through, and
+vice versa? Well, there are basically 2 alternatives:
+
+\begin{enumerate}
+\item Open ports ``by hand'', in both NATs, to indicate the public
+  port open for incoming traffic to the process. For example, if A
+  runs on end-point 192.168.1.2:4000 and the open public port is 5000,
+  all UDP traffic arriving at port 5000 from the Internet should be
+  sent to end-point 192.168.1.2: 4000. Normally, to do this, it is
+  necessary to have access to the NAT as an administrator.
+
+\item Create the appropriate entries in the NAT tables so that
+  communication between A and B is possible. This should happen if
+  both A and B know the end-point of their interlocutor and send UDP
+  traffic from A to B and from B to A at the same time.
+\end{enumerate}
+  
+Obviously, the most transparent option for the user is the second.
+
+\section{Deliverables}
+
+A Python module called \texttt{NAT\_traversal.py} that inherits from
+\texttt{buffer.py} and that implements the previously presented idea.
+
+\section{Resources}
+
+\bibliography{networking,nat}
