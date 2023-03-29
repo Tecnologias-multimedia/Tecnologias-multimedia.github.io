@@ -34,7 +34,7 @@ we can use the \href{https://en.wikipedia.org/wiki/Linear_map}{linear
 {\mathbf x},
   \label{eq:forward_transform_matrix_form}
 \end{equation}
-that can be also written as
+that can also be written as
 \begin{equation}
   \begin{bmatrix}
     {\mathbf w}_0 \\
@@ -75,14 +75,14 @@ The proposed matrix ${\mathbf K}$ corresponds to the transform used in
 \href{https://en.wikipedia.org/wiki/Hadamard_transform}{Discrete
   Walsh-Hadamard Transform}~\cite{sayood2017introduction}.
 
-In general (for all the linear transforms),
+In general (for all linear transforms),
 Eqs.~\eqref{eq:forward_transform_matrix_form} and
-\eqref{eq:forward_transform_matrix_form2} can be also expressed as
+\eqref{eq:forward_transform_matrix_form2} can also be expressed as
 \begin{equation}
   {\mathbf w}_u = \sum_i {\mathbf K}_{u,i}{\mathbf x}_i,
   \label{eq:forward_transform_linear_combination_form}
 \end{equation}
-where ${\mathbf K}_{u,i}$ denotes $i$-th element of the $u$-th row of
+where ${\mathbf K}_{u,i}$ denotes the $i$ -th element of the $u$-th row of
 the matrix ${\mathbf K}$.
 
 A major difference between the transformed data ${\mathbf w}$ and the
@@ -99,7 +99,7 @@ the values of ${\mathbf K}_1$ describe a
   filter}, and ${\mathbf K}$ represents the
 \href{https://en.wikipedia.org/wiki/Digital_filter}{filters} of a
 \href{https://en.wikipedia.org/wiki/Filter_bank}{filter bank (FB)} with two
-filters. This can be also seen in the notebook
+filters. This can also be seen in the notebook
 \href{https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/study_guide/transform_coding/stereo_transforms_RD.ipynb}{A RD-comparison of ``Stereo'' Transforms}.
 %}}}
 
@@ -111,14 +111,14 @@ The inverse (or synthesis) transform
   \label{eq:inverse_transform}
 \end{equation}
 can be deduced from Eq.~\eqref{eq:forward_transform_matrix_form}, where we
-get that
+get
 \begin{equation}
   \begin{array}{rcl}
   {\mathbf w}_0 & = & {\mathbf x}_0 + {\mathbf x}_1\\
   {\mathbf w}_1 & = & {\mathbf x}_0 - {\mathbf x}_1.
   \end{array}
 \end{equation}
-By solving ${\mathbf x}_0$ (adding) and ${\mathbf x}_1$ (substracting) in
+By solving ${\mathbf x}_0$ (adding) and ${\mathbf x}_1$ (subtracting) in
 these equations, we obtain that
 \begin{equation}
   \begin{array}{rcl}
@@ -148,7 +148,7 @@ Therefore,
 
 \subsubsection{Orthogonality of the transform}
 %{{{ 
-As can be seen (if we ignore the $\frac{1}{2}$ scale factor)
+As can be seen (if we ignore the $\frac{1}{2}$ scale factor),
 the inverse transform is the transpose of the forward transform
 (${\mathbf K}^{-1}={\mathbf K}^{\text T}$). This is a characteristic
 of all
@@ -158,7 +158,7 @@ specifically, it also holds that ${\mathbf K}^{\text T}={\mathbf K}$
 because ${\mathbf K}$ is
 \href{https://en.wikipedia.org/wiki/Symmetric_matrix}{symmetric}.
 
-Apart from checking that ${\mathbf K}^{-1}={\mathbf K}^{\text T}$,
+In addition to verifying that ${\mathbf K}^{-1}={\mathbf K}^{\text T}$,
 ${\mathbf K}$ is orthogonal if the
 \href{https://en.wikipedia.org/wiki/Inner_product_space}{inner
   product}\footnote{The inner product between two vectors is in some
@@ -222,8 +222,8 @@ Notice also that
 \end{equation}
 which basically means\footnote{Remember that for the MST a subband has
   only one coefficient. For other transforms, ${\mathbf w}_i$ can be
-  made up of more than one coefficient and therefore, we would be
-  speaking of the coefficients of the subband, instead of only one
+  made up of more than one coefficient and therefore we would be
+  speaking of the subband coefficients, instead of only one
   coefficient.} that ${\mathbf w}_i$ is proportional to the similarity
 between the input signal ${\mathbf x}$ and the
 \href{https://en.wikipedia.org/wiki/Finite_impulse_response}{taps} of
@@ -233,13 +233,13 @@ can help you with this key idea.
 
 Orthogonality is important in compression applications because the
 \href{https://en.wikipedia.org/wiki/Correlation_and_dependence}{statistical
-  correlation} between subbands is 0, and therefore, the contributions
+  correlation} between the subbands is 0, and therefore the contributions
 of the subbands to the reconstruction of the original signal are
 independent\footnote{The total
 \href{https://en.wikipedia.org/wiki/Distortion}{distortion} is the sum
 of the distortion contribution of each
 subband~\cite{sayood2017introduction}.}. Another interesting property
-satisfied by a lot of famous transforms (such as the
+satisfied by many famous transforms (such as the
 \href{https://en.wikipedia.org/wiki/Fourier_transform}{Fourier
   Transform}) is
 \href{https://en.wikipedia.org/wiki/Orthonormality}{orthonormality},
@@ -260,7 +260,7 @@ The MST is not orthonormal, because
   \label{eq:No_Parseval}
 \end{equation}
 For this reason, we must divide the synthesized samples by $2$ (see
-Eq.~\eqref{eq:inverse_transform_matrix_form}). On the contrary, we would
+Eq.~\eqref{eq:inverse_transform_matrix_form}). In contrast, we would
 get $2{\mathbf x}$ as the reconstructed signal instead of ${\mathbf x}$.
 %}}}
 
@@ -270,15 +270,15 @@ get $2{\mathbf x}$ as the reconstructed signal instead of ${\mathbf x}$.
 
 Ideally, the QSS (Quantization Step Size) $\Delta_i$ used for a
 subband ${\mathbf w}_i$ must operate in the RD curve $f_i$ with the
-same slope than the rest of
+same slope as the rest of the
 subbands~\cite{vetterli2014foundations,sayood2017introduction} (this
-is the same to say that we must satisfy that $f'_0(x)=f'_1(x)$, where
+is the same as saying that we must satisfy $f'_0(x)=f'_1(x)$, where
 $f'$ denotes the derivative of $f$). The main drawback of this
 approach is that the finding of $f_i$ is computationally intensive (we
-must analyze, quantize, compress, decompress, dequantize, synthesize
-and compute the distortion of the data for a enoughly high number of
+must analyze, quantize, compress, decompress, dequantize, synthesize,
+and compute the distortion of the data for a sufficiently high number of
 quantization steps), and usually we cannot do that in
-real-time.\footnote{Notice, however, that this would solve the problem
+real time.\footnote{Notice, however, that this would solve the problem
   of controlling the bit-rate because using the RD curves we know how
   many bits will require each subband.}
 
@@ -290,9 +290,9 @@ real-time.\footnote{Notice, however, that this would solve the problem
   similar to some the curves of previous pieces, that has already been
   compressed and transmitted, and therefore, we can compute also the
   distortion. Using this information, we can estimate a RD curve for
-  the current piece, and estimate the ``optimal'' QSSs. This procedure
-  is much faster than the described in the previous paragraph, but it
-  may still be time-consuming.
+  the current piece and estimate the ``optimal'' QSSs. This procedure
+  is much faster than the procedure described in the previous paragraph, but it
+  may still be time consuming.
 \end{comment}
 
 For this reason, in the notebook
@@ -305,8 +305,7 @@ should be proportional to the
 of each synthesis\footnote{Notice that the quantization error is
   generated in the transform domain and perceived in the signal domain
   after appliying the inverse transform.} filter of ${\mathbf K}^{-1}$
-(remember that we are working with orthogonal transforms and
-therefore, the contribution of the subbands are independent). Thus, if
+(recall that we work with orthogonal transforms and, therefore, the contributions of the subbands are independent). Thus, if
 the filters had different gains, the QSSs should consider this fact
 using a smaller QSS where the gain is higher.\footnote{Notice that the
   important here is the relative gain of each subband. For example, if
@@ -333,7 +332,7 @@ proportional to the
   form is equivalent to compute the
   \href{https://en.wikipedia.org/wiki/Euclidean_distance}{Euclidean
     distance} in $N$-dimensional (in our case, $N=2$)
-  \href{https://en.wikipedia.org/wiki/Vector_space}{spaces}.} (or
+  \href{https://en.wikipedia.org/wiki/Vector_space}{spaces}.} (or the
 ``squared'' norm) of the (analysis) filter ${\mathbf K}_i^{-1}$. Thus
 \begin{equation}
   \begin{array}{l}
@@ -341,22 +340,22 @@ proportional to the
     \left\| {\mathbf K}_1^{-1} \right\|_2 := \sqrt{\langle \begin{bmatrix} \frac{1}{2} & -\frac{1}{2} \end{bmatrix}, \begin{bmatrix} \frac{1}{2} & -\frac{1}{2} \end{bmatrix} \rangle} = \sqrt{\begin{bmatrix} \frac{1}{2} & -\frac{1}{2} \end{bmatrix}\cdot \begin{bmatrix} \frac{1}{2} & -\frac{1}{2} \end{bmatrix}} = \frac{1}{\sqrt{2}},
   \end{array}
 \end{equation}
-resulting that both subbands ${\mathbf w}_1$ and ${\mathbf w}_2$ have
-the same gain ($1/\sqrt{2}$). This result tell us that both subbands
+resulting in the fact that both subbands ${\mathbf w}_1$ and ${\mathbf w}_2$ have
+the same gain ($1/\sqrt{2}$). This result tells us that both subbands
 could use the same quantization step size ($\Delta_0=\Delta_1$). In
 the notebook
 \href{https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/study_guide/transform_coding/stereo_transforms_RD.ipynb}{A
-  RD-comparison of "Stereo" Transforms} there are some evidences of
+  RD-comparison of "Stereo" Transforms} there is some evidence of
 this.
 
-Unfortunately, most of the transform are not implemented using
+Unfortunately, most of the transforms are not implemented using
 matrix-vector operations, but using
 \href{https://en.wikipedia.org/wiki/Fast_Fourier_transform}{faster
   algorithms} based on a lattice of
 \href{https://en.wikipedia.org/wiki/Butterfly_diagram}{computational
   bufferflies} or filter
 \href{https://en.wikipedia.org/wiki/Filter_(signal_processing)}{convolutions}
-(and therefore, we don't know ${\mathbf K}$). Fortunately, we can
+(and therefore, we do not know ${\mathbf K}$). Fortunately, we can
 determine ${\mathbf K}_i^{-1}$ (and therefore, ${\mathbf K}$) by simply computing the inverse transform of
 the decomposition
 $\begin{bmatrix} 0 & \cdots & 0 & 1 & 0 & \cdots &
@@ -401,13 +400,11 @@ that
   \end{array}
 \end{equation}
 \begin{comment}
-that as you can see, correspond to the columns of the inverse
-transform matrix ${\mathbf K}^{-1}$. Notice that this is true for all
-the orthogonal transforms whose analysis and synthesis matrices are
-symmetrical.% because in that case ${\mathbf K}^{-1}={\mathbf K}^{\text T}$.
+that, as you can see, correspond to the columns of the inverse
+transform matrix ${\mathbf K}^{-1}$. Notice that this is true for all orthogonal transforms whose analysis and synthesis matrices are symmetric. % because in that case ${\mathbf K}^{-1}={\mathbf K}^{\text T}$.
 \end{comment}
 
-As a final remark, we could also consider that any alternative other than $\Delta_0=\Delta_1$ will affect to the spatial perception of the audio. The notebook \href{https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/study_guide/transform_coding/stereo_transforms_RD.ipynb}{A
+As a final remark, we could also consider that any alternative other than $\Delta_0=\Delta_1$ will affect the spatial perception of the audio. The notebook \href{https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/study_guide/transform_coding/stereo_transforms_RD.ipynb}{A
   RD-comparison of "Stereo" Transforms} gives more information about this.
 
 %}}}
@@ -420,21 +417,21 @@ As a final remark, we could also consider that any alternative other than $\Delt
 \subsubsection{About temporal redundancy in audio}
 %{{{
 
-After exploiting the spatial (stereo) redundancy, the next natural
+After exploiting spatial (stereo) redundancy, the next natural
 step in the development of InterCom is to remove the temporal
 redundancy that can be found inside of each subband\footnote{Notice
 that, beacuse the MST and the transform used in this milestone are
 both lineal, the order in which the transforms are applied is
 irrelevant. For this reason, we could also have used the temporal
 transform inside of each channel of samples, and then, remove the
-spatial redundancy.}. As it can be seen in the notebook
+spatial redundancy.}. As can be seen in the notebook
 \href{https://github.com/Tecnologias-multimedia/intercom/blob/master/tools/audio_viewer.ipynb}{Audio Viewer},
-most audio signals show ``patterns'' of samples that tends to repeat,
+most audio signals show ``patterns'' of samples that tend to repeat,
 especially locally. Another clear source of temporal redundancy is
-that the neighbor audio samples usually show similar amplitude values.
+that neighboring audio samples usually show similar amplitude values.
 
 % A decorrelating technique: DPCM
-There are several techniques that can be used for removing the
+There are several techniques that can be used to remove the
 temporal redundancy of a sequence of audio. One of the most
 straightforward is
 \href{https://en.wikipedia.org/wiki/Differential_pulse-code_modulation}{Differential
@@ -442,18 +439,18 @@ straightforward is
   (DPCM)~\cite{sayood2017introduction}}. However, there are more
 efficient decorrelation algorithms based on
 \href{https://en.wikipedia.org/wiki/Transform_coding}{Transform
-  Coding}, such as the described in the previous section and in this
+  Coding}, such as the one described in the previous section and in this
 one.
 
 % Another decorrelating technique: transform coding
-As it has been explained before, Transform Coding is based on the idea
+As has been explained before, Transform Coding is based on the idea
 that we can decompose the input signal into a set of subbands, and if
-the used filters are the adecuate ones for removing the (in this case,
+the filters used are the appropriate ones to remove the (in this case,
 temporal) redundancy, we can achieve a high Transform Coding
-Gain~\cite{sayood2017introduction}, accumulating the most part of the
+Gain~\cite{sayood2017introduction}, accumulating the most of the
 signal energy (and presumably most of the information) in a small
 number of subbands. When this happens, the quantization of the
-subbands will remove basically the least significant information
+subbands will basically remove the least significant information
 (usually
 \href{https://en.wikipedia.org/wiki/Noise_(electronics)}{electronic
   noise}), allowing better compression ratios than those in which we
@@ -500,11 +497,11 @@ $\phi={\mathbf K}^{-1}_0$, and $\psi={\mathbf K}^{-1}_1$).
 \end{figure}
 
 % An intro to PRFBs
-Let's suppose now that the analysis filters (represented by the taps
+Let us suppose now that the analysis filters (represented by the taps
 of) ${\mathbf K}_0$ and ${\mathbf K}_1$ are applied to the input
 signal ${\mathbf x}$ (now a sequence of $N$ samples) using a
 \href{https://en.wikipedia.org/wiki/Kernel_(image_processing)}{convolution}
-(without splitting $\mathbf{x}$ into blocks). Let's also suppose (as
+(without splitting $\mathbf{x}$ into blocks). Let us also suppose (as
 happens in the MST) that ${\mathbf K}_0$ is a low-pass filter and
 ${\mathbf K}_1$ is a high-pass filter, and that the
 \href{https://en.wikipedia.org/wiki/Filter_(signal_processing)}{frequency
@@ -534,7 +531,7 @@ subsampling is possible because the
 aliasing generated in the high-pass subband. To achieve this, the
 \href{https://en.wikipedia.org/wiki/Filter_(signal_processing)}{frequency
   response} of ${\mathbf K}_0$ must be equal to the mirrored frequency
-response of ${\mathbf K}_1$, and obviously, both filters must have the
+response of ${\mathbf K}_1$, and obviously both filters must have the
 same
 \href{https://en.wikipedia.org/wiki/Bandwidth_(signal_processing)}{bandwidth}~\cite{sayood2017introduction}. In
 this situation, in which ${\mathbf K}_1$ and ${\mathbf K}_2$ are
@@ -562,13 +559,13 @@ used and what
 should they have. At this design point, we must also consider that the
 accuracy of the
 \href{https://en.wikipedia.org/wiki/Psychoacoustics}{humman perception
-  of the sound} depends on the frequency: (as it can be
+  of the sound} depends on the frequency (as can be
 checked\footnote{You need to generate tonal sounds with different
   frequency and amplitudes.} with the notebook
 \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/tools/tonal_generator.ipynb}{Tonal
   Generator}) we are more sensitive to frequency variations when the
 frequency of the sound is low\footnote{And also, we are more sensitive
-  to low frequencies that to high ones.}. This fact is related with
+  to low frequencies that to high ones.}. This fact is related to
 the way in which the
 \href{https://en.wikipedia.org/wiki/Critical_band}{critical bands} are
 distributed in \href{https://en.wikipedia.org/wiki/Bark_scale}{the
@@ -580,8 +577,8 @@ distributed in \href{https://en.wikipedia.org/wiki/Bark_scale}{the
 %{{{
 
 % The bark scale and the DWT
-As it can be seen, the Bark Scale divides the audible spectrum into 24
-subband of (a priori) ``whimsical'' bandwidths. However, it's clear
+As can be seen, the Bark Scale divides the audible spectrum into 24
+subbands of (a priori) ``whimsical'' bandwidths. However, it is clear
 that a \href{https://en.wikipedia.org/wiki/Octave_band}{dyadic
   partition of the spectrum} fits better than
 \href{https://en.wikipedia.org/wiki/Wavelet_transform#Principle}{a
@@ -597,7 +594,7 @@ The DWT has also other interesting features:
   ($O(N)$, where $N$ is the number of ``transformed'' samples).
 \item It can represent efficienty
   \href{https://en.wikipedia.org/wiki/Transient_(oscillation)}{transient}
-  signals, which can happen frequently in audio.
+  signals, which can occur frequently in audio.
 \item Although we are not going to take advantage of the following
   characteristic (for now), one of the most interesting features of
   the DWT is that it can used to find a
@@ -627,7 +624,7 @@ The DWT can be implemented in different ways:
   and computing matrix-vector multiplications, which requires a
   calculation time proportional to $O(N^2)$. However, the main problem
   of this type of implementation is generated by the amount of memory
-  that ${\mathbf K}$ requires, that is proportional to $N^2$.
+  that ${\mathbf K}$ requires, which is proportional to $N^2$.
 
 \item
   \href{https://en.wikipedia.org/wiki/Discrete_wavelet_transform#Cascading_and_filter_banks}{Cascading
@@ -636,16 +633,16 @@ The DWT can be implemented in different ways:
   $O(N\log_2N)$ operation (if it is
   \href{https://en.wikipedia.org/wiki/Convolution_theorem}{implemented
     in the frequency domain}), and that the number of levels in the
-  cascade is generally small (5 for example), this implementation is
-  faster than the based in vector-matrix arithmetic. And most
-  importantly, we don't need to store ${\mathbf K}$, but only the taps
+  cascade is generally small (5, for example), this implementation is
+  faster than that based on vector-matrix arithmetic. And most
+  importantly, we do not need to store ${\mathbf K}$, but only the taps
   of the different filters that are used.\footnote{Notice that in a
     typical cascade, the filters are always the same. Therefore, we
     only need to store in memory only a copy of each different filter.}
 
 \item Using
   \href{https://en.wikipedia.org/wiki/Lifting_scheme}{lifting}~\cite{sweldens1997building},
-  which provides an extra speed-up factor of 2 compared to the FB
+  which provides an additional speed-up factor of 2 compared to the FB
   implementation. DWTs implemented with lifting do not need to
   downsample and upsample the subbands, an operation that is wasting
   the calculus of half of the coefficients at each level of the
@@ -659,7 +656,7 @@ The DWT can be implemented in different ways:
 %{{{
 
 % Using the MST filters for building a DWT
-In order to clarify the previously introduced concepts, let's build a
+In order to clarify the concepts introduced above, let us build a
 DWT using the MST filters and lifting.
 
 \begin{enumerate}
@@ -668,7 +665,7 @@ DWT using the MST filters and lifting.
   \href{https://en.wikipedia.org/wiki/Multiresolution_analysis}{multiresolution
     analysis}, and also related to the so called
   \href{https://en.wikipedia.org/wiki/Polyphase_matrix}{polyphase
-    representation} of signals. In order to do that, we can rewrite
+    representation} of signals. To do that, we can rewrite
   the MST filter equations (our ${\mathbf K}_0$ and $-{\mathbf K}_1$
   filters in the previous section) as
   \begin{equation}
@@ -688,7 +685,7 @@ DWT using the MST filters and lifting.
   and we say, therefore, that Eq.~\eqref{eq:1dwt} computes the
   1-levels DWT.
 
-  Based on the 1-levels DWT, we define the 2-levels DWT as
+  Based on the 1-level DWT, we define the 2-levels DWT as
   \begin{equation}
     \begin{array}{rcl}
       {\mathbf l}^2_i & = & {\mathbf l}^1_{2i} + {\mathbf l}^1_{2i+1} \\
@@ -707,7 +704,7 @@ DWT using the MST filters and lifting.
     \label{eq:ldwt}
   \end{equation}
 
-  The $l$-levels DWT splits the signal spectrum in $l+1$ subbands. If
+  The $l$-levels DWT splits the signal spectrum into $l+1$ subbands. If
   $l=n$ (where $N=2^n$), we have the spectrum partition
   \begin{equation*}
         | \mathbf{l}^l_0 | \mathbf{h}^l_0 | \mathbf{h}^{l-1}_0 \mathbf{h}^{l-1}_1 | \mathbf{h}^{l-2}_0 \mathbf{h}^{l-2}_1 \mathbf{h}^{l-2}_2 \mathbf{h}^{l-2}_3 | \cdots | \mathbf{h}^1_0 \mathbf{h}^1_1 \cdots \mathbf{h}^1_{2^{n-1}-1} |,
@@ -724,7 +721,7 @@ DWT using the MST filters and lifting.
 \item DWT performs a number of lifting steps, each one with
   2 (sub)steps:
   \begin{enumerate}
-  \item A \textbf{predict step}, that computes the ${\mathbf h}$
+  \item A \textbf{predict step}, which computes the ${\mathbf h}$
     subbands as a prediction error (that in general should be
     minimized) between the even samples (usually, the values used to
     predict) and the odd samples (usually, the values predicted). For
@@ -756,19 +753,19 @@ DWT using the MST filters and lifting.
 \subsubsection{Wavelets and filter banks}
 %{{{
 
-In the context of the wavelet theory~\cite{burrus2013wavelets}, the
-response of the analysis low-pass filter (${\mathbf K}_0$ in the MST)
+In the context of wavelet theory~\cite{burrus2013wavelets}, the
+response of the low-pass analysis filter (${\mathbf K}_0$ in MST)
 to the
 \href{https://en.wikipedia.org/?title=Unit_impulse&redirect=no}{unit
   impulse}\footnote{The response of a filter to the unit impulse
 characterize the filter because the output of the filter is the set of
-taps of the filter.} is known as the \emph{scaling function} and is
+taps of the filter.} is known as \emph{scaling function} and is
 usually denoted by $\tilde\phi$, the response of the analysis
 high-pass filter (${\mathbf K}_1$) is known as the \emph{wavelet
 function} and it is usually denoted by $\tilde\psi$, the response of
-the synthesis low-pass filter (${\mathbf K}^{-1}_0$) is denoted by
+the low-pass filter synthesis (${\mathbf K}^{-1}_0$) is indicated by
 $\phi$ and the synthesis high-pass filter (${\mathbf K}^{-1}_1$) is
-represented by $\psi$, that are the dual scaling and wavelet functions.
+represented by $\psi$, which are the dual scaling and wavelet functions.
 
 For the MST it holds that $\tilde\phi\bot\tilde\psi$, $\tilde\phi$ is
 equal to the mirror\footnote{In the $Z$-domain, it holds that
@@ -791,8 +788,8 @@ orthogonal DWTs is that the filters cannot be
 
 The previous MST-based DWT is similar to other transforms such as the
 \href{https://en.wikipedia.org/wiki/Haar_wavelet}{Haar transform}, in
-which we are using an 1-order predictor for removing the temporal
-redundancy. Let's extend the idea of lifting to a prediction of order
+which we use a 1-order predictor to remove temporal
+redundancy. Let us extend the idea of lifting to a prediction of order
 two. For that, we define the predict step as
 \begin{equation}
   {\mathbf h}^l_i = {\mathbf l}^{l-1}_{2i+1} - \frac{1}{2}({\mathbf l}^{l-1}_{2i} + {\mathbf l}^{l-1}_{2i+2})
@@ -811,8 +808,8 @@ energy~\cite{sweldens1997building}. This transform is known as the
   their corresponding ``\emph{dual}'' analysis filters, the transform is
   said biorthogonal.~\cite{vetterli2014foundations}} filters can be
 \href{http://wavelets.pybytes.com/}{easely recognized} because they
-are always symmetric. When the filters of the PRFB are biorthogonal,
-they also satisfy that $\psi\bot\tilde\phi$ and
+are always symmetric. When the PRFB filters are biorthogonal,
+they also satisfy $\psi\bot\tilde\phi$ and
 $\phi\bot\tilde\psi$.
 
 This linear transform is also invertible by simply reversing the steps:
@@ -830,35 +827,33 @@ This linear transform is also invertible by simply reversing the steps:
 The QSSs to be used in the different subbands of a (orthogonal)
 decomposition should be inversely\footnote{Remember that if the QSS is
   higher, the quantization error is also higher. Therefore, those
-  subbands with a higher amplification in the inverse transform should
+  subbands with higher amplification in the inverse transform should
   be quantized less.} proportional the gain of the synthesis
-filters. The gain of a filter correspond to the L$^2$ norm of its
+filters. The gain of a filter corresponds to the L$^2$ norm of its
 taps, and the final gain applied to a subband depends logically on the
 number of times that we have applied the filter in the cascade. Notice
-that, if we don't know the taps, we can use the algorithm described in
-the Section~\ref{sec:quantization_subbands_spatial} to find the gain
+that if we do not know the taps, we can use the algorithm described in Section~\ref{sec:quantization_subbands_spatial} to find the gain
 of the subbands.
 
-Finally, notice that if the transform in orthonormal, by definition,
-the gain of the analysis and synthesis filters is always 1, and also
-this is the gain of the subbands. In the notebook
+Finally, notice that if the transform is orthonormal, by definition,
+the gain of the analysis and synthesis filters is always 1, and this is also the gain of the subbands. In the notebook
 \href{https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/study_guide/transform_coding/DWT_RD.ipynb}{A
-  RD-comparison of DWTs} there is more information about the QSS that
+  RD-comparison of DWTs} there is more information on QSS that
 can be used in the quantization process.
 
 %}}}
 
 %{{{
 
-\subsection{\href{https://en.wikipedia.org/wiki/Lapped_transform}{Overlapped block transforms} for minimizing the distortion}
+\subsection{\href{https://en.wikipedia.org/wiki/Lapped_transform}{Overlapped block transforms} to minimize distortion}
 %{{{
 
-Transform Coding implies to split the signal into blocks of data
-(chunks), and to compute the transform of each chunk. When the output
-coefficients are quantized, it is possible that significative (and
+Transform Coding implies splitting the signal into blocks of data
+(chunks) and computing the transform of each chunk. When the output
+coefficients are quantized, it is possible that significant (and
 unpleasant) distortions may appear in the border frames of the chunks
-(see Fig.~\ref{fig:3_chunks}). This is a consequence that in the
-prediction step used by the DWT in the limits of the chunks generate
+(see Fig.~\ref{fig:3_chunks}). This is a consequence of the
+prediction step used by the DWT in the limits of the chunks, generating
 different predictions at the beginning and the end of the adjacent
 chunks.
 
@@ -878,7 +873,7 @@ chunks.
   \label{fig:3_chunks}
 \end{figure}
 
-One solution to avoid signal discontinuitites between chunks is to
+One solution to avoid signal discontinuities between chunks is to
 overlap the chunks. Thus, the current ($i$-th) chunk uses also the
 last frames of the previous ($(i-1)$-th) chunk and the first frames of
 the next ($(i+1)$-th) chunk to compute the transform of the current
@@ -901,7 +896,7 @@ been described in the following algorithm:
       C}_{i+1}$.
   \item Compute the decomposition ${\mathbf D}_i \leftarrow
     \text{DWT}^l({\mathbf E})$, where $l$ is the number of levels of
-    the DWT ($l=2$ in the Fig.~\ref{fig:subbands}).
+    the DWT ($l=2$ in Fig.~\ref{fig:subbands}).
   \item Output the decomposition ${\mathbf D}_i$.
   \item ${\mathbf C}_{i-1}\leftarrow {\mathbf C}_i$ (notice that we can assign the pointers, not the contents).
   \item ${\mathbf C}_i\leftarrow {\mathbf C}_{i+1}$.
@@ -949,7 +944,7 @@ notation.
 
 This idea has been implemented in the notebook
 \href{https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/study_guide/transform_coding/overlapped_DWT_I.ipynb}{Overlapped
-  DWT}, and the result can be seen in the Fig.~\ref{fig:3_chunks}.
+  DWT}, and the result can be seen in Fig.~\ref{fig:3_chunks}.
 
 %}}}
 
@@ -959,18 +954,18 @@ This idea has been implemented in the notebook
 \label{sec:reducing}
 
 Unfortunately, the previous algorithm sends twice the DWT coefficients
-of the overlapped areas (in the Fig.~\ref{fig:subbands}, $\{{\mathbf
+of the overlapped areas (in Fig.~\ref{fig:subbands}, $\{{\mathbf
   D}_i.{\mathbf l}^2[-o/4:], {\mathbf D}_i.{\mathbf l}^2[:o/4],
 {\mathbf D}_i.{\mathbf h}^2[-o/4:], {\mathbf D}_i.{\mathbf
   h}^2[:o/4], {\mathbf D}_i.{\mathbf h}^1[-o/2:], {\mathbf
   D}_i.{\mathbf h}^1[:o/2]\}$). To avoid this waste of bandwidth, we
 can reuse the received coefficients of the overlapped areas. This
-procedure has been described in the Fig.~\ref{fig:overlapping}, and,
-as it can be seen, the encoding algorithm is identical to the previous
-one except in that only the central (stereo) coefficients are
-sent. The rest of coefficients that are needed to compute the inverse
-transform are extracted from the neighbor chunks (represented in the
-DWT domain). Notice that now, the number of sent coefficients is
+procedure has been described in Fig.~\ref{fig:overlapping}, and,
+as can be seen, the encoding algorithm is identical to the previous
+one except that only the central (stereo) coefficients are
+sent. The rest of the coefficients that are needed to compute the inverse
+transform are extracted from the neighboring chunks (represented in the
+DWT domain). Notice that now the number of sent coefficients is
 $\text{len}({\mathbf C}_i)$, the number of samples in ${\mathbf C}_i$.
 
 \begin{figure}
@@ -995,7 +990,7 @@ $\text{len}({\mathbf C}_i)$, the number of samples in ${\mathbf C}_i$.
 %  \end{enumerate}
 %\end{enumerate}
 
-The codec now can be described by:
+The codec can now be described by:
 
 \subsection*{Encoder:}
 \begin{enumerate}
@@ -1082,12 +1077,12 @@ differs in how the transform has been implemented.
 %{{{
 
 Rebuild the RD curves considering also the temporal decorrelation. Use
-\verb|temporal_no_overlapped_DWT_coding.py|. Notice that the number of
+\verb|temporal_no_overlapped_DWT_coding.py|. Note that the number of
 levels $l$ of the DWT (computed using
 \href{https://pywavelets.readthedocs.io/en/latest/}{PyWavelets}~\cite{lee2019pywavelets})
 can have a high impact on the amount of energy concentration achieved
-by the DWT, and therefore, on the efficiency of coding system. Show
-such impact. Experiment also with the wavelet name.
+by the DWT, and therefore on the efficiency of the coding system. Show
+such an impact. Experiment also with the wavelet name.
 
 %}}}
 
@@ -1096,7 +1091,7 @@ such impact. Experiment also with the wavelet name.
 
 Finally, redo the curves considering now the block overlapping
 (\verb|temporal_overlapped_DWT_coding.py|). It is a good idea to put
-all the RD curves together (in the same graph), to compare easely,
+all the RD curves together (in the same graph), to compare easily.
 
 %}}}
 
@@ -1108,11 +1103,11 @@ all the RD curves together (in the same graph), to compare easely,
 \item Which has been the gain of the filters used in your experiments?
 
 \item Does the computation of the DWT using chunk overlapping increase
-  the latency of the whole system? And the jitter? In which amount?
+  the latency of the whole system? And what about the jitter? In what amount?
 
 \item Which other transform(s) are used in audio encoding systems
-  (such as MP3) for exploiting the temporal redundancy? Enumerate the
-  systems and the used transform(s).
+  (such as MP3) to exploit temporal redundancy? Enumerate the
+  systems and the transform(s) used.
 
 %}}}
 \end{enumerate}
@@ -1133,7 +1128,7 @@ python temporal_overlapped_DWT_coding.py -i 6 -o 6 --show_stats -q 8192
 python dwt5.py -d 9
 \end{verbatim}
 
-You can also visualize the DWT domain running the commands that are defined in the notebook \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/docs/2-hours_seminar.ipynb}{InterCom: a Real-Time Digital Audio Full-Duplex Transmitter/Receiver}.
+You can also visualize the DWT domain running the commands defined in the notebook \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/docs/2-hours_seminar.ipynb}{InterCom: a Real-Time Digital Audio Full-Duplex Transmitter/Receiver}.
 
 %}}}
 
@@ -1144,4 +1139,4 @@ A description of the experiments and their results.
 
 \section{Resources}
 
-\bibliography{python,maths,data-compression,DWT,audio-coding,signal-processing}
+\bibliography{python,maths,data_compression,DWT,audio_coding,signal_processing}
