@@ -8,14 +8,13 @@
 
 \begin{figure}
 \begin{verbatim}
-+---------+    +--------+    +--------------+
-| Private +----+ NAT    +----+ The rest of  |
-| Network |    | Device |    | the Internet |
-+---------+    +--------+    +--------------+
-(internal peers)              (external peers)
++----------+    +--------+    +----------+
+| Internal +----+ NAT    +----+ External |
+| Network  |    | Device |    | Network  |
++----------+    +--------+    +----------+
+                               (Internet)
 \end{verbatim}
-\caption{NAT framework. Notice that the rest of the Internet also
-  include other private networks (even nested).}
+\caption{NAT framework.}
 \label{fig:NAT_framework}
 \end{figure}
 
@@ -23,17 +22,17 @@ NAT stands for Network Address Translation, and it is a method of
 remapping an IP address space into another by modifying network
 address information in the IP header of packets while they are in
 transit across a traffic routing device (see the
-Fig~\ref{fig:NAT_framework}). When a network device on a private network sends
-a packet X to the Internet, the NAT device translates the private IP
-address in the packet header to a public IP address, and the packet is
-then forwarded to the internet. When a packet from the Internet
-arrives at the NAT device, it translates the public IP
-address in the packet header to the private IP address of the device
-that sent the packet X.
+Fig~\ref{fig:NAT_framework}). When a network device on a internal
+(usually private) network sends a packet P to the Internet, the NAT
+device translates the internal IP address in the packet header to a
+external (usually public) IP address. When a packet from the Internet
+arrives at the NAT device, it translates the external IP address in
+the packet header to the internal IP address of the device that sent
+the packet P.
 
 \section{Pros and cons}
 
-NAT has several advantages:
+NAT was designed because it provides the following advantages:
 \begin{enumerate}
 \item It allows multiple devices on a private network to share a
   single public IP address and access the internet. Therefore, a NAT
@@ -44,8 +43,11 @@ NAT has several advantages:
 
 However, NAT also has (mainly) one disadvantage:
 \begin{enumerate}
-\item It can make it more difficult (and sometimes, impossible) to host
-  servers (for example, a Web server) on a private network.
+\item It can be difficult (and sometimes, impossible) to host servers
+  (for example, a Web server) on a private network, because the
+  incoming traffic will be filtered by the NAT device at least the
+  server initiates the conections (something that by definition is not
+  done by servers).
 \end{enumerate}
 
 \section{IP addresses, ports, end-points, connections and peers}
