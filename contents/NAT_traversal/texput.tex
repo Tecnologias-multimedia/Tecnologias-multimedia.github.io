@@ -4,15 +4,164 @@
 
 \maketitle
 
+\section{What is a ``NAT''?}
+
+\begin{figure}
+\begin{verbatim}
++---------+    +--------+    +--------------+
+| Private +----+ NAT    +----+ The rest of  |
+| Network |    | Device |    | the Internet |
++---------+    +--------+    +--------------+
+(internal peers)              (external peers)
+\end{verbatim}
+\caption{NAT framework. Notice that the rest of the Internet also
+  include other private networks (even nested).}
+\label{fig:NAT_framework}
+\end{figure}
+
+NAT stands for Network Address Translation, and it is a method of
+remapping an IP address space into another by modifying network
+address information in the IP header of packets while they are in
+transit across a traffic routing device (see the
+Fig~\ref{fig:NAT_framework}). When a network device on a private network sends
+a packet X to the Internet, the NAT device translates the private IP
+address in the packet header to a public IP address, and the packet is
+then forwarded to the internet. When a packet from the Internet
+arrives at the NAT device, it translates the public IP
+address in the packet header to the private IP address of the device
+that sent the packet X.
+
+\section{Pros and cons}
+
+NAT has several advantages:
+\begin{enumerate}
+\item It allows multiple devices on a private network to share a
+  single public IP address and access the internet. Therefore, a NAT
+  device conserves public IP addresses, which are in short supply.
+\item It can improve security by hiding the internal IP addresses of
+  devices on a private network.
+\end{enumerate}
+
+However, NAT also has (mainly) one disadvantage:
+\begin{enumerate}
+\item It can make it more difficult (and sometimes, impossible) to host
+  servers (for example, a Web server) on a private network.
+\end{enumerate}
+
+\section{IP addresses, ports, end-points, connections and peers}
+
+An IP address (Internet Protocol address) is a unique address that
+identifies a device on a network. It is an integer number (32 bits in
+the case of IPv4 and 128 bit in IPv6) assigned to devices that use the
+Internet to communicate. For example, computers that communicate over
+the Internet or via local networks share information to a specific
+location using IP addresses.
+
+A port in the context of networking is a integer number (usually 16
+bits long) associated with a network protocol that receives or
+transmits communication for a specific service (for example, port 80
+is used for the Hypertext Transfer Protocol (HTTP), which is used to
+transfer web pages). Ports are used to identify a specific process or
+service on a computer. When a computer receives a packet of data, the
+operating system looks at the port number in the packet header to
+determine which process or service should handle the data.
+
+An end-point is the combination of a IP address and a port. End-points
+identify networked actors (usually computer processes) that
+interchange IP packets. For example, the end-point \texttt{8.8.8.8:53}
+identify a name-server provided by Google Inc.
+
+A conection is the action of transmitting at least one packet from one
+end-point to another. Notice that connections are determined by a pair
+of end-points.
+
+In general, we will call peers to the networked entities.
+
+\section{The Translation Table (TT)}
+
+A NAT device uses a TT to track the connections that are established
+between ``internal'' and ``external'' peers (see the
+Fig.~\ref{fig:NAT_framework}). When a outgoing packet (generated in
+the private network) arrives, the TT indicates the private end-point
+of the peer that has sent this packet. When a incomming packet
+(generated in the Internet) arrives, the TT indicates the private
+end-point of a peer.
+
+Notice that the entries in the TT are only generated for out-going
+traffic.
+
+\section{Types of NAT}
+
+\subsection{Static and dynamic}
+
+Depending on the number of available IP public addresses:
+
+\begin{enumrate}
+\item A static NAT maps a single private IP address to a single public
+  IP address. This is useful for devices that need to be accessible
+  from the internet, such as web servers.
+\item A dynamic NAT maps multiple private IP addresses to a pool of
+  public IP addresses. This is the most common type of NAT and is used
+  in most home and office networks.
+\end{enumerate}
+
+\subsection{Types of ports mapping}
+
+Depending on how the public ports are assigned:
+
+\begin{enumerate}
+\item EIM (Endpoint Independent Mapping) NAT devices reuse the same
+  (external) port $P(X:y)$ for all traffic sent from the same internal
+  end-point $X:y$ to any external endpoint. Therefore, it holds that
+  \begin{equation}
+    P(X:y)=y.
+  \end{equation}
+  This algorithm is used in Cone NATs and Port-Preservation Symmetric
+  NAT devices.
+\item In CDM (Connection Dependent Mapping) NAT devices the assigned
+  (external) port $P(X:x,Y:y)$ is different for each connection
+  $(X:x,Y:y)$, where $X:x$ is an internal end-point and $Y:y$ is an
+  external end-point. In this case, we can distinguish between:
+  \begin{enumerate}
+    \item Fixed-$\Delta$ CDM, if the NAT device selects $P(X:x,Y:y)$
+      using a constant port step $\Delta$.
+    \item Random-$\Delta$ CDM, if the NAT device selects $P(X:x,Y:y)$
+      using a random port step $\Delta$.
+  \end{enumerate}
+  These algorithms are used in symmetric NAT devices. Notice that,
+  even if our device is fixed-$\Delta$, it could behave as a
+  Random-$\Delta$ one due to the outgoing traffic generated by
+  neighbor peers.
+\end{enumerate}
+
+\subsection{Types of filtering}
+
+Depending on how the incomming traffic is accepted (or not), NAT are
+classified as:
+
+\begin{enumerate}
+\item EIF (Endpoint Independent Filtering) when the incoming packets
+  are forwarded without any extra restriction. This is used in Full
+  Cone NAT devices.
+\item ARF (Address Restricted Filtering) when only those incoming
+  packets having the same external IP address as the one in the TE is
+  forwarded to the internal endpoint. This policy is used by
+  Restricted Cone NAT devices.
+\item ERF (Endpoint Restricted Filtering) when only external incoming
+  packets hav- ing the same external source endpoint like the one in
+  the TE is forwarded to the internal endpoint. This policy is used in
+  Port Restricted Cone (PRCN) and Symmetric NAT devices.
+\end{enumerate}
+  
 \section{NAT-ing for what?}
 
 One of the main problems that applications that transmit data over the
 Internet must face is the use of NATs (Network Address Translators). A
 NAT is a network device that converts public end-points\footnote{An
-  end-point is a tuple made up of an IP address and a port.} to
-private end-points and vice versa. Due to this, the consumption rate
-of IPv4 addresses has dropped drastically and has meant that IPv6 is
-still not the dominant network communication protocol, as expected.
+end-point is a tuple made up of an IP address and a port.} to private
+end-points and vice versa. Due to this, the consumption rate of IPv4
+addresses has dropped drastically and has meant that IPv6 is still not
+the dominant network communication protocol, as expected.
 
 The real reason for this is that only public servers really need a
 public IP address, and the vast majority of Internet users use private
