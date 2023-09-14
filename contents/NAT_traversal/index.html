@@ -19,62 +19,244 @@
 
 <h2 class='titleHead'>NAT Traversal</h2>
  <div class='author'><a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp; </span><a href='https://www.marcoslupion.com/'><span class='ecrm-1200'>Marcos Lupión Lorente</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>September 10, 2023</span></div>
+<div class='date'><span class='ecrm-1200'>September 14, 2023</span></div>
    </div>
-   <h3 class='sectionHead'><span class='titlemark'>1   </span> <a id='x1-10001'></a>NAT-ing for what?</h3>
-<!-- l. 9 --><p class='noindent'>One of the main problems that applications that transmit data over the Internet must face is
-the use of NATs (Network Address Translators). A NAT is a network device that converts public
-end-points<span class='footnote-mark'><a href='#fn1x0' id='fn1x0-bk'><sup class='textsuperscript'>1</sup></a></span><a id='x1-1001f1'></a>
-to private end-points and vice versa. Due to this, the consumption rate of IPv4
-addresses has dropped drastically and has meant that IPv6 is still not the dominant
-network communication protocol, as expected.
-</p><!-- l. 17 --><p class='indent'>   The real reason for this is that only public servers really need a public IP address,
-and the vast majority of Internet users use private IP addresses on their local devices.
-This basically means that in each of the companies that do not offer IP services from
-their corporate network, and that in each of our homes, where we do not install
-public servers either, we are reusing the same range of private IP addresses over and
-over again.
-</p><!-- l. 25 --><p class='noindent'>
-</p>
-   <h3 class='sectionHead'><span class='titlemark'>2   </span> <a id='x1-20002'></a>Negative consequences</h3>
-<!-- l. 27 --><p class='noindent'>The main drawback of using NAT devices is that for two network applications, A and
-B, that use IP and run on two hosts belonging to two different private networks, with
-NAT-A and NAT-B respectively, to be able to communicate, it is necessary for A to
-know the end-point used in NAT-B for incoming traffic from NAT-A to B (through
-NAT-A), and obviously, B must know the end-point used in NAT-A for incoming
-traffic to A (from NAT-B).
+   <h3 class='sectionHead'><span class='titlemark'>1   </span> <a id='x1-10001'></a>What is a “NAT”?</h3>
+   <figure class='figure'> 
+
                                                                   
 
                                                                   
-</p><!-- l. 35 --><p class='noindent'>
+                                                                  
+
+                                                                  
+<pre class='verbatim' id='verbatim-1'>
++----------+    +--------+    +----------+
+| Internal +----+ NAT    +----+ External |
+| Network  |    | Device |    | Network  |
++----------+    +--------+    +----------+
+                               (Internet)
+</pre>
+<!-- l. 16 --><p class='nopar'> <a id='x1-1001r1'></a>
+<a id='x1-1002'></a>
 </p>
-   <h3 class='sectionHead'><span class='titlemark'>3   </span> <a id='x1-30003'></a>NAT configuration</h3>
-<!-- l. 37 --><p class='noindent'>But how do we tell NAT-A to let traffic to A from NAT-B through, and vice versa?
-Well, there are basically 2 alternatives:
-</p><!-- l. 40 --><p class='indent'>
+<figcaption class='caption'><span class='id'>Figure 1: </span><span class='content'>NAT framework.
+</span></figcaption><!-- tex4ht:label?: x1-1001r1  -->
+                                                                  
+
+                                                                  
+   </figure>
+<!-- l. 21 --><p class='indent'>   NAT stands for Network Address Translation, and it is a method of remapping an
+IP (Internet Protocol) address space into another by modifying network address
+information in the IP header of packets while they are in transit across a traffic
+routing device (see the Fig <a href='#x1-1001r1'>1<!-- tex4ht:ref: fig:NAT_framework  --></a>). When a network device on a internal (usually private)
+network sends a packet P to the Internet, the NAT device translates the internal IP
+address in the packet header to a external (usually public) IP address. When a packet
+from the Internet arrives at the NAT device, it translates the external IP address in
+the packet header to the internal IP address of the device that sent the packet
+P.
+</p>
+   <h3 class='sectionHead'><span class='titlemark'>2   </span> <a id='x1-20002'></a>Pros and cons</h3>
+<!-- l. 35 --><p class='noindent'>NAT was designed because it provides the following advantages:
      </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-3002x1'>Open ports “by hand”, in both NATs, to indicate the public port open
+<li class='enumerate' id='x1-2002x1'>It allows multiple devices on a private network to share a single public IP
+     address and access the Internet. Therefore, a NAT device conserves public
+     IP addresses, which are in short supply.
+     </li>
+<li class='enumerate' id='x1-2004x2'>It can improve security by hiding the internal IP addresses of devices on
+     the internal network.</li></ol>
+<!-- l. 44 --><p class='indent'>   However, NAT also has (mainly) one disadvantage:
+     </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-2006x1'>It can be difficult (and sometimes, impossible because NAT algorithms are
+     not standarized) to host servers (for example, a Web server) on the internal
+     network, because the incoming traffic will be filtered by the NAT device
+     at least the server initiates the conections (something that by definition is
+     not done by servers).</li></ol>
+<!-- l. 53 --><p class='noindent'>
+</p>
+                                                                  
+
+                                                                  
+   <h3 class='sectionHead'><span class='titlemark'>3   </span> <a id='x1-30003'></a>IP addresses, ports, end-points, connections, servers, clients and
+peers</h3>
+<!-- l. 55 --><p class='noindent'>An IP address is a unique label that identifies a device on a network. It is an
+integer number (32 bits in the case of IPv4 and 128 bits in IPv6) assigned
+to devices that use the Internet to communicate. All IP packets have an
+IP address in their header. IPv4 addresses are usually written using the
+dotted-decimal notation, such as for example, <span class='ectt-1000'>10.20.30.40</span>. On the other hand, IPv6
+addresses are expresed in colon-hexadecimal notation, such for example,
+<span class='ectt-1000'>2001:0db8:85a3:0000:0000:8a2e:0370:7334</span>.
+</p><!-- l. 64 --><p class='indent'>   A port in the context of networking is an integer number (usually 16 bits long)
+associated with a network protocol that receives or transmits communication for a
+specific service (for example, port <span class='ectt-1000'>80 </span>is used for the Hypertext Transfer Protocol
+(HTTP), which is used to transfer Web pages). Ports are used to identify
+a specific service (usually running as a process) on a computer. When a
+computer receives a packet of data, the operating system looks at the port
+number in the packet header to determine which service should handle the
+data.
+</p><!-- l. 74 --><p class='indent'>   An end-point is the combination of an IP address and a port. End-points identify
+networked actors (usually computer processes) that interchange IP packets. For
+example, the end-point <span class='ectt-1000'>8.8.8.8:53 </span>identify a name-server provided by Google Inc.
+In general, we will represent a end-point such as \(A:b\), where \(A\) is an IP address and \(b\) is a
+port.
+</p><!-- l. 81 --><p class='indent'>   A conection is the action of transmitting at least one packet from one
+end-point to another. Notice that connections are determined by a pair of
+end-points.
+</p><!-- l. 85 --><p class='indent'>   Networked actors can be classified in severs when they wait for the requests from
+clients (clients always initiate the connections). When the actors can act as servers
+and clients at the same time, they are called peers.
+</p><!-- l. 90 --><p class='noindent'>
+</p>
+   <h3 class='sectionHead'><span class='titlemark'>4   </span> <a id='x1-40004'></a>The Translation Table (TT)</h3>
+<!-- l. 92 --><p class='noindent'>A NAT device uses a TT to track the connections that are established between
+“internal” and “external” peers (see the Fig. <a href='#x1-1001r1'>1<!-- tex4ht:ref: fig:NAT_framework  --></a>). When an outgoing packet (generated
+in the internal network) arrives, the TT registers the internal end-point of
+the peer that has sent this packet. When an incoming packet (generated in
+the external network) arrives, the TT indicates the internal end-point of a
+peer.
+</p><!-- l. 100 --><p class='indent'>   Notice that the entries in the TT are only generated for outgoing traffic. If
+happens that when an external IP packet arrives to the NAT device and there is not
+any TT-entry associated to the connection, the packet is discarded.
+                                                                  
+
+                                                                  
+</p><!-- l. 105 --><p class='noindent'>
+</p>
+   <h3 class='sectionHead'><span class='titlemark'>5   </span> <a id='x1-50005'></a>Types of NAT</h3>
+<!-- l. 107 --><p class='noindent'>
+</p>
+   <h4 class='subsectionHead'><span class='titlemark'>5.1   </span> <a id='x1-60005.1'></a>Static and dynamic</h4>
+<!-- l. 109 --><p class='noindent'>Depending on the number of available IP external addresses:
+</p><!-- l. 111 --><p class='indent'>
+     </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-6002x1'>A static NAT device maps a single internal IP address to a single external
+     IP address. Static NAT devices are used in home networks.
+     </li>
+<li class='enumerate' id='x1-6004x2'>A dynamic NAT device maps multiple internal IP addresses to a pool of
+     external IP addresses. This is the most common type of NAT device and
+     is used in most home and office networks.</li></ol>
+<!-- l. 120 --><p class='noindent'>
+</p>
+   <h4 class='subsectionHead'><span class='titlemark'>5.2   </span> <a id='x1-70005.2'></a>Types of ports mapping</h4>
+<!-- l. 122 --><p class='noindent'>Depending on how the external ports are assigned:
+</p><!-- l. 124 --><p class='indent'>
+     </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-7002x1'>EIM (Endpoint Independent Mapping) NAT devices reuse the same (external)
+     port \(P(X:y)\) for all traffic sent from the same internal end-point \(X:y\) to any external
+     endpoint. Therefore, it holds that \begin {equation}  P(X:y)=y, \forall X,  \end {equation}
+     if \(y\) is avaliable in the TT. If the external port \(y\) is not available (because there is
+     another host in the internal network that is using the same port \(y\)), then the
+     NAT device usually selects the “next” (counting from \(y\)) free port. This
+     algorithm is used in Cone NATs and Port-Preservation Symmetric NAT
+     devices.
+     </li>
+                                                                  
+
+                                                                  
+<li class='enumerate' id='x1-7004x2'>
+     <!-- l. 136 --><p class='noindent'>In CDM (Connection Dependent Mapping) NAT devices the assigned
+     (external) port \(P(X:x,Y:y)\) is different for each connection \((X:x,Y:y)\), where \(X:x\) is an internal
+     end-point and \(Y:y\) is an external end-point. In this case, we can distinguish
+     between:
+         </p><ol class='enumerate2'>
+<li class='enumerate' id='x1-7006x1'>Fixed-\(\Delta \) CDM, if the NAT device selects \(P(X:x,Y:y)\) using a constant port step \(\Delta \).
+         \(\Delta \) is a natural number.
+         </li>
+<li class='enumerate' id='x1-7008x2'>Random-\(\Delta \) CDM, if the NAT device selects \(P(X:x,Y:y)\) using a random port step
+         \(\Delta \).</li></ol>
+     <!-- l. 146 --><p class='noindent'>These algorithms are used in symmetric NAT devices. Notice that, even if our
+     device is fixed-\(\Delta \), it could behave as a Random-\(\Delta \) one due to the outgoing traffic
+     generated by neighbor peers.</p></li></ol>
+<!-- l. 152 --><p class='noindent'>
+</p>
+   <h4 class='subsectionHead'><span class='titlemark'>5.3   </span> <a id='x1-80005.3'></a>Types of packet filtering</h4>
+<!-- l. 154 --><p class='noindent'>Depending on how the incoming traffic is accepted (or not), NAT are classified
+as:
+</p><!-- l. 157 --><p class='indent'>
+     </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-8002x1'>EIF  (Endpoint  Independent  Filtering)  when  the  incoming  packets  are
+     forwarded without any extra restriction. This is used in Full Cone NAT
+     devices.
+     </li>
+<li class='enumerate' id='x1-8004x2'>ARF (Address Restricted Filtering) when only those incoming packets
+     having  the  same  external  IP  address  as  the  one  in  the  TT-entry  is
+     forwarded to the internal end-point. This policy is used by Restricted Cone
+     NAT devices.
+                                                                  
+
+                                                                  
+     </li>
+<li class='enumerate' id='x1-8006x3'>ERF (Endpoint Restricted Filtering) when only external incoming packets
+     having  the  same  external  end-point  like  the  one  in  the  TT-entry  is
+     forwarded to the internal end-point. This policy is used in Port Restricted
+     Cone (PRCN) and Symmetric NAT devices.</li></ol>
+<!-- l. 172 --><p class='noindent'>
+</p>
+   <h3 class='sectionHead'><span class='titlemark'>6   </span> <a id='x1-90006'></a>UDP hole punching</h3>
+<!-- l. 174 --><p class='noindent'>UDP hole punching is a technique for transmitting UDP packets
+between peers that are behind different NAT devices, ... in some
+cases.<span class='footnote-mark'><a href='#fn1x0' id='fn1x0-bk'><sup class='textsuperscript'>1</sup></a></span><a id='x1-9001f1'></a>
+UDP hole punching works by having the two peers first send messages to each other
+through a third-party server. After that, the peers try to “punch a hole” in
+theirs NAT devices through which the incoming traffic can cross the NAT
+device.
+</p>
+   <figure class='figure'> 
+
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+<!-- l. 183 --><p class='noindent'><img alt='PIC' src='graphics/UDP_Hole_Punching_RCN.svg' /> <a id='x1-9002r2'></a>
+<a id='x1-9003'></a>
+</p>
+<figcaption class='caption'><span class='id'>Figure 2: </span><span class='content'>A sucessful UDP “connection”  between two peers \(P_1\) and \(P_2\). \(a\), \(b\), and \(s\)
+represent the external port assigned by NAT device \(A\) for the outgoing traffic
+from \(P_1\), \(b\) is exactly the same, but for NAT device \(B\), and \(s\) is the public port used
+by the server \(S\).
+</span></figcaption><!-- tex4ht:label?: x1-9002r6  -->
+                                                                  
+
+                                                                  
+   </figure>
+<!-- l. 192 --><p class='indent'>   Figure <a href='#x1-9002r2'>2<!-- tex4ht:ref: fig:UHP  --></a> shows an example (generic and ideal) where two “NAT-ed” peers \(P_1\) and \(P_2\),
+establish an UDP connection, with the help of a server \(S\). As it can be seen, the peers
+talk to the server first and then, between them. In the Step 15, \(P_1\) knows that it can
+communicate with \(P_2\), and in the Step 19, \(P_2\) recongnizes successful “connection” with
+\(P_1\).
+</p>
+   <h3 class='sectionHead'><span class='titlemark'>7   </span> <a id='x1-100007'></a>NAT configuration</h3>
+<!-- l. 203 --><p class='noindent'>But how do we tell NAT-A to let traffic to A from NAT-B through, and vice versa?
+Well, there are basically 2 alternatives:
+</p><!-- l. 206 --><p class='indent'>
+     </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-10002x1'>Open ports “by hand”, in both NATs, to indicate the public port open
      for incoming traffic to the process. For example, if A runs on end-point
      192.168.1.2:4000 and the open public port is 5000, all UDP traffic arriving
      at port 5000 from the Internet should be sent to end-point 192.168.1.2:
      4000. Normally, to do this, it is necessary to have access to the NAT as
      an administrator.
      </li>
-<li class='enumerate' id='x1-3004x2'>Create the appropriate entries in the NAT tables so that communication
+<li class='enumerate' id='x1-10004x2'>Create the appropriate entries in the NAT tables so that communication
      between A and B is possible. This should happen if both A and B know
      the end-point of their interlocutor and send UDP traffic from A to B and
      from B to A at the same time.</li></ol>
-<!-- l. 54 --><p class='indent'>   Obviously, the most transparent option for the user is the second.
-</p><!-- l. 56 --><p class='noindent'>
+<!-- l. 220 --><p class='indent'>   Obviously, the most transparent option for the user is the second.
+</p><!-- l. 222 --><p class='noindent'>
 </p>
-   <h3 class='sectionHead'><span class='titlemark'>4   </span> <a id='x1-40004'></a>Deliverables</h3>
-<!-- l. 58 --><p class='noindent'>A Python module called <span class='ectt-1000'>NAT_traversal.py </span>that inherits from <span class='ectt-1000'>minimal.py </span>and that
+   <h3 class='sectionHead'><span class='titlemark'>8   </span> <a id='x1-110008'></a>Deliverables</h3>
+<!-- l. 224 --><p class='noindent'>A Python module called <span class='ectt-1000'>NAT_traversal.py </span>that inherits from <span class='ectt-1000'>minimal.py </span>and that
 implements the previously presented idea.
-</p><!-- l. 61 --><p class='noindent'>
+                                                                  
+
+                                                                  
+</p><!-- l. 227 --><p class='noindent'>
 </p>
-   <h3 class='sectionHead'><span class='titlemark'>5   </span> <a id='x1-50005'></a>Resources</h3>
-<p><a id='Q1-1-6'></a></p>
-   <div class='footnotes'><!-- l. 12 --><p class='indent'>     <span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='ecrm-0800'>An end-point is a tuple made up of an IP address and a port.</span></p>                              </div>
+   <h3 class='sectionHead'><span class='titlemark'>9   </span> <a id='x1-120009'></a>Resources</h3>
+<p><a id='Q1-1-15'></a></p>
+   <div class='footnotes'><!-- l. 177 --><p class='indent'>     <span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='ecrm-0800'>It is not always reliable, and it may not work in all situations.</span></p>                             </div>
  
 </body> 
 </html>
