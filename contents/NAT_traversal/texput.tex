@@ -23,13 +23,13 @@ NAT stands for Network Address Translation, and it is a method of
 remapping an IP (Internet Protocol) address space into another by
 modifying network address information in the IP header of packets
 while they are in transit across a traffic routing device (see the
-Fig~\ref{fig:NAT_framework}). When a network device on a internal
-(usually private) network sends a packet P to the Internet, the NAT
-device translates the internal IP address in the packet header to a
-external (usually public) IP address. When a packet from the Internet
-arrives at the NAT device, it translates the external IP address in
-the packet header to the internal IP address of the device that sent
-the packet P.
+Fig~\ref{fig:NAT_framework})~\cite{srisuresh1999nat,Srisuresh2001}. When
+a network device on a internal (usually private) network sends a
+packet P to the Internet, the NAT device translates the internal IP
+address in the packet header to a external (usually public) IP
+address. When a packet from the Internet arrives at the NAT device, it
+translates the external IP address in the packet header to the
+internal IP address of the device that sent the packet P.
 
 \section{Pros and cons}
 
@@ -105,6 +105,8 @@ packet is discarded.
 
 \section{Types of NAT}
 
+NAT devices can be classified as~\cite{jennings2007network}:
+
 \subsection{Static and dynamic}
 
 Depending on the number of available IP external addresses:
@@ -171,13 +173,13 @@ classified as:
 
 \section{Custom-server assisted UDP hole punching}
 
-UDP hole punching is a technique for transmitting UDP packets between
-peers that are behind different NAT devices, ... in some
-cases.\footnote{It is not always reliable, and it may not work in all
-  situations.} UDP hole punching works by having the two peers first
-send messages to each other through a third-party server. After that,
-the peers try to ``punch a hole'' in theirs NAT devices through which
-the incoming traffic can cross the NAT device.
+UDP hole punching~\cite{srisuresh2008state} is a technique for
+transmitting UDP packets between peers that are behind different NAT
+devices, ... in some cases.\footnote{It is not always reliable, and it
+  may not work in all situations.} UDP hole punching works by having
+the two peers first send messages to each other through a third-party
+server. After that, the peers try to ``punch a hole'' in theirs NAT
+devices through which the incoming traffic can cross the NAT device.
 
 \begin{figure}
   \includegraphics{graphics/UDP_Hole_Punching_RCN}
@@ -198,11 +200,12 @@ with $P_1$.
 
 \section{STUN-sever assisted UDP hole punching}
 
-STUN (Session Traversal Utilities for NAT) is a standard network
-protocol, defined in the RFC (Request for Comments) 5389, designed to
-provide public IP address and port discovery when UDP is used. There
-are dozens of STUN servers available that can be consulted. Some of
-them are (most STUN severs are listening to the port 3478):
+STUN (Session Traversal Utilities for NAT)~\cite{STUN} is a standard
+network protocol, defined in the RFC (Request for Comments) 5389,
+designed to provide public IP address and port discovery when UDP is
+used. There are dozens of STUN servers available that can be
+consulted. Some of them are (most STUN severs are listening to the
+port 3478):
 \begin{verbatim}
 stun.l.google.com:3478
 stun.12connect.com:3478
@@ -242,4 +245,4 @@ A Python module called \texttt{NAT\_traversal.py} that inherits from
 
 \section{Resources}
 
-\bibliography{networking,nat}
+\bibliography{networking,NAT,P2P}
