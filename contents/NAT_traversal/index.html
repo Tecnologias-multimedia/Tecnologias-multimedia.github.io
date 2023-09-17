@@ -19,7 +19,7 @@
 
 <h2 class='titleHead'>NAT Traversal</h2>
  <div class='author'><a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp; </span><a href='https://www.marcoslupion.com/'><span class='ecrm-1200'>Marcos Lupión Lorente</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>September 16, 2023</span></div>
+<div class='date'><span class='ecrm-1200'>September 17, 2023</span></div>
    </div>
    <h3 class='likesectionHead'><a id='x1-1000'></a>Contents</h3>
    <div class='tableofcontents'>
@@ -68,7 +68,7 @@
 <!-- l. 22 --><p class='indent'>   NAT stands for Network Address Translation, and it is a method of remapping an
 IP (Internet Protocol) address space into another by modifying network address
 information in the IP header of packets while they are in transit across a traffic
-routing device (see the Fig <a href='#x1-2001r1'>1<!-- tex4ht:ref: fig:NAT_framework  --></a>) <span class='cite'>[<a href='#Xsrisuresh1999nat'>4</a>, <a href='#XSrisuresh2001'>3</a>]</span>. When a network device on a internal (usually
+routing device (see the Fig <a href='#x1-2001r1'>1<!-- tex4ht:ref: fig:NAT_framework  --></a>) <span class='cite'>[<a href='#Xsrisuresh1999nat'>5</a>, <a href='#XSrisuresh2001'>3</a>]</span>. When a network device on a internal (usually
 private) network sends a packet P to the Internet, the NAT device translates the
 internal IP address in the packet header to a external (usually public) IP address.
 When a packet from the Internet arrives at the NAT device, it translates the external
@@ -213,7 +213,7 @@ as:
 <!-- l. 174 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>6   </span> <a id='x1-100006'></a>Custom-server assisted UDP hole punching</h3>
-<!-- l. 176 --><p class='noindent'>UDP hole punching <span class='cite'>[<a href='#Xsrisuresh2008state'>5</a>]</span> is a technique for transmitting UDP packets
+<!-- l. 176 --><p class='noindent'>UDP hole punching <span class='cite'>[<a href='#Xsrisuresh2008state'>4</a>]</span> is a technique for transmitting UDP packets
 between peers that are behind different NAT devices, ... in some
 cases.<span class='footnote-mark'><a href='#fn1x0' id='fn1x0-bk'><sup class='textsuperscript'>1</sup></a></span><a id='x1-10001f1'></a>
 UDP hole punching works by having the two peers first send messages to each other
@@ -307,21 +307,20 @@ that:
    </p>
    <p class='bibitem'><span class='biblabel'>
  [2]<span class='bibsp'>   </span></span><a id='XSTUN'></a>J. Rosenberg, R. Mahy, P. Matthews, and D. Wing. <a href='https://tools.ietf.org/html/rfc5389'>Session Traversal
-   Utilities  for  NAT  (STUN)</a>.   https://tools.ietf.org/html/rfc5389,  October
-   2008.
+   Utilities for NAT (STUN) (RFC5389)</a>, 2008.
    </p>
    <p class='bibitem'><span class='biblabel'>
  [3]<span class='bibsp'>   </span></span><a id='XSrisuresh2001'></a>P. Srisuresh  and  K. Egevang.      <a href='https://datatracker.ietf.org/doc/html/rfc3022'>Traditional  IP  Network  Address
-   Translator (Traditional NAT)</a>, January 2001. RFC-3022.
+   Translator (Traditional NAT) (RFC3022)</a>, 2001.
    </p>
    <p class='bibitem'><span class='biblabel'>
- [4]<span class='bibsp'>   </span></span><a id='Xsrisuresh1999nat'></a>P. Srisuresh and M. Holdrege.  <a href='https://tools.ietf.org/html/rfc2663'>IP Network Address Translator (NAT)
-   Terminology and Considerations</a>. 1999.
-   </p>
-   <p class='bibitem'><span class='biblabel'>
- [5]<span class='bibsp'>   </span></span><a id='Xsrisuresh2008state'></a>Pyda Srisuresh, Bryan Ford, and Dan Kegel. <a href='https://datatracker.ietf.org/doc/html/rfc5128'>State of peer-to-peer (P2P)
-   communication across network address translators (NATs)</a>. Technical report,
+ [4]<span class='bibsp'>   </span></span><a id='Xsrisuresh2008state'></a>P. Srisuresh,  B. Ford,  and  D. Kegel.    <a href='https://datatracker.ietf.org/doc/html/rfc5128'>State  of  peer-to-peer  (P2P)
+   communication  across  network  address  translators  (NATs)  (RFC  5128)</a>.
    2008.
+   </p>
+   <p class='bibitem'><span class='biblabel'>
+ [5]<span class='bibsp'>   </span></span><a id='Xsrisuresh1999nat'></a>P. Srisuresh and M. Holdrege.  <a href='https://tools.ietf.org/html/rfc2663'>IP Network Address Translator (NAT)
+   Terminology and Considerations (RFC 2663)</a>. 1999.
 </p>
    </div>
 <p><a id='Q1-1-17'></a></p>
