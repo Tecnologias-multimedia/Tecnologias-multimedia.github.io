@@ -13,7 +13,8 @@
 | Internal +--------+ NAT    +--------+ External |
 | Network  |        | Device |        | Network  |
 +----------+        +--------+        +----------+
-(usually your home)                    (Internet)
+(usually)                             (rest of the
+ your home)                            Internet)
 \end{verbatim}
 \caption{NAT framework.}
 \label{fig:NAT_framework}
@@ -21,15 +22,15 @@
 
 NAT stands for Network Address Translation, and it is a method of
 remapping an IP (Internet Protocol) address space into another by
-modifying network address information in the IP header of packets
+modifying network address information (in the IP header) of packets
 while they are in transit across a traffic routing device (see the
 Fig~\ref{fig:NAT_framework})~\cite{srisuresh1999nat,Srisuresh2001}. When
 a network device on a internal (usually private) network sends a
 packet P to the Internet, the NAT device translates the internal IP
-address in the packet header to a external (usually public) IP
-address. When a packet from the Internet arrives at the NAT device, it
-translates the external IP address in the packet header to the
-internal IP address of the device receiver of the packet P.
+address to a external (usually public) IP address. When a packet from
+the Internet arrives at the NAT device, it translates the external IP
+address to the internal IP address of the device receiver of the
+packet P.
 
 \section{Pros and cons}
 
@@ -45,10 +46,11 @@ NAT was designed because it provides the following advantages:
 However, NAT also has (mainly) one disadvantage:
 \begin{enumerate}
 \item It can be difficult (and sometimes, impossible because NAT
-  algorithms are not standarized) to host servers (for example, a Web
-  server) on the internal network, because the incoming traffic will
-  be filtered by the NAT device at least the server initiates the
-  conections (something that by definition is not done by servers).
+  algorithms are not standarized) to communicate with servers (for
+  example, a Web server) on the internal network, because the incoming
+  traffic will be filtered by the NAT device at least the server
+  initiates the conections\footnote{Something that by definition is
+    not done by servers.}.
 \end{enumerate}
 
 \section{IP addresses, ports, end-points, connections, servers, clients and peers}
@@ -67,10 +69,10 @@ bits long) associated with a network protocol that receives or
 transmits data for a specific service (for example, the port
 \texttt{80} is used for the Hypertext Transfer Protocol (HTTP), which
 is employed to transfer Web pages). In general, ports are used to
-identify a running as a process on a computer. When a computer
-receives a packet of data, the operating system looks at the port
-number in the packet header to determine which service should handle
-the data.
+identify a running process on a computer (host). When a host receives
+a packet of data, the operating system looks at the port number in the
+packet header to determine which service is the destination of the
+data.
 
 An end-point is the combination of an IP address and a
 port. End-points identify networked actors (usually computer
@@ -79,11 +81,14 @@ processes) that interchange IP packets. For example, the end-point
 general, we will represent an end-point as $A:b$, where $A$ is an
 IP address and $b$ is a port.
 
-A conection is the action of transmitting at least one packet from one
-end-point to another. Notice that connections are determined by a pair
-of end-points.
+In the context of UDP, a ``conection''\footnote{The term connection is
+  mainly used in the context of TCT, which is not our case.} is the
+action of transmitting at least one packet from one end-point to
+another. Notice that connections are determined by a pair of
+end-points.
 
-Networked actors can be classified in severs when they wait for the
+Networked actors (usually processes\footnote{But it could be a piece
+  of hardware.}) can be classified in severs when they wait for the
 requests from clients (clients always initiate the connections). When
 the actors can act as servers and clients at the same time, they are
 called peers.
@@ -100,9 +105,10 @@ i.e., the Internet) arrives, the TT indicates the internal end-point
 of a peer.
 
 Notice that the entries in the TT are only generated for outgoing
-traffic (from an internal network perspective). If happens that
-an external IP packet arrives to the NAT device and there is not any
-TT-entry associated to the connection, the packet is discarded.
+traffic (generated in the internal network). If happens that an
+external IP packet arrives to the NAT device and there is not any
+entry in the TT (with a TT-record) associated to the connection, the
+packet is discarded.
 
 \section{Types of NAT}
 
@@ -119,7 +125,7 @@ Depending on the number of available IP external addresses:
 \item A dynamic NAT device maps multiple internal IP addresses to a
   pool of external IP addresses. This is the most common type of NAT
   device and is used in most corporative networks because can
-  accomodate more than $2^{16}$ internal concurrent processes using
+  accomodate more than $2^{16}$ internal concurrent actors using
   the Internet.
 \end{enumerate}
 
@@ -129,7 +135,7 @@ Depending on how the external ports are assigned:
 
 \begin{enumerate}
 \item EIM (Endpoint Independent Mapping) NAT devices reuse the same
-  (external) port $P(X:y)$ for all traffic sent from the same internal
+  (external) port $P(X:y)$ for all traffic sent from
   end-point $X:y$ to any external endpoint. Therefore, it usually
   holds that
   \begin{equation}
@@ -154,7 +160,7 @@ Depending on how the external ports are assigned:
   These algorithms are used in \textbf{Symmetric NAT devices}. Notice
   that, even if our device is fixed-$\Delta$, it could behave as a
   Random-$\Delta$ one due to the outgoing traffic generated by
-  neighbor peers or other networked processes.
+  neighbor peers or other actors.
 \end{enumerate}
 
 \subsection{Types of packet filtering}
@@ -165,19 +171,19 @@ classified as:
 \begin{enumerate}
 \item EIF (Endpoint Independent Filtering) when the incoming packets
   are forwarded without any extra restriction\footnote{Apart from the
-    existence of a working TT-entry for the corresponding public port
+    existence of a working TT-record for the corresponding public port
     used by the incoming packets.}. This is used in \textbf{Full Cone
     NAT} devices.
 \item ARF (Address Restricted Filtering) when only those incoming
-  packets having the same external IP address as the one in the
-  TT-entry is forwarded to the internal end-point\footnote{Notice that
-    in this case, TT-entries are also indexed by the external IP
+  packets having the same external IP address as the one in the corresponding
+  TT-record is forwarded to the internal end-point\footnote{Notice that
+    in this case, TT-records are also indexed by the external IP
     addresses of the incoming packets.}. This policy is used by
   \textbf{Restricted Cone NAT} devices.
 \item ERF (Endpoint Restricted Filtering) when only external incoming
   packets having the same external end-point like the one in the
-  TT-entry is forwarded to the internal end-point\footnote{Now, the
-    TT-entries are indexed by the external port and the external
+  TT-record is forwarded to the internal end-point\footnote{Now, the
+    TT-records are indexed by the external port and the external
     end-point.}. This policy is used in \textbf{Port Restricted Cone
     NAT} (PRCN) and \textbf{Symmetric NAT} devices.
 \end{enumerate}
@@ -196,7 +202,7 @@ NAT device.
 \begin{figure}
   \includegraphics{graphics/UDP_Hole_Punching_RCN}
   \caption{A sucessful UDP ``connection'' between two peers $P_1$ and
-    $P_2$. $a$, $b$, and $s$ represent the external port assigned by
+    $P_2$. The number $a$ represent the external port assigned by
     NAT device $A$ for the outgoing traffic from $P_1$, $b$ is exactly
     the same, but for NAT device $B$, and $s$ is the public port used
     by the server $S$.}
@@ -208,24 +214,23 @@ and $P_2$, establish an UDP connection, with the information provided
 by a server $S$ (the public IP end-points used by the NAT devices). As
 it can be seen, the peers talk to the server first and then, between
 them. In the Step 15, $P_1$ knows that it can communicate with $P_2$,
-and in the Step 19, $P_2$ recongnizes a successful
-``connection''\footnote{The term connection is mainly used in the
-  context of TCT, which is not our case.} with $P_1$.
+and in the Step 19, $P_2$ recongnizes a successful connection with
+$P_1$.
 
 \section{STUN-sever assisted UDP hole punching}
 
-STUN (Session Traversal Utilities for NAT)~\cite{STUN} is a standard
-network protocol, defined in the RFC (Request for Comments) 5389,
+STUN (Session Traversal Utilities for NAT) is a standard network
+protocol, defined in the RFC (Request for Comments) 5389~\cite{STUN},
 designed to provide public IP address and port discovery when UDP is
-used. There are dozens of STUN servers available that can be
-consulted. Some of them are (most STUN severs are listening to the
-port 3478):
+used. There are
+\href{https://gist.github.com/mondain/b0ec1cf5f60ae726202e}{dozens of
+  STUN servers available} that can be consulted. Some of them are
+(most STUN severs are listening to the port 3478):
 \begin{verbatim}
 stun.l.google.com:3478
 stun.12connect.com:3478
 stun.12voip.com:3478
 \end{verbatim}
-See also \url{https://gist.github.com/mondain/b0ec1cf5f60ae726202e}.
 
 In Python, you can query a server with:
 \begin{verbatim}
@@ -240,7 +245,7 @@ maneuver.
 
 \section{Port-forwarding}
 
-It is possible to ``open by hand'' external ports in your NAT device
+It is possible to open ``by hand'' external ports in your NAT device
 if you have administrator privileges. To do this, you need to login
 into your NAT device and configure an UDP data redirection which
 should indicate an external (unused) port and the internal end-point
@@ -253,10 +258,10 @@ A Python module called \texttt{NAT\_traversal.py} that inherits from
 \begin{enumerate}
 \item Determine (and print) the external (public) end-point of your
   NAT device, classify\footnote{Do not use the classification provided
-    by the STUN servers.} (and print) your NAT device as Full Cone
-  NAT, Restricted Cone NAT, Port Restricted Cone NAT or Symmetric NAT,
-  and finally exit\footnote{Quit InterCom.}. Use for this a new
-  command-line parameter.
+    by the STUN servers, because it could be inaccurate.} (and print)
+  your NAT device as Full Cone NAT, Restricted Cone NAT, Port
+  Restricted Cone NAT or Symmetric NAT, and finally exit\footnote{Quit
+    InterCom.}. Use for this a new command-line parameter.
 \item Implement an UDP hole punching technique that should be able to
   communicate the InterCom instances (\texttt{minimal.py}) in a
   context where InterCom is not the only process in your LAN using the
