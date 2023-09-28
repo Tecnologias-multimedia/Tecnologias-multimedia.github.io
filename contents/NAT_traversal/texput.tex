@@ -178,8 +178,8 @@ classified as:
   packets having the same external IP address as the one in the corresponding
   TT-record is forwarded to the internal end-point\footnote{Notice that
     in this case, TT-records are also indexed by the external IP
-    addresses of the incoming packets.}. This policy is used by
-  \textbf{Restricted Cone NAT} devices.
+    addresses of the incoming packets.}. This policy is used by 
+  \textbf{(Address) Restricted Cone NAT} devices.
 \item ERF (Endpoint Restricted Filtering) when only external incoming
   packets having the same external end-point like the one in the
   TT-record is forwarded to the internal end-point\footnote{Now, the
@@ -257,21 +257,27 @@ A Python module called \texttt{NAT\_traversal.py} that inherits from
 \texttt{minimal.py} and that:
 \begin{enumerate}
 \item Determine (and print) the external (public) end-point of your
-  NAT device, classify\footnote{Do not use the classification provided
-    by the STUN servers, because it could be inaccurate.} (and print)
-  your NAT device as Full Cone NAT, Restricted Cone NAT, Port
-  Restricted Cone NAT or Symmetric NAT, and finally exit\footnote{Quit
-    InterCom.}. Use for this a new command-line parameter.
-\item Implement an UDP hole punching technique that should be able to
-  communicate the InterCom instances (\texttt{minimal.py}) in a
-  context where InterCom is not the only process in your LAN using the
-  Internet.\footnote{Think about that it could happen that another
-    networked process running in another host in your LAN is already
-    using the same port that your InterCom instance.} In this case,
-  you should implement some port prediction technique.
+  NAT device when \texttt{NAT\_traversal.py} is running,
+  classify\footnote{Do not use the classification provided by the STUN
+    servers, because it could be inaccurate.} (and print) your NAT
+  device classification as ``Full Cone NAT'', ``(Address) Restricted
+  Cone NAT'', ``Port Restricted Cone NAT'' or ``Symmetric NAT'', and
+  finally exit\footnote{Quit InterCom.}. Use for this a new
+  command-line parameter. Using the end-points provided by the STUN
+  server for both InterCom instances you should be able to communicate
+  them if you are using Cone NATs.
+\item (Optional) In the case of Symmetric NATs, the two instances of
+  InterCom will receive a different external port when they query
+  the STUN server and send data to the other InterCom instance, and
+  therefore, the simple UDP hole punching done by InterCon will not
+  work. In this case, you should implement some port prediction
+  technique to guess what public port have used the symmetric
+  NAT(s). Notice that, to do the prediction port algorith more
+  challenging, it could exist other networked processes that also use
+  external ports.
 \end{enumerate}
 
-This module should be tested in an environment where each InterCom
+InterCom should be tested in an environment where each instance
 runs in different NAT-ed LANs (Local Area Networks, that probably are
 private). To do this, you have basically the following options:
 \begin{enumerate}

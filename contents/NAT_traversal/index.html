@@ -19,7 +19,7 @@
 
 <h2 class='titleHead'>NAT Traversal</h2>
  <div class='author'><a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp; </span><a href='https://www.marcoslupion.com/'><span class='ecrm-1200'>Marcos Lupión Lorente</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>September 25, 2023</span></div>
+<div class='date'><span class='ecrm-1200'>September 28, 2023</span></div>
    </div>
    <h3 class='likesectionHead'><a id='x1-1000'></a>Contents</h3>
    <div class='tableofcontents'>
@@ -206,7 +206,7 @@ as:
 <li class='enumerate' id='x1-9005x2'>ARF (Address Restricted Filtering) when only those incoming packets
      having  the  same  external  IP  address  as  the  one  in  the  corresponding
      TT-record is forwarded to the internal end-point<span class='footnote-mark'><a href='#fn5x0' id='fn5x0-bk'><sup class='textsuperscript'>5</sup></a></span><a id='x1-9006f5'></a>.
-     This policy is used by <span class='ecbx-1000'>Restricted Cone NAT </span>devices.
+     This policy is used by <span class='ecbx-1000'>(Address) Restricted Cone NAT </span>devices.
                                                                   
 
                                                                   
@@ -297,55 +297,62 @@ to.
 <!-- l. 256 --><p class='noindent'>A Python module called <span class='ectt-1000'>NAT_traversal.py </span>that inherits from <span class='ectt-1000'>minimal.py </span>and
 that:
      </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-13002x1'>Determine (and print) the external (public) end-point of your NAT device,
-     classify<span class='footnote-mark'><a href='#fn8x0' id='fn8x0-bk'><sup class='textsuperscript'>8</sup></a></span><a id='x1-13003f8'></a>
-     (and print) your NAT device as Full Cone NAT, Restricted Cone NAT,
-     Port Restricted Cone NAT or Symmetric NAT, and finally exit<span class='footnote-mark'><a href='#fn9x0' id='fn9x0-bk'><sup class='textsuperscript'>9</sup></a></span><a id='x1-13004f9'></a>.
-     Use for this a new command-line parameter.
+<li class='enumerate' id='x1-13002x1'>Determine (and print) the external (public) end-point of your NAT device
+     when <span class='ectt-1000'>NAT_traversal.py </span>is running, classify<span class='footnote-mark'><a href='#fn8x0' id='fn8x0-bk'><sup class='textsuperscript'>8</sup></a></span><a id='x1-13003f8'></a>
+     (and print) your NAT device classification as “Full Cone NAT”, “(Address)
+     Restricted Cone NAT”, “Port Restricted Cone NAT” or “Symmetric NAT”,
+     and finally exit<span class='footnote-mark'><a href='#fn9x0' id='fn9x0-bk'><sup class='textsuperscript'>9</sup></a></span><a id='x1-13004f9'></a>.
+     Use for this a new command-line parameter. Using the end-points provided
+     by the STUN server for both InterCom instances you should be able to
+     communicate them if you are using Cone NATs.
      </li>
-<li class='enumerate' id='x1-13006x2'>Implement an UDP hole punching technique that should be able to communicate
-     the InterCom instances (<span class='ectt-1000'>minimal.py</span>) in a context where InterCom is not
-     the only process in your LAN using the Internet.<span class='footnote-mark'><a href='#fn10x0' id='fn10x0-bk'><sup class='textsuperscript'>10</sup></a></span><a id='x1-13007f10'></a>
-     In this case, you should implement some port prediction technique.</li></ol>
-                                                                  
-
-                                                                  
-<!-- l. 274 --><p class='indent'>   This module should be tested in an environment where each InterCom runs in
+<li class='enumerate' id='x1-13006x2'>(Optional) In the case of Symmetric NATs, the two instances of InterCom
+     will receive a different external port when they query the STUN server
+     and send data to the other InterCom instance, and therefore, the simple
+     UDP hole punching done by InterCon will not work. In this case, you
+     should implement some port prediction technique to guess what public
+     port have used the symmetric NAT(s). Notice that, to do the prediction
+     port algorith more challenging, it could exist other networked processes
+     that also use external ports.</li></ol>
+<!-- l. 280 --><p class='indent'>   InterCom should be tested in an environment where each instance runs in
 different NAT-ed LANs (Local Area Networks, that probably are private). To do this,
 you have basically the following options:
      </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-13009x1'>Run the two InterCom instances A and B in real private networks, for
+<li class='enumerate' id='x1-13008x1'>Run the two InterCom instances A and B in real private networks, for
      example, the instance A in a home network 1, and the instance B in a
      home network 2. This option should be tested, in any case.
      </li>
-<li class='enumerate' id='x1-13011x2'>
-     <!-- l. 281 --><p class='noindent'>Simulate the networking environment in your computer:
+<li class='enumerate' id='x1-13010x2'>
+     <!-- l. 287 --><p class='noindent'>Simulate the networking environment in your computer:
          </p><ol class='enumerate2'>
-<li class='enumerate' id='x1-13013x1'>With  VirtualBox  (recommended,  especially  if  you  are  running
+<li class='enumerate' id='x1-13012x1'>With  VirtualBox  (recommended,  especially  if  you  are  running
          Windows).   VirtualBox   provides   a   feature   called   <a href='https://www.virtualbox.org/manual/ch06.html#network_hostonly'>"Host-Only
          Networking"</a> that allows you to create isolated LANs for your virtual
          machines (VMs). Notice that you will need run two (for example,
          <a href='https://xubuntu.org/download/'>Linux</a>) VMs, each one in a different LAN. In this context, <a href='https://www.vagrantup.com/'>Vagrant</a>
          could help.
          </li>
-<li class='enumerate' id='x1-13015x2'>Using <a href='https://www.docker.com/'>Docker</a> Containers.
+<li class='enumerate' id='x1-13014x2'>Using <a href='https://www.docker.com/'>Docker</a> Containers.
          </li>
-<li class='enumerate' id='x1-13017x3'>Using <a href='http://mininet.org/'>Mininet</a>.
+<li class='enumerate' id='x1-13016x3'>Using <a href='http://mininet.org/'>Mininet</a>.
          </li>
-<li class='enumerate' id='x1-13019x4'>Using <a href='https://www.qemu.org/'>QEMU</a>.
+<li class='enumerate' id='x1-13018x4'>Using <a href='https://www.qemu.org/'>QEMU</a>.
+                                                                  
+
+                                                                  
          </li>
-<li class='enumerate' id='x1-13021x5'>Using <a href='https://www.nsnam.org/'>Network Simulator NS-3</a>.
+<li class='enumerate' id='x1-13020x5'>Using <a href='https://www.nsnam.org/'>Network Simulator NS-3</a>.
          </li>
-<li class='enumerate' id='x1-13023x6'>With  <a href='https://en.wikipedia.org/wiki/Iptables'><span class='ectt-1000'>iptables</span></a>.  This  option  only  runs  in  Linux.  With  this  tool,
+<li class='enumerate' id='x1-13022x6'>With  <a href='https://en.wikipedia.org/wiki/Iptables'><span class='ectt-1000'>iptables</span></a>.  This  option  only  runs  in  Linux.  With  this  tool,
          you can define specific “chains of rules” for the processes when they
          access to the network. <span class='ectt-1000'>iptables </span>are provided by the Linux kernel
          and requires system administrator privileges. An example of use can
          be found <a href='https://github.com/P2PSP/console/blob/master/src/setup_NAT_network.sh'>here</a>. A definition of networks using different NAT devices
          can be found <a href='https://github.com/P2PSP/core/tree/master/doc/NTS/iptables'>here</a>.</li></ol>
      </li></ol>
-<!-- l. 308 --><p class='indent'>   Your work will be presented at class, by groups. Try to use <a href='https://jupyter.org/'>Jupyter Notebook</a>.
+<!-- l. 314 --><p class='indent'>   Your work will be presented at class, by groups. Try to use <a href='https://jupyter.org/'>Jupyter Notebook</a>.
 <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/docs/2-hours_seminar.ipynb'>Here</a> you have an example.
-</p><!-- l. 313 --><p class='noindent'>
+</p><!-- l. 319 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>10   </span> <a id='x1-1400010'></a>Resources</h3>
    <div class='thebibliography'>
@@ -365,15 +372,15 @@ you have basically the following options:
  [4]<span class='bibsp'>   </span></span><a id='Xsrisuresh2008state'></a>P. Srisuresh,  B. Ford,  and  D. Kegel.    <a href='https://datatracker.ietf.org/doc/html/rfc5128'>State  of  peer-to-peer  (P2P)
    communication  across  network  address  translators  (NATs)  (RFC  5128)</a>.
    2008.
+                                                                  
+
+                                                                  
    </p>
    <p class='bibitem'><span class='biblabel'>
  [5]<span class='bibsp'>   </span></span><a id='Xsrisuresh1999nat'></a>P. Srisuresh and M. Holdrege.  <a href='https://tools.ietf.org/html/rfc2663'>IP Network Address Translator (NAT)
    Terminology and Considerations (RFC 2663)</a>. 1999.
 </p>
    </div>
-                                                                  
-
-                                                                  
 <p><a id='Q1-1-17'></a></p>
    <div class='footnotes'><!-- l. 53 --><p class='noindent'><span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='ecrm-0800'>Something that by definition is not done by servers.</span></p>
 <!-- l. 85 --><p class='indent'>     <span class='footnote-mark'><a href='#fn2x0-bk' id='fn2x0'><sup class='textsuperscript'>2</sup></a></span><span class='ecrm-0800'>The term connection is mainly used in the context of TCT, which is not our
@@ -384,10 +391,8 @@ you have basically the following options:
 </span><span class='ecrm-0800'>incoming packets.</span></p>
 <!-- l. 187 --><p class='noindent'><span class='footnote-mark'><a href='#fn6x0-bk' id='fn6x0'><sup class='textsuperscript'>6</sup></a></span><span class='ecrm-0800'>Now, the TT-records are indexed by the external port and the external end-point.</span></p>
 <!-- l. 196 --><p class='indent'>     <span class='footnote-mark'><a href='#fn7x0-bk' id='fn7x0'><sup class='textsuperscript'>7</sup></a></span><span class='ecrm-0800'>It is not always reliable, and it may not work in all situations.</span></p>
-<!-- l. 261 --><p class='noindent'><span class='footnote-mark'><a href='#fn8x0-bk' id='fn8x0'><sup class='textsuperscript'>8</sup></a></span><span class='ecrm-0800'>Do not use the classification provided by the STUN servers, because it could be inaccurate.</span></p>
-<!-- l. 264 --><p class='noindent'><span class='footnote-mark'><a href='#fn9x0-bk' id='fn9x0'><sup class='textsuperscript'>9</sup></a></span><span class='ecrm-0800'>Quit InterCom.</span></p>
-<!-- l. 270 --><p class='noindent'><span class='footnote-mark'><a href='#fn10x0-bk' id='fn10x0'><sup class='textsuperscript'>10</sup></a></span><span class='ecrm-0800'>Think about that it could happen that another networked process running in another host
-</span><span class='ecrm-0800'>in your LAN is already using the same port that your InterCom instance.</span></p>                         </div>
+<!-- l. 262 --><p class='noindent'><span class='footnote-mark'><a href='#fn8x0-bk' id='fn8x0'><sup class='textsuperscript'>8</sup></a></span><span class='ecrm-0800'>Do not use the classification provided by the STUN servers, because it could be inaccurate.</span></p>
+<!-- l. 265 --><p class='noindent'><span class='footnote-mark'><a href='#fn9x0-bk' id='fn9x0'><sup class='textsuperscript'>9</sup></a></span><span class='ecrm-0800'>Quit InterCom.</span></p>                                                                                                </div>
  
 </body> 
 </html>
