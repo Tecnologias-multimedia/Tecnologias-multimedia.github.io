@@ -266,15 +266,18 @@ A Python module called \texttt{NAT\_traversal.py} that inherits from
   command-line parameter. Using the end-points provided by the STUN
   server for both InterCom instances you should be able to communicate
   them if you are using Cone NATs.
-\item (Optional) In the case of Symmetric NATs, the two instances of
-  InterCom will receive a different external port when they query
-  the STUN server and send data to the other InterCom instance, and
-  therefore, the simple UDP hole punching done by InterCon will not
-  work. In this case, you should implement some port prediction
-  technique to guess what public port have used the symmetric
-  NAT(s). Notice that, to do the prediction port algorithm more
-  challenging, it could exist other networked processes that also use
-  external ports.
+\item (Optional) In the case of both\footnote{Notice that if only one
+NAT is symmetric, the connection should be possible without using port
+prediction, because one of the peers could receive the packets sent by
+the other peer that is behing the symmetric NAT.} NATs are symmetric,
+  the two instances of InterCom will receive a different external port
+  when they query the STUN server and send data to the other InterCom
+  instance, and therefore, the simple UDP hole punching done by
+  InterCon will not work. In this case, you should implement some port
+  prediction technique to guess what public port have used the
+  symmetric NAT(s). Notice that, to do the prediction port algorithm
+  more challenging, it could exist other networked processes that also
+  use external ports.
 \end{enumerate}
 
 InterCom should be tested in an environment where each instance
