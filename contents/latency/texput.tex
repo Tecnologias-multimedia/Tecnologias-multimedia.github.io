@@ -412,12 +412,10 @@ The following guidelines have been used to implement the
 \item The class Minimal has been
   \href{https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)}{inherited}
   (extended) to implement a new class Buffering.
-\item In the payload of each UDP packet a chunk number (a counter that
-  goes from the maximum value to 0) has been included in order to
-  provide to the receiver the information to determine where to store
-  the corresponding chunk in the circular buffer. Specifically, an
-  unsigned integer of 16 bits has been used for representing the chunk
-  numbers.
+\item In the payload of each UDP packet a chunk number (a 16-bits
+  counter) has been included in order to provide to the receiver the
+  information which determine where to store the corresponding chunk in
+  the circular buffer.
 \item It has been taken into consideration that the critical part of
   InterCom (the method \verb|record_send_and_play()|) is a method that
   runs as an
@@ -431,7 +429,7 @@ The following guidelines have been used to implement the
     \href{https://en.wikipedia.org/wiki/Gapless_playback}{\emph{gapless}}
     (without the occurrence of silences) as long as the chunks have
     been received on time.
-  \item As always, the lost\footnote{Those chunks that have not been
+  \item The lost\footnote{Those chunks that have not been
   received on time or never have been received.} chunks are replaced
     by zero-chunks in the playback.
   \end{enumerate}
@@ -495,19 +493,22 @@ every new received chunk.
 
 \subsection{Control of the buffer size in InterCom}
 \label{sec:homework2}
-\verb|buffer.py| can be run to intercommunicate two users (or one
-user in the case of a simulation), and the buffering time (in
-miliseconds) can be controlled with the \verb|--buffering_time|
-parameter. Using a real o simulated environment, find the minimum
-buffering time that allows you to hide the jitter in your environment. If you are using a simulated one, find such a minimal buffering time in
-different jitter configurations (value, correlation, and
-distribution). Experiment also with the loss of chunks to see the
-effect of playing the empty chunks.
+\verb|buffer.py| can be run to intercommunicate two users (or one user
+in the case of a simulation), and the buffering time (in miliseconds)
+can be controlled with the \verb|--buffering_time| parameter. Using a
+real o simulated environment, find the minimum buffering time that
+allows you to hide\footnote{Allowing a good quality of the sound.} the
+jitter in your environment. If you are using a simulated one, find
+such a minimal buffering time in different jitter configurations
+(value, correlation, and distribution). Experiment also with the loss
+of chunks to listen to the effect of playing the empty chunks.
 
 \section{Deliverables}
 
-The results of the experiments proposed in
-Section~\ref{sec:homework} and Section~\ref{sec:homework2}.
+The results of the experiments proposed in Section~\ref{sec:homework}
+and Section~\ref{sec:homework2}. Remember also that now, the class
+\texttt{Buffering} in InterCom should inherit \texttt{NAT\_Traversal}
+instead of \texttt{Minimal}.
 
 \section{Resources}
 

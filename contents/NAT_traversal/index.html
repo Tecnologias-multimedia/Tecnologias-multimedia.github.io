@@ -66,7 +66,7 @@
 
                                                                   
    </figure>
-<!-- l. 23 --><p class='indent'>   NAT stands for Network Address Translation, and it is a method of remapping an
+<!-- l. 23 --><p class='indent'>   NAT stands for <a href='https://en.wikipedia.org/wiki/Network_address_translation'>Network Address Translation</a>, and it is a method of remapping an
 IP (Internet Protocol) address space into another by modifying network address
 information (in the IP header) of packets while they are in transit across a traffic
 routing device (see the Fig <a href='#x1-2001r1'>1<!-- tex4ht:ref: fig:NAT_framework  --></a>) <span class='cite'>[<a href='#Xsrisuresh1999nat'>5</a>, <a href='#XSrisuresh2001'>3</a>]</span>. When a network device on a internal (usually
@@ -77,7 +77,7 @@ IP address to the internal IP address of the device receiver of the packet
 P.
 </p>
    <h3 class='sectionHead'><span class='titlemark'>2   </span> <a id='x1-30002'></a>Pros and cons</h3>
-<!-- l. 37 --><p class='noindent'>NAT was designed because it provides the following advantages:
+<!-- l. 39 --><p class='noindent'>NAT was designed because it provides the following advantages:
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-3002x1'>It allows multiple devices on a private network to share a single public IP
      address and access the Internet. Therefore, a NAT device conserves public
@@ -85,27 +85,27 @@ P.
      </li>
 <li class='enumerate' id='x1-3004x2'>It can improve security by hiding the internal IP addresses of devices on
      the internal networks.</li></ol>
-<!-- l. 46 --><p class='indent'>   However, NAT also has (mainly) one disadvantage:
+<!-- l. 48 --><p class='indent'>   However, NAT also has (mainly) one disadvantage:
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-3006x1'>It can be difficult (and sometimes, impossible because NAT algorithms are
      not standarized) to communicate with servers (for example, a Web server)
      on the internal network, because the incoming traffic will be filtered by the
      NAT device at least the server initiates the conections<span class='footnote-mark'><a href='#fn1x0' id='fn1x0-bk'><sup class='textsuperscript'>1</sup></a></span><a id='x1-3007f1'></a>.</li></ol>
-<!-- l. 56 --><p class='noindent'>
+<!-- l. 58 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>3   </span> <a id='x1-40003'></a>IP addresses, ports, end-points, connections, servers, clients and
 peers</h3>
                                                                   
 
                                                                   
-<!-- l. 58 --><p class='noindent'>An IP address is a unique label that identifies a device on a network. It is an
+<!-- l. 60 --><p class='noindent'>An IP address is a unique label that identifies a device on a network. It is an
 integer number (32 bits in the case of IPv4 and 128 bits in IPv6) assigned
 to devices that use the Internet to communicate. All IP packets have an
 IP address in their header. IPv4 addresses are usually written using the
 dotted-decimal notation, such as for example, <span class='ectt-1000'>10.20.30.40</span>. On the other hand, IPv6
 addresses are expresed in colon-hexadecimal notation, such for example,
 <span class='ectt-1000'>2001:0db8:85a3:0000:0000:8a2e:0370:7334</span>.
-</p><!-- l. 67 --><p class='indent'>   A port in the context of networking is an integer number (usually 16 bits long)
+</p><!-- l. 69 --><p class='indent'>   A port in the context of networking is an integer number (usually 16 bits long)
 associated with a network protocol that receives or transmits data for a
 specific service (for example, the port <span class='ectt-1000'>80 </span>is used for the Hypertext Transfer
 Protocol (HTTP), which is employed to transfer Web pages). In general, ports
@@ -113,45 +113,45 @@ are used to identify a running process on a computer (host). When a host
 receives a packet of data, the operating system looks at the port number
 in the packet header to determine which service is the destination of the
 data.
-</p><!-- l. 77 --><p class='indent'>   An end-point is the combination of an IP address and a port. End-points identify
+</p><!-- l. 79 --><p class='indent'>   An end-point is the combination of an IP address and a port. End-points identify
 networked actors (usually computer processes) that interchange IP packets. For
 example, the end-point <span class='ectt-1000'>8.8.8.8:53 </span>identify a name-server provided by Google Inc.
 In general, we will represent an end-point as \(A:b\), where \(A\) is an IP address and \(b\) is a
 port.
-</p><!-- l. 84 --><p class='indent'>   In  the  context  of  UDP,  a
+</p><!-- l. 86 --><p class='indent'>   In  the  context  of  UDP,  a
 “conection”<span class='footnote-mark'><a href='#fn2x0' id='fn2x0-bk'><sup class='textsuperscript'>2</sup></a></span><a id='x1-4001f2'></a>
 is the action of transmitting at least one packet from one end-point to another.
 Notice that connections are determined by a pair of end-points.
-</p><!-- l. 90 --><p class='indent'>   Networked  actors  (usually
+</p><!-- l. 92 --><p class='indent'>   Networked  actors  (usually
 processes<span class='footnote-mark'><a href='#fn3x0' id='fn3x0-bk'><sup class='textsuperscript'>3</sup></a></span><a id='x1-4002f3'></a>)
 can be classified in severs when they wait for the requests from clients (clients always
 initiate the connections). When the actors can act as servers and clients at the same
 time, they are called peers.
-</p><!-- l. 96 --><p class='noindent'>
+</p><!-- l. 98 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>4   </span> <a id='x1-50004'></a>The Translation Table (TT)</h3>
-<!-- l. 98 --><p class='noindent'>A NAT device uses a TT to track the connections that are established between
+<!-- l. 100 --><p class='noindent'>A NAT device uses a TT to track the connections that are established between
 “internal” and “external” peers (see the Fig. <a href='#x1-2001r1'>1<!-- tex4ht:ref: fig:NAT_framework  --></a>). When an outgoing packet (generated
 in the internal network) is sent to the NAT device, the TT <span class='ecti-1000'>registers </span>the internal
 end-point of the peer that has sent this packet. Thus, when an incoming packet
 (generated in the external network, i.e., the Internet) arrives, the TT indicates the
 internal end-point of a peer.
-</p><!-- l. 107 --><p class='indent'>   Notice that the entries in the TT are only generated for outgoing traffic
+</p><!-- l. 109 --><p class='indent'>   Notice that the entries in the TT are only generated for outgoing traffic
 (generated in the internal network). If happens that an external IP packet arrives to
 the NAT device and there is not any entry in the TT (with a TT-record) associated
 to the connection, the packet is discarded.
                                                                   
 
                                                                   
-</p><!-- l. 113 --><p class='noindent'>
+</p><!-- l. 115 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>5   </span> <a id='x1-60005'></a>Types of NAT</h3>
-<!-- l. 115 --><p class='noindent'>NAT devices can be classified as <span class='cite'>[<a href='#Xjennings2007network'>1</a>]</span>:
-</p><!-- l. 117 --><p class='noindent'>
+<!-- l. 117 --><p class='noindent'>NAT devices can be classified as <span class='cite'>[<a href='#Xjennings2007network'>1</a>]</span>:
+</p><!-- l. 119 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead'><span class='titlemark'>5.1   </span> <a id='x1-70005.1'></a>Static and dynamic</h4>
-<!-- l. 119 --><p class='noindent'>Depending on the number of available IP external addresses:
-</p><!-- l. 121 --><p class='indent'>
+<!-- l. 121 --><p class='noindent'>Depending on the number of available IP external addresses:
+</p><!-- l. 123 --><p class='indent'>
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-7002x1'>A static NAT device maps a single internal IP address to a single external
      IP address. Static NAT devices are used in most home networks.
@@ -160,11 +160,11 @@ to the connection, the packet is discarded.
      external IP addresses. This is the most common type of NAT device and
      is used in most corporative networks because can accomodate more than \(2^{16}\)
      internal concurrent actors using the Internet.</li></ol>
-<!-- l. 132 --><p class='noindent'>
+<!-- l. 134 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead'><span class='titlemark'>5.2   </span> <a id='x1-80005.2'></a>Types of ports mapping</h4>
-<!-- l. 134 --><p class='noindent'>Depending on how the external ports are assigned:
-</p><!-- l. 136 --><p class='indent'>
+<!-- l. 136 --><p class='noindent'>Depending on how the external ports are assigned:
+</p><!-- l. 138 --><p class='indent'>
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-8002x1'>EIM (Endpoint Independent Mapping) NAT devices reuse the same (external)
      port \(P(X:y)\) for all traffic sent from end-point \(X:y\) to any external endpoint. Therefore, it
@@ -179,7 +179,7 @@ to the connection, the packet is discarded.
                                                                   
      </li>
 <li class='enumerate' id='x1-8004x2'>
-     <!-- l. 150 --><p class='noindent'>In CDM (Connection Dependent Mapping) NAT devices, the assigned
+     <!-- l. 152 --><p class='noindent'>In CDM (Connection Dependent Mapping) NAT devices, the assigned
      (external) port \(P(X:x,Y:y)\) is different for each connection \((X:x,Y:y)\), where \(X:x\) is an internal
      end-point and \(Y:y\) is an external end-point. In this case, we can distinguish
      between:
@@ -189,15 +189,15 @@ to the connection, the packet is discarded.
          </li>
 <li class='enumerate' id='x1-8008x2'>Random-\(\Delta \) CDM, if the NAT device selects \(P(X:x,Y:y)\) using a random port step
          \(\Delta \).</li></ol>
-     <!-- l. 160 --><p class='noindent'>These algorithms are used in <span class='ecbx-1000'>Symmetric NAT devices</span>. Notice that, even if
+     <!-- l. 162 --><p class='noindent'>These algorithms are used in <span class='ecbx-1000'>Symmetric NAT devices</span>. Notice that, even if
      our device is fixed-\(\Delta \), it could behave as a Random-\(\Delta \) one due to the outgoing
      traffic generated by neighbor peers or other actors.</p></li></ol>
-<!-- l. 166 --><p class='noindent'>
+<!-- l. 168 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead'><span class='titlemark'>5.3   </span> <a id='x1-90005.3'></a>Types of packet filtering</h4>
-<!-- l. 168 --><p class='noindent'>Depending on how the incoming traffic is accepted (or not), NAT are classified
+<!-- l. 170 --><p class='noindent'>Depending on how the incoming traffic is accepted (or not), NAT are classified
 as:
-</p><!-- l. 171 --><p class='indent'>
+</p><!-- l. 173 --><p class='indent'>
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-9002x1'>EIF  (Endpoint  Independent  Filtering)  when  the  incoming  packets  are
      forwarded without any extra restriction<span class='footnote-mark'><a href='#fn4x0' id='fn4x0-bk'><sup class='textsuperscript'>4</sup></a></span><a id='x1-9003f4'></a>.
@@ -216,10 +216,10 @@ as:
      to the internal end-point<span class='footnote-mark'><a href='#fn6x0' id='fn6x0-bk'><sup class='textsuperscript'>6</sup></a></span><a id='x1-9009f6'></a>.
      This policy is used in <span class='ecbx-1000'>Port Restricted Cone NAT </span>(PRCN) and <span class='ecbx-1000'>Symmetric
      </span><span class='ecbx-1000'>NAT </span>devices.</li></ol>
-<!-- l. 191 --><p class='noindent'>
+<!-- l. 193 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>6   </span> <a id='x1-100006'></a>Custom-server assisted UDP hole punching</h3>
-<!-- l. 193 --><p class='noindent'>UDP hole punching <span class='cite'>[<a href='#Xsrisuresh2008state'>4</a>]</span> is a technique for transmitting UDP packets
+<!-- l. 195 --><p class='noindent'>UDP hole punching <span class='cite'>[<a href='#Xsrisuresh2008state'>4</a>]</span> is a technique for transmitting UDP packets
 between peers that are behind different NAT devices, ... in some
 cases.<span class='footnote-mark'><a href='#fn7x0' id='fn7x0-bk'><sup class='textsuperscript'>7</sup></a></span><a id='x1-10001f7'></a>
 UDP hole punching works by having the two peers first send messages to each other
@@ -235,7 +235,7 @@ device.
                                                                   
 
                                                                   
-<!-- l. 203 --><p class='noindent'><img alt='PIC' src='graphics/UDP_Hole_Punching_RCN.svg' /> <a id='x1-10002r2'></a>
+<!-- l. 205 --><p class='noindent'><img alt='PIC' src='graphics/UDP_Hole_Punching_RCN.svg' /> <a id='x1-10002r2'></a>
 <a id='x1-10003'></a>
 </p>
 <figcaption class='caption'><span class='id'>Figure 2: </span><span class='content'>A sucessful UDP “connection” between two peers \(P_1\) and \(P_2\). The number
@@ -247,7 +247,7 @@ by the server \(S\).
 
                                                                   
    </figure>
-<!-- l. 212 --><p class='indent'>   Figure <a href='#x1-10002r2'>2<!-- tex4ht:ref: fig:UHP  --></a> shows an example where two “NAT-ed” peers \(P_1\) and \(P_2\), establish an
+<!-- l. 214 --><p class='indent'>   Figure <a href='#x1-10002r2'>2<!-- tex4ht:ref: fig:UHP  --></a> shows an example where two “NAT-ed” peers \(P_1\) and \(P_2\), establish an
 UDP connection, with the information provided by a server \(S\) (the public IP
 end-points used by the NAT devices). As it can be seen, the peers talk to
 the server first and then, between them. In the Step 15, \(P_1\) knows that it can
@@ -255,7 +255,7 @@ communicate with \(P_2\), and in the Step 19, \(P_2\) recongnizes a successful c
 \(P_1\).
 </p>
    <h3 class='sectionHead'><span class='titlemark'>7   </span> <a id='x1-110007'></a>STUN-sever assisted UDP hole punching</h3>
-<!-- l. 222 --><p class='noindent'>STUN (Session Traversal Utilities for NAT) is a standard network protocol, defined
+<!-- l. 224 --><p class='noindent'>STUN (Session Traversal Utilities for NAT) is a standard network protocol, defined
 in the RFC (Request for Comments) 5389 <span class='cite'>[<a href='#XSTUN'>2</a>]</span>, designed to provide public IP address
 and port discovery when UDP is used. There are <a href='https://gist.github.com/mondain/b0ec1cf5f60ae726202e'>dozens of STUN servers available</a>
 that can be consulted. Some of them are (most STUN severs are listening to the port
@@ -269,8 +269,8 @@ stun.l.google.com:3478
 stun.12connect.com:3478
 stun.12voip.com:3478
 </pre>
-<!-- l. 233 --><p class='nopar'>
-</p><!-- l. 235 --><p class='indent'>   In Python, you can query a server with:
+<!-- l. 235 --><p class='nopar'>
+</p><!-- l. 237 --><p class='indent'>   In Python, you can query a server with:
                                                                   
 
                                                                   
@@ -279,22 +279,22 @@ stun.12voip.com:3478
 import stun # Install with "pip install pystun3"
 nat_type, external_ip, external_port = stun.get_ip_info(stun_host=’stun.l.google.com’)
 </pre>
-<!-- l. 239 --><p class='nopar'>
-</p><!-- l. 241 --><p class='indent'>   Notice that STUN servers do not provide information about other peers.
+<!-- l. 241 --><p class='nopar'>
+</p><!-- l. 243 --><p class='indent'>   Notice that STUN servers do not provide information about other peers.
 Therefore, you need to specify (manually) the end-point of your interlocutor when
 using InterCom, before the UDP hole punching maneuver.
-</p><!-- l. 246 --><p class='noindent'>
+</p><!-- l. 248 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>8   </span> <a id='x1-120008'></a>Port-forwarding</h3>
-<!-- l. 248 --><p class='noindent'>It is possible to open “by hand” external ports in your NAT device if you
+<!-- l. 250 --><p class='noindent'>It is possible to open “by hand” external ports in your NAT device if you
 have administrator privileges. To do this, you need to login into your NAT
 device and configure an UDP data redirection which should indicate an
 external (unused) port and the internal end-point where InterCom is listening
 to.
-</p><!-- l. 254 --><p class='noindent'>
+</p><!-- l. 256 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>9   </span> <a id='x1-130009'></a>Deliverables</h3>
-<!-- l. 256 --><p class='noindent'>A Python module called <span class='ectt-1000'>NAT_traversal.py </span>that inherits from <span class='ectt-1000'>minimal.py </span>and
+<!-- l. 258 --><p class='noindent'>A Python module called <span class='ectt-1000'>NAT_traversal.py </span>that inherits from <span class='ectt-1000'>minimal.py </span>and
 that:
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-13002x1'>Determine (and print) the external (public) end-point of your NAT device
@@ -314,7 +314,7 @@ that:
      prediction technique to guess what public port have used the symmetric
      NAT(s). Notice that, to do the prediction port algorithm more challenging,
      it could exist other networked processes that also use external ports.</li></ol>
-<!-- l. 283 --><p class='indent'>   InterCom should be tested in an environment where each instance runs in
+<!-- l. 285 --><p class='indent'>   InterCom should be tested in an environment where each instance runs in
 different NAT-ed LANs (Local Area Networks, that probably are private). To do this,
 you have basically the following options:
      </p><ol class='enumerate1'>
@@ -323,7 +323,7 @@ you have basically the following options:
      home network 2. This option should be tested, in any case.
      </li>
 <li class='enumerate' id='x1-13011x2'>
-     <!-- l. 290 --><p class='noindent'>Simulate the networking environment in your computer:
+     <!-- l. 292 --><p class='noindent'>Simulate the networking environment in your computer:
          </p><ol class='enumerate2'>
 <li class='enumerate' id='x1-13013x1'>With  VirtualBox  (recommended,  especially  if  you  are  running
          Windows).   VirtualBox   provides   a   feature   called   <a href='https://www.virtualbox.org/manual/ch06.html#network_hostonly'>"Host-Only
@@ -350,9 +350,9 @@ you have basically the following options:
          be found <a href='https://github.com/P2PSP/console/blob/master/src/setup_NAT_network.sh'>here</a>. A definition of networks using different NAT devices
          can be found <a href='https://github.com/P2PSP/core/tree/master/doc/NTS/iptables'>here</a>.</li></ol>
      </li></ol>
-<!-- l. 317 --><p class='indent'>   Your work will be presented at class, by groups. Try to use <a href='https://jupyter.org/'>Jupyter Notebook</a>.
+<!-- l. 319 --><p class='indent'>   Your work will be presented at class, by groups. Try to use <a href='https://jupyter.org/'>Jupyter Notebook</a>.
 <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/docs/2-hours_seminar.ipynb'>Here</a> you have an example.
-</p><!-- l. 322 --><p class='noindent'>
+</p><!-- l. 324 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>10   </span> <a id='x1-1400010'></a>Resources</h3>
    <div class='thebibliography'>
@@ -382,18 +382,18 @@ you have basically the following options:
 </p>
    </div>
 <p><a id='Q1-1-17'></a></p>
-   <div class='footnotes'><!-- l. 53 --><p class='noindent'><span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='ecrm-0800'>Something that by definition is not done by servers.</span></p>
-<!-- l. 85 --><p class='indent'>     <span class='footnote-mark'><a href='#fn2x0-bk' id='fn2x0'><sup class='textsuperscript'>2</sup></a></span><span class='ecrm-0800'>The term connection is mainly used in the context of TCT, which is not our
-</span><span class='ecrm-0800'>case.</span></p><!-- l. 91 --><p class='indent'> <span class='footnote-mark'><a href='#fn3x0-bk' id='fn3x0'><sup class='textsuperscript'>3</sup></a></span><span class='ecrm-0800'>But it could be a piece of hardware.</span></p>
-<!-- l. 175 --><p class='noindent'><span class='footnote-mark'><a href='#fn4x0-bk' id='fn4x0'><sup class='textsuperscript'>4</sup></a></span><span class='ecrm-0800'>Apart from the existence of a working TT-record for the corresponding public port used
+   <div class='footnotes'><!-- l. 55 --><p class='noindent'><span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='ecrm-0800'>Something that by definition is not done by servers.</span></p>
+<!-- l. 87 --><p class='indent'>     <span class='footnote-mark'><a href='#fn2x0-bk' id='fn2x0'><sup class='textsuperscript'>2</sup></a></span><span class='ecrm-0800'>The term connection is mainly used in the context of TCT, which is not our
+</span><span class='ecrm-0800'>case.</span></p><!-- l. 93 --><p class='indent'> <span class='footnote-mark'><a href='#fn3x0-bk' id='fn3x0'><sup class='textsuperscript'>3</sup></a></span><span class='ecrm-0800'>But it could be a piece of hardware.</span></p>
+<!-- l. 177 --><p class='noindent'><span class='footnote-mark'><a href='#fn4x0-bk' id='fn4x0'><sup class='textsuperscript'>4</sup></a></span><span class='ecrm-0800'>Apart from the existence of a working TT-record for the corresponding public port used
 </span><span class='ecrm-0800'>by the incoming packets.</span></p>
-<!-- l. 181 --><p class='noindent'><span class='footnote-mark'><a href='#fn5x0-bk' id='fn5x0'><sup class='textsuperscript'>5</sup></a></span><span class='ecrm-0800'>Notice that in this case, TT-records are also indexed by the external IP addresses of the
+<!-- l. 183 --><p class='noindent'><span class='footnote-mark'><a href='#fn5x0-bk' id='fn5x0'><sup class='textsuperscript'>5</sup></a></span><span class='ecrm-0800'>Notice that in this case, TT-records are also indexed by the external IP addresses of the
 </span><span class='ecrm-0800'>incoming packets.</span></p>
-<!-- l. 187 --><p class='noindent'><span class='footnote-mark'><a href='#fn6x0-bk' id='fn6x0'><sup class='textsuperscript'>6</sup></a></span><span class='ecrm-0800'>Now, the TT-records are indexed by the external port and the external end-point.</span></p>
-<!-- l. 196 --><p class='indent'>     <span class='footnote-mark'><a href='#fn7x0-bk' id='fn7x0'><sup class='textsuperscript'>7</sup></a></span><span class='ecrm-0800'>It is not always reliable, and it may not work in all situations.</span></p>
-<!-- l. 262 --><p class='noindent'><span class='footnote-mark'><a href='#fn8x0-bk' id='fn8x0'><sup class='textsuperscript'>8</sup></a></span><span class='ecrm-0800'>Do not use the classification provided by the STUN servers, because it could be inaccurate.</span></p>
-<!-- l. 265 --><p class='noindent'><span class='footnote-mark'><a href='#fn9x0-bk' id='fn9x0'><sup class='textsuperscript'>9</sup></a></span><span class='ecrm-0800'>Quit InterCom.</span></p>
-<!-- l. 272 --><p class='noindent'><span class='footnote-mark'><a href='#fn10x0-bk' id='fn10x0'><sup class='textsuperscript'>10</sup></a></span><span class='ecrm-0800'>Notice that if only one NAT is symmetric, the connection should be possible without using
+<!-- l. 189 --><p class='noindent'><span class='footnote-mark'><a href='#fn6x0-bk' id='fn6x0'><sup class='textsuperscript'>6</sup></a></span><span class='ecrm-0800'>Now, the TT-records are indexed by the external port and the external end-point.</span></p>
+<!-- l. 198 --><p class='indent'>     <span class='footnote-mark'><a href='#fn7x0-bk' id='fn7x0'><sup class='textsuperscript'>7</sup></a></span><span class='ecrm-0800'>It is not always reliable, and it may not work in all situations.</span></p>
+<!-- l. 264 --><p class='noindent'><span class='footnote-mark'><a href='#fn8x0-bk' id='fn8x0'><sup class='textsuperscript'>8</sup></a></span><span class='ecrm-0800'>Do not use the classification provided by the STUN servers, because it could be inaccurate.</span></p>
+<!-- l. 267 --><p class='noindent'><span class='footnote-mark'><a href='#fn9x0-bk' id='fn9x0'><sup class='textsuperscript'>9</sup></a></span><span class='ecrm-0800'>Quit InterCom.</span></p>
+<!-- l. 274 --><p class='noindent'><span class='footnote-mark'><a href='#fn10x0-bk' id='fn10x0'><sup class='textsuperscript'>10</sup></a></span><span class='ecrm-0800'>Notice that if only one NAT is symmetric, the connection should be possible without using
 </span><span class='ecrm-0800'>port prediction, because one of the peers could receive the packets sent by the other peer that
 </span><span class='ecrm-0800'>is behing the symmetric NAT.</span></p>                                                                                  </div>
  
