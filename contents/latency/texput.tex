@@ -3,6 +3,7 @@
 \title{Hidding the network jitter}
 
 \maketitle
+\tableofcontents
 
 \section{Description}
 
@@ -15,8 +16,8 @@
 in a \href{https://en.wikipedia.org/wiki/Internet_Protocol}{IP}
 \href{https://en.wikipedia.org/wiki/Network_packet}{packet} in the
 case of the Internet) to travel from one point of the network to
-another. This time is relevant for an intercom because the total
-latency $t_u$ that an user experiments can be approximated by
+another. This time is relevant for an intercom(municator) because the
+total latency $t_u$ that an user experiments can be approximated by
 \begin{equation}
   t_u = t_p + t_i,
   \label{eq:user_latency}
@@ -41,38 +42,56 @@ latency varies \href{https://en.wikipedia.org/wiki/Randomness}{at
   random}. At this point, we basically have two alternatives:
 \begin{enumerate}
 \item Run two instances of InterCom in two different
-  \href{https://en.wikipedia.org/wiki/Host_(network)}{host}s separated
+  \href{https://en.wikipedia.org/wiki/Host_(network)}{host}s interconected
   by a shared link.
-\item Run an instance of InterCom and simulate the network latency.
+\item Run instances\footnote{In the general case, we can use two
+    instances but it is also possible to use only one.} of InterCom
+  and control the network latency.
 \end{enumerate}
 Each option has pros and cons, from which we can highlight that:
 \begin{enumerate}
-\item \textbf{Using a real link:} (Pro) The use of real latency is
-  going to show the true behavior of InterCom between the used hosts,
-  which is quite impredictable (depend basically on the
-  \href{https://en.wikipedia.org/wiki/Network_congestion}{network
-    congestion}). (Con) To run InterCom in two different hosts we will
-  need to establish a direct communication between them and it is very
-  likely that we will have to redirect ports in the corresponding
-  \href{https://en.wikipedia.org/wiki/Network_address_translation}{NAT}
-  devices~\cite{srisuresh1999nat}.
-\item \textbf{Using a simulated link:} (Pro) The simulation of the
-  link latency is much more straightforward than opening ports in our
-  NATs and (pro) will allow us to run InterCom in situations that
-  are difficult to achieve in a real network. (Con) The running
-  environment must provide a way of controlling the latency between
-  \href{https://en.wikipedia.org/wiki/Process_(computing)}{processes}. Fortunately,
-  in Linux we can control the latency (and the
-  \href{https://en.wikipedia.org/wiki/Bit_rate}{bit-rate}) of the
-  outgoing traffic (packets) using the command
-  \href{https://man7.org/linux/man-pages/man8/tc.8.html}{\texttt{tc}}
-  \cite{bert2012lartc}.
+\item \textbf{Using a real link:}
+  \begin{itemize}
+  \item (Pro) The use of real latency is
+    going to show the true behavior of InterCom between the used hosts,
+    which is quite impredictable (depend basically on the
+    \href{https://en.wikipedia.org/wiki/Network_congestion}{network
+      congestion}).
+  \item (Con) To run InterCom in two different hosts we will need to
+    establish a direct communication between them and it is very
+    likely that we will be in different LANs interconnected by one or
+    more NAT devices~\cite{srisuresh1999nat}.
+  \end{itemize}
+\item \textbf{Using a simulated link:}
+  \begin{itemize}
+  \item (Pro) The simulation of the link latency allows to control the
+    behavior of the link, allowing, for example, to run InterCom in
+    situations that are difficult to achieve in a real network.
+  \item (Con) The running environment must provide a way of
+    controlling the latency between
+    \href{https://en.wikipedia.org/wiki/Process_(computing)}{processes}. Fortunately,
+    in Linux we can control the latency (and the
+    \href{https://en.wikipedia.org/wiki/Bit_rate}{bit-rate}) of the
+    outgoing traffic (packets) using the command
+    \href{https://man7.org/linux/man-pages/man8/tc.8.html}{\texttt{tc}}
+    \cite{bert2012lartc}.
+  \end{itemize}
 \end{enumerate}
 
 \subsection{Measurement}
 In most cases we will test InterCom only on our host. Therefore, it
 can be useful to have an idea of how the latencies are distributed, at
 least from a statistical point of view.
+
+\begin{figure}
+  \begin{center}
+    \myfig{graphics/ping_timeline}{8cm}{500}
+    % \svgfig{graphics/ping_timeline}{8cm}{1800}
+  \end{center}
+  \caption{Timeline of a ping interaction between two hosts A and B,
+    interconnected by simple communication link.}
+  \label{fig:ping_timeline}
+\end{figure}
 
 To measure latencies, we will use
 \href{https://github.com/torvalds/linux/blob/master/net/ipv4/ping.c}{\texttt{ping}}~\cite{Kurose-Ross,Forouzan},
@@ -101,18 +120,8 @@ of link (a simple wire), it also holds that
   \text{RTT} = 2t_p + 2t_t.
   \label{eq:RTT}
 \end{equation}
-  
-\begin{figure}
-  \begin{center}
-    \myfig{graphics/ping_timeline}{8cm}{500}
-    % \svgfig{graphics/ping_timeline}{8cm}{1800}
-  \end{center}
-  \caption{Timeline of a ping interaction between two hosts A and B,
-    interconnected by simple communication link.}
-  \label{fig:ping_timeline}
-\end{figure}
 
-\section{What you have to do?}
+\section{What you have to do (deliverables)?}
 \label{sec:homework}
 
 \subsection{Characterize the latency in different scenarios}
@@ -126,8 +135,8 @@ Do the following steps:
    \begin{lstlisting}{language=bash}
 ping localhost -c 100 -s <payload_length_in_bytes> > /tmp/ping.txt
   \end{lstlisting}
-  Use a payload size similar to the chunk size that you expect to use
-  in your InterCom experiments.
+  Use a payload size similar to the chunk size (in bytes) that you
+  expect to use in your experiments.
 \item Compute the expected (considering that the RTT should
   double the) latency to the host of your interlocutor:\\\\
   \verb|export LC\_NUMERIC=en\_US.UTF-8 # Use "." instead of "," for the decimal separator|\\
@@ -204,7 +213,7 @@ ping -s <chunk_length_in_bytes> 192.168.1.1
   latency of the link between you a your interlocutor is the sum of
   the latency from your host to the router of your interlocutor added
   to the latency from your interlocutor's host to that router
-  (remember to edit the next line to use the right namefiles!):
+  (remember to edit the next line to use the right namefiles):
 
 \texttt{paste /tmp/<router\_public\_IP\_address>\_latencies.txt /tmp/<router\_private\_IP\_address>\_latencies.txt | awk
   \textquotesingle\{print \$1+\$2\}\textquotesingle~> /tmp/add.txt}\\
@@ -247,8 +256,8 @@ any traffic control.
 
 Quantify your QoE when you run InterCom in two different hosts that
 are connected to different\footnote{If you are unable to use two
-  different local networks, try to run InterCom in two hosts connected
-  to the same router.} local networks, without any traffic control.
+  different LANs, try to run InterCom in two hosts connected
+  to the same router.} LANs, without any traffic control.
 
 \subsubsection{In your host, but simulating the Internet}
 
@@ -260,11 +269,8 @@ are connected to different\footnote{If you are unable to use two
 tc qdisc show dev lo
   \end{lstlisting}
   
-  The output should be something like:
-  
-  \begin{lstlisting}{language=bash}
-qdisc noqueue 0: root refcnt 2
-  \end{lstlisting}
+  The output should be something like: ``\texttt{qdisc noqueue 0: root
+    refcnt 2}''
   
 \item Using the characterization of the Internet link previously
   obtained, use the command
@@ -307,11 +313,8 @@ sudo tc qdisc add dev lo root netem delay 100ms 10ms 25% distribution normal
 tc qdisc show dev lo
     \end{lstlisting}
     
-    that should output (or something very similar):
-    
-    \begin{lstlisting}{language=bash}
-qdisc netem 8009: root refcnt 2 limit 1000 delay 100ms  10ms 25%
-    \end{lstlisting}
+    that should output (or something very similar): ``\texttt{ qdisc
+      netem 8009: root refcnt 2 limit 1000 delay 100ms 10ms 25\%}''
   \end{enumerate}
 
 \item Measure QoE.
@@ -367,18 +370,21 @@ hide the jitter from the user~\cite{Kurose-Ross}.
 \href{https://en.wikipedia.org/wiki/Jitter#Jitter_buffers}{\emph{Dejitterizing}
   buffers}\footnote{Usually implemented with random access buffers.}
 are typically implemented as a circular buffer structure (see
-Fig.~\ref{fig:circular_buffer}). In an ideal situation (as
-depicted in the figure), the number of pending-to-be-played chunks
-available in the buffer is half of the number of slots in the buffer,
-and the chunks have arrived on time. In this example, the receiver
-(where the chunks are buffered) waits for 3 chunks before starting
-playing the chunk number 0.\footnote{Implementation tip: in a system
-where for each recorded chunk a chunk must be also played, a delay in
-the playback can be generated by sending zero-chunks to the DAC and
-then, after the delay, start sending the received chunk of audio, in
-the right order.} Notice that the number of slots in the buffer $2N$
-must double the number of chunks buffered during the buffering
-time proportional to $N$, in order to hide a jitter of $N$ chunk times. Notice also that this technique also introduces a $N$ fragment-time delay in the playback.
+Fig.~\ref{fig:circular_buffer}). In an ideal situation (as depicted in
+the figure), the number of pending-to-be-played chunks available in
+the buffer is half of the number of slots in the buffer, and the
+chunks have arrived on time. In this example
+(Fig.~\ref{fig:circular_buffer}), the receiver (where the chunks are
+buffered) waits for 3 chunks before starting playing the chunk number
+0.\footnote{Implementation tip: in a system where for each recorded
+  chunk a chunk must be also played, a delay in the playback can be
+  generated by sending zero-chunks to the DAC and then, after the
+  delay, start sending the received chunk of audio, in the right
+  order.} Notice that the number of slots in the buffer $2N$ must
+double the number of chunks buffered during the buffering time
+proportional to $N$, in order to hide a jitter of $N$
+chunk-times. Notice also that this technique also introduces a $N$
+chunk-time delay in the playback.
 
 \begin{figure}
   \begin{tabular}{ccc}
@@ -394,9 +400,9 @@ time proportional to $N$, in order to hide a jitter of $N$ chunk times. Notice a
   \label{fig:circular_buffer}
 \end{figure}
 
-For this new improved InterCom, users must provide a new parameter called \emph{buffering
-  time} must be provided by the users. This value (typically expressed
-in milliseconds) should be large enough to hide the network jitter but
+For this new improved InterCom, users must provide a new parameter
+called \emph{buffering time}. This value (typically expressed in
+milliseconds) should be large enough to hide the network jitter but
 small enough to keep the end-to-end (user) latency limited.
 
 The following guidelines have been used to implement the
