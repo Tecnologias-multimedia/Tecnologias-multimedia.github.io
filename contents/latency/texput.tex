@@ -43,7 +43,7 @@ latency varies \href{https://en.wikipedia.org/wiki/Randomness}{at
 \begin{enumerate}
 \item Run two instances of InterCom in two different
   \href{https://en.wikipedia.org/wiki/Host_(network)}{host}s interconected
-  by a shared link.
+  by a communication link.
 \item Run instances\footnote{In the general case, we can use two
     instances but it is also possible to use only one.} of InterCom
   and control the network latency.
@@ -54,23 +54,28 @@ Each option has pros and cons, from which we can highlight that:
   \begin{itemize}
   \item (Pro) The use of real latency is
     going to show the true behavior of InterCom between the used hosts,
-    which is quite impredictable (depend basically on the
+    which, in general, is quite impredictable (depend basically on the
     \href{https://en.wikipedia.org/wiki/Network_congestion}{network
       congestion}).
   \item (Con) To run InterCom in two different hosts we will need to
     establish a direct communication between them and it is very
     likely that we will be in different LANs interconnected by one or
-    more NAT devices~\cite{srisuresh1999nat}.
+    more
+    \href{https://tecnologias-multimedia.github.io/contents/NAT_traversal/}{NAT
+      devices}~\cite{srisuresh1999nat}.
   \end{itemize}
 \item \textbf{Using a simulated link:}
   \begin{itemize}
   \item (Pro) The simulation of the link latency allows to control the
     behavior of the link, allowing, for example, to run InterCom in
-    situations that are difficult to achieve in a real network.
+    situations that are difficult to find out in a real network.
   \item (Con) The running environment must provide a way of
     controlling the latency between
     \href{https://en.wikipedia.org/wiki/Process_(computing)}{processes}. Fortunately,
-    in Linux we can control the latency (and the
+    in Linux\footnote{In other OS, other tools could be avaiable. If
+      this is not the case, remember that we can run InterCom in a
+      virtual machine to control the network latency.} we can control
+    the latency (and the
     \href{https://en.wikipedia.org/wiki/Bit_rate}{bit-rate}) of the
     outgoing traffic (packets) using the command
     \href{https://man7.org/linux/man-pages/man8/tc.8.html}{\texttt{tc}}
@@ -79,8 +84,8 @@ Each option has pros and cons, from which we can highlight that:
 \end{enumerate}
 
 \subsection{Measurement}
-In most cases we will test InterCom only on our host. Therefore, it
-can be useful to have an idea of how the latencies are distributed, at
+In most cases we will test InterCom only in our host. Therefore, it
+can be useful to have an idea of how the latencies are, at
 least from a statistical point of view.
 
 \begin{figure}
@@ -107,15 +112,15 @@ host, measuring the so called
 Time). For example, in the Figure~\ref{fig:ping_timeline} are
 described the different time components in which a RTT can be
 decomposed. In this figure, $t_t$ stands for \emph{transmission time},
-and $t_p$ (again) for \emph{propagation time}. A simple link (a cable,
-for example) using
+and $t_p$ (again) for \emph{propagation time}. A simple link (two
+wires, for example) using
 \href{https://en.wikipedia.org/wiki/Time-division_multiple_access}{TDM}
 (Time-Domain Multiplexing) has been supposed. For this reason, the
 propagation and transmission times are identical in both
 directions. Notice that if the payload of the \verb|ping| message has
 only 64 bytes (the default value in most \verb|ping| implementations)
-and the bit rate of the link is high, then $t_p\gg t_t.$ For this type
-of link (a simple wire), it also holds that
+and the bit rate of the link is high, then $t_p\gg t_t.$ In a LAN, for
+example, it also holds that
 \begin{equation}
   \text{RTT} = 2t_p + 2t_t.
   \label{eq:RTT}
@@ -178,7 +183,7 @@ plot "/tmp/localhost_histogram.txt" with histogram
 \subsubsection{In the Internet}
 
 This scenario can be useful to test InterCom in your host, but
-simulating a real connection between hosts in different local
+simulating later a real connection between hosts in different local
 networks\footnote{If you are unable to use two different local
   networks, try to run InterCom in two hosts connected to the same
   router.}. For doing that:
@@ -391,12 +396,12 @@ chunk-time delay in the playback.
     \vbox{\myfig{graphics/circular_buffer1}{2cm}{200}} & \vbox{\myfig{graphics/circular_buffer2}{2cm}{200}} & \vbox{\myfig{graphics/circular_buffer3}{2cm}{200}} \\
     (a) & (b) & (c)
   \end{tabular}
-  \caption{A circular buffer with 6 slots (space for 6 chunks). Up to
-    the half of the buffer is occupied (slots in gray) because the
-    buffering time is 3 chunk times and 3 chunks (with chunk number 0,
-    1 and 2 in the beginning, subfigure (a)) have been received. The
-    first chunk to be played is chunk 0 (subfigure (b)). Then, a new
-    chunk (chunk number 3) is received and buffered (subfigure (c)).}
+  \caption{A circular buffer with 6 slots (space for 6 chunks). Half
+    of the buffer is occupied (slots in gray) because the buffering
+    time is 3 chunk times and 3 chunks (with chunk number 0, 1 and 2
+    in the beginning, subfigure (a)) have been received. The first
+    chunk to be played is chunk 0 (subfigure (b)). Then, a new chunk
+    (chunk number 3) is received and buffered (subfigure (c)).}
   \label{fig:circular_buffer}
 \end{figure}
 
@@ -420,8 +425,9 @@ The following guidelines have been used to implement the
   InterCom (the method \verb|record_send_and_play()|) is a method that
   runs as an
   \href{https://en.wikipedia.org/wiki/Interrupt_handler}{interrup
-    handler} that is called each time a new chunk is available
-  in the ADC (see the preceding milestone). More precisely:
+    handler} that is called each time a new chunk is available in the
+  \href{https://en.wikipedia.org/wiki/Analog-to-digital_converter}{ADC}. More
+  precisely:
   \begin{enumerate}
   \item To minimize the latency, the recorded chunks are sent
     to the interlocutor as soon as possible.
@@ -442,8 +448,9 @@ The following guidelines have been used to implement the
   or
   \href{https://docs.python.org/3/library/multiprocessing.html}{multiprocessing}
   packages because the interruption handler (the so called
-  \emph{callback}() function in sounddevice) already runs in parallel
-  with the main thread.
+  \emph{callback}() function in
+  \href{https://python-sounddevice.readthedocs.io/en/0.3.14/api.html}{sounddevice})
+  already runs in parallel with the main thread.
 \end{enumerate}
 
 This is an overview of the implementation:
@@ -496,14 +503,14 @@ every new received chunk.
 \verb|buffer.py| can be run to intercommunicate two users (or one user
 in the case of a simulation), and the buffering time (in miliseconds)
 can be controlled with the \verb|--buffering_time| parameter. Using a
-real o simulated environment, find the minimum buffering time that
+real o a simulated environment, find the minimum buffering time that
 allows you to hide\footnote{Allowing a good quality of the sound.} the
 jitter in your environment. If you are using a simulated one, find
 such a minimal buffering time in different jitter configurations
 (value, correlation, and distribution). Experiment also with the loss
 of chunks to listen to the effect of playing the empty chunks.
 
-\section{Deliverables}
+\section{Deliverables (again)}
 
 The results of the experiments proposed in Section~\ref{sec:homework}
 and Section~\ref{sec:homework2}. Remember also that now, the class
