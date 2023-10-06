@@ -195,9 +195,9 @@ this point, we basically have two alternatives:
 \item Run two instances of InterCom in two different
   \href{https://en.wikipedia.org/wiki/Host_(network)}{host}s interconected
   by a communication link.
-\item Locally, run instances\footnote{In the general case, we can use two
-    instances but it is also possible to use only one.} of InterCom
-  and control the network latency.
+\item Locally, run instances\footnote{In the general case, we can use
+two instances but it is also possible to use only one.} of InterCom in
+  the same host and control the network latency.
 \end{enumerate}
 Each option has pros and cons, from which we can highlight that:
 \begin{enumerate}
@@ -219,7 +219,7 @@ Each option has pros and cons, from which we can highlight that:
   \begin{itemize}
   \item (Pro) The simulation of the link latency allows to control the
     behavior of the link, allowing, for example, to run InterCom in
-    situations that are difficult to find out in a real network.
+    situations that are difficult to reproduce in a real network.
   \item (Con) The running environment must provide a way of
     controlling the latency between
     \href{https://en.wikipedia.org/wiki/Process_(computing)}{processes}. Fortunately,
@@ -510,12 +510,9 @@ such a minimal buffering time in different jitter configurations
 (value, correlation, and distribution). Experiment also with the loss
 of chunks to listen to the effect of playing the empty chunks.
 
-\subsection{Deliverables (again)}
+\subsection{Create the \texttt{NAT\_Traversal} module}
 
-Summarizing, you must present the results of the experiments proposed
-in Section~\ref{sec:homework} and
-Section~\ref{sec:homework2}. Remember also that now, the class
-\texttt{Buffering} in InterCom should inherit \texttt{NAT\_Traversal}
-instead of \texttt{Minimal}.
+Finally, remember that the class \texttt{Buffering} in InterCom should
+inherit \texttt{NAT\_Traversal} instead of \texttt{Minimal}.
 
 \bibliography{networking,nat}
