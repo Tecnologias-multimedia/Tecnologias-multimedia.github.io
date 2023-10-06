@@ -19,7 +19,7 @@
 
 <h2 class='titleHead'>NAT Traversal</h2>
  <div class='author'><a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp; </span><a href='https://www.marcoslupion.com/'><span class='ecrm-1200'>Marcos Lupión Lorente</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>September 30, 2023</span></div>
+<div class='date'><span class='ecrm-1200'>October 6, 2023</span></div>
    </div>
    <h3 class='likesectionHead'><a id='x1-1000'></a>Contents</h3>
    <div class='tableofcontents'>
@@ -281,8 +281,9 @@ nat_type, external_ip, external_port = stun.get_ip_info(stun_host=’stun.l.
 </pre>
 <!-- l. 241 --><p class='nopar'>
 </p><!-- l. 243 --><p class='indent'>   Notice that STUN servers do not provide information about other peers.
-Therefore, you need to specify (manually) the end-point of your interlocutor when
-using InterCom, before the UDP hole punching maneuver.
+Therefore, you need to specify (manually) the end-point of your interlocutor
+when using InterCom (which automatically performs the UDP hole punching
+maneuver).
 </p><!-- l. 248 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>8   </span> <a id='x1-120008'></a>Port-forwarding</h3>
@@ -306,6 +307,9 @@ that:
      by the STUN server for both InterCom instances you should be able to
      communicate them if you are using Cone NATs.
      </li>
+                                                                  
+
+                                                                  
 <li class='enumerate' id='x1-13006x2'>(Optional) In the case of both<span class='footnote-mark'><a href='#fn10x0' id='fn10x0-bk'><sup class='textsuperscript'>10</sup></a></span><a id='x1-13007f10'></a>
      NATs are symmetric, the two instances of InterCom will receive a different
      external port when they query the STUN server and send data to the other
@@ -336,10 +340,10 @@ you have basically the following options:
          </li>
 <li class='enumerate' id='x1-13017x3'>Using <a href='http://mininet.org/'>Mininet</a>.
          </li>
-<li class='enumerate' id='x1-13019x4'>Using <a href='https://www.qemu.org/'>QEMU</a>.
                                                                   
 
                                                                   
+<li class='enumerate' id='x1-13019x4'>Using <a href='https://www.qemu.org/'>QEMU</a>.
          </li>
 <li class='enumerate' id='x1-13021x5'>Using <a href='https://www.nsnam.org/'>Network Simulator NS-3</a>.
          </li>

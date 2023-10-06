@@ -242,8 +242,8 @@ nat_type, external_ip, external_port = stun.get_ip_info(stun_host='stun.l.google
 
 Notice that STUN servers do not provide information about other
 peers. Therefore, you need to specify (manually) the end-point of your
-interlocutor when using InterCom, before the UDP hole punching
-maneuver.
+interlocutor when using InterCom (which automatically performs the UDP
+hole punching maneuver).
 
 \section{Port-forwarding}
 
