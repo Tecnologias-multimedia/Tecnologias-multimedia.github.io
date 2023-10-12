@@ -1,7 +1,7 @@
-include $(HOME)/LaTeX_templates/Makefile
+include $(LATEX_TEMPLATES)/Makefile
 
 # intercom
-$(HOME)/repos/intercom/:
+$(HOME)/repos/InterCom/:
 	git clone git@github.com:Tecnologias-multimedia/InterCom.git $@
 
 # ALSA
@@ -60,7 +60,7 @@ $(HOME)/repos/Xubuntu_install/:
 $(HOME)/repos/Xubuntu_install/index.html:	$(HOME)/repos/Xubuntu_install/
 	make -C $(HOME)/repos/Xubuntu_install/
 
-default:	$(HOME)/repos/intercom/ \
+default:	$(HOME)/repos/InterCom/ \
 		$(HOME)/repos/ALSA/index.html \
 		$(HOME)/repos/intro_to_sounddevice/index.html \
 		$(HOME)/repos/JACK/index.html \
