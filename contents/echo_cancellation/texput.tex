@@ -8,7 +8,8 @@
 
 
 One of the first problems we encounter when we use the
-\texttt{buffer.py} version of InterCom is that if we don't use
+\texttt{buffer.py} version\footnote{And obviously, any other parent
+  version of \texttt{buffer.py}.} of InterCom is that if we don't use
 headphones, the sound that comes out of our PC's speaker reaches our
 microphone and some time later, that sound reaches our interlocutor in
 the form of an echo, which is reproduced by his speaker, which is
@@ -21,8 +22,8 @@ gain of the amplifier that feeds our speaker. Unfortunately, this is
 not always possible, among other reasons, because if the volume is too
 low, we will not hear our interlocutor.
 
-Another way is to subtract from the signal that our microphone picks
-up ${\mathbf m}$, the signal that our speaker is reproducing
+Another way is to subtract from the signal ${\mathbf m}$ that our microphone picks
+up, the signal that our speaker is reproducing
 ${\mathbf s}$, resulting in an echo cancellation, and therefore, of
 the coupling that it generates. The key in this process is to find
 out:
@@ -43,7 +44,7 @@ occur after performing the operation
 \begin{equation}
    {\mathbf c}_i = {\mathbf m}_i - a{\mathbf s}_{i+d},
 \end{equation}
-where $\{{\mathbf c}_i\}$ is the signal sent with the echo cancelled.
+where ${\mathbf c}=\{{\mathbf c}_i\}$ is the signal sent with the echo cancelled.
 
 Since $d$ depends exclusively on the physical configuration of our PC
 (assuming that there are no other sources of echo, such as walls), we
@@ -53,15 +54,20 @@ time after being digitized by our microphone, and measuring with a
 stopwatch the time that elapses from when the sound is reproduced
 until it is registered again.
 
-To calculate $a$ what we can do is check if, in the absence of local
-sound (only having the speaker as sound source),
-${\mathbf c}={\mathbf 0}$, that is, if we have canceled the echo. If
-the energy of ${\mathbf c}$ is not zero, then the value of $a$ is too
-high or too low. So what we will do is increase $a$ and see if the
-energy decreases, and if it doesn't, then we will decrease $a$. In
-general we will never cancel the echo completely, but we should always
-be able to find a value for $a$ that minimizes the energy
-${\mathbf c}$ (as long as we are silent).
+To calculate $a$ what we can do is to check if, in the absence of
+local sound (only having the speaker as sound source),
+${\mathbf c}\approx{\mathbf 0}$, or at least a sound where
+${\mathbf s}$ is not recognized. Otherwise, the value of $a$ is too
+high or too low and therefore, what we will do is increase $a$ and see
+if the energy~\cite{vetterli2014foundations} decreases, and if it doesn't, then we will decrease
+$a$. In general we will never cancel the echo completely, but we
+should always be able to find a value for $a$ that minimizes the
+energy ${\mathbf c}$ (as long as we are silent).
+
+Notice that in this discussion we have supposed that the spectrums~\cite{kovacevic2013fourier,Oppenheim2} of
+${\mathbf s}$ and ${\mathbf m}$ are identical. If this is not true, we
+should also compute the filter that should be applied to ${\mathbf s}$ to
+minimize the energy of ${\mathbf c}$.
 
 \section{Deliverables}
 
@@ -70,4 +76,4 @@ A Python module called \texttt{cancel\_echo.py} that inherits from
 
 \section{Resources}
 
-\bibliography{networking,nat}
+\bibliography{signal_processing}
