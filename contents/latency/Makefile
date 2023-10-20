@@ -1,2 +1,2 @@
-include $(HOME)/LaTeX_templates/Makefile
+include $(LATEX_TEMPLATES)/Makefile
 default:	index.html
