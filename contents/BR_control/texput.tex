@@ -312,6 +312,16 @@ definition, and this does not depend on the bit-rate control.} There
 
 \section{What do you have to do?}
 %{{{ 
+
+\subsection{Which data-ordering performs better?}
+%{{{ 
+Determine empirically which ordering of the chunk data is the most
+efficient from a lossless data compression point of view (the smaller
+the bit-rates, the higher the compression). Use the audio sequence you
+want. Some samples are stored in the \verb|data| directory of
+InterCom.
+%}}}
+
 \subsection{Estimate the bit-rate in an Internet link}
 %{{{ 
 Usually, we need to use a tool such as \href{https://iperf.fr/}{iPerf}
@@ -348,7 +358,7 @@ where $B$ is the number of bits sent in a \verb|ping|
   \label{eq:tt}
 \end{equation}
 an equation that can be determined by revisiting the \verb|ping|
-timeline (Fig.~1) and the Eq.~2 of the
+timeline (\href{https://tecnologias-multimedia.github.io/contents/latency/graphics/ping_timeline.svg}{Fig.~3}) and the Eq.~2 of the
 \href{https://tecnologias-multimedia.github.io/study_guide/latency/}{previous
   milestone}.
 
@@ -485,15 +495,6 @@ Recall to delete the rules after they are unnecessary (example to delete the pre
 \end{lstlisting}
 %}}}
 
-\subsection{Which data-ordering performs better?}
-%{{{ 
-Determine empirically which ordering of the chunk data is the most
-efficient from a lossless data compression point of view (the smaller
-the bit-rates, the higher the compression). Use the audio sequence you
-want. Some samples are stored in the \verb|data| directory of
-InterCom.
-%}}}
-
 \subsection{Compute RD (Rate/Distortion) curves}
 %{{{ 
 Considering the
@@ -514,7 +515,7 @@ points of the RD curves.
 
 \section{Deliverables}
 
-A report documenting the experiments and the results.
+A report documenting the experiments and the results. Use Jupyter.
 
 \section{Resources}
 
