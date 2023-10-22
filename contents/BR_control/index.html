@@ -19,12 +19,12 @@
 
 <h2 class='titleHead'>Bit-Rate Control in InterCom</h2>
  <div class='author'><a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp; </span><a href='https://www.marcoslupion.com/'><span class='ecrm-1200'>Marcos Lupión Lorente</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>September 10, 2023</span></div>
+<div class='date'><span class='ecrm-1200'>October 22, 2023</span></div>
    </div>
    <h3 class='likesectionHead'><a id='x1-1000'></a>Contents</h3>
    <div class='tableofcontents'>
     <span class='sectionToc'>1 <a href='#x1-20001' id='QQ2-1-2'>Description</a></span>
-<br />     <span class='subsectionToc'>1.1 <a href='#x1-30001.1' id='QQ2-1-3'>Impact of the link throughput</a></span>
+<br />     <span class='subsectionToc'>1.1 <a href='#x1-30001.1' id='QQ2-1-3'>Impact of the network throughput</a></span>
 <br />     <span class='subsectionToc'>1.2 <a href='#x1-40001.2' id='QQ2-1-4'>Compressing the audio data with zlib</a></span>
 <br />     <span class='subsectionToc'>1.3 <a href='#x1-50001.3' id='QQ2-1-6'>Quantization</a></span>
 <br />     <span class='subsectionToc'>1.4 <a href='#x1-60001.4' id='QQ2-1-7'>(Bit-) Rate control and distortion</a></span>
@@ -46,32 +46,32 @@
                                                                   
 <!-- l. 13 --><p class='noindent'>
 </p>
-   <h4 class='subsectionHead'><span class='titlemark'>1.1   </span> <a id='x1-30001.1'></a>Impact of the link throughput</h4>
-<!-- l. 15 --><p class='noindent'>Along with the latency and its variation (jitter), another main aspect to
-consider about the <a href='https://en.wikipedia.org/wiki/Telecommunications_link'>transmission link</a> used in an InterCom session is the <a href='https://en.wikipedia.org/wiki/Channel_capacityhttps://en.wikipedia.org/wiki/Network_throughput'>link
+   <h4 class='subsectionHead'><span class='titlemark'>1.1   </span> <a id='x1-30001.1'></a>Impact of the network throughput</h4>
+<!-- l. 15 --><p class='noindent'>Along with the latency and its variation (jitter), another main aspect to consider about
+the <a href='https://en.wikipedia.org/wiki/Telecommunications_link'>transmission link</a> (a section of the network) used in an InterCom session is the <a href='https://en.wikipedia.org/wiki/Channel_capacityhttps://en.wikipedia.org/wiki/Network_throughput'>link
 throughput</a><span class='footnote-mark'><a href='#fn1x0' id='fn1x0-bk'><sup class='textsuperscript'>1</sup></a></span><a id='x1-3001f1'></a>
-that it can provide <span class='cite'>[<a href='#XForouzan'>2</a>, <a href='#XTanenbaum'>6</a>]</span>. This bit rate depends on the maximum <a href='https://en.wikipedia.org/wiki/Channel_capacity'>capacity</a> (a
+that it can provide <span class='cite'>[<a href='#XForouzan'>2</a>, <a href='#XTanenbaum'>6</a>]</span>. This bit-rate depends on the maximum <a href='https://en.wikipedia.org/wiki/Channel_capacity'>capacity</a> (a
 characteristic closely related with the available <a href='https://en.wikipedia.org/wiki/Bandwidth_(signal_processing)'>bandwidth</a>) and the <a href='https://en.wikipedia.org/wiki/Network_congestion'>congestion level</a>
 (that basically depends on the load) of the link. In general, we can suppose that the
 capacity is constant over time (the bandwidth provided by the link does not vary
-with time). On the contrary, the throughput is time-variating and quite
-unpredictable, because it depends on the congestion level that, in turn, depends on
-the behavior of the network users.
+with time). On the contrary, the throughput is time-varying and quite unpredictable,
+because it depends on the congestion level that, in turn, depends on the behavior of
+the network users.
 </p><!-- l. 37 --><p class='indent'>   In this milestone, we will measure the impact of the link throughput on the
 <a href='https://en.wikipedia.org/wiki/Quality_of_experience'>QoE</a><span class='footnote-mark'><a href='#fn2x0' id='fn2x0-bk'><sup class='textsuperscript'>2</sup></a></span><a id='x1-3002f2'></a>
-provided by the current implementation of InterCom (<a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/buffer.py'><span class='ectt-1000'>buffer.py</span></a>). Similarly to
+provided by the current implementation of InterCom (<a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/cancel_echo.py'><span class='ectt-1000'>cancel_echo.py</span></a>). Similarly to
 the procedure used to measure the impact of latency and jitter, we will
 use <a href='https://man7.org/linux/man-pages/man8/tc.8.html'><span class='ectt-1000'>tc</span></a> <span class='cite'>[<a href='#Xbert2012lartc'>3</a>]</span> to control the amount of data that an InterCom instance will
 be allowed to send in a local environment, with the aim of simulating a
-real environment. Notice that this upper bound in the bit rate will also
+real environment. Notice that this upper bound in the bit-rate will also
 affect the loss of chunks because if the link capacity is smaller than the
-audio bit rate (throughput), sooner or later the link will discard those
+audio bit-rate (throughput), sooner or later the link will discard those
 chunks that cannot be buffered in the retransmission nodes (routers and
 switches)<span class='footnote-mark'><a href='#fn3x0' id='fn3x0-bk'><sup class='textsuperscript'>3</sup></a></span><a id='x1-3003f3'></a>.
 </p><!-- l. 57 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead'><span class='titlemark'>1.2   </span> <a id='x1-40001.2'></a>Compressing the audio data with <a href='https://zlib.net/'>zlib</a></h4>
-<!-- l. 59 --><p class='noindent'>To reduce the bit rate, we need some way of compressing the data, an action that
+<!-- l. 59 --><p class='noindent'>To reduce the bit-rate, we need some way of compressing the data, an action that
 also will reduce the throughput in InterCom. The <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>pack() </span></span></span> and <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>unpack() </span></span></span> methods
 can compress and decompress, respectively, the chunks that are processed. To
 compress and decompress, we will use a free <a href='https://en.wikipedia.org/wiki/Codec'>codec</a> named <a href='https://en.wikipedia.org/wiki/DEFLATE'>DEFLATE</a>, which is based
@@ -183,18 +183,18 @@ required.
 <!-- l. 224 --><p class='noindent'>The number of representation levels used by a quantizer is basically dependent on the
 quantization step (size), typically denoted by \(\Delta \). The higher \(\Delta \), the smaller the number
 of representation levels, and therefore the higher the distortion generated by the
-quantization error (see the previous notebooks), and the smaller the output bit
-rate. This generates a <a href='https://en.wikipedia.org/wiki/Rate%E2%80%93distortion_theory'>rate/distortion</a> trade-off that is descriptive of all lossy
+quantization error (see the previous notebooks), and the smaller the output
+bit-rate. This generates a <a href='https://en.wikipedia.org/wiki/Rate%E2%80%93distortion_theory'>rate/distortion</a> trade-off that is descriptive of all lossy
 compressors.
-</p><!-- l. 232 --><p class='indent'>   Controlling the bit rate through the values of \(\Delta \) is a technique that can be used in
+</p><!-- l. 232 --><p class='indent'>   Controlling the bit-rate through the values of \(\Delta \) is a technique that can be used in
 real-time transmission systems to minimize the jitter and the loss of packets when
 <a href='https://en.wikipedia.org/wiki/Network_congestion'>congestion</a> occurs. However, notice that depending of the <a href='https://en.wikipedia.org/wiki/Entropy_(information_theory)'>entropy</a> coding stage
 and the characteristics of the signal (<a href='https://en.wikipedia.org/wiki/Variance'>variance</a>, entropy) may not exist a
-clear relationship between \(\Delta \) and the output bit rate. This happens using
+clear relationship between \(\Delta \) and the output bit-rate. This happens using
 DEFLATE.
 </p><!-- l. 243 --><p class='indent'>   Notice also that any rate control algorithm based on quantization has a
 characteristic RD (Rate/Distortion) curve, in which the X axis represents the (in the
-case of InterCom, received) bit rate, and the Y axis the distortion in the
+case of InterCom, received) bit-rate, and the Y axis the distortion in the
 reconstruction (in the case of InterCom, the played audio sequence) obtained after
 the quantization. Some examples can be found in <a href='https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/study_guide/BR_control/audio_quantization.ipynb'>this notebook</a>.
 </p><!-- l. 253 --><p class='noindent'>
@@ -266,7 +266,7 @@ minimum link latency is a constant, and the congestion of the link always increa
 it.
 </p><!-- l. 363 --><p class='indent'>   Therefore, supposing that \(t_p\) is constant and using the
 average<span class='footnote-mark'><a href='#fn8x0' id='fn8x0-bk'><sup class='textsuperscript'>8</sup></a></span><a id='x1-9001f8'></a> \(\text {RTT}\)
-to transmit \(B\) bits (\(B\) as large as possible), the bit rate value \(b\) determined by
+to transmit \(B\) bits (\(B\) as large as possible), the bit-rate value \(b\) determined by
 Eq. \eqref{eq:b} can be considered as a good estimation for the link of the near
 future.
 </p><!-- l. 370 --><p class='indent'>   So, to determine \(b\), we must perform the following steps:
@@ -300,10 +300,10 @@ throughput:
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-9012x1'>In <a href='https://en.wikipedia.org/wiki/Localhost'><span class='ectt-1000'>localhost</span></a>.
      </li>
-<li class='enumerate' id='x1-9014x2'>In <span class='ectt-1000'>localhost</span>, we limit the bit rate to <span class='ectt-1000'>tc</span>.
+<li class='enumerate' id='x1-9014x2'>In <span class='ectt-1000'>localhost</span>, we limit the bit-rate to <span class='ectt-1000'>tc</span>.
      </li>
 <li class='enumerate' id='x1-9016x3'>Between two hosts in your <a href='https://en.wikipedia.org/wiki/Local_area_network'>local network</a> (your host and your router, for
-     example). Notice that in this case, you should not obtain a bit rate higher
+     example). Notice that in this case, you should not obtain a bit-rate higher
      than the capacity of your <a href='https://en.wikipedia.org/wiki/Network_interface_controller'>network adapter</a>.
      </li>
 <li class='enumerate' id='x1-9018x4'>Between your host and a public host of the Internet. Try <a href='https://www.meter.net/'><span class='ectt-1000'>www.meter.net</span></a>
@@ -314,7 +314,7 @@ throughput:
 <!-- l. 419 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead'><span class='titlemark'>2.2   </span> <a id='x1-100002.2'></a>Simulate the link</h4>
-<!-- l. 421 --><p class='noindent'>With the bitrate value \(b\) calculated from the previous section, simulate this link
+<!-- l. 421 --><p class='noindent'>With the bit-rate value \(b\) calculated from the previous section, simulate this link
 (locally) with:
 </p>
    <!-- l. 424 -->
@@ -379,7 +379,7 @@ previous rules):
 </p>
    <h4 class='subsectionHead'><span class='titlemark'>2.3   </span> <a id='x1-110002.3'></a>Which data-ordering performs better?</h4>
 <!-- l. 484 --><p class='noindent'>Determine empirically which ordering of the chunk data is the most efficient from a
-lossless data compression point of view (the smaller the bit rates, the higher the
+lossless data compression point of view (the smaller the bit-rates, the higher the
 compression). Use the audio sequence you want. Some samples are stored in the <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>data</span></span></span>
 directory of InterCom.
                                                                   
