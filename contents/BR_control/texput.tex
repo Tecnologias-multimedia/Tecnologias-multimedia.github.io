@@ -318,22 +318,26 @@ definition, and this does not depend on the bit-rate control.} There
 Determine empirically which ordering of the chunk data is the most
 efficient from a lossless data compression point of view (the smaller
 the bit-rates, the higher the compression). Use the audio sequence you
-want. Some samples are stored in the \verb|data| directory of
-InterCom.
+want.\footnote{Some samples are stored in the \verb|data| directory of
+  InterCom.} Notice that using different audio files you could obtain
+different results.
 %}}}
 
 \subsection{Estimate the bit-rate in an Internet link}
-%{{{ 
-Usually, we need to use a tool such as \href{https://iperf.fr/}{iPerf}
-to
+% {{{
+Apart from determining a suitable entropy coding scheme, we will need
+to deal with the limitation of the throughput provided by the
+transmission link. In general, we cannot expect that link will be able to transmit 1.5 Mbps uninterruptedly.
+
+Usually, to determine the throughput, we need to use a tool such as
+\href{https://iperf.fr/}{iPerf} to
 \href{https://en.wikipedia.org/wiki/Measuring_network_throughput}{measure
-  the link capacity} between
-two \href{https://datatracker.ietf.org/doc/html/rfc4113}{end-points}
-(of
+  the link capacity} between two
+\href{https://datatracker.ietf.org/doc/html/rfc4113}{end-points} (of
 different \href{https://en.wikipedia.org/wiki/Host_(network)}{hosts})
-in the Internet. This procedure implies that we must have access to
-both hosts to install and run this program, privileges that are not
-always available.
+in the Internet. Unfortunately, this procedure implies that we must
+have access to both hosts to install and run this program, privileges
+that are not always available.
 
 Alternatively, we can estimate the
 \href{https://en.wikipedia.org/wiki/Throughput}{link throughput} using
@@ -359,7 +363,7 @@ where $B$ is the number of bits sent in a \verb|ping|
 \end{equation}
 an equation that can be determined by revisiting the \verb|ping|
 timeline (\href{https://tecnologias-multimedia.github.io/contents/latency/graphics/ping_timeline.svg}{Fig.~3}) and the Eq.~2 of the
-\href{https://tecnologias-multimedia.github.io/study_guide/latency/}{previous
+\href{https://tecnologias-multimedia.github.io/contents/latency/}{previous
   milestone}.
 
 Notice that if the payload of the ping is small enough ($0$ bytes
