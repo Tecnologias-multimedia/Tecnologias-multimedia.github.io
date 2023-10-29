@@ -313,12 +313,14 @@ definition, and this does not depend on the bit-rate control.} There
 \section{What do you have to do?}
 %{{{ 
 
+Please, answer the following questions:
+
 \subsection{Which data-ordering performs better?}
 %{{{ 
 Determine empirically which ordering of the chunk data is the most
 efficient from a lossless data compression point of view (the smaller
 the bit-rates, the higher the compression). Use the audio sequence you
-want.\footnote{Some samples are stored in the \verb|data| directory of
+want.\footnote{Some samples are stored in the \texttt{data} directory of
   InterCom.} Notice that using different audio files you could obtain
 different results.
 %}}}
@@ -326,8 +328,9 @@ different results.
 \subsection{Estimate the bit-rate in an Internet link}
 % {{{
 Apart from determining a suitable entropy coding scheme, we will need
-to deal with the limitation of the throughput provided by the
-transmission link. In general, we cannot expect that link will be able to transmit 1.5 Mbps uninterruptedly.
+to deal with the limit of the throughput that the transmission link is
+able to provide. In general, we cannot expect that link will be able
+to transmit 1.5 Mbps uninterruptedly.
 
 Usually, to determine the throughput, we need to use a tool such as
 \href{https://iperf.fr/}{iPerf} to
@@ -344,13 +347,13 @@ Alternatively, we can estimate the
 \href{https://github.com/torvalds/linux/blob/master/net/ipv4/ping.c}{\texttt{ping}}
 (see the
 \href{https://tecnologias-multimedia.github.io/contents/latency/}{previous
-  milestone}). At this point, it is important to realize that
+  milestone}). However, it is important to realize that
 \texttt{ping} has been designed to measure latencies, not bit-rates,
 and that, for this reason, we will only be able to estimate
 throughputs, rougtly.
 
-The transmission bitrate available between two directly reachable IP
-devices can be estimated as
+Said that, the transmission bitrate available between two directly
+reachable IP devices can be found with
 \begin{equation}
   b=\frac{B}{t_t},
   \label{eq:b}
@@ -362,37 +365,37 @@ where $B$ is the number of bits sent in a \verb|ping|
   \label{eq:tt}
 \end{equation}
 an equation that can be determined by revisiting the \verb|ping|
-timeline (\href{https://tecnologias-multimedia.github.io/contents/latency/graphics/ping_timeline.svg}{Fig.~3}) and the Eq.~2 of the
+timeline
+(\href{https://tecnologias-multimedia.github.io/contents/latency/graphics/ping_timeline.svg}{Fig.~3})
+and the Eq.~2 of the
 \href{https://tecnologias-multimedia.github.io/contents/latency/}{previous
-  milestone}.
-
-Notice that if the payload of the ping is small enough ($0$ bytes
-ideally, and therefore $t_t=0$), we can consider that
+  milestone}. In this expression, $\text{RTT}_{\text{max}}$ represents
+  the average\footnote{Remember that ping can generate a number of
+    time measurements.} RTT measured when we send the
+  maximum\footnote{We should use a payload as large as possible
+    (ideally, an infinite number of bytes), in order to make $t_t$ a
+    significant amount of time, which is easy to measure} number of
+  bytes in the payload of the \verb|ping|, and
 \begin{equation}
   t_p \approx \frac{\text{RTT}_{\text{min}}}{2},
   \label{eq:tp}
 \end{equation}
-and that to measure $\text{RTT}$ in Eq.~\eqref{eq:tt}, we
-should use a payload as large as possible (ideally, an infinite number
-of bytes), in order to make $t_t$ a significant amount of time, which is easy
-to measure. Note also that we should use the smallest RTT value of a
-\texttt{ping} session of measurements in the Eq.~\eqref{eq:tp} because
-the minimum link latency is a constant, and the congestion of the link
-always increases it.
+where $\text{RTT}_{\text{min}}$ presents the minimum\footnote{Again,
+  remember that ping returns a collection of RTTs, a we should use the
+  minimun beause the latency of the link should be a constant and the
+  congestion always increases this value.} RTT measurement when we
+send the minimum\footnote{If the payload of the ping is small enough
+  ($0$ bytes ideally), it would happen that $t_t=0$.} payload.
 
-Therefore, supposing that $t_p$ is constant and using the
-average\footnote{Remember that with the \texttt{ping} command, we
-iterate several times and the tool returns average values.}
-$\text{RTT}$ to transmit $B$ bits ($B$ as large as possible), the
-bit-rate value $b$ determined by Eq.~\eqref{eq:b} can be considered as
-a good estimation for the link of the near future.
+Therefore, to estimate $b$ for the near future, we must perform the
+following steps:
 
-So, to determine $b$, we must perform the following steps:
 \begin{enumerate}
+  
 \item Run \texttt{ping} using the smallest possible payload that
   provides RTTs values.\footnote{The minimal payload for a
     \texttt{ping} message can be 0, but depending on the
-    implementation of \texttt{ping} you may be able to use a larger
+    implementation of \texttt{ping} you might have to use a larger
     value.} Use it to calculate $t_p$.
   
 \item Run \texttt{ping} using the largest possible payload to achieve
@@ -405,22 +408,22 @@ So, to determine $b$, we must perform the following steps:
   RTT and the minimal $t_p$.
   
 \item Finally, use Eq.~\eqref{eq:b} to determine $b$.
+  
 \end{enumerate}
 
 If the devices cannot be \texttt{ping}-ed, and supposing that there is
 only one point in the communication link that is filtering the ICMP
 Echo Request traffic in each direction, then we can apply the same
 technique that was used in the
-\href{https://tecnologias-multimedia.github.io/study_guide/latency/}{previous
+\href{https://tecnologias-multimedia.github.io/contents/latency/}{previous
   milestone}, which basically consists in computing the total RTT as
 the sum of the RTTs from the devices that we want to connect (where
 the InterCom is it supposed to be run) to the filter (possiblely, one
-of your home routers). A similar throughput estimation should be
-obtained considering only the slower part of the total link.
+of your home routers).
 
-(Optional) To gain experience with all this stuff, measure
-your bandwidth (using your local host) with different \texttt{ping}
-servers and try to compute the link throughput:
+To gain experience with all this stuff, measure your bandwidth (using
+your local host) with different \texttt{ping} servers and try to
+compute the link throughput:
 \begin{enumerate}
 \item In \href{https://en.wikipedia.org/wiki/Localhost}{\texttt{localhost}}.
 \item In \texttt{localhost}, we limit the bit-rate to \texttt{tc}.
