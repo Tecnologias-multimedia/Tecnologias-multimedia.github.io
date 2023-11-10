@@ -29,7 +29,7 @@ we can use the \href{https://en.wikipedia.org/wiki/Linear_map}{linear
   transform}~\cite{strang4linear}
 \begin{equation}
   {\mathbf w} = {\mathbf K}{\mathbf x} =
-\begin{bmatrix} \mathbf{K}_0 \\ \mathbf{K}_1 \end{bmatrix} =
+\begin{bmatrix} \mathbf{K}_0 \\ \mathbf{K}_1 \end{bmatrix}{\mathbf x} =
 \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}
 {\mathbf x},
   \label{eq:forward_transform_matrix_form}
@@ -1072,7 +1072,9 @@ This decoder ignores the adjacent chunks in the DWT domain, but notice that it u
 As we did in the previous milestone, generate the RD curves for a set
 of simulated transmission contexts. Use the modules
 \texttt{stereo\_MST\_coding\{|\_16|\_32\}.py}. As you can see, they
-differs in how the transform has been implemented.
+differs in how the transform has been implemented.  Notice that you
+can use the \verb|--minimal_quantization_step| parameter to generate
+the different points of the RD curves.
 %}}}
 
 \subsection{Determine the RD curves for the DWT}
@@ -1084,7 +1086,9 @@ levels $l$ of the DWT (computed using
 \href{https://pywavelets.readthedocs.io/en/latest/}{PyWavelets}~\cite{lee2019pywavelets})
 can have a high impact on the amount of energy concentration achieved
 by the DWT, and therefore on the efficiency of the coding system. Show
-such an impact. Experiment also with the wavelet name.
+such an impact. Experiment also with the wavelet name. Again, use the
+\verb|--minimal_quantization_step| parameter to generate the different
+points of the RD curves.
 
 %}}}
 

@@ -19,7 +19,7 @@
 
 <h2 class='titleHead'><a href='https://en.wikipedia.org/wiki/Transform_coding'>Transform Coding</a> for <a href='https://en.wikipedia.org/wiki/Data_redundancy'>Redundancy</a> Removal</h2>
  <div class='author'><a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp; </span><a href='https://www.marcoslupion.com/'><span class='ecrm-1200'>Marcos Lupión Lorente</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>November 5, 2023</span></div>
+<div class='date'><span class='ecrm-1200'>November 6, 2023</span></div>
    </div>
    <h3 class='likesectionHead'><a id='x1-1000'></a>Contents</h3>
    <div class='tableofcontents'>
@@ -54,7 +54,7 @@
 are <a href='https://en.wikipedia.org/wiki/Binaural_recording'>highly correlated</a> (especially when the microphone is mono because both channels
 are identical), which means that we can find a more efficient representation. To
 perform this inter-channel <a href='https://en.wikipedia.org/wiki/Decorrelation'>decorrelation</a> <span class='cite'>[<a href='#Xthinkstats'>4</a>]</span> we can use the <a href='https://en.wikipedia.org/wiki/Linear_map'>linear transform</a> <span class='cite'>[<a href='#Xstrang4linear'>8</a>]</span>
-\begin {equation}  {\mathbf w} = {\mathbf K}{\mathbf x} = \begin {bmatrix} \mathbf {K}_0 \\ \mathbf {K}_1 \end {bmatrix} = \begin {bmatrix} 1 &amp; 1 \\ 1 &amp; -1 \end {bmatrix} {\mathbf x}, \label {eq:forward_transform_matrix_form}  \end {equation}
+\begin {equation}  {\mathbf w} = {\mathbf K}{\mathbf x} = \begin {bmatrix} \mathbf {K}_0 \\ \mathbf {K}_1 \end {bmatrix}{\mathbf x} = \begin {bmatrix} 1 &amp; 1 \\ 1 &amp; -1 \end {bmatrix} {\mathbf x}, \label {eq:forward_transform_matrix_form}  \end {equation}
 that can also be written as \begin {equation}  \begin {bmatrix} {\mathbf w}_0 \\ {\mathbf w}_1 \end {bmatrix} = \begin {bmatrix} 1 &amp; 1 \\ 1 &amp; -1 \end {bmatrix} \begin {bmatrix} {\mathbf x}_0 \\ {\mathbf x}_1 \end {bmatrix}, \label {eq:forward_transform_matrix_form2}  \end {equation}
 where \({\mathbf x}\in \mathbb {Z}^2\) is a stereo frame, \(\mathbf K\) is the forward (or analysis) transform matrix, and \({\mathbf w}=\begin {bmatrix} {\mathbf w}_0 &amp; {\mathbf w}_1\end {bmatrix}^{\text T}\) is the
 corresponding <a href='https://en.wikipedia.org/wiki/Discrete_wavelet_transform'>decomposition</a>. In this particular transform, the decomposition has two
