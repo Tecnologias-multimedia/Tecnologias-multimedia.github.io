@@ -19,7 +19,7 @@
 
 <h2 class='titleHead'><a href='https://en.wikipedia.org/wiki/Transform_coding'>Transform Coding</a> for <a href='https://en.wikipedia.org/wiki/Data_redundancy'>Redundancy</a> Removal</h2>
  <div class='author'><a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp; </span><a href='https://www.marcoslupion.com/'><span class='ecrm-1200'>Marcos Lupión Lorente</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>November 6, 2023</span></div>
+<div class='date'><span class='ecrm-1200'>November 10, 2023</span></div>
    </div>
    <h3 class='likesectionHead'><a id='x1-1000'></a>Contents</h3>
    <div class='tableofcontents'>
@@ -623,43 +623,46 @@ milestone.
    <h4 class='subsectionHead'><span class='titlemark'>2.1   </span> <a id='x1-260002.1'></a>Determine the RD curves for the MST</h4>
 <!-- l. 1072 --><p class='noindent'>As we did in the previous milestone, generate the RD curves for a set of simulated
 transmission contexts. Use the modules <span class='ectt-1000'>stereo_MST_coding{|_16|_32}.py</span>. As you
-can see, they differs in how the transform has been implemented.
-</p><!-- l. 1078 --><p class='noindent'>
+can see, they differs in how the transform has been implemented. Notice that you can
+use the <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>--minimal_quantization_step</span></span></span> parameter to generate the different points of
+the RD curves.
+</p><!-- l. 1080 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead'><span class='titlemark'>2.2   </span> <a id='x1-270002.2'></a>Determine the RD curves for the DWT</h4>
-<!-- l. 1081 --><p class='noindent'>Rebuild the RD curves considering also the temporal decorrelation. Use
+<!-- l. 1083 --><p class='noindent'>Rebuild the RD curves considering also the temporal decorrelation. Use
 <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>temporal_no_overlapped_DWT_coding.py</span></span></span>. Note that the number of levels \(l\) of the
 DWT (computed using <a href='https://pywavelets.readthedocs.io/en/latest/'>PyWavelets</a> <span class='cite'>[<a href='#Xlee2019pywavelets'>6</a>]</span>) can have a high impact on the amount of
 energy concentration achieved by the DWT, and therefore on the efficiency of the
-coding system. Show such an impact. Experiment also with the wavelet
-name.
-</p><!-- l. 1091 --><p class='noindent'>
+coding system. Show such an impact. Experiment also with the wavelet name. Again,
+use the <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>--minimal_quantization_step</span></span></span> parameter to generate the different points of
+the RD curves.
+</p><!-- l. 1095 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead'><span class='titlemark'>2.3   </span> <a id='x1-280002.3'></a>Determine the RD curves for the overlapped DWT</h4>
-<!-- l. 1094 --><p class='noindent'>Finally, redo the curves considering now the block overlapping
+<!-- l. 1098 --><p class='noindent'>Finally, redo the curves considering now the block overlapping
 (<span class='obeylines-h'><span class='verb'><span class='ectt-1000'>temporal_overlapped_DWT_coding.py</span></span></span>). It is a good idea to put all the RD curves
 together (in the same graph), to compare easily.
-</p><!-- l. 1100 --><p class='noindent'>
+</p><!-- l. 1104 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead'><span class='titlemark'>2.4   </span> <a id='x1-290002.4'></a>Answer these questions</h4>
-<!-- l. 1103 --><p class='noindent'>
+<!-- l. 1107 --><p class='noindent'>
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-29002x1'>Which has been the gain of the filters used in your experiments?
      </li>
 <li class='enumerate' id='x1-29004x2'>Does the computation of the DWT using chunk overlapping increase the
      latency of the whole system? And what about the jitter? In what amount?
-     </li>
                                                                   
 
                                                                   
+     </li>
 <li class='enumerate' id='x1-29006x3'>Which other transform(s) are used in audio encoding systems (such as
      MP3) to exploit temporal redundancy? Enumerate the systems and the
      transform(s) used.
 </li></ol>
-<!-- l. 1122 --><p class='noindent'>
+<!-- l. 1126 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead'><span class='titlemark'>2.5   </span> <a id='x1-300002.5'></a>Visualize</h4>
-<!-- l. 1125 --><p class='noindent'>Visualize the effects (in the DWT domain) of quantization.
+<!-- l. 1129 --><p class='noindent'>Visualize the effects (in the DWT domain) of quantization.
                                                                   
 
                                                                   
@@ -670,14 +673,14 @@ python temporal_overlapped_DWT_coding.py -i 6 -o 6 --show_stats -q 8192
 # Connect the output of temporal_overlapped_DWT_coding.py to the input of dwt5.py
 python dwt5.py -d 9
 </pre>
-<!-- l. 1131 --><p class='nopar'>
-</p><!-- l. 1133 --><p class='indent'>   You can also visualize the DWT domain running the commands defined in the
+<!-- l. 1135 --><p class='nopar'>
+</p><!-- l. 1137 --><p class='indent'>   You can also visualize the DWT domain running the commands defined in the
 notebook <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/docs/2-hours_seminar.ipynb'>InterCom: a Real-Time Digital Audio Full-Duplex Transmitter/Receiver</a>.
-</p><!-- l. 1139 --><p class='noindent'>
+</p><!-- l. 1143 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>3   </span> <a id='x1-310003'></a>Deliverables</h3>
-<!-- l. 1140 --><p class='noindent'>A description of the experiments and their results.
-</p><!-- l. 1142 --><p class='noindent'>
+<!-- l. 1144 --><p class='noindent'>A description of the experiments and their results.
+</p><!-- l. 1146 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>4   </span> <a id='x1-320004'></a>Resources</h3>
     <div class='thebibliography'>
