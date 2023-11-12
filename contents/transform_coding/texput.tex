@@ -21,8 +21,8 @@ channels)
 \href{https://en.wikipedia.org/wiki/Pulse-code_modulation}{PCM
   signal}. In most cases, the channels are
 \href{https://en.wikipedia.org/wiki/Binaural_recording}{highly
-  correlated} (especially when the microphone is mono because both
-channels are identical), which means that we can find a more efficient
+  correlated}\footnote{Especially when the microphone is mono because both
+channels are identical}, which means that we can find a more efficient
 representation. To perform this inter-channel
 \href{https://en.wikipedia.org/wiki/Decorrelation}{decorrelation}~\cite{thinkstats}
 we can use the \href{https://en.wikipedia.org/wiki/Linear_map}{linear
@@ -56,7 +56,7 @@ ${\mathbf w}=\begin{bmatrix} {\mathbf w}_0 & {\mathbf
 this particular transform, the decomposition has two
 \href{https://en.wikipedia.org/wiki/Sub-band_coding}{subbands}
 ${\mathbf w}_0$ and ${\mathbf w}_1$, and each subband has only one
-\href{https://web.stanford.edu/class/ee398a/handouts/lectures/07-TransformCoding.pdf}{coefficient}. Notice
+\href{https://web.stanford.edu/class/ee398a/handouts/lectures/07-TransformCoding.pdf}{coefficient} per frame. Notice
 that ${\mathbf x}\in\mathbb{Z}^2$ is a vector space\footnote{Adding
   two vectors in the plane produces a third one also in the plane;
   multiplying a vector by a real scalar produces a second vector also
@@ -90,7 +90,7 @@ original data ${\mathbf x}$ is that the characteristics of the
 elements of ${\mathbf w}$ are determined by their position within the
 decomposition ${\mathbf w}$~\cite{sayood2017introduction}. Thus, as a
 consequence of how the matrix has been defined, the subband ${\mathbf
-  w}_0$ represents (very roughly) the low frequencies of ${\mathbf
+  w}_0$ represents (very roughly) the low frequencies of (the sequence of) ${\mathbf
   x}$, and ${\mathbf w}_1$ the high frequencies. Therefore, the values
 of ${\mathbf K}_0$ (the row 0 of ${\mathbf K}$) describe a
 \href{https://en.wikipedia.org/wiki/Low-pass_filter}{low-pass filter},
