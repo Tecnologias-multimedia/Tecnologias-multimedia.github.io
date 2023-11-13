@@ -176,7 +176,7 @@ filters\footnote{When we are working with discrete signals, we usually
   talk about vectors instead of functions. These vectors are sampled
   versions of the corresponding functions, or as happen in our case,
   the
-  \href{https://en.wikipedia.org/wiki/Finite_impulse_response}{taps}
+  \href{https://en.wikipedia.org/wiki/Finite_impulse_response}{coefficients}
   of the filters, each one representing a
   \href{https://en.wikipedia.org/wiki/Basis_(linear_algebra)}{basis
     vectors}.} of ${\mathbf K}$ is $0$ between the different filters
@@ -226,7 +226,7 @@ which basically means\footnote{Remember that for the MST a subband has
   speaking of the subband coefficients, instead of only one
   coefficient.} that ${\mathbf w}_i$ is proportional to the similarity
 between the input signal ${\mathbf x}$ and the
-\href{https://en.wikipedia.org/wiki/Finite_impulse_response}{taps} of
+\href{https://en.wikipedia.org/wiki/Finite_impulse_response}{coefficients} of
 the filter ${\mathbf K}_i$. These
 \href{https://cseweb.ucsd.edu/classes/fa17/cse166-a/lec13.pdf}{slides}
 can help you with this key idea.
@@ -472,10 +472,10 @@ samples.\footnote{Notice that is we dead-zone quantize a decomposition
     signal processing, sub-band coding (SBC) is any form of transform
     coding that breaks a signal into a number of different frequency
     bands}.} is a particular case of Transform Coding where the rows
-of the transform matrix are the taps of digital filters\footnote{In
+of the transform matrix are the coefficients of digital filters\footnote{In
   theory, such rows could be any mathematical operation, not
   necessarily a filter.} In this context, our analysis transform
-matrix ${\mathbf K}$ (see the previous section) represents the taps of
+matrix ${\mathbf K}$ (see the previous section) represents the coefficients of
 a 2-channels analysis
 \href{https://en.wikipedia.org/wiki/Filter_bank}{Filter Bank
   (FB)}~\cite{vetterli1995wavelets}, and the forward transform is in
@@ -483,7 +483,7 @@ fact ``descomposing'' ${\mathbf x}$ into two subbands ${\mathbf w}_0$
 and ${\mathbf w}_1$ (see the Figure~\ref{fig:PRFB}, and the notebook
 \href{https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/contents/transform_coding/PRFB.ipynb}{A
   Perfect Reconstruction Filter Bank (PRFB)}). On the other hand, the
-synthesis transform matrix ${\mathbf K}^{-1}$ denotes the taps of the
+synthesis transform matrix ${\mathbf K}^{-1}$ denotes the coefficients of the
 corresponding synthesis FB that allows to recover ${\mathbf x}$
 (notice that in the figure, ${\mathbf x}={\mathbf l}^i$,
 ${\mathbf w}_0={\mathbf l}^{i+1}$, ${\mathbf w}_1={\mathbf h}^{i+1}$,
@@ -635,7 +635,7 @@ The DWT can be implemented in different ways:
     in the frequency domain}), and that the number of levels in the
   cascade is generally small (5, for example), this implementation is
   faster than the based on vector-matrix arithmetic. And most
-  importantly, we do not need to store ${\mathbf K}$, but only the taps
+  importantly, we do not need to store ${\mathbf K}$, but only the coefficients
   of the different filters that are used.\footnote{Notice that in a
     typical cascade, the filters are always the same. Therefore, we
     only need to store in memory only a copy of each different filter.}
@@ -645,8 +645,8 @@ The DWT can be implemented in different ways:
   which provides an additional speed-up factor of 2 compared to the FB
   implementation. DWTs implemented with lifting do not need to
   downsample and upsample the subbands, an operation that is wasting
-  the calculus of half of the coefficients at each level of the
-  cascade.
+  the calculus of half of the wavelet coefficients at each level of
+  the cascade.
 
 \end{enumerate}
 
@@ -681,9 +681,9 @@ DWT using the MST filters and lifting.
   definition, ${\mathbf l}^0={\mathbf x}$, the original resolution
   level of the signal. The subbands ${\mathbf l}^1$ and
   ${\mathbf h}^1$ computed by Eq.~\eqref{eq:1dwt} are the same than
-  the decimated subbands computed by the corresponding 1-levels PRFB,
+  the decimated subbands computed by the corresponding 1-level PRFB,
   and we say, therefore, that Eq.~\eqref{eq:1dwt} computes the
-  1-levels DWT.
+  1-level DWT.
 
   Based on the 1-level DWT, we define the 2-levels DWT as
   \begin{equation}
@@ -705,14 +705,13 @@ DWT using the MST filters and lifting.
   \end{equation}
 
   The $l$-levels DWT splits the signal spectrum into $l+1$ subbands. If
-  $l=n$ (where $N=2^n$), we have the spectrum partition
+  $l=n$, where $N=2^n$, we have the spectrum partition
   \begin{equation*}
         | \mathbf{l}^l_0 | \mathbf{h}^l_0 | \mathbf{h}^{l-1}_0 \mathbf{h}^{l-1}_1 | \mathbf{h}^{l-2}_0 \mathbf{h}^{l-2}_1 \mathbf{h}^{l-2}_2 \mathbf{h}^{l-2}_3 | \cdots | \mathbf{h}^1_0 \mathbf{h}^1_1 \cdots \mathbf{h}^1_{2^{n-1}-1} |,
   \end{equation*}
-  where\footnote{The coefficient ${\mathbf l}^l_0$ is called the DC
+  holding\footnote{The wavelet coefficient ${\mathbf l}^l_0$ is called the DC
     (Direct Current) coefficient, and the rest of ${\mathbf h}$
-    coefficients are called AC (Alternating Current) coefficients.} it
-  holds that
+    coefficients are called AC (Alternating Current) coefficients.} that
   \begin{equation}
     1+\sum_{j=1}^l 2^{j-1}=2^n,
   \end{equation}
@@ -759,7 +758,7 @@ to the
 \href{https://en.wikipedia.org/?title=Unit_impulse&redirect=no}{unit
   impulse}\footnote{The response of a filter to the unit impulse
 characterize the filter because the output of the filter is the set of
-taps of the filter.} is known as \emph{scaling function} and is
+coefficients of the filter.} is known as \emph{scaling function} and is
 usually denoted by $\tilde\phi$, the response of the analysis
 high-pass filter (${\mathbf K}_1$) is known as the \emph{wavelet
 function} and it is usually denoted by $\tilde\psi$, the response of
@@ -767,8 +766,9 @@ the low-pass filter synthesis (${\mathbf K}^{-1}_0$) is indicated by
 $\phi$ and the synthesis high-pass filter (${\mathbf K}^{-1}_1$) is
 represented by $\psi$, which are the dual scaling and wavelet functions.
 
-For the MST it holds that $\tilde\phi\bot\tilde\psi$, $\tilde\phi$ is
-equal to the mirror\footnote{In the $Z$-domain, it holds that
+For the MST it holds that $\tilde\phi\bot\tilde\psi$, the frequency
+response of $\tilde\phi$ is equal to the mirror\footnote{In the
+  $Z$-domain, it holds that
   ${\mathcal Z}\{\tilde\phi\}(z)={\mathcal Z}\{\phi\}(-z)$.} of $\phi$
 and $\tilde\psi$ is equal to the mirror of $\psi$, and this is also
 true for all orthogonal DWTs. Another important characteristic of
@@ -830,10 +830,12 @@ decomposition should be inversely\footnote{Remember that if the QSS is
   subbands with higher amplification in the inverse transform should
   be quantized less.} proportional the gain of the synthesis
 filters. The gain of a filter corresponds to the L$^2$ norm of its
-taps, and the final gain applied to a subband depends logically on the
-number of times that we have applied the filter in the cascade. Notice
-that if we do not know the taps, we can use the algorithm described in Section~\ref{sec:quantization_subbands_spatial} to find the gain
-of the subbands.
+coefficients, and the final gain applied to a subband depends
+logically on the number of times that we have applied the filter in
+the cascade. Notice that if we do not know the coefficients, we can
+use the algorithm described in
+Section~\ref{sec:quantization_subbands_spatial} to find the gain of
+the subbands.
 
 Finally, notice that if the transform is orthonormal, by definition,
 the gain of the analysis and synthesis filters is always 1, and this is also the gain of the subbands. In the notebook
@@ -899,7 +901,7 @@ algorithm:
     \text{DWT}^l({\mathbf E})$, where $l$ is the number of levels of
     the DWT ($l=2$ in Fig.~\ref{fig:subbands}).
   \item Output the decomposition ${\mathbf D}_i$.
-  \item ${\mathbf C}_{i-1}\leftarrow {\mathbf C}_i$ (notice that we can assign the pointers, not the contents).
+  \item ${\mathbf C}_{i-1}\leftarrow {\mathbf C}_i$ (we can assign the pointers, not the contents).
   \item ${\mathbf C}_i\leftarrow {\mathbf C}_{i+1}$.
   \end{enumerate}
 \end{enumerate}
@@ -935,11 +937,12 @@ notation.
 \begin{figure}
   \centering
   \svg{graphics/subbands}{550}
-  \caption{Structure in the DWT domain of an extended chunk for
-    $l=2$. $o$ is the number of overlapped frames between adajacent
-    chunks. ${\mathbf C}_{i-1}[-o:]$ represents the last $o$ frames of
-    chunk ${\mathbf C}_{i-1}$, and ${\mathbf C}_{i+1}[:o]$ the first
-    $o$ frames of the chunk ${\mathbf C}_{i+1}$.}
+  \caption{Structure in the DWT domain of an extended chunk for $l=2$
+    (upper subfigure, without chunk extension). $o$ is the number of
+    overlapped frames between adajacent chunks.
+    ${\mathbf C}_{i-1}[-o:]$ represents the last $o$ frames of chunk
+    ${\mathbf C}_{i-1}$, and ${\mathbf C}_{i+1}[:o]$ the first $o$
+    frames of the chunk ${\mathbf C}_{i+1}$.}
   \label{fig:subbands}
 \end{figure}
 
@@ -1073,7 +1076,8 @@ of simulated transmission contexts. Use the modules
 \texttt{stereo\_MST\_coding\{|\_16|\_32\}.py}. As you can see, they
 differs in how the transform has been implemented.  Notice that you
 can use the \verb|--minimal_quantization_step| parameter to generate
-the different points of the RD curves.
+the different points of the RD curves (it is not necessary to use a
+bit-rate control algorithm).
 %}}}
 
 \subsection{Determine the RD curves for the DWT}
