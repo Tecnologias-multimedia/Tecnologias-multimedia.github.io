@@ -22,7 +22,7 @@ simultaneous masking</title>
 Milestone 15: Considering the simultaneous
 masking</h2>
  <div class='author'><a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp; </span><a href='https://www.marcoslupion.com/'><span class='ecrm-1200'>Marcos Lupión Lorente</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>September 10, 2023</span></div>
+<div class='date'><span class='ecrm-1200'>November 20, 2023</span></div>
    </div>
    <h3 class='sectionHead'><span class='titlemark'>1   </span> <a id='x1-10001'></a>Description</h3>
 <!-- l. 10 --><p class='noindent'>
@@ -68,18 +68,21 @@ in the presence of (is masked by) a louder signal (masker signal).
 <li class='enumerate' id='x1-3002x1'>Write a generator of vectors of quantization steps. The generator should
      analyze the energy of each DWT subband and decide, considering the
      simultaneous masking effect, the vector of quantization steps (one for the
-     subband).</li></ol>
-<!-- l. 47 --><p class='noindent'>
+     subband).
+     </li>
+<li class='enumerate' id='x1-3004x2'>Extend this procedure to the case of using Fourier/Wavelet subbands (see
+     the previous milestone).</li></ol>
+<!-- l. 49 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>3   </span> <a id='x1-40003'></a>Deliverables</h3>
-<!-- l. 49 --><p class='noindent'>The module <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>simultaneous_masking.py</span></span></span> (inherited from <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>threshold.py</span></span></span>). Store it at
+<!-- l. 51 --><p class='noindent'>The module <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>simultaneous_masking.py</span></span></span> (inherited from <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>threshold.py</span></span></span>). Store it at
 the <a href='https://github.com/Tecnologias-multimedia/intercom'>root directory</a> of your InterCom repo.
-</p><!-- l. 54 --><p class='noindent'>
-</p>
-   <h3 class='sectionHead'><span class='titlemark'>4   </span> <a id='x1-50004'></a>Resources</h3>
                                                                   
 
                                                                   
+</p><!-- l. 56 --><p class='noindent'>
+</p>
+   <h3 class='sectionHead'><span class='titlemark'>4   </span> <a id='x1-50004'></a>Resources</h3>
    <div class='thebibliography'>
    <p class='bibitem'><span class='biblabel'>
  [1]<span class='bibsp'>   </span></span><a id='Xbosi2003intro'></a>M. Bosi and R.E. Goldberd.  <a href='https://last.hit.bme.hu/download/vidtechlab/fcc/literature/audio/audio_coding_standards_book.pdf'><span class='ecti-1000'>Introduction to Digital Audio Coding and
