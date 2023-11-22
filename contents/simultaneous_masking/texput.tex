@@ -39,6 +39,21 @@ How much quantization noise can be generated without it being audible?
 Psychoacoustics has the answer: A weaker signal (maskee signal) becomes
 inaudible in the presence of (is masked by) a louder signal (masker signal). 
 
+\subsection{An algorithm}
+
+In the presence of sufficient energy in one subband, the quantization
+step sizes (QSS) of the rest of the subbands could be increased
+because the most energetic subband masks the others. In the wavelet
+domain, where we have a dyadic distribution of frequencies between
+subbands, we can assume that if the subband $h^i$ is the most
+energetic and $E(h^i)$ is its energy, we can assume that the subbands
+$h^{i+1}$ and $h^{i-1}$ could use a QSS*2, and the subbands $h^{i+2}$
+and $h^{i-2}$ a QSS*4, etc. If $l^i$ is the most energetic, then the
+QSS for $h^i$ would be QSS*2, and so on.
+
+Notice that these modifications of the QSS should take into
+consideration the ToH curve computed in the previous milestone.
+  
 \section{What you have to do?}
 
 \begin{enumerate}

@@ -1,7 +1,6 @@
 <!DOCTYPE html> 
 <html lang='en-US' xml:lang='en-US'> 
-<head> <title>TecnologÃŋas Multimedia - Study Guide - Milestone 15: Considering the
-simultaneous masking</title> 
+<head> <title>Considering the simultaneous masking (in progress)</title> 
 <meta charset='utf-8' /> 
 <meta content='TeX4ht (https://tug.org/tex4ht/)' name='generator' /> 
 <meta content='width=device-width,initial-scale=1' name='viewport' /> 
@@ -18,17 +17,16 @@ simultaneous masking</title>
 
                                                                   
 
-<h2 class='titleHead'><a href='https://tecnologias-multimedia.github.io/'>Tecnologías Multimedia</a> - Study Guide -
-Milestone 15: Considering the simultaneous
-masking</h2>
+<h2 class='titleHead'>Considering the simultaneous masking (in
+progress)</h2>
  <div class='author'><a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp; </span><a href='https://www.marcoslupion.com/'><span class='ecrm-1200'>Marcos Lupión Lorente</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>November 20, 2023</span></div>
+<div class='date'><span class='ecrm-1200'>November 22, 2023</span></div>
    </div>
    <h3 class='sectionHead'><span class='titlemark'>1   </span> <a id='x1-10001'></a>Description</h3>
-<!-- l. 10 --><p class='noindent'>
+<!-- l. 12 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead'><span class='titlemark'>1.1   </span> <a id='x1-20001.1'></a>Simultaneous masking</h4>
-<!-- l. 11 --><p class='noindent'>The HAS (Human Auditory System) has a finite frequency resolution, which
+<!-- l. 13 --><p class='noindent'>The HAS (Human Auditory System) has a finite frequency resolution, which
 basically means that two different tonal sounds with different amplitudes can be
 heard only as one (the louder) when they are closed enough <span class='cite'>[<a href='#Xbosi2003intro'>1</a>]</span> (in frequency). When
 this happens, the DWT subband <span class='cite'>[<a href='#Xvetterli1995wavelets'>2</a>]</span> where the quiet sound is placed can be
@@ -44,45 +42,58 @@ higher the compression ratio.
                                                                   
 
                                                                   
-<!-- l. 23 --><p class='noindent'><div style='text-align:center;'> <img src='simultaneous_masking.png' /> </div>  <a id='x1-2001r1'></a>
+<!-- l. 25 --><p class='noindent'><div style='text-align:center;'> <img src='simultaneous_masking.png' /> </div>  <a id='x1-2001r1'></a>
 <a id='x1-2002'></a>
 </p>
-<figcaption class='caption'><span class='id'>Figure 1: </span><span class='content'>Simultaneous masking. The threshold of hearing has been modified
-(increased) in the in the vicinity of the pure tone of 1 KHz.                </span></figcaption><!-- tex4ht:label?: x1-2001r1  -->
+<figcaption class='caption'><span class='id'>Figure 1: </span><span class='content'>An example of simultaneous masking. The threshold of hearing has
+been modified (increased) in the in the vicinity of the pure tone of 1 KHz.    </span></figcaption><!-- tex4ht:label?: x1-2001r1  -->
                                                                   
 
                                                                   
    </figure>
-<!-- l. 28 --><p class='indent'>   Masking depends on:
+<!-- l. 32 --><p class='indent'>   Masking depends on:
      </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-2004x1'>The frequency of the maskee and masker signals.
+<li class='enumerate' id='x1-2004x1'>The proximity in frequency of the maskee and masker signals.
      </li>
 <li class='enumerate' id='x1-2006x2'>Their overlap over time.</li></ol>
-<!-- l. 34 --><p class='indent'>   How much quantization noise can be generated without it being audible?
+<!-- l. 38 --><p class='indent'>   How much quantization noise can be generated without it being audible?
 Psychoacoustics has the answer: A weaker signal (maskee signal) becomes inaudible
 in the presence of (is masked by) a louder signal (masker signal).
 </p>
-   <h3 class='sectionHead'><span class='titlemark'>2   </span> <a id='x1-30002'></a>What you have to do?</h3>
-<!-- l. 40 --><p class='noindent'>
+   <h4 class='subsectionHead'><span class='titlemark'>1.2   </span> <a id='x1-30001.2'></a>An algorithm</h4>
+<!-- l. 44 --><p class='noindent'>In the presence of sufficient energy in one subband, the quantization step
+sizes (QSS) of the rest of the subbands could be increased because the most
+energetic subband masks the others. In the wavelet domain, where we have a
+dyadic distribution of frequencies between subbands, we can assume that if
+the subband \(h^i\) is the most energetic and \(E(h^i)\) is its energy, we can assume that
+the subbands \(h^{i+1}\) and \(h^{i-1}\) could use a QSS*2, and the subbands \(h^{i+2}\) and \(h^{i-2}\) a QSS*4,
+etc. If \(l^i\) is the most energetic, then the QSS for \(h^i\) would be QSS*2, and so
+on.
+</p><!-- l. 54 --><p class='indent'>   Notice that these modifications of the QSS should take into consideration the ToH
+curve computed in the previous milestone.
+</p><!-- l. 57 --><p class='noindent'>
+</p>
+   <h3 class='sectionHead'><span class='titlemark'>2   </span> <a id='x1-40002'></a>What you have to do?</h3>
+<!-- l. 59 --><p class='noindent'>
      </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-3002x1'>Write a generator of vectors of quantization steps. The generator should
+<li class='enumerate' id='x1-4002x1'>Write a generator of vectors of quantization steps. The generator should
      analyze the energy of each DWT subband and decide, considering the
      simultaneous masking effect, the vector of quantization steps (one for the
      subband).
-     </li>
-<li class='enumerate' id='x1-3004x2'>Extend this procedure to the case of using Fourier/Wavelet subbands (see
-     the previous milestone).</li></ol>
-<!-- l. 49 --><p class='noindent'>
-</p>
-   <h3 class='sectionHead'><span class='titlemark'>3   </span> <a id='x1-40003'></a>Deliverables</h3>
-<!-- l. 51 --><p class='noindent'>The module <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>simultaneous_masking.py</span></span></span> (inherited from <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>threshold.py</span></span></span>). Store it at
-the <a href='https://github.com/Tecnologias-multimedia/intercom'>root directory</a> of your InterCom repo.
                                                                   
 
                                                                   
-</p><!-- l. 56 --><p class='noindent'>
+     </li>
+<li class='enumerate' id='x1-4004x2'>Extend this procedure to the case of using Fourier/Wavelet subbands (see
+     the previous milestone).</li></ol>
+<!-- l. 68 --><p class='noindent'>
 </p>
-   <h3 class='sectionHead'><span class='titlemark'>4   </span> <a id='x1-50004'></a>Resources</h3>
+   <h3 class='sectionHead'><span class='titlemark'>3   </span> <a id='x1-50003'></a>Deliverables</h3>
+<!-- l. 70 --><p class='noindent'>The module <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>simultaneous_masking.py</span></span></span> (inherited from <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>threshold.py</span></span></span>). Store it at
+the <a href='https://github.com/Tecnologias-multimedia/intercom'>root directory</a> of your InterCom repo.
+</p><!-- l. 75 --><p class='noindent'>
+</p>
+   <h3 class='sectionHead'><span class='titlemark'>4   </span> <a id='x1-60004'></a>Resources</h3>
    <div class='thebibliography'>
    <p class='bibitem'><span class='biblabel'>
  [1]<span class='bibsp'>   </span></span><a id='Xbosi2003intro'></a>M. Bosi and R.E. Goldberd.  <a href='https://last.hit.bme.hu/download/vidtechlab/fcc/literature/audio/audio_coding_standards_book.pdf'><span class='ecti-1000'>Introduction to Digital Audio Coding and
@@ -93,7 +104,7 @@ the <a href='https://github.com/Tecnologias-multimedia/intercom'>root directory<
    Prentice-hall, 1995.
 </p>
    </div>
-<p><a id='Q1-1-7'></a></p>
+<p><a id='Q1-1-8'></a></p>
     
 </body> 
 </html>
