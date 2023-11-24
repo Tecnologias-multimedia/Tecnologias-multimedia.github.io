@@ -50,7 +50,7 @@ of the decomposition), it holds that
 \begin{equation}
   W({\mathbf h}^s) = \frac{1}{2}W({\mathbf h}^{s-1}),
 \end{equation}
-being $W(\cdot)$ the bandwidth of the corresponding subband
+being $W(s)$ the bandwidth of the corresponding subband
 $s$. Therefore, considering that the bandwidth of the audio signal is
 $22050$ Hz, the bandwidth $W({\mathbf h}^1)=11025$ Hz,
 $W({\mathbf h} ^2)=22025/4$, etc. It also holds that
@@ -76,7 +76,7 @@ corresponding part of the ToH curve. To achieve this, we will use the
 \href{https://numpy.org/doc/stable/reference/routines.fft.html}{FFT
   (Fast Fourier Transform)} to map each DWT subband to the Fourier
 domain and filter the signal using the ToH curve without generating a
-significant increase or decrease in signal energy. To
+significant increase or decrease in the signal energy. To
 do this, we should quantize and dequantize each FFT subband, using the
 corresponding QSS.
 
@@ -99,7 +99,7 @@ capabilities''.\footnote{For example, your speakers could not have a
   flat frequency response, or your room could attenuate more, some
   freqencies.} For this reason, in module \verb|advanced_ToH.py|,
 implement a procedure to determe the QSSs used in
-each Fourier subband\footnote{Remember that when the
+each wavelet/Fourier subband\footnote{Remember that when the
   \href{https://en.wikipedia.org/wiki/Wavelet_transform}{Wavalet
     transform} is
   \href{https://en.wikipedia.org/wiki/Dyadic_rational}{dyadic}, the
@@ -114,7 +114,7 @@ each Fourier subband\footnote{Remember that when the
   
 To find such QSSs, we can simulate
 \href{https://en.wikipedia.org/wiki/Quantization_(signal_processing)}{quantization
-  noise} in each FFT subband and measure the amplitude of the noise when
+  noise} in each subband and measure the amplitude of the noise when
 it starts to be noticeable. Supposing that the quantization noise
 follows an
 \href{https://en.wikipedia.org/wiki/Continuous_uniform_distribution}{uniform
@@ -124,7 +124,7 @@ follows an
 \item Let
   $\{{\mathbf l}^{N_{\text{levels}}}, {\mathbf h}^{N_{\text{levels}}},
   {\mathbf h}^{N_{\text{levels}}-1},\cdots, {\mathbf h}^1\}$ the
-  Wavelet representation of a
+  wavelet representation of a
   chunk. %, being ${\mathbf l}^{N_{\text{levels}}}$ the lowest frequency subband.
   Starting with ${\mathbf l}^{N_{\text{levels}}}$ (at the first
   iteration the rest of subbands are zero), split the wavelet subband
@@ -132,11 +132,11 @@ follows an
   imperceptible:
   \begin{enumerate}
   \item Increase the amplitude of the noise in the Fourier subband.
-  \item Compute the inverse FFT/Wavelet-transform.
+  \item Compute the inverse FFT/wavelet-transform.
   \item Reproduce the generated chunk, alternating every second with
     the play of an empty chunk.
   \end{enumerate}
-\item Continue with the next Fourier/Wavelet subband, but keeping the
+\item Continue with the next Fourier/wavelet subband, but keeping the
   highest unperceptible uniform noise in the previously processed
   ones. In this way, for the wavelet subband ${\mathbf h}^1$ (the last
   one to be processed), the rest of subbands should be already

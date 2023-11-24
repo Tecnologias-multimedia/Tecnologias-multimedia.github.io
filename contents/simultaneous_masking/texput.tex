@@ -47,9 +47,9 @@ because the most energetic subband masks the others. In the wavelet
 domain, where we have a dyadic distribution of frequencies between
 subbands, we can assume that if the subband $h^i$ is the most
 energetic and $E(h^i)$ is its energy, we can assume that the subbands
-$h^{i+1}$ and $h^{i-1}$ could use a QSS*2, and the subbands $h^{i+2}$
-and $h^{i-2}$ a QSS*4, etc. If $l^i$ is the most energetic, then the
-QSS for $h^i$ would be QSS*2, and so on.
+$h^{i+1}$ and $h^{i-1}$ could use a $2\times\text{QSS}$, and the subbands $h^{i+2}$
+and $h^{i-2}$ a $4\times\text{QSS}$, etc. If $l^i$ is the most energetic, then the
+QSS for $h^i$ would be $2\times\text{QSS}$, and so on.
 
 Notice that these modifications of the QSS should take into
 consideration the ToH curve computed in the previous milestone.
@@ -61,7 +61,7 @@ consideration the ToH curve computed in the previous milestone.
   generator should analyze the energy of each DWT subband and decide,
   considering the simultaneous masking effect, the vector of
   quantization steps (one for the subband).
-\item Extend this procedure to the case of using Fourier/Wavelet
+\item Extend this procedure to the case of using Fourier/wavelet
   subbands (see the previous milestone).
 \end{enumerate}
 
