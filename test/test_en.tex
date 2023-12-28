@@ -1,0 +1,960 @@
+\documentclass[legalpaper, 12pt, addpoints]{exam}
+%\documentclass[legalpaper, 12pt, addpoints, answers]{exam}
+
+\usepackage[english]{babel}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{graphics}
+\usepackage{color}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{cancel}
+\usepackage{ragged2e}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{color}
+\usepackage{tikz}
+\usepackage{datetime}
+
+\CorrectChoiceEmphasis{\itseries\color{red}}
+
+\begin{document}
+%\begin{coverpages}
+%---uncomment to add a custom header (replace {header-cufm.png})---- %
+%\begin{figure}[t]
+%\includegraphics[width=1\textwidth,height=1.2\textheight,keepaspectratio]{%header-cufm.png}
+%\end{figure}
+
+\newcommand{\convocatoria}{January, 2024}
+
+\begin{center}
+  \textbf{Multimedia Technologies} \\
+  Test\\
+  \convocatoria
+\end{center}
+\extraheadheight{-0.8in}
+
+\vspace{0.25in} {\fbox{\parbox{6in}{\parbox{6in}{{Read each question carefully
+          and circle the correct solution A or B. Also, don't forget to write
+          your name, last name, and ID. Remember that an incorrect answer
+          invalidates another correct one. All questions have the same weight
+          in the final grade. Compiled: \today, \currenttime.\\\\\textbf{Total time:
+            120 minutes}.}}}}}  \runningheadrule
+\extraheadheight{0.14in}
+
+\lhead{\ifcontinuation{Question \ContinuedQuestion\ continues\ldots}{}}
+\runningheader{Multimedia Technologies}{Test}{\convocatoria}
+\runningfooter{}
+              {Page \thepage\ of \numpages}
+              {}
+
+\vspace{0.15in}
+
+\begin{tabular}{l}
+  Name and last name: \\
+  ID:
+\end{tabular}
+              
+
+\vspace{0.1in}
+
+%-comment out the next line to display point value for each question -%
+%\nopointsinmargin
+%\setlength\linefillthickness{0.1pt}
+%\setlength\answerlinelength{0.1in}
+%\end{coverpages}
+
+\begin{questions}
+
+\question An intercom system like the one developed in the course project is:
+
+\begin{oneparchoices}
+  \choice A peer-to-peer application that allows users connected to the network to communicate with each other.\\
+  \choice A Python-based web service that allows web clients to communicate with each other.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question A sound wave is:
+
+\begin{oneparchoices}
+  \choice A mechanical pressure signal that is transmitted only through the air.\\
+  \choice Any mechanical pressure wave that generally carries auditory information.
+\end{oneparchoices}
+  
+\question When a sound wave is represented in the frequency domain:
+
+\begin{oneparchoices}
+  \choice The signal's amplitude represents its energy over time.\\
+  \choice The signal's amplitude represents its energy in some way over frequency.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question Most natural sounds perceived by humans tend to:
+
+\begin{oneparchoices}
+  \choice Accumulate most of their energy in low frequencies.\\
+  \choice Accumulate most of their energy in high frequencies.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question Approximately, a young and healthy human can perceive sounds between:
+
+\begin{oneparchoices}
+  \choice 0 Hz and 44100 Hz.\\
+  \choice 20 Hz and 20000 Hz.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question The level of sound intensity is usually measured in decibels because:
+
+\begin{oneparchoices}
+  \choice Our perception of sound intensity is not linear but logarithmic.\\
+  \choice There is an international standard that dictates this measurement.
+\end{oneparchoices}
+
+\vspace{0.10in}
+
+\question Generally, humans perceive more easily those sounds whose frequency components are between:
+
+\begin{oneparchoices}
+  \choice 3 KHz and 5 KHz, approximately.\\
+  \choice 10 KHz and 15 KHz, approximately.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question Binaural (stereo) perception helps humans spatially locate the source of sounds:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question An audio sample:
+
+\begin{oneparchoices}
+  \choice Represents how many bits a audio signal needs at a specific moment in time.\\
+  \choice Represents the level of sound pressure at a specific moment in time.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question In the \texttt{sounddevice} library, a \emph{frame} is:
+
+\begin{oneparchoices}
+  \choice A pair of audio samples.\\
+  \choice The data structure used to represent an audio chunk.
+\end{oneparchoices}
+
+\question The total latency experienced by InterCom users in a test where two interlocutors are on different hosts is equal to:
+
+\begin{oneparchoices}
+  \choice The time it takes for a chunk to travel to one of the hosts until the chunk back is received, with the return chunk containing the response to the sent chunk.\\
+  \choice The sum of the link latency plus the latency generated by the intercom.
+\end{oneparchoices}
+
+\vspace{0.10in}
+
+\question In general, the total latency experienced by InterCom users depends on:
+
+\begin{oneparchoices}
+  \choice The transmission rate supported by the network.\\
+  \choice The latency of the network.
+\end{oneparchoices}
+
+\vspace{0.10in}
+
+\question The variation in network latency (jitter) influences the transmission rate of chunks over a sufficiently long period:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+
+\vspace{0.10in}
+
+\question The variation in latency can influence the chunk loss rate if the buffer size is not sufficiently large:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+
+\vspace{0.10in}
+
+\question The variation in latency can influence the sound quality if the buffer size is not sufficiently large:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+
+\vspace{0.10in}
+
+\question The variation in network latency influences the total latency experienced by InterCom users:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+
+\vspace{0.10in}
+
+\question Buffering chunks increases the chunk transmission rate:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+
+\vspace{0.10in}
+
+\question Buffering chunks hides the hardware jitter:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+
+\vspace{0.10in}
+
+\question Buffering chunks basically hides the transmission link jitter:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+
+\vspace{0.10in}
+
+\question Buffering chunks generally hides CPU jitter, caused because operating systems often run many processes concurrently:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+
+\vspace{0.10in}
+
+\question The buffering time influences the quality of the transmitted sound, as long as it accommodates the jitter:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+
+\vspace{0.10in}
+
+\question InterCom can be tested on a single host because:
+
+\begin{oneparchoices}
+  \choice An instance of InterCom sends and receives chunks.\\
+  \choice It can't be done because the sound hardware can't capture and play at the same time.
+\end{oneparchoices}
+
+\vspace{0.10in}
+
+\question In general, the buffering time:
+
+\begin{oneparchoices}
+  \choice Is less if InterCom instances run on the same host.\\
+  \choice Is greater if only one instance of InterCom is running because the CPU must send and receive.
+\end{oneparchoices}
+
+\vspace{0.10in}
+
+\question In InterCom, lost chunks:
+
+\begin{oneparchoices}
+  \choice Chunks are not lost; they are delayed.\\
+  \choice Are filled with zeros and played.
+\end{oneparchoices}
+
+\vspace{0.10in}
+
+\question In InterCom, lost chunks:
+
+\begin{oneparchoices}
+  \choice Generate silences during playback.\\
+  \choice Simply are not played.
+\end{oneparchoices}
+
+\vspace{0.10in}
+
+\question When playing a sequence of samples whose value does not change over time:
+
+\begin{oneparchoices}
+  \choice The reproduced sound repeats over time.\\
+  \choice No sound is reproduced.
+\end{oneparchoices}
+
+\vspace{0.10in}
+
+\question For sound effects:
+
+\begin{oneparchoices}
+  \choice It is the same to play a sequence of zero samples as any other constant value.\\
+  \choice The above is not true.
+\end{oneparchoices}
+
+\vspace{0.10in}
+
+\question A transmission rate supported by the communication link lower than the data rate generated by InterCom affects the chunk loss rate:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+
+\vspace{0.10in}
+
+\question The transmission rate supported by the link significantly affects the rate of loss of individual frames, but only if that rate is lower than the bit rate generated by InterCom:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+
+\vspace{0.10in}
+
+\question Decreasing the chunk size we can successfully use InterCom (without data loss) over a link with a low transmission rate:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+
+\vspace{0.10in}
+
+\question Decreasing the chunk rate we can successfully use InterCom (without data loss) over a link with a low transmission rate:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+
+\vspace{0.10in}
+
+\question Decreasing the audio bit rate we can get less audio chunk loss over a link with a low transmission rate:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+
+\vspace{0.10in}
+
+\question Basically, the buffer used in InterCom serves to delay playback relative to the arrival of chunks, thus being able to play on time the delayed chunks that arrive:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+
+\vspace{0.10in}
+
+\question When storing a chunk in the InterCom buffer, that chunk:
+
+\begin{oneparchoices}
+  \choice Is played immediately.\\
+  \choice Remains in the buffer until its playback time arrives.
+\end{oneparchoices}
+
+\vspace{0.10in}
+
+\question Echo occurs in InterCom when the microphone of our computer records the sound played by the speakers:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+
+\vspace{0.10in}
+
+\question When compressing with DEFLATE, there is no loss of information:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+
+\question When we compress with DEFLATE, the output bit rate is constant:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question When we compress with DEFLATE, the compression rate depends on the input data (that is, the content of the audio chunks):
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question When we compress with DEFLATE, in general, weaker sounds generate lower compression rates:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False, they generate higher compression rates.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question The size of the chunk influences the compression rate achieved with DEFLATE:
+
+\begin{oneparchoices}
+  \choice True, because each chunk is compressed independently.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question The audio bit rate influences the compression rate achieved with DEFLATE:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question The chunk loss rate influences the compression rate achieved with DEFLATE:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question \emph{Quantization} is the process of discretizing the amplitude of a signal:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question A digital \emph{scalar quantizer} is a system that accepts a signal in Pulse Code Modulation (PCM) format and returns another signal in PCM format:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question The \emph{quantization step size} controls the amount of information lost during the \emph{quantization} process:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False, the use of a \emph{quantizer} is always a completely reversible process.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question If the \emph{quantization step size} is equal to 1, then:
+
+\begin{oneparchoices}
+  \choice If the signals are already digital (PCM), there is no change in representation.\\
+  \choice The loss of information is minimal.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question In the current implementation of InterCom, we use \emph{scalar quantization} to control information loss:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question In the current implementation of InterCom, we use \emph{vector quantization} to control information loss:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question In the current implementation of InterCom, we use \emph{scalar quantization} to have some (approximate) control over the transmitted bit rate:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question One of the effects of using a \emph{quantization step size} greater than 1 is that compression rates generally increase:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question In general, a \emph{quantization} process only affects the waveform of the reconstructed signal but not its frequency components:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question The basic difference between a \emph{dead-zone quantizer} and other types is that in the former, the \emph{quantization step size} is twice as large around the input value of 0:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question There are \emph{scalar quantizers} where the \emph{quantization step size} is variable and depends on the amplitude of the input signal:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question A \emph{quantizer} decreases the number of samples:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question Generally, a \emph{quantizer} reduces the number of bits needed to represent the samples:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question The \emph{quantization error} measures the difference between the signal to be discretized and the discretized signal:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question The \emph{quantization error} depends on both the \emph{quantization step size} and the amplitude of the discretized signal:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question If the \emph{quantization step size} is small enough compared to the amplitude of the discretized audio signal, then the \emph{quantization error} can be considered unpredictable because it is essentially noise:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question The \emph{quantization step size} can be used to control the transmission rate of chunks in InterCom, even while maintaining the number of frames per chunk:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question Generally, stereo signals exhibit greater correlation than mono signals within a channel:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question Generally, the left and right channels of stereo signals exhibit high spatial correlation:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question A transform like MST (Mid/Side Transform) exploits spatial redundancy between samples of a channel:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question At least as used in InterCom, MST reduces spatial correlation between channels of a stereo signal:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question If there is spatial correlation between channels of a stereo signal, MST concentrates most of the energy in a single subband:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question MST is an irreversible transform:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False, although this may depend on whether we use fixed-point or floating-point arithmetic.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question The length of the filters used in MST is 4 coefficients, meaning at least 4 samples are needed to apply MST:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question MST must necessarily be applied between consecutive samples in time:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question MST is an orthogonal transform and, therefore, any of its analysis filters can be derived from the other analysis filters using simple operations (additions, subtractions, multiplications, and divisions):
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question The orthogonality condition in a transform is interesting because it implies that the output subbands are completely independent (they do not share information present in the original signal):
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question In total, the subbands generated by MST contain as many coefficients as the transformed samples:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question The number of subbands generated by MST in InterCom is:
+
+\begin{oneparchoices}
+  \choice As many as samples.\\
+  \choice Two.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question The quantization noise generated in one subband (when quantizing subband coefficients, not samples) does not influence the quantization noise generated in another different subband:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False, unless the subbands are orthogonal.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question The quantization error generated in one of the subbands does not influence the information stored in the other subbands:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question The use of a transform (like MST) increases the performance of the coding system from the \emph{rate/distortion} perspective because it is possible to allocate more bits to those subbands that carry more information from the transformed signal:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question The use of a transform (like MST) increases the performance of the coding system from the \emph{rate/distortion} perspective because the transformed signal is usually better compressed (better compression ratio):
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question Transform-based coding can reduce the temporal redundancy present in the two samples of an audio frame:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question The Discrete Wavelet Transform (DWT) generates a frequency octave decomposition:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question The number of coefficients present in a DWT subband depends on the values of the transformed signal:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question In the case of audio signals, most of the energy is concentrated in the high-frequency subbands of the DWT decomposition:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question The number of bits needed to represent a DWT coefficient generally coincides with the number of bits used for the transformed samples:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question In the case of InterCom, within a DWT subband, there is no temporal correlation:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question The quantization process applied to DWT subbands significantly increases the compression rates achieved by DEFLATE because:
+
+\begin{oneparchoices}
+  \choice Long sequences of zeros tend to be generated, especially in high-frequency subbands.\\
+  \choice The lengths of subbands (in coefficients) are shorter than audio chunks.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question The value of DWT coefficients depends on which filters are used in the transform:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question The quantization process applied to DWT subbands (without overlap between chunks) can produce discontinuities between transformed chunks:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question The discontinuity between quantized chunks in the DWT domain can be eliminated if the transformed chunks overlap:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False, because what needs to overlap are the channels of the chunks in time.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question Overlapping chunks in the time domain also produce an overlap in time between transformed chunks:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False, because what needs to overlap are the channels of the chunks.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question Overlapping chunks produce an increase in the number of coefficients generated per overlapped (extended) chunk compared to the original chunks:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question Overlapped and decomposed chunks in the DWT domain do not share coefficients resulting from the overlapped areas between chunks:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question Overlapping chunks during the use of DWT in InterCom allows for a slight reduction in distortion for a given bit rate:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question Humans can perceive sounds with a frequency of 0 Hertz:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question Humans perceive sounds with an intensity that depends on their frequency:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question The auditory perception threshold varies with frequency:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question The auditory perception threshold varies among individuals:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question The auditory perception threshold indicates that quantization noise may be higher in the frequency range centered at 4 kHz than in the rest of audible frequencies:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question In the case of InterCom, different frequency subbands generated by DWT must be quantized proportionally to the average hearing threshold for the corresponding subband:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question Perceptual quantization generally improves the \emph{rate/distortion} ratio:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question Perceptual quantization generally improves the perceptual \emph{rate/distortion} ratio (bit rate \emph{versus} perceived distortion):
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+
+\vspace{0.10in}
+
+\question In InterCom, we can apply perceptual quantization simply by quantizing DWT coefficients before they are delivered to the rest of the task pipeline that decorrelates, compresses, and sends the chunks, and by dequantizing DWT coefficients after being decompressed:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+
+\vspace{0.10in}
+
+\question The simultaneous masking effect in audio samples allows more severe quantization of frequency subbands that are close to the masking subband:
+
+\begin{oneparchoices}
+  \choice True.\\
+  \choice False.
+\end{oneparchoices}
+
+\vspace{0.10in}
+
+\vspace{0.25in} {\fbox{\parbox{6in}{\parbox{6in}{{End of the test.}}}}}
+
+\end{questions}
+
+\end{document}
