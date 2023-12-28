@@ -27,7 +27,7 @@
 %\includegraphics[width=1\textwidth,height=1.2\textheight,keepaspectratio]{%header-cufm.png}
 %\end{figure}
 
-\newcommand{\convocatoria}{Enero, 2022}
+\newcommand{\convocatoria}{Enero, 2024}
 
 \begin{center}
   \textbf{Tecnologías Multimedia} \\
@@ -38,22 +38,27 @@
 
 \vspace{0.25in} {\fbox{\parbox{6in}{\parbox{6in}{{Lea cuidadosamente
           cada pregunta y responda redondeando con un círculo la
-          solución A o B que considere correcta (también existe la
-          opción de escribir las respuestas en una hoja aparte,
-          indicando el número de la pregunta y la letra de la
-          respuesta correcta), y no olvide escribir además su
-          nombre, apellidos y DNI. Se recuerda que una respuesta
-          incorrecta invalida otra correcta. Todas las preguntas
-          tienen el mismo peso en la nota obtenida.  Compilado:
-          \today, \currenttime.\\\\\textbf{Tiempo total: 120 minutos}.}}}}}
-\runningheadrule \extraheadheight{0.14in}
+          solución A o B que considere correcta, y no olvide escribir
+          además su nombre, apellidos y DNI. Se recuerda que una
+          respuesta incorrecta invalida otra correcta. Todas las
+          preguntas tienen el mismo peso en la nota obtenida.
+          Compilado: \today, \currenttime.\\\\\textbf{Tiempo total:
+            120 minutos}.}}}}}  \runningheadrule
+\extraheadheight{0.14in}
 
 \lhead{\ifcontinuation{Question \ContinuedQuestion\ continues\ldots}{}}
 \runningheader{Tecnologías Multimedia}{Test}{\convocatoria}
 \runningfooter{}
               {Página \thepage\ de \numpages}
               {}
+
 \vspace{0.15in}
+
+\begin{tabular}{l}
+  Nombre y apellidos: \\
+  DNI:
+\end{tabular}
+              
 
 \vspace{0.1in}
 
@@ -65,12 +70,12 @@
 
 \begin{questions}
 
-%\question Un intercomunicador como el desarrollado en el proyecto de la asignatura es:
+\question Un intercomunicador como el desarrollado en el proyecto de la asignatura es:
 
-%\begin{oneparchoices}
-%  \choice Una aplicación peer-to-peer que permite a usuarios conectados a la red comunicarse entre sí.\\
-%  \choice Un servicio Web implementado en Python que permite a los clientes comunicarse entre sí.
-%\end{oneparchoices}
+\begin{oneparchoices}
+  \choice Una aplicación peer-to-peer que permite a usuarios conectados a la red comunicarse entre sí.\\
+  \choice Un servicio Web implementado en Python que permite a los clientes Web comunicarse entre sí.
+\end{oneparchoices}
   
 \vspace{0.10in}
 
@@ -78,7 +83,7 @@
 
 \begin{oneparchoices}
   \choice Una señal mecánica de presión que se transmite sólo por el aire.\\
-  \choice Cualquier onda mecánica de presión que proporciona información auditiva.
+  \choice Cualquier onda mecánica de presión que generalmente transporta información auditiva.
 \end{oneparchoices}
   
 \question Cuando una onda sonora se representa en el dominio de la frecuencia:
@@ -118,17 +123,16 @@
 
 \vspace{0.10in}
 
-\question En general, los humanos percibimos con más facilidad
-aquellos sonidos cuyas componentes frecuenciales están entre:
+\question En general, los humanos percibimos con más facilidad aquellos sonidos cuyas componentes frecuenciales están entre:
 
 \begin{oneparchoices}
-  \choice 3 KHz y 4 KHz, aproximadamente.\\
+  \choice 3 KHz y 5 KHz, aproximadamente.\\
   \choice 10 KHz y 15 KHz, aproximadamente.
 \end{oneparchoices}
   
 \vspace{0.10in}
 
-\question La percepción binaural ayuda a los humanos a localizar espacialmente la fuente de los sonidos:
+\question La percepción binaural (estereo) ayuda a los humanos a localizar espacialmente la fuente de los sonidos:
 
 \begin{oneparchoices}
   \choice Verdadero.\\
@@ -159,13 +163,12 @@ aquellos sonidos cuyas componentes frecuenciales están entre:
 
 \begin{oneparchoices}
   \choice Las calidad de los canales es mejor en la señal estereo.\\
-  \choice La señal de audio estéreo transporta información espacial y la mono, no.
+  \choice La señal de audio estereo transporta información espacial y la mono, no.
 \end{oneparchoices}
   
 \vspace{0.10in}
 
-\question Un \emph{frame} de audio estereo se diferencia de un frame
-de audio mono en que:
+\question Un \emph{frame} de audio estereo se diferencia de un frame de audio mono en que:
 
 \begin{oneparchoices}
   \choice Los \emph{frames} de audio estéreo suelen representarse con
@@ -178,10 +181,10 @@ de audio mono en que:
   
 \vspace{0.10in}
 
-\question Con 16 bits/muestra con signo, en general:
+\question Con 16 bits/muestra con signo:
 
 \begin{oneparchoices}
-  \choice El rango dinámico de la señal de audio comprende entre -32768 y 32767.\\
+  \choice El rango dinámico de la señal de audio puede comprender entre -32768 y 32767.\\
   \choice El rango dinámico de las muestras estéreo comprende entre -65536 y 65535, por cada canal.
 \end{oneparchoices}
   
@@ -264,7 +267,7 @@ de audio mono en que:
 \question Las señales de audio en formato CD siempre tienen una tasa de bits igual a:
 
 \begin{oneparchoices}
-  \choice 44100 muestras/segundo * 2 canales * 16 bits/muestra.\\
+  \choice 44100 frames/segundo * 2 muestra/frame * 16 bits/muestra.\\
   \choice La calidad no representa necesariamente una única tasa de
   bits porque la señal de audio puede estar comprimida.
 \end{oneparchoices}
@@ -275,7 +278,7 @@ de audio mono en que:
 frecuencia 2000 Hz, la tasa de muestreo debe ser:
 
 \begin{oneparchoices}
-  \choice 2000 muestras/segundo.\\
+  \choice 1000 muestras/segundo.\\
   \choice 4000 muestras/segundo.
 \end{oneparchoices}
   
@@ -293,16 +296,16 @@ componente de frecuencia que se desea registrar:
   
 \vspace{0.10in}
 
-\question Un ADC (Analog to Digital Converter) tiene por misión:
+\question Un ADC (Analog to Digital Converter) tiene por misión fundamental la de:
 
 \begin{oneparchoices}
   \choice Descomprimir las señales de audio para que éstas sean audibles por los seres humanos.\\
-  \choice Muestrear las señales (presumiblemente de audio) que llegan a su entrada.
+  \choice Muestrear señales (presumiblemente de audio).
 \end{oneparchoices}
   
 \vspace{0.10in}
 
-\question Un ADC tiene como entrada una señal representada mediante
+\question Generalmente, un ADC tiene como entrada una señal representada mediante
 alguna magnitud física (como, por ejemplo, voltaje o intensidad
 luminosa):
 
@@ -313,7 +316,7 @@ luminosa):
   
 \vspace{0.10in}
 
-\question Un ADC tiene como salida una señal representada mediante
+\question Generalmente, un ADC tiene como salida una señal representada mediante
 alguna magnitud física (como, por ejemplo, voltaje o intensidad
 luminosa):
 
@@ -322,7 +325,7 @@ luminosa):
   \choice Falso.
 \end{oneparchoices}
 
-\question Un DAC (Digital to Analog Converter) tiene como entrada una
+\question Generalmente, un DAC (Digital to Analog Converter) tiene como entrada una
 señal representada mediante alguna magnitud física (como, por ejemplo,
 voltaje o intensidad luminosa):
 
@@ -333,7 +336,7 @@ voltaje o intensidad luminosa):
   
 \vspace{0.10in}
 
-\question Un DAC tiene como salida una señal representada mediante
+\question Generalmente, un DAC tiene como salida una señal representada mediante
 alguna magnitud física (como, por ejemplo, voltaje o intensidad
 luminosa):
 
@@ -405,7 +408,7 @@ influye de forma lineal en la latencia:
 \vspace{0.10in}
 
 \question Cuando la tasa de muestreo y el tamaño del \emph{chunk}
-permanecen constantes, el tiempo de \emph{chunk} también lo hace
+permanecen constantes, el tiempo de \emph{chunk} también lo hace:
 
 \begin{oneparchoices}
   \choice Verdadero.\\
@@ -414,7 +417,7 @@ permanecen constantes, el tiempo de \emph{chunk} también lo hace
   
 \vspace{0.10in}
 
-\question En Intercom, la tasa de muestreo se varía en tiempo de
+\question En InterCom, la tasa de muestreo se varía en tiempo de
 ejecución para reducir en la medida de lo posible la tasa de
 transmisión
 
@@ -425,7 +428,7 @@ transmisión
   
 \vspace{0.10in}
 
-\question En la implementación de Intercom, donde los \emph{chunks} de
+\question En la implementación de InterCom, donde los \emph{chunks} de
 audio no son comprimidos, la tasa de generación de los \emph{chunks}
 coincide con la tasa de envío de los \emph{chunks}:
 
@@ -436,7 +439,7 @@ coincide con la tasa de envío de los \emph{chunks}:
   
 \vspace{0.10in}
 
-\question En Intercom, donde los \emph{chunks} de audio sí son
+\question En InterCom, donde los \emph{chunks} de audio sí son
 comprimidos (cada uno por separado), la tasa de generación de los
 \emph{chunks} coincide con la tasa de envío de los \emph{chunks} (cada
 uno por separado), al menos en promedio:
@@ -480,8 +483,7 @@ llamadas al método que captura los \emph{chunks}, entonces:
   
 \vspace{0.10in}
 
-\question Para usar Intercom en un entorno real, donde los dos
-interlocutores usan hosts diferentes:
+\question Para usar InterCom en un entorno real, donde los dos interlocutores usan hosts diferentes:
 
 %\begin{oneparchoices}
 %  \choice Ambos intercomunicadores envían y reciben \emph{chunks}.\\
@@ -489,13 +491,13 @@ interlocutores usan hosts diferentes:
 %\end{oneparchoices}
   
 \begin{oneparchoices}
-  \choice Es necesario especificar el \emph{end-point} (dirección IP y puerto) destino de los \emph{chunks} que son enviados, y este end-point se recibe con los \emph{chunks} recibidos.\\
-  \choice Es necesario especificar el end-point (dirección IP y puerto) destino de los \emph{chunks} que son enviados, y este \emph{end-point} debe comunicarse de forma manual al interlocutor.
+  \choice Es necesario especificar el \emph{end-point} (dirección IP y puerto) destino de los \emph{chunks} que son enviados, y este \emph{end-point} se recibe con los \emph{chunks} recibidos.\\
+  \choice Es necesario especificar el \emph{end-point} (dirección IP y puerto) destino de los \emph{chunks} que son enviados, y este \emph{end-point} debe comunicarse al interlocutor.
 \end{oneparchoices}
 
 \vspace{0.10in}
 
-\question En una prueba de Intercom donde dos interlocutores están en
+\question En una prueba de InterCom donde dos interlocutores están en
 hosts diferentes, la latencia total experimentada por los usuarios es
 igual a:
 
@@ -517,7 +519,8 @@ de Intercom depende de:
 \vspace{0.10in}
 
 \question La variación de la latencia de la red (\emph{jitter})
-influye en la tasa de \emph{chunks} enviados:
+influye en la tasa de \emph{chunks} enviados durante un periodo de
+tiempo suficientemente largo:
 
 \begin{oneparchoices}
   \choice Verdadero.\\
@@ -557,7 +560,7 @@ total experimentada por los usuarios
   
 \vspace{0.10in}
 
-\question El buffering de \emph{chunks} aumenta la tasa de transmisión
+\question El \emph{buffering} de \emph{chunks} aumenta la tasa de transmisión
 de \emph{chunks}:
 
 \begin{oneparchoices}
@@ -589,7 +592,7 @@ de \emph{chunks}:
 
 \question El \emph{buffering} de \emph{chunks} generalmente esconde el
 \emph{jitter} de la CPU, provocado porque los sistemas operatios
-suelen ser multiprogramados:
+suelen ejecutar muchos procesos de forma concurrente:
 
 \begin{oneparchoices}
   \choice Verdadero.\\
@@ -609,10 +612,10 @@ sonido transmitido, siempre y cuando permita acomodar el
   
 \vspace{0.10in}
 
-\question Se puede testear el funcionamiento de Intercom en un único host porque:
+\question Se puede testear el funcionamiento de InterCom en un único host porque:
 
 \begin{oneparchoices}
-  \choice Una instancia de Intercom envía y recibe \emph{chunks}.\\
+  \choice Una instancia de InterCom envía y recibe \emph{chunks}.\\
   \choice No se puede, porque el \emph{hardware} de sonido no puede capturar y reproducir al mismo tiempo.
 \end{oneparchoices}
   
@@ -621,8 +624,8 @@ sonido transmitido, siempre y cuando permita acomodar el
 \question En general, el tiempo de \emph{buffering}:
 
 \begin{oneparchoices}
-  \choice Es menor si las instancias de Intercom corren en el mismo host.\\
-  \choice Es mayor si sólo se ejecuta una instancia de Intercom porque la CPU debe enviar y recibir.
+  \choice Es menor si las instancias de InterCom corren en el mismo host.\\
+  \choice Es mayor si sólo se ejecuta una instancia de InterCom porque la CPU debe enviar y recibir.
 \end{oneparchoices}
   
 \vspace{0.10in}
@@ -638,7 +641,7 @@ sonido transmitido, siempre y cuando permita acomodar el
   
 %\vspace{0.10in}
 
-\question En Intercom, los \emph{chunks} perdidos:
+\question En InterCom, los \emph{chunks} perdidos:
 
 \begin{oneparchoices}
   \choice Los \emph{chunks} no se pierden, se retrasan.\\
@@ -647,7 +650,7 @@ sonido transmitido, siempre y cuando permita acomodar el
   
 \vspace{0.10in}
 
-\question En Intercom, los \emph{chunks} perdidos:
+\question En InterCom, los \emph{chunks} perdidos:
 
 \begin{oneparchoices}
   \choice Generan silencios durante la reproducción.\\
@@ -669,13 +672,13 @@ sonido transmitido, siempre y cuando permita acomodar el
 
 \begin{oneparchoices}
   \choice Es lo mismo reproducir una secuencia de muestras iguales a cero que a cualquier otro valor constante.\\
-  \choice Es más agradable reproducir secuencias de ceros.
+  \choice Lo anterior no es cierto.
 \end{oneparchoices}
   
 \vspace{0.10in}
 
 \question Una tasa de transmisión soportada por el enlace de
-comunicación inferior a la tasa de datos generada por Intercom afecta
+comunicación inferior a la tasa de datos generada por InterCom, afecta
 a la tasa de pérdida de \emph{chunks}:
 
 \begin{oneparchoices}
@@ -688,7 +691,7 @@ a la tasa de pérdida de \emph{chunks}:
 \question La tasa de transmisión soportada por el enlace afecta
 significativamente a la tasa de pérdida de \emph{frames} individuales,
 pero sólo si dicha tasa es inferior a la tasa de bits generada por
-Intercom:
+InterCom:
 
 \begin{oneparchoices}
   \choice Verdadero.\\
@@ -698,7 +701,7 @@ Intercom:
 \vspace{0.10in}
 
 \question Disminuyendo el tamaño de los \emph{chunks} podemos
-conseguir usar Intercom con éxito (sin pérdida de datos) sobre un
+conseguir usar InterCom con éxito (sin pérdida de datos) sobre un
 enlace con baja tasa de transmisión:
 
 \begin{oneparchoices}
@@ -709,7 +712,7 @@ enlace con baja tasa de transmisión:
 \vspace{0.10in}
 
 \question Disminuyendo la tasa de \emph{chunks} podemos conseguir usar
-Intercom con éxito (sin pérdida de datos) sobre un enlace con baja
+InterCom con éxito (sin pérdida de datos) sobre un enlace con baja
 tasa de transmisión:
 
 \begin{oneparchoices}
@@ -730,7 +733,7 @@ de transmisión:
   
 \vspace{0.10in}
 
-\question Básicamente, el \emph{buffer} usado en Intercom sirve para
+\question Básicamente, el \emph{buffer} usado en InterCom sirve para
 retrasar la reproducción respecto de la llegada de \emph{chunks} y así
 poder reproducir a tiempo los \emph{chunks} que llegan retrasados:
 
@@ -741,11 +744,20 @@ poder reproducir a tiempo los \emph{chunks} que llegan retrasados:
   
 \vspace{0.10in}
 
-\question Cuando se almacena un \emph{chunk} en el \emph{buffer} de Intercom, dicho \emph{chunk}:
+\question Cuando se almacena un \emph{chunk} en el \emph{buffer} de InterCom, dicho \emph{chunk}:
 
 \begin{oneparchoices}
   \choice Se reproduce inmediatamente.\\
   \choice Permanece en el \emph{buffer} hasta que le llega el instante de su reproducción.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
+\question El eco se produce en InterCom cuando el micrófono de nuestra computadora registra el sonido reproducido por los altavoces:
+
+\begin{oneparchoices}
+  \choice Verdadero.\\
+  \choice Falso.
 \end{oneparchoices}
   
 \vspace{0.10in}
@@ -819,14 +831,12 @@ compresión conseguida con DEFLATE:
   
 \vspace{0.10in}
 
-\question Si cada canal de audio se comprime de forma independiente
-con DEFLATE, el número de canales de audio influye en la tasa de
-compresión:
+%\question Si cada canal de audio se comprime de forma independiente con DEFLATE, el número de canales de audio influye en la tasa de compresión:
 
-\begin{oneparchoices}
-  \choice Verdadero.\\
-  \choice Falso.
-\end{oneparchoices}
+%\begin{oneparchoices}
+%  \choice Verdadero.\\
+%  \choice Falso.
+%\end{oneparchoices}
   
 \vspace{0.10in}
 
@@ -850,7 +860,7 @@ en formato PCM:
   
 \vspace{0.10in}
 
-\question El \emph{quantization step} controla la cantidad de
+\question El \emph{quantization step size} controla la cantidad de
 información que se pierde durante el proceso de \emph{quantization}:
 
 \begin{oneparchoices}
@@ -860,7 +870,7 @@ información que se pierde durante el proceso de \emph{quantization}:
   
 \vspace{0.10in}
 
-\question Si el \emph{quantization step} es igual a 1, entonces:
+\question Si el \emph{quantization step size} es igual a 1, entonces:
 
 \begin{oneparchoices}
   \choice Si las señales ya son digitales (PCM), no existe ningún cambio de representación.\\
@@ -869,7 +879,7 @@ información que se pierde durante el proceso de \emph{quantization}:
   
 \vspace{0.10in}
 
-\question En la implementación actual de Intercom usamos \emph{scalar
+\question En la implementación actual de InterCom usamos \emph{scalar
 quantization} para controlar la pérdida de información:
 
 \begin{oneparchoices}
@@ -879,7 +889,7 @@ quantization} para controlar la pérdida de información:
   
 \vspace{0.10in}
 
-\question En la implementación actual de Intercom usamos \emph{vector
+\question En la implementación actual de InterCom usamos \emph{vector
 quantization} para controlar la pérdida de información:
 
 \begin{oneparchoices}
@@ -889,7 +899,7 @@ quantization} para controlar la pérdida de información:
   
 \vspace{0.10in}
 
-\question En la implementación actual de Intercom usamos \emph{scalar
+\question En la implementación actual de InterCom usamos \emph{scalar
   quantization} para tener cierto control (aproximado) sobre la tasa
 de bits transmitidos:
 
@@ -900,7 +910,7 @@ de bits transmitidos:
   
 \vspace{0.10in}
 
-\question Uno de los efectos de usar un \emph{quantization step}
+\question Uno de los efectos de usar un \emph{quantization step size}
 superior a 1 es que las tasas de compresión, en general, aumentan:
 
 \begin{oneparchoices}
@@ -910,8 +920,9 @@ superior a 1 es que las tasas de compresión, en general, aumentan:
   
 \vspace{0.10in}
 
-\question \emph{Quantization} sólo afecta a la forma de onda de la
-señal reconstruída, pero no a sus componentes de frecuencia:
+\question En general, un proceso de \emph{quantization} sólo afecta a
+la forma de onda de la señal reconstruída, pero no a sus componentes
+de frecuencia:
 
 \begin{oneparchoices}
   \choice Verdadero.\\
@@ -921,7 +932,7 @@ señal reconstruída, pero no a sus componentes de frecuencia:
 \vspace{0.10in}
 
 \question La diferencia básica entre un \emph{dead-zone quantizer} y
-los otros tipos es que en este primero el \emph{quantization step} es
+los otros tipos es que en este primero el \emph{quantization step size} es
 el doble de grande alrrededor del valor de entrada 0:
 
 \begin{oneparchoices}
@@ -932,7 +943,7 @@ el doble de grande alrrededor del valor de entrada 0:
 \vspace{0.10in}
 
 \question Existen \emph{scalar quantizers} donde el \emph{quantization
-  step} es variable y depende de la amplitud de la señal de entrada:
+  step size} es variable y depende de la amplitud de la señal de entrada:
 
 \begin{oneparchoices}
   \choice Verdadero.\\
@@ -950,7 +961,7 @@ el doble de grande alrrededor del valor de entrada 0:
   
 \vspace{0.10in}
 
-\question Un \emph{quantizer} disminuye el número de bits necesarios
+\question Generalmente, un \emph{quantizer} disminuye el número de bits necesarios
 para representar las muestras:
 
 \begin{oneparchoices}
@@ -971,7 +982,7 @@ señal a discretizar y la señal discretizada:
 \vspace{0.10in}
 
 \question El \emph{quantization error} depende tanto del
-\emph{quantization step} como de la amplitud de la señal discretizada:
+\emph{quantization step size} como de la amplitud de la señal discretizada:
 
 \begin{oneparchoices}
   \choice Verdadero.\\
@@ -980,7 +991,7 @@ señal a discretizar y la señal discretizada:
   
 \vspace{0.10in}
 
-\question Si el \emph{quantization step} es suficientemente pequeño
+\question Si el \emph{quantization step size} es suficientemente pequeño
 comparado con la amplitud de la señal de audio discretizada, entonces
 el \emph{quantization error} puede considerarse impredecible porque
 básicamente se trata de ruido:
@@ -992,8 +1003,8 @@ básicamente se trata de ruido:
   
 \vspace{0.10in}
 
-\question El \emph{quantization step} puede usarse para controlar la
-tasa de transmisión de \emph{chunks} en Intercom, aun manteniendo el
+\question El \emph{quantization step size} puede usarse para controlar la
+tasa de transmisión de \emph{chunks} en InterCom, aun manteniendo el
 número de \emph{frames}/\emph{chunk}:
 
 \begin{oneparchoices}
@@ -1023,7 +1034,7 @@ estereo presentan una alta correlación espacial:
   
 \vspace{0.10in}
 
-\question Una transformada como la MST (Mid/Side Transform) explota la
+\question Una transformada como la MST (\emph{Mid/Side Transform}) explota la
 redundancia espacial entre las muestras de un canal:
 
 \begin{oneparchoices}
@@ -1033,7 +1044,7 @@ redundancia espacial entre las muestras de un canal:
   
 \vspace{0.10in}
 
-\question Al menos tal y como se usa en Intercom, la MST reduce la
+\question Al menos tal y como se usa en InterCom, la MST reduce la
 correlación espacial entre los canales de una señal estereo:
 
 \begin{oneparchoices}
@@ -1116,7 +1127,7 @@ contienen tantos coeficientes como muestras son transformadas:
   
 \vspace{0.10in}
 
-\question El número de subbandas generadas por la MST en Intercom es:
+\question El número de subbandas generadas por la MST en InterCom es:
 
 \begin{oneparchoices}
   \choice Tantas como muestras.\\
@@ -1125,20 +1136,21 @@ contienen tantos coeficientes como muestras son transformadas:
   
 \vspace{0.10in}
 
-\question El ruido de \emph{quantization} generado en una subbanda no
-influye en el ruido de \emph{quantization} generado en otra subbanda
-diferente si las subbanda son ortogonales:
+\question El ruido de \emph{quantization} generado en una subbanda
+(cuando quantizamos los coeficientes de las subbandas, no las
+muestras) no influye en el ruido de \emph{quantization} generado en
+otra subbanda diferente:
 
 \begin{oneparchoices}
   \choice Verdadero.\\
-  \choice Falso.
+  \choice Falso, a no ser que las subbandas sean ortogonales.
 \end{oneparchoices}
   
 \vspace{0.10in}
 
-\question Si una transformada es ortogonal, entonces el
-\emph{quantization error} generado en una de las subbandas no influye
-en la información almacenada en las demás subbandas:
+\question El \emph{quantization error} generado en una de las
+subbandas no influye en la información almacenada en las demás
+subbandas:
 
 \begin{oneparchoices}
   \choice Verdadero.\\
@@ -1159,6 +1171,18 @@ subbandas que transportan más información de la señal transformada:
   
 \vspace{0.10in}
 
+\question El uso de una transformada (como la MST) incrementa el
+rendimiento del sistema de codificación desde el punto de vista
+\emph{rate/distortion} porque la señal transformada suele comprimirse
+mejor (mejor ratio de compresión):
+
+\begin{oneparchoices}
+  \choice Verdadero.\\
+  \choice Falso.
+\end{oneparchoices}
+  
+\vspace{0.10in}
+
 \question La codificación basada en transformadas puede reducir la
 redundancia temporal presente en las dos muestras de un \emph{frame}
 de audio:
@@ -1170,7 +1194,7 @@ de audio:
   
 \vspace{0.10in}
 
-\question La DWT (Dicrete Wavelet Transform) genera una descomposición
+\question La DWT (\emph{Dicrete Wavelet Transform}) genera una descomposición
 en frecuencia por octavas:
 
 \begin{oneparchoices}
@@ -1212,7 +1236,7 @@ transformadas:
   
 \vspace{0.10in}
 
-\question En el caso de Intercom, dentro de una subbanda DWT no existe
+\question En el caso de InterCom, dentro de una subbanda DWT no existe
 correlación temporal:
 
 \begin{oneparchoices}
@@ -1233,8 +1257,7 @@ DEFLATE porque:
   
 \vspace{0.10in}
 
-\question El valor de los coeficientes DWT depende de qué filtros son
-usados en la transformada:
+\question El valor de los coeficientes DWT depende de qué filtros son usados en la transformada:
 
 \begin{oneparchoices}
   \choice Verdadero.\\
@@ -1298,7 +1321,7 @@ entre \emph{chunks}:
 \vspace{0.10in}
 
 \question El solapamiento de \emph{chunks} durante el uso de la DWT en
-Intercom permite disminuir ligeramente la distorsión para una
+InterCom permite disminuir ligeramente la distorsión para una
 determinada tasa de bits:
 
 \begin{oneparchoices}
@@ -1319,7 +1342,7 @@ igual a 0 Hercios:
 \vspace{0.10in}
 
 \question Los seres humanos perciben los sonidos con una intensidad
-que depende de su frecuecia:
+que depende de su frecuencia:
 
 \begin{oneparchoices}
   \choice Verdadero.\\
@@ -1357,8 +1380,8 @@ centrado en 4 Kz, que en el resto de frecuencias audibles:
   
 \vspace{0.10in}
 
-\question En el caso de Intercom, las diferentes subbandas de
-frecuencia generadas por la DWT deben ser \emph{quantized} de forma
+\question En el caso de InterCom, las diferentes subbandas de
+frecuencia generadas por la DWT deben ser quantizadas de forma
 proporcional al humbral de audición promedio para la correspondiente
 subbanda:
 
@@ -1369,7 +1392,7 @@ subbanda:
   
 \vspace{0.10in}
 
-\question La \emph{quantization} perceptual en general mejora la ratio
+\question La quantización perceptual en general mejora la ratio
 \emph{rate}/\emph{distortion}:
 
 \begin{oneparchoices}
@@ -1379,7 +1402,7 @@ subbanda:
   
 \vspace{0.10in}
 
-\question La \emph{quantization} perceptual en general mejora la ratio
+\question La quantización perceptual en general mejora la ratio
 \emph{rate}/\emph{distortion}-perceptual (ratio tasa de bits
 \emph{versus} la distorsión percibida):
 
@@ -1390,11 +1413,20 @@ subbanda:
 
 \vspace{0.10in}
 
-\question En Intercom podemos aplicar la \emph{quantization}
-perceptual simplemente \emph{quantizing} los coeficientes DWT antes de
+\question En InterCom podemos aplicar la quantización
+perceptual simplemente quantizando los coeficientes DWT antes de
 ser entregados al resto del \emph{pipeline} de tareas que
-descorrelacionan, comprimen y envían los chunks, y \emph{dequantizing}
+descorrelacionan, comprimen y envían los chunks, y desquantizándo
 los coeficientes DWT después de ser descomprimidos:
+
+\begin{oneparchoices}
+  \choice Verdadero.\\
+  \choice Falso.
+\end{oneparchoices}
+
+\vspace{0.10in}
+
+\question El efecto del enmascaramiento simultaneo en muestras de audio permite quantizar más severamente aquellas subbandas de frecuencia que están próximas a la subbanda enmascarante:
 
 \begin{oneparchoices}
   \choice Verdadero.\\
