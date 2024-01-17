@@ -501,10 +501,10 @@ llamadas al método que captura los \emph{chunks}, entonces:
 hosts diferentes, la latencia total experimentada por los usuarios es
 igual a:
 
-\begin{oneparchoices}
-  \choice El tiempo que tarde un \emph{chunk} desde viajar a uno de los hosts hasta que el \emph{chunk} de vuelta es recibido, entendiendo por \emph{chunk} de vuelta el que contiene la respuesta al \emph{chunk} enviado.\\
-  \choice La suma de la latencia del enlace más la latencia generada por el intercomunicador.
-\end{oneparchoices}
+%\begin{oneparchoices}
+%  \choice El tiempo que tarde un \emph{chunk} en viajar a uno de los hosts hasta que el \emph{chunk} de vuelta es recibido, entendiendo por \emph{chunk} de vuelta el que contiene la respuesta al \emph{chunk} enviado.\\
+%  \choice La suma de la latencia del enlace más la latencia generada por el intercomunicador.
+%\end{oneparchoices}
   
 \vspace{0.10in}
 
@@ -570,15 +570,13 @@ de \emph{chunks}:
   
 \vspace{0.10in}
 
-\question El \emph{buffering} de \emph{chunks} esconde el
-\emph{jitter} del \emph{hardware} de sonido:
-
-\begin{oneparchoices}
-  \choice Verdadero.\\
-  \choice Falso.
-\end{oneparchoices}
+%\question El \emph{buffering} de \emph{chunks} esconde el \emph{jitter} del \emph{hardware} de sonido:
+%\begin{oneparchoices}
+%  \choice Verdadero.\\
+%  \choice Falso.
+%\end{oneparchoices}
   
-\vspace{0.10in}
+%\vspace{0.10in}
 
 \question El \emph{buffering} de \emph{chunks} esconde básicamente el
 \emph{jitter} del enlace de transmisión:
@@ -706,7 +704,7 @@ enlace con baja tasa de transmisión:
 
 \begin{oneparchoices}
   \choice Verdadero.\\
-  \choice Falso.
+  \choice Falso, si no reducimos por ejemplo la frecuencia de muestreo.
 \end{oneparchoices}
   
 \vspace{0.10in}
@@ -801,7 +799,7 @@ débiles generan tasas de compresión inferiores:
   
 \vspace{0.10in}
 
-\question El tamaño del \emph{chunk} influye en la tasa de compresión
+\question En InterCom, el tamaño del \emph{chunk} influye en la tasa de compresión
 conseguida con DEFLATE:
 
 \begin{oneparchoices}
@@ -1392,7 +1390,7 @@ subbanda:
   
 \vspace{0.10in}
 
-\question La quantización perceptual en general mejora la ratio
+\question La quantización perceptual, siempre mejora la ratio
 \emph{rate}/\emph{distortion}:
 
 \begin{oneparchoices}
