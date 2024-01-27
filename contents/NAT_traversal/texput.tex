@@ -22,19 +22,19 @@
 
 NAT stands for
 \href{https://en.wikipedia.org/wiki/Network_address_translation}{Network
-  Address Translation}, and it is a method of remapping an IP
+  Address Translation}, and it is a method to remap an IP
 (Internet Protocol) address space into another by modifying network
 address information (in the IP header) of packets while they are in
 transit across a traffic routing device (see the
 Fig~\ref{fig:NAT_framework})~\cite{srisuresh1999nat,Srisuresh2001}. When
-a network device on a internal (usually private) network sends a
-packet P to the Internet, the NAT device translates the internal IP
-address to a external (usually public) IP address. When a packet from
-the Internet arrives at the NAT device, it translates the external IP
+a network device on an internal (usually private) network sends a
+packet $P$ to the Internet, the NAT device translates the internal IP
+address to an external (usually public) IP address. When a packet from
+the Internet arrives to the NAT device, it translates the external IP
 address to the internal IP address of the device receiver of the
-packet P.
+packet $P$.
 
-\section{Pros and cons}
+\section{Pros and cons of NATting}
 
 NAT was designed because it provides the following advantages:
 \begin{enumerate}
@@ -50,14 +50,14 @@ However, NAT also has (mainly) one disadvantage:
 \item It can be difficult (and sometimes, impossible because NAT
   algorithms are not standarized) to communicate with servers (for
   example, a Web server) on the internal network, because the incoming
-  traffic will be filtered by the NAT device at least the server
+  traffic will be filtered by the NAT device, at least the server
   initiates the conections\footnote{Something that by definition is
     not done by servers.}.
 \end{enumerate}
 
 \section{IP addresses, ports, end-points, connections, servers, clients and peers}
 
-An IP address is a unique label that identifies a device on a
+An \emph{IP address} is an unique label that identifies a device on a
 network. It is an integer number (32 bits in the case of IPv4 and 128
 bits in IPv6) assigned to devices that use the Internet to
 communicate. All IP packets have an IP address in their header. IPv4
@@ -66,7 +66,7 @@ as for example, \texttt{10.20.30.40}. On the other hand, IPv6
 addresses are expresed in colon-hexadecimal notation, such for
 example, \texttt{2001:0db8:85a3:0000:0000:8a2e:0370:7334}.
 
-A port in the context of networking is an integer number (usually 16
+A \emph{port} in the context of networking is an integer number (usually 16
 bits long) associated with a network protocol that receives or
 transmits data for a specific service (for example, the port
 \texttt{80} is used for the Hypertext Transfer Protocol (HTTP), which
