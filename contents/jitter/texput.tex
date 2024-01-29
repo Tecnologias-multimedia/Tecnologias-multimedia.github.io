@@ -184,8 +184,21 @@ every new received chunk.
 %  \ENDPROCEDURE
 %\end{pseudocode}
 
-\section{What you have to do? (deliverables)}
+\section{Deliverables}
 \label{sec:homework}
+
+\subsection*{Find your minimum buffering time}
+Determine, experimentally:
+\begin{enumerate}
+\item The minimum artificial latency that you must configure in your
+  InterCom instance to communicate with your groupmate without lossing
+  chunks, when he is in a different\footnote{Different to the network
+    in which you are using InterCom.} local network.
+\item Repeat the previous experiment using only localhost (transmiting
+  the chunk between the loopback network adapter), but adding some
+  jitter with the tool
+  \href{https://man7.org/linux/man-pages/man8/tc.8.html}{\texttt{tc}}.
+\end{enumerate}
 
 In this milestone we are going to measure the QoE provided by our
 ``minimal'' (or ``NAT\_traversal'') intercom when the network latency
@@ -234,6 +247,7 @@ Each option has pros and cons, from which we can highlight that:
   \end{itemize}
 \end{enumerate}
 
+% LLevar ping a un repo diferente. Hacer lo mismo con tc
 \subsection{Measurement}
 In most cases we will test InterCom only in our host. Therefore, it
 can be useful to have an idea of how the latencies are, at
@@ -277,6 +291,7 @@ example, it also holds that
   \label{eq:RTT}
 \end{equation}
 
+% Borrar (pero dejar el ejemplo del notebook por ahí)
 \subsection{Characterize the latency in different scenarios}
 
 \subsubsection{In your host}
