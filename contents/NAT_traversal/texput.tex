@@ -34,7 +34,7 @@ the Internet arrives at the NAT device, it translates the external IP
 address to the internal IP address of the device receiver of the
 packet P.
 
-\section{Pros and cons}
+\section{Pros and cons of NATting}
 
 NAT was designed because it provides the following advantages:
 \begin{enumerate}
@@ -255,6 +255,42 @@ where InterCom is listening to.
 
 \section{Deliverables}
 
+The main objectives of this milestone are:
+\begin{enumerate}
+\item To know if you can use
+InterCom to communicate between your home networks (or between
+simulated private networks).
+\item To classify your NAT device.
+\end{enumerate}
+
+\subsection{Testing your NAT devices}
+
+Run an instance of InterCom in two different private networks, and try
+to communicate. Use the command line parameters to specify the
+end-point of your interlocutor. Report your experiment. Try to use
+\href{https://jupyter.org/}{Jupyter
+  Notebook}. \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/docs/2-hours_seminar.ipynb}{Here}
+you have an example.
+
+\subsection{Classify your NAT device}
+
+NAT devices can be classified into:
+\begin{enumerate}
+\item Full cone NATs: when the end-point usigned by the NAT to
+  InterCom remains the same for two (or more) interlocutors (each one
+  in a different private network), and none packet filtering policy is
+  used.
+\item Restricted cone NATs: when in the previous situation (full cone) 
+\item Port-restricted cone NATs:
+\item Symmetric NATs:
+\end{enumerate}
+
+\subsection{Simulating a NATted environment}
+
+InterCom should be able to communicate in all NAT combinations except when both are symmetric.
+
+If you cannot communicate, and this is 
+  
 A Python module called \texttt{NAT\_traversal.py} that inherits from
 \texttt{minimal.py} and that:
 \begin{enumerate}
