@@ -1,6 +1,6 @@
 % Emacs, this is -*-latex-*-
 
-\title{Bit-Rate Control in InterCom}
+\title{Bit-Rate Control}
 
 % USE 16 bits/coefficient (2 byte-planes).
 
@@ -35,11 +35,9 @@ because it depends on the congestion level that, in turn, depends
 on the behavior of the network users.
 
 In this milestone, we will measure the impact of the link throughput
-on the
-\href{https://en.wikipedia.org/wiki/Quality_of_experience}{QoE}\footnote{Follow
-  the same rubric than in the case of the measurement of the impact of
-  the latency.} provided by the current implementation of InterCom
-(\href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/cancel_echo.py}{\texttt{cancel\_echo.py}}). Similarly
+on the \href{https://en.wikipedia.org/wiki/Quality_of_experience}{QoE}
+provided by the current implementation of InterCom
+(\href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/echo_cancellation.py}{\texttt{echo\_cancellation.py}}). Similarly
 to the procedure used to measure the impact of latency and jitter, we
 will use
 \href{https://man7.org/linux/man-pages/man8/tc.8.html}{\texttt{tc}}~\cite{bert2012lartc}
@@ -47,11 +45,11 @@ to control the amount of data that an InterCom instance will be
 allowed to send in a local environment, with the aim of simulating a
 real environment. Notice that this upper bound in the bit-rate will
 also affect the loss of chunks because if the link capacity is smaller
-than the audio bit-rate (throughput), sooner or later the link will
-discard those chunks that cannot be buffered in the retransmission
-nodes (routers and switches)\footnote{Notice that, in this case, we
-  would be at least contributing, if not causing, the link
-  congestion.}.
+than the audio bit-rate (throughput), sooner or later the transmission
+link will discard those chunks that cannot be buffered in the
+retransmission nodes (routers and switches)\footnote{Notice that, in
+  this case, we would be at least contributing, if not causing, the
+  link congestion.}.
 %}}}
 
 \subsection{Compressing the audio data with \href{https://zlib.net/}{zlib}}
