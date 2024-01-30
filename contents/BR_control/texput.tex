@@ -55,10 +55,10 @@ retransmission nodes (routers and switches)\footnote{Notice that, in
 \subsection{Compressing the audio data with \href{https://zlib.net/}{zlib}}
 %{{{ ...
 To reduce the bit-rate, we need some way of compressing the data, an
-action that also will reduce the throughput in InterCom. The
+action that also will reduce the data-throughput in InterCom. The
 \verb|pack()| and \verb|unpack()| methods can compress and
 decompress, respectively, the chunks that are processed. To compress
-and decompress, we will use a free
+and decompress, we will use a free data
 \href{https://en.wikipedia.org/wiki/Codec}{codec} named
 \href{https://en.wikipedia.org/wiki/DEFLATE}{DEFLATE}, which is based
 on
@@ -150,10 +150,10 @@ Another key aspect to consider is that the processing that the
 \href{https://en.wikipedia.org/wiki/Equal-loudness_contour}{finite
   number of different volumen levels that a human being can
   recognize}~\cite{bosi2003intro}. In this milestone, we will profit from
-that fact to decrease the transmission bit-rate by sacrificing
+that fact to decrease the transmission bit-rate by decreaing
 quality. In most
 \href{https://en.wikipedia.org/wiki/Lossy_compression}{lossy
-  compression} schemes, quantization is the only source of
+  compression} schemes, quantization is the main source of
 \href{https://en.wikipedia.org/wiki/Distortion}{distortion}~\cite{taubman2002jpeg2000}.
 
 \href{https://en.wikipedia.org/wiki/Quantization_(signal_processing)}{Scalar
