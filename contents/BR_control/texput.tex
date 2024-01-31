@@ -308,10 +308,9 @@ definition, and this does not depend on the bit-rate control.} There
 
 %}}}
 
-\section{What do you have to do?}
-%{{{ 
+\section{Deliverables}
 
-Please, answer the following questions:
+Remember to report both, the experiments and the results.
 
 \subsection{Which data-ordering performs better?}
 %{{{ 
@@ -321,204 +320,24 @@ the bit-rates, the higher the compression). Use the audio sequence you
 want.\footnote{Some samples are stored in the \texttt{data} directory of
   InterCom.} Notice that using different audio files you could obtain
 different results.
-%}}}
 
-\subsection{Estimate the bit-rate in an Internet link}
-% {{{
-Apart from determining a suitable entropy coding scheme, we will need
-to deal with the limit of the throughput that the transmission link is
-able to provide. In general, we cannot expect that link will be able
-to transmit 1.5 Mbps uninterruptedly.
-
-Usually, to determine the throughput, we need to use a tool such as
-\href{https://iperf.fr/}{iPerf} to
-\href{https://en.wikipedia.org/wiki/Measuring_network_throughput}{measure
-  the link capacity} between two
-\href{https://datatracker.ietf.org/doc/html/rfc4113}{end-points} (of
-different \href{https://en.wikipedia.org/wiki/Host_(network)}{hosts})
-in the Internet. Unfortunately, this procedure implies that we must
-have access to both hosts to install and run this program, privileges
-that are not always available.
-
-Alternatively, we can estimate the
-\href{https://en.wikipedia.org/wiki/Throughput}{link throughput} using
-\href{https://github.com/torvalds/linux/blob/master/net/ipv4/ping.c}{\texttt{ping}}
-(see the
-\href{https://tecnologias-multimedia.github.io/contents/latency/}{previous
-  milestone}). However, it is important to realize that
-\texttt{ping} has been designed to measure latencies, not bit-rates,
-and that, for this reason, we will only be able to estimate
-throughputs, rougtly.
-
-Said that, the transmission bitrate available between two directly
-reachable IP devices can be found with
-\begin{equation}
-  b=\frac{B}{t_t},
-  \label{eq:b}
-\end{equation}
-where $B$ is the number of bits sent in a \verb|ping|
-\href{https://en.wikipedia.org/wiki/Payload_(computing)}{payload}, and
-\begin{equation}
-  t_t = \frac{\text{RTT}_{\text{max}}-2t_p}{2},
-  \label{eq:tt}
-\end{equation}
-an equation that can be determined by revisiting the \verb|ping|
-timeline
-(\href{https://tecnologias-multimedia.github.io/contents/latency/graphics/ping_timeline.svg}{Fig.~3})
-and the Eq.~2 of the
-\href{https://tecnologias-multimedia.github.io/contents/latency/}{previous
-  milestone}. In this expression, $\text{RTT}_{\text{max}}$ represents
-  the average\footnote{Remember that ping can generate a number of
-    time measurements.} RTT measured when we send the
-  maximum\footnote{We should use a payload as large as possible
-    (ideally, an infinite number of bytes), in order to make $t_t$ a
-    significant amount of time, which is easy to measure} number of
-  bytes in the payload of the \verb|ping|, and
-\begin{equation}
-  t_p \approx \frac{\text{RTT}_{\text{min}}}{2},
-  \label{eq:tp}
-\end{equation}
-where $\text{RTT}_{\text{min}}$ presents the minimum\footnote{Again,
-  remember that ping returns a collection of RTTs, a we should use the
-  minimun beause the latency of the link should be a constant and the
-  congestion always increases this value.} RTT measurement when we
-send the minimum\footnote{If the payload of the ping is small enough
-  ($0$ bytes ideally), it would happen that $t_t=0$.} payload.
-
-Therefore, to estimate $b$ for the near future, we must perform the
-following steps:
-
-\begin{enumerate}
-  
-\item Run \texttt{ping} using the smallest possible payload that
-  provides RTTs values.\footnote{The minimal payload for a
-    \texttt{ping} message can be 0, but depending on the
-    implementation of \texttt{ping} you might have to use a larger
-    value.} Use it to calculate $t_p$.
-  
-\item Run \texttt{ping} using the largest possible payload to achieve
-  that the most part of the average RTT provided by \texttt{ping}
-  corresponds to $t_t$. It is necessary to use the highest
-  payload-size because the accuracy of the cronometer used by
-  \texttt{ping}, in general, is not high enough.
-  
-\item Use Eq.~\eqref{eq:tt} to find $t_t$ as a function of the average
-  RTT and the minimal $t_p$.
-  
-\item Finally, use Eq.~\eqref{eq:b} to determine $b$.
-  
-\end{enumerate}
-
-If the devices cannot be \texttt{ping}-ed, and supposing that there is
-only one point in the communication link that is filtering the ICMP
-Echo Request traffic in each direction, then we can apply the same
-technique that was used in the
-\href{https://tecnologias-multimedia.github.io/contents/latency/}{previous
-  milestone}, which basically consists in computing the total RTT as
-the sum of the RTTs from the devices that we want to connect (where
-the InterCom is it supposed to be run) to the filter (possiblely, one
-of your home routers).
-
-To gain experience with all this stuff, measure your bandwidth (using
-your local host) with different \texttt{ping} servers and try to
-compute the link throughput:
-\begin{enumerate}
-\item In \href{https://en.wikipedia.org/wiki/Localhost}{\texttt{localhost}}.
-\item In \texttt{localhost}, we limit the bit-rate to \texttt{tc}.
-\item Between two hosts in your
-  \href{https://en.wikipedia.org/wiki/Local_area_network}{local
-    network} (your host and your router, for example). Notice that in
-  this case, you should not obtain a bit-rate higher than the capacity
-  of your
-  \href{https://en.wikipedia.org/wiki/Network_interface_controller}{network
-    adapter}.
-\item Between your host and a public host of the Internet. Try
-  \href{https://www.meter.net/}{\texttt{www.meter.net}} for example.
-\end{enumerate}
-%}}}
-
-\subsection{Simulate the link}
-%{{{ 
-With the bit-rate value $b$ calculated from the previous section, simulate
-this link (locally) with:
-
-\begin{lstlisting}{language=bash}
-  sudo tc qdisc add dev lo root handle 1: tbf rate <bit-rate_in_kbps>kbit burst 32kbit limit 32kbit
-  sudo tc qdisc add dev lo parent 1:1 handle 10: netem delay <average_delay_in_miliseconds>ms <maximum_average_deviation_in_miliseconds>ms <Pearson_correlation_coefficient_expressed_as_a_percentage>% distribution <uniform|normal|pareto|paretonormal>
-\end{lstlisting}
-
-Examples:
-
-\begin{enumerate}
-\item Check the current configuration:
-  
-  \begin{lstlisting}{language=bash}
-    tc qdisc show dev lo
-  \end{lstlisting}
-  
-  The output should be something like:
-  
-  \begin{lstlisting}{language=bash}
-    qdisc noqueue 0: root refcnt 2
-  \end{lstlisting}
-  
-\item Define the rule for bit-rate control (example for $200$ kbps):
-  
-  \begin{lstlisting}{language=bash}
-    sudo tc qdisc add dev lo root handle 1: tbf rate 200kbit burst 32kbit limit 32kbit
-  \end{lstlisting}
-  
-\item Define the rule for latency control
-  (example for $100$ ms, $10$ ms of jitter, and
-  \href{https://wiki.linuxfoundation.org/networking/netem}{with the
-    next random transmission depending on $25$\% on the last}):
-  
-  \begin{lstlisting}{language=bash}
-    sudo tc qdisc add dev lo parent 1:1 handle 10: netem delay 100ms 10ms 25% distribution normal
-  \end{lstlisting}
-  
-\item After adding these rules, this should be the configuration:
-  
-  \begin{lstlisting}{language=bash}
-    tc qdisc show dev lo
-  \end{lstlisting}
-  
-  The output should be something like:
-  
-  \begin{lstlisting}{language=bash}
-    qdisc tbf 1: root refcnt 2 rate 200Kbit burst 4Kb lat 0us 
-    qdisc netem 10: parent 1:1 limit 1000 delay 100ms  10ms 25%
-  \end{lstlisting}
-
-\end{enumerate}
-
-Recall to delete the rules after they are unnecessary (example to delete the previous rules):
-
-\begin{lstlisting}{language=bash}
-  sudo tc qdisc delete dev lo parent 1:1 handle 10: netem delay 100ms 10ms 25% distribution normal
-  sudo tc qdisc delete dev lo root handle 1: tbf rate 200kbit burst 32kbit limit 32kbit
-\end{lstlisting}
 %}}}
 
 \subsection{Compute RD (Rate/Distortion) curves}
 %{{{ 
+
 Considering the
 \href{https://en.wikipedia.org/wiki/Root-mean-square_deviation}{RMSE
   (Root Mean Square Error)} as a distortion measure between the sent and
 the received audio signal (using only one instance of InterCom),
 generate the RD curve considering a set of different simulated
 transmission environments (use
-\href{https://man7.org/linux/man-pages/man8/tc.8.html}{tc}) of one
-audio sequence (remember that you can use one of the samples found in
-the \verb|data| directory of the InterCom repo), for the four
-implementations.
-%}}}
+\href{https://vicente-gonzalez-ruiz.github.io/about_tc/}{tc}) of one
+audio sequence.
+
+Remember that the X-axis must express bit-rate and the Y-axis, distortion.
 
 %}}}
-
-\section{Deliverables}
-
-A report documenting the experiments and the results. Use Jupyter.
 
 \section{Resources}
 
