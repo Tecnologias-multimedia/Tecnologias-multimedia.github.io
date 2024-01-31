@@ -1066,8 +1066,7 @@ This decoder ignores the adjacent chunks in the DWT domain, but notice that it u
 
 %}}}
 
-\section{What you have to do?}
-%{{{
+\section{Deliverables}
 
 \subsection{Determine the RD curves for the MST}
 %{{{
@@ -1077,7 +1076,7 @@ of simulated transmission contexts. Use the modules
 differs in how the transform has been implemented.  Notice that you
 can use the \verb|--minimal_quantization_step| parameter to generate
 the different points of the RD curves (it is not necessary to use a
-bit-rate control algorithm).
+bit-rate control algorithm neither \texttt{tc}).
 %}}}
 
 \subsection{Determine the RD curves for the DWT}
@@ -1104,12 +1103,15 @@ all the RD curves together (in the same graph), to compare easily.
 
 %}}}
 
-\subsection{Answer these questions}
+\subsection{Answer the questions}
 %{{{
 
 \begin{enumerate}
   
 \item Which has been the gain of the filters used in your experiments?
+  You can plot the gains (as it is shown in
+  \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/docs/2-hours_seminar.ipynb}{this
+    notebook}), but give some written explanation.
 
 \item Does the computation of the DWT using chunk overlapping increase
   the latency of the whole system? And what about the jitter? In what amount?
@@ -1118,14 +1120,10 @@ all the RD curves together (in the same graph), to compare easily.
   (such as MP3) to exploit temporal redundancy? Enumerate the
   systems and the transform(s) used.
 
-%}}}
 \end{enumerate}
-
-%\subsection{Implement a Chunk Truncation Encoding (CTE)}
-%{{{
-
 %}}}
 
+\begin{comment}
 \subsection{Visualize}
 %{{{
 
@@ -1138,13 +1136,8 @@ python dwt5.py -d 9
 \end{verbatim}
 
 You can also visualize the DWT domain running the commands defined in the notebook \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/docs/2-hours_seminar.ipynb}{InterCom: a Real-Time Digital Audio Full-Duplex Transmitter/Receiver}.
-
+\end{comment}
 %}}}
-
-%}}}
-
-\section{Deliverables}
-A description of the experiments and their results.
 
 \section{Resources}
 
