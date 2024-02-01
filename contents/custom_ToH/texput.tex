@@ -1,0 +1,74 @@
+% Emacs, this is -*-latex-*-
+
+\title{Custom Thresholds of Hearing}
+
+\maketitle
+
+\section{Description}
+In general, the ToH (Threshold of Hearing) is different for each
+person. Added to this, not all the auditory information that is
+received from our iterlocutor is transduced with the same
+fidelity\footnote{For example, your speakers could not have a flat
+  frequency response, or your room could attenuate more, some
+  frequencies.} Knowing this, we can take advantage of this fact by
+avoiding having to transmit information that we will not be able to
+perceive. In other words, we can compute a set of quantization step
+sizes that our interlocutor can use to quantize the audio that he/she
+is going to send us.
+
+To find such QSSs, we can simulate
+\href{https://en.wikipedia.org/wiki/Quantization_(signal_processing)}{quantization
+  noise}~\cite{sayood2017introduction} in each
+subband~\cite{vetterli1995wavelets} and use the amplitude of the noise
+when it starts to be noticeable. Supposing that the quantization noise
+follows an
+\href{https://en.wikipedia.org/wiki/Continuous_uniform_distribution}{uniform
+  distribution}, the next algorithm can be implemented:
+
+\begin{enumerate}
+\item Let
+  $\{{\mathbf l}^{N_{\text{levels}}}, {\mathbf h}^{N_{\text{levels}}},
+  {\mathbf h}^{N_{\text{levels}}-1},\cdots, {\mathbf h}^1\}$ the
+  wavelet representation of a
+  chunk. %, being ${\mathbf l}^{N_{\text{levels}}}$ the lowest frequency subband.
+  Starting with ${\mathbf l}^{N_{\text{levels}}}$ (at the first
+  iteration the rest of subbands are zero), split the wavelet subband
+  into a (configurable) number of Fourier subbands. While the noise stays
+  imperceptible:
+  \begin{enumerate}
+  \item Increase the amplitude of the noise in the Fourier subband.
+  \item Compute the inverse FFT/wavelet-transform.
+  \item Reproduce the generated chunk, alternating every second with
+    the play of an empty chunk.
+  \end{enumerate}
+\item Continue with the next subband, but keeping the
+  highest unperceptible uniform noise in the previously processed
+  ones. In this way, for the subband ${\mathbf h}^1$ (the last
+  one to be processed), the rest of subbands should be already
+  noisy.
+\end{enumerate}
+
+Again, notice that the QSSs are determined for the sound that you are
+going to play (not for the audio that you are generating). Therefore,
+you should use your interlocutor's QSSs and vice versa. It is also
+necessary the transmission of this information.
+
+Finally, use the new QSSs instead of the default ones (those generated
+using the standard ToH).
+
+\section{Deliverables}
+
+\subsection{Implement \texttt{find\_custom\_ToH.py}}
+
+Provide an implementation of the previous algorithm for determining
+your ToH, and sending it to your interlocutor.
+
+\subsection{Implement \texttt{use\_custom\_ToH.py}}
+
+Provide an implementation that receives the ``custom'' QSSs, and use to
+encode the audio that you are sending.
+
+\section{Resources}
+
+\bibliography{maths,data_compression,DWT,audio_coding}
+
