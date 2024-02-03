@@ -20,7 +20,7 @@
 <h2 class='titleHead'>Perceptual Coding Considering the Threshold of
 Hearing</h2>
  <div class='author'><a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp; </span><a href='https://www.marcoslupion.com/'><span class='ecrm-1200'>Marcos Lupión Lorente</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>November 24, 2023</span></div>
+<div class='date'><span class='ecrm-1200'>February 4, 2024</span></div>
    </div>
    <h3 class='sectionHead'><span class='titlemark'>1   </span> <a id='x1-10001'></a>Description</h3>
 <!-- l. 9 --><p class='noindent'>
@@ -42,23 +42,21 @@ perceptual perspective) of the quantization noise <span class='cite'>[<a href='
 
                                                                   
 <!-- l. 28 --><p class='noindent'><div style='text-align:center;'> <img src='graphics/ToHH.svg' /> </div>  <a id='x1-2001r1'></a>
-<a id='x1-2002'></a>
 </p>
 <figcaption class='caption'><span class='id'>Figure 1: </span><span class='content'>A model for the threshold of human hearing.                    </span></figcaption><!-- tex4ht:label?: x1-2001r1  -->
                                                                   
 
                                                                   
    </figure>
-<!-- l. 33 --><p class='indent'>   A good approximation of ToH for a 20-year-old person can be obtained with <span class='cite'>[<a href='#Xbosi2003intro'>1</a>]</span>
-\begin {equation}  T(f)\text {[dB]} = 3.64(f\text {[kHz]})^{-0.8} - 6.5e^{f\text {[kHz]}-3.3)^2} + 10^{-3}(f\text {[kHz]})^4. \label {eq:ToHH}  \end {equation}
+<!-- l. 33 --><p class='indent'>   A good approximation of ToH for a 20-year-old person can be obtained with <span class='cite'>[<a href='#Xbosi2003intro'>1</a>]</span> \begin {equation}  T(f)\text {[dB]} = 3.64(f\text {[kHz]})^{-0.8} - 6.5e^{f\text {[kHz]}-3.3)^2} + 10^{-3}(f\text {[kHz]})^4. \label {eq:ToHH}  \end {equation}<a id='x1-2002r1'></a>
 This equation has been plotted in Fig. <a href='#x1-2001r1'>1<!-- tex4ht:ref: fig:ToHH  --></a>.
 </p>
    <h4 class='subsectionHead'><span class='titlemark'>1.2   </span> <a id='x1-30001.2'></a>DWT subbands and quantization steps (basic algorithm)</h4>
-<!-- l. 42 --><p class='noindent'>The number of DWT subbands \begin {equation}  N_{\text {sb}} = N_{\text {levels}} + 1  \end {equation}
-where \(N_{\text {levels}}\) is the number of levels of the DWT <span class='cite'>[<a href='#Xvetterli1995wavelets'>3</a>]</span>. Except for the \({\mathbf l}^{N_{\text {levels}}}\) subband (the
-lowest-pass frequency of the decomposition), it holds that \begin {equation}  W({\mathbf h}^s) = \frac {1}{2}W({\mathbf h}^{s-1}),  \end {equation}
-being \(W(s)\) the bandwidth of the corresponding subband \(s\). Therefore, considering that the
-bandwidth of the audio signal is \(22050\) Hz, the bandwidth \(W({\mathbf h}^1)=11025\) Hz, \(W({\mathbf h} ^2)=22025/4\), etc. It also holds that \begin {equation}  W({\mathbf l}^{N_{\text {levels}}}) = W({\mathbf h}^{N_{\text {levels}}}).  \end {equation}
+<!-- l. 42 --><p class='noindent'>The number of DWT subbands \begin {equation}  N_{\text {sb}} = N_{\text {levels}} + 1  \end {equation}<a id='x1-3001r2'></a> where \(N_{\text {levels}}\) is the number of levels of the DWT <span class='cite'>[<a href='#Xvetterli1995wavelets'>3</a>]</span>.
+Except for the \({\mathbf l}^{N_{\text {levels}}}\) subband (the lowest-pass frequency of the decomposition), it holds
+that \begin {equation}  W({\mathbf h}^s) = \frac {1}{2}W({\mathbf h}^{s-1}),  \end {equation}<a id='x1-3002r3'></a> being \(W(s)\) the bandwidth of the corresponding subband \(s\). Therefore, considering
+that the bandwidth of the audio signal is \(22050\) Hz, the bandwidth \(W({\mathbf h}^1)=11025\) Hz, \(W({\mathbf h} ^2)=22025/4\), etc. It also holds
+that \begin {equation}  W({\mathbf l}^{N_{\text {levels}}}) = W({\mathbf h}^{N_{\text {levels}}}).  \end {equation}<a id='x1-3003r4'></a>
 </p><!-- l. 61 --><p class='indent'>   The idea is to decide, knowing the frequencies represented in each DWT subband
 and the ToH curve (see <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/docs/2-hours_seminar.ipynb'>InterCom: a Real-Time Digital Audio Full-Duplex
 Transmitter/Receiver</a>), the QSS (Quantization Step Size) that should be
@@ -84,32 +82,32 @@ technique</a>) should be used to minimize the <a href='https://en.wikipedia.org/
    <h3 class='sectionHead'><span class='titlemark'>3   </span> <a id='x1-50003'></a>Better ToHs</h3>
 <!-- l. 96 --><p class='noindent'>The ToH plotted in Fig. <a href='#x1-2001r1'>1<!-- tex4ht:ref: fig:ToHH  --></a> can be different from the curve that corresponds to your current “hearing
 capabilities”.<span class='footnote-mark'><a href='#fn1x0' id='fn1x0-bk'><sup class='textsuperscript'>1</sup></a></span><a id='x1-5001f1'></a>
+For this reason, in module <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>advanced_ToH.py</span></span></span>, implement a
+procedure to determe the QSSs used in each wavelet/Fourier
+subband<span class='footnote-mark'><a href='#fn2x0' id='fn2x0-bk'><sup class='textsuperscript'>2</sup></a></span><a id='x1-5003f2'></a>.
                                                                   
 
                                                                   
-For this reason, in module <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>advanced_ToH.py</span></span></span>, implement a
-procedure to determe the QSSs used in each wavelet/Fourier
-subband<span class='footnote-mark'><a href='#fn2x0' id='fn2x0-bk'><sup class='textsuperscript'>2</sup></a></span><a id='x1-5002f2'></a>.
 </p><!-- l. 115 --><p class='indent'>   To find such QSSs, we can simulate <a href='https://en.wikipedia.org/wiki/Quantization_(signal_processing)'>quantization noise</a> in each subband and
 measure the amplitude of the noise when it starts to be noticeable. Supposing that
 the quantization noise follows an <a href='https://en.wikipedia.org/wiki/Continuous_uniform_distribution'>uniform distribution</a>, the next algorithm can be
 implemented:
 </p><!-- l. 123 --><p class='indent'>
      </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-5004x1'>
+<li class='enumerate' id='x1-5006x1'>
      <!-- l. 124 --><p class='noindent'>Let \(\{{\mathbf l}^{N_{\text {levels}}}, {\mathbf h}^{N_{\text {levels}}}, {\mathbf h}^{N_{\text {levels}}-1},\cdots , {\mathbf h}^1\}\) the wavelet representation of a chunk. Starting with \({\mathbf l}^{N_{\text {levels}}}\) (at the first
      iteration the rest of subbands are zero), split the wavelet subband into
      a (configurable) number of Fourier subbands. While the noise stays
      imperceptible:
          </p><ol class='enumerate2'>
-<li class='enumerate' id='x1-5006x1'>Increase the amplitude of the noise in the Fourier subband.
+<li class='enumerate' id='x1-5008x1'>Increase the amplitude of the noise in the Fourier subband.
          </li>
-<li class='enumerate' id='x1-5008x2'>Compute the inverse FFT/wavelet-transform.
+<li class='enumerate' id='x1-5010x2'>Compute the inverse FFT/wavelet-transform.
          </li>
-<li class='enumerate' id='x1-5010x3'>Reproduce the generated chunk, alternating every second with the
+<li class='enumerate' id='x1-5012x3'>Reproduce the generated chunk, alternating every second with the
          play of an empty chunk.</li></ol>
      </li>
-<li class='enumerate' id='x1-5012x2'>Continue with the next Fourier/wavelet subband, but keeping the highest
+<li class='enumerate' id='x1-5014x2'>Continue with the next Fourier/wavelet subband, but keeping the highest
      unperceptible uniform noise in the previously processed ones. In this way, for
      the wavelet subband \({\mathbf h}^1\) (the last one to be processed), the rest of subbands
      should be already noisy, and the same holds for the Fourier subbands that
@@ -149,9 +147,10 @@ including a subjective performance comparison.
    Prentice-hall, 1995.
 </p>
    </div>
-<p><a id='Q1-1-10'></a></p>
-   <div class='footnotes'><!-- l. 100 --><p class='indent'>     <span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='ecrm-0800'>For example, your speakers could not have a flat frequency response, or your room could
-</span><span class='ecrm-0800'>attenuate more, some freqencies.</span></p>
+<p><a id='Q1-1-10'></a>
+   </p><div class='footnotes'><a id='x1-5002x3'></a>
+<!-- l. 100 --><p class='indent'>     <span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='ecrm-0800'>For example, your speakers could not have a flat frequency response, or your room could
+</span><span class='ecrm-0800'>attenuate more, some freqencies.</span></p><a id='x1-5004x3'></a>
 <!-- l. 113 --><p class='indent'>     <span class='footnote-mark'><a href='#fn2x0-bk' id='fn2x0'><sup class='textsuperscript'>2</sup></a></span><span class='ecrm-0800'>Remember that when the </span><a href='https://en.wikipedia.org/wiki/Wavelet_transform'><span class='ecrm-0800'>Wavalet transform</span></a> <span class='ecrm-0800'>is </span><a href='https://en.wikipedia.org/wiki/Dyadic_rational'><span class='ecrm-0800'>dyadic</span></a><span class='ecrm-0800'>, the </span><a href='https://en.wikipedia.org/wiki/Discrete_wavelet_transform'><span class='ecrm-0800'>Wavelet space</span></a> <span class='ecrm-0800'>is analyzed by</span>
 <a href='https://en.wikipedia.org/wiki/Octave_band'><span class='ecrm-0800'>octaves</span></a><span class='ecrm-0800'>, and therefore the </span><a href='https://en.wikipedia.org/wiki/Filter_bank'><span class='ecrm-0800'>subbands</span></a> <span class='ecrm-0800'>doubles the size when we increase the frequency (see </span><a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/docs/2-hours_seminar.ipynb'><span class='ecrm-0800'>InterCom:
 </span><span class='ecrm-0800'>a Real-Time Digital Audio Full-Duplex Transmitter/Receiver</span></a><span class='ecrm-0800'>).</span></p>                                       </div>
