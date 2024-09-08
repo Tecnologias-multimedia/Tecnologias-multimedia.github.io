@@ -12,36 +12,37 @@ The InterCom project \cite{intercom} is a collection of
 Python has been ported to
 \href{https://www.python.org/download/other/}{almost all} the current
 OSs, including mobile \href{https://kivy.org/#home}{devices}. Among
-all available development environments, we will develop the project on
-Linux, and more concretely, on
-\href{https://xubuntu.org/download/}{Xubuntu 22.04 (Jammy Jellyfish)}
-\cite{xubuntu}, running natively (no
+all available development environments, the prefered one is Linux, and
+more concretely, on \href{https://xubuntu.org/download/}{Xubuntu 24.04
+  (Noble Numbat)} \cite{xubuntu}, running natively (no
 \href{https://en.wikipedia.org/wiki/Virtualization}{virtualization}),
-if possible. Please, follow for this,
-\href{https://vicente-gonzalez-ruiz.github.io/Xubuntu_install/}{to
-  install Xubuntu}. Alternatively, you can use any other Linux
-distribution (or even any other OS), but you should be able to
-provide technical support yourself, in case you need it.
+if possible (see
+\href{https://vicente-gonzalez-ruiz.github.io/Xubuntu_install/}{How to
+  install xubuntu}). Alternatively, you can use any other Linux
+distribution, such as Debian or Arch, or even any other OS (OSX or
+Windows).
 
-You don't need to master Python to follow this course, but it is
-convenient for you to rely on some Python programming tutorial, such
-as \href{https://docs.python.org/3/tutorial/}{The Python Tutorial}
+InterCom has been written in Python. You don't need to master Python
+to follow this course, but it is convenient for you to rely on some
+Python programming tutorial, such as
+\href{https://docs.python.org/3/tutorial/}{The Python Tutorial}
 \cite{python-tutorial} if you realize that the language is a setback
 for you. If you need to start with Python from the beginning, an
 introduction to Python such as this
 \href{https://github.com/vicente-gonzalez-ruiz/YAPT/tree/master/workshops/programacion_python_ESO}{workshop
   of YAPT} \cite{YAPT} could also be helpful. See also
-\href{http://zetcode.com/lang/python/}{ZetCode's Python
-  Tutorial}.
+\href{http://zetcode.com/lang/python/}{ZetCode's Python Tutorial}, for
+example (Internet if full of Python manuals).
 
 To run InterCom, the following alternatives should work:
 \begin{enumerate}
 \item Use the Python interpreter shipped with your OS. If you are
-  using the recommended Xubuntu version in this guide, the Python
-  interpreter is fine. In this case, use a virtual
-  \href{https://docs.python.org/3/library/venv.html}{environment} for
-  InterCom. To do this, run:
+  using the recommended xubuntu version, the Python interpreter
+  provided by the OS is fine. In this case, use a virtual
+  \href{https://docs.python.org/3/library/venv.html}{environment} when
+  working with InterCom. To do this, run:
   \begin{lstlisting}[language=Bash]
+    # mkdir ~/envs
     python3 -m venv ~/enviroments/intercom     # Create (only the first time)
     source ~/enviroments/intercom/bin/activate # Activate (allways you run InterCom)
   \end{lstlisting}
