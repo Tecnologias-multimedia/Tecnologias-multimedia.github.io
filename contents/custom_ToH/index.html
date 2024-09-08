@@ -35,23 +35,23 @@ the quantization noise follows an <a href='https://en.wikipedia.org/wiki/Continu
 implemented:
 </p><!-- l. 28 --><p class='indent'>
      </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-1003x1'>
+<li class='enumerate' id='x1-1004x1'>
      <!-- l. 29 --><p class='noindent'>Let \(\{{\mathbf l}^{N_{\text {levels}}}, {\mathbf h}^{N_{\text {levels}}}, {\mathbf h}^{N_{\text {levels}}-1},\cdots , {\mathbf h}^1\}\) the wavelet representation of a chunk. Starting with \({\mathbf l}^{N_{\text {levels}}}\) (at the first
      iteration the rest of subbands are zero), split the wavelet subband into
      a (configurable) number of Fourier subbands. While the noise stays
      imperceptible:
          </p><ol class='enumerate2'>
-<li class='enumerate' id='x1-1005x1'>Increase the amplitude of the noise in the Fourier subband.
+<li class='enumerate' id='x1-1006x1'>Increase the amplitude of the noise in the Fourier subband.
+         </li>
+<li class='enumerate' id='x1-1008x2'>Compute the inverse FFT/wavelet-transform.
                                                                   
 
                                                                   
          </li>
-<li class='enumerate' id='x1-1007x2'>Compute the inverse FFT/wavelet-transform.
-         </li>
-<li class='enumerate' id='x1-1009x3'>Reproduce the generated chunk, alternating every second with the
+<li class='enumerate' id='x1-1010x3'>Reproduce the generated chunk, alternating every second with the
          play of an empty chunk.</li></ol>
      </li>
-<li class='enumerate' id='x1-1011x2'>Continue with the next subband, but keeping the highest unperceptible uniform
+<li class='enumerate' id='x1-1012x2'>Continue with the next subband, but keeping the highest unperceptible uniform
      noise in the previously processed ones. In this way, for the subband \({\mathbf h}^1\)
      (the last one to be processed), the rest of subbands should be already
      noisy.</li></ol>
@@ -74,12 +74,12 @@ sending it to your interlocutor.
    <h4 class='subsectionHead'><span class='titlemark'>2.2   </span> <a id='x1-40002.2'></a>Implement <span class='ectt-1000'>use_custom_ToH.py</span></h4>
 <!-- l. 68 --><p class='noindent'>Provide an implementation that receives the “custom” QSSs, and use to encode the
 audio that you are sending.
-                                                                  
-
-                                                                  
 </p><!-- l. 71 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>3   </span> <a id='x1-50003'></a>Resources</h3>
+                                                                  
+
+                                                                  
    <div class='thebibliography'>
    <p class='bibitem'><span class='biblabel'>
  [1]<span class='bibsp'>   </span></span><a id='Xsayood2017introduction'></a>K. Sayood.    <a href='http://rahilshaikh.weebly.com/uploads/1/1/6/3/11635894/data_compression.pdf'><span class='ecti-1000'>Introduction  to  Data  Compression</span></a>  <a href='https://people.cs.nctu.edu.tw/~cmliu/Courses/Compression/'><span class='ecti-1000'>(Slides)</span></a>.    Morgan
@@ -90,7 +90,8 @@ audio that you are sending.
    Prentice-hall, 1995.
 </p>
    </div>
-   <div class='footnotes'><!-- l. 13 --><p class='indent'>     <span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='ecrm-0800'>For example, your speakers could not have a flat frequency response, or your room could
+   <div class='footnotes'><a id='x1-1002x1'></a>
+<!-- l. 13 --><p class='indent'>     <span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='ecrm-0800'>For example, your speakers could not have a flat frequency response, or your room could
 </span><span class='ecrm-0800'>attenuate more, some frequencies.</span></p>                                                                             </div>
  
 </body> 
