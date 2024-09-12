@@ -35,7 +35,7 @@ introduction to Python such as this
 \href{http://zetcode.com/lang/python/}{ZetCode's Python Tutorial}, for
 example (Internet if full of Python manuals).
 
-To run InterCom, the following alternatives should work:
+To run InterCom, the following alternatives (both) should work:
 \begin{enumerate}
 \item Use the Python interpreter shipped with your OS. If you are
   using the recommended xubuntu version, the Python interpreter
@@ -44,13 +44,14 @@ To run InterCom, the following alternatives should work:
   working with InterCom. To do this, run:
   \begin{lstlisting}[language=Bash]
     # mkdir ~/envs
-    python3 -m venv ~/enviroments/intercom     # Create (only the first time)
-    source ~/enviroments/intercom/bin/activate # Activate (allways you run InterCom)
+    python3 -m venv ~/envs/TM     # Create (only the first time)
+    source ~/envs/TM/bin/activate # Activate (allways you run InterCom)
   \end{lstlisting}
   And to deactivate the environment, run:
   \begin{lstlisting}[language=Bash]
     deactivate
   \end{lstlisting}
+  This is the recommended alternative.
   
 \item Use a specific version of Python installed in a virtual environment. In this case, follow this 
 \href{https://vicente-gonzalez-ruiz.github.io/Python_install/}{guide}.
