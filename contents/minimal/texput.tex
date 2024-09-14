@@ -12,7 +12,7 @@ InterCom is an application that captures and plays audio, and therefore, in Linu
 \item
   \href{https://vicente-gonzalez-ruiz.github.io/PulseAudio/}{PulseAudio}
   (in the case of Xubuntu, this is the audio server that comes with
-  Xfce).
+  \href{https://www.xfce.org/}{Xfce}).
 \item \href{https://vicente-gonzalez-ruiz.github.io/JACK/}{JACK}.
 \item \href{https://pipewire.org/}{Pipewire}.
 \end{enumerate}
@@ -21,7 +21,8 @@ To abstract InterCom from the available audio resources, InterCom uses
 \href{http://www.portaudio.com/}{PortAudio}~\cite{portaudio} (through
 \href{https://vicente-gonzalez-ruiz.github.io/intro_to_sounddevice/}{sounddevice})
 to capture and play the audio. Using sounddevice, we have two
-alternatives for the implementation:
+alternatives for implementing InterCom (and in general, for any
+real-time audio-processing application):
 
 \subsection{Loop-based algorithm}
 
@@ -30,12 +31,12 @@ Roughtly, InterCom can be divided into 6 steps:
 \begin{lstlisting}[language=Python,numbers=left]
   # Loop-based algorithm (to be called in a loop)
   def record_IO_and_play(chunk_size):
-     chunk = record(chunk_size)  # (1)
-     packed_chunk = pack(chunk)  # (2)
-     send(packed_chunk)  # (3)
-     packed_chunk = receive()  # (4)
+     chunk = record(chunk_size)    # (1)
+     packed_chunk = pack(chunk)    # (2)
+     send(packed_chunk)            # (3)
+     packed_chunk = receive()      # (4)
      chunk = unpack(packed_chunk)  # (5)
-     play(chunk)  # (6)
+     play(chunk)                   # (6)
 \end{lstlisting}
 
 %\begin{pseudocode}{Sequential\_InterCom}{~}
@@ -77,7 +78,7 @@ where:
 \item \verb|pack(chunk)| process the chunk to create a
   \href{https://en.wikipedia.org/wiki/Network_packet}{packet} (or a
   sequence of packets), a structure that can be transmitted through
-  the Internet using the
+  the \href{https://en.wikipedia.org/wiki/Internet}{Internet} using the
   \href{https://en.wikipedia.org/wiki/Datagram}{Datagram} Model. In
   general, this is a
   \href{https://en.wikipedia.org/wiki/CPU-bound}{CPU-bounded}
@@ -89,7 +90,7 @@ where:
   interlocutor. When datagrams are used, this step is not blocking nor
   CPU-bounding (the CPU usage is very low), as long as the number of
   packets/second is small and the sizes of the payloads are also
-  small, as is expected in InterCom.
+  small, as it is expected in InterCom.
 
 \item \verb|receive()|, waits (blocking the calling process) for an
   incoming packet, and therefore, this operation is IO-bound. However,
@@ -97,10 +98,11 @@ where:
     API}s~\cite{python} offeer a
   \href{https://docs.python.org/3.8/library/socket.html#socket.socket.setblocking}{non-blocking
     option} where when a packet is not available in the kernel's
-  buffer associated with the corresponding socket, some kind of
-  exception is generated, and, in this case, it is resposabability of
-  the programmer to generate an ``alternative'' chunk (in our case,
-  for example, a chunk filled with
+  buffer associated with the corresponding socket after a
+  predetermined amount of time, some kind of exception is generated,
+  and, in this case, it is resposabability of the programmer to
+  generate an ``alternative'' chunk (in our case, for example, a chunk
+  filled with
   \href{https://en.wikipedia.org/wiki/Digital_audio#Overview}{zeros}
   that will not produce any sound when it is played).
 
@@ -113,7 +115,7 @@ where:
   the same pace as \verb|record()|, and the record and play parameters
   are exactly the same (as happens in our algorithm), the playing of
   the chunk should return immediately because the time that the
-  \verb|play()| method needs to complete would match exactlythe time
+  \verb|play()| method needs to complete would match exactly the time
   that the \verb|record()| method requires (see
   \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/test/sounddevice/wire4.py}{wire4.py}).
 \end{enumerate}
