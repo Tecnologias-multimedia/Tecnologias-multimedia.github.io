@@ -3,10 +3,13 @@
 \title{Meeting \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py}{\texttt{minimal}} InterCom}
 
 \maketitle
+\tableofcontents
 
 \section{Description}
 
-InterCom is an application that captures and plays audio, and therefore, in Linux, runs on the top of one of the following audio services:
+InterCom is an application that captures and plays audio, and
+therefore, in Linux, runs on the top of one of the following audio
+services:
 \begin{enumerate}
 \item \href{https://vicente-gonzalez-ruiz.github.io/ALSA/}{ALSA}.
 \item
@@ -171,7 +174,45 @@ is basically the previous one, except that the chunk size is fixed.
 %  \ENDPROCEDURE
 %\end{pseudocode}
 
-The current implementation of InterCom uses the Timer-based algorithm.
+The current implementation of InterCom uses the Timer-based
+(interruption-based) algorithm.
+
+\section{Deliverables}
+
+None. However, you should understand the meaning, purpose and use of
+each of the parameters of \texttt{minimal.py}. For this, try the
+following:
+
+\begin{enumerate}
+\item Run \texttt{minimial.py} using \texttt{localhost} as the
+  destination for your chunks of audio (notice that this is the
+  default configuration for the parameters
+  \verb|--destination_address| and \verb|--destination_port|). Check
+  that you can listen to yourself after some delay, and that the
+  quality of the sound is good (it is recommended to used a
+  headset). If you think that the quality is not high enough, comment
+  this with your teacher. Remember that the parameters
+  \verb|--show_stats|, \verb|--show_samples|, and
+  \verb|--show_spectrum|, can provide some information about what is
+  happening. Can you determine the delay?
+\item Always using the command line, modify the parameter
+  \verb|--frames_per_chunk|. Do you notice any changes in latency
+  or audio quality?
+\item Modify the parameter \verb|--frames_per_second|. Again, do
+  you notice any changes in latency or audio quality? You should.
+\item With one of your group mates, try to communicate using the same
+  \href{https://en.wikipedia.org/wiki/Local_area_network}{LAN} (you
+  will need to modify the parameter
+  \verb|--destination_address|). Notice that some LANs, such as the
+  provided by the UAL could filter your InterCom traffic. Good
+  alternative options are you LAN at home or an ad-hoc LAN created
+  with a mobile device.
+\item Repeat the last experiment when two (or more) group mates send
+  you their chunks. What do you think that is happening?
+\item Finally, are you able to communicate with an interlocutor that
+  is in a different LAN than you (for example, when two InterCom
+  instances are running in different home networks)?
+\end{enumerate}
 
 \begin{comment}
 \section{What do you have to do?}
