@@ -67,7 +67,7 @@ where:
     \texttt{curl
       https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire4.py
       > wire4.py}} and also in the documentation of
-  \verb|sounddevice|, if we read only the frames that are available in
+  \verb|sounddevice| if we read only the frames that are available in
   the soundcard's buffer, this generates a non-blocking operation and
   the chunk size depends on the instant of time in which this method
   is called. Otherwise, if we specify a number of frames different to
@@ -89,7 +89,7 @@ where:
   compressed in order to minimize the transmission
   \href{https://en.wikipedia.org/wiki/Bit_rate}{bit-rate}.
 
-\item \verb|send(packed_chunk)|, sends the packet to our
+\item \verb|send(packed_chunk)| sends the packet to our
   interlocutor. When datagrams are used, this step is not blocking nor
   CPU-bounding (the CPU usage is very low), as long as the number of
   packets/second is small and the sizes of the payloads are also
@@ -126,9 +126,9 @@ where:
 This algorithm works fine if the chunk size is controlled by
 (\verb|sounddevice|) and also, the run-time required by the operations
 \verb|pack(chunk)| and \verb|unpack(packet)| is shorter than the chunk
-time. Unfortunately, the first premise (that we can use varying the
-chunk sizes) complicates slightly the implementation because we would
-work with chunks of varying lengths (that as you can see running
+time. Unfortunately, the first premise (that we can use varying chunk
+sizes) complicates slightly the implementation because we would work
+with chunks of different lengths (that as you can see running
 \verb|wire4.py|, in most of the iterations the size of the read chunk
 is 0). This also complicates the control of the latency because the
 chunk size is variable. However, the real problem appears when our
@@ -144,7 +144,7 @@ audio is called periodically (probably, using some
 \href{https://en.wikipedia.org/wiki/Timer}{timer} provided by the
 sound hardware). This procedure guarantees a
 \href{https://en.wikipedia.org/wiki/Glitch}{gliches}-free audio-IO
-when constant chunk sizes are used because the timer interruption
+when constant chunk sizes are used, because the timer interruption
 coincides exactly with the instant of time in which the
 \verb|record()| and the \verb|play()| methods can be used without
 blocking. The following pseudo-code describes the new algorithm, which
