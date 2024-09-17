@@ -34,12 +34,12 @@ Roughtly, InterCom can be divided into 6 steps:
 \begin{lstlisting}[language=Python,numbers=left]
   # Loop-based algorithm (to be called in a loop)
   def record_IO_and_play(chunk_size):
-     chunk = record(chunk_size)    # (1)
-     packed_chunk = pack(chunk)    # (2)
-     send(packed_chunk)            # (3)
-     packed_chunk = receive()      # (4)
-     chunk = unpack(packed_chunk)  # (5)
-     play(chunk)                   # (6)
+     chunk = record(chunk_size) # (1)
+     packed_chunk = pack(chunk) # (2)
+     send(packed_chunk) # (3)
+     packed_chunk = receive() # (4)
+     chunk = unpack(packed_chunk) # (5)
+     play(chunk) # (6)
 \end{lstlisting}
 
 %\begin{pseudocode}{Sequential\_InterCom}{~}
@@ -120,9 +120,10 @@ where:
   the chunk should return immediately because the time that the
   \verb|play()| method needs to complete would match exactly the time
   that the \verb|record()| method requires (see
-  \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/test/sounddevice/wire4.py}{wire4.py}).
+  \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/test/sounddevice/wire4b.py}{wire4b.py}).
 \end{enumerate}
 
+\begin{comment}
 This algorithm works fine if the chunk size is controlled by
 (\verb|sounddevice|) and also, the run-time required by the operations
 \verb|pack(chunk)| and \verb|unpack(packet)| is shorter than the chunk
@@ -136,8 +137,14 @@ computer is not able to satisfy the second requirement, i.e., when the
 chunk time is smaller than the time that we need to process the
 chunks. This can only be addressed through code optimization, for
 example, parallelization.
+\end{comment}
 
 \subsection{Timer-based algorithm}
+
+The to-be-called-in-a-loop implementation depicted in the previous
+section works fine, but finally InterCom uses a
+to-be-called-by-an-interruption implementation because it is allows to
+have running another task for free.
 
 In this algorithm, the task dedicated to record and play the chunks of
 audio is called periodically (probably, using some
@@ -147,19 +154,22 @@ sound hardware). This procedure guarantees a
 when constant chunk sizes are used, because the timer interruption
 coincides exactly with the instant of time in which the
 \verb|record()| and the \verb|play()| methods can be used without
-blocking. The following pseudo-code describes the new algorithm, which
+blocking.
+\begin{comment}
+The following pseudo-code describes the new algorithm, which
 is basically the previous one, except that the chunk size is fixed.
 
 \begin{lstlisting}[language=Python,numbers=left]
   # Timer-based algorithm (to be called periodically)
   def record_IO_and_play(chunk_size):
-     chunk = record(chunk_size)   # The chunk has chunk_size frames
+     chunk = record(chunk_size)
      packed_chunk = pack(chunk)
      send(packed_chunk)
      packed_chunk = receive()
      chunk = unpack(packed_chunk)
-     play(chunk)                  # I play chunk_size frames
+     play(chunk)
 \end{lstlisting}
+\end{comment}
 
 %\begin{pseudocode}{Timer-based\_InterCom}{~}
 %  \PROCEDURE{Record\_IO\_and\_Play}{\mathtt{chunk\_size}}
