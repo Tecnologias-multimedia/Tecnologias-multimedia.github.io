@@ -3,16 +3,19 @@
 \title{Meeting \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py}{\texttt{minimal}} InterCom}
 
 \maketitle
+\tableofcontents
 
 \section{Description}
 
-InterCom is an application that captures and plays audio, and therefore, in Linux, runs on the top of one of the following audio services:
+InterCom is an application that captures and plays audio, and
+therefore, in Linux, runs on the top of one of the following audio
+services:
 \begin{enumerate}
 \item \href{https://vicente-gonzalez-ruiz.github.io/ALSA/}{ALSA}.
 \item
   \href{https://vicente-gonzalez-ruiz.github.io/PulseAudio/}{PulseAudio}
   (in the case of Xubuntu, this is the audio server that comes with
-  Xfce).
+  \href{https://www.xfce.org/}{Xfce}).
 \item \href{https://vicente-gonzalez-ruiz.github.io/JACK/}{JACK}.
 \item \href{https://pipewire.org/}{Pipewire}.
 \end{enumerate}
@@ -21,7 +24,8 @@ To abstract InterCom from the available audio resources, InterCom uses
 \href{http://www.portaudio.com/}{PortAudio}~\cite{portaudio} (through
 \href{https://vicente-gonzalez-ruiz.github.io/intro_to_sounddevice/}{sounddevice})
 to capture and play the audio. Using sounddevice, we have two
-alternatives for the implementation:
+alternatives for implementing InterCom (and in general, for any
+real-time audio-processing application):
 
 \subsection{Loop-based algorithm}
 
@@ -30,12 +34,12 @@ Roughtly, InterCom can be divided into 6 steps:
 \begin{lstlisting}[language=Python,numbers=left]
   # Loop-based algorithm (to be called in a loop)
   def record_IO_and_play(chunk_size):
-     chunk = record(chunk_size)  # (1)
-     packed_chunk = pack(chunk)  # (2)
-     send(packed_chunk)  # (3)
-     packed_chunk = receive()  # (4)
-     chunk = unpack(packed_chunk)  # (5)
-     play(chunk)  # (6)
+     chunk = record(chunk_size) # (1)
+     packed_chunk = pack(chunk) # (2)
+     send(packed_chunk) # (3)
+     packed_chunk = receive() # (4)
+     chunk = unpack(packed_chunk) # (5)
+     play(chunk) # (6)
 \end{lstlisting}
 
 %\begin{pseudocode}{Sequential\_InterCom}{~}
@@ -63,7 +67,7 @@ where:
     \texttt{curl
       https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire4.py
       > wire4.py}} and also in the documentation of
-  \verb|sounddevice|, if we read only the frames that are available in
+  \verb|sounddevice| if we read only the frames that are available in
   the soundcard's buffer, this generates a non-blocking operation and
   the chunk size depends on the instant of time in which this method
   is called. Otherwise, if we specify a number of frames different to
@@ -77,7 +81,7 @@ where:
 \item \verb|pack(chunk)| process the chunk to create a
   \href{https://en.wikipedia.org/wiki/Network_packet}{packet} (or a
   sequence of packets), a structure that can be transmitted through
-  the Internet using the
+  the \href{https://en.wikipedia.org/wiki/Internet}{Internet} using the
   \href{https://en.wikipedia.org/wiki/Datagram}{Datagram} Model. In
   general, this is a
   \href{https://en.wikipedia.org/wiki/CPU-bound}{CPU-bounded}
@@ -85,11 +89,11 @@ where:
   compressed in order to minimize the transmission
   \href{https://en.wikipedia.org/wiki/Bit_rate}{bit-rate}.
 
-\item \verb|send(packed_chunk)|, sends the packet to our
+\item \verb|send(packed_chunk)| sends the packet to our
   interlocutor. When datagrams are used, this step is not blocking nor
   CPU-bounding (the CPU usage is very low), as long as the number of
   packets/second is small and the sizes of the payloads are also
-  small, as is expected in InterCom.
+  small, as it is expected in InterCom.
 
 \item \verb|receive()|, waits (blocking the calling process) for an
   incoming packet, and therefore, this operation is IO-bound. However,
@@ -97,10 +101,11 @@ where:
     API}s~\cite{python} offeer a
   \href{https://docs.python.org/3.8/library/socket.html#socket.socket.setblocking}{non-blocking
     option} where when a packet is not available in the kernel's
-  buffer associated with the corresponding socket, some kind of
-  exception is generated, and, in this case, it is resposabability of
-  the programmer to generate an ``alternative'' chunk (in our case,
-  for example, a chunk filled with
+  buffer associated with the corresponding socket after a
+  predetermined amount of time, some kind of exception is generated,
+  and, in this case, it is resposabability of the programmer to
+  generate an ``alternative'' chunk (in our case, for example, a chunk
+  filled with
   \href{https://en.wikipedia.org/wiki/Digital_audio#Overview}{zeros}
   that will not produce any sound when it is played).
 
@@ -111,19 +116,20 @@ where:
 \item \verb|play(chunk)| renders the chunk. In general, this is an
   I/O-bound blocking action. However, if \verb|play()| is called at
   the same pace as \verb|record()|, and the record and play parameters
-  are exactly the same (as happens in our algorithm), the playing of
+  are exactly the same (as usually happens in InterCom), the playing of
   the chunk should return immediately because the time that the
-  \verb|play()| method needs to complete would match exactlythe time
+  \verb|play()| method needs to complete would match exactly the time
   that the \verb|record()| method requires (see
-  \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/test/sounddevice/wire4.py}{wire4.py}).
+  \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/test/sounddevice/wire4b.py}{wire4b.py}).
 \end{enumerate}
 
+\begin{comment}
 This algorithm works fine if the chunk size is controlled by
 (\verb|sounddevice|) and also, the run-time required by the operations
 \verb|pack(chunk)| and \verb|unpack(packet)| is shorter than the chunk
-time. Unfortunately, the first premise (that we can use varying the
-chunk sizes) complicates slightly the implementation because we would
-work with chunks of varying lengths (that as you can see running
+time. Unfortunately, the first premise (that we can use varying chunk
+sizes) complicates slightly the implementation because we would work
+with chunks of different lengths (that as you can see running
 \verb|wire4.py|, in most of the iterations the size of the read chunk
 is 0). This also complicates the control of the latency because the
 chunk size is variable. However, the real problem appears when our
@@ -131,30 +137,39 @@ computer is not able to satisfy the second requirement, i.e., when the
 chunk time is smaller than the time that we need to process the
 chunks. This can only be addressed through code optimization, for
 example, parallelization.
+\end{comment}
 
 \subsection{Timer-based algorithm}
+
+The to-be-called-in-a-loop implementation depicted in the previous
+section works fine, but finally InterCom uses a
+to-be-called-by-an-interruption implementation because it is allows to
+have running another task for free.
 
 In this algorithm, the task dedicated to record and play the chunks of
 audio is called periodically (probably, using some
 \href{https://en.wikipedia.org/wiki/Timer}{timer} provided by the
 sound hardware). This procedure guarantees a
 \href{https://en.wikipedia.org/wiki/Glitch}{gliches}-free audio-IO
-when constant chunk sizes are used because the timer interruption
+when constant chunk sizes are used, because the timer interruption
 coincides exactly with the instant of time in which the
 \verb|record()| and the \verb|play()| methods can be used without
-blocking. The following algorithm describes the new algorithm, which
+blocking.
+\begin{comment}
+The following pseudo-code describes the new algorithm, which
 is basically the previous one, except that the chunk size is fixed.
 
 \begin{lstlisting}[language=Python,numbers=left]
   # Timer-based algorithm (to be called periodically)
   def record_IO_and_play(chunk_size):
-     chunk = record(chunk_size)  # The chunk has chunk_size frames
+     chunk = record(chunk_size)
      packed_chunk = pack(chunk)
      send(packed_chunk)
      packed_chunk = receive()
      chunk = unpack(packed_chunk)
-     play(chunk)  # I play chunk_size frames
+     play(chunk)
 \end{lstlisting}
+\end{comment}
 
 %\begin{pseudocode}{Timer-based\_InterCom}{~}
 %  \PROCEDURE{Record\_IO\_and\_Play}{\mathtt{chunk\_size}}
@@ -169,7 +184,47 @@ is basically the previous one, except that the chunk size is fixed.
 %  \ENDPROCEDURE
 %\end{pseudocode}
 
-The current implementation of InterCom uses the Timer-based algorithm.
+The
+\href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L111}{current
+  implementation} of InterCom uses the Timer-based
+(interruption-based) algorithm.
+
+\section{Deliverables}
+
+None. However, you should understand the meaning, purpose and use of
+each of the parameters of \texttt{minimal.py}. For this, try the
+following:
+
+\begin{enumerate}
+\item Run \texttt{minimial.py} using \texttt{localhost} as the
+  destination for your chunks of audio (notice that this is the
+  default configuration for the parameters
+  \verb|--destination_address| and \verb|--destination_port|). Check
+  that you can listen to yourself after some delay, and that the
+  quality of the sound is good (it is recommended to used a
+  headset). If you think that the quality is not high enough, comment
+  this with your teacher. Remember that the parameters
+  \verb|--show_stats|, \verb|--show_samples|, and
+  \verb|--show_spectrum|, can provide some information about what is
+  happening. Can you determine the delay?
+\item Always using the command line, modify the parameter
+  \verb|--frames_per_chunk|. Do you notice any changes in latency
+  or audio quality?
+\item Modify the parameter \verb|--frames_per_second|. Again, do
+  you notice any changes in latency or audio quality? You should.
+\item With one of your group mates, try to communicate using the same
+  \href{https://en.wikipedia.org/wiki/Local_area_network}{LAN} (you
+  will need to modify the parameter
+  \verb|--destination_address|). Notice that some LANs, such as the
+  provided by the UAL could filter your InterCom traffic. Good
+  alternative options are you LAN at home or an ad-hoc LAN created
+  with a mobile device.
+\item Repeat the last experiment when two (or more) group mates send
+  you their chunks. What do you think that is happening?
+\item Finally, are you able to communicate with an interlocutor that
+  is in a different LAN than you (for example, when two InterCom
+  instances are running in different home networks)?
+\end{enumerate}
 
 \begin{comment}
 \section{What do you have to do?}

@@ -19,123 +19,155 @@
 
 <h2 class='titleHead'>Meeting <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py'>minimal</a> InterCom</h2>
  <div class='author'><a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp; </span><a href='https://hpca.ual.es/~savins/'><span class='ecrm-1200'>Savins Puertas Martín</span></a> <span class='ecrm-1200'>&amp; </span><a href='https://www.marcoslupion.com/'><span class='ecrm-1200'>Marcos Lupión Lorente</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>September 6, 2024</span></div>
+<div class='date'><span class='ecrm-1200'>September 17, 2024</span></div>
    </div>
-   <h3 class='sectionHead'><span class='titlemark'>1   </span> <a id='x1-10001'></a>Description</h3>
-<!-- l. 9 --><p class='noindent'>InterCom is an application that captures and plays audio, and therefore, in Linux,
+   <h3 class='likesectionHead'><a id='x1-1000'></a>Contents</h3>
+   <div class='tableofcontents'>
+    <span class='sectionToc'>1 <a href='#x1-20001' id='QQ2-1-2'>Description</a></span>
+<br />     <span class='subsectionToc'>1.1 <a href='#x1-30001.1' id='QQ2-1-3'>Loop-based algorithm</a></span>
+<br />     <span class='subsectionToc'>1.2 <a href='#x1-40001.2' id='QQ2-1-4'>Timer-based algorithm</a></span>
+<br />    <span class='sectionToc'>2 <a href='#x1-50002' id='QQ2-1-5'>Deliverables</a></span>
+<br />    <span class='sectionToc'>3 <a href='#x1-60003' id='QQ2-1-6'>Resources</a></span>
+   </div>
+<!-- l. 8 --><p class='noindent'>
+</p>
+   <h3 class='sectionHead'><span class='titlemark'>1   </span> <a id='x1-20001'></a>Description</h3>
+<!-- l. 10 --><p class='noindent'>InterCom is an application that captures and plays audio, and therefore, in Linux,
 runs on the top of one of the following audio services:
      </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-1002x1'><a href='https://vicente-gonzalez-ruiz.github.io/ALSA/'>ALSA</a>.
+<li class='enumerate' id='x1-2002x1'><a href='https://vicente-gonzalez-ruiz.github.io/ALSA/'>ALSA</a>.
      </li>
-<li class='enumerate' id='x1-1004x2'><a href='https://vicente-gonzalez-ruiz.github.io/PulseAudio/'>PulseAudio</a> (in the case of Xubuntu, this is the audio server that comes
-     with Xfce).
-     </li>
-<li class='enumerate' id='x1-1006x3'><a href='https://vicente-gonzalez-ruiz.github.io/JACK/'>JACK</a>.
-     </li>
-<li class='enumerate' id='x1-1008x4'><a href='https://pipewire.org/'>Pipewire</a>.</li></ol>
-<!-- l. 20 --><p class='indent'>   To abstract InterCom from the available audio resources, InterCom uses
-<a href='http://www.portaudio.com/'>PortAudio</a> <span class='cite'>[<a href='#Xportaudio'>1</a>]</span> (through <a href='https://vicente-gonzalez-ruiz.github.io/intro_to_sounddevice/'>sounddevice</a>) to capture and play the audio. Using
-sounddevice, we have two alternatives for the implementation:
+<li class='enumerate' id='x1-2004x2'><a href='https://vicente-gonzalez-ruiz.github.io/PulseAudio/'>PulseAudio</a> (in the case of Xubuntu, this is the audio server that comes
+     with <a href='https://www.xfce.org/'>Xfce</a>).
                                                                   
 
                                                                   
-</p><!-- l. 26 --><p class='noindent'>
+     </li>
+<li class='enumerate' id='x1-2006x3'><a href='https://vicente-gonzalez-ruiz.github.io/JACK/'>JACK</a>.
+     </li>
+<li class='enumerate' id='x1-2008x4'><a href='https://pipewire.org/'>Pipewire</a>.</li></ol>
+<!-- l. 23 --><p class='indent'>   To abstract InterCom from the available audio resources, InterCom uses
+<a href='http://www.portaudio.com/'>PortAudio</a> <span class='cite'>[<a href='#Xportaudio'>1</a>]</span> (through <a href='https://vicente-gonzalez-ruiz.github.io/intro_to_sounddevice/'>sounddevice</a>) to capture and play the audio. Using
+sounddevice, we have two alternatives for implementing InterCom (and in general, for
+any real-time audio-processing application):
+</p><!-- l. 30 --><p class='noindent'>
 </p>
-   <h4 class='subsectionHead'><span class='titlemark'>1.1   </span> <a id='x1-20001.1'></a>Loop-based algorithm</h4>
-<!-- l. 28 --><p class='noindent'>Roughtly, InterCom can be divided into 6 steps:
+   <h4 class='subsectionHead'><span class='titlemark'>1.1   </span> <a id='x1-30001.1'></a>Loop-based algorithm</h4>
+<!-- l. 32 --><p class='noindent'>Roughtly, InterCom can be divided into 6 steps:
 </p>
-   <!-- l. 30 -->
-   <pre class='lstlisting' id='listing-1'><span class='label'><a id='x1-2001r1'></a>1</span><span class='ecit-1000'>  </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>Loop-based </span><span class='ecit-1000'>algorithm </span><span class='ecit-1000'>(to </span><span class='ecit-1000'>be </span><span class='ecit-1000'>called </span><span class='ecit-1000'>in </span><span class='ecit-1000'>a </span><span class='ecit-1000'>loop)</span> 
-</span><span class='label'><a id='x1-2002r2'></a>2</span><span class='ectt-1000'>  </span><span style='color:#000000'><span class='ectt-1000'>def</span></span><span style='color:#000000'> <span class='ectt-1000'>record_IO_and_play(chunk_size):</span> 
-</span><span class='label'><a id='x1-2003r3'></a>3</span><span class='ectt-1000'>    </span><span style='color:#000000'><span class='ectt-1000'>chunk</span></span><span style='color:#000000'> <span class='ectt-1000'>= </span><span class='ectt-1000'>record(chunk_size)</span> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(1)</span> 
-</span><span class='label'><a id='x1-2004r4'></a>4</span><span class='ectt-1000'>    </span><span style='color:#000000'><span class='ectt-1000'>packed_chunk</span></span><span style='color:#000000'> <span class='ectt-1000'>= </span><span class='ectt-1000'>pack(chunk)</span> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(2)</span> 
-</span><span class='label'><a id='x1-2005r5'></a>5</span><span class='ectt-1000'>    </span><span style='color:#000000'><span class='ectt-1000'>send</span></span><span style='color:#000000'><span class='ectt-1000'>(</span></span><span style='color:#000000'><span class='ectt-1000'>packed_chunk</span></span><span style='color:#000000'><span class='ectt-1000'>)</span></span><span style='color:#000000'> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(3)</span> 
-</span><span class='label'><a id='x1-2006r6'></a>6</span><span class='ectt-1000'>    </span><span style='color:#000000'><span class='ectt-1000'>packed_chunk</span></span><span style='color:#000000'> <span class='ectt-1000'>= </span><span class='ectt-1000'>receive()</span> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(4)</span> 
-</span><span class='label'><a id='x1-2007r7'></a>7</span><span class='ectt-1000'>    </span><span style='color:#000000'><span class='ectt-1000'>chunk</span></span><span style='color:#000000'> <span class='ectt-1000'>= </span><span class='ectt-1000'>unpack(packed_chunk)</span> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(5)</span> 
-</span><span class='label'><a id='x1-2008r8'></a>8</span><span class='ectt-1000'>    </span><span style='color:#000000'><span class='ectt-1000'>play</span></span><span style='color:#000000'><span class='ectt-1000'>(</span></span><span style='color:#000000'><span class='ectt-1000'>chunk</span></span><span style='color:#000000'><span class='ectt-1000'>)</span></span><span style='color:#000000'> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(6)</span></span></pre>
+   <!-- l. 34 -->
+   <pre class='lstlisting' id='listing-1'><span class='label'><a id='x1-3001r1'></a>1</span><span class='ecit-1000'>  </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>Loop-based </span><span class='ecit-1000'>algorithm </span><span class='ecit-1000'>(to </span><span class='ecit-1000'>be </span><span class='ecit-1000'>called </span><span class='ecit-1000'>in </span><span class='ecit-1000'>a </span><span class='ecit-1000'>loop)</span> 
+</span><span class='label'><a id='x1-3002r2'></a>2</span><span class='ectt-1000'>  </span><span style='color:#000000'><span class='ectt-1000'>def</span></span><span style='color:#000000'> <span class='ectt-1000'>record_IO_and_play(chunk_size):</span> 
+</span><span class='label'><a id='x1-3003r3'></a>3</span><span class='ectt-1000'>    </span><span style='color:#000000'><span class='ectt-1000'>chunk</span></span><span style='color:#000000'> <span class='ectt-1000'>= </span><span class='ectt-1000'>record(chunk_size) </span><span class='ecit-1000'># </span><span class='ecit-1000'>(1)</span> 
+</span><span class='label'><a id='x1-3004r4'></a>4</span><span class='ectt-1000'>    </span><span style='color:#000000'><span class='ectt-1000'>packed_chunk</span></span><span style='color:#000000'> <span class='ectt-1000'>= </span><span class='ectt-1000'>pack(chunk) </span><span class='ecit-1000'># </span><span class='ecit-1000'>(2)</span> 
+</span><span class='label'><a id='x1-3005r5'></a>5</span><span class='ectt-1000'>    </span><span style='color:#000000'><span class='ectt-1000'>send</span></span><span style='color:#000000'><span class='ectt-1000'>(</span></span><span style='color:#000000'><span class='ectt-1000'>packed_chunk</span></span><span style='color:#000000'><span class='ectt-1000'>)</span></span><span style='color:#000000'> <span class='ecit-1000'># </span><span class='ecit-1000'>(3)</span> 
+</span><span class='label'><a id='x1-3006r6'></a>6</span><span class='ectt-1000'>    </span><span style='color:#000000'><span class='ectt-1000'>packed_chunk</span></span><span style='color:#000000'> <span class='ectt-1000'>= </span><span class='ectt-1000'>receive() </span><span class='ecit-1000'># </span><span class='ecit-1000'>(4)</span> 
+</span><span class='label'><a id='x1-3007r7'></a>7</span><span class='ectt-1000'>    </span><span style='color:#000000'><span class='ectt-1000'>chunk</span></span><span style='color:#000000'> <span class='ectt-1000'>= </span><span class='ectt-1000'>unpack(packed_chunk) </span><span class='ecit-1000'># </span><span class='ecit-1000'>(5)</span> 
+</span><span class='label'><a id='x1-3008r8'></a>8</span><span class='ectt-1000'>    </span><span style='color:#000000'><span class='ectt-1000'>play</span></span><span style='color:#000000'><span class='ectt-1000'>(</span></span><span style='color:#000000'><span class='ectt-1000'>chunk</span></span><span style='color:#000000'><span class='ectt-1000'>)</span></span><span style='color:#000000'> <span class='ecit-1000'># </span><span class='ecit-1000'>(6)</span></span></pre>
    
-<!-- l. 54 --><p class='indent'>   where:
-</p><!-- l. 56 --><p class='indent'>
+<!-- l. 58 --><p class='indent'>   where:
+</p><!-- l. 60 --><p class='indent'>
      </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-2010x1'>The <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>record(chunk_size)</span></span></span> method captures a chunk (a fragment) of frames<span class='footnote-mark'><a href='#fn1x0' id='fn1x0-bk'><sup class='textsuperscript'>1</sup></a></span><a id='x1-2011f1'></a>.
+<li class='enumerate' id='x1-3010x1'>The <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>record(chunk_size)</span></span></span> method captures a chunk (a fragment) of frames<span class='footnote-mark'><a href='#fn1x0' id='fn1x0-bk'><sup class='textsuperscript'>1</sup></a></span><a id='x1-3011f1'></a>.
      In <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>sounddevice</span></span></span>, this operation is carried on by the <a href='https://python-sounddevice.readthedocs.io/en/0.4.0/api/streams.html#sounddevice.Stream.read'><span class='ectt-1000'>read() </span>method</a>. As can
-     be seen in <a href='https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire4.py'>wire4.py</a><span class='footnote-mark'><a href='#fn2x0' id='fn2x0-bk'><sup class='textsuperscript'>2</sup></a></span><a id='x1-2013f2'></a>
-     and also in the documentation of <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>sounddevice</span></span></span>, if we read only the frames
+     be seen in <a href='https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire4.py'>wire4.py</a><span class='footnote-mark'><a href='#fn2x0' id='fn2x0-bk'><sup class='textsuperscript'>2</sup></a></span><a id='x1-3013f2'></a>
+     and also in the documentation of <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>sounddevice</span></span></span> if we read only the frames
      that are available in the soundcard’s buffer, this generates a non-blocking
      operation and the chunk size depends on the instant of time in which this
      method is called. Otherwise, if we specify a number of frames different to
-     the number of frames available, the operation can<span class='footnote-mark'><a href='#fn3x0' id='fn3x0-bk'><sup class='textsuperscript'>3</sup></a></span><a id='x1-2015f3'></a>
+     the number of frames available, the operation can<span class='footnote-mark'><a href='#fn3x0' id='fn3x0-bk'><sup class='textsuperscript'>3</sup></a></span><a id='x1-3015f3'></a>
      be <a href='https://python-sounddevice.readthedocs.io/en/0.4.0/api/streams.html#sounddevice.Stream.write'>blocking</a> and <a href='https://en.wikipedia.org/wiki/I/O_bound'>I/O-bound</a> (the calling process sleeps until the required
      chunk size is returned).
      </li>
-<li class='enumerate' id='x1-2018x2'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>pack(chunk)</span></span></span> process  the  chunk  to  create  a  <a href='https://en.wikipedia.org/wiki/Network_packet'>packet</a>  (or  a  sequence  of
-     packets), a structure that can be transmitted through the Internet using
+<li class='enumerate' id='x1-3018x2'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>pack(chunk)</span></span></span> process  the  chunk  to  create  a  <a href='https://en.wikipedia.org/wiki/Network_packet'>packet</a>  (or  a  sequence  of
+     packets), a structure that can be transmitted through the <a href='https://en.wikipedia.org/wiki/Internet'>Internet</a> using
      the <a href='https://en.wikipedia.org/wiki/Datagram'>Datagram</a> Model. In general, this is a <a href='https://en.wikipedia.org/wiki/CPU-bound'>CPU-bounded</a> (CPU-intensive)
      operation because the payload of the packet can be compressed in order
      to minimize the transmission <a href='https://en.wikipedia.org/wiki/Bit_rate'>bit-rate</a>.
      </li>
-<li class='enumerate' id='x1-2020x3'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>send(packed_chunk)</span></span></span>,  sends  the  packet  to  our  interlocutor.  When
+<li class='enumerate' id='x1-3020x3'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>send(packed_chunk)</span></span></span>  sends  the  packet  to  our  interlocutor.  When
      datagrams are used, this step is not blocking nor CPU-bounding (the CPU
      usage is very low), as long as the number of packets/second is small and
-     the sizes of the payloads are also small, as is expected in InterCom.
+     the sizes of the payloads are also small, as it is expected in InterCom.
      </li>
-<li class='enumerate' id='x1-2022x4'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>receive()</span></span></span>, waits (blocking the calling process) for an incoming packet,
+<li class='enumerate' id='x1-3022x4'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>receive()</span></span></span>, waits (blocking the calling process) for an incoming packet,
      and therefore, this operation is IO-bound. However, most <a href='https://docs.python.org/3/library/socket.html'>socket API</a>s <span class='cite'>[<a href='#Xpython'>2</a>]</span>
      offeer  a  <a href='https://docs.python.org/3.8/library/socket.html#socket.socket.setblocking'>non-blocking  option</a>  where  when  a  packet  is  not  available  in
-     the kernel’s buffer associated with the corresponding socket, some kind
-     of exception is generated, and, in this case, it is resposabability of the
-     programmer to generate an “alternative” chunk (in our case, for example, a
-     chunk filled with <a href='https://en.wikipedia.org/wiki/Digital_audio#Overview'>zeros</a> that will not produce any sound when it is played).
+     the  kernel’s  buffer  associated  with  the  corresponding  socket  after  a
+     predetermined  amount  of  time,  some  kind  of  exception  is  generated,
+     and, in this case, it is resposabability of the programmer to generate an
+     “alternative”  chunk (in our case, for example, a chunk filled with <a href='https://en.wikipedia.org/wiki/Digital_audio#Overview'>zeros</a>
+     that will not produce any sound when it is played).
      </li>
-<li class='enumerate' id='x1-2024x5'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>unpack(packed_chunk)</span></span></span>       is           (like           the           method
+<li class='enumerate' id='x1-3024x5'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>unpack(packed_chunk)</span></span></span>       is           (like           the           method
      <span class='ectt-1000'>pack(chunk)</span>) a CPU-intensive step that transforms a packed chunk into
      a chunk of audio.
      </li>
-<li class='enumerate' id='x1-2026x6'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>play(chunk)</span></span></span> renders the chunk. In general, this is an I/O-bound blocking
-     action.  However,  if  <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>play()</span></span></span> is  called  at  the  same  pace  as  <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>record()</span></span></span>,
-     and the record and play parameters are exactly the same (as happens
-     in our algorithm), the playing of the chunk should return immediately
-     because the time that the <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>play()</span></span></span> method needs to complete would match
-     exactlythe time that the <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>record()</span></span></span> method requires (see <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/test/sounddevice/wire4.py'>wire4.py</a>).</li></ol>
-<!-- l. 121 --><p class='indent'>   This algorithm works fine if the chunk size is controlled by (<span class='obeylines-h'><span class='verb'><span class='ectt-1000'>sounddevice</span></span></span>) and
-also, the run-time required by the operations <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>pack(chunk)</span></span></span> and <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>unpack(packet)</span></span></span> is
-shorter than the chunk time. Unfortunately, the first premise (that we can use
-varying the chunk sizes) complicates slightly the implementation because we would
-work with chunks of varying lengths (that as you can see running <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>wire4.py</span></span></span>, in most
-of the iterations the size of the read chunk is 0). This also complicates the control of
-the latency because the chunk size is variable. However, the real problem
-appears when our computer is not able to satisfy the second requirement, i.e.,
-when the chunk time is smaller than the time that we need to process the
-chunks. This can only be addressed through code optimization, for example,
-parallelization.
-</p><!-- l. 135 --><p class='noindent'>
-</p>
-   <h4 class='subsectionHead'><span class='titlemark'>1.2   </span> <a id='x1-30001.2'></a>Timer-based algorithm</h4>
-<!-- l. 137 --><p class='noindent'>In this algorithm, the task dedicated to record and play the chunks of audio is called
-periodically (probably, using some <a href='https://en.wikipedia.org/wiki/Timer'>timer</a> provided by the sound hardware). This
-procedure guarantees a <a href='https://en.wikipedia.org/wiki/Glitch'>gliches</a>-free audio-IO when constant chunk sizes are used
-because the timer interruption coincides exactly with the instant of time in which the
-<span class='obeylines-h'><span class='verb'><span class='ectt-1000'>record()</span></span></span> and the <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>play()</span></span></span> methods can be used without blocking. The following
+<li class='enumerate' id='x1-3026x6'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>play(chunk)</span></span></span> renders the chunk. In general, this is an I/O-bound blocking
+     action. However, if <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>play()</span></span></span> is called at the same pace as <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>record()</span></span></span>, and
+     the record and play parameters are exactly the same (as usually happens
+     in InterCom), the playing of the chunk should return immediately because
+     the time that the <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>play()</span></span></span> method needs to complete would match exactly
+     the time that the <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>record()</span></span></span> method requires (see <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/test/sounddevice/wire4b.py'>wire4b.py</a>).</li></ol>
                                                                   
 
                                                                   
-algorithm describes the new algorithm, which is basically the previous one, except
-that the chunk size is fixed.
+<!-- l. 142 --><p class='noindent'>
 </p>
-   <!-- l. 148 -->
-   <pre class='lstlisting' id='listing-2'><span class='label'><a id='x1-3001r1'></a>1</span><span class='ecit-1000'>  </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>Timer-based </span><span class='ecit-1000'>algorithm </span><span class='ecit-1000'>(to </span><span class='ecit-1000'>be </span><span class='ecit-1000'>called </span><span class='ecit-1000'>periodically)</span> 
-</span><span class='label'><a id='x1-3002r2'></a>2</span><span class='ectt-1000'>  </span><span style='color:#000000'><span class='ectt-1000'>def</span></span><span style='color:#000000'> <span class='ectt-1000'>record_IO_and_play(chunk_size):</span> 
-</span><span class='label'><a id='x1-3003r3'></a>3</span><span class='ectt-1000'>    </span><span style='color:#000000'><span class='ectt-1000'>chunk</span></span><span style='color:#000000'> <span class='ectt-1000'>= </span><span class='ectt-1000'>record(chunk_size)</span> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>The </span><span class='ecit-1000'>chunk </span><span class='ecit-1000'>has </span><span class='ecit-1000'>chunk_size </span><span class='ecit-1000'>frames</span> 
-</span><span class='label'><a id='x1-3004r4'></a>4</span><span class='ectt-1000'>    </span><span style='color:#000000'><span class='ectt-1000'>packed_chunk</span></span><span style='color:#000000'> <span class='ectt-1000'>= </span><span class='ectt-1000'>pack(chunk)</span> 
-</span><span class='label'><a id='x1-3005r5'></a>5</span><span class='ectt-1000'>    </span><span style='color:#000000'><span class='ectt-1000'>send</span></span><span style='color:#000000'><span class='ectt-1000'>(</span></span><span style='color:#000000'><span class='ectt-1000'>packed_chunk</span></span><span style='color:#000000'><span class='ectt-1000'>)</span></span> 
-<span class='label'><a id='x1-3006r6'></a>6</span><span class='ectt-1000'>    </span><span style='color:#000000'><span class='ectt-1000'>packed_chunk</span></span><span style='color:#000000'> <span class='ectt-1000'>= </span><span class='ectt-1000'>receive()</span> 
-</span><span class='label'><a id='x1-3007r7'></a>7</span><span class='ectt-1000'>    </span><span style='color:#000000'><span class='ectt-1000'>chunk</span></span><span style='color:#000000'> <span class='ectt-1000'>= </span><span class='ectt-1000'>unpack(packed_chunk)</span> 
-</span><span class='label'><a id='x1-3008r8'></a>8</span><span class='ectt-1000'>    </span><span style='color:#000000'><span class='ectt-1000'>play</span></span><span style='color:#000000'><span class='ectt-1000'>(</span></span><span style='color:#000000'><span class='ectt-1000'>chunk</span></span><span style='color:#000000'><span class='ectt-1000'>)</span></span><span style='color:#000000'> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>I </span><span class='ecit-1000'>play </span><span class='ecit-1000'>chunk_size </span><span class='ecit-1000'>frames</span></span></pre>
-   
-<!-- l. 172 --><p class='indent'>   The current implementation of InterCom uses the Timer-based algorithm.
-</p><!-- l. 203 --><p class='noindent'>
+   <h4 class='subsectionHead'><span class='titlemark'>1.2   </span> <a id='x1-40001.2'></a>Timer-based algorithm</h4>
+<!-- l. 144 --><p class='noindent'>The to-be-called-in-a-loop implementation depicted in the previous section works
+fine, but finally InterCom uses a to-be-called-by-an-interruption implementation
+because it is allows to have running another task for free.
+</p><!-- l. 149 --><p class='indent'>   In this algorithm, the task dedicated to record and play the chunks of audio is
+called periodically (probably, using some <a href='https://en.wikipedia.org/wiki/Timer'>timer</a> provided by the sound hardware).
+This procedure guarantees a <a href='https://en.wikipedia.org/wiki/Glitch'>gliches</a>-free audio-IO when constant chunk sizes are
+used, because the timer interruption coincides exactly with the instant of
+time in which the <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>record()</span></span></span> and the <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>play()</span></span></span> methods can be used without
+blocking.
+</p><!-- l. 187 --><p class='indent'>   The <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L111'>current implementation</a> of InterCom uses the Timer-based (interruption-based)
+algorithm.
+</p><!-- l. 192 --><p class='noindent'>
 </p>
-   <h3 class='sectionHead'><span class='titlemark'>2   </span> <a id='x1-40002'></a>Resources</h3>
+   <h3 class='sectionHead'><span class='titlemark'>2   </span> <a id='x1-50002'></a>Deliverables</h3>
+<!-- l. 194 --><p class='noindent'>None. However, you should understand the meaning, purpose and use of each of the
+parameters of <span class='ectt-1000'>minimal.py</span>. For this, try the following:
+</p><!-- l. 198 --><p class='indent'>
+     </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-5002x1'>Run <span class='ectt-1000'>minimial.py </span>using <span class='ectt-1000'>localhost </span>as the destination for your chunks
+     of audio (notice that this is the default configuration for the parameters
+     <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>--destination_address</span></span></span> and <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>--destination_port</span></span></span>). Check that you can
+     listen to yourself after some delay, and that the quality of the sound is
+     good (it is recommended to used a headset). If you think that the quality
+     is not high enough, comment this with your teacher. Remember that the
+     parameters <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>--show_stats</span></span></span>, <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>--show_samples</span></span></span>, and <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>--show_spectrum</span></span></span>, can
+     provide some information about what is happening. Can you determine
+     the delay?
+     </li>
+<li class='enumerate' id='x1-5004x2'>Always
+     using the command line, modify the parameter <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>--frames_per_chunk</span></span></span>. Do
+     you notice any changes in latency or audio quality?
+     </li>
+                                                                  
+
+                                                                  
+<li class='enumerate' id='x1-5006x3'>Modify the parameter <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>--frames_per_second</span></span></span>. Again, do you notice any
+     changes in latency or audio quality? You should.
+     </li>
+<li class='enumerate' id='x1-5008x4'>With one of your group mates, try to communicate using the same <a href='https://en.wikipedia.org/wiki/Local_area_network'>LAN</a>
+     (you will need to modify the parameter <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>--destination_address</span></span></span>). Notice
+     that  some  LANs,  such  as  the  provided  by  the  UAL  could  filter  your
+     InterCom traffic. Good alternative options are you LAN at home or an
+     ad-hoc LAN created with a mobile device.
+     </li>
+<li class='enumerate' id='x1-5010x5'>Repeat the last experiment when two (or more) group mates send you
+     their chunks. What do you think that is happening?
+     </li>
+<li class='enumerate' id='x1-5012x6'>Finally, are you able to communicate with an interlocutor that is in a
+     different LAN than you (for example, when two InterCom instances are
+     running in different home networks)?</li></ol>
+<!-- l. 258 --><p class='noindent'>
+</p>
+   <h3 class='sectionHead'><span class='titlemark'>3   </span> <a id='x1-60003'></a>Resources</h3>
    <div class='thebibliography'>
    <p class='bibitem'><span class='biblabel'>
  [1]<span class='bibsp'>   </span></span><a id='Xportaudio'></a><a href='http://www.portaudio.com/'>PortAudio</a>.
@@ -144,11 +176,14 @@ that the chunk size is fixed.
  [2]<span class='bibsp'>   </span></span><a id='Xpython'></a>The Python Foundation. <a href='https://www.python.org/'>The Python Website</a>.
 </p>
    </div>
-   <div class='footnotes'><a id='x1-2012x1'></a>
-<!-- l. 59 --><p class='noindent'><span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='ecrm-0800'>A stereo sample, usually 16 + 16 bits.</span></p><a id='x1-2014x2'></a>
-<!-- l. 65 --><p class='noindent'><span class='footnote-mark'><a href='#fn2x0-bk' id='fn2x0'><sup class='textsuperscript'>2</sup></a></span><span class='ectt-0800'>curl https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire4.py
-</span><span class='ectt-0800'>&gt; wire4.py</span></p><a id='x1-2016x3'></a>
-<!-- l. 72 --><p class='noindent'><span class='footnote-mark'><a href='#fn3x0-bk' id='fn3x0'><sup class='textsuperscript'>3</sup></a></span><span class='ecrm-0800'>The reading will be blocking if the number of requested frames is larger than the number
+                                                                  
+
+                                                                  
+   <div class='footnotes'><a id='x1-3012x1'></a>
+<!-- l. 63 --><p class='noindent'><span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='ecrm-0800'>A stereo sample, usually 16 + 16 bits.</span></p><a id='x1-3014x2'></a>
+<!-- l. 69 --><p class='noindent'><span class='footnote-mark'><a href='#fn2x0-bk' id='fn2x0'><sup class='textsuperscript'>2</sup></a></span><span class='ectt-0800'>curl https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire4.py
+</span><span class='ectt-0800'>&gt; wire4.py</span></p><a id='x1-3016x3'></a>
+<!-- l. 76 --><p class='noindent'><span class='footnote-mark'><a href='#fn3x0-bk' id='fn3x0'><sup class='textsuperscript'>3</sup></a></span><span class='ecrm-0800'>The reading will be blocking if the number of requested frames is larger than the number
 </span><span class='ecrm-0800'>of available frames.</span></p>                                                                                                 </div>
  
 </body> 
