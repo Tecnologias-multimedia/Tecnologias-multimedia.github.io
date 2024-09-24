@@ -20,22 +20,22 @@
 \label{fig:NAT_framework}
 \end{figure}
 
+
 NAT stands for
 \href{https://en.wikipedia.org/wiki/Network_address_translation}{Network
-  Address Translation}, and it is a method to remap an IP
-(Internet Protocol) address space into another by modifying network
-address information (in the IP header) of packets while they are in
-transit across a traffic routing device (see the
+  Address Translation}, and it is a method to remap an IP (Internet
+Protocol) address space into another by modifying network address
+information (in the IP header) of packets while they are in transit
+across a traffic routing device (see the
 Fig~\ref{fig:NAT_framework})~\cite{srisuresh1999nat,Srisuresh2001}. When
-a network device in an internal (usually private) network sends a
-packet $P$ to the Internet, the NAT device translates the internal IP
-address to an external (usually public) IP address. When a packet from
-the Internet arrives to the NAT device, it translates the external IP
-address to the internal IP address of the device receiver of the
-packet $P$.
+a network device\footnote{Installed for example in a host.} in an
+internal (usually private) network sends a packet $P$ to the Internet,
+the NAT device translates the internal IP address to an external
+(usually public) IP address. When a packet from the Internet arrives
+to the NAT device, it translates the external IP address to the
+internal IP address of the device receiver of the packet $P$.
 
 Most NAT boxes are implemented as a part of home routers.
-
 
 \section{Pros and cons of NATting}
 
@@ -146,9 +146,9 @@ Depending on the number of available IP external addresses:
 Depending on how the external ports are assigned:
 
 \begin{enumerate}
-\item EIM (Endpoint Independent Mapping) NAT devices reuse the same
+\item \textbf{EIM (End-point Independent Mapping)} NAT devices reuse the same
   (external) port $P(X:y)$ for all traffic sent from the internal
-  end-point $X:y$ to any external endpoint. Therefore, it usually
+  end-point $X:y$ to any external end-point. Therefore, it usually
   holds that
   \begin{equation}
     P(X:y)=y, \forall X~\mathrm{private},
@@ -158,15 +158,15 @@ Depending on how the external ports are assigned:
   that is using the same port $y$), then the NAT device usually
   selects the ``next'' (counting from $y$) free port. This algorithm
   is commonly used in \textbf{Cone NAT devices}.
-\item In CDM (Connection Dependent Mapping) NAT devices, the assigned
+\item In \textbf{CDM (Connection Dependent Mapping)} NAT devices, the assigned
   (external) port $P(X:x,Y:y)$ is different for each ``connection''
   $(X:x,Y:y)$, where $X:x$ is an internal end-point and $Y:y$ is an
   external end-point. In this case, we can distinguish between:
   \begin{enumerate}
-  \item Fixed-$\Delta$ CDM, when the NAT device selects $P(X:x,Y:y)$
+  \item \textbf{Fixed-$\Delta$ CDM}, when the NAT device selects $P(X:x,Y:y)$
     using a constant port step $\Delta$\footnote{$\Delta$ is a natural
       number.}.
-  \item Random-$\Delta$ CDM, when the NAT device selects $P(X:x,Y:y)$
+  \item \textbf{Random-$\Delta$ CDM}, when the NAT device selects $P(X:x,Y:y)$
     using a random port step $\Delta$.
   \end{enumerate}
   These algorithms are used in \textbf{Symmetric NAT devices}. Notice
@@ -185,19 +185,19 @@ Depending on how the incoming traffic is accepted (or not), NAT are
 classified as:
 
 \begin{enumerate}
-\item EIF (Endpoint Independent Filtering) when the incoming packets
+\item \textbf{EIF (End-point Independent Filtering)} when the incoming packets
   are forwarded without any extra restriction\footnote{Apart from the
     existence of a working TT-record for the corresponding public port
     used by the incoming packets.}. This is usually used in
   \textbf{Full Cone NAT} devices.
-\item ARF (Address Restricted Filtering) when only those incoming
+\item \textbf{ARF (Address Restricted Filtering)} when only those incoming
   packets having the same external IP address as the one in the
   corresponding TT-record is forwarded to the internal
   end-point\footnote{Notice that in this case, TT-records are also
     indexed by the external IP addresses of the incoming
     packets.}. This policy is generally used by \textbf{(Address)
     Restricted Cone NAT} devices.
-\item ERF (Endpoint Restricted Filtering) when only external incoming
+\item \textbf{ERF (End-point Restricted Filtering)} when only external incoming
   packets having the same external end-point like the one in the
   TT-record is forwarded to the internal end-point\footnote{Now, the
     TT-records are indexed by the external port and the external
@@ -261,10 +261,12 @@ nat_type, external_ip, external_port = stun.get_ip_info(stun_host='stun.l.google
 \end{verbatim}
 
 Notice that STUN servers do not provide information about other
-peers. Therefore, you need to specify (manually) the end-point of your
-interlocutor when using InterCom (which automatically performs the UDP
-hole punching maneuver because the InterCom instances start
-transmitting UDP packets as soon as there is audio data).
+peers. Therefore, even if you use a STUN server for knowing the public
+end-point used by your NAT device, you will need to specify (manually)
+the end-point of your interlocutor when using InterCom (which
+automatically performs the UDP hole punching maneuver because the
+InterCom instances start transmitting UDP packets as soon as there is
+audio data).
 
 \section{Port-forwarding}
 
