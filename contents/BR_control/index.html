@@ -19,7 +19,7 @@
 
 <h2 class='titleHead'>Bit-Rate Control</h2>
  <div class='author'><a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp; </span><a href='https://hpca.ual.es/~savins/'><span class='ecrm-1200'>Savins Puertas Martín</span></a> <span class='ecrm-1200'>&amp; </span><a href='https://www.marcoslupion.com/'><span class='ecrm-1200'>Marcos Lupión Lorente</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>September 6, 2024</span></div>
+<div class='date'><span class='ecrm-1200'>September 24, 2024</span></div>
    </div>
    <h3 class='likesectionHead'><a id='x1-1000'></a>Contents</h3>
    <div class='tableofcontents'>
@@ -73,7 +73,7 @@ To compress and decompress, we will use a free data <a href='https://en.wikipedi
 is based on <a href='https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Storer%E2%80%93Szymanski'>LZSS</a> and <a href='https://en.wikipedia.org/wiki/Huffman_coding'>Huffman Coding</a> <span class='cite'>[<a href='#Xnelson96datacompression'>4</a>]</span> (see this <a href='https://github.com/vicente-gonzalez-ruiz/LZ77/blob/master/index.ipynb'>notebook</a> and this <a href='https://github.com/vicente-gonzalez-ruiz/Huffman_coding/blob/master/index.ipynb'>notebook</a>).
 The DEFLATE algorithm is implemented in the Python’s standard library
 <a href='https://docs.python.org/3/library/zlib.html'><span class='ectt-1000'>zlib</span></a>.
-</p><!-- l. 77 --><p class='indent'>   In order to compare the performance of different alternatives, the avobe methods
+</p><!-- l. 77 --><p class='indent'>   In order to compare the performance of different alternatives, the above methods
 are implemented in the following modules, with different functionality:
 </p><!-- l. 81 --><p class='indent'>
      </p><ol class='enumerate1'>
@@ -249,7 +249,7 @@ Notice that using different audio files you could obtain different results.
 <!-- l. 329 --><p class='noindent'>Considering the <a href='https://en.wikipedia.org/wiki/Root-mean-square_deviation'>RMSE (Root Mean Square Error)</a> as a distortion measure between
 the sent and the received audio signal (using only one instance of InterCom),
 generate the RD curve considering a set of different simulated transmission
-environments (use <a href='https://vicente-gonzalez-ruiz.github.io/about_tc/'>tc</a>) of one audio sequence.
+environments (use <a href='https://vicente-gonzalez-ruiz.github.io/about_tc/'>tc</a> or a similar tool) of one audio sequence.
 </p><!-- l. 338 --><p class='indent'>   Remember that the X-axis must express bit-rate and the Y-axis, distortion.
 </p><!-- l. 342 --><p class='noindent'>
 </p>

@@ -197,10 +197,12 @@ Determine, experimentally:
 \item Repeat the previous experiment using only localhost (transmiting
   the chunk between the loopback network adapter), but adding some
   jitter with the tool
-  \href{https://vicente-gonzalez-ruiz.github.io/about_tc/}{\texttt{tc}}.
+  \href{https://vicente-gonzalez-ruiz.github.io/about_tc/}{\texttt{tc}}. If
+  \texttt{tc} is not avaiable in your OS, you can use any other
+  similar tool.
 \end{enumerate}
 
-You can measure the \href{https://en.wikipedia.org/wiki/Quality_of_experience}{QoE} using the following classification:
+You can quantify the \href{https://en.wikipedia.org/wiki/Quality_of_experience}{QoE} using the following classification:
 \begin{itemize}
 \item \textbf{Perfect}: no loss or delay can be perceived.
 \item \textbf{Good}: if you detect some minimal distortion in the

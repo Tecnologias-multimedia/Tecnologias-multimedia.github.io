@@ -19,7 +19,7 @@
 
 <h2 class='titleHead'>Hidding the Jitter</h2>
  <div class='author'><a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp; </span><a href='https://hpca.ual.es/~savins/'><span class='ecrm-1200'>Savins Puertas Martín</span></a> <span class='ecrm-1200'>&amp; </span><a href='https://www.marcoslupion.com/'><span class='ecrm-1200'>Marcos Lupión Lorente</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>September 6, 2024</span></div>
+<div class='date'><span class='ecrm-1200'>September 24, 2024</span></div>
    </div>
    <h3 class='likesectionHead'><a id='x1-1000'></a>Contents</h3>
    <div class='tableofcontents'>
@@ -181,11 +181,12 @@ return with every new received chunk.
      </li>
 <li class='enumerate' id='x1-5006x2'>Repeat  the  previous  experiment  using  only  localhost  (transmiting  the
      chunk between the loopback network adapter), but adding some jitter with
-     the tool <a href='https://vicente-gonzalez-ruiz.github.io/about_tc/'><span class='ectt-1000'>tc</span></a>.</li></ol>
+     the tool <a href='https://vicente-gonzalez-ruiz.github.io/about_tc/'><span class='ectt-1000'>tc</span></a>. If <span class='ectt-1000'>tc </span>is not avaiable in your OS, you can use any other similar
+     tool.</li></ol>
                                                                   
 
                                                                   
-<!-- l. 203 --><p class='indent'>   You can measure the <a href='https://en.wikipedia.org/wiki/Quality_of_experience'>QoE</a> using the following classification: </p>
+<!-- l. 205 --><p class='indent'>   You can quantify the <a href='https://en.wikipedia.org/wiki/Quality_of_experience'>QoE</a> using the following classification: </p>
      <ul class='itemize1'>
      <li class='itemize'><span class='ecbx-1000'>Perfect</span>: no loss or delay can be perceived.
      </li>
@@ -197,7 +198,7 @@ return with every new received chunk.
      <li class='itemize'><span class='ecbx-1000'>Bad</span>: you are able to recognize only small parts of the received audio.
      </li>
      <li class='itemize'><span class='ecbx-1000'>No way</span>: when most of the time only silence is heard.</li></ul>
-<!-- l. 215 --><p class='indent'>   An example of a notebook related to this milestone can be found <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/docs/Hidding_the_Network_Jitter__example.ipynb'>here</a>.
+<!-- l. 217 --><p class='indent'>   An example of a notebook related to this milestone can be found <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/docs/Hidding_the_Network_Jitter__example.ipynb'>here</a>.
    </p><div class='thebibliography'>
    <p class='bibitem'><span class='biblabel'>
  [1]<span class='bibsp'>   </span></span><a id='Xdordal2020intro'></a>Peter L. Dordal. <a href='http://intronetworks.cs.luc.edu/current/ComputerNetworks.pdf'><span class='ecti-1000'>An Introduction to Computer Networks</span></a>. 2020.
