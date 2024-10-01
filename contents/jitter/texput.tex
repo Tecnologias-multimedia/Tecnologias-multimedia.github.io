@@ -10,7 +10,7 @@
   latency} (also called
 \href{https://en.wikipedia.org/wiki/Network_delay}{network delay} and
 \href{https://en.wikipedia.org/wiki/End-to-end_delay}{end-to-end
-  delay}) is the time it takes for that a chunk of data (encapsulated
+  delay}) is the time it takes for a chunk of data (encapsulated
 in an \href{https://en.wikipedia.org/wiki/Internet_Protocol}{IP}
 \href{https://en.wikipedia.org/wiki/Network_packet}{packet}) to travel
 from one end-point of the network to another. This time is relevant
@@ -190,6 +190,22 @@ every new received chunk.
 \section{Deliverables}
 \label{sec:homework}
 
+\subsection*{Show the performance of Minimal in congested links}
+Determine the quality of the sound when minimal is used in a congested
+tranmission environment. You can quantify the
+\href{https://en.wikipedia.org/wiki/Quality_of_experience}{QoE} using
+the following classification:
+\begin{itemize}
+\item \textbf{Perfect}: no loss or delay can be perceived.
+\item \textbf{Good}: if you detect some minimal distortion in the
+  rendering of the sound.
+\item \textbf{Acceptable}: when the effects of the latency are
+  noticeable, but you can communicate with your interlocutor.
+\item \textbf{Bad}: you are able to recognize only small parts of the
+  received audio.
+\item \textbf{No way}: when most of the time only silence is heard.
+\end{itemize}
+
 \subsection*{Find your minimum buffering time}
 Determine, experimentally:
 \begin{enumerate}
@@ -205,19 +221,10 @@ Determine, experimentally:
   similar tool, or use the Linux system at the laboratory.
 \end{enumerate}
 
-You can quantify the \href{https://en.wikipedia.org/wiki/Quality_of_experience}{QoE} using the following classification:
-\begin{itemize}
-\item \textbf{Perfect}: no loss or delay can be perceived.
-\item \textbf{Good}: if you detect some minimal distortion in the
-  rendering of the sound.
-\item \textbf{Acceptable}: when the effects of the latency are
-  noticeable, but you can communicate with your interlocutor.
-\item \textbf{Bad}: you are able to recognize only small parts of the
-  received audio.
-\item \textbf{No way}: when most of the time only silence is heard.
-\end{itemize}
-
-An example of a notebook related to this milestone can be found \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/docs/Hidding_the_Network_Jitter__example.ipynb}{here}.
-
+\subsection*{Example}
+An example of a notebook related to this milestone can be found
+\href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/docs/Hidding_the_Network_Jitter__example.ipynb}{here}. Notice
+that not all the content of the notebook could be requested in this
+milestone.
 
 \bibliography{networking,nat}
