@@ -6,23 +6,21 @@
 
 \section{The problem}
 
-One of the first problems we encounter with the use the
+One of the first problems we encounter with the use of the
 \texttt{buffer.py} module\footnote{And obviously, any other parent
   version of \texttt{buffer.py}.} is that, if we don't use headphones,
-the sound that comes out of our PC's speaker reaches our microphone
+the sound that comes out of our PC's speaker reaches our mic(rophone)
 some time later, and more some time later, that sound reaches our
-interlocutor in the form of an echo, which is reproduced by his/her
-speaker, which can be captured again (some time later) by his
-microphone and sent it back to us ... and so on, generating a rather
-unpleasant feedback (echo) signal. In other words, if ${\mathbf s}$ is
-the (analog) signal played by our speaker and that reaches our
-mic(rophone), ${\mathbf n}$ is the signal emited by
-the ``near-end'' person\footnote{Our interlocutor would be the
-  ``far-end'' person.} that reaches our mic (i.e., the same signal
-that would be captured by our mic if I were using a headset), and
-${\mathbf m}$ is the (mixed) signal recorded by our microphone (when
-the headset is not used), we have that
-
+interlocutor (the ``far-end'' ... we are the ``near-end'') in the form
+of an echo (signal), which is reproduced by his/her speaker, which can
+be captured again (some time later) by his microphone and sent it back
+to us ... and so on, generating a rather unpleasant signal. In other
+words, if ${\mathbf s}$ is the (analog) signal played by our speaker
+and that reaches our mic, ${\mathbf n}$ is the signal emited by the
+near-end person that reaches our mic\footnote{I.e., the same signal
+  that would be captured by our mic if I were using a headset.}, and
+${\mathbf m}$ is the (mixed) signal recorded by our microphone, we
+have that
 \begin{equation}
   m(t) = n(t) + s(t),
   \label{eq:echo_problem}
@@ -33,7 +31,8 @@ Our problem here is to minimize the energy of $s(t)$.
 
 \section{The trivial (and definitive) solution}
 
-Use a headset. In this case,
+Use a \href{https://en.wikipedia.org/wiki/Audio_headset}{headset}. In
+this case,
 \begin{equation}
   m(t) \approx n(t)
   \label{eq:headset_solution}
@@ -42,21 +41,25 @@ because $s(t)\approx 0$.
 
 \section{The trivial (but limited) solution}
 
-Decrease the gain of our speaker to do $s(t)\approx 0$. Unfortunately
-this also decreases the volume of the far-end signal (the voice of our
-interlocutor) :-/
+Decrease the gain of the amplifier of our speaker to do
+$s(t)\approx 0$. Unfortunately this also decreases the volume of the
+far-end signal (the voice of our interlocutor) :-/
 
 \section{The simplest substract solution}
 Lets ${\mathbf m}$ the digital version of $m(t)$ and ${\mathbf m}[t]$
-it's $t$-the sample\footnote{Or frame if we work in stereo}. In this
+it's $t$-th sample\footnote{Or frame if we work in stereo}. In this
 solution, we send
 \begin{equation}
-  \tilde{\mathbf n}[i] = {\mathbf m}[i] - a{\mathbf s}[i-d],
+  \tilde{\mathbf n}[t] = {\mathbf m}[t] - a{\mathbf s}[t-d],
   \label{eq:simplest}
 \end{equation}
 where $a$ is an attenuation (scalar) value and $d$ represents the
-delay (measured in frame-times) required to propagate the sound from
-our speaker to our mic. We define
+delay\footnote{In a digital signal the sample index indicates the
+  position of the sample in the sequence of samples. If we also know
+  the sample-time, i.e., the cadency of the sampler, we can also
+  compute at which time was taken a sample.} (measured in
+sample-times) required to propagate the sound from our speaker to our
+mic. We define
 \begin{equation}
   \hat{\mathbf e}[t] = a{\mathbf s}[i-d]
 \end{equation}
@@ -64,35 +67,42 @@ as the estimated echo signal.
 
 \section{Considering the frequency response of the near-end to estimate the echo signal}
 We can improve the performance of the echo cancellation process if we
-take also into consideration that echo signal that finally reaches our mic
-is the convolution of $s(t)$ and the signal $h(t)$ that represents
-the echo response of our local audioset (speaker, mic, walls, monitor,
-keyboard, our body, etc.) to the impulse signal $\delta(t)$. In other
-``words'', we can compute
+take also into consideration that echo signal that finally reaches our
+mic is the
+\href{https://en.wikipedia.org/wiki/Convolution}{convolution} of
+$s(t)$ and a signal $h(t)$ that represents the echo response of our
+local audioset (speaker, mic, walls, monitor, keyboard, our body,
+etc.) to a impulse signal $\delta(t)$.\footnote{This action is similar
+  to the carried out by submarines when they user the sonar to perform
+  echo-location, or by bats.} In other ``words'', we can compute
 \begin{equation}
- \tilde{\mathbf n}[i] = {\mathbf m}[i] - ({\mathbf s}*{\mathbf h})[i-d],
+ \tilde{\mathbf n}[t] = {\mathbf m}[t] - ({\mathbf s}*{\mathbf h})[t-d],
   \label{eq:using_convolution}
 \end{equation}
-where $*$ represents the convolution between digital signals, and
-${\mathbf h}$ is the digitalized (discrete + quantized) version of
-$h(t)$, the response of the near audioset to $\delta(t)$.
+where $*$ represents the convolution between (in our case of) digital
+signals, and ${\mathbf h}$ is the digitalized (discrete + quantized)
+version of $h(t)$, the response of the near-end audioset to the impact
+of $\delta(t)$.
 
 The convolution of digital signals in the time domain can be expensive
-$(O^2$) if the number of samples is high. Fortunately, thanks to the
-theorem of the convolution of signals in the frequency
+(with
+\href{https://en.wikipedia.org/wiki/Computational_complexity_theory}{computational
+  complexity} $O^2$) if the number of samples is high. Fortunately,
+thanks to the \href{https://en.wikipedia.org/wiki/Convolution}{theorem
+  of the convolution} of signals in the frequency
 domain~\cite{kovacevic2013fourier,Oppenheim2}, the convolution can be
-replaced by the dot product, when we consider the signals in the
-frequency domain. Thanks to this, we can rewrite the
-Eq.~\eqref{eq:simplest} as
+replaced by the \href{https://en.wikipedia.org/wiki/Dot_product}{dot
+  product} ($O$), when we consider the signals in the frequency
+domain. Thanks to this, we can rewrite the Eq.~\eqref{eq:using_convolution} as
 \begin{equation}
-  \tilde{\mathbf n}[i] = {\mathbf m}[i] - {\mathcal F}^{-1}\{{\mathbf S}{\mathbf H}\}[i-d],
-  \label{eq:simplest_and_faster}
+  \tilde{\mathbf n}[t] = {\mathbf m}[t] - {\mathcal F}^{-1}\{{\mathbf S}{\mathbf H}\}[t-d],
+  \label{eq:faster}
 \end{equation}
-where ${\mathbf S}$ is the Fourier transform\footnote{The Fourier
-  transform is an special case of the Laplace transform where
-  $\sigma=0$ in the Laplace domain represented by the complex numbers
-  $s=\sigma+j\omega$. This simplification can be used for the
-  characterization of our local-end audioset because it can be
+where ${\mathbf S}$ is the (digital) Fourier transform\footnote{The
+  Fourier transform is an special case of the Laplace transform where
+  $\sigma=0$ in the complex (Laplace) domain represented by
+  $s=\sigma+j\omega$ frequencies. This simplification can be used for
+  the characterization of our local-end audioset because it can be
   considered a FIR (Finite Impulse Response) system (in ausence of an
   audio signal, the echo always decays with the time).} of
 ${\mathbf s}$, ${\mathbf H}$ is the Fourier transform of
@@ -101,38 +111,60 @@ transform. Notice that all these transforms are applied to digital
 signals, and there exist fast algorithms ($O\log_2O$).
 
 \section{Estimation of the echo signal using LMS (Least Mean Squares)}
+We just have seen how it is possible to find better estimations of the
+echo signal ${\mathbf e}$ using convolutions. By definition,
+convolutions are performed by filters.
 
-The LMS (Least Mean Squares) algorithm is an algorithm designed to
-minimize the mean square error of a target function. LMS is adaptive,
-which means that it suitable when there are near-end acoustic
-variations. In the previous section we have computed the near-end
-audioset impulse response using the frequency domain. In this case, we
-will use the time domain, i.e.,
+Filters can be implemented in the frequency domain (see the previous
+section) or in the signal (time in our case) domain. Signal domain
+(digital) convolutions are efficient when the length\footnote{The
+  number of coefficients.} of the (digital) filters is small. For
+determining ${\mathbf e}$, the length of a
+\href{https://en.wikipedia.org/wiki/Finite_impulse_response}{FIR
+  filter} should be at least $d$, because at least we need $d$ samples
+to detect the echo signal. Therefore, we have that
 \begin{equation}
-  \hat{\mathbf e}[t] = \sum_{k=0}^{N-1}{\mathbf h}_k^{(t)}{\mathbf s}[t-k]
+  \hat{\mathbf e}[t] = \sum_{k=0}^{d-1}{\mathbf h}_k^{(t)}{\mathbf s}[t-k],
 \end{equation}
-where ${\mathbf h}$ is the near-end impulse response and $N$ is the
-length of the LMS filter.
+where ${\mathbf h}$ is the near-end impulse response in the time
+domain.
 
-LMS minimizes the energy of the residue signal
-\begin{equation}
-  r[t] = {\mathbf m}[t] - {\mathbf n}[t-d]
-\end{equation}
-(the difference between the signal captured by the mic and the signal
-generated by the near-end user) that ideally, after a delay of $d$
-samples (an input parameter of this technique) should be the echo
-signal. More concretely, LMS minimizes $E\{|r|^2_2\}$ (the expectation
-of the square of $r$) using an interative algorithm where, in the
-iteration $i$ computes
-\begin{equation}
-  h^{(i+1)} = h^{(i)} + \mu r^{(i)}{\mathbf m}[i],
-\end{equation}
-where
-\begin{equation}
-  r^{(i)} = {\mathbf s}[i] - \hat{\mathbf e}[i],
-\end{equation}
-and $\mu$ is the ``learning rate'' of the LMS algorithm.
+Also, as we have seen in the previous section, it is possible to adapt
+the filter to the acoustic conditions, measuring the echo generated by
+the impulse signal. In the time domain, one of the most used
+techniques for computing the coefficients of a FIR filter is the
+\href{https://en.wikipedia.org/wiki/Least_mean_squares_filter}{LMS
+  (Least Mean Squares) algorithm}~\cite{haykin1995adaptive}, among
+other reasons because the filter (coefficients) can be adapted to
+variations in the signal to filter (the filter can learn).
 
+LMS was invented by professor Bernard Widrow and his first
+Ph.D. student, Ted Hoff, to train the
+\href{https://en.wikipedia.org/wiki/ADALINE}{ADALINE} artificial
+neural network.\footnote{See
+  \url{https://www.youtube.com/watch?v=hc2Zj55j1zU}} Using LMS,
+ADALINE is able to learn pattern, even using a single
+neuron\footnote{A neuron and a FIR filter are very similar.}.
+
+LMS can be used to compute the coefficients of a filter to provide a
+desired output (a signal) for a given input (a signal). In our
+context, the input signal is ${\mathbf m}$ (the digital signal
+recorded by our soundcard) and the desired output signal is
+${\mathbf n}$ (the digital version of our voice). LMS, iteratively
+computes
+\begin{eqnarray}
+  {\mathbf h}^{(i+1)} & = & {\mathbf h}^{(i)} + 2\mu\epsilon^{(i)}{\mathbf m}[i-d:i] \\
+  \epsilon^{(i) }& = & {\mathbf n}[i-d:i] - {\mathbf m}[i-d:i]^\mathrm{T}{\mathbf h}^{(i)},
+\end{eqnarray}
+where $i$ represents the iteration number, $\mu$ is the learning rate,
+and $\cdot^\mathrm{T}$ is the transpose of a matrix. Notice that we
+are using
+\href{https://numpy.org/doc/stable/user/basics.indexing.html}{the
+  NumPy slicing notation}. These equations can be found using the
+(steepest)
+\href{https://en.wikipedia.org/wiki/Gradient_descent}{gradient descend
+  algorithm}.\footnote{Again, see
+  \url{https://www.youtube.com/watch?v=hc2Zj55j1zU}!}
 
 \section{Deliverables}
 
@@ -165,9 +197,9 @@ described solutions. More concretely:
     enought.} monitored becase the physical composition of the
   near-end audioset can be dynamic (for example, the inclination of
   the screen of our laptop can be modified).
-\item Finally, try to use LMS to find a estimation of the echo signal
-  that takes into consideration the impulse response of the local-end
-  audioset.
+\item Use LMS to find a estimation of the echo signal.
+\item Finally, use any other technique (for example, an artificial
+  neural network) for estimating the echo.
 \end{enumerate}
 
 \section{Resources}
@@ -289,5 +321,40 @@ Therefore, as it can be seen in Eq.~\eqref{eq:simplest2}, to find the
 echo signal we need to mulplity  ${\mathbf S}$ (the played signal in the Fourier
 domain) by ${\mathbf H}$ (the frequency response of the near-end
 audioset).
+
+The LMS (Least Mean Squares) algorithm is an algorithm designed to
+minimize the mean square error of a target function.
+
+
+LMS is adaptive,
+which means that it suitable when there are near-end acoustic
+variations. In the previous section we have computed the near-end
+audioset impulse response using the frequency domain. In this case, we
+will use the time domain, i.e.,
+\begin{equation}
+  \hat{\mathbf e}[t] = \sum_{k=0}^{N-1}{\mathbf h}_k^{(t)}{\mathbf s}[t-k]
+\end{equation}
+where ${\mathbf h}$ is the near-end impulse response and $N$ is the
+length of the LMS filter.
+
+LMS minimizes the energy of the residue signal
+\begin{equation}
+  r[t] = {\mathbf m}[t] - {\mathbf n}[t-d]
+\end{equation}
+(the difference between the signal captured by the mic and the signal
+generated by the near-end user) that ideally, after a delay of $d$
+samples (an input parameter of this technique) should be the echo
+signal. More concretely, LMS minimizes $E\{|r|^2_2\}$ (the expectation
+of the square of $r$) using an interative algorithm where, in the
+iteration $i$ computes
+\begin{equation}
+  h^{(i+1)} = h^{(i)} + \mu r^{(i)}{\mathbf m}[i],
+\end{equation}
+where
+\begin{equation}
+  r^{(i)} = {\mathbf s}[i] - \hat{\mathbf e}[i],
+\end{equation}
+and $\mu$ is the ``learning rate'' of the LMS algorithm.
+
 
 \end{comment}
