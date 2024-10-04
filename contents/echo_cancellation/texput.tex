@@ -118,13 +118,14 @@ convolutions are performed by filters.
 Filters can be implemented in the frequency domain (see the previous
 section) or in the signal (time in our case) domain. Signal domain
 (digital) convolutions are efficient when the length\footnote{The
-  number of coefficients.} of the (digital) filters is small. For
-determining ${\mathbf e}$, the length of a
+number of coefficients.} of the (digital) filters is small. For
+estimating the echo signal at the sample-time $t$, ${\mathbf e}^{(t)}$,
+the length of a
 \href{https://en.wikipedia.org/wiki/Finite_impulse_response}{FIR
   filter} should be at least $d$, because at least we need $d$ samples
 to detect the echo signal. Therefore, we have that
 \begin{equation}
-  \hat{\mathbf e}[t] = \sum_{k=0}^{d-1}{\mathbf h}_k^{(t)}{\mathbf s}[t-k],
+  \hat{\mathbf e}^{(t)} = \sum_{k=0}^{d-1}{\mathbf h}_k^{(t)}{\mathbf s}[t-k],
 \end{equation}
 where ${\mathbf h}$ is the near-end impulse response in the time
 domain.
@@ -144,29 +145,34 @@ Ph.D. student, Ted Hoff, to train the
 \href{https://en.wikipedia.org/wiki/ADALINE}{ADALINE} artificial
 neural network.\footnote{See
   \url{https://www.youtube.com/watch?v=hc2Zj55j1zU}} Using LMS,
-ADALINE is able to learn to distinguish between pattern, even using a
-single neuron\footnote{A neuron and a FIR filter are very similar
-  structures.}.
+ADALINE is able to learn hot to distinguish between patterns, even
+using a part of a single neuron\footnote{If we do not consider the
+  \href{https://en.wikipedia.org/wiki/Activation_function}{activation
+    function}, an artificial neuron and a FIR filter perform the same
+  computation.}.
 
 LMS can be used to compute the coefficients of a filter to provide a
-desired output (a signal) for a given input (a signal). In our
+desired output for a given input. In our
 context, the input signal is ${\mathbf m}$ (the digital signal
 recorded by our soundcard) and the desired output signal is
 ${\mathbf n}$ (the digital version of our voice). LMS, iteratively
 computes
 \begin{eqnarray}
-  {\mathbf h}^{(i+1)} & = & {\mathbf h}^{(i)} + 2\mu\epsilon^{(i)}{\mathbf m}[i-d:i] \\
-  \epsilon^{(i) }& = & {\mathbf n}[i-d:i] - {\mathbf m}[i-d:i]^\mathrm{T}{\mathbf h}^{(i)},
+  {\mathbf h}^{(i+1)}_k & = & {\mathbf h}^{(i)}_k + 2\mu\tilde{\mathbf n}[i]{\mathbf s}[i-k] \\
+  \tilde{\mathbf n}[i] & = & {\mathbf m}[i] - \hat{\mathbf e}^{(i)},
 \end{eqnarray}
-where $i$ represents the iteration number, $\mu$ is the learning rate,
-and $\cdot^\mathrm{T}$ is the transpose of a matrix. Notice that we
-are using
-\href{https://numpy.org/doc/stable/user/basics.indexing.html}{the
-  NumPy slicing notation}. These equations can be found using the
+where $i$ represents the iteration number, and $\mu$ is the learning
+rate\footnote{High $\mu$ values spped-up the adaption process, but can
+generate worse ${\mathbf h}$ coefficients.}. These equations can be
+found\footnote{Again, see
+\url{https://www.youtube.com/watch?v=hc2Zj55j1zU}!} using the
 (steepest)
 \href{https://en.wikipedia.org/wiki/Gradient_descent}{gradient descend
-  algorithm}.\footnote{Again, see
-  \url{https://www.youtube.com/watch?v=hc2Zj55j1zU}!}
+  algorithm}. Notice that we process the signals sample-by-sample (at
+iteration $i$ we compute the $i$-th sample of $\tilde{\mathbf n}$ (the
+signal without the echo, supposely containing only our voice), and
+this is the signal that we will send to the far-end in the next
+chunk).
 
 \section{Deliverables}
 
@@ -199,9 +205,14 @@ described solutions. More concretely:
     enought.} monitored becase the physical composition of the
   near-end audioset can be dynamic (for example, the inclination of
   the screen of our laptop can be modified).
-\item Use LMS to find a estimation of the echo signal.
-\item Finally, use any other technique (for example, an artificial
-  neural network) for estimating the echo.
+\item Use LMS to find a estimation of the echo signal and perform the
+  echo cancellation.
+\item (Optional) Use any other technique (for example, an artificial
+  neural network\footnote{ADALINE is the simplest
+  \href{https://en.wikipedia.org/wiki/Neural_network_(machine_learning)}{AAN}
+  ever developed!}) for estimating the echo, and use it for removing
+  the echo. In this case, consider to process the signals by chunks,
+  not by samples.
 \end{enumerate}
 
 \section{Resources}
