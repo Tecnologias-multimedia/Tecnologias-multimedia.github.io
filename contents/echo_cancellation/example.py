@@ -1,4 +1,4 @@
-% Can you provide a python implementation of an echo cancellation using LMS?
+# Can you provide a python implementation of an echo cancellation using LMS?
 
 import numpy as np
 import matplotlib.pyplot as plt
