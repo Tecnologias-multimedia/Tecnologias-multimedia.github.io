@@ -144,9 +144,12 @@ LMS was invented by professor Bernard Widrow and his first
 Ph.D. student, Ted Hoff, to train the
 \href{https://en.wikipedia.org/wiki/ADALINE}{ADALINE} artificial
 neural network.\footnote{See
-  \url{https://www.youtube.com/watch?v=hc2Zj55j1zU}} Using LMS,
-ADALINE is able to learn pattern, even using a single
-neuron\footnote{A neuron and a FIR filter are very similar.}.
+\url{https://www.youtube.com/watch?v=hc2Zj55j1zU}} Using LMS, ADALINE
+is able to learn pattern, even using a part of a single
+neuron\footnote{If we do not consider the
+\href{https://en.wikipedia.org/wiki/Activation_function}{activation
+  function}, an artificial neuron and a FIR filter perform the same
+computation.}.
 
 LMS can be used to compute the coefficients of a filter to provide a
 desired output for a given input. In our
@@ -167,8 +170,9 @@ found\footnote{Again, see
 \href{https://en.wikipedia.org/wiki/Gradient_descent}{gradient descend
   algorithm}. Notice that we process the signals sample-by-sample (at
 iteration $i$ we compute the $i$-th sample of $\tilde{\mathbf n}$ (the
-signal without the echo, supposely containing only our voice, and that
-we will send to the far-end in the next chunk).
+signal without the echo, supposely containing only our voice), and
+this is the signal that we will send to the far-end in the next
+chunk).
 
 \section{Deliverables}
 
@@ -204,10 +208,11 @@ described solutions. More concretely:
 \item Use LMS to find a estimation of the echo signal and perform the
   echo cancellation.
 \item (Optional) Use any other technique (for example, an artificial
-  neural network\footnote{ADALINE is the simplest AAN ever
-  developed!}) for estimating the echo, and use it for removing the
-  echo. In this case, consider to process the signals by chunks, not
-  by samples.
+  neural network\footnote{ADALINE is the simplest
+  \href{https://en.wikipedia.org/wiki/Neural_network_(machine_learning)}{AAN}
+  ever developed!}) for estimating the echo, and use it for removing
+  the echo. In this case, consider to process the signals by chunks,
+  not by samples.
 \end{enumerate}
 
 \section{Resources}

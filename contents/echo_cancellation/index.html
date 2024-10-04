@@ -105,23 +105,23 @@ filter can learn).
 </p><!-- l. 143 --><p class='indent'>   LMS was invented by professor Bernard Widrow and his first
 Ph.D. student, Ted Hoff, to train the  <a href='https://en.wikipedia.org/wiki/ADALINE'>ADALINE</a> artificial neural
 network.<span class='footnote-mark'><a href='#fn8x0' id='fn8x0-bk'><sup class='textsuperscript'>8</sup></a></span><a id='x1-6004f8'></a>
-Using LMS, ADALINE is able to learn pattern, even using a single
+Using LMS, ADALINE is able to learn pattern, even using a part of a single
 neuron<span class='footnote-mark'><a href='#fn9x0' id='fn9x0-bk'><sup class='textsuperscript'>9</sup></a></span><a id='x1-6006f9'></a>.
-</p><!-- l. 151 --><p class='indent'>   LMS can be used to compute the coefficients of a filter to provide a desired
+</p><!-- l. 154 --><p class='indent'>   LMS can be used to compute the coefficients of a filter to provide a desired
 output for a given input. In our context, the input signal is \(\mathbf m\) (the digital signal
 recorded by our soundcard) and the desired output signal is \(\mathbf n\) (the digital version of
 our voice). LMS, iteratively computes </p><div class='eqnarray'>\begin {eqnarray}  {\mathbf h}^{(i+1)}_k &amp; = &amp; {\mathbf h}^{(i)}_k + 2\mu \tilde {\mathbf n}[i]{\mathbf s}[i-k] \\ \tilde {\mathbf n}[i] &amp; = &amp; {\mathbf m}[i] - \hat {\mathbf e}^{(i)},  \end {eqnarray}</div>
-<!-- l. 161 --><p class='indent'>   where \(i\) represents the iteration number, and \(\mu \) is the learning
+<!-- l. 164 --><p class='indent'>   where \(i\) represents the iteration number, and \(\mu \) is the learning
 rate<span class='footnote-mark'><a href='#fn10x0' id='fn10x0-bk'><sup class='textsuperscript'>10</sup></a></span><a id='x1-6008f10'></a>. These equations
 can be found<span class='footnote-mark'><a href='#fn11x0' id='fn11x0-bk'><sup class='textsuperscript'>11</sup></a></span><a id='x1-6010f11'></a>
 using the (steepest)  <a href='https://en.wikipedia.org/wiki/Gradient_descent'>gradient descend algorithm</a>. Notice that we process the signals
 sample-by-sample (at iteration \(i\) we compute the \(i\)-th sample of \(\tilde {\mathbf n}\) (the signal without
-the echo, supposely containing only our voice, and that we will send to the far-end in
-the next chunk).
-</p><!-- l. 173 --><p class='noindent'>
+the echo, supposely containing only our voice), and this is the signal that we will
+send to the far-end in the next chunk).
+</p><!-- l. 177 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>7   </span> <a id='x1-70007'></a>Deliverables</h3>
-<!-- l. 175 --><p class='noindent'>A Python module called <span class='ectt-1000'>echo_cancellation.py </span>that inherits from <span class='ectt-1000'>buffer.py </span>and
+<!-- l. 179 --><p class='noindent'>A Python module called <span class='ectt-1000'>echo_cancellation.py </span>that inherits from <span class='ectt-1000'>buffer.py </span>and
 that implements at least one of the previously described solutions. More
 concretely:
      </p><ol class='enumerate1'>
@@ -158,7 +158,7 @@ concretely:
 <li class='enumerate' id='x1-7012x5'>(Optional) Use any other technique (for example, an artificial neural network<span class='footnote-mark'><a href='#fn13x0' id='fn13x0-bk'><sup class='textsuperscript'>13</sup></a></span><a id='x1-7013f13'></a>)
      for estimating the echo, and use it for removing the echo. In this case,
      consider to process the signals by chunks, not by samples.</li></ol>
-<!-- l. 213 --><p class='noindent'>
+<!-- l. 218 --><p class='noindent'>
                                                                   
 
                                                                   
@@ -198,11 +198,12 @@ Impulse Response) system (in ausence of an audio signal, the echo always decays 
 time).</span></p><a id='x1-6002x6'></a>
 <!-- l. 121 --><p class='indent'>     <span class='footnote-mark'><a href='#fn7x0-bk' id='fn7x0'><sup class='textsuperscript'>7</sup></a></span><span class='ecrm-0800'>The number of coefficients.</span></p><a id='x1-6005x6'></a>
 <!-- l. 147 --><p class='indent'>     <span class='footnote-mark'><a href='#fn8x0-bk' id='fn8x0'><sup class='textsuperscript'>8</sup></a></span><span class='ecrm-0800'>See </span><a class='url' href='https://www.youtube.com/watch?v=hc2Zj55j1zU'><span class='ectt-0800'>https://www.youtube.com/watch?v=hc2Zj55j1zU</span></a></p><a id='x1-6007x6'></a>
-<!-- l. 149 --><p class='indent'>    <span class='footnote-mark'><a href='#fn9x0-bk' id='fn9x0'><sup class='textsuperscript'>9</sup></a></span><span class='ecrm-0800'>A neuron and a FIR filter are very similar.</span></p><a id='x1-6009x6'></a>
-<!-- l. 163 --><p class='indent'>     <span class='footnote-mark'><a href='#fn10x0-bk' id='fn10x0'><sup class='textsuperscript'>10</sup></a></span><span class='ecrm-0800'>High</span> \(\mu \) <span class='ecrm-0800'>values spped-up the adaption process, but can generate worse</span> \(\mathbf h\) <span class='ecrm-0800'>coefficients.</span></p><a id='x1-6011x6'></a>
-<!-- l. 165 --><p class='indent'>     <span class='footnote-mark'><a href='#fn11x0-bk' id='fn11x0'><sup class='textsuperscript'>11</sup></a></span><span class='ecrm-0800'>Again, see </span><a class='url' href='https://www.youtube.com/watch?v=hc2Zj55j1zU'><span class='ectt-0800'>https://www.youtube.com/watch?v=hc2Zj55j1zU</span></a><span class='ecrm-0800'>!</span></p><a id='x1-7008x12'></a>
-<!-- l. 201 --><p class='noindent'><span class='footnote-mark'><a href='#fn12x0-bk' id='fn12x0'><sup class='textsuperscript'>12</sup></a></span><span class='ecrm-0800'>A 1-seconds cadence should be enought.</span></p><a id='x1-7014x13'></a>
-<!-- l. 208 --><p class='noindent'><span class='footnote-mark'><a href='#fn13x0-bk' id='fn13x0'><sup class='textsuperscript'>13</sup></a></span><span class='ecrm-0800'>ADALINE is the simplest AAN ever developed!</span></p>                                                      </div>
+<!-- l. 152 --><p class='indent'>    <span class='footnote-mark'><a href='#fn9x0-bk' id='fn9x0'><sup class='textsuperscript'>9</sup></a></span><span class='ecrm-0800'>If we do not consider the  </span><a href='https://en.wikipedia.org/wiki/Activation_function'><span class='ecrm-0800'>activation function</span></a><span class='ecrm-0800'>, an artificial neuron and a FIR filter perform
+the same computation.</span></p><a id='x1-6009x6'></a>
+<!-- l. 166 --><p class='indent'>     <span class='footnote-mark'><a href='#fn10x0-bk' id='fn10x0'><sup class='textsuperscript'>10</sup></a></span><span class='ecrm-0800'>High</span> \(\mu \) <span class='ecrm-0800'>values spped-up the adaption process, but can generate worse</span> \(\mathbf h\) <span class='ecrm-0800'>coefficients.</span></p><a id='x1-6011x6'></a>
+<!-- l. 168 --><p class='indent'>     <span class='footnote-mark'><a href='#fn11x0-bk' id='fn11x0'><sup class='textsuperscript'>11</sup></a></span><span class='ecrm-0800'>Again, see </span><a class='url' href='https://www.youtube.com/watch?v=hc2Zj55j1zU'><span class='ectt-0800'>https://www.youtube.com/watch?v=hc2Zj55j1zU</span></a><span class='ecrm-0800'>!</span></p><a id='x1-7008x12'></a>
+<!-- l. 205 --><p class='noindent'><span class='footnote-mark'><a href='#fn12x0-bk' id='fn12x0'><sup class='textsuperscript'>12</sup></a></span><span class='ecrm-0800'>A 1-seconds cadence should be enought.</span></p><a id='x1-7014x13'></a>
+<!-- l. 213 --><p class='noindent'><span class='footnote-mark'><a href='#fn13x0-bk' id='fn13x0'><sup class='textsuperscript'>13</sup></a></span><span class='ecrm-0800'>ADALINE is the simplest  </span><a href='https://en.wikipedia.org/wiki/Neural_network_(machine_learning)'><span class='ecrm-0800'>AAN</span></a> <span class='ecrm-0800'>ever developed!</span></p>                                                     </div>
  
 </body> 
 </html>
