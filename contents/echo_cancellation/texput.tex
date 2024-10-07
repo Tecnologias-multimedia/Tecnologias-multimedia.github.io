@@ -13,7 +13,7 @@ the sound that comes out of our PC's speaker reaches our mic(rophone)
 some time later, and more some time later, that sound reaches our
 interlocutor (the ``far-end'' ... we are the ``near-end'') in the form
 of an echo (signal), which is reproduced by his/her speaker, which can
-be captured again (some time later) by his microphone and sent it back
+be captured again (some time later) by his/her mic and sent it back
 to us ... and so on, generating a rather unpleasant signal. In other
 words, if ${\mathbf s}$ is the (analog) signal played by our speaker
 and that reaches our mic, ${\mathbf n}$ is the signal emited by the
@@ -27,7 +27,9 @@ have that
 \end{equation}
 where $m(t)$ is the signal that hits the membrane of our mic.
 
-Our problem here is to minimize the energy of $s(t)$.
+Our problem here is to minimize the
+\href{https://en.wikipedia.org/wiki/Energy_(signal_processing)}{energy}
+of $s(t)$.
 
 \section{The trivial (and definitive) solution}
 
@@ -41,9 +43,9 @@ because $s(t)\approx 0$.
 
 \section{The trivial (but limited) solution}
 
-Decrease the gain of the amplifier of our speaker to do
-$s(t)\approx 0$. Unfortunately this also decreases the volume of the
-far-end signal (the voice of our interlocutor) :-/
+Decrease the gain of the amplifier of your speaker to do (the energy
+of) $s(t)$ as low as possible. Unfortunately this also decreases the
+volume of the far-end signal (the voice of our interlocutor) :-/
 
 \section{The simplest substract solution}
 Lets ${\mathbf m}$ the digital version of $m(t)$ and ${\mathbf m}[t]$
@@ -67,14 +69,14 @@ as the estimated echo signal.
 
 \section{Considering the frequency response of the near-end to estimate the echo signal}
 We can improve the performance of the echo cancellation process if we
-take also into consideration that echo signal that finally reaches our
-mic is the
+take also into consideration that the echo signal that finally reaches
+our mic is the
 \href{https://en.wikipedia.org/wiki/Convolution}{convolution} of
 $s(t)$ and a signal $h(t)$ that represents the echo response of our
 local audioset (speaker, mic, walls, monitor, keyboard, our body,
 etc.) to a impulse signal $\delta(t)$.\footnote{This action is similar
   to the carried out by submarines when they user the sonar to perform
-  echo-location, or by bats.} In other ``words'', we can compute
+  echo-location, or by bats.} In other words, we can compute
 \begin{equation}
  \tilde{\mathbf n}[t] = {\mathbf m}[t] - ({\mathbf s}*{\mathbf h})[t-d],
   \label{eq:using_convolution}
@@ -92,10 +94,10 @@ thanks to the \href{https://en.wikipedia.org/wiki/Convolution}{theorem
   of the convolution} of signals in the frequency
 domain~\cite{kovacevic2013fourier,Oppenheim2}, the convolution can be
 replaced by the \href{https://en.wikipedia.org/wiki/Dot_product}{dot
-  product} ($O$), when we consider the signals in the frequency
+  product} (with $O$), when we consider the signals in the frequency
 domain. Thanks to this, we can rewrite the Eq.~\eqref{eq:using_convolution} as
 \begin{equation}
-  \tilde{\mathbf n}[t] = {\mathbf m}[t] - {\mathcal F}^{-1}\{{\mathbf S}{\mathbf H}\}[t-d],
+  \tilde{\mathbf n}[t] = {\mathbf m}[t] - ({\mathcal F}^{-1}\{{\mathbf S}{\mathbf H}\})[t-d],
   \label{eq:faster}
 \end{equation}
 where ${\mathbf S}$ is the (digital) Fourier transform\footnote{The
