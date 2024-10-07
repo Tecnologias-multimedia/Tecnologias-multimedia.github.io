@@ -6,9 +6,9 @@ import matplotlib.pyplot as plt
 # LMS Algorithm for Echo Cancellation
 
 class LMSFilter:
-    def __init__(self, filter_length, step_size):
+    def __init__(self, filter_length, mu):
         self.filter_length = filter_length  # Number of filter coefficients (adaptive filter length)
-        self.step_size = step_size  # Step size (learning rate)
+        self.mu = mu  # Step size (learning rate)
         self.w = np.zeros(filter_length)  # Filter coefficients initialized to zero
 
     def filter(self, x):
@@ -17,23 +17,23 @@ class LMSFilter:
 
     def update(self, x, error):
         """Update the filter coefficients using the LMS algorithm."""
-        self.w += 2 * self.step_size * error * x
+        self.w += 2 * self.mu * error * x
 
-def lms_echo_cancellation(microphone_signal, far_end_signal, filter_length, step_size):
+def lms_echo_cancellation(microphone_signal, far_end_signal, filter_length, mu):
     """Perform echo cancellation using LMS algorithm.
 
     Args:
         microphone_signal (numpy array): Signal received by the microphone (containing echo).
         far_end_signal (numpy array): Far-end signal (played by the loudspeaker).
         filter_length (int): Length of the adaptive filter.
-        step_size (float): Step size for the LMS algorithm.
+        mu (float): Step size for the LMS algorithm.
 
     Returns:
         (numpy array): The estimated near-end signal (echo-canceled signal).
         (numpy array): The error signal over time.
     """
     # Initialize the LMS adaptive filter
-    lms = LMSFilter(filter_length, step_size)
+    lms = LMSFilter(filter_length, mu)
     
     # Prepare output arrays
     num_samples = len(microphone_signal)
@@ -69,7 +69,7 @@ def lms_echo_cancellation(microphone_signal, far_end_signal, filter_length, step
 # Parameters
 num_samples = 1000
 filter_length = 32  # Number of filter coefficients
-step_size = 0.01  # Learning rate
+mu = 0.01  # Learning rate
 
 # Generate a far-end signal (simulating a voice signal, played on loudspeaker)
 np.random.seed(0)
@@ -86,7 +86,7 @@ echo_signal = np.convolve(far_end_signal, impulse_response, mode='full')[:num_sa
 microphone_signal = near_end_signal + echo_signal
 
 # Perform echo cancellation using LMS
-echo_canceled_signal, error_signal = lms_echo_cancellation(microphone_signal, far_end_signal, filter_length, step_size)
+echo_canceled_signal, error_signal = lms_echo_cancellation(microphone_signal, far_end_signal, filter_length, mu)
 
 # Plot the results
 plt.figure(figsize=(12, 8))

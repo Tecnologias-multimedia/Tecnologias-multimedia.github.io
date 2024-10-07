@@ -11,16 +11,16 @@ One of the first problems we encounter with the use of the
   version of \texttt{buffer.py}.} is that, if we don't use headphones,
 the sound that comes out of our PC's speaker reaches our mic(rophone)
 some time later, and more some time later, that sound reaches our
-interlocutor (the ``far-end'' ... we are the ``near-end'') in the form
-of an echo (signal), which is reproduced by his/her speaker, which can
-be captured again (some time later) by his microphone and sent it back
-to us ... and so on, generating a rather unpleasant signal. In other
-words, if ${\mathbf s}$ is the (analog) signal played by our speaker
-and that reaches our mic, ${\mathbf n}$ is the signal emited by the
-near-end person that reaches our mic\footnote{I.e., the same signal
-  that would be captured by our mic if I were using a headset.}, and
-${\mathbf m}$ is the (mixed) signal recorded by our microphone, we
-have that
+interlocutor (the ``far-end'' ... in the system we are the
+``near-end'') in the form of an echo (signal), which is reproduced by
+his/her speaker, which can be captured again (some time later) by his
+microphone and sent it back to us ... and so on, generating a rather
+unpleasant signal. In other words, if ${\mathbf s}$ is the (analog)
+signal played by our (loud)speaker and that reaches our mic,
+${\mathbf n}$ is the signal emited by the near-end person (me) that
+reaches our mic\footnote{I.e., the same signal that would be captured
+  by our mic if I were using a headset.}, and ${\mathbf m}$ is the
+(mixed) signal recorded by our microphone, we have that
 \begin{equation}
   m(t) = n(t) + s(t),
   \label{eq:echo_problem}
@@ -113,14 +113,16 @@ signals, and there exist fast algorithms ($O\log_2O$).
 \section{Estimation of the echo signal using LMS (Least Mean Squares)}
 We just have seen how it is possible to find better estimations of the
 echo signal ${\mathbf e}$ using convolutions. By definition,
-convolutions are performed by filters.
+convolutions are performed by filters. 
 
 Filters can be implemented in the frequency domain (see the previous
 section) or in the signal (time in our case) domain. Signal domain
 (digital) convolutions are efficient when the length\footnote{The
-number of coefficients.} of the (digital) filters is small. For
-estimating the echo signal at the sample-time $t$, ${\mathbf e}^{(t)}$,
-the length of a
+  number of coefficients.} of the (digital) filters is
+small.\footnote{Take in mind that convolution is a $O\log_2O$
+  operation, and therefore, we can only handle in real-time with our
+  computers small filter.} For estimating the echo signal at the
+sample-time $t$, ${\mathbf e}^{(t)}$, the length of a
 \href{https://en.wikipedia.org/wiki/Finite_impulse_response}{FIR
   filter} should be at least $d$, because at least we need $d$ samples
 to detect the echo signal. Therefore, we have that
@@ -176,44 +178,73 @@ chunk).
 
 \section{Deliverables}
 
-A Python module called \texttt{echo\_cancellation.py} that inherits from
-\texttt{buffer.py} and that implements at least one of the previously
+A Python module called \texttt{echo\_cancellation.py} that inherits
+from \texttt{buffer.py} and that implements at least\footnote{More
+  working implementations, higher mark.} one of the previously
 described solutions. More concretely:
 \begin{enumerate}
-\item If you implement the ``delay and substract solution'', you must
-  estimate $a$, $d$ and perform the signals substraction to remove the
-  echo signal. For example, Skype finds $d$ and $a$ using a ``call
-  signal'' (a sequence of more-or-less tonal sounds). $d$ is
-  determined measuring the propagation time of the call signal between
-  our speaker and our mic, and $a$ measuring the ratio between the
-  energy of the call signal played and the energy of the call signal
-  recorded.
-\item If you also consider the (discrete) frequency response of the
-  near-end audioset to estimate a better echo signal, first you will
-  need to find ${\mathbf H}$ (the discrete frequency response of the
-  audioset). For this, the local-end speaker should generate an
-  impulse signal ${\mathbf \delta}$, and in absence of any other sound
-  signal, record the echo and compute its Fourier transform. Likely,
-  it is a good idea to repeat this process several times to obtain a
-  better estimation of ${\mathbf H}$. Finally, notice that
-  ${\mathbf H}[\omega]$ (the $\omega$-th frequency component of
-  ${\mathbf H}$) is a complex number.
-\item In both cases (simple delay and substract solution and
-  considering also the frequency response of the near-end audioset),
-  the parameters that determine the estimation of the echo signal
-  should be continously\footnote{A 1-seconds cadence should be
-    enought.} monitored becase the physical composition of the
-  near-end audioset can be dynamic (for example, the inclination of
-  the screen of our laptop can be modified).
+
+\item If you implement the ``$s(t)$ delay and substract solution'',
+  you must estimate $a$, $d$ and perform the signals substraction to
+  remove the echo far-end signal ($s(t)$). For example, Skype finds
+  $d$ and $a$ using a ``call signal'' (a sequence of more-or-less
+  tonal sounds). $d$ is determined measuring the propagation time of
+  the call signal between our speaker and our mic, and $a$ measuring
+  the ratio between the energy of the call signal played and the
+  energy of the call signal recorded.
+
+  At the same time you can also implement a ``$n(t)$ delay and
+  substract solution'', where you have to estimate $a$ for your voice
+  $n(t)$ delayed the buffering time + average RTT + $d$ at the
+  far-end. The average RTT can be estimated using\footnote{Remember
+    that \texttt{ping} only works between public devices.} a local
+  clock, storing in a list when the last $N$ chunks were sent, and
+  sending with each chunk a new field in the packet header with the
+  last chunk number that was received. Thus, when we receive the chunk
+  $n$-th\footnote{Remember that the chunks have a chunk number in the
+    packet header.}, we can copy this number in the next sent chunk
+  and the receiver will be able to find the RTT substracting to the
+  time reception the corresponding time in the list.
+
+\item In a ``$s(t)$ delay and substract solution'', if you also
+  consider the (discrete) frequency response of the near-end audioset
+  to estimate a better echo signal, first you will need to find
+  ${\mathbf H}$ (the discrete frequency response of your
+  audioset). For this, the near-end speaker should generate an impulse
+  signal ${\mathbf \delta}$, and in absence of any other sound signal,
+  record the echo and compute its Fourier transform (it is a good idea
+  to repeat this process several times to obtain a better estimation
+  of ${\mathbf H}$). Finally, notice that ${\mathbf H}[\omega]$ (the
+  $\omega$-th frequency component of ${\mathbf H}$) is a complex
+  number (the Fourier coefficients are complex number).
+
+  Notice that the frequency characterization of the far-end audioset
+  can be also used in a ``$n(t)$ delay and substract
+  solution''. Remember that filtering operations must be implemented
+  with convolutions in the temporal domain, but are products in the
+  frequency domain.
+  
 \item Use LMS to find a estimation of the echo signal and perform the
-  echo cancellation.
-\item (Optional) Use any other technique (for example, an artificial
-  neural network\footnote{ADALINE is the simplest
+  echo cancellation. In this case, only a ``$s(t)$ delay and substract
+  solution'' should be considered because the required filters could
+  be too long to run in real-time in the time domain.
+\end{enumerate}
+
+Optionally, but interesting for your mark, use any other technique
+(for example, an artificial neural network\footnote{ADALINE is the
+  simplest
   \href{https://en.wikipedia.org/wiki/Neural_network_(machine_learning)}{AAN}
   ever developed!}) for estimating the echo, and use it for removing
-  the echo. In this case, consider to process the signals by chunks,
-  not by samples.
-\end{enumerate}
+the echo (obviously, in real-time). Take also into consideration that
+the parameters that determine the estimation of the echo signal should
+be continously\footnote{A 1-seconds cadence should be enought.}
+monitored becase the physical composition of the near-end audioset can
+be dynamic (for example, the inclination of the screen of our laptop
+can be modified).
+
+Finally, notice that signals
+\href{https://en.wikipedia.org/wiki/Correlation}{correlation} can help
+in the task of fine-tunning $d$.
 
 \section{Resources}
 
