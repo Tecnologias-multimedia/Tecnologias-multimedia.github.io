@@ -19,7 +19,7 @@
 
 <h2 class='titleHead'>Bit-Rate Control</h2>
  <div class='author'><a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp; </span><a href='https://hpca.ual.es/~savins/'><span class='ecrm-1200'>Savins Puertas Martín</span></a> <span class='ecrm-1200'>&amp; </span><a href='https://www.marcoslupion.com/'><span class='ecrm-1200'>Marcos Lupión Lorente</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>September 24, 2024</span></div>
+<div class='date'><span class='ecrm-1200'>October 12, 2024</span></div>
    </div>
    <h3 class='likesectionHead'><a id='x1-1000'></a>Contents</h3>
    <div class='tableofcontents'>
@@ -40,13 +40,13 @@
 <!-- l. 13 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead'><span class='titlemark'>1.1   </span> <a id='x1-30001.1'></a>Impact of the network throughput</h4>
+                                                                  
+
+                                                                  
 <!-- l. 15 --><p class='noindent'>Along with the latency and its variation (jitter), another main aspect to consider about
 the <a href='https://en.wikipedia.org/wiki/Telecommunications_link'>transmission link</a> (a section of the network) used in an InterCom session is the <a href='https://en.wikipedia.org/wiki/Channel_capacityhttps://en.wikipedia.org/wiki/Network_throughput'>link
 throughput</a><span class='footnote-mark'><a href='#fn1x0' id='fn1x0-bk'><sup class='textsuperscript'>1</sup></a></span><a id='x1-3001f1'></a>
 that it can provide <span class='cite'>[<a href='#XForouzan'>2</a>, <a href='#XTanenbaum'>6</a>]</span>. This bit-rate depends on the maximum <a href='https://en.wikipedia.org/wiki/Channel_capacity'>capacity</a> (a
-                                                                  
-
-                                                                  
 characteristic closely related with the available <a href='https://en.wikipedia.org/wiki/Bandwidth_(signal_processing)'>bandwidth</a>) and the <a href='https://en.wikipedia.org/wiki/Network_congestion'>congestion level</a>
 (that basically depends on the load) of the link. In general, we can suppose that the
 capacity is constant over time (the bandwidth provided by the link does not vary
@@ -58,12 +58,12 @@ provided by the current implementation of InterCom (<a href='https://github.com/
 Similarly to the procedure used to measure the impact of latency and jitter, we will
 use <a href='https://man7.org/linux/man-pages/man8/tc.8.html'><span class='ectt-1000'>tc</span></a> <span class='cite'>[<a href='#Xbert2012lartc'>3</a>]</span> to control the amount of data that an InterCom instance will be
 allowed to send in a local environment, with the aim of simulating a real
-environment.<span class='footnote-mark'><a href='#fn2x0' id='fn2x0-bk'><sup class='textsuperscript'>2</sup></a></span><a id='x1-3003f2'></a>
+environment.<span class='footnote-mark'><a href='#fn2x0' id='fn2x0-bk'><sup class='textsuperscript'>2</sup></a></span><a id='x1-3002f2'></a>
 Notice that this upper bound in the bit-rate will also affect the loss of
 chunks because if the link capacity is smaller than the audio bit-rate
 (throughput), sooner or later the transmission link will discard those
 chunks that cannot be buffered in the retransmission nodes (routers and
-switches)<span class='footnote-mark'><a href='#fn3x0' id='fn3x0-bk'><sup class='textsuperscript'>3</sup></a></span><a id='x1-3005f3'></a>.
+switches)<span class='footnote-mark'><a href='#fn3x0' id='fn3x0-bk'><sup class='textsuperscript'>3</sup></a></span><a id='x1-3003f3'></a>.
 </p><!-- l. 58 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead'><span class='titlemark'>1.2   </span> <a id='x1-40001.2'></a>Compressing the audio data with <a href='https://zlib.net/'>zlib</a></h4>
@@ -81,47 +81,48 @@ are implemented in the following modules, with different functionality:
 <li class='enumerate' id='x1-4002x1'><a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/DEFLATE_raw.py'><span class='ectt-1000'>DEFLATE_raw.py</span></a>: Compress the raw chunks with DEFLATE.
      </li>
 <li class='enumerate' id='x1-4004x2'>
+                                                                  
+
+                                                                  
      <!-- l. 89 --><p class='noindent'><a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/DEFLATE_serial.py'><span class='ectt-1000'>DEFLATE_serial.py</span></a>: Compress the chunk after concatenating the
      channels (see Fig. <a href='#x1-4005r1'>1<!-- tex4ht:ref: fig:reordering  --></a>). Note that with this data-shuffling, the samples
      are not interleaved and the <a href='https://en.wikipedia.org/wiki/Correlation'>correlation</a> between consecutive bytes is
      slightly increased. This should also increase the <a href='https://en.wikipedia.org/wiki/Data_compression_ratio'>(data) compression ratio</a>.
      </p><figure class='figure'> 
 
-                                                                  
-
-                                                                  
 <div class='center'>
 <!-- l. 99 --><p class='noindent'>
 </p><!-- l. 100 --><p class='noindent'><div style='text-align:center;'> <img src='graphics/reordering.svg' /> </div>  </p></div>
 <a id='x1-4005r1'></a>
+<a id='x1-4006'></a>
      <figcaption class='caption'><span class='id'>Figure 1: </span><span class='content'>Sample reordering to create two independent channels.
      </span></figcaption><!-- tex4ht:label?: x1-4005r1  -->
      </figure>
      </li>
-<li class='enumerate' id='x1-4007x3'><a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/DEFLATE_serial2.py'><span class='ectt-1000'>DEFLATE_serial2.py</span></a>: Similar to <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>compress_serial.py</span></span></span>, but reseting
+<li class='enumerate' id='x1-4008x3'><a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/DEFLATE_serial2.py'><span class='ectt-1000'>DEFLATE_serial2.py</span></a>: Similar to <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>compress_serial.py</span></span></span>, but reseting
      DEFLATE at each new chunk-channel, i.e., compressing each chunk-channel
      independtly. The idea here is to see if DEFLATE is exploiting the redundancy
      between the consecutive channels.
      </li>
-<li class='enumerate' id='x1-4009x4'><a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/DEFLATE_byteplanes2.py'><span class='ectt-1000'>DEFLATE_byteplanes2.py</span></a>: Similar to <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>compress_serial.py</span></span></span> (samples are
+<li class='enumerate' id='x1-4010x4'><a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/DEFLATE_byteplanes2.py'><span class='ectt-1000'>DEFLATE_byteplanes2.py</span></a>: Similar to <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>compress_serial.py</span></span></span> (samples are
      de-interleaved), but 2 code-streams are generated, one for the LSB (Low
      Significant Byte) plane and another for the MSB (Most Significant Byte) plane,
      working with 16 bits/sample. The idea here is to see if the MSB can be
      compressed more efficiently because it can contain runs of zeros, especially
      when the audio sequence is <span class='ecti-1000'>quiet</span>.
      </li>
-<li class='enumerate' id='x1-4011x5'><a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/DEFLATE_byteplanes3.py'><span class='ectt-1000'>DEFLATE_byteplanes3.py</span></a>: Similar to <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>DEFLATE_byteplanes2.py</span></span></span> but
+<li class='enumerate' id='x1-4012x5'><a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/DEFLATE_byteplanes3.py'><span class='ectt-1000'>DEFLATE_byteplanes3.py</span></a>: Similar to <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>DEFLATE_byteplanes2.py</span></span></span> but
      considering three byte-planes. This would allow compression of
-     <span class='ecti-1000'>coefficients</span><span class='footnote-mark'><a href='#fn4x0' id='fn4x0-bk'><sup class='textsuperscript'>4</sup></a></span><a id='x1-4012f4'></a>
+     <span class='ecti-1000'>coefficients</span><span class='footnote-mark'><a href='#fn4x0' id='fn4x0-bk'><sup class='textsuperscript'>4</sup></a></span><a id='x1-4013f4'></a>
      that requires more than two bytes to be represented.
      </li>
 <li class='enumerate' id='x1-4015x6'><a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/DEFLATE_byteplanes4.py'><span class='ectt-1000'>DEFLATE_byteplanes4.py</span></a>: Consider four-byte planes.
-     </li>
-<li class='enumerate' id='x1-4017x7'><a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/DEFLATE_byteplanes2_interlaced.py'><span class='ectt-1000'>DEFLATE_byteplanes2_interlaced.py</span></a>: Similar to <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>DEFLATE_byteplanes2.py</span></span></span>
-     but using the raw chunks (without concatenating the channels).</li></ol>
                                                                   
 
                                                                   
+     </li>
+<li class='enumerate' id='x1-4017x7'><a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/DEFLATE_byteplanes2_interlaced.py'><span class='ectt-1000'>DEFLATE_byteplanes2_interlaced.py</span></a>: Similar to <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>DEFLATE_byteplanes2.py</span></span></span>
+     but using the raw chunks (without concatenating the channels).</li></ol>
 <!-- l. 134 --><p class='indent'>   Finally, notice that the number of UDP packets sent (which will now be variable
 in length) remains constant with respect to <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>cancel_echo.py</span></span></span>.
 </p><!-- l. 139 --><p class='noindent'>
@@ -159,15 +160,15 @@ quantization indices equal to 0 (which increases compression ratios) at the cost
 generating more quantization noise for values of the input signal close to 0,
 or what is the same, decreasing the <a href='https://en.wikipedia.org/wiki/Signal-to-noise_ratio'>SNR</a> for small signal values. A priori,
 this could be seen as a problem, but in reality it is not because precisely
+                                                                  
+
+                                                                  
 when the amplitude of the signal is small and the noise is independent of
 its amplitude (which usually happens with <a href='https://en.wikipedia.org/wiki/Noise_(electronics)'>electronic noise</a>), the SNR of
 the input signal has its lowest value precisely for those values close to 0.
 Therefore, the quantizer will basically change electronic noise by quantization
-noise<span class='footnote-mark'><a href='#fn6x0' id='fn6x0-bk'><sup class='textsuperscript'>6</sup></a></span><a id='x1-5003f6'></a>
+noise<span class='footnote-mark'><a href='#fn6x0' id='fn6x0-bk'><sup class='textsuperscript'>6</sup></a></span><a id='x1-5002f6'></a>
 (see this <a href='https://github.com/vicente-gonzalez-ruiz/signal_quantization'>introduction to signal quantization</a> and this <a href='https://github.com/vicente-gonzalez-ruiz/scalar_quantization'>comparative between digital
-                                                                  
-
-                                                                  
 scalar quantizers</a>). Finally, although this is a feature that we are not going to exploit
 for now, dead-zone quantizers perform by using bit-planes when the quantization
 steps sizes are powers of two, allowing the design of progressive entropy encoding
@@ -201,34 +202,35 @@ Some examples can be found in <a href='https://github.com/Tecnologias-multimedia
 methods <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>pack()</span></span></span> and <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>unpack()</span></span></span>, performing now:
 </p>
    <!-- l. 267 -->
-   <pre class='lstlisting' id='listing-1'><span class='label'><a id='x1-7001r1'></a></span><span class='ectt-1000'>  </span><span style='color:#000000'><span class='ectt-1000'>def</span></span><span style='color:#000000'> <span class='ectt-1000'>pack(chunk_number, </span><span class='ectt-1000'>chunk):</span> 
-</span><span class='label'><a id='x1-7002r2'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>quantized_chunk</span></span><span style='color:#000000'> <span class='ectt-1000'>= </span><span class='ectt-1000'>quantize(chunk)</span> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(1)</span> 
-</span><span class='label'><a id='x1-7003r3'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>packed_chunk</span></span><span style='color:#000000'> <span class='ectt-1000'>= </span><span class='ectt-1000'>Buffering.pack(chunk_number, </span><span class='ectt-1000'>quantized_chunk)</span> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(2)</span> 
-</span><span class='label'><a id='x1-7004r4'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>return</span></span><span style='color:#000000'> <span class='ectt-1000'>packed_chunk</span> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(3)</span></span></pre>
+   <div class='lstlisting' id='listing-1'><span class='label'><a id='x1-7001r1'></a></span><span class='ectt-1000'>  </span><span style='color:#000000'><span class='ectt-1000'>def</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>pack</span></span><span style='color:#000000'><span class='ectt-1000'>(</span></span><span style='color:#000000'><span class='ectt-1000'>chunk_number</span></span><span style='color:#000000'><span class='ectt-1000'>,</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>chunk</span></span><span style='color:#000000'><span class='ectt-1000'>):</span></span><span class='ectt-1000'> </span><br /> 
+<span class='label'><a id='x1-7002r2'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>quantized_chunk</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>=</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>quantize</span></span><span style='color:#000000'><span class='ectt-1000'>(</span></span><span style='color:#000000'><span class='ectt-1000'>chunk</span></span><span style='color:#000000'><span class='ectt-1000'>)</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>(1)</span></span><span class='ectt-1000'> </span><br /> 
+<span class='label'><a id='x1-7003r3'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>packed_chunk</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>=</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>Buffering</span></span><span style='color:#000000'><span class='ectt-1000'>.</span></span><span style='color:#000000'><span class='ectt-1000'>pack</span></span><span style='color:#000000'><span class='ectt-1000'>(</span></span><span style='color:#000000'><span class='ectt-1000'>chunk_number</span></span><span style='color:#000000'><span class='ectt-1000'>,</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>quantized_chunk</span></span><span style='color:#000000'><span class='ectt-1000'>)</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>(2)</span></span><span class='ectt-1000'> </span><br /> 
+<span class='label'><a id='x1-7004r4'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>return</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>packed_chunk</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>(3)</span></span></div>
    
-   <!-- l. 274 -->
-   <pre class='lstlisting' id='listing-2'><span class='label'><a id='x1-7005r1'></a></span><span class='ectt-1000'>  </span><span style='color:#000000'><span class='ectt-1000'>def</span></span><span style='color:#000000'> <span class='ectt-1000'>unpack(packed_chunk):</span> 
-</span><span class='label'><a id='x1-7006r2'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>(</span></span><span style='color:#000000'><span class='ectt-1000'>chunk_number</span></span><span style='color:#000000'><span class='ectt-1000'>,</span></span><span style='color:#000000'> <span class='ectt-1000'>quantized_chunk) </span><span class='ectt-1000'>= </span><span class='ectt-1000'>Buffering.unpack(packed_chunk)</span> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(1)</span> 
-</span><span class='label'><a id='x1-7007r3'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>chunk</span></span><span style='color:#000000'> <span class='ectt-1000'>= </span><span class='ectt-1000'>dequantize(quantized_chunk)</span> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(2)</span> 
-</span><span class='label'><a id='x1-7008r4'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>return</span></span><span style='color:#000000'> <span class='ectt-1000'>(chunk_number, </span><span class='ectt-1000'>chunk)</span> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(3)</span></span></pre>
-   
-<!-- l. 281 --><p class='indent'>   Notice that, regarding the bit-rate control, you will find four implementations
-related to this milestone:
                                                                   
 
                                                                   
+   <!-- l. 274 -->
+   <div class='lstlisting' id='listing-2'><span class='label'><a id='x1-7005r1'></a></span><span class='ectt-1000'>  </span><span style='color:#000000'><span class='ectt-1000'>def</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>unpack</span></span><span style='color:#000000'><span class='ectt-1000'>(</span></span><span style='color:#000000'><span class='ectt-1000'>packed_chunk</span></span><span style='color:#000000'><span class='ectt-1000'>):</span></span><span class='ectt-1000'> </span><br /> 
+<span class='label'><a id='x1-7006r2'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>(</span></span><span style='color:#000000'><span class='ectt-1000'>chunk_number</span></span><span style='color:#000000'><span class='ectt-1000'>,</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>quantized_chunk</span></span><span style='color:#000000'><span class='ectt-1000'>)</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>=</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>Buffering</span></span><span style='color:#000000'><span class='ectt-1000'>.</span></span><span style='color:#000000'><span class='ectt-1000'>unpack</span></span><span style='color:#000000'><span class='ectt-1000'>(</span></span><span style='color:#000000'><span class='ectt-1000'>packed_chunk</span></span><span style='color:#000000'><span class='ectt-1000'>)</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>(1)</span></span><span class='ectt-1000'> </span><br /> 
+<span class='label'><a id='x1-7007r3'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>chunk</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>=</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>dequantize</span></span><span style='color:#000000'><span class='ectt-1000'>(</span></span><span style='color:#000000'><span class='ectt-1000'>quantized_chunk</span></span><span style='color:#000000'><span class='ectt-1000'>)</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>(2)</span></span><span class='ectt-1000'> </span><br /> 
+<span class='label'><a id='x1-7008r4'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>return</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>(</span></span><span style='color:#000000'><span class='ectt-1000'>chunk_number</span></span><span style='color:#000000'><span class='ectt-1000'>,</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span style='color:#000000'><span class='ectt-1000'>chunk</span></span><span style='color:#000000'><span class='ectt-1000'>)</span></span><span style='color:#000000'><span class='ectt-1000'> </span></span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'><span class='ecit-1000'> </span></span><span style='color:#000000'><span class='ecit-1000'>(3)</span></span></div>
+   
+<!-- l. 281 --><p class='indent'>   Notice that, regarding the bit-rate control, you will find four implementations
+related to this milestone:
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-7010x1'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>BR_control_no.py</span></span></span>: Uses a constant \(\Delta &gt;0\).<span class='footnote-mark'><a href='#fn8x0' id='fn8x0-bk'><sup class='textsuperscript'>8</sup></a></span><a id='x1-7011f8'></a>
      There is not BR control.
      </li>
-<li class='enumerate' id='x1-7014x2'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>BR_control_add_lost.py</span></span></span>: Every second runs: \begin {equation}  \Delta = \Delta + L - 1  \end {equation}<a id='x1-7015r1'></a> where \(L\) is the number of lost
-     (received) chunks in the previous second. Notice that this heuristic (and the
-     following ones) supposes that the interlocutor is losing (on average) the same
-     number of chunks.
+<li class='enumerate' id='x1-7013x2'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>BR_control_add_lost.py</span></span></span>: Every second runs: \begin {equation}  \Delta = \Delta + L - 1  \end {equation}
+     where \(L\) is the number of lost (received) chunks in the previous second. Notice
+     that this heuristic (and the following ones) supposes that the interlocutor is
+     losing (on average) the same number of chunks.
      </li>
-<li class='enumerate' id='x1-7017x3'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>BR_control_lost.py</span></span></span>: Every second runs: \begin {equation}  \Delta = L - 1.  \end {equation}<a id='x1-7018r2'></a>
+<li class='enumerate' id='x1-7015x3'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>BR_control_lost.py</span></span></span>: Every second runs: \begin {equation}  \Delta = L - 1.  \end {equation}
      </li>
-<li class='enumerate' id='x1-7020x4'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>BR_control_conservative.py</span></span></span>: Every second runs: \begin {equation}  \left \{ \begin {array}{ll} \Delta = 2\Delta &amp; \quad \text {if}~L&gt;2 \\ \Delta = \frac {10}{11}\Delta &amp; \quad \text {always}. \end {array} \right .  \end {equation}<a id='x1-7021r3'></a></li></ol>
+<li class='enumerate' id='x1-7017x4'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>BR_control_conservative.py</span></span></span>: Every second runs: \begin {equation}  \left \{ \begin {array}{ll} \Delta = 2\Delta &amp; \quad \text {if}~L&gt;2 \\ \Delta = \frac {10}{11}\Delta &amp; \quad \text {always}. \end {array} \right .  \end {equation}
+     </li></ol>
 <!-- l. 314 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>2   </span> <a id='x1-80002'></a>Deliverables</h3>
@@ -236,14 +238,14 @@ related to this milestone:
 </p><!-- l. 318 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead'><span class='titlemark'>2.1   </span> <a id='x1-90002.1'></a>Which data-ordering performs better?</h4>
+                                                                  
+
+                                                                  
 <!-- l. 320 --><p class='noindent'>Determine empirically which ordering of the chunk data is the most
 efficient from a lossless data compression point of view (the smaller the
 bit-rates, the higher the compression). Use the audio sequence you
 want.<span class='footnote-mark'><a href='#fn9x0' id='fn9x0-bk'><sup class='textsuperscript'>9</sup></a></span><a id='x1-9001f9'></a>
 Notice that using different audio files you could obtain different results.
-                                                                  
-
-                                                                  
 </p><!-- l. 329 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead'><span class='titlemark'>2.2   </span> <a id='x1-100002.2'></a>Compute RD (Rate/Distortion) curves</h4>
@@ -273,15 +275,15 @@ environments (use <a href='https://vicente-gonzalez-ruiz.github.io/about_tc/'>tc
  [4]<span class='bibsp'>   </span></span><a id='Xnelson96datacompression'></a>Nelson M. and Gailly J.  <a href='https://theswissbay.ch/pdf/Gentoomen%20Library/Information%20Theory/Compression/The%20Data%20Compression%20Book%202nd%20Ed%20-%20Mark%20Nelson.pdf'><span class='ecti-1000'>The Data Compression Book</span></a>.  M&amp;T Books,
    1996.
    </p>
+                                                                  
+
+                                                                  
    <p class='bibitem'><span class='biblabel'>
  [5]<span class='bibsp'>   </span></span><a id='Xsayood2017introduction'></a>K. Sayood.    <a href='http://rahilshaikh.weebly.com/uploads/1/1/6/3/11635894/data_compression.pdf'><span class='ecti-1000'>Introduction  to  Data  Compression</span></a>  <a href='https://people.cs.nctu.edu.tw/~cmliu/Courses/Compression/'><span class='ecti-1000'>(Slides)</span></a>.    Morgan
    Kaufmann, 2017.
    </p>
    <p class='bibitem'><span class='biblabel'>
  [6]<span class='bibsp'>   </span></span><a id='XTanenbaum'></a>Andrew S. Tanenbaum. <a href='https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=&amp;cad=rja&amp;uact=8&amp;ved=2ahUKEwj9857DgLvsAhUTA2MBHTJfCZ4QFjAAegQIBBAC&amp;url=https%3A%2F%2Fdocs.google.com%2Fviewer%3Fa%3Dv%26pid%3Dsites%26srcid%3DZGVmYXVsdGRvbWFpbnxza21pbmh8Z3g6NjQxMTI2MmYxMTAwZmNjZQ&amp;usg=AOvVaw3m5WEH7H2923_hOFl1e-W-'><span class='ecti-1000'>Computer Networks</span></a>. Prentice Hall, 2011.
-                                                                  
-
-                                                                  
    </p>
    <p class='bibitem'><span class='biblabel'>
  [7]<span class='bibsp'>   </span></span><a id='Xtaubman2002jpeg2000'></a>D.S. Taubman and W.M. Marcellin.   <a href='https://last.hit.bme.hu/download/firtha/video/JPEG2000/David%20S.%20Taubman,%20%20Michael%20W.%20Marcellin%20%20(auth.)%20JPEG2000%20Image%20Compression%20Fundamentals,%20Standards%20and%20Practice%20%202002.pdf'><span class='ecti-1000'>JPEG2000. Image Compression
@@ -292,24 +294,21 @@ environments (use <a href='https://vicente-gonzalez-ruiz.github.io/about_tc/'>tc
    </span><span class='ecti-1000'>Processing</span></a>. Cambridge University Press, 2014.
 </p>
    </div>
-   <div class='footnotes'><a id='x1-3002x1.1'></a>
-<!-- l. 22 --><p class='indent'>     <span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='ecrm-0800'>Measured in bits per second or a</span> \(10\)<span class='ecrm-0800'>-multiple of this transmission </span><a href='https://en.wikipedia.org/wiki/Bandwidth_(computing)'><span class='ecrm-0800'>capacity</span></a><span class='ecrm-0800'>.</span></p><a id='x1-3004x1.1'></a>
+   <div class='footnotes'><!-- l. 22 --><p class='indent'>     <span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='ecrm-0800'>Measured in bits per second or a</span> \(10\)<span class='ecrm-0800'>-multiple of this transmission </span><a href='https://en.wikipedia.org/wiki/Bandwidth_(computing)'><span class='ecrm-0800'>capacity</span></a><span class='ecrm-0800'>.</span></p>
 <!-- l. 49 --><p class='indent'>     <span class='footnote-mark'><a href='#fn2x0-bk' id='fn2x0'><sup class='textsuperscript'>2</sup></a></span><span class='ecrm-0800'>If </span><span class='ectt-0800'>tc </span><span class='ecrm-0800'>(or a similar tool) is not avaiable in your OS, you can use a real transmission
 </span><span class='ecrm-0800'>environment, but you must take into consideration that you will need to control de bit-rate in order
-</span><span class='ecrm-0800'>obtain the points of the RD curve.</span></p><a id='x1-3006x1.1'></a>
+</span><span class='ecrm-0800'>obtain the points of the RD curve.</span></p>
 <!-- l. 55 --><p class='indent'>     <span class='footnote-mark'><a href='#fn3x0-bk' id='fn3x0'><sup class='textsuperscript'>3</sup></a></span><span class='ecrm-0800'>Notice that, in this case, we would be at least contributing, if not causing, the link
-</span><span class='ecrm-0800'>congestion.</span></p><a id='x1-4013x4'></a>
-<!-- l. 124 --><p class='noindent'><span class='footnote-mark'><a href='#fn4x0-bk' id='fn4x0'><sup class='textsuperscript'>4</sup></a></span><span class='ecrm-0800'>Used in a future improvements of intercom.</span></p><a id='x1-5002x1.3'></a>
+</span><span class='ecrm-0800'>congestion.</span></p>
+<!-- l. 124 --><p class='noindent'><span class='footnote-mark'><a href='#fn4x0-bk' id='fn4x0'><sup class='textsuperscript'>4</sup></a></span><span class='ecrm-0800'>Used in a future improvements of intercom.</span></p>
 <!-- l. 187 --><p class='indent'>     <span class='footnote-mark'><a href='#fn5x0-bk' id='fn5x0'><sup class='textsuperscript'>5</sup></a></span><span class='ecrm-0800'>The decision intervals and the representation levels in each interval can be also optimized
 </span><span class='ecrm-0800'>using other criteria, such as, minimizing the rate/distortion at a given point of the RD
-</span><span class='ecrm-0800'>curve.</span></p><a id='x1-5004x1.3'></a>
-<!-- l. 211 --><p class='indent'>     <span class='footnote-mark'><a href='#fn6x0-bk' id='fn6x0'><sup class='textsuperscript'>6</sup></a></span><span class='ecrm-0800'>The error generated by the quantization stage.</span></p><a id='x1-6002x1.4'></a>
+</span><span class='ecrm-0800'>curve.</span></p><!-- l. 211 --><p class='indent'> <span class='footnote-mark'><a href='#fn6x0-bk' id='fn6x0'><sup class='textsuperscript'>6</sup></a></span><span class='ecrm-0800'>The error generated by the quantization stage.</span></p>
 <!-- l. 255 --><p class='indent'>     <span class='footnote-mark'><a href='#fn7x0-bk' id='fn7x0'><sup class='textsuperscript'>7</sup></a></span><span class='ecrm-0800'>From a signal processing point of view, the term “de-quantization” refers to restore the
 </span><span class='ecrm-0800'>original dynamic range of the signal, but notice that this does not imply that the original signal will
-</span><span class='ecrm-0800'>be restored. This only happens when</span> \(\Delta =1\)<span class='ecrm-0800'>.</span></p><a id='x1-7012x8'></a>
+</span><span class='ecrm-0800'>be restored. This only happens when</span> \(\Delta =1\)<span class='ecrm-0800'>.</span></p>
 <!-- l. 286 --><p class='noindent'><span class='footnote-mark'><a href='#fn8x0-bk' id='fn8x0'><sup class='textsuperscript'>8</sup></a></span>\(\Delta \) <span class='ecrm-0800'>must be always bigger than</span> \(0\)<span class='ecrm-0800'>, by definition, and this does not depend on the bit-rate
-</span><span class='ecrm-0800'>control.</span></p><a id='x1-9002x2.1'></a>
-<!-- l. 324 --><p class='indent'>     <span class='footnote-mark'><a href='#fn9x0-bk' id='fn9x0'><sup class='textsuperscript'>9</sup></a></span><span class='ecrm-0800'>Some samples are stored in the </span><span class='ectt-0800'>data </span><span class='ecrm-0800'>directory of InterCom.</span></p>                                 </div>
+</span><span class='ecrm-0800'>control.</span></p><!-- l. 324 --><p class='indent'> <span class='footnote-mark'><a href='#fn9x0-bk' id='fn9x0'><sup class='textsuperscript'>9</sup></a></span><span class='ecrm-0800'>Some samples are stored in the </span><span class='ectt-0800'>data </span><span class='ecrm-0800'>directory of InterCom.</span></p>                                 </div>
  
 </body> 
 </html>

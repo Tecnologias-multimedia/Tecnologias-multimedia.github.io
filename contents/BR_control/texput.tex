@@ -41,18 +41,18 @@ provided by the current implementation of InterCom
 to the procedure used to measure the impact of latency and jitter, we
 will use
 \href{https://man7.org/linux/man-pages/man8/tc.8.html}{\texttt{tc}}~\cite{bert2012lartc}
-to control the amount of data that an InterCom instance will be
+to control the amount of data\footnote{Notice that this upper bound in
+  the bit-rate will also affect to the loss of chunks because if the
+  link capacity is smaller than the audio bit-rate (throughput),
+  sooner or later the transmission link will discard those chunks that
+  cannot be buffered in the retransmission nodes (routers and
+  switches). In this case, we would be at least contributing, if not
+  causing, the link congestion.} that an InterCom instance will be
 allowed to send in a local environment, with the aim of simulating a
 real environment.\footnote{If \texttt{tc} (or a similar tool) is not
   avaiable in your OS, you can use a real transmission environment,
   but you must take into consideration that you will need to control
-  de bit-rate in order obtain the points of the RD curve.} Notice that
-this upper bound in the bit-rate will also affect the loss of chunks
-because if the link capacity is smaller than the audio bit-rate
-(throughput), sooner or later the transmission link will discard those
-chunks that cannot be buffered in the retransmission nodes (routers
-and switches)\footnote{Notice that, in this case, we would be at least
-  contributing, if not causing, the link congestion.}.
+  de bit-rate in order obtain the points of the RD curve.}
 %}}}
 
 \subsection{Compressing the audio data with \href{https://zlib.net/}{zlib}}
