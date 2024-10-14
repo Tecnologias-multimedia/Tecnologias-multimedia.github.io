@@ -190,7 +190,8 @@ every new received chunk.
 \section{Deliverables}
 \label{sec:homework}
 
-\subsection*{Show the performance of Minimal in congested links}
+\begin{enumerate}
+\item \textbf{Show the performance of Minimal in congested links}:
 Determine the quality of the sound when minimal is used in a congested
 tranmission environment. You can quantify the
 \href{https://en.wikipedia.org/wiki/Quality_of_experience}{QoE} using
@@ -206,12 +207,12 @@ the following classification:
 \item \textbf{No way}: when most of the time only silence is heard.
 \end{itemize}
 
-\subsection*{Find your minimum buffering time}
+\item \textbf{Find your minimum buffering time}:
 Determine, experimentally:
 \begin{enumerate}
 \item The minimum artificial latency that you must configure in your
   InterCom instance to communicate with your groupmate without lossing
-  chunks, when he is in a different\footnote{Different to the network
+  chunks, when he/she is in a different\footnote{Different to the network
     in which you are using InterCom.} local network. \href{https://vicente-gonzalez-ruiz.github.io/about_ping/}{Ping} can help to estimate the latency.
 \item (Optional) Repeat the previous experiment using only localhost
   (transmiting the chunk between the loopback network adapter), but
@@ -226,5 +227,7 @@ An example of a notebook related to this milestone can be found
 \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/docs/Hidding_the_Network_Jitter__example.ipynb}{here}. Notice
 that not all the content of the notebook could be requested in this
 milestone.
+
+\end{enumerate}
 
 \bibliography{networking,nat}
