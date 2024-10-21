@@ -47,7 +47,7 @@ Decrease the gain of the amplifier of your speaker to do (the energy
 of) $s(t)$ as low as possible. Unfortunately this also decreases the
 volume of the far-end signal (the voice of our interlocutor) :-/
 
-\section{The simplest substract solution}
+\section{The simplest subtract solution}
 Lets ${\mathbf m}$ the digital version of $m(t)$ and ${\mathbf m}[t]$
 it's $t$-th sample\footnote{Or frame if we work in stereo}. In this
 solution, we send
@@ -186,8 +186,8 @@ from \texttt{buffer.py} and that implements at least\footnote{More
 described solutions. More concretely:
 \begin{enumerate}
 
-\item If you implement the ``$s(t)$ delay and substract solution'',
-  you must estimate $a$, $d$ and perform the signals substraction to
+\item If you implement the ``$s(t)$ delay and subtract solution'',
+  you must estimate $a$, $d$ and perform the signals subtraction to
   remove the echo far-end signal ($s(t)$). For example, Skype finds
   $d$ and $a$ using a ``call signal'' (a sequence of more-or-less
   tonal sounds). $d$ is determined measuring the propagation time of
@@ -196,7 +196,7 @@ described solutions. More concretely:
   energy of the call signal recorded.
 
   At the same time you can also implement a ``$n(t)$ delay and
-  substract solution'', where you have to estimate $a$ for your voice
+  subtract solution'', where you have to estimate $a$ for your voice
   $n(t)$ delayed the buffering time + average RTT + $d$ at the
   far-end. The average RTT can be estimated using\footnote{Remember
     that \texttt{ping} only works between public devices.} a local
@@ -205,10 +205,10 @@ described solutions. More concretely:
   last chunk number that was received. Thus, when we receive the chunk
   $n$-th\footnote{Remember that the chunks have a chunk number in the
     packet header.}, we can copy this number in the next sent chunk
-  and the receiver will be able to find the RTT substracting to the
+  and the receiver will be able to find the RTT subtracting to the
   time reception the corresponding time in the list.
 
-\item In a ``$s(t)$ delay and substract solution'', if you also
+\item In a ``$s(t)$ delay and subtract solution'', if you also
   consider the (discrete) frequency response of the near-end audioset
   to estimate a better echo signal, first you will need to find
   ${\mathbf H}$ (the discrete frequency response of your
@@ -221,13 +221,13 @@ described solutions. More concretely:
   number (the Fourier coefficients are complex numbers).
 
   Notice that the frequency characterization of the far-end audioset
-  can be also used in a ``$n(t)$ delay and substract
+  can be also used in a ``$n(t)$ delay and subtract
   solution''. Remember that filtering operations must be implemented
   with convolutions in the temporal domain, but are products in the
   frequency domain.
   
 \item Use LMS to find a estimation of the echo signal and perform the
-  echo cancellation. In this case, only a ``$s(t)$ delay and substract
+  echo cancellation. In this case, only a ``$s(t)$ delay and subtract
   solution'' should be considered because the required filters could
   be too long to run in real-time in the time domain.
 \end{enumerate}
@@ -288,7 +288,7 @@ because if the volume is too low, we will not hear our interlocutor
 (the ``far-end'').
 
 
-\section{Delay and substract solution}
+\section{Delay and subtract solution}
 
 Another simple\footnote{The AEC (Audio Echo Cancellation) problem has
   been extensively estudied and there are several solutions. This one
