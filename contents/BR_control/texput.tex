@@ -287,22 +287,39 @@ definition, and this does not depend on the bit-rate control.} There
   is not BR control.
 \item \verb|BR_control_add_lost.py|: Every second runs:
   \begin{equation}
-    \Delta = \Delta + L - 1
+    \left\{
+    \begin{array}{ll}
+      \Delta = \Delta + L - 1 & \quad\text{always}, \\
+      \Delta = \Delta_{\text{min}} & \quad\text{if}~\Delta < \Delta_{\text{min}}.                                 
+    \end{array}
+    \right.
   \end{equation}
+  %\begin{equation}
+  %  \Delta = \Delta + L - 1
+  %\end{equation}
   where $L$ is the number of lost (received) chunks in the previous
   second. Notice that this heuristic (and the following ones) supposes
   that the interlocutor is losing (on average) the same number of
   chunks that we.
 \item \verb|BR_control_lost.py|: Every second runs:
   \begin{equation}
-    \Delta = L - 1\quad\text{if}~L>2.
+    \left\{
+    \begin{array}{ll}
+      \Delta = L - 1 & \quad\text{always}, \\
+      \Delta = \Delta_{\text{min}} & \quad\text{if}~\Delta < \Delta_{\text{min}}.
+    \end{array}
+    \right.
   \end{equation}
+  %\begin{equation}
+  %  \Delta = L - 1\quad\text{if}~L>2.
+  %\end{equation}
 \item \verb|BR_control_conservative.py|: Every second runs:
   \begin{equation}
     \left\{
     \begin{array}{ll}
-      \Delta = 2\Delta & \quad\text{if}~L>2 \\
-      \Delta = \frac{10}{11}\Delta & \quad\text{always}.
+      \Delta = 2\Delta & \quad\text{if}~L>2, \\
+      \Delta = \frac{10}{11}\Delta & \quad\text{always}, \\
+      \Delta = \Delta_{\text{min}} & \quad\text{if}~\Delta < \Delta_{\text{min}}.
     \end{array}
     \right.
   \end{equation}
