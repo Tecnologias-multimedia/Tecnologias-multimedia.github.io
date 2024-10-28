@@ -7,13 +7,12 @@
 \maketitle
 \tableofcontents
 
-\section{Description}
 %{{{
 
-\subsection{Spatial (stereo) decorrelation with the MST (Mid/Side Transform)}
+\section{Spatial (stereo) decorrelation with the MST (Mid/Side Transform)}
 %{{{
 
-\subsubsection{Analysis transform}
+\subsection{Analysis transform}
 %{{{ 
 InterCom transmits a
 \href{https://en.wikipedia.org/wiki/Stereophonic_sound}{stereo} (two
@@ -70,10 +69,11 @@ The proposed matrix ${\mathbf K}$ corresponds to the transform used in
 (Mid/Side Transform). This is similar to the $2\times 2$ KLT
 \href{https://en.wikipedia.org/wiki/Kosambi%E2%80%93Karhunen%E2%80%93Lo%C3%A8ve_theorem}{(Karhunen-Lo\`eve
   Transform)}, the
-\href{http://wavelets.pybytes.com/wavelet/haar/}{Haar
-  Transform}~\cite{vetterli1995wavelets} and the $2\times 2$
+\href{http://wavelets.pybytes.com/wavelet/haar/}{Haar Transform} and
+the $2\times 2$
 \href{https://en.wikipedia.org/wiki/Hadamard_transform}{Discrete
-  Walsh-Hadamard Transform}~\cite{sayood2017introduction}.
+  Walsh-Hadamard
+  Transform}~\cite{sayood2017introduction,vetterli1995wavelets}.
 
 In general (for all linear transforms),
 Eqs.~\eqref{eq:forward_transform_matrix_form} and
@@ -103,15 +103,14 @@ filters. This can also be seen in the notebook
 \href{https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/contents/transform_coding/stereo_transforms_RD.ipynb}{A RD-comparison of ``Stereo'' Transforms}.
 %}}}
 
-\subsubsection{Synthesis transform}
+\subsection{Synthesis transform}
 %{{{ 
 The inverse (or synthesis) transform
 \begin{equation}
   {\mathbf x} = {\mathbf K}^{-1}{\mathbf w}
   \label{eq:inverse_transform}
 \end{equation}
-can be deduced from Eq.~\eqref{eq:forward_transform_matrix_form}, where we
-get
+can be deduced from Eq.~\eqref{eq:forward_transform_matrix_form}, where we have that
 \begin{equation}
   \begin{array}{rcl}
   {\mathbf w}_0 & = & {\mathbf x}_0 + {\mathbf x}_1\\
@@ -146,7 +145,7 @@ Therefore,
 \end{equation}
 %}}}
 
-\subsubsection{Orthogonality of the transform}
+\subsection{Orthogonality of the transform}
 %{{{ 
 As can be seen (if we ignore the $\frac{1}{2}$ scale factor),
 the inverse transform is the transpose of the forward transform
@@ -241,7 +240,7 @@ signal ${\mathbf x}$ are independent\footnote{The total
   subband~\cite{sayood2017introduction}.}. Another interesting
 property satisfied by many famous transforms (such as the
 \href{https://en.wikipedia.org/wiki/Fourier_transform}{Fourier
-  Transform}) is
+  Transform}) is also
 \href{https://en.wikipedia.org/wiki/Orthonormality}{orthonormality},
 which means that the transform is
 \href{https://en.wikipedia.org/wiki/Energy_(signal_processing)}{energy}
@@ -254,7 +253,7 @@ The MST is not orthonormal, because
 \begin{equation}
   \sum_i {{\mathbf w}_i}^2 =
   ({\mathbf x}_0 + {\mathbf x}_1)^2 + ({\mathbf x}_0 - {\mathbf x}_1)^2 =
-  ({\mathbf x}_0^2 + 2{\mathbf x}_0{\mathbf x}_1+{\mathbf x}_1^2) + ({\mathbf x}_0^2-{\mathbf 2}x_0{\mathbf x}_1+{\mathbf x}_1^2) =
+  ({\mathbf x}_0^2 + 2{\mathbf x}_0{\mathbf x}_1+{\mathbf x}_1^2) + ({\mathbf x}_0^2-2{\mathbf x_0}{\mathbf x}_1+{\mathbf x}_1^2) =
   2({\mathbf x}_0^2+{\mathbf x}_1^2) =
   2\sum_i {{\mathbf x}_i}^2.
   \label{eq:No_Parseval}
@@ -265,7 +264,7 @@ would get $2{\mathbf x}$ as the reconstructed signal instead of
 ${\mathbf x}$.
 %}}}
 
-\subsubsection{Quantization of the subbands}
+\subsection{Quantization of the subbands}
 \label{sec:quantization_subbands_spatial}
 % {{{
 
@@ -334,7 +333,7 @@ proportional to the
   \href{https://en.wikipedia.org/wiki/Euclidean_distance}{Euclidean
     distance} in $N$-dimensional (in our case, $N=2$)
   \href{https://en.wikipedia.org/wiki/Vector_space}{spaces}.} (or the
-``squared'' norm) of the (analysis) filter ${\mathbf K}_i^{-1}$. Thus
+``squared'' norm) of the (synthesis) filter ${\mathbf K}_i^{-1}$. Thus
 \begin{equation}
   \begin{array}{l}
     \left\| {\mathbf K}_0^{-1} \right\|_2 := \sqrt{\langle \begin{bmatrix} \frac{1}{2} & \frac{1}{2} \end{bmatrix}, \begin{bmatrix} \frac{1}{2} & \frac{1}{2} \end{bmatrix} \rangle} = \sqrt{\begin{bmatrix}\frac{1}{2} & \frac{1}{2} \end{bmatrix} \cdot \begin{bmatrix} \frac{1}{2} & \frac{1}{2} \end{bmatrix}} = \frac{1}{\sqrt{2}},\\
@@ -412,10 +411,10 @@ As a final remark, we could also consider that any alternative other than $\Delt
 
 %}}}
 
-\subsection{Temporal decorrelation using the DWT (Discrete Wavelet Transform)}
+\section{Temporal decorrelation using the DWT (Discrete Wavelet Transform)}
 %{{{
 
-\subsubsection{About temporal redundancy in audio}
+\subsection{About temporal redundancy in audio}
 %{{{
 
 After exploiting spatial (stereo) redundancy, the next natural
@@ -462,7 +461,7 @@ samples.\footnote{Notice that is we dead-zone quantize a decomposition
 
 %}}}
 
-\subsubsection{Subband Coding}
+\subsection{Subband Coding}
 %{{{
 
 % Relation between transform coding and subband coding
@@ -534,7 +533,7 @@ ${\mathbf w}_1$ (see the notebook
     theorem}.} To achieve this, the
 \href{https://en.wikipedia.org/wiki/Filter_(signal_processing)}{frequency
   response} of ${\mathbf K}_0$ must be equal to the mirrored frequency
-response of ${\mathbf K}_1$, and obviously both filters must have the
+response of ${\mathbf K}_1,$ and obviously both filters must have the
 same
 \href{https://en.wikipedia.org/wiki/Bandwidth_(signal_processing)}{bandwidth}~\cite{sayood2017introduction}. In
 this situation, in which ${\mathbf K}_0$ and ${\mathbf K}_1$ are
@@ -544,7 +543,7 @@ mirror filters, we say that they form a
 
 %}}}
 
-\subsubsection{Multichannel filter banks and psychoacoustic frequency resolution}
+\subsection{Multichannel filter banks and psychoacoustic frequency resolution}
 %{{{
 
 % M-channels PRFB and the frequency resolution of the HAS
@@ -576,7 +575,7 @@ distributed in \href{https://en.wikipedia.org/wiki/Bark_scale}{the
 
 %}}}
 
-\subsubsection{The Discrete Wavelet Transform}
+\subsection{The Discrete Wavelet Transform}
 %{{{
 
 % The bark scale and the DWT
@@ -605,16 +604,9 @@ The DWT has also other interesting features:
     representation} of the signal.
 \end{enumerate}
 
-\begin{figure}
-  \centering
-  \myfig{graphics/cascade}{8cm}{800}
-  \caption{A dyadic 2-levels cascade of PRFBs.}
-  \label{fig:cascade}
-\end{figure}
-
 %}}}
 
-\subsubsection{Implementation of the DWT}
+\subsection{Implementation of the DWT}
 %{{{
 
 % Implementation alternatives for the DWT
@@ -643,6 +635,13 @@ The DWT can be implemented in different ways:
     typical cascade, the filters are always the same. Therefore, we
     only need to store in memory only a copy of each different filter.}
 
+\begin{figure}
+  \centering
+  \myfig{graphics/cascade}{8cm}{800}
+  \caption{A dyadic 2-levels cascade of PRFBs.}
+  \label{fig:cascade}
+\end{figure}
+
 \item Using
   \href{https://en.wikipedia.org/wiki/Lifting_scheme}{lifting}~\cite{sweldens1997building},
   which provides an additional speed-up factor of 2 compared to the FB
@@ -655,7 +654,7 @@ The DWT can be implemented in different ways:
 
 %}}}
 
-\subsubsection{Example of a DWT using the MST filters}
+\subsection{Example of a DWT using the MST filters}
 %{{{
 
 % Using the MST filters for building a DWT
@@ -679,7 +678,7 @@ DWT using the MST filters and lifting.
     \label{eq:1dwt}
   \end{equation}
   where the $l$-th subband
-  ${\mathbf z}^l=\{{\mathbf z}_i^l~|~0\le i\le 2^{n-l}\}$, being
+  ${\mathbf w}^l=\{{\mathbf w}_i^l~|~0\le i\le 2^{n-l}\}$, being
   $2^n=N$ the number of samples in ${\mathbf x}$, and where, by
   definition, ${\mathbf l}^0={\mathbf x}$, is the original resolution
   level of the signal. The subbands ${\mathbf l}^1$ and
@@ -720,7 +719,7 @@ DWT using the MST filters and lifting.
   \end{equation}
   i.e., the number of DWT coefficients is also $N$.
 
-\item DWT performs a number of lifting steps, each one with
+\item All DWT perform a number of lifting steps, each one with
   2 (sub)steps:
   \begin{enumerate}
   \item A \textbf{predict step}, which computes the ${\mathbf h}$
@@ -752,7 +751,7 @@ DWT using the MST filters and lifting.
 
 %}}}
 
-\subsubsection{Wavelets and filter banks}
+\subsection{Wavelets and filter banks}
 %{{{
 
 In the context of wavelet theory~\cite{burrus2013wavelets}, the
@@ -786,7 +785,7 @@ orthogonal DWTs is that the filters cannot be
 
 %}}}
 
-\subsubsection{Example of a DWT using ``high''-order filters}
+\subsection{Example of a DWT using ``high''-order filters}
 %{{{
 
 The previous MST-based DWT is similar to other transforms such as the
@@ -825,7 +824,7 @@ This linear transform is also invertible by simply reversing the steps:
 
 %}}}
 
-\subsubsection{Quantization of the DWT subbands}
+\subsection{Quantization of the DWT subbands}
 
 The QSSs to be used in the different subbands of a (orthogonal)
 decomposition should be inversely\footnote{Remember that if the QSS is
@@ -855,7 +854,7 @@ can be used in the quantization process.
 
 %{{{
 
-\subsection{\href{https://en.wikipedia.org/wiki/Lapped_transform}{Overlapped block transforms} to minimize distortion}
+\section{\href{https://en.wikipedia.org/wiki/Lapped_transform}{Overlapped block transforms} to minimize distortion}
 %{{{
 
 Transform Coding implies splitting the signal into blocks of data
@@ -962,7 +961,7 @@ This idea has been implemented in the notebook
 
 %}}}
 
-\subsection{Reducing the data overhead}
+\section{Reducing the data overhead}
 %{{{
 
 \label{sec:reducing}
