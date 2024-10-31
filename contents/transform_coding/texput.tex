@@ -276,11 +276,13 @@ is the same as saying that we must satisfy $f'_0(x)=f'_1(x)$, where
 $f'$ denotes the derivative of $f$). The main drawback of this
 approach is that the finding of $f_i$ is computationally intensive (we
 must analyze, quantize, compress, decompress, dequantize, synthesize,
-and compute the distortion of the data for a sufficiently high number of
-quantization steps), and usually we cannot do that in
-real time.\footnote{Notice, however, that this would solve the problem
-  of controlling the bit-rate because using the RD curves we know how
-  many bits will require each subband.}
+and compute the distortion of the data for a sufficiently high number
+of quantization steps), and usually we cannot do that in real
+time.\footnote{This would solve the problem of controlling the
+  bit-rate because using the RD curves we know how many bits will
+  require each subband.} Notice that we can use this optimal
+quantization scheme because the subbands are indepent one of the
+other, and this is true because the transforms are orthogonal.
 
 \begin{comment}
   An approximation to this could be to suppose that the RD curves of
