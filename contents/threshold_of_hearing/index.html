@@ -27,10 +27,9 @@ Hearing</h2>
     <span class='sectionToc'>1 <a href='#x1-20001' id='QQ2-1-2'>A model of the Threshold of (Human) Hearing</a></span>
 <br />    <span class='sectionToc'>2 <a href='#x1-30002' id='QQ2-1-4'>DWT subbands and quantization steps (basic algorithm)</a></span>
 <br />    <span class='sectionToc'>3 <a href='#x1-40003' id='QQ2-1-5'>A higher frequency-resolution approach</a></span>
-<br />    <span class='sectionToc'>4 <a href='#x1-50004' id='QQ2-1-6'>Better ToH curves</a></span>
-<br />    <span class='sectionToc'>5 <a href='#x1-60005' id='QQ2-1-7'>What you have to do?</a></span>
-<br />    <span class='sectionToc'>6 <a href='#x1-70006' id='QQ2-1-8'>Deliverables</a></span>
-<br />    <span class='sectionToc'>7 <a href='#x1-80007' id='QQ2-1-9'>Resources</a></span>
+<br />    <span class='sectionToc'>4 <a href='#x1-50004' id='QQ2-1-6'>Customizable ToH curves</a></span>
+<br />    <span class='sectionToc'>5 <a href='#x1-60005' id='QQ2-1-7'>Deliverables</a></span>
+<br />    <span class='sectionToc'>6 <a href='#x1-70006' id='QQ2-1-8'>Resources</a></span>
    </div>
 <!-- l. 8 --><p class='noindent'>
 </p>
@@ -81,63 +80,57 @@ accurately.<span class='footnote-mark'><a href='#fn1x0' id='fn1x0-bk'><sup class
 To overcome this, we can use a decomposition with more subbands and a
 good tool could be <a href='https://en.wikipedia.org/wiki/Wavelet_packet_decomposition'>Wavelet Packets</a>. Notice that PyWavelets provides an
 <a href='https://pywavelets.readthedocs.io/en/latest/ref/wavelet-packets.html'>implementation</a>.
-</p><!-- l. 102 --><p class='indent'>   So far, this technique has not been implemented.
-</p><!-- l. 104 --><p class='noindent'>
+</p><!-- l. 113 --><p class='indent'>   So far, this technique has not been implemented.
+</p><!-- l. 115 --><p class='noindent'>
 </p>
-   <h3 class='sectionHead'><span class='titlemark'>4   </span> <a id='x1-50004'></a>Better ToH curves</h3>
-<!-- l. 107 --><p class='noindent'>The ToH plotted in Fig. <a href='#x1-2001r1'>1<!-- tex4ht:ref: fig:ToHH  --></a> can be different from the curve that corresponds to your current “hearing
+   <h3 class='sectionHead'><span class='titlemark'>4   </span> <a id='x1-50004'></a>Customizable ToH curves</h3>
+<!-- l. 118 --><p class='noindent'>The ToH plotted in Fig. <a href='#x1-2001r1'>1<!-- tex4ht:ref: fig:ToHH  --></a> can be different to your current “perceptual hearing
 capabilities”.<span class='footnote-mark'><a href='#fn2x0' id='fn2x0-bk'><sup class='textsuperscript'>2</sup></a></span><a id='x1-5001f2'></a>
-For this reason, in module <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>advanced_ToH.py</span></span></span>, implement a
-procedure to determe the QSSs used in each wavelet/Fourier
-subband<span class='footnote-mark'><a href='#fn3x0' id='fn3x0-bk'><sup class='textsuperscript'>3</sup></a></span><a id='x1-5003f3'></a>.
-</p><!-- l. 126 --><p class='indent'>   To find such QSSs, we can simulate <a href='https://en.wikipedia.org/wiki/Quantization_(signal_processing)'>quantization noise</a> in each subband and
+An optimal-user-specific ToH should take into consideration your noticeable
+<a href='https://en.wikipedia.org/wiki/Quantization_(signal_processing)'>quantization noise</a> in each subband.
+</p><!-- l. 127 --><p class='indent'>   For this reason, in module named <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>advanced_ToH.py</span></span></span>, implement a procedure to
+determe the QSSs used in each subband.
+</p><!-- l. 131 --><p class='indent'>   To find such QSSs, we can simulate <a href='https://en.wikipedia.org/wiki/Quantization_(signal_processing)'>quantization noise</a> in each subband and
 measure the amplitude of the noise when it starts to be noticeable. Supposing that
 the quantization noise follows an <a href='https://en.wikipedia.org/wiki/Continuous_uniform_distribution'>uniform distribution</a>, the next algorithm can be
-implemented:
                                                                   
 
                                                                   
-</p><!-- l. 134 --><p class='indent'>
+implemented:
+</p><!-- l. 139 --><p class='indent'>
      </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-5006x1'>
-     <!-- l. 135 --><p class='noindent'>Let \(\{{\mathbf l}^{N_{\text {levels}}}, {\mathbf h}^{N_{\text {levels}}}, {\mathbf h}^{N_{\text {levels}}-1},\cdots , {\mathbf h}^1\}\) the wavelet representation of a chunk. Starting with \({\mathbf l}^{N_{\text {levels}}}\) (at the first
-     iteration the rest of subbands are zero), split the wavelet subband into
-     a (configurable) number of Fourier subbands. While the noise stays
-     imperceptible:
+<li class='enumerate' id='x1-5004x1'>
+     <!-- l. 145 --><p class='noindent'>Starting with the lowest frequency subband (at the first iteration the rest of
+     subbands are zero). While the noise (suppose that the quantization noise
+     follows an <a href='https://en.wikipedia.org/wiki/Continuous_uniform_distribution'>uniform distribution</a>) stays imperceptible:
          </p><ol class='enumerate2'>
-<li class='enumerate' id='x1-5008x1'>Increase the amplitude of the noise in the Fourier subband.
+<li class='enumerate' id='x1-5006x1'>Increase the amplitude of the noise in the subband.
          </li>
-<li class='enumerate' id='x1-5010x2'>Compute the inverse FFT/wavelet-transform.
+<li class='enumerate' id='x1-5008x2'>Compute the inverse transform.
          </li>
-<li class='enumerate' id='x1-5012x3'>Reproduce the generated chunk, alternating every second with the
-         play of an empty chunk.</li></ol>
+<li class='enumerate' id='x1-5010x3'>Reproduce  the  generated  chunk,  alternating  every  second  with  a
+         silence (the play of an empty chunk).</li></ol>
      </li>
-<li class='enumerate' id='x1-5014x2'>Continue with the next Fourier/wavelet subband, but keeping the highest
-     unperceptible uniform noise in the previously processed ones. In this way, for
-     the wavelet subband \({\mathbf h}^1\) (the last one to be processed), the rest of subbands
-     should be already noisy, and the same holds for the Fourier subbands that
-     belong to each wavelet subband.</li></ol>
-<!-- l. 158 --><p class='indent'>   Notice that the QSSs are determined for the sound that you are going to play
+<li class='enumerate' id='x1-5012x2'>Continue with the next subband, but keeping the highest unperceptible noise in
+     the previously processed ones.</li></ol>
+<!-- l. 161 --><p class='indent'>   Notice that the QSSs are determined for the sound that you are going to play
 (not for the audio that you are generating). Therefore, you should use your
 interlocutor’s QSSs and vice versa. Implement also the transmission of this
 information.
-</p><!-- l. 163 --><p class='indent'>   Finally, the determination of the ToH should be optional for the users of
-InterCom (the “standard” ToH, see Fig. <a href='#x1-2001r1'>1<!-- tex4ht:ref: fig:ToHH  --></a>, should be used by default).
-</p><!-- l. 167 --><p class='noindent'>
+</p><!-- l. 166 --><p class='indent'>   Finally, this improvement should be optional through a command line parameter
+(the “standard” ToH, see Fig. <a href='#x1-2001r1'>1<!-- tex4ht:ref: fig:ToHH  --></a>, should be used by default).
+</p><!-- l. 192 --><p class='noindent'>
 </p>
-   <h3 class='sectionHead'><span class='titlemark'>5   </span> <a id='x1-60005'></a>What you have to do?</h3>
-<!-- l. 170 --><p class='noindent'>Implement the functionality described in Sections <a href='#x1-40003'>3<!-- tex4ht:ref: sec:FFT  --></a> and <a href='#x1-50004'>4<!-- tex4ht:ref: sec:better_ToH  --></a>.
+   <h3 class='sectionHead'><span class='titlemark'>5   </span> <a id='x1-60005'></a>Deliverables</h3>
+<!-- l. 194 --><p class='noindent'>Implement the functionality described in Sections <a href='#x1-40003'>3<!-- tex4ht:ref: sec:FFT  --></a> and <a href='#x1-50004'>4<!-- tex4ht:ref: sec:better_ToH  --></a> in a module
+<span class='obeylines-h'><span class='verb'><span class='ectt-1000'>advanced_ToH.py</span></span></span>, and a report how your proposal works, including a subjective
+performance comparison.
                                                                   
 
                                                                   
-</p><!-- l. 191 --><p class='noindent'>
+</p><!-- l. 199 --><p class='noindent'>
 </p>
-   <h3 class='sectionHead'><span class='titlemark'>6   </span> <a id='x1-70006'></a>Deliverables</h3>
-<!-- l. 193 --><p class='noindent'>The improved module <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>advanced_ToH.py</span></span></span> and a report of how your proposal works,
-including a subjective performance comparison.
-</p><!-- l. 196 --><p class='noindent'>
-</p>
-   <h3 class='sectionHead'><span class='titlemark'>7   </span> <a id='x1-80007'></a>Resources</h3>
+   <h3 class='sectionHead'><span class='titlemark'>6   </span> <a id='x1-70006'></a>Resources</h3>
    <div class='thebibliography'>
    <p class='bibitem'><span class='biblabel'>
  [1]<span class='bibsp'>   </span></span><a id='Xbosi2003intro'></a>M. Bosi and R.E. Goldberd.  <a href='https://last.hit.bme.hu/download/vidtechlab/fcc/literature/audio/audio_coding_standards_book.pdf'><span class='ecti-1000'>Introduction to Digital Audio Coding and
@@ -153,14 +146,14 @@ including a subjective performance comparison.
 </p>
    </div>
    <div class='footnotes'><a id='x1-4002x3'></a>
-<!-- l. 76 --><p class='indent'>     <span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='ecrm-0800'>For example, if</span> \(N_{\text {levels}=5}\) <span class='ecrm-0800'>we decompose the audio into 6 subbands, and the Bark scale has 24
-</span><span class='ecrm-0800'>subbands. Anyway, the higher the numbe of subbands, the better the approximation to the ToH
+<!-- l. 87 --><p class='indent'>     <span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='ecrm-0800'>For example, if</span> \(N_{\text {levels}=5}\) <span class='ecrm-0800'>we decompose the audio into 6 subbands, and the Bark scale has 24
+</span><span class='ecrm-0800'>subbands. Remember that when the </span><a href='https://en.wikipedia.org/wiki/Wavelet_transform'><span class='ecrm-0800'>Wavalet transform</span></a> <span class='ecrm-0800'>is </span><a href='https://en.wikipedia.org/wiki/Dyadic_rational'><span class='ecrm-0800'>dyadic</span></a><span class='ecrm-0800'>, the </span><a href='https://en.wikipedia.org/wiki/Discrete_wavelet_transform'><span class='ecrm-0800'>Wavelet space</span></a> <span class='ecrm-0800'>is
+</span><span class='ecrm-0800'>analyzed by </span><a href='https://en.wikipedia.org/wiki/Octave_band'><span class='ecrm-0800'>octaves</span></a><span class='ecrm-0800'>, and therefore the </span><a href='https://en.wikipedia.org/wiki/Filter_bank'><span class='ecrm-0800'>subbands</span></a> <span class='ecrm-0800'>doubles their size when we increase the
+</span><span class='ecrm-0800'>frequency (see </span><a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/docs/2-hours_seminar.ipynb'><span class='ecrm-0800'>InterCom: a Real-Time Digital Audio Full-Duplex Transmitter/Receiver</span></a><span class='ecrm-0800'>).
+</span><span class='ecrm-0800'>Anyway, the higher the numbe of subbands, the better the approximation to the ToH
 </span><span class='ecrm-0800'>curve.</span></p><a id='x1-5002x4'></a>
-<!-- l. 111 --><p class='indent'>     <span class='footnote-mark'><a href='#fn2x0-bk' id='fn2x0'><sup class='textsuperscript'>2</sup></a></span><span class='ecrm-0800'>For example, your speakers could not have a flat frequency response, or your room could
-</span><span class='ecrm-0800'>attenuate more, some freqencies.</span></p><a id='x1-5004x4'></a>
-<!-- l. 124 --><p class='indent'>     <span class='footnote-mark'><a href='#fn3x0-bk' id='fn3x0'><sup class='textsuperscript'>3</sup></a></span><span class='ecrm-0800'>Remember that when the </span><a href='https://en.wikipedia.org/wiki/Wavelet_transform'><span class='ecrm-0800'>Wavalet transform</span></a> <span class='ecrm-0800'>is </span><a href='https://en.wikipedia.org/wiki/Dyadic_rational'><span class='ecrm-0800'>dyadic</span></a><span class='ecrm-0800'>, the </span><a href='https://en.wikipedia.org/wiki/Discrete_wavelet_transform'><span class='ecrm-0800'>Wavelet space</span></a> <span class='ecrm-0800'>is analyzed by</span>
-<a href='https://en.wikipedia.org/wiki/Octave_band'><span class='ecrm-0800'>octaves</span></a><span class='ecrm-0800'>, and therefore the </span><a href='https://en.wikipedia.org/wiki/Filter_bank'><span class='ecrm-0800'>subbands</span></a> <span class='ecrm-0800'>doubles the size when we increase the frequency (see </span><a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/docs/2-hours_seminar.ipynb'><span class='ecrm-0800'>InterCom:
-</span><span class='ecrm-0800'>a Real-Time Digital Audio Full-Duplex Transmitter/Receiver</span></a><span class='ecrm-0800'>).</span></p>                                       </div>
+<!-- l. 121 --><p class='indent'>     <span class='footnote-mark'><a href='#fn2x0-bk' id='fn2x0'><sup class='textsuperscript'>2</sup></a></span><span class='ecrm-0800'>For example, your speakers could not have a flat frequency response, or your room could
+</span><span class='ecrm-0800'>attenuate some frequencies.</span></p>                                                                                      </div>
  
 </body> 
 </html>
