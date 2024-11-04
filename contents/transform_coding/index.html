@@ -19,7 +19,7 @@
 
 <h2 class='titleHead'><a href='https://en.wikipedia.org/wiki/Transform_coding'>Transform Coding</a> for <a href='https://en.wikipedia.org/wiki/Data_redundancy'>Redundancy</a> Removal</h2>
  <div class='author'><a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp; </span><a href='https://hpca.ual.es/~savins/'><span class='ecrm-1200'>Savins Puertas Martín</span></a> <span class='ecrm-1200'>&amp; </span><a href='https://www.marcoslupion.com/'><span class='ecrm-1200'>Marcos Lupión Lorente</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>November 1, 2024</span></div>
+<div class='date'><span class='ecrm-1200'>November 4, 2024</span></div>
    </div>
    <h3 class='likesectionHead'><a id='x1-1000'></a>Contents</h3>
    <div class='tableofcontents'>
@@ -153,7 +153,7 @@ operations, but using <a href='https://en.wikipedia.org/wiki/Fast_Fourier_transf
 or filter <a href='https://en.wikipedia.org/wiki/Filter_(signal_processing)'>convolutions</a> (and therefore, we do not know \(\mathbf K\)). Fortunately, we can
 determine \({\mathbf K}_i^{-1}\) (and therefore, \(\mathbf K\)) by simply computing the inverse transform of the
 decomposition \(\begin {bmatrix} 0 &amp; \cdots &amp; 0 &amp; 1 &amp; 0 &amp; \cdots &amp; 0 \end {bmatrix}^{\text T}\), where the \(1\) value is in the position \(i\) (only the subband \({\mathbf w}_i=1\), the rest are
-“zeroed”)).<span class='footnote-mark'><a href='#fn13x0' id='fn13x0-bk'><sup class='textsuperscript'>13</sup></a></span><a id='x1-6010f13'></a>
+“zeroed”).<span class='footnote-mark'><a href='#fn13x0' id='fn13x0-bk'><sup class='textsuperscript'>13</sup></a></span><a id='x1-6010f13'></a>
 In our example, we get that
 </p><!-- l. 403 --><p class='indent'>   \begin {equation}  \begin {array}{l} {\mathbf K}_0^{-1} = \frac {1}{2} \begin {bmatrix} 1 &amp; 1 \\ 1 &amp; -1 \end {bmatrix} \begin {bmatrix} 1 \\ 0 \end {bmatrix} = \frac {1}{2} \begin {bmatrix} 1 &amp; 1 \end {bmatrix}, \\ {\mathbf K}_1^{-1} = \frac {1}{2} \begin {bmatrix} 1 &amp; 1 \\ 1 &amp; -1 \end {bmatrix} \begin {bmatrix} 0 \\ 1 \end {bmatrix} = \frac {1}{2} \begin {bmatrix} 1 &amp; -1 \end {bmatrix}. \end {array}  \end {equation}<a id='x1-6012r13'></a>
 </p><!-- l. 409 --><p class='indent'>   As a final remark, we could also consider that any alternative other than \(\Delta _0=\Delta _1\) will
@@ -182,9 +182,9 @@ section.
                                                                   
 
                                                                   
-can decompose the input signal into a set of subbands, and if the filters used are the
-appropriate ones to remove the (in this case, temporal) redundancy, we can achieve a
-high Transform Coding Gain <span class='cite'>[<a href='#Xsayood2017introduction'>7</a>]</span>, accumulating the most of the signal energy (and
+can decompose the input signal into a set of subbands, and if the filters used are
+appropriate to remove the (in this case, temporal) redundancy, we can achieve a high
+Transform Coding Gain <span class='cite'>[<a href='#Xsayood2017introduction'>7</a>]</span>, accumulating the most of the signal energy (and
 presumably most of the information) in a small number of subbands. When this
 happens, the quantization of the subbands will basically remove the least significant
 information (usually <a href='https://en.wikipedia.org/wiki/Noise_(electronics)'>electronic noise</a>), allowing better compression ratios
