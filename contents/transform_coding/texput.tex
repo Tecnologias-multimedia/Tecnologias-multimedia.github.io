@@ -835,6 +835,19 @@ This linear transform is also invertible by simply reversing the steps:
 
 \subsection{Quantization of the DWT subbands}
 
+The same theory developed for the quantization of the MST subbands
+(see Section~\href{sec:quantization_subbands_spatial} is applicable
+here: we should select the different quantization step sizes depending
+on the slope generated in the rate/distortion curve (see this
+\href{https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/contents/transform_coding/DWT_RD.ipynb}{A
+  RD-comparison of DWTs}. In the practice, when the dynamic range of
+the DWT coefficients depends on the gain of the synthesis filters (as
+occurs with PyWavelets), a constant QSS strategy, where
+\begin{equation}
+  \Delta_0=\Delta_i~\text{for}~i=1,\cdots,l+1
+\end{equation}
+usually works fine.
+\begin{comment}
 The QSSs to be used in the different subbands of a (orthogonal)
 decomposition should be inversely\footnote{Remember that if the QSS is
   higher, the quantization error is also higher. Therefore, those
@@ -858,7 +871,7 @@ the gain of the analysis and synthesis filters is always 1, and this is also the
 \href{https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/contents/transform_coding/DWT_RD.ipynb}{A
   RD-comparison of DWTs} there is more information on QSS that
 can be used in the quantization process.
-
+\end{comment}
 %}}}
 
 %{{{
@@ -871,9 +884,9 @@ Transform Coding implies splitting the signal into blocks of data
 coefficients are quantized, it is possible that significant (and
 unpleasant) distortions may appear in the border frames of the chunks
 (see Fig.~\ref{fig:3_chunks}). This is a consequence of the prediction
-step computed by the DWT in the limits of the chunks, generating
-different predictions at the beginning and the end of the adjacent
-chunks.
+step computed by the DWT in the limits of the chunks (where we need
+the samples of the adjacent chunks), generating different predictions
+at the beginning and the end of the adjacent chunks.
 
 \begin{figure}
   \centering
@@ -894,12 +907,12 @@ chunks.
 \end{figure}
 
 One solution to avoid signal discontinuities between chunks is to
-overlap the content of the chunks. Thus, the current ($i$-th) chunk
-uses also the last frames of the previous ($(i-1)$-th) chunk and the
-first frames of the next ($(i+1)$-th) chunk to compute the transform
-of the current extended ($i$-th) chunk (see the
-Fig.~\ref{fig:subbands}). This has been described in the following
-algorithm:
+overlap the content of the blocks of data processed by the DWT. Thus,
+the current ($i$-th) ``chunk'' uses also the last frames of the
+previous ($(i-1)$-th) chunk and the first frames of the next
+($(i+1)$-th) chunk to compute the transform of the current extended
+($i$-th) chunk (see the Fig.~\ref{fig:subbands}). This has been
+described in the following algorithm:
 
 \subsection*{Encoder:}
 \begin{enumerate}
@@ -1068,7 +1081,7 @@ chunks.
   \begin{enumerate}
   \item Input decomposition ${\mathbf D}_{i+1}$.
   \item Build the extended decomposition ${\mathbf E}_i =
-    {\mathbf D}_{i-1}.{\mathbf l}^l[-\frac{o}{2^l}:]|{\mathbf D}_i.{\mathbf l}^l|{\mathbf D}_{i+1}.{\mathbf l}^l[:\frac{o}{2^l}]|{\mathbf D}_{i-1}.{\mathbf h}^l[-\frac{o}{2^l}:]|{\mathbf D}_i.{\mathbf h}^l|{\mathbf D}_{i+1}.{\mathbf h}^l[:\frac{o}{2^l}]|\cdots|{\mathbf D}_{i-1}.{\mathbf h}^1[-\frac{o}{2^1}:]|{\mathbf D}_i.{\mathbf h}^1|{\mathbf D}_{i+1}.{\mathbf h}^1[:\frac{o}{2^1}]$.
+    {\mathbf D}_{i-1}.{\mathbf l}^l[-\frac{o}{2^l}:]|{\mathbf D}_i.{\mathbf l}^l|{\mathbf D}_{i+1}.{\mathbf l}^l[:\frac{o}{2^l}]|{\mathbf D}_{i-1}.{\mathbf h}^l[-\frac{o}{2^l}:]|{\mathbf D}_i.{\mathbf h}^l|{\mathbf D}_{i+1}.{\mathbf h}^l[:\frac{o}{2^l}]|\cdots|{\mathbf D}_{i-1}.{\mathbf h}^1[-\frac{o}{2^1}:]|{\mathbf D}_i.{\mathbf h}^1|{\mathbf D}_{i+1}.{\mathbf h}^1[:\frac{o}{2^1}].$
   \item Compute the extended chunk ${\mathbf C}_i\leftarrow\text{DWT}^{-l}({\mathbf E}_i)$.
   \item Output ${\mathbf C}_i[o:-o]$.
   \item ${\mathbf D}_{i-1} \leftarrow {\mathbf D}_i$.
