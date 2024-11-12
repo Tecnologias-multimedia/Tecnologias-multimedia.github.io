@@ -1122,15 +1122,16 @@ bit-rate control algorithm neither \texttt{tc}).
 \item \textbf{Determine the RD curves for the DWT}:
 %{{{
 
-Rebuild the RD curves considering also the removal of the temporal
-decorrelation. Use \verb|temporal_no_overlapped_DWT_coding.py|. Note
-that the number of levels $l$ of the DWT (computed using
-\href{https://pywavelets.readthedocs.io/en/latest/}{PyWavelets}~\cite{lee2019pywavelets})
-can have a high impact on the amount of energy concentration achieved
-by the DWT, and therefore on the efficiency of the coding system. Show
-such an impact. Experiment also with the wavelet name. Again, use the
-\verb|--minimal_quantization_step| parameter to generate the different
-points of the RD curves.
+  Rebuild the RD curves considering also the removal of the temporal
+  decorrelation. Use \verb|temporal_no_overlapped_DWT_coding.py|. Note
+  that the number of levels $l$ of the DWT (computed using
+  \href{https://pywavelets.readthedocs.io/en/latest/}{PyWavelets}~\cite{lee2019pywavelets})
+  can have a high impact on the amount of energy concentration
+  achieved by the DWT, and therefore on the efficiency of the coding
+  system. Show such an impact. Experiment also with the wavelet name
+  (try to optimize --minimize-- the RD curve). Again, use the
+  \verb|--minimal_quantization_step| parameter to generate the
+  different points of the RD curves.
 
 %}}}
 
