@@ -30,7 +30,6 @@ Hearing</h2>
 <br />    <span class='sectionToc'>4 <a href='#x1-50004' id='QQ2-1-6'>Customizable ToH curves</a></span>
 <br />    <span class='sectionToc'>5 <a href='#x1-60005' id='QQ2-1-7'>Deliverables</a></span>
 <br />    <span class='sectionToc'>6 <a href='#x1-70006' id='QQ2-1-8'>Resources</a></span>
-<br />    <span class='sectionToc'><a href='#Q1-1-9'>References</a></span>
    </div>
 <!-- l. 8 --><p class='noindent'>
 </p>
@@ -52,23 +51,21 @@ noise <span class='cite'>[<a href='#Xsayood2017introduction'>2</a>]</span>.
 
                                                                   
 <!-- l. 27 --><p class='noindent'><div style='text-align:center;'> <img src='graphics/ToHH.svg' /> </div>  <a id='x1-2001r1'></a>
-<a id='x1-2002'></a>
 </p>
 <figcaption class='caption'><span class='id'>Figure 1: </span><span class='content'>A model for the threshold of human hearing.                    </span></figcaption><!-- tex4ht:label?: x1-2001r1  -->
                                                                   
 
                                                                   
    </figure>
-<!-- l. 32 --><p class='indent'>   A good approximation of ToH for a 20-year-old person can be obtained with <span class='cite'>[<a href='#Xbosi2003intro'>1</a>]</span>
-\begin {equation}  T(f)\text {[dB]} = 3.64(f\text {[kHz]})^{-0.8} - 6.5e^{f\text {[kHz]}-3.3)^2} + 10^{-3}(f\text {[kHz]})^4. \label {eq:ToHH}  \end {equation}
+<!-- l. 32 --><p class='indent'>   A good approximation of ToH for a 20-year-old person can be obtained with <span class='cite'>[<a href='#Xbosi2003intro'>1</a>]</span> \begin {equation}  T(f)\text {[dB]} = 3.64(f\text {[kHz]})^{-0.8} - 6.5e^{f\text {[kHz]}-3.3)^2} + 10^{-3}(f\text {[kHz]})^4. \label {eq:ToHH}  \end {equation}<a id='x1-2002r1'></a>
 This equation has been plotted in Fig. <a href='#x1-2001r1'>1<!-- tex4ht:ref: fig:ToHH  --></a>.
 </p>
    <h3 class='sectionHead'><span class='titlemark'>2   </span> <a id='x1-30002'></a>DWT subbands and quantization steps (basic algorithm)</h3>
-<!-- l. 41 --><p class='noindent'>The number of DWT subbands \begin {equation}  N_{\text {sb}} = N_{\text {levels}} + 1  \end {equation}
-where \(N_{\text {levels}}\) is the number of levels of the DWT <span class='cite'>[<a href='#Xvetterli1995wavelets'>3</a>]</span>. Except for the \({\mathbf l}^{N_{\text {levels}}}\) subband (the
-lowest-pass frequency of the decomposition), it holds that \begin {equation}  W({\mathbf w}_s) = \frac {1}{2}W({\mathbf w}_{s-1}),  \end {equation}
-being \(W(\cdot )\) the bandwidth of the corresponding subband. Therefore, considering that the
-bandwidth of the audio signal is \(22050\) Hz, the bandwidth \(W({\mathbf w}_1)=11025\) Hz, \(W({\mathbf w}_2)=22025/4\), etc. It also holds that \begin {equation}  W({\mathbf l}^{N_{\text {levels}}}) = W({\mathbf w}^{N_{\text {levels}}}).  \end {equation}
+<!-- l. 41 --><p class='noindent'>The number of DWT subbands \begin {equation}  N_{\text {sb}} = N_{\text {levels}} + 1  \end {equation}<a id='x1-3001r2'></a> where \(N_{\text {levels}}\) is the number of levels of the DWT <span class='cite'>[<a href='#Xvetterli1995wavelets'>3</a>]</span>.
+Except for the \({\mathbf l}^{N_{\text {levels}}}\) subband (the lowest-pass frequency of the decomposition), it holds
+that \begin {equation}  W({\mathbf w}_s) = \frac {1}{2}W({\mathbf w}_{s-1}),  \end {equation}<a id='x1-3002r3'></a> being \(W(\cdot )\) the bandwidth of the corresponding subband. Therefore, considering that
+the bandwidth of the audio signal is \(22050\) Hz, the bandwidth \(W({\mathbf w}_1)=11025\) Hz, \(W({\mathbf w}_2)=22025/4\), etc. It also holds that
+\begin {equation}  W({\mathbf l}^{N_{\text {levels}}}) = W({\mathbf w}^{N_{\text {levels}}}).  \end {equation}<a id='x1-3003r4'></a>
 </p><!-- l. 60 --><p class='indent'>   The idea is to decide, knowing the frequencies represented in each DWT subband
 and the ToH curve (see <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/docs/2-hours_seminar.ipynb'>InterCom: a Real-Time Digital Audio Full-Duplex
 Transmitter/Receiver</a>), the QSS (Quantization Step Size) that should be applied to
@@ -93,23 +90,23 @@ An optimal-user-specific ToH should take into consideration your noticeable
 <a href='https://en.wikipedia.org/wiki/Quantization_(signal_processing)'>quantization noise</a> in each subband, defining a set of QSSs (one per subband). To find
 such set, the following algorithm can be used:
 </p><!-- l. 128 --><p class='indent'>
+     </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-5004x1'>
                                                                   
 
                                                                   
-     </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-5003x1'>
      <!-- l. 134 --><p class='noindent'>Starting with the lowest frequency subband (at the first iteration the rest of
      subbands are zero). While the noise (suppose that the quantization noise
      follows an <a href='https://en.wikipedia.org/wiki/Continuous_uniform_distribution'>uniform distribution</a>) is imperceptible:
          </p><ol class='enumerate2'>
-<li class='enumerate' id='x1-5005x1'>Increase the amplitude of the noise in the subband.
+<li class='enumerate' id='x1-5006x1'>Increase the amplitude of the noise in the subband.
          </li>
-<li class='enumerate' id='x1-5007x2'>Compute the inverse transform, generating a chunk of audio.
+<li class='enumerate' id='x1-5008x2'>Compute the inverse transform, generating a chunk of audio.
          </li>
-<li class='enumerate' id='x1-5009x3'>Reproduce  the  generated  chunk,  alternating  every  second  with  a
+<li class='enumerate' id='x1-5010x3'>Reproduce  the  generated  chunk,  alternating  every  second  with  a
          silence (the play of an empty chunk).</li></ol>
      </li>
-<li class='enumerate' id='x1-5011x2'>Continue with the next subband, but keeping the highest unperceptible noise in
+<li class='enumerate' id='x1-5012x2'>Continue with the next subband, but keeping the highest unperceptible noise in
      the previously processed ones.</li></ol>
 <!-- l. 150 --><p class='indent'>   Notice that the QSSs are determined for the sound that you are going to play
 (not for the audio that you are generating). Therefore, you should use your
@@ -123,12 +120,12 @@ information.
 <!-- l. 183 --><p class='noindent'>Implement the functionality described in Sections <a href='#x1-40003'>3<!-- tex4ht:ref: sec:more_subbands  --></a> and <a href='#x1-50004'>4<!-- tex4ht:ref: sec:better_ToH  --></a> in a module
 <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>advanced_ToH.py</span></span></span>, and a report showing how your proposal works, including a
 subjective performance comparison.
-                                                                  
-
-                                                                  
 </p><!-- l. 188 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>6   </span> <a id='x1-70006'></a>Resources</h3>
+                                                                  
+
+                                                                  
    <div class='thebibliography'>
    <p class='bibitem'><span class='biblabel'>
  [1]<span class='bibsp'>   </span></span><a id='Xbosi2003intro'></a>M. Bosi and R.E. Goldberd.  <a href='https://last.hit.bme.hu/download/vidtechlab/fcc/literature/audio/audio_coding_standards_book.pdf'><span class='ecti-1000'>Introduction to Digital Audio Coding and
@@ -143,13 +140,14 @@ subjective performance comparison.
    Prentice-hall, 1995.
 </p>
    </div>
-<p><a id='Q1-1-9'></a></p>
-   <div class='footnotes'><!-- l. 88 --><p class='indent'>     <span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='ecrm-0800'>For example, if</span> \(N_{\text {levels}=5}\) <span class='ecrm-0800'>we decompose the audio into 6 subbands, and the Bark scale has 24
+   <div class='footnotes'><a id='x1-4002x3'></a>
+<!-- l. 88 --><p class='indent'>     <span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='ecrm-0800'>For example, if</span> \(N_{\text {levels}=5}\) <span class='ecrm-0800'>we decompose the audio into 6 subbands, and the Bark scale has 24
 </span><span class='ecrm-0800'>subbands. Remember that when the </span><a href='https://en.wikipedia.org/wiki/Wavelet_transform'><span class='ecrm-0800'>Wavalet transform</span></a> <span class='ecrm-0800'>is </span><a href='https://en.wikipedia.org/wiki/Dyadic_rational'><span class='ecrm-0800'>dyadic</span></a><span class='ecrm-0800'>, the </span><a href='https://en.wikipedia.org/wiki/Discrete_wavelet_transform'><span class='ecrm-0800'>Wavelet space</span></a> <span class='ecrm-0800'>is
 </span><span class='ecrm-0800'>analyzed by </span><a href='https://en.wikipedia.org/wiki/Octave_band'><span class='ecrm-0800'>octaves</span></a><span class='ecrm-0800'>, and therefore the </span><a href='https://en.wikipedia.org/wiki/Filter_bank'><span class='ecrm-0800'>subbands</span></a> <span class='ecrm-0800'>doubles their size when we increase the
 </span><span class='ecrm-0800'>frequency (see </span><a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/docs/2-hours_seminar.ipynb'><span class='ecrm-0800'>InterCom: a Real-Time Digital Audio Full-Duplex Transmitter/Receiver</span></a><span class='ecrm-0800'>).
 </span><span class='ecrm-0800'>Anyway, the higher the numbe of subbands, the better the approximation to the ToH
-</span><span class='ecrm-0800'>curve.</span></p><!-- l. 122 --><p class='indent'> <span class='footnote-mark'><a href='#fn2x0-bk' id='fn2x0'><sup class='textsuperscript'>2</sup></a></span><span class='ecrm-0800'>For example, your speakers could not have a flat frequency response, or your room could
+</span><span class='ecrm-0800'>curve.</span></p><a id='x1-5002x4'></a>
+<!-- l. 122 --><p class='indent'>     <span class='footnote-mark'><a href='#fn2x0-bk' id='fn2x0'><sup class='textsuperscript'>2</sup></a></span><span class='ecrm-0800'>For example, your speakers could not have a flat frequency response, or your room could
 </span><span class='ecrm-0800'>attenuate some frequencies.</span></p>                                                                                      </div>
  
 </body> 

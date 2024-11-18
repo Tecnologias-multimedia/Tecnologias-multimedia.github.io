@@ -16,10 +16,10 @@ Psychoacoustics (see
 System) has a sensitivity that depends on the frequency of the sound,
 the so called ToH
 (\href{https://en.wikipedia.org/wiki/Absolute_threshold_of_hearing}{Threshold
-  of (Human) Hearing}). This basically means that some subbands (intervals of frequencies)can be
-quantized with a larger quantization step than others without a
-noticeable increase (from a perceptual perspective) of the
-quantization noise~\cite{sayood2017introduction}.
+  of (Human) Hearing}). This basically means that some subbands
+(intervals of frequencies) can be quantized with a larger quantization
+step than others without a noticeable increase (from a perceptual
+perspective) of the quantization noise~\cite{sayood2017introduction}.
 
 \begin{figure}
   \centering
@@ -50,9 +50,10 @@ of the decomposition), it holds that
   W({\mathbf w}_s) = \frac{1}{2}W({\mathbf w}_{s-1}),
 \end{equation}
 being $W(\cdot)$ the bandwidth of the corresponding
-subband. Therefore, considering that the bandwidth of the audio signal
-is $22050$ Hz, the bandwidth $W({\mathbf w}_1)=11025$ Hz,
-$W({\mathbf w}_2)=22025/4$, etc. It also holds that
+subband. Therefore, considering that (by default, in InterCom) the
+bandwidth of the audio signal is $22050$ Hz, the bandwidth
+$W({\mathbf w}_1)=11025$ Hz, $W({\mathbf w}_2)=22025/4$, etc. It also
+holds that
 \begin{equation}
   W({\mathbf l}^{N_{\text{levels}}}) = W({\mathbf w}^{N_{\text{levels}}}).
 \end{equation}
