@@ -19,7 +19,7 @@
 
 <h2 class='titleHead'>Echo Cancellation</h2>
  <div class='author'><a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp; </span><a href='https://hpca.ual.es/~savins/'><span class='ecrm-1200'>Savins Puertas Martín</span></a> <span class='ecrm-1200'>&amp; </span><a href='https://www.marcoslupion.com/'><span class='ecrm-1200'>Marcos Lupión Lorente</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>October 21, 2024</span></div>
+<div class='date'><span class='ecrm-1200'>November 1, 2024</span></div>
    </div>
    <h3 class='sectionHead'><span class='titlemark'>1   </span> <a id='x1-10001'></a>The problem</h3>
 <!-- l. 9 --><p class='noindent'>One of the first problems we encounter with the use of the <span class='ectt-1000'>buffer.py</span>
@@ -32,21 +32,20 @@ can be captured again (some time later) by his/her mic and sent it back to
 us ... and so on, generating a rather unpleasant signal. In other words, if
 \(\mathbf s\) is the (analog) signal played by our (loud)speaker and that reaches our
 mic, \(\mathbf n\) is the signal emited by the near-end person (me) that reaches our
-mic<span class='footnote-mark'><a href='#fn2x0' id='fn2x0-bk'><sup class='textsuperscript'>2</sup></a></span><a id='x1-1002f2'></a>,
-and \(\mathbf m\) is the (mixed) signal recorded by our microphone, we have that \begin {equation}  m(t) = n(t) + s(t), \label {eq:echo_problem}  \end {equation}
-where \(m(t)\) is the signal that hits the membrane of our mic.
+mic<span class='footnote-mark'><a href='#fn2x0' id='fn2x0-bk'><sup class='textsuperscript'>2</sup></a></span><a id='x1-1003f2'></a>,
+and \(\mathbf m\) is the (mixed) signal recorded by our microphone, we have that \begin {equation}  m(t) = n(t) + s(t), \label {eq:echo_problem}  \end {equation}<a id='x1-1005r1'></a> where \(m(t)\) is the
+signal that hits the membrane of our mic.
 </p><!-- l. 30 --><p class='indent'>   Our problem here is to minimize the <a href='https://en.wikipedia.org/wiki/Energy_(signal_processing)'>energy</a> of \(s(t)\).
 </p><!-- l. 34 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>2   </span> <a id='x1-20002'></a>The trivial (and definitive) solution</h3>
-<!-- l. 36 --><p class='noindent'>Use a <a href='https://en.wikipedia.org/wiki/Audio_headset'>headset</a>. In this case, \begin {equation}  m(t) \approx n(t) \label {eq:headset_solution}  \end {equation}
-because \(s(t)\approx 0\).
+<!-- l. 36 --><p class='noindent'>Use a <a href='https://en.wikipedia.org/wiki/Audio_headset'>headset</a>. In this case, \begin {equation}  m(t) \approx n(t) \label {eq:headset_solution}  \end {equation}<a id='x1-2001r2'></a> because \(s(t)\approx 0\).
 </p><!-- l. 44 --><p class='noindent'>
+</p>
+   <h3 class='sectionHead'><span class='titlemark'>3   </span> <a id='x1-30003'></a>The trivial (but limited) solution</h3>
                                                                   
 
                                                                   
-</p>
-   <h3 class='sectionHead'><span class='titlemark'>3   </span> <a id='x1-30003'></a>The trivial (but limited) solution</h3>
 <!-- l. 46 --><p class='noindent'>Decrease the gain of the amplifier of your speaker to do (the energy of) \(s(t)\) as low as
 possible. Unfortunately this also decreases the volume of the far-end signal (the voice
 of our interlocutor) :-/
@@ -55,12 +54,10 @@ of our interlocutor) :-/
    <h3 class='sectionHead'><span class='titlemark'>4   </span> <a id='x1-40004'></a>The simplest subtract solution</h3>
 <!-- l. 51 --><p class='noindent'>Lets \(\mathbf m\) the digital version of \(m(t)\) and \({\mathbf m}[t]\) it’s \(t\)-th
 sample<span class='footnote-mark'><a href='#fn3x0' id='fn3x0-bk'><sup class='textsuperscript'>3</sup></a></span><a id='x1-4001f3'></a>.
-In this solution, we send \begin {equation}  \tilde {\mathbf n}[t] = {\mathbf m}[t] - a{\mathbf s}[t-d], \label {eq:simplest}  \end {equation}
-where \(a\) is an attenuation (scalar) value and \(d\) represents the
-delay<span class='footnote-mark'><a href='#fn4x0' id='fn4x0-bk'><sup class='textsuperscript'>4</sup></a></span><a id='x1-4002f4'></a>
+In this solution, we send \begin {equation}  \tilde {\mathbf n}[t] = {\mathbf m}[t] - a{\mathbf s}[t-d], \label {eq:simplest}  \end {equation}<a id='x1-4003r3'></a> where \(a\) is an attenuation (scalar) value and \(d\) represents the
+delay<span class='footnote-mark'><a href='#fn4x0' id='fn4x0-bk'><sup class='textsuperscript'>4</sup></a></span><a id='x1-4004f4'></a>
 (measured in sample-times) required to propagate the sound from our speaker to our
-mic. We define \begin {equation}  \hat {\mathbf e}[t] = a{\mathbf s}[t-d]  \end {equation}
-as the estimated echo signal.
+mic. We define \begin {equation}  \hat {\mathbf e}[t] = a{\mathbf s}[t-d]  \end {equation}<a id='x1-4006r4'></a> as the estimated echo signal.
 </p><!-- l. 70 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>5   </span> <a id='x1-50005'></a>Considering the frequency response of the near-end to estimate the echo
@@ -70,38 +67,36 @@ consideration that the echo signal that finally reaches our mic is the <a href='
 of \(s(t)\) and a signal \(h(t)\) that represents the echo response of our local audioset
 (speaker, mic, walls, monitor, keyboard, our body, etc.) to a impulse signal
 \(\delta (t)\).<span class='footnote-mark'><a href='#fn5x0' id='fn5x0-bk'><sup class='textsuperscript'>5</sup></a></span><a id='x1-5001f5'></a> In
-other words, we can compute \begin {equation}  \tilde {\mathbf n}[t] = {\mathbf m}[t] - ({\mathbf s}*{\mathbf h})[t-d], \label {eq:using_convolution}  \end {equation}
-where \(*\) represents the convolution between (in our case of) digital signals, and \(\mathbf h\) is the
-digitalized (discrete + quantized) version of \(h(t)\), the response of the near-end audioset to
-the impact of \(\delta (t)\).
+other words, we can compute \begin {equation}  \tilde {\mathbf n}[t] = {\mathbf m}[t] - ({\mathbf s}*{\mathbf h})[t-d], \label {eq:using_convolution}  \end {equation}<a id='x1-5003r5'></a> where \(*\) represents the convolution between (in our case
+of) digital signals, and \(\mathbf h\) is the digitalized (discrete + quantized) version of \(h(t)\), the
+response of the near-end audioset to the impact of \(\delta (t)\).
 </p><!-- l. 89 --><p class='indent'>   The convolution of digital signals in the time domain can be expensive (with
 <a href='https://en.wikipedia.org/wiki/Computational_complexity_theory'>computational complexity</a> \(O^2\)) if the number of samples is high. Fortunately, thanks to
-the <a href='https://en.wikipedia.org/wiki/Convolution'>theorem of the convolution</a> of signals in the frequency domain <span class='cite'>[<a href='#Xkovacevic2013fourier'>3</a>, <a href='#XOppenheim2'>4</a>]</span>, the
-convolution can be replaced by the <a href='https://en.wikipedia.org/wiki/Dot_product'>dot product</a> (with \(O\)), when we consider
-the signals in the frequency domain. Thanks to this, we can rewrite the
-Eq. \eqref{eq:using_convolution} as \begin {equation}  \tilde {\mathbf n}[t] = {\mathbf m}[t] - ({\mathcal F}^{-1}\{{\mathbf S}{\mathbf H}\})[t-d], \label {eq:faster}  \end {equation}
-where  \(\mathbf S\)  is  the  (digital)  Fourier
-transform<span class='footnote-mark'><a href='#fn6x0' id='fn6x0-bk'><sup class='textsuperscript'>6</sup></a></span><a id='x1-5002f6'></a>
+the <a href='https://en.wikipedia.org/wiki/Convolution'>theorem of the convolution</a> of signals in the frequency domain <span class='cite'>[<a href='#Xkovacevic2013fourier'>3</a>, <a href='#XOppenheim2'>4</a>]</span>,
+the convolution can be replaced by the <a href='https://en.wikipedia.org/wiki/Dot_product'>dot product</a> (with \(O\)), when we
+consider the signals in the frequency domain. Thanks to this, we can rewrite
+the Eq. \eqref{eq:using_convolution} as \begin {equation}  \tilde {\mathbf n}[t] = {\mathbf m}[t] - ({\mathcal F}^{-1}\{{\mathbf S}{\mathbf H}\})[t-d], \label {eq:faster}  \end {equation}<a id='x1-5004r6'></a> where \(\mathbf S\) is the (digital) Fourier
+transform<span class='footnote-mark'><a href='#fn6x0' id='fn6x0-bk'><sup class='textsuperscript'>6</sup></a></span><a id='x1-5005f6'></a>
 of \(\mathbf s\), \(\mathbf H\) is the Fourier transform of \(\mathbf h\), and \({\mathcal F}^{-1}\) represents the inverse Fourier transform.
 Notice that all these transforms are applied to digital signals, and there exist fast
 algorithms (\(O\log _2O\)).
-                                                                  
-
-                                                                  
 </p><!-- l. 115 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>6   </span> <a id='x1-60006'></a>Estimation of the echo signal using LMS (Least Mean Squares)</h3>
+                                                                  
+
+                                                                  
 <!-- l. 116 --><p class='noindent'>We just have seen how it is possible to find better estimations of the echo
 signal \(\mathbf e\) using convolutions. By definition, convolutions are performed by
 filters.
 </p><!-- l. 120 --><p class='indent'>   Filters can be implemented in the frequency domain (see the previous section) or in the
 signal (time in our case) domain. Signal domain (digital) convolutions are efficient when the
 length<span class='footnote-mark'><a href='#fn7x0' id='fn7x0-bk'><sup class='textsuperscript'>7</sup></a></span><a id='x1-6001f7'></a> of the (digital)
-filters is small.<span class='footnote-mark'><a href='#fn8x0' id='fn8x0-bk'><sup class='textsuperscript'>8</sup></a></span><a id='x1-6002f8'></a>
+filters is small.<span class='footnote-mark'><a href='#fn8x0' id='fn8x0-bk'><sup class='textsuperscript'>8</sup></a></span><a id='x1-6003f8'></a>
 For estimating the echo signal at the sample-time \(t\), \({\mathbf e}^{(t)}\), the length of a <a href='https://en.wikipedia.org/wiki/Finite_impulse_response'>FIR filter</a> should
-be at least \(d\), because at least we need \(d\) samples to detect the echo signal. Therefore,
-we have that \begin {equation}  \hat {\mathbf e}^{(t)} = \sum _{k=0}^{d-1}{\mathbf h}_k^{(t)}{\mathbf s}[t-k],  \end {equation}
-where \(\mathbf h\) is the near-end impulse response in the time domain.
+be at least \(d\), because at least we need \(d\) samples to detect the echo signal.
+Therefore, we have that \begin {equation}  \hat {\mathbf e}^{(t)} = \sum _{k=0}^{d-1}{\mathbf h}_k^{(t)}{\mathbf s}[t-k],  \end {equation}<a id='x1-6005r7'></a> where \(\mathbf h\) is the near-end impulse response in the time
+domain.
 </p><!-- l. 137 --><p class='indent'>   Also, as we have seen in the previous section, it is possible to adapt the filter to
 the acoustic conditions, measuring the echo generated by the impulse signal. In the
 time domain, one of the most used techniques for computing the coefficients of a FIR
@@ -110,17 +105,16 @@ because the filter (coefficients) can be adapted to variations in the signal to 
 filter can learn).
 </p><!-- l. 147 --><p class='indent'>   LMS was invented by professor Bernard Widrow and his first
 Ph.D. student, Ted Hoff, to train the <a href='https://en.wikipedia.org/wiki/ADALINE'>ADALINE</a> artificial neural
-network.<span class='footnote-mark'><a href='#fn9x0' id='fn9x0-bk'><sup class='textsuperscript'>9</sup></a></span><a id='x1-6003f9'></a>
+network.<span class='footnote-mark'><a href='#fn9x0' id='fn9x0-bk'><sup class='textsuperscript'>9</sup></a></span><a id='x1-6006f9'></a>
 Using LMS, ADALINE is able to distinguish between patterns, even using a part of a single
-neuron<span class='footnote-mark'><a href='#fn10x0' id='fn10x0-bk'><sup class='textsuperscript'>10</sup></a></span><a id='x1-6004f10'></a>.
+neuron<span class='footnote-mark'><a href='#fn10x0' id='fn10x0-bk'><sup class='textsuperscript'>10</sup></a></span><a id='x1-6008f10'></a>.
 </p><!-- l. 158 --><p class='indent'>   LMS can be used to compute the coefficients of a filter to provide a desired
 output for a given input. In our context, the input signal is \(\mathbf m\) (the digital signal
 recorded by our soundcard) and the desired output signal is \(\mathbf n\) (the digital version of
-our voice). LMS, iteratively computes </p><div class='eqnarray'>\begin {eqnarray}  {\mathbf h}^{(i+1)}_k &amp; = &amp; {\mathbf h}^{(i)}_k + 2\mu \tilde {\mathbf n}[i]{\mathbf s}[i-k] \\ \tilde {\mathbf n}[i] &amp; = &amp; {\mathbf m}[i] - \hat {\mathbf e}^{(i)},  \end {eqnarray}
-</div>
+our voice). LMS, iteratively computes </p><div class='eqnarray'>\begin {eqnarray}  {\mathbf h}^{(i+1)}_k &amp; = &amp; {\mathbf h}^{(i)}_k + 2\mu \tilde {\mathbf n}[i]{\mathbf s}[i-k] \\ \tilde {\mathbf n}[i] &amp; = &amp; {\mathbf m}[i] - \hat {\mathbf e}^{(i)},  \end {eqnarray}</div>
 <!-- l. 168 --><p class='indent'>   where \(i\) represents the iteration number, and \(\mu \) is the learning
-rate<span class='footnote-mark'><a href='#fn11x0' id='fn11x0-bk'><sup class='textsuperscript'>11</sup></a></span><a id='x1-6005f11'></a>. These equations
-can be found<span class='footnote-mark'><a href='#fn12x0' id='fn12x0-bk'><sup class='textsuperscript'>12</sup></a></span><a id='x1-6006f12'></a>
+rate<span class='footnote-mark'><a href='#fn11x0' id='fn11x0-bk'><sup class='textsuperscript'>11</sup></a></span><a id='x1-6010f11'></a>. These equations
+can be found<span class='footnote-mark'><a href='#fn12x0' id='fn12x0-bk'><sup class='textsuperscript'>12</sup></a></span><a id='x1-6012f12'></a>
 using the (steepest) <a href='https://en.wikipedia.org/wiki/Gradient_descent'>gradient descend algorithm</a>. Notice that we process the signals
 sample-by-sample (at iteration \(i\) we compute the \(i\)-th sample of \(\tilde {\mathbf n}\) (the signal without
 the echo, supposely containing only our voice), and this is the signal that we will
@@ -128,14 +122,14 @@ send to the far-end in the next chunk).
 </p><!-- l. 181 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>7   </span> <a id='x1-70007'></a>Deliverables</h3>
-                                                                  
-
-                                                                  
 <!-- l. 183 --><p class='noindent'>A Python module called <span class='ectt-1000'>echo_cancellation.py </span>that inherits from <span class='ectt-1000'>buffer.py </span>and that implements
 at least<span class='footnote-mark'><a href='#fn13x0' id='fn13x0-bk'><sup class='textsuperscript'>13</sup></a></span><a id='x1-7001f13'></a>
 one of the previously described solutions. More concretely:
      </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-7003x1'>
+<li class='enumerate' id='x1-7004x1'>
+                                                                  
+
+                                                                  
      <!-- l. 189 --><p class='noindent'>If you implement the “\(s(t)\) delay and subtract solution”, you must estimate
      \(a\), \(d\) and perform the signals subtraction to remove the echo far-end signal
      (\(s(t)\)). For example, Skype finds \(d\) and \(a\) using a “call signal”  (a sequence of
@@ -146,15 +140,15 @@ one of the previously described solutions. More concretely:
      </p><!-- l. 198 --><p class='noindent'>At the same time you can also implement a “\(n(t)\) delay and subtract solution”,
      where you have to estimate \(a\) for your voice \(n(t)\) delayed the buffering time
      + average RTT + \(d\) at the far-end. The average RTT can be estimated
-     using<span class='footnote-mark'><a href='#fn14x0' id='fn14x0-bk'><sup class='textsuperscript'>14</sup></a></span><a id='x1-7004f14'></a>
+     using<span class='footnote-mark'><a href='#fn14x0' id='fn14x0-bk'><sup class='textsuperscript'>14</sup></a></span><a id='x1-7005f14'></a>
      a local clock, storing in a list when the last \(N\) chunks were sent, and sending
      with each chunk a new field in the packet header with the last chunk
-     number that was received. Thus, when we receive the chunk \(n\)-th<span class='footnote-mark'><a href='#fn15x0' id='fn15x0-bk'><sup class='textsuperscript'>15</sup></a></span><a id='x1-7005f15'></a>,
+     number that was received. Thus, when we receive the chunk \(n\)-th<span class='footnote-mark'><a href='#fn15x0' id='fn15x0-bk'><sup class='textsuperscript'>15</sup></a></span><a id='x1-7007f15'></a>,
      we can copy this number in the next sent chunk and the receiver will be
      able to find the RTT subtracting to the time reception the corresponding
      time in the list.
      </p></li>
-<li class='enumerate' id='x1-7007x2'>
+<li class='enumerate' id='x1-7010x2'>
      <!-- l. 211 --><p class='noindent'>In a “\(s(t)\) delay and subtract solution”, if you also consider the (discrete)
      frequency response of the near-end audioset to estimate a better echo
      signal, first you will need to find \(\mathbf H\) (the discrete frequency response of your
@@ -169,15 +163,18 @@ one of the previously described solutions. More concretely:
      operations  must  be  implemented  with  convolutions  in  the  temporal
      domain, but are products in the frequency domain.
      </p></li>
-<li class='enumerate' id='x1-7009x3'>Use LMS to find a estimation of the echo signal and perform the echo
+<li class='enumerate' id='x1-7012x3'>Use LMS to find a estimation of the echo signal and perform the echo
      cancellation. In this case, only a “\(s(t)\) delay and subtract solution” should be
      considered because the required filters could be too long to run in real-time
      in the time domain.</li></ol>
 <!-- l. 235 --><p class='indent'>   Optionally, but interesting for your mark, use any other technique (for example, an artificial
-neural network<span class='footnote-mark'><a href='#fn16x0' id='fn16x0-bk'><sup class='textsuperscript'>16</sup></a></span><a id='x1-7010f16'></a>)
+neural network<span class='footnote-mark'><a href='#fn16x0' id='fn16x0-bk'><sup class='textsuperscript'>16</sup></a></span><a id='x1-7013f16'></a>)
 for estimating the echo, and use it for removing the echo (obviously, in real-time). Take also into
+                                                                  
+
+                                                                  
 consideration that the parameters that determine the estimation of the echo signal should be
-continously<span class='footnote-mark'><a href='#fn17x0' id='fn17x0-bk'><sup class='textsuperscript'>17</sup></a></span><a id='x1-7011f17'></a>
+continously<span class='footnote-mark'><a href='#fn17x0' id='fn17x0-bk'><sup class='textsuperscript'>17</sup></a></span><a id='x1-7015f17'></a>
 monitored becase the physical composition of the audiosets can be dynamic (for
 example, the inclination of the screen of our laptop can be modified at any
 moment).
@@ -206,29 +203,32 @@ moment).
                                                                   
 
                                                                   
-   <div class='footnotes'><!-- l. 11 --><p class='indent'>     <span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='ecrm-0800'>And obviously, any other parent version of </span><span class='ectt-0800'>buffer.py</span><span class='ecrm-0800'>.</span></p>
-<!-- l. 22 --><p class='indent'>     <span class='footnote-mark'><a href='#fn2x0-bk' id='fn2x0'><sup class='textsuperscript'>2</sup></a></span><span class='ecrm-0800'>I.e., the same signal that would be captured by our mic if I were using a headset.</span></p>
-<!-- l. 52 --><p class='indent'>     <span class='footnote-mark'><a href='#fn3x0-bk' id='fn3x0'><sup class='textsuperscript'>3</sup></a></span><span class='ecrm-0800'>Or frame if we work in stereo</span></p><!-- l. 62 --><p class='indent'> <span class='footnote-mark'><a href='#fn4x0-bk' id='fn4x0'><sup class='textsuperscript'>4</sup></a></span><span class='ecrm-0800'>In a digital signal the sampleindex indicates the position of the sample in the sequence of
+   <div class='footnotes'><a id='x1-1002x1'></a>
+<!-- l. 11 --><p class='indent'>     <span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='ecrm-0800'>And obviously, any other parent version of </span><span class='ectt-0800'>buffer.py</span><span class='ecrm-0800'>.</span></p><a id='x1-1004x1'></a>
+<!-- l. 22 --><p class='indent'>     <span class='footnote-mark'><a href='#fn2x0-bk' id='fn2x0'><sup class='textsuperscript'>2</sup></a></span><span class='ecrm-0800'>I.e., the same signal that would be captured by our mic if I were using a headset.</span></p><a id='x1-4002x4'></a>
+<!-- l. 52 --><p class='indent'>     <span class='footnote-mark'><a href='#fn3x0-bk' id='fn3x0'><sup class='textsuperscript'>3</sup></a></span><span class='ecrm-0800'>Or frame if we work in stereo</span></p><a id='x1-4005x4'></a>
+<!-- l. 62 --><p class='indent'>     <span class='footnote-mark'><a href='#fn4x0-bk' id='fn4x0'><sup class='textsuperscript'>4</sup></a></span><span class='ecrm-0800'>In a digital signal the sample index indicates the position of the sample in the sequence of
 </span><span class='ecrm-0800'>samples. If we also know the sample-time, i.e., the cadency of the sampler, we can also compute at
-</span><span class='ecrm-0800'>which time was taken a sample.</span></p>
+</span><span class='ecrm-0800'>which time was taken a sample.</span></p><a id='x1-5002x5'></a>
 <!-- l. 79 --><p class='indent'>     <span class='footnote-mark'><a href='#fn5x0-bk' id='fn5x0'><sup class='textsuperscript'>5</sup></a></span><span class='ecrm-0800'>This action is similar to the carried out by submarines when they user the sonar to perform
-</span><span class='ecrm-0800'>echo-location, or by bats.</span></p>
+</span><span class='ecrm-0800'>echo-location, or by bats.</span></p><a id='x1-5006x5'></a>
 <!-- l. 109 --><p class='indent'>     <span class='footnote-mark'><a href='#fn6x0-bk' id='fn6x0'><sup class='textsuperscript'>6</sup></a></span><span class='ecrm-0800'>The Fourier transform is an special case of the Laplace transform where</span> \(\sigma =0\) <span class='ecrm-0800'>in the complex
 </span><span class='ecrm-0800'>(Laplace) domain represented by</span> \(s=\sigma +j\omega \) <span class='ecrm-0800'>frequencies. This simplification can be used for the
 </span><span class='ecrm-0800'>characterization of our local-end audioset because it can be considered a FIR (Finite
 </span><span class='ecrm-0800'>Impulse Response) system (in ausence of an audio signal, the echo always decays with the
-</span><span class='ecrm-0800'>time).</span></p>
-<!-- l. 123 --><p class='indent'>     <span class='footnote-mark'><a href='#fn7x0-bk' id='fn7x0'><sup class='textsuperscript'>7</sup></a></span><span class='ecrm-0800'>The number of coefficients.</span></p><!-- l. 126 --><p class='indent'> <span class='footnote-mark'><a href='#fn8x0-bk' id='fn8x0'><sup class='textsuperscript'>8</sup></a></span><span class='ecrm-0800'>Take in mind that convolution is a</span> \(O^2\) <span class='ecrm-0800'>operation, and therefore, we can only handle in real-time
-</span><span class='ecrm-0800'>with our computers small filter.</span></p>
-<!-- l. 151 --><p class='indent'>     <span class='footnote-mark'><a href='#fn9x0-bk' id='fn9x0'><sup class='textsuperscript'>9</sup></a></span><span class='ecrm-0800'>See </span><a class='url' href='https://www.youtube.com/watch?v=hc2Zj55j1zU'><span class='ectt-0800'>https://www.youtube.com/watch?v=hc2Zj55j1zU</span></a></p>
+</span><span class='ecrm-0800'>time).</span></p><a id='x1-6002x6'></a>
+<!-- l. 123 --><p class='indent'>     <span class='footnote-mark'><a href='#fn7x0-bk' id='fn7x0'><sup class='textsuperscript'>7</sup></a></span><span class='ecrm-0800'>The number of coefficients.</span></p><a id='x1-6004x6'></a>
+<!-- l. 126 --><p class='indent'>     <span class='footnote-mark'><a href='#fn8x0-bk' id='fn8x0'><sup class='textsuperscript'>8</sup></a></span><span class='ecrm-0800'>Take in mind that convolution is a</span> \(O^2\) <span class='ecrm-0800'>operation, and therefore, we can only handle in real-time
+</span><span class='ecrm-0800'>with our computers small filter.</span></p><a id='x1-6007x6'></a>
+<!-- l. 151 --><p class='indent'>     <span class='footnote-mark'><a href='#fn9x0-bk' id='fn9x0'><sup class='textsuperscript'>9</sup></a></span><span class='ecrm-0800'>See </span><a class='url' href='https://www.youtube.com/watch?v=hc2Zj55j1zU'><span class='ectt-0800'>https://www.youtube.com/watch?v=hc2Zj55j1zU</span></a></p><a id='x1-6009x6'></a>
 <!-- l. 156 --><p class='indent'>    <span class='footnote-mark'><a href='#fn10x0-bk' id='fn10x0'><sup class='textsuperscript'>10</sup></a></span><span class='ecrm-0800'>If we do not consider the </span><a href='https://en.wikipedia.org/wiki/Activation_function'><span class='ecrm-0800'>activation function</span></a><span class='ecrm-0800'>, an artificial neuron and a FIR filter perform
-</span><span class='ecrm-0800'>the same computation.</span></p>
-<!-- l. 170 --><p class='indent'>     <span class='footnote-mark'><a href='#fn11x0-bk' id='fn11x0'><sup class='textsuperscript'>11</sup></a></span><span class='ecrm-0800'>High</span> \(\mu \) <span class='ecrm-0800'>values spped-up the adaption process, but can generate worse</span> \(\mathbf h\) <span class='ecrm-0800'>coefficients.</span></p>
-<!-- l. 172 --><p class='indent'>     <span class='footnote-mark'><a href='#fn12x0-bk' id='fn12x0'><sup class='textsuperscript'>12</sup></a></span><span class='ecrm-0800'>Again, see </span><a class='url' href='https://www.youtube.com/watch?v=hc2Zj55j1zU'><span class='ectt-0800'>https://www.youtube.com/watch?v=hc2Zj55j1zU</span></a><span class='ecrm-0800'>!</span></p>
-<!-- l. 185 --><p class='indent'>     <span class='footnote-mark'><a href='#fn13x0-bk' id='fn13x0'><sup class='textsuperscript'>13</sup></a></span><span class='ecrm-0800'>More working implementations, higher mark.</span></p>
-<!-- l. 202 --><p class='noindent'><span class='footnote-mark'><a href='#fn14x0-bk' id='fn14x0'><sup class='textsuperscript'>14</sup></a></span><span class='ecrm-0800'>Remember that </span><span class='ectt-0800'>ping </span><span class='ecrm-0800'>only works between public devices.</span></p>
-<!-- l. 207 --><p class='noindent'><span class='footnote-mark'><a href='#fn15x0-bk' id='fn15x0'><sup class='textsuperscript'>15</sup></a></span><span class='ecrm-0800'>Remember that the chunks have a chunk number in the packet header.</span></p>
-<!-- l. 239 --><p class='indent'>     <span class='footnote-mark'><a href='#fn16x0-bk' id='fn16x0'><sup class='textsuperscript'>16</sup></a></span><span class='ecrm-0800'>ADALINE is the simplest </span><a href='https://en.wikipedia.org/wiki/Neural_network_(machine_learning)'><span class='ecrm-0800'>AAN</span></a> <span class='ecrm-0800'>ever developed!</span></p>
+</span><span class='ecrm-0800'>the same computation.</span></p><a id='x1-6011x6'></a>
+<!-- l. 170 --><p class='indent'>     <span class='footnote-mark'><a href='#fn11x0-bk' id='fn11x0'><sup class='textsuperscript'>11</sup></a></span><span class='ecrm-0800'>High</span> \(\mu \) <span class='ecrm-0800'>values spped-up the adaption process, but can generate worse</span> \(\mathbf h\) <span class='ecrm-0800'>coefficients.</span></p><a id='x1-6013x6'></a>
+<!-- l. 172 --><p class='indent'>     <span class='footnote-mark'><a href='#fn12x0-bk' id='fn12x0'><sup class='textsuperscript'>12</sup></a></span><span class='ecrm-0800'>Again, see </span><a class='url' href='https://www.youtube.com/watch?v=hc2Zj55j1zU'><span class='ectt-0800'>https://www.youtube.com/watch?v=hc2Zj55j1zU</span></a><span class='ecrm-0800'>!</span></p><a id='x1-7002x7'></a>
+<!-- l. 185 --><p class='indent'>     <span class='footnote-mark'><a href='#fn13x0-bk' id='fn13x0'><sup class='textsuperscript'>13</sup></a></span><span class='ecrm-0800'>More working implementations, higher mark.</span></p><a id='x1-7006x14'></a>
+<!-- l. 202 --><p class='noindent'><span class='footnote-mark'><a href='#fn14x0-bk' id='fn14x0'><sup class='textsuperscript'>14</sup></a></span><span class='ecrm-0800'>Remember that </span><span class='ectt-0800'>ping </span><span class='ecrm-0800'>only works between public devices.</span></p><a id='x1-7008x15'></a>
+<!-- l. 207 --><p class='noindent'><span class='footnote-mark'><a href='#fn15x0-bk' id='fn15x0'><sup class='textsuperscript'>15</sup></a></span><span class='ecrm-0800'>Remember that the chunks have a chunk number in the packet header.</span></p><a id='x1-7014x7'></a>
+<!-- l. 239 --><p class='indent'>     <span class='footnote-mark'><a href='#fn16x0-bk' id='fn16x0'><sup class='textsuperscript'>16</sup></a></span><span class='ecrm-0800'>ADALINE is the simplest </span><a href='https://en.wikipedia.org/wiki/Neural_network_(machine_learning)'><span class='ecrm-0800'>AAN</span></a> <span class='ecrm-0800'>ever developed!</span></p><a id='x1-7016x7'></a>
 <!-- l. 242 --><p class='indent'>     <span class='footnote-mark'><a href='#fn17x0-bk' id='fn17x0'><sup class='textsuperscript'>17</sup></a></span><span class='ecrm-0800'>A 1-seconds cadence should be enought.</span></p>                                                          </div>
  
 </body> 

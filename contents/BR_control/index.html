@@ -217,24 +217,24 @@ related to this milestone:
 <li class='enumerate' id='x1-7010x1'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>BR_control_no.py</span></span></span>: Uses a constant \(\Delta &gt;0\).<span class='footnote-mark'><a href='#fn8x0' id='fn8x0-bk'><sup class='textsuperscript'>8</sup></a></span><a id='x1-7011f8'></a>
      There is not BR control.
      </li>
-<li class='enumerate' id='x1-7013x2'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>BR_control_add_lost.py</span></span></span>: Every second runs: \begin {equation}  \Delta = \Delta + L - 1  \end {equation}
+<li class='enumerate' id='x1-7013x2'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>BR_control_add_lost.py</span></span></span>: Every second runs: \begin {equation}  \left \{ \begin {array}{ll} \Delta = \Delta + L - 1 &amp; \quad \text {always}, \\ \Delta = \Delta _{\text {min}} &amp; \quad \text {if}~\Delta &lt; \Delta _{\text {min}}. \end {array} \right .  \end {equation}
      where \(L\) is the number of lost (received) chunks in the previous second.
      Notice that this heuristic (and the following ones) supposes that the
      interlocutor is losing (on average) the same number of chunks that
      we.
      </li>
-<li class='enumerate' id='x1-7015x3'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>BR_control_lost.py</span></span></span>: Every second runs: \begin {equation}  \Delta = L - 1\quad \text {if}~L&gt;2.  \end {equation}
+<li class='enumerate' id='x1-7015x3'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>BR_control_lost.py</span></span></span>: Every second runs: \begin {equation}  \left \{ \begin {array}{ll} \Delta = L - 1 &amp; \quad \text {always}, \\ \Delta = \Delta _{\text {min}} &amp; \quad \text {if}~\Delta &lt; \Delta _{\text {min}}. \end {array} \right .  \end {equation}
      </li>
-<li class='enumerate' id='x1-7017x4'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>BR_control_conservative.py</span></span></span>: Every second runs: \begin {equation}  \left \{ \begin {array}{ll} \Delta = 2\Delta &amp; \quad \text {if}~L&gt;2 \\ \Delta = \frac {10}{11}\Delta &amp; \quad \text {always}. \end {array} \right .  \end {equation}
+<li class='enumerate' id='x1-7017x4'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>BR_control_conservative.py</span></span></span>: Every second runs: \begin {equation}  \left \{ \begin {array}{ll} \Delta = 2\Delta &amp; \quad \text {if}~L&gt;2, \\ \Delta = \frac {10}{11}\Delta &amp; \quad \text {always}, \\ \Delta = \Delta _{\text {min}} &amp; \quad \text {if}~\Delta &lt; \Delta _{\text {min}}. \end {array} \right .  \end {equation}
      </li></ol>
-<!-- l. 314 --><p class='noindent'>
+<!-- l. 331 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>2   </span> <a id='x1-80002'></a>Deliverables</h3>
-<!-- l. 316 --><p class='noindent'>Remember to report both, the experiments and the results.
+<!-- l. 333 --><p class='noindent'>Remember to report both, the experiments and the results.
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-8002x1'>
-     <!-- l. 318 --><p class='noindent'><span class='ecbx-1000'>Which data-ordering performs better?</span>:
-     </p><!-- l. 321 --><p class='noindent'>Determine empirically which ordering of the chunk data is the most efficient
+     <!-- l. 335 --><p class='noindent'><span class='ecbx-1000'>Which data-ordering performs better?</span>:
+     </p><!-- l. 338 --><p class='noindent'>Determine empirically which ordering of the chunk data is the most efficient
      from a lossless data compression point of view (the smaller the bit-rates,
      the higher the compression). Use the audio sequence you want.<span class='footnote-mark'><a href='#fn9x0' id='fn9x0-bk'><sup class='textsuperscript'>9</sup></a></span><a id='x1-8003f9'></a>
      Notice that using different audio files you could obtain different results.
@@ -243,17 +243,17 @@ related to this milestone:
                                                                   
      </p></li>
 <li class='enumerate' id='x1-8005x2'>
-     <!-- l. 330 --><p class='noindent'><span class='ecbx-1000'>Compute RD (Rate/Distortion) curves</span>:
-     </p><!-- l. 333 --><p class='noindent'>Considering the <a href='https://en.wikipedia.org/wiki/Root-mean-square_deviation'>RMSE (Root Mean Square Error)</a> as a distortion measure
+     <!-- l. 347 --><p class='noindent'><span class='ecbx-1000'>Compute RD (Rate/Distortion) curves</span>:
+     </p><!-- l. 350 --><p class='noindent'>Considering the <a href='https://en.wikipedia.org/wiki/Root-mean-square_deviation'>RMSE (Root Mean Square Error)</a> as a distortion measure
      between  the  sent  and  the  received  audio  signal,  for  a  concrete  audio
      sequence, generate the RD curve considering a set of different simulated
      transmission environments (use <a href='https://vicente-gonzalez-ruiz.github.io/about_tc/'>tc</a> or a any other similar tool). Which BR
      control algorithm shows the best RD curve?
-     </p><!-- l. 342 --><p class='noindent'>Remember  that  the  X-axis  must  express  bit-rate  and  the  Y-axis,
+     </p><!-- l. 359 --><p class='noindent'>Remember  that  the  X-axis  must  express  bit-rate  and  the  Y-axis,
      distortion.
 </p>
      </li></ol>
-<!-- l. 348 --><p class='noindent'>
+<!-- l. 365 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>3   </span> <a id='x1-90003'></a>Resources</h3>
    <div class='thebibliography'>
@@ -311,7 +311,7 @@ related to this milestone:
 </span><span class='ecrm-0800'>be restored. This only happens when</span> \(\Delta =1\)<span class='ecrm-0800'>.</span></p>
 <!-- l. 286 --><p class='noindent'><span class='footnote-mark'><a href='#fn8x0-bk' id='fn8x0'><sup class='textsuperscript'>8</sup></a></span>\(\Delta \) <span class='ecrm-0800'>must be always bigger than</span> \(0\)<span class='ecrm-0800'>, by definition, and this does not depend on the bit-rate
 </span><span class='ecrm-0800'>control.</span></p>
-<!-- l. 325 --><p class='noindent'><span class='footnote-mark'><a href='#fn9x0-bk' id='fn9x0'><sup class='textsuperscript'>9</sup></a></span><span class='ecrm-0800'>Some samples are stored in the </span><span class='ectt-0800'>data </span><span class='ecrm-0800'>directory of InterCom.</span></p>                                      </div>
+<!-- l. 342 --><p class='noindent'><span class='footnote-mark'><a href='#fn9x0-bk' id='fn9x0'><sup class='textsuperscript'>9</sup></a></span><span class='ecrm-0800'>Some samples are stored in the </span><span class='ectt-0800'>data </span><span class='ecrm-0800'>directory of InterCom.</span></p>                                      </div>
  
 </body> 
 </html>
