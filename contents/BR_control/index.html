@@ -19,7 +19,7 @@
 
 <h2 class='titleHead'>Bit-Rate Control</h2>
  <div class='author'><a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp; </span><a href='https://hpca.ual.es/~savins/'><span class='ecrm-1200'>Savins Puertas Martín</span></a> <span class='ecrm-1200'>&amp; </span><a href='https://www.marcoslupion.com/'><span class='ecrm-1200'>Marcos Lupión Lorente</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>November 18, 2024</span></div>
+<div class='date'><span class='ecrm-1200'>December 2, 2024</span></div>
    </div>
    <h3 class='likesectionHead'><a id='x1-1000'></a>Contents</h3>
    <div class='tableofcontents'>
@@ -31,7 +31,6 @@
 <br />     <span class='subsectionToc'>1.5 <a href='#x1-70001.5' id='QQ2-1-8'>The current implementation(s) for the control of the bit-rate</a></span>
 <br />    <span class='sectionToc'>2 <a href='#x1-80002' id='QQ2-1-9'>Deliverables</a></span>
 <br />    <span class='sectionToc'>3 <a href='#x1-90003' id='QQ2-1-10'>Resources</a></span>
-<br />    <span class='sectionToc'><a href='#Q1-1-11'>References</a></span>
    </div>
 <!-- l. 11 --><p class='noindent'>
 </p>
@@ -42,10 +41,10 @@
 <!-- l. 15 --><p class='noindent'>Along with the latency and its variation (jitter), another main aspect to
 consider about the <a href='https://en.wikipedia.org/wiki/Telecommunications_link'>transmission link</a> used in an InterCom session is the <a href='https://en.wikipedia.org/wiki/Channel_capacityhttps://en.wikipedia.org/wiki/Network_throughput'>link
 throughput</a><span class='footnote-mark'><a href='#fn1x0' id='fn1x0-bk'><sup class='textsuperscript'>1</sup></a></span><a id='x1-3001f1'></a>
+that it can provide <span class='cite'>[<a href='#XForouzan'>2</a>, <a href='#XTanenbaum'>6</a>]</span>. This bit-rate depends on the maximum <a href='https://en.wikipedia.org/wiki/Channel_capacity'>capacity</a> (a
                                                                   
 
                                                                   
-that it can provide <span class='cite'>[<a href='#XForouzan'>2</a>, <a href='#XTanenbaum'>6</a>]</span>. This bit-rate depends on the maximum <a href='https://en.wikipedia.org/wiki/Channel_capacity'>capacity</a> (a
 characteristic closely related with the available <a href='https://en.wikipedia.org/wiki/Bandwidth_(signal_processing)'>bandwidth</a>) and the <a href='https://en.wikipedia.org/wiki/Network_congestion'>congestion level</a>
 (that basically depends on the load) of the link. In general, we can suppose that the
 capacity is constant over time (the bandwidth provided by the link does not vary
@@ -83,10 +82,10 @@ are implemented in the following modules, with different functionality:
      </p><figure class='figure'> 
 
 <div class='center'>
+<!-- l. 99 --><p class='noindent'>
                                                                   
 
                                                                   
-<!-- l. 99 --><p class='noindent'>
 </p><!-- l. 100 --><p class='noindent'><div style='text-align:center;'> <img src='graphics/reordering.svg' /> </div>  </p></div>
 <a id='x1-4005r1'></a>
 <a id='x1-4006'></a>
@@ -244,7 +243,8 @@ related to this milestone:
                                                                   
      </p></li>
 <li class='enumerate' id='x1-8005x2'>
-     <!-- l. 347 --><p class='noindent'><span class='ecbx-1000'>Compute RD (Rate/Distortion) curves</span>:
+     <!-- l. 347 --><p class='noindent'><span class='ecbx-1000'>Which    BR    control    algorithm    shows    the    best    RD
+     </span><span class='ecbx-1000'>(Rate/Distortion) curve?</span>:
      </p><!-- l. 350 --><p class='noindent'>Considering the <a href='https://en.wikipedia.org/wiki/Root-mean-square_deviation'>RMSE (Root Mean Square Error)</a> as a distortion measure
      between  the  sent  and  the  received  audio  signal,  for  a  concrete  audio
      sequence, generate the RD curve considering a set of different simulated
@@ -293,7 +293,6 @@ related to this milestone:
    </span><span class='ecti-1000'>Processing</span></a>. Cambridge University Press, 2014.
 </p>
    </div>
-<p><a id='Q1-1-11'></a></p>
    <div class='footnotes'><!-- l. 22 --><p class='indent'>     <span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='ecrm-0800'>Measured in bits per second or a</span> \(10\)<span class='ecrm-0800'>-multiple of this transmission </span><a href='https://en.wikipedia.org/wiki/Bandwidth_(computing)'><span class='ecrm-0800'>capacity</span></a><span class='ecrm-0800'>.</span></p>
 <!-- l. 50 --><p class='indent'>     <span class='footnote-mark'><a href='#fn2x0-bk' id='fn2x0'><sup class='textsuperscript'>2</sup></a></span><span class='ecrm-0800'>Notice that this upper bound in the bit-rate will also affect to the loss of chunks because if
 </span><span class='ecrm-0800'>the link capacity is smaller than the audio bit-rate (throughput), sooner or later the transmission
