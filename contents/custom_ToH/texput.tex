@@ -1,0 +1,95 @@
+% Emacs, this is -*-latex-*-
+
+\title{Custom ToH (Threshold of Hearing) Curves}
+
+\maketitle
+\tableofcontents
+
+\section{Not everyone hears the same}
+
+The ToH curve varies between individuals:
+\begin{enumerate}
+\item In general, women hear better than men.
+\item With age, we lose sensitivity to high frequencies.
+\item Exposure to loud noises over time can elevate the ToH,
+  especially in individuals exposed to loud sound.
+\item Auditory training can help detect sounds at lower intensities or
+  distinguish subtle nuances in tone.
+  % \item Short-duration sounds may require higher intensities to be
+  %   perceived compared to longer-duration ones. -> a un nuevo
+  %   hito. https://en.wikipedia.org/wiki/Critical_band
+\end{enumerate}
+
+And this can be said without considering your local audio
+infraestructure.\footnote{For example,
+  your speakers could not have a flat frequency response, or your room
+  could attenuate some frequencies.}
+
+Therefore, it is quite improbable that, at least in practice, you
+have a ToH identical to the theoretical curve shown in the previous
+milestone.
+
+\section{Why to use custom ToH curves?}
+
+If you are talking to a semi-deaf interlocutor, why would you send
+them auditory information that they will not be able to perceive? For
+this reason, this step proposes the calculation of your own ToH curve,
+information that must be transmitted to your interlocutor so that they
+can use the quantization steps adapted to your perception.
+
+\section{A procedure to determine your YoH curve}
+
+An optimal-user-specific ToH
+should take into consideration your noticeable
+\href{https://en.wikipedia.org/wiki/Quantization_(signal_processing)}{quantization
+  noise} in each subband, defining a set of QSSs (one per subband). To
+find such set, the following algorithm can be used:
+
+\begin{enumerate}
+\item %Let
+  %$\{{\mathbf l}^{N_{\text{levels}}}, {\mathbf h}^{N_{\text{levels}}},
+  %{\mathbf h}^{N_{\text{levels}}-1},\cdots, {\mathbf h}^1\}$ the
+  %wavelet representation of a
+  %chunk. %, being ${\mathbf l}^{N_{\text{levels}}}$ the lowest frequency subband.
+  Starting with the lowest frequency subband (at the first
+  iteration the rest of subbands are zero). While the noise
+  (suppose that the quantization noise follows an
+  \href{https://en.wikipedia.org/wiki/Continuous_uniform_distribution}{uniform
+    distribution}) is imperceptible:
+  \begin{enumerate}
+  \item Increase the amplitude of the noise in the subband.
+  \item Compute the inverse transform, generating a chunk of audio.
+  \item Reproduce the generated chunk, alternating every second with
+    a silence (the play of an empty chunk).
+  \end{enumerate}
+\item Continue with the next subband, but keeping the
+  highest unperceptible noise in the previously processed
+  ones.
+\end{enumerate}
+
+It's a good idea to have the option of determining the ToH of a given
+subband, without reconsidering the rest of them.
+
+\section{Deliverables}
+
+Implement the previous procedure in a Python module named
+\verb|create_ToH.py|. The output of such module should be a text file,
+named \verb|custom_ToH.txt|, with three columns (example):
+\begin{verbatim}
+# Initial_frequency_in_Herts Band-width_in_Herts ToH
+20                           50                  100
+70                           60                  80
+130                          80                  60
+210                          100                 50
+310                          150                 40
+460                          180                 30
+:                            :                   :
+\end{verbatim}
+
+Modify the module \verb|dyadic_ToH.py| to use the file
+\verb|custom_ToH.txt|, when available.
+
+\section{Resources}
+
+\bibliography{maths,data_compression,DWT,audio_coding}
+
