@@ -1,0 +1,116 @@
+<!DOCTYPE html> 
+<html lang='en-US' xml:lang='en-US'> 
+<head> <title>Custom ToH (Threshold of Hearing) Curves</title> 
+<meta charset='utf-8' /> 
+<meta content='TeX4ht (https://tug.org/tex4ht/)' name='generator' /> 
+<meta content='width=device-width,initial-scale=1' name='viewport' /> 
+<link href='index.css' rel='stylesheet' type='text/css' /> 
+<meta content='index.tex' name='src' /> 
+<script>window.MathJax = { tex: { tags: "ams", }, }; </script> 
+<script async='async' id='MathJax-script' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js' type='text/javascript'></script>  
+</head><body>
+   <div class='maketitle'>
+                                                                  
+
+                                                                  
+                                                                  
+
+                                                                  
+
+<h2 class='titleHead'>Custom ToH (Threshold of Hearing) Curves</h2>
+ <div class='author'><span class='ecrm-1200'>Vicente González Ruiz</span></div><br />
+<div class='date'><span class='ecrm-1200'>January 20, 2025</span></div>
+   </div>
+   <h3 class='likesectionHead' id='contents'><a id='x1-1000'></a>Contents</h3>
+   <div class='tableofcontents'>
+   <span class='sectionToc'>1 <a href='#not-everyone-hears-the-same' id='QQ2-1-2'>Not everyone hears the same</a></span>
+<br />   <span class='sectionToc'>2 <a href='#why-to-use-custom-toh-curves' id='QQ2-1-3'>Why to use custom ToH curves?</a></span>
+<br />   <span class='sectionToc'>3 <a href='#a-procedure-to-determine-your-yoh-curve' id='QQ2-1-4'>A procedure to determine your YoH curve</a></span>
+<br />   <span class='sectionToc'>4 <a href='#deliverables' id='QQ2-1-5'>Deliverables</a></span>
+<br />   <span class='sectionToc'>5 <a href='#resources' id='QQ2-1-6'>Resources</a></span>
+   </div>
+<!-- l. 8 --><p class='noindent'>
+</p>
+   <h3 class='sectionHead' id='not-everyone-hears-the-same'><span class='titlemark'>1   </span> <a id='x1-20001'></a>Not everyone hears the same</h3>
+<!-- l. 10 --><p class='noindent'>The ToH curve varies between individuals:
+     </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-2002x1'>In general, women hear better than men.
+     </li>
+<li class='enumerate' id='x1-2004x2'>With age, we lose sensitivity to high frequencies.
+     </li>
+<li class='enumerate' id='x1-2006x3'>Exposure  to  loud  noises  over  time  can  elevate  the  ToH,  especially  in
+     individuals exposed to loud sound.
+     </li>
+<li class='enumerate' id='x1-2008x4'>Auditory training can help detect sounds at lower intensities or distinguish
+     subtle nuances in tone.</li></ol>
+<!-- l. 23 --><p class='indent'>   And this can be said without considering your local audio
+infraestructure.<span class='footnote-mark'><a href='#fn1x0' id='fn1x0-bk'><sup class='textsuperscript'>1</sup></a></span><a id='x1-2009f1'></a>
+</p><!-- l. 28 --><p class='indent'>   Therefore, it is quite improbable that, at least in practice, you have a ToH
+identical to the theoretical curve shown in the previous milestone.
+</p><!-- l. 32 --><p class='noindent'>
+</p>
+   <h3 class='sectionHead' id='why-to-use-custom-toh-curves'><span class='titlemark'>2   </span> <a id='x1-30002'></a>Why to use custom ToH curves?</h3>
+<!-- l. 34 --><p class='noindent'>If you are talking to a semi-deaf interlocutor, why would you send them auditory
+information that they will not be able to perceive? For this reason, this step proposes
+the calculation of your own ToH curve, information that must be transmitted to your
+interlocutor so that they can use the quantization steps adapted to your
+perception.
+</p><!-- l. 40 --><p class='noindent'>
+</p>
+   <h3 class='sectionHead' id='a-procedure-to-determine-your-yoh-curve'><span class='titlemark'>3   </span> <a id='x1-40003'></a>A procedure to determine your YoH curve</h3>
+<!-- l. 42 --><p class='noindent'>An optimal-user-specific ToH should take into consideration your noticeable
+<a href='https://en.wikipedia.org/wiki/Quantization_(signal_processing)'>quantization noise</a> in each subband, defining a set of QSSs (one per subband). To find
+such set, the following algorithm can be used:
+</p><!-- l. 48 --><p class='indent'>
+     </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-4002x1'>
+     <!-- l. 54 --><p class='noindent'>Starting with the lowest frequency subband (at the first iteration the rest of
+     subbands are zero). While the noise (suppose that the quantization noise
+     follows an  <a href='https://en.wikipedia.org/wiki/Continuous_uniform_distribution'>uniform distribution</a>) is imperceptible:
+         </p><ol class='enumerate2'>
+<li class='enumerate' id='x1-4004x1'>Increase the amplitude of the noise in the subband.
+                                                                  
+
+                                                                  
+         </li>
+<li class='enumerate' id='x1-4006x2'>Compute the inverse transform, generating a chunk of audio.
+         </li>
+<li class='enumerate' id='x1-4008x3'>Reproduce  the  generated  chunk,  alternating  every  second  with  a
+         silence (the play of an empty chunk).</li></ol>
+     </li>
+<li class='enumerate' id='x1-4010x2'>Continue with the next subband, but keeping the highest unperceptible noise in
+     the previously processed ones.</li></ol>
+<!-- l. 70 --><p class='indent'>   It’s a good idea to have the option of determining the ToH of a given subband,
+without reconsidering the rest of them.
+</p><!-- l. 73 --><p class='noindent'>
+</p>
+   <h3 class='sectionHead' id='deliverables'><span class='titlemark'>4   </span> <a id='x1-50004'></a>Deliverables</h3>
+<!-- l. 75 --><p class='noindent'>Implement the previous procedure in a Python module named <span class='obeylines-h'><code class='verb'>create_ToH.py</code></span>. The
+output of such module should be a text file, named <span class='obeylines-h'><code class='verb'>custom_ToH.txt</code></span>, with three
+columns (example):
+                                                                  
+
+                                                                  
+</p>
+   <pre class='verbatim' id='verbatim-1'>
+# Initial_frequency_in_Herts Band-width_in_Herts ToH
+20                           50                  100
+70                           60                  80
+130                          80                  60
+210                          100                 50
+310                          150                 40
+460                          180                 30
+:                            :                   :
+</pre>
+<!-- l. 87 --><p class='nopar'>
+</p><!-- l. 89 --><p class='indent'>   Modify the module <span class='obeylines-h'><code class='verb'>dyadic_ToH.py</code></span> to use the file <span class='obeylines-h'><code class='verb'>custom_ToH.txt</code></span>, when
+available.
+</p><!-- l. 92 --><p class='noindent'>
+</p>
+   <h3 class='sectionHead' id='resources'><span class='titlemark'>5   </span> <a id='x1-60005'></a>Resources</h3>
+   <div class='footnotes'><a id='x1-2010x1'></a>
+<!-- l. 26 --><p class='indent'>     <span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='ecrm-0800'>For example, your speakers could not have a flat frequency response, or your room could
+attenuate some frequencies.</span></p>                                                                                      </div>
+ 
+</body> 
+</html>
