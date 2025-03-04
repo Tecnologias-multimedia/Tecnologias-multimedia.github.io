@@ -50,7 +50,7 @@ Decrease the gain of the amplifier of your speaker to do (the energy
 of) $s(t)$ as small as possible. Unfortunately this also decreases the
 volume of the far-end signal (the voice of our interlocutor) :-/
 
-\section{The simplest subtract solution}
+\section{The ``simplest'' subtract solution}
 Lets ${\mathbf m}$ the digital version of $m(t)$ and ${\mathbf m}[t]$
 it's $t$-th sample\footnote{Or frame if we work in stereo}. In this
 solution, we send
@@ -192,6 +192,58 @@ signal without the feedback, supposely containing \emph{only} our
 voice), and this is the signal that we will send to the far-end in the
 next chunk).
 
+\section{Filtering in the frequency domain}
+
+Assume that $s$ (the signal received by our microphone from our
+speaker) has essentially the same frequency spectrum as the audio
+signal being played (i.e., $h(t)=\delta(t)$, and therefore, the
+environment does not modify the spectrum of the reproduced signal). We
+denote the signal reproduced by our speaker as $f(t)$ ($f$ for
+far-end). In this case, we can propose a feedback reduction system by
+applying a filter $\mathbf{F}^{-1}$ to the captured signal
+$\mathbf{s}$, which is equal to the ``inverse'' of the spectrum of
+$\mathbf{f}$ (the signal we are reproducing). Specifically, this would
+involve:
+
+\begin{enumerate}
+\item \textbf{Calculating} $\mathbf{F}$, the Fourier transform of the
+  reproduced audio signal $\mathbf{f}$, chunk by chunk.
+\item \textbf{Calculating} $\mathbf{F}^{-1}$, the ``inverse'' of
+  $\mathbf{F}$. If $w_{\text{max}}$ is the frequency component of
+  $\mathbf{F}$ with the highest energy, $g_{\text{max}}$, i.e.,
+  $\mathbf{F}[w_{\text{max}}]=g_{\text{max}}$, and
+  $\mathbf{F}[w_{\text{min}}]=g_{\text{min}}$, normalize its spectrum
+  with:
+  \begin{equation}
+    \mathbf{F}_{\text{normalized}} = \frac{\mathbf{F} - g_{\text{min}}}{g_{\text{max}} - g_{\text{min}}},
+  \end{equation}
+  and finally calculate:
+  \begin{equation}
+    \mathbf{F}^{-1} = 1 - \mathbf{F}_{\text{normalized}}.
+  \end{equation}
+\item \textbf{Filtering the signal captured by the microphone} using
+  $\mathbf{F}^{-1}$, taking into account the attenuation factor $a$,
+  which relates how much of the reproduced signal is captured by the
+  microphone (how much of $\mathbf{f}$ is in $\mathbf{s}$), i.e.,
+  calculate:
+  \begin{equation}
+    \hat{\mathbf{N}} = a\mathbf{F}^{-1}\mathbf{S},
+  \end{equation}
+  where $\mathcal{F}(\mathbf{s})=\mathbf{N}$.
+\item \textbf{Estimating the attenuation factor} $a$ for the next
+  chunk. Initially, we assume that $a=1$ (and therefore, that there is
+  no attenuation). If it is an overestimation, then some frequency
+  components in the sent audio could disappear, and if we
+  underestimate, then some frequency components could be
+  amplified. Therefore, the attenuation factor should be high enough
+  so that the energy of $\mathbf{s}$ does not increase progressively,
+  but low enough so that some frequency components do not become 0.
+\end{enumerate}
+The signal to send (without the feedback) is:
+\begin{equation}
+  \mathbf{n} = \mathcal{F}^{-1}(\mathbf{N})
+\end{equation}
+    
 \section{Deliverables}
 
 A Python module called \texttt{feedback\_cancellation.py} that inherits
@@ -235,6 +287,10 @@ described solutions. More concretely:
   a sample-time) and compute the estimated feedback signal
   (Equation~\eqref{eq:LMS_feedback}) for every chunk. Notice that for
   doing that, we will require the first $k$ samples of the next chunk.
+
+\item For computing the Fourier transform of digital signals use a
+  library such as
+  \href{https://numpy.org/doc/2.1/reference/routines.fft.html}{\text{numpy.fft}}.
 \end{enumerate}
 
 Optionally, but interesting for your mark, use any other technique
@@ -249,7 +305,7 @@ monitored becase the physical composition of the audiosets can
 be dynamic (for example, the inclination of the screen of our laptop
 can be modified at any moment).
 
-Finally, notice that signals
+Finally, notice that
 \href{https://en.wikipedia.org/wiki/Correlation}{correlation}
 operation can help to fine-tune $d$.
 
