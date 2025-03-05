@@ -7,7 +7,7 @@
 <link href='index.css' rel='stylesheet' type='text/css' /> 
 <meta content='index.tex' name='src' /> 
 <script>window.MathJax = { tex: { tags: "ams", }, }; </script> 
- <script async='async' id='MathJax-script' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js' type='text/javascript'></script>  
+<script async='async' id='MathJax-script' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js' type='text/javascript'></script>  
 </head><body>
    <div class='maketitle'>
                                                                   
@@ -18,10 +18,10 @@
                                                                   
 
 <h2 class='titleHead'>Feedback suppression</h2>
- <div class='author'><a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp; </span><a href='https://hpca.ual.es/~savins/'><span class='ecrm-1200'>Savins Puertas Martín</span></a> <span class='ecrm-1200'>&amp; </span><a href='https://www.marcoslupion.com/'><span class='ecrm-1200'>Marcos Lupión Lorente</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>March 4, 2025</span></div>
+ <div class='author'> <a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp;  </span><a href='https://hpca.ual.es/~savins/'><span class='ecrm-1200'>Savins Puertas Martín</span></a> <span class='ecrm-1200'>&amp;  </span><a href='https://www.marcoslupion.com/'><span class='ecrm-1200'>Marcos Lupión Lorente</span></a></div><br />
+<div class='date'><span class='ecrm-1200'>March 5, 2025</span></div>
    </div>
-   <h3 class='sectionHead'><span class='titlemark'>1   </span> <a id='x1-10001'></a>The problem</h3>
+   <h3 class='sectionHead' id='the-problem'><span class='titlemark'>1   </span> <a id='x1-10001'></a>The problem</h3>
 <!-- l. 9 --><p class='noindent'>One of the first problems we encounter with the use of the <span class='ectt-1000'>buffer.py</span>
 module<span class='footnote-mark'><a href='#fn1x0' id='fn1x0-bk'><sup class='textsuperscript'>1</sup></a></span><a id='x1-1001f1'></a>
 is that, if we don’t use headphones, the sound that comes out of our PC’s speaker
@@ -30,140 +30,142 @@ reaches our interlocutor (the “far-end” ... in the system we are the “near
 in the form of an echo (signal), which is reproduced by his/her speaker,
 which can be captured again (some time later) by his/her mic and sent it
 back to us ... and so on, generating a rather unpleasant signal. In other
-words, if \(\mathbf s\) is the (analog) signal played by our (loud)speaker and that reaches
-our mic, \(\mathbf n\) is the signal emited by the near-end person (I) that reaches our
+words, if <span class='mathjax-inline'>\(\mathbf s\)</span> is the (analog) signal played by our (loud)speaker and that reaches
+our mic, <span class='mathjax-inline'>\(\mathbf n\)</span> is the signal emited by the near-end person (I) that reaches our
 mic<span class='footnote-mark'><a href='#fn2x0' id='fn2x0-bk'><sup class='textsuperscript'>2</sup></a></span><a id='x1-1003f2'></a>,
-and \(\mathbf m\) is the (mixed) signal recorded by our microphone, we have that \begin {equation}  m(t) = n(t) + s(t), \label {eq:echo_problem}  \end {equation}<a id='x1-1005r1'></a> where \(m(t)\) is the
+and <span class='mathjax-inline'>\(\mathbf m\)</span> is the (mixed) signal recorded by our microphone, we have that </p><div class='mathjax-env mathjax-equation'>\begin{equation} m(t) = n(t) + s(t), \label {eq:echo_problem} \end{equation}</div><p><a id='x1-1005r1'></a> where <span class='mathjax-inline'>\(m(t)\)</span> is the
 analog audio signal that hits the membrane of our mic.
-</p><!-- l. 30 --><p class='indent'>   Our problem here is to minimize the <a href='https://en.wikipedia.org/wiki/Energy_(signal_processing)'>energy</a> of \(s(t)\), i.e., to make \begin {equation}  s(t)\approx 0.  \end {equation}<a id='x1-1006r2'></a>
+</p><!-- l. 30 --><p class='indent'>   Our problem here is to minimize the  <a href='https://en.wikipedia.org/wiki/Energy_(signal_processing)'>energy</a> of <span class='mathjax-inline'>\(s(t)\)</span>, i.e., to make </p><div class='mathjax-env mathjax-equation'>\begin{equation} s(t)\approx 0. \end{equation}</div><p><a id='x1-1006r2'></a>
 </p><!-- l. 37 --><p class='noindent'>
 </p>
-   <h3 class='sectionHead'><span class='titlemark'>2   </span> <a id='x1-20002'></a>The trivial (and definitive) solution</h3>
-<!-- l. 39 --><p class='noindent'>Use a <a href='https://en.wikipedia.org/wiki/Audio_headset'>headset</a>. In this case, \begin {equation}  m(t) \approx n(t) \label {eq:headset_solution}  \end {equation}<a id='x1-2001r3'></a> because \(s(t)\approx 0\).
+   <h3 class='sectionHead' id='the-trivial-and-definitive-solution'><span class='titlemark'>2   </span> <a id='x1-20002'></a>The trivial (and definitive) solution</h3>
+<!-- l. 39 --><p class='noindent'>Use a  <a href='https://en.wikipedia.org/wiki/Audio_headset'>headset</a>. In this case, </p><div class='mathjax-env mathjax-equation'>\begin{equation} m(t) \approx n(t) \label {eq:headset_solution} \end{equation}</div><p><a id='x1-2001r3'></a> because <span class='mathjax-inline'>\(s(t)\approx 0\)</span>.
 </p><!-- l. 47 --><p class='noindent'>
 </p>
-   <h3 class='sectionHead'><span class='titlemark'>3   </span> <a id='x1-30003'></a>The trivial (but limited) solution</h3>
+   <h3 class='sectionHead' id='the-trivial-but-limited-solution'><span class='titlemark'>3   </span> <a id='x1-30003'></a>The trivial (but limited) solution</h3>
                                                                   
 
                                                                   
-<!-- l. 49 --><p class='noindent'>Decrease the gain of the amplifier of your speaker to do (the energy of) \(s(t)\) as small as
+<!-- l. 49 --><p class='noindent'>Decrease the gain of the amplifier of your speaker to do (the energy of) <span class='mathjax-inline'>\(s(t)\)</span> as small as
 possible. Unfortunately this also decreases the volume of the far-end signal (the voice
 of our interlocutor) :-/
 </p><!-- l. 53 --><p class='noindent'>
 </p>
-   <h3 class='sectionHead'><span class='titlemark'>4   </span> <a id='x1-40004'></a>The “simplest” subtract solution</h3>
-<!-- l. 54 --><p class='noindent'>Lets \(\mathbf m\) the digital version of \(m(t)\) and \({\mathbf m}[t]\) it’s \(t\)-th
+   <h3 class='sectionHead' id='the-simplest-subtract-solution'><span class='titlemark'>4   </span> <a id='x1-40004'></a>The “simplest” subtract solution</h3>
+<!-- l. 54 --><p class='noindent'>Lets <span class='mathjax-inline'>\(\mathbf m\)</span> the digital version of <span class='mathjax-inline'>\(m(t)\)</span> and <span class='mathjax-inline'>\({\mathbf m}[t]\)</span> it’s <span class='mathjax-inline'>\(t\)</span>-th
 sample<span class='footnote-mark'><a href='#fn3x0' id='fn3x0-bk'><sup class='textsuperscript'>3</sup></a></span><a id='x1-4001f3'></a>.
-In this solution, we send \begin {equation}  \tilde {\mathbf n}[t] = {\mathbf m}[t] - a{\mathbf s}[t-d], \label {eq:simplest}  \end {equation}<a id='x1-4003r4'></a> where \(a\) is an attenuation (scalar) value, and \(d\) represents the
+In this solution, we send </p><div class='mathjax-env mathjax-equation'>\begin{equation} \tilde {\mathbf n}[t] = {\mathbf m}[t] - a{\mathbf s}[t-d], \label {eq:simplest} \end{equation}</div><p><a id='x1-4003r4'></a> where <span class='mathjax-inline'>\(a\)</span> is an attenuation (scalar) value, and <span class='mathjax-inline'>\(d\)</span> represents the
 delay<span class='footnote-mark'><a href='#fn4x0' id='fn4x0-bk'><sup class='textsuperscript'>4</sup></a></span><a id='x1-4004f4'></a> (measured
-in sample-times) required to propagate the sound from our speaker to our mic. We define \begin {equation}  \hat {\mathbf f}[t] = a{\mathbf s}[t-d]  \end {equation}<a id='x1-4006r5'></a> as
+in sample-times) required to propagate the sound from our speaker to our mic. We define </p><div class='mathjax-env mathjax-equation'>\begin{equation} \hat {\mathbf f}[t] = a{\mathbf s}[t-d] \end{equation}</div><p><a id='x1-4006r5'></a> as
 the estimated<span class='footnote-mark'><a href='#fn5x0' id='fn5x0-bk'><sup class='textsuperscript'>5</sup></a></span><a id='x1-4007f5'></a>
 feedback signal.
-</p><!-- l. 76 --><p class='indent'>   Notice that we have used the symbol \(\tilde {}\) to highlight that \(\tilde {\mathbf n}\) will be an approximation
-of \(\mathbf n\).
+</p><!-- l. 76 --><p class='indent'>   Notice that we have used the symbol <span class='mathjax-inline'>\(\tilde {}\)</span> to highlight that <span class='mathjax-inline'>\(\tilde {\mathbf n}\)</span> will be an approximation
+of <span class='mathjax-inline'>\(\mathbf n\)</span>.
 </p><!-- l. 79 --><p class='noindent'>
 </p>
-   <h3 class='sectionHead'><span class='titlemark'>5   </span> <a id='x1-50005'></a>Considering the frequency response of the near-end to estimate feedback
+   <h3 class='sectionHead' id='considering-the-frequency-response-of-the-nearend-to-estimate-feedback-signal'><span class='titlemark'>5   </span> <a id='x1-50005'></a>Considering the frequency response of the near-end to estimate feedback
 signal</h3>
 <!-- l. 80 --><p class='noindent'>We can improve the performance of the feedback cancellation process if we take also
 into consideration that the feedback signal that finally reaches our mic is the
-<a href='https://en.wikipedia.org/wiki/Convolution'>convolution</a> of \(s(t)\) and a signal \(h(t)\) that represents the echo response of our local audioset
+<a href='https://en.wikipedia.org/wiki/Convolution'>convolution</a> of <span class='mathjax-inline'>\(s(t)\)</span> and a signal <span class='mathjax-inline'>\(h(t)\)</span> that represents the echo response of our local audioset
 (speaker, mic, walls, monitor, keyboard, our body, etc.) to a impulse signal
-\(\delta (t)\).<span class='footnote-mark'><a href='#fn6x0' id='fn6x0-bk'><sup class='textsuperscript'>6</sup></a></span><a id='x1-5001f6'></a> In
-other words, we can compute \begin {equation}  \tilde {\mathbf n}[t] = {\mathbf m}[t] - ({\mathbf s}*{\mathbf h})[t-d], \label {eq:using_convolution}  \end {equation}<a id='x1-5003r6'></a> where \(*\) represents the convolution between (in
-our case of) digital signals, and \(\mathbf h\) is the digitalized (discrete + quantized)
-version of \(h(t)\), the response (echo) of the near-end audioset to the impact of
-\(\delta (t)\).
+<span class='mathjax-inline'>\(\delta (t)\)</span>.<span class='footnote-mark'><a href='#fn6x0' id='fn6x0-bk'><sup class='textsuperscript'>6</sup></a></span><a id='x1-5001f6'></a> In
+other words, we can compute </p><div class='mathjax-env mathjax-equation'>\begin{equation} \tilde {\mathbf n}[t] = {\mathbf m}[t] - ({\mathbf s}*{\mathbf h})[t-d], \label {eq:using_convolution} \end{equation}</div><p><a id='x1-5003r6'></a> where <span class='mathjax-inline'>\(*\)</span> represents the convolution between (in
+our case of) digital signals, and <span class='mathjax-inline'>\(\mathbf h\)</span> is the digitalized (discrete + quantized)
+version of <span class='mathjax-inline'>\(h(t)\)</span>, the response (echo) of the near-end audioset to the impact of
+<span class='mathjax-inline'>\(\delta (t)\)</span>.
 </p><!-- l. 99 --><p class='indent'>   The convolution of digital signals in the time domain can be expensive (with
-<a href='https://en.wikipedia.org/wiki/Computational_complexity_theory'>computational complexity</a> \(O^2\), where \(O\) is the number of elements to process) if the
+<a href='https://en.wikipedia.org/wiki/Computational_complexity_theory'>computational complexity</a> <span class='mathjax-inline'>\(O^2\)</span>, where <span class='mathjax-inline'>\(O\)</span> is the number of elements to process) if the
 number of samples or/and filter coefficientsis is high. Fortunately, thanks to the
 <a href='https://en.wikipedia.org/wiki/Convolution'>theorem of the convolution</a> of signals in the frequency domain <span class='cite'>[<a href='#Xkovacevic2013fourier'>3</a>, <a href='#XOppenheim2'>4</a>]</span>, the
-convolution can be replaced by the <a href='https://en.wikipedia.org/wiki/Dot_product'>dot product</a> (with complexity \(O\)), when we
+convolution can be replaced by the  <a href='https://en.wikipedia.org/wiki/Dot_product'>dot product</a> (with complexity <span class='mathjax-inline'>\(O\)</span>), when we
 consider the signals in the frequency domain. Thanks to this, we can rewrite
-the Eq. \eqref{eq:using_convolution} as \begin {equation}  \tilde {\mathbf n}[t] = {\mathbf m}[t] - ({\mathcal F}^{-1}\{{\mathbf S}{\mathbf H}\})[t-d], \label {eq:faster}  \end {equation}<a id='x1-5004r7'></a> where \(\mathbf S\) is the (digital) Fourier
+the Eq. \eqref{eq:using_convolution} as </p><div class='mathjax-env mathjax-equation'>\begin{equation} \tilde {\mathbf n}[t] = {\mathbf m}[t] - ({\mathcal F}^{-1}\{{\mathbf S}{\mathbf H}\})[t-d], \label {eq:faster} \end{equation}</div><p><a id='x1-5004r7'></a> where <span class='mathjax-inline'>\(\mathbf S\)</span> is the (digital) Fourier
 transform<span class='footnote-mark'><a href='#fn7x0' id='fn7x0-bk'><sup class='textsuperscript'>7</sup></a></span><a id='x1-5005f7'></a>
-of \(\mathbf s\), \(\mathbf H\) is the Fourier transform of \(\mathbf h\), and \({\mathcal F}^{-1}\) represents the inverse Fourier transform.
+of <span class='mathjax-inline'>\(\mathbf s\)</span>, <span class='mathjax-inline'>\(\mathbf H\)</span> is the Fourier transform of <span class='mathjax-inline'>\(\mathbf h\)</span>, and <span class='mathjax-inline'>\({\mathcal F}^{-1}\)</span> represents the inverse Fourier transform.
 Notice that all these transforms are applied to digital signals, and there exist fast
-algorithms (with complexity \(O\log _2O\)).
+algorithms (with complexity <span class='mathjax-inline'>\(O\log _2O\)</span>).
                                                                   
 
                                                                   
 </p><!-- l. 128 --><p class='noindent'>
 </p>
-   <h3 class='sectionHead'><span class='titlemark'>6   </span> <a id='x1-60006'></a>Estimation of the feedback signal using LMS (Least Mean Squares)</h3>
+   <h3 class='sectionHead' id='estimation-of-the-feedback-signal-using-lms-least-mean-squares'><span class='titlemark'>6   </span> <a id='x1-60006'></a>Estimation of the feedback signal using LMS (Least Mean Squares)</h3>
 <!-- l. 129 --><p class='noindent'>We just have seen how it is possible to find better estimations of the feedback
-signal \(\hat {\mathbf f}\) using convolutions. By definition, convolutions are performed by
+signal <span class='mathjax-inline'>\(\hat {\mathbf f}\)</span> using convolutions. By definition, convolutions are performed by
 filters.
 </p><!-- l. 133 --><p class='indent'>   As we have seen, filters can be implemented in the frequency domain or in the signal
 (time in our case) domain. Signal domain (digital) convolutions are efficient when the
 length<span class='footnote-mark'><a href='#fn8x0' id='fn8x0-bk'><sup class='textsuperscript'>8</sup></a></span><a id='x1-6001f8'></a> of the (digital)
 filters is small.<span class='footnote-mark'><a href='#fn9x0' id='fn9x0-bk'><sup class='textsuperscript'>9</sup></a></span><a id='x1-6003f9'></a>
-For estimating the feedback signal at the sample-time \(t\), \({\mathbf f}[t]\), the length of a <a href='https://en.wikipedia.org/wiki/Finite_impulse_response'>FIR filter</a>
-should be at least \(d\), because at least we need \(d\) samples to detect the feedback signal.
-Therefore, we have that \begin {equation}  \hat {\mathbf f}[t] = \sum _{k=0}^{d-1}{\mathbf h}_k^{(t)}{\mathbf s}[t-k], \label {eq:LMS_feedback}  \end {equation}<a id='x1-6005r8'></a> where \(\mathbf h\) is the near-end impulse response in the time
+For estimating the feedback signal at the sample-time <span class='mathjax-inline'>\(t\)</span>, <span class='mathjax-inline'>\({\mathbf f}[t]\)</span>, the length of a  <a href='https://en.wikipedia.org/wiki/Finite_impulse_response'>FIR filter</a>
+should be at least <span class='mathjax-inline'>\(d\)</span>, because at least we need <span class='mathjax-inline'>\(d\)</span> samples to detect the feedback signal.
+Therefore, we have that </p><div class='mathjax-env mathjax-equation'>\begin{equation} \hat {\mathbf f}[t] = \sum _{k=0}^{d-1}{\mathbf h}_k^{(t)}{\mathbf s}[t-k], \label {eq:LMS_feedback} \end{equation}</div><p><a id='x1-6005r8'></a> where <span class='mathjax-inline'>\(\mathbf h\)</span> is the near-end impulse response in the time
 domain.
 </p><!-- l. 151 --><p class='indent'>   Also, as we have seen in the previous section, it is possible to adapt the filter to
 the acoustic conditions, measuring the echo generated by the impulse signal. In the
 time domain, one of the most used techniques for computing the coefficients of a FIR
-filter is the <a href='https://en.wikipedia.org/wiki/Least_mean_squares_filter'>LMS (Least Mean Squares) algorithm</a> <span class='cite'>[<a href='#Xhaykin1995adaptive'>2</a>, <a href='#Xboyd2004convex'>1</a>]</span>, among other reasons
+filter is the  <a href='https://en.wikipedia.org/wiki/Least_mean_squares_filter'>LMS (Least Mean Squares) algorithm</a> <span class='cite'>[<a href='#Xhaykin1995adaptive'>2</a>, <a href='#Xboyd2004convex'>1</a>]</span>, among other reasons
 because the filter (coefficients) can be adapted to variations in the signal to filter (the
 filter can learn).
 </p><!-- l. 161 --><p class='indent'>   LMS was invented by professor Bernard Widrow and his first
-Ph.D. student, Ted Hoff, to train the <a href='https://en.wikipedia.org/wiki/ADALINE'>ADALINE</a> artificial neural
+Ph.D. student, Ted Hoff, to train the  <a href='https://en.wikipedia.org/wiki/ADALINE'>ADALINE</a> artificial neural
 network.<span class='footnote-mark'><a href='#fn10x0' id='fn10x0-bk'><sup class='textsuperscript'>10</sup></a></span><a id='x1-6006f10'></a>
 Using LMS, ADALINE is able to distinguish between patterns, even using a part of a single
 neuron.<span class='footnote-mark'><a href='#fn11x0' id='fn11x0-bk'><sup class='textsuperscript'>11</sup></a></span><a id='x1-6008f11'></a>
 </p><!-- l. 172 --><p class='indent'>   LMS can be used to compute the coefficients of a filter to provide a desired
-output for a given input. In our context, the input signal is \(\mathbf m\) (the digital signal
-recorded by our soundcard) and the desired output signal is \(\mathbf n\) (the digital version of
-our voice). LMS, iteratively computes \begin {align}  {\mathbf h}^{(i+1)}_k &amp; = &amp; {\mathbf h}^{(i)}_k + 2\mu \tilde {\mathbf n}[i]{\mathbf s}[i-k] \label {eq:update} \\ \tilde {\mathbf n}[i] &amp; = &amp; {\mathbf m}[i] - \hat {\mathbf e}[i],  \end {align}
-</p><!-- l. 182 --><p class='indent'>   where \(i\) represents the iteration number, and \(\mu \) is the learning
+output for a given input. In our context, the input signal is <span class='mathjax-inline'>\(\mathbf m\)</span> (the digital signal
+recorded by our soundcard) and the desired output signal is <span class='mathjax-inline'>\(\mathbf n\)</span> (the digital version of
+our voice). LMS, iteratively computes </p><div class='mathjax-env mathjax-align'>\begin{align} {\mathbf h}^{(i+1)}_k &amp; = &amp; {\mathbf h}^{(i)}_k + 2\mu \tilde {\mathbf n}[i]{\mathbf s}[i-k] \label {eq:update} \\ \tilde {\mathbf n}[i] &amp; = &amp; {\mathbf m}[i] - \hat {\mathbf e}[i], \end{align}</div>
+<!-- l. 182 --><p class='indent'>   where <span class='mathjax-inline'>\(i\)</span> represents the iteration number, and <span class='mathjax-inline'>\(\mu \)</span> is the learning
 rate<span class='footnote-mark'><a href='#fn12x0' id='fn12x0-bk'><sup class='textsuperscript'>12</sup></a></span><a id='x1-6010f12'></a>. These equations
 can be found<span class='footnote-mark'><a href='#fn13x0' id='fn13x0-bk'><sup class='textsuperscript'>13</sup></a></span><a id='x1-6012f13'></a>
-using the (steepest) <a href='https://en.wikipedia.org/wiki/Gradient_descent'>gradient descend algorithm</a>. Notice that we process the signals
-sample-by-sample (at iteration \(i\) we compute the \(i\)-th sample of \(\tilde {\mathbf n}\) (the signal without
+using the (steepest)  <a href='https://en.wikipedia.org/wiki/Gradient_descent'>gradient descend algorithm</a>. Notice that we process the signals
+sample-by-sample (at iteration <span class='mathjax-inline'>\(i\)</span> we compute the <span class='mathjax-inline'>\(i\)</span>-th sample of <span class='mathjax-inline'>\(\tilde {\mathbf n}\)</span> (the signal without
 the feedback, supposely containing <span class='ecti-1000'>only </span>our voice), and this is the signal that we will
 send to the far-end in the next chunk).
 </p><!-- l. 195 --><p class='noindent'>
 </p>
-   <h3 class='sectionHead'><span class='titlemark'>7   </span> <a id='x1-70007'></a>Filtering in the frequency domain</h3>
-<!-- l. 197 --><p class='noindent'>Assume that \(s\) (the signal received by our microphone from our speaker) has
+   <h3 class='sectionHead' id='filtering-in-the-frequency-domain'><span class='titlemark'>7   </span> <a id='x1-70007'></a>Filtering in the frequency domain</h3>
+<!-- l. 197 --><p class='noindent'>Assume that <span class='mathjax-inline'>\(s\)</span> (the signal received by our microphone from our speaker) has
 essentially the same frequency spectrum as the audio signal being played
-(i.e., \(h(t)=\delta (t)\), and therefore, the environment does not modify the spectrum of the
-reproduced signal). We denote the signal reproduced by our speaker as \(f(t)\) (\(f\)
+(i.e., <span class='mathjax-inline'>\(h(t)=\delta (t)\)</span>, and therefore, the environment does not modify the spectrum of the
+reproduced signal). We denote the signal reproduced by our speaker as <span class='mathjax-inline'>\(f(t)\)</span> (<span class='mathjax-inline'>\(f\)</span>
                                                                   
 
                                                                   
 for far-end). In this case, we can propose a feedback reduction system by
-applying a filter \(\mathbf {F}^{-1}\) to the captured signal \(\mathbf {s}\), which is equal to the “inverse” of
-the spectrum of \(\mathbf {f}\) (the signal we are reproducing). Specifically, this would
+applying a filter <span class='mathjax-inline'>\(\mathbf {F}^{-1}\)</span> to the captured signal <span class='mathjax-inline'>\(\mathbf {s}\)</span>, which is equal to the “inverse” of
+the spectrum of <span class='mathjax-inline'>\(\mathbf {f}\)</span> (the signal we are reproducing). Specifically, this would
 involve:
 </p><!-- l. 208 --><p class='indent'>
      </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-7002x1'><span class='ecbx-1000'>Calculating</span> \(\mathbf {F}\), the Fourier transform of the reproduced audio signal \(\mathbf {f}\),
+<li class='enumerate' id='x1-7002x1'><span class='ecbx-1000'>Calculating </span><span class='mathjax-inline'>\(\mathbf {F}\)</span>, the Fourier transform of the reproduced audio signal <span class='mathjax-inline'>\(\mathbf {f}\)</span>,
      chunk by chunk.
      </li>
-<li class='enumerate' id='x1-7004x2'><span class='ecbx-1000'>Calculating</span> \(\mathbf {F}^{-1}\), the “inverse” of \(\mathbf {F}\). If \(w_{\text {max}}\) is the frequency component of \(\mathbf {F}\) with the
-     highest energy, \(g_{\text {max}}\), i.e., \(\mathbf {F}[w_{\text {max}}]=g_{\text {max}}\), and \(\mathbf {F}[w_{\text {min}}]=g_{\text {min}}\), normalize its spectrum with: \begin {equation}  \mathbf {F}_{\text {normalized}} = \frac {\mathbf {F} - g_{\text {min}}}{g_{\text {max}} - g_{\text {min}}},  \end {equation}<a id='x1-7005r9'></a> and finally calculate:
-     \begin {equation}  \mathbf {F}^{-1} = 1 - \mathbf {F}_{\text {normalized}}.  \end {equation}<a id='x1-7006r10'></a>
+<li class='enumerate' id='x1-7004x2'>
+     <!-- l. 211 --><p class='noindent'><span class='ecbx-1000'>Calculating </span><span class='mathjax-inline'>\(\mathbf {F}^{-1}\)</span>, the “inverse” of <span class='mathjax-inline'>\(\mathbf {F}\)</span>. If <span class='mathjax-inline'>\(w_{\text {max}}\)</span> is the frequency component of <span class='mathjax-inline'>\(\mathbf {F}\)</span> with the
+     highest energy, <span class='mathjax-inline'>\(g_{\text {max}}\)</span>, i.e., <span class='mathjax-inline'>\(\mathbf {F}[w_{\text {max}}]=g_{\text {max}}\)</span>, and <span class='mathjax-inline'>\(\mathbf {F}[w_{\text {min}}]=g_{\text {min}}\)</span>, normalize its spectrum with: </p><div class='mathjax-env mathjax-equation'>\begin{equation} \mathbf {F}_{\text {normalized}} = \frac {\mathbf {F} - g_{\text {min}}}{g_{\text {max}} - g_{\text {min}}}, \end{equation}</div><a id='x1-7005r9'></a> and finally calculate:
+     <div class='mathjax-env mathjax-equation'>\begin{equation} \mathbf {F}^{-1} = 1 - \mathbf {F}_{\text {normalized}}. \end{equation}</div><a id='x1-7006r10'></a>
      </li>
-<li class='enumerate' id='x1-7008x3'><span class='ecbx-1000'>Filtering the signal captured by the microphone </span>using \(\mathbf {F}^{-1}\), taking into
-     account the attenuation factor \(a\), which relates how much of the reproduced
-     signal is captured by the microphone (how much of \(\mathbf {f}\) is in \(\mathbf {s}\)), i.e., calculate: \begin {equation}  \hat {\mathbf {N}} = a\mathbf {F}^{-1}\mathbf {S},  \end {equation}<a id='x1-7009r11'></a>
-     where \(\mathcal {F}(\mathbf {s})=\mathbf {N}\).
+<li class='enumerate' id='x1-7008x3'>
+     <!-- l. 224 --><p class='noindent'><span class='ecbx-1000'>Filtering the signal captured by the microphone </span>using <span class='mathjax-inline'>\(\mathbf {F}^{-1}\)</span>, taking into
+     account the attenuation factor <span class='mathjax-inline'>\(a\)</span>, which relates how much of the reproduced
+     signal is captured by the microphone (how much of <span class='mathjax-inline'>\(\mathbf {f}\)</span> is in <span class='mathjax-inline'>\(\mathbf {s}\)</span>), i.e., calculate: </p><div class='mathjax-env mathjax-equation'>\begin{equation} \hat {\mathbf {N}} = a\mathbf {F}^{-1}\mathbf {S}, \end{equation}</div><a id='x1-7009r11'></a>
+     where <span class='mathjax-inline'>\(\mathcal {F}(\mathbf {s})=\mathbf {N}\)</span>.
      </li>
-<li class='enumerate' id='x1-7011x4'><span class='ecbx-1000'>Estimating the attenuation factor</span> \(a\) for the next chunk. Initially,
-     we assume that \(a=1\) (and therefore, that there is no attenuation). If it
+<li class='enumerate' id='x1-7011x4'><span class='ecbx-1000'>Estimating the attenuation factor </span><span class='mathjax-inline'>\(a\)</span> for the next chunk. Initially,
+     we assume that <span class='mathjax-inline'>\(a=1\)</span> (and therefore, that there is no attenuation). If it
      is an overestimation, then some frequency components in the sent
      audio could disappear, and if we underestimate, then some frequency
      components could be amplified. Therefore, the attenuation factor should be
-     high enough so that the energy of \(\mathbf {s}\) does not increase progressively,
+     high enough so that the energy of <span class='mathjax-inline'>\(\mathbf {s}\)</span> does not increase progressively,
      but low enough so that some frequency components do not become
      0.</li></ol>
-<!-- l. 242 --><p class='noindent'>The signal to send (without the feedback) is: \begin {equation}  \mathbf {n} = \mathcal {F}^{-1}(\mathbf {N})  \end {equation}<a id='x1-7012r12'></a>
+<!-- l. 242 --><p class='noindent'>The signal to send (without the feedback) is: </p><div class='mathjax-env mathjax-equation'>\begin{equation} \mathbf {n} = \mathcal {F}^{-1}(\mathbf {N}) \end{equation}</div><p><a id='x1-7012r12'></a>
 </p><!-- l. 247 --><p class='noindent'>
 </p>
-   <h3 class='sectionHead'><span class='titlemark'>8   </span> <a id='x1-80008'></a>Deliverables</h3>
+   <h3 class='sectionHead' id='deliverables'><span class='titlemark'>8   </span> <a id='x1-80008'></a>Deliverables</h3>
                                                                   
 
                                                                   
@@ -172,25 +174,25 @@ implements at least<span class='footnote-mark'><a href='#fn14x0' id='fn14x0-bk'>
 one of the previously described solutions. More concretely:
 </p><!-- l. 254 --><p class='indent'>
      </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-8004x1'>If you implement the “\(s(t)\) delay and subtract solution”, you must estimate
-     \(a\),  \(d\)  and  perform  the  signals  subtraction  to  remove  the  feedback  signal
-     (\(s(t)\)). For example, Skype finds \(d\) and \(a\) using a “call-signal”  (a sequence of
-     more-or-less tonal sounds). \(d\) is determined measuring the propagation time
-     of the call-signal between our speaker and our mic, and \(a\) measuring the
+<li class='enumerate' id='x1-8004x1'>If you implement the “<span class='mathjax-inline'>\(s(t)\)</span> delay and subtract solution”, you must estimate
+     <span class='mathjax-inline'>\(a\)</span>,  <span class='mathjax-inline'>\(d\)</span>  and  perform  the  signals  subtraction  to  remove  the  feedback  signal
+     (<span class='mathjax-inline'>\(s(t)\)</span>). For example, Skype finds <span class='mathjax-inline'>\(d\)</span> and <span class='mathjax-inline'>\(a\)</span> using a “call-signal”  (a sequence of
+     more-or-less tonal sounds). <span class='mathjax-inline'>\(d\)</span> is determined measuring the propagation time
+     of the call-signal between our speaker and our mic, and <span class='mathjax-inline'>\(a\)</span> measuring the
      ratio between the energy of the call-signal played and the energy of the
      call-signal recorded.
      </li>
 <li class='enumerate' id='x1-8006x2'>
-     <!-- l. 265 --><p class='noindent'>In a “\(s(t)\) delay and subtract solution”, if you also consider the frequency
+     <!-- l. 265 --><p class='noindent'>In a “<span class='mathjax-inline'>\(s(t)\)</span> delay and subtract solution”, if you also consider the frequency
      response of the near-end audioset to estimate a better feedback signal, first
-     you will need to find \(\mathbf H\) (the discrete frequency response of your audioset).
-     For this, the near-end speaker should generate an impulse signal \(\mathbf \delta \), and in
+     you will need to find <span class='mathjax-inline'>\(\mathbf H\)</span> (the discrete frequency response of your audioset).
+     For this, the near-end speaker should generate an impulse signal <span class='mathjax-inline'>\(\mathbf \delta \)</span>, and in
      absence of any other sound signal, record the echo and compute its Fourier
      transform (it is a good idea to repeat this process several times to obtain a
-     better estimation of \(\mathbf H\)). Finally, notice that \({\mathbf H}[\omega ]\) (the \(\omega \)-th frequency component
-     of \(\mathbf H\)) is a complex number (the Fourier coefficients are complex numbers).
+     better estimation of <span class='mathjax-inline'>\(\mathbf H\)</span>). Finally, notice that <span class='mathjax-inline'>\({\mathbf H}[\omega ]\)</span> (the <span class='mathjax-inline'>\(\omega \)</span>-th frequency component
+     of <span class='mathjax-inline'>\(\mathbf H\)</span>) is a complex number (the Fourier coefficients are complex numbers).
      </p><!-- l. 277 --><p class='noindent'>Notice that the frequency characterization of the far-end audioset can be
-     also used in a “\(n(t)\) delay and subtract solution”. Remember that filtering
+     also used in a “<span class='mathjax-inline'>\(n(t)\)</span> delay and subtract solution”. Remember that filtering
      operations  must  be  implemented  with  convolutions  in  the  temporal
      domain, but are dot products in the frequency domain.
      </p></li>
@@ -199,11 +201,11 @@ one of the previously described solutions. More concretely:
      coefficients of the LMS filter (Equation \eqref{eq:update} can run with
      a cadence much higher than a sample-time) and compute the estimated
      feedback  signal  (Equation \eqref{eq:LMS_feedback})  for  every  chunk.
-     Notice that for doing that, we will require the first \(k\) samples of the next
+     Notice that for doing that, we will require the first <span class='mathjax-inline'>\(k\)</span> samples of the next
      chunk.
      </li>
 <li class='enumerate' id='x1-8010x4'>For computing the Fourier transform of digital signals use a library such
-     as <a href='https://numpy.org/doc/2.1/reference/routines.fft.html'>numpy.fft</a>.</li></ol>
+     as  <a href='https://numpy.org/doc/2.1/reference/routines.fft.html'>numpy.fft</a>.</li></ol>
 <!-- l. 296 --><p class='indent'>   Optionally, but interesting for your mark, use any other technique (for example, an artificial
 neural network<span class='footnote-mark'><a href='#fn15x0' id='fn15x0-bk'><sup class='textsuperscript'>15</sup></a></span><a id='x1-8011f15'></a>)
 for estimating the echo, and use it for removing the echo (obviously, in real-time). Take also into
@@ -212,25 +214,25 @@ continously<span class='footnote-mark'><a href='#fn16x0' id='fn16x0-bk'><sup cla
 monitored becase the physical composition of the audiosets can be dynamic (for
 example, the inclination of the screen of our laptop can be modified at any
 moment).
-</p><!-- l. 308 --><p class='indent'>   Finally, notice that <a href='https://en.wikipedia.org/wiki/Correlation'>correlation</a> operation can help to fine-tune \(d\).
+</p><!-- l. 308 --><p class='indent'>   Finally, notice that  <a href='https://en.wikipedia.org/wiki/Correlation'>correlation</a> operation can help to fine-tune <span class='mathjax-inline'>\(d\)</span>.
 </p><!-- l. 312 --><p class='noindent'>
 </p>
-   <h3 class='sectionHead'><span class='titlemark'>9   </span> <a id='x1-90009'></a>Resources</h3>
+   <h3 class='sectionHead' id='resources'><span class='titlemark'>9   </span> <a id='x1-90009'></a>Resources</h3>
    <div class='thebibliography'>
    <p class='bibitem'><span class='biblabel'>
- [1]<span class='bibsp'>   </span></span><a id='Xboyd2004convex'></a>Stephen  Boyd  and  Lieven  Vandenberghe.     <a href='https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf'><span class='ecti-1000'>Convex  Optimization</span></a>.
+ [1]<span class='bibsp'>   </span></span><a id='Xboyd2004convex'></a>Stephen  Boyd  and  Lieven  Vandenberghe.      <a href='https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf'><span class='ecti-1000'>Convex  Optimization</span></a>.
    Cambridge University Press, 2004.
    </p>
    <p class='bibitem'><span class='biblabel'>
- [2]<span class='bibsp'>   </span></span><a id='Xhaykin1995adaptive'></a>S. Haykin. <a href='https://users.ics.forth.gr/~tsakalid/UVEG09/Book/Haykin-AFT(3rd.Ed.)_Introduction.pdf'><span class='ecti-1000'>Adaptive Filter Theory (3rd edition)</span></a>. Prentice Hall, 1995.
+ [2]<span class='bibsp'>   </span></span><a id='Xhaykin1995adaptive'></a>S. Haykin.  <a href='https://users.ics.forth.gr/~tsakalid/UVEG09/Book/Haykin-AFT(3rd.Ed.)_Introduction.pdf'><span class='ecti-1000'>Adaptive Filter Theory (3rd edition)</span></a>. Prentice Hall, 1995.
    </p>
    <p class='bibitem'><span class='biblabel'>
- [3]<span class='bibsp'>   </span></span><a id='Xkovacevic2013fourier'></a>J. Kovačević,  V.K.  Goyal,  and  M. Vetterli.   <a href='https://foundationsofsignalprocessing.org/FWSP_a3.2_2013.pdf'><span class='ecti-1000'>Fourier and Wavelet
-   </span><span class='ecti-1000'>Signal Processing</span></a>. <a class='url' href='http://www.fourierandwavelets.org/'><span class='ectt-1000'>http://www.fourierandwavelets.org/</span></a>, 2013.
+ [3]<span class='bibsp'>   </span></span><a id='Xkovacevic2013fourier'></a>J. Kovačević, V.K. Goyal, and M. Vetterli.  <a href='https://foundationsofsignalprocessing.org/FWSP_a3.2_2013.pdf'><span class='ecti-1000'>Fourier and Wavelet Signal
+   Processing</span></a>. <a class='url' href='http://www.fourierandwavelets.org/'><span class='ectt-1000'>http://www.fourierandwavelets.org/</span></a>, 2013.
    </p>
    <p class='bibitem'><span class='biblabel'>
- [4]<span class='bibsp'>   </span></span><a id='XOppenheim2'></a>Alan V. Oppenheim, Alan S. Willsky, and S. Hamid Nawab.  <a href='http://materias.df.uba.ar/l5a2021c1/files/2021/05/Alan-V.-Oppenheim-Alan-S.-Willsky-with-S.-Hamid-Signals-and-Systems-Prentice-Hall-1996.pdf'><span class='ecti-1000'>Signals
-   </span><span class='ecti-1000'>and Systems (2nd edition)</span></a>. Prentice Hall, 1997.
+ [4]<span class='bibsp'>   </span></span><a id='XOppenheim2'></a>Alan V. Oppenheim, Alan S. Willsky, and S. Hamid Nawab.   <a href='http://materias.df.uba.ar/l5a2021c1/files/2021/05/Alan-V.-Oppenheim-Alan-S.-Willsky-with-S.-Hamid-Signals-and-Systems-Prentice-Hall-1996.pdf'><span class='ecti-1000'>Signals
+   and Systems (2nd edition)</span></a>. Prentice Hall, 1997.
 </p>
    </div>
                                                                   
@@ -241,28 +243,28 @@ moment).
 <!-- l. 22 --><p class='indent'>     <span class='footnote-mark'><a href='#fn2x0-bk' id='fn2x0'><sup class='textsuperscript'>2</sup></a></span><span class='ecrm-0800'>I.e., the same signal that would be captured by our mic if I were using a headset.</span></p><a id='x1-4002x4'></a>
 <!-- l. 55 --><p class='indent'>     <span class='footnote-mark'><a href='#fn3x0-bk' id='fn3x0'><sup class='textsuperscript'>3</sup></a></span><span class='ecrm-0800'>Or frame if we work in stereo</span></p><a id='x1-4005x4'></a>
 <!-- l. 65 --><p class='indent'>     <span class='footnote-mark'><a href='#fn4x0-bk' id='fn4x0'><sup class='textsuperscript'>4</sup></a></span><span class='ecrm-0800'>In a digital signal the sample index indicates the position of the sample in the sequence of
-</span><span class='ecrm-0800'>samples. If we also know the sample-time, i.e., the cadency of the sampler, we can also compute at
-</span><span class='ecrm-0800'>which time was taken a sample.</span></p><a id='x1-4008x4'></a>
+samples. If we also know the sample-time, i.e., the cadency of the sampler, we can also compute at
+which time was taken a sample.</span></p><a id='x1-4008x4'></a>
 <!-- l. 74 --><p class='indent'>     <span class='footnote-mark'><a href='#fn5x0-bk' id='fn5x0'><sup class='textsuperscript'>5</sup></a></span><span class='ecrm-0800'>We use the word “estimated” because in this model we are ignoring several factors, such as
-</span><span class='ecrm-0800'>echoes, unflat frequency responses, etc. that modify the version of</span> \(\mathbf {s}\) <span class='ecrm-0800'>that is received by the
-</span><span class='ecrm-0800'>microphone.</span></p><a id='x1-5002x5'></a>
+echoes, unflat frequency responses, etc. that modify the version of </span><span class='mathjax-inline'>\(\mathbf {s}\) </span><span class='ecrm-0800'>that is received by the
+microphone.</span></p><a id='x1-5002x5'></a>
 <!-- l. 88 --><p class='indent'>     <span class='footnote-mark'><a href='#fn6x0-bk' id='fn6x0'><sup class='textsuperscript'>6</sup></a></span><span class='ecrm-0800'>This technique is similar to the carried out by submarines when they user the sonar to
-</span><span class='ecrm-0800'>perform echo-location, or by bats to fly in the darkness.</span></p><a id='x1-5006x5'></a>
-<!-- l. 122 --><p class='indent'>     <span class='footnote-mark'><a href='#fn7x0-bk' id='fn7x0'><sup class='textsuperscript'>7</sup></a></span><span class='ecrm-0800'>The Fourier transform is an special case of the Laplace transform where</span> \(\sigma =0\) <span class='ecrm-0800'>in the complex
-</span><span class='ecrm-0800'>(Laplace) domain represented by</span> \(s=\sigma +j\omega \) <span class='ecrm-0800'>frequencies. This simplification can be used for the
-</span><span class='ecrm-0800'>characterization of our near-end audioset because it can be considered as a FIR (Finite Impulse
-</span><span class='ecrm-0800'>Response) system (in ausence of an audio signal, the echo signal always decays with the
-</span><span class='ecrm-0800'>time).</span></p><a id='x1-6002x6'></a>
+perform echo-location, or by bats to fly in the darkness.</span></p><a id='x1-5006x5'></a>
+<!-- l. 122 --><p class='indent'>     <span class='footnote-mark'><a href='#fn7x0-bk' id='fn7x0'><sup class='textsuperscript'>7</sup></a></span><span class='ecrm-0800'>The Fourier transform is an special case of the Laplace transform where </span><span class='mathjax-inline'>\(\sigma =0\) </span><span class='ecrm-0800'>in the complex
+(Laplace) domain represented by </span><span class='mathjax-inline'>\(s=\sigma +j\omega \) </span><span class='ecrm-0800'>frequencies. This simplification can be used for the
+characterization of our near-end audioset because it can be considered as a FIR (Finite Impulse
+Response) system (in ausence of an audio signal, the echo signal always decays with the
+time).</span></p><a id='x1-6002x6'></a>
 <!-- l. 136 --><p class='indent'>     <span class='footnote-mark'><a href='#fn8x0-bk' id='fn8x0'><sup class='textsuperscript'>8</sup></a></span><span class='ecrm-0800'>The number of coefficients.</span></p><a id='x1-6004x6'></a>
-<!-- l. 138 --><p class='indent'>     <span class='footnote-mark'><a href='#fn9x0-bk' id='fn9x0'><sup class='textsuperscript'>9</sup></a></span><span class='ecrm-0800'>Take in mind that convolution is a</span> \(O^2\) <span class='ecrm-0800'>operation, and therefore, we can only handle in real-time
-</span><span class='ecrm-0800'>with our computers small filter.</span></p><a id='x1-6007x6'></a>
+<!-- l. 138 --><p class='indent'>     <span class='footnote-mark'><a href='#fn9x0-bk' id='fn9x0'><sup class='textsuperscript'>9</sup></a></span><span class='ecrm-0800'>Take in mind that convolution is a </span><span class='mathjax-inline'>\(O^2\) </span><span class='ecrm-0800'>operation, and therefore, we can only handle in real-time
+with our computers small filter.</span></p><a id='x1-6007x6'></a>
 <!-- l. 165 --><p class='indent'>     <span class='footnote-mark'><a href='#fn10x0-bk' id='fn10x0'><sup class='textsuperscript'>10</sup></a></span><span class='ecrm-0800'>See </span><a class='url' href='https://www.youtube.com/watch?v=hc2Zj55j1zU'><span class='ectt-0800'>https://www.youtube.com/watch?v=hc2Zj55j1zU</span></a></p><a id='x1-6009x6'></a>
-<!-- l. 170 --><p class='indent'>    <span class='footnote-mark'><a href='#fn11x0-bk' id='fn11x0'><sup class='textsuperscript'>11</sup></a></span><span class='ecrm-0800'>If we do not consider the </span><a href='https://en.wikipedia.org/wiki/Activation_function'><span class='ecrm-0800'>activation function</span></a><span class='ecrm-0800'>, an artificial neuron and a FIR filter perform
-</span><span class='ecrm-0800'>the same computation.</span></p><a id='x1-6011x6'></a>
-<!-- l. 184 --><p class='indent'>     <span class='footnote-mark'><a href='#fn12x0-bk' id='fn12x0'><sup class='textsuperscript'>12</sup></a></span><span class='ecrm-0800'>High</span> \(\mu \) <span class='ecrm-0800'>values spped-up the adaption process, but can generate worse</span> \(\mathbf {h}\) <span class='ecrm-0800'>coefficients.</span></p><a id='x1-6013x6'></a>
+<!-- l. 170 --><p class='indent'>    <span class='footnote-mark'><a href='#fn11x0-bk' id='fn11x0'><sup class='textsuperscript'>11</sup></a></span><span class='ecrm-0800'>If we do not consider the  </span><a href='https://en.wikipedia.org/wiki/Activation_function'><span class='ecrm-0800'>activation function</span></a><span class='ecrm-0800'>, an artificial neuron and a FIR filter perform
+the same computation.</span></p><a id='x1-6011x6'></a>
+<!-- l. 184 --><p class='indent'>     <span class='footnote-mark'><a href='#fn12x0-bk' id='fn12x0'><sup class='textsuperscript'>12</sup></a></span><span class='ecrm-0800'>High </span><span class='mathjax-inline'>\(\mu \) </span><span class='ecrm-0800'>values spped-up the adaption process, but can generate worse </span><span class='mathjax-inline'>\(\mathbf {h}\) </span><span class='ecrm-0800'>coefficients.</span></p><a id='x1-6013x6'></a>
 <!-- l. 186 --><p class='indent'>     <span class='footnote-mark'><a href='#fn13x0-bk' id='fn13x0'><sup class='textsuperscript'>13</sup></a></span><span class='ecrm-0800'>Again, see </span><a class='url' href='https://www.youtube.com/watch?v=hc2Zj55j1zU'><span class='ectt-0800'>https://www.youtube.com/watch?v=hc2Zj55j1zU</span></a><span class='ecrm-0800'>!</span></p><a id='x1-8002x8'></a>
 <!-- l. 251 --><p class='indent'>     <span class='footnote-mark'><a href='#fn14x0-bk' id='fn14x0'><sup class='textsuperscript'>14</sup></a></span><span class='ecrm-0800'>More working implementations, higher grade.</span></p><a id='x1-8012x8'></a>
-<!-- l. 300 --><p class='indent'>     <span class='footnote-mark'><a href='#fn15x0-bk' id='fn15x0'><sup class='textsuperscript'>15</sup></a></span><span class='ecrm-0800'>ADALINE is the simplest </span><a href='https://en.wikipedia.org/wiki/Neural_network_(machine_learning)'><span class='ecrm-0800'>AAN</span></a> <span class='ecrm-0800'>ever developed!</span></p><a id='x1-8014x8'></a>
+<!-- l. 300 --><p class='indent'>     <span class='footnote-mark'><a href='#fn15x0-bk' id='fn15x0'><sup class='textsuperscript'>15</sup></a></span><span class='ecrm-0800'>ADALINE is the simplest  </span><a href='https://en.wikipedia.org/wiki/Neural_network_(machine_learning)'><span class='ecrm-0800'>AAN</span></a> <span class='ecrm-0800'>ever developed!</span></p><a id='x1-8014x8'></a>
 <!-- l. 303 --><p class='indent'>     <span class='footnote-mark'><a href='#fn16x0-bk' id='fn16x0'><sup class='textsuperscript'>16</sup></a></span><span class='ecrm-0800'>A 1-seconds cadence should be enought.</span></p>                                                          </div>
  
 </body> 

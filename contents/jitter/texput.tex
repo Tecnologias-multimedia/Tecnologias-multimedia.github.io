@@ -93,7 +93,6 @@ $N\times$ chunk-time delay in the playback.
     (chunk number 3) is received and buffered (subfigure (c)).}
   \label{fig:circular_buffer}
 \end{figure}
-
 For this new improved InterCom, users must provide a new parameter
 called ``\emph{buffering time}''. This value (typically expressed in
 milliseconds) should be large enough to hide the network jitter but
@@ -191,21 +190,21 @@ every new received chunk.
 \label{sec:homework}
 
 \begin{enumerate}
-\item \textbf{Show the performance of Minimal in congested links}:
-  Determine the quality of the sound when \texttt{minimal.py} is used
-  in a congested tranmission environment. You can quantify the
-  \href{https://en.wikipedia.org/wiki/Quality_of_experience}{QoE}
-  using the following classification:
-\begin{itemize}
-\item \textbf{Perfect}: no loss or delay can be perceived.
-\item \textbf{Good}: if you detect some minimal distortion in the
-  rendering of the sound.
-\item \textbf{Acceptable}: when the effects of the latency are
-  noticeable, but you can communicate with your interlocutor.
-\item \textbf{Bad}: you are able to recognize only small parts of the
-  received audio.
-\item \textbf{No way}: when most of the time only silence is heard.
-\end{itemize}
+% \item \textbf{Show the performance of Minimal in congested links}:
+%   Determine the quality of the sound when \texttt{minimal.py} is used
+%   in a congested tranmission environment. You can quantify the
+%   \href{https://en.wikipedia.org/wiki/Quality_of_experience}{QoE}
+%   using the following classification:
+% \begin{itemize}
+% \item \textbf{Perfect}: no loss or delay can be perceived.
+% \item \textbf{Good}: if you detect some minimal distortion in the
+%   rendering of the sound.
+% \item \textbf{Acceptable}: when the effects of the latency are
+%   noticeable, but you can communicate with your interlocutor.
+% \item \textbf{Bad}: you are able to recognize only small parts of the
+%   received audio.
+% \item \textbf{No way}: when most of the time only silence is heard.
+% \end{itemize}
 
 \item \textbf{Find your minimum buffering time}:
 Determine, experimentally:
@@ -214,9 +213,9 @@ Determine, experimentally:
   InterCom instance to communicate with your groupmate without lossing
   chunks, when he/she is in a different\footnote{Different to the network
     in which you are using InterCom.} local network. \href{https://vicente-gonzalez-ruiz.github.io/about_ping/}{Ping} can help to estimate the latency.
-\item (Optional) Repeat the previous experiment using only localhost
-  (transmiting the chunk between the loopback network adapter), but
-  adding some jitter with the tool
+\item Repeat the previous experiment using only localhost (transmiting
+  the chunk between the loopback network adapter), but adding some
+  jitter with the tool
   \href{https://vicente-gonzalez-ruiz.github.io/about_tc/}{\texttt{tc}}. If
   \texttt{tc} is not avaiable in your OS, you can use any other
   similar tool, or use the Linux system at the laboratory.
