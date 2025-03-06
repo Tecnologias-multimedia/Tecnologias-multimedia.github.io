@@ -19,7 +19,7 @@
 
 <h2 class='titleHead'>Hidding the Jitter</h2>
  <div class='author'><a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp; </span><a href='https://hpca.ual.es/~savins/'><span class='ecrm-1200'>Savins Puertas Martín</span></a> <span class='ecrm-1200'>&amp; </span><a href='https://www.marcoslupion.com/'><span class='ecrm-1200'>Marcos Lupión Lorente</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>March 5, 2025</span></div>
+<div class='date'><span class='ecrm-1200'>March 6, 2025</span></div>
    </div>
    <h3 class='likesectionHead'><a id='x1-1000'></a>Contents</h3>
    <div class='tableofcontents'>
@@ -107,11 +107,11 @@ new chunk (chunk number 3) is received and buffered (subfigure (c)).
 
                                                                   
    </figure>
-<!-- l. 97 --><p class='indent'>   For this new improved InterCom, users must provide a new parameter called
+<!-- l. 96 --><p class='indent'>   For this new improved InterCom, users must provide a new parameter called
 “<span class='ecti-1000'>buffering time</span>”. This value (typically expressed in milliseconds) should be large
 enough to hide the network jitter but small enough to keep the end-to-end (user)
 latency below some limit.
-</p><!-- l. 102 --><p class='indent'>   The following guidelines have been used to implement the <span class='ecti-1000'>buffered </span>version of
+</p><!-- l. 101 --><p class='indent'>   The following guidelines have been used to implement the <span class='ecti-1000'>buffered </span>version of
 InterCom:
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-3008x1'>The class <span class='ectt-1000'>Minimal </span>has been <a href='https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)'>inherited</a> (extended) to implement a new class
@@ -122,7 +122,7 @@ InterCom:
      determine where to store the corresponding chunk in the circular buffer.
      </li>
 <li class='enumerate' id='x1-3012x3'>
-     <!-- l. 113 --><p class='noindent'>It has been taken into consideration that the critical part of InterCom (the
+     <!-- l. 112 --><p class='noindent'>It has been taken into consideration that the critical part of InterCom (the
      method <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>record_send_and_play()</span></span></span>) is a method that runs as an <a href='https://en.wikipedia.org/wiki/Interrupt_handler'>interrup
      handler</a> that is called each time a new chunk is available in the <a href='https://en.wikipedia.org/wiki/Analog-to-digital_converter'>ADC</a>. More
      precisely:
@@ -145,9 +145,9 @@ InterCom:
      be achieved without using the <a href='https://docs.python.org/3/library/threading.html'>threading</a> or <a href='https://docs.python.org/3/library/multiprocessing.html'>multiprocessing</a> packages because
      the interruption handler (the so called <span class='ecti-1000'>callback</span>() function in <a href='https://python-sounddevice.readthedocs.io/en/0.3.14/api.html'>sounddevice</a>)
      already runs in parallel with the main thread.</li></ol>
-<!-- l. 145 --><p class='indent'>   This is an overview of the implementation:
+<!-- l. 144 --><p class='indent'>   This is an overview of the implementation:
 </p>
-   <!-- l. 147 -->
+   <!-- l. 146 -->
    <pre class='lstlisting' id='listing-1'><span class='label'><a id='x1-3023r1'></a></span><span class='ecit-1000'>  </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>Interruption </span><span class='ecit-1000'>handler</span> 
 </span><span class='label'><a id='x1-3024r2'></a></span><span class='ectt-1000'>  </span><span style='color:#000000'><span class='ectt-1000'>def</span></span><span style='color:#000000'> <span class='ectt-1000'>record_send_and_play():</span> 
 </span><span class='label'><a id='x1-3025r3'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>chunk</span></span><span style='color:#000000'> <span class='ectt-1000'>= </span><span class='ectt-1000'>record()</span> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(1)</span> 
@@ -162,53 +162,34 @@ InterCom:
 </span><span class='label'><a id='x1-3034r12'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>chunk_number</span></span><span style='color:#000000'><span class='ectt-1000'>,</span></span><span style='color:#000000'> <span class='ectt-1000'>chunk </span><span class='ectt-1000'>= </span><span class='ectt-1000'>unpack(packed_chunk)</span> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(2)</span> 
 </span><span class='label'><a id='x1-3035r13'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>buffer</span></span><span style='color:#000000'><span class='ectt-1000'>(</span></span><span style='color:#000000'><span class='ectt-1000'>chunk_number</span></span><span style='color:#000000'><span class='ectt-1000'>,</span></span><span style='color:#000000'> <span class='ectt-1000'>chunk)</span> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(3)</span></span></pre>
    
-<!-- l. 163 --><p class='indent'>   Notice that Step (4) of the method <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>record_send_and_play()</span></span></span> extracts from the buffer an
+<!-- l. 162 --><p class='indent'>   Notice that Step (4) of the method <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>record_send_and_play()</span></span></span> extracts from the buffer an
 unpacked<span class='footnote-mark'><a href='#fn5x0' id='fn5x0-bk'><sup class='textsuperscript'>5</sup></a></span><a id='x1-3036f5'></a>
 chunk. The chunks are buffered in Step (3) of the method <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>receive_and_buffer()</span></span></span>.
 Note also that Step (1) of <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>receive_and_buffer()</span></span></span> is a blocking method that should
 return with every new received chunk.
 </p>
    <h3 class='sectionHead'><span class='titlemark'>3   </span> <a id='x1-40003'></a>Deliverables</h3>
-<!-- l. 193 --><p class='noindent'>
+<!-- l. 192 --><p class='noindent'>
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-4002x1'>
-     <!-- l. 194 --><p class='noindent'><span class='ecbx-1000'>Show the performance of Minimal in congested links</span>: Determine the
-     quality of the sound when <span class='ectt-1000'>minimal.py </span>is used in a congested tranmission
-     environment. You can quantify the <a href='https://en.wikipedia.org/wiki/Quality_of_experience'>QoE</a> using the following classification:
-     </p>
-         <ul class='itemize1'>
-         <li class='itemize'><span class='ecbx-1000'>Perfect</span>: no loss or delay can be perceived.
+     <!-- l. 209 --><p class='noindent'><span class='ecbx-1000'>Find your minimum buffering time</span>: Determine, experimentally:
+         </p><ol class='enumerate2'>
+<li class='enumerate' id='x1-4004x1'>The minimum artificial latency that you must configure in your InterCom
+         instance to communicate with your groupmate without lossing chunks,
+         when he/she is in a different<span class='footnote-mark'><a href='#fn6x0' id='fn6x0-bk'><sup class='textsuperscript'>6</sup></a></span><a id='x1-4005f6'></a>
+         local network. <a href='https://vicente-gonzalez-ruiz.github.io/about_ping/'>Ping</a> can help to estimate the latency.
          </li>
-         <li class='itemize'><span class='ecbx-1000'>Good</span>: if you detect some minimal distortion in the rendering of the
-         sound.
-         </li>
-         <li class='itemize'><span class='ecbx-1000'>Acceptable</span>: when the effects of the latency are noticeable, but you
-         can communicate with your interlocutor.
+<li class='enumerate' id='x1-4008x2'>Repeat the previous experiment using only localhost (transmiting
+         the chunk between the loopback network adapter), but adding some
+         jitter with the tool <a href='https://vicente-gonzalez-ruiz.github.io/about_tc/'><span class='ectt-1000'>tc</span></a>. If <span class='ectt-1000'>tc </span>is not avaiable in your OS, you can use
+         any other similar tool, or use the Linux system at the laboratory.</li></ol>
                                                                   
 
                                                                   
-         </li>
-         <li class='itemize'><span class='ecbx-1000'>Bad</span>: you are able to recognize only small parts of the received audio.
-         </li>
-         <li class='itemize'><span class='ecbx-1000'>No way</span>: when most of the time only silence is heard.</li></ul>
-     </li>
-<li class='enumerate' id='x1-4004x2'>
-     <!-- l. 210 --><p class='noindent'><span class='ecbx-1000'>Find your minimum buffering time</span>: Determine, experimentally:
-         </p><ol class='enumerate2'>
-<li class='enumerate' id='x1-4006x1'>The minimum artificial latency that you must configure in your InterCom
-         instance to communicate with your groupmate without lossing chunks,
-         when he/she is in a different<span class='footnote-mark'><a href='#fn6x0' id='fn6x0-bk'><sup class='textsuperscript'>6</sup></a></span><a id='x1-4007f6'></a>
-         local network. <a href='https://vicente-gonzalez-ruiz.github.io/about_ping/'>Ping</a> can help to estimate the latency.
-         </li>
-<li class='enumerate' id='x1-4010x2'>(Optional)  Repeat  the  previous  experiment  using  only  localhost
-         (transmiting the chunk between the loopback network adapter), but
-         adding some jitter with the tool <a href='https://vicente-gonzalez-ruiz.github.io/about_tc/'><span class='ectt-1000'>tc</span></a>. If <span class='ectt-1000'>tc </span>is not avaiable in your OS,
-         you can use any other similar tool, or use the Linux system at the
-         laboratory.</li></ol>
-     <!-- l. 225 --><p class='noindent'>
+     <!-- l. 224 --><p class='noindent'>
 </p>
      <h4 class='likesubsectionHead'><a id='x1-5000'></a>Example</h4>
-     <!-- l. 226 --><p class='noindent'>An example of a notebook related to this milestone can be found <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/docs/Hidding_the_Network_Jitter__example.ipynb'>here</a>. Notice
+     <!-- l. 225 --><p class='noindent'>An example of a notebook related to this milestone can be found <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/docs/Hidding_the_Network_Jitter__example.ipynb'>here</a>. Notice
      that not all the content of the notebook could be requested in this
      milestone.
 </p>
@@ -216,9 +197,6 @@ return with every new received chunk.
    <div class='thebibliography'>
    <p class='bibitem'><span class='biblabel'>
  [1]<span class='bibsp'>   </span></span><a id='Xdordal2020intro'></a>Peter L. Dordal. <a href='http://intronetworks.cs.luc.edu/current/ComputerNetworks.pdf'><span class='ecti-1000'>An Introduction to Computer Networks</span></a>. 2020.
-                                                                  
-
-                                                                  
    </p>
    <p class='bibitem'><span class='biblabel'>
  [2]<span class='bibsp'>   </span></span><a id='XKurose-Ross'></a>James F.  Kurose  and  Keith W.  Ross.     <a href='https://docs.google.com/viewer?a=v&amp;pid=sites&amp;srcid=Z2FyZGl2aWR5YXBpdGguYWMuaW58aXQyMDE0LTIwMTh8Z3g6OTY5ZDcxZjRmZDBkYzI3'><span class='ecti-1000'>Computer  Networking:  A
@@ -240,10 +218,10 @@ return with every new received chunk.
 </span><span class='ecrm-0800'>also played, a delay in the playback can be generated by sending zero-chunks to the
 </span><span class='ecrm-0800'>DAC and then, after the delay, start sending the received chunk of audio, in the right
 </span><span class='ecrm-0800'>order.</span></p><a id='x1-3020x4'></a>
-<!-- l. 128 --><p class='noindent'><span class='footnote-mark'><a href='#fn4x0-bk' id='fn4x0'><sup class='textsuperscript'>4</sup></a></span><span class='ecrm-0800'>Those chunks that have not been received on time or never have been received.</span></p><a id='x1-3037x2'></a>
-<!-- l. 166 --><p class='indent'>     <span class='footnote-mark'><a href='#fn5x0-bk' id='fn5x0'><sup class='textsuperscript'>5</sup></a></span><span class='ecrm-0800'>Chunks will be compressed in a posterior milestone, and uncompressing is performed in this
-</span><span class='ecrm-0800'>step.</span></p><a id='x1-4008x6'></a>
-<!-- l. 216 --><p class='noindent'><span class='footnote-mark'><a href='#fn6x0-bk' id='fn6x0'><sup class='textsuperscript'>6</sup></a></span><span class='ecrm-0800'>Different to the network in which you are using InterCom.</span></p>                                        </div>
+<!-- l. 127 --><p class='noindent'><span class='footnote-mark'><a href='#fn4x0-bk' id='fn4x0'><sup class='textsuperscript'>4</sup></a></span><span class='ecrm-0800'>Those chunks that have not been received on time or never have been received.</span></p><a id='x1-3037x2'></a>
+<!-- l. 165 --><p class='indent'>     <span class='footnote-mark'><a href='#fn5x0-bk' id='fn5x0'><sup class='textsuperscript'>5</sup></a></span><span class='ecrm-0800'>Chunks will be compressed in a posterior milestone, and uncompressing is performed in this
+</span><span class='ecrm-0800'>step.</span></p><a id='x1-4006x6'></a>
+<!-- l. 215 --><p class='noindent'><span class='footnote-mark'><a href='#fn6x0-bk' id='fn6x0'><sup class='textsuperscript'>6</sup></a></span><span class='ecrm-0800'>Different to the network in which you are using InterCom.</span></p>                                        </div>
  
 </body> 
 </html>

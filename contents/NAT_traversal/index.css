@@ -35,12 +35,13 @@ div.par-math-display, div.math-display{text-align:center;}
 body{ margin:1em auto; max-width:80ch; padding:0 .62em; }
 h1,h2,h3,h4,h5 { line-height:1.2; }
 @media print{ body{ max-width:none } }
-.partHead, likepartHead { font-size: 2em; }
-.chapterHead, likechapterHead { font-size: 1.7411em; }
-.sectionHead, likesectionHead { font-size: 1.5157em; }
-.subsectionHead, likesubsectionHead { font-size: 1.3195em; }
-.subsubsectionHead, likesubsubsectionHead { font-size: 1.1487em; }
+.partHead, .likepartHead { font-size: 2em; }
+.chapterHead, .likechapterHead { font-size: 1.7411em; }
+.sectionHead, .likesectionHead { font-size: 1.5157em; }
+.subsectionHead, .likesubsectionHead { font-size: 1.3195em; }
+.subsubsectionHead, .likesubsubsectionHead { font-size: 1.1487em; }
  @media (prefers-color-scheme: dark) { img[src^="index"]{filter: invert(1); } } 
+ body { background-color: Canvas; color: CanvasText; color-scheme: light dark; } 
 li p.indent { text-indent: 0em }
 li p:first-child{ margin-top:0em; }
 li p:last-child, li div:last-child { margin-bottom:0.5em; }
@@ -79,6 +80,7 @@ span.thank-mark{ vertical-align: super }
 span.footnote-mark sup.textsuperscript, span.footnote-mark a sup.textsuperscript{ font-size:80%; }
 div.footnotes{border-top:solid 1px black; border-bottom:solid 1px black; padding-bottom:1ex; padding-top:0.5ex; margin-right:15%; margin-top:2ex; font-style:italic; font-size:85%;}
 div.footnotes p{margin-top:0; margin-bottom:0; text-indent:0;}
+code.verb{font-family:monospace,monospace;}
 div.tabular, div.center div.tabular {text-align: center; margin-top:0.5em; margin-bottom:0.5em; }
 table.tabular td p{margin-top:0em;}
 table.tabular {margin-left: auto; margin-right: auto;}
@@ -99,7 +101,6 @@ table[rules] {border-left:solid black 0.4pt; border-right:solid black 0.4pt; }
 .hline hr, .cline hr{border:none;border-top:1px solid black;}
 .hline {border-top: 1px solid black;}
 .hline + .vspace:last-child{display:none;}
-.hline:first-child{border-bottom:1px solid black;border-top:none;}
 .tabbing-right {text-align:right;}
 div.float, div.figure {margin-left: auto; margin-right: auto;}
 div.float img {text-align:center;}
@@ -124,7 +125,6 @@ table.pmatrix {width:100%;}
 span.bar-css {text-decoration:overline;}
 img.cdots{vertical-align:middle;}
 .partToc a, .partToc, .likepartToc a, .likepartToc {line-height: 200%; font-weight:bold; font-size:110%;}
-.chapterToc a, .chapterToc, .likechapterToc a, .likechapterToc, .appendixToc a, .appendixToc {line-height: 200%; font-weight:bold;}
 .index-item, .index-subitem, .index-subsubitem {display:block}
 div.caption {text-indent:-2em; margin-left:3em; margin-right:1em; text-align:left;}
 div.caption span.id{font-weight: bold; white-space: nowrap; }
@@ -143,6 +143,10 @@ div.thanks{text-align:left; margin-left:10%; font-size:85%; font-style:italic; }
 div.abstract p {margin-left:5%; margin-right:5%;}
 div.abstract {width:100%;}
 .abstracttitle{text-align:center;margin-bottom:1em;}
+.subsectionToc, .likesubsectionToc {margin-left:1em;}
+.subsubsectionToc, .likesubsubsectionToc {margin-left:2em;}
+.paragraphToc, .likeparagraphToc {margin-left:3em;}
+.subparagraphToc, .likesubparagraphToc {margin-left:4em;}
 figure.float, div.figure {margin-left: auto; margin-right: auto;}
 figure.figure {text-align:center;}
 figcaption.caption {text-indent:-2em; margin-left:3em; margin-right:1em; text-align:center;}
@@ -183,7 +187,6 @@ table[rules] {border-left:solid black 0.4pt; border-right:solid black 0.4pt; }
 .hline hr, .cline hr{border:none;border-top:1px solid black;}
 .hline {border-top: 1px solid black;}
 .hline + .vspace:last-child{display:none;}
-.hline:first-child{border-bottom:1px solid black;border-top:none;}
 div.array {text-align:center;}
 .supertabular {text-align:center}
 code.lstinline{font-family:monospace,monospace;}
