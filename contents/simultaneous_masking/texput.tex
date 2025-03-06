@@ -10,12 +10,13 @@
 \section{Frequencial Masking}
 The HAS (Human Auditory System) has a finite frequency resolution,
 which basically means that weaker audio signal (maskee) becomes
-inaudible in the presence of (is masked by) a louder audio (masker),
-when they are closed enough\cite{bosi2003intro}, in the frequency
-domain (and obviously in time). When this happens, the
-subband~\cite{vetterli1995wavelets} in which the maskee signal is
-placed can be quantized more severely without perceiving that the
-quantization noise in such subband (see Figure~\ref{fig:SM}).
+inaudible in the presence of (is masked by) a louder audio signal
+(masker), when they are close enough \cite{bosi2003intro}, in the
+frequency domain (and obviously in time, i.e., in the same
+chunk). When this happens, the subband~\cite{vetterli1995wavelets} in
+which the maskee signal is placed can be quantized more severely
+without perceiving the quantization noise in the maskee subband (see
+Figure~\ref{fig:SM}).
 
 \begin{figure}
   \centering
@@ -52,7 +53,7 @@ quantization noise in such subband (see Figure~\ref{fig:SM}).
   ${\mathbf w}_m$, compute the set of optimal\footnote{From a
     perceptual perspective.} QSSs as
   \begin{equation}
-    {\mathbf \Delta}^* := \{\cdots,3{\mathbf \Delta}_{x-2},2{\mathbf \Delta}_{x-1},{\mathbf \Delta}_x,2{\mathbf \Delta}_{x+1},3{\mathbf \Delta}_{x+2}, \cdots\}.
+    {\mathbf \Delta}^* := \{\cdots,3{\mathbf \Delta}_{m-2},2{\mathbf \Delta}_{m-1},{\mathbf \Delta}_m,2{\mathbf \Delta}_{m+1},3{\mathbf \Delta}_{m+2}, \cdots\}.
   \end{equation}
 \end{enumerate}
 
@@ -60,7 +61,8 @@ quantization noise in such subband (see Figure~\ref{fig:SM}).
 
 Implement the algorithm described in Section~\ref{sec:algo} in a
 module named \verb|simultaneous_masking.py|. You should extend the
-classes defined in \verb|advanced_ToH.py|.
+classes defined in \verb|linear_ToH.py| or
+\verb|dyadic_linear_ToH.py|.
 
 \section{Resources}
 
