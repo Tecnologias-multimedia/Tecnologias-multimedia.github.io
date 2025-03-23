@@ -19,7 +19,7 @@
 
 <h2 class='titleHead'><a href='https://en.wikipedia.org/wiki/Transform_coding'>Transform Coding</a> for <a href='https://en.wikipedia.org/wiki/Data_redundancy'>Redundancy</a> Removal</h2>
  <div class='author'><a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp; </span><a href='https://hpca.ual.es/~savins/'><span class='ecrm-1200'>Savins Puertas Martín</span></a> <span class='ecrm-1200'>&amp; </span><a href='https://www.marcoslupion.com/'><span class='ecrm-1200'>Marcos Lupión Lorente</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>March 22, 2025</span></div>
+<div class='date'><span class='ecrm-1200'>March 23, 2025</span></div>
    </div>
    <h3 class='likesectionHead'><a id='x1-1000'></a>Contents</h3>
    <div class='tableofcontents'>
@@ -607,51 +607,59 @@ avoid the gliches at the borders of the chunks.
 <!-- l. 1108 --><p class='noindent'>
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-24002x1'>
-     <!-- l. 1110 --><p class='noindent'><span class='ecbx-1000'>Determine the RD curves for the MST</span>:
-     </p><!-- l. 1113 --><p class='noindent'>As   we   did   in   the   previous   milestone,   generate   the   RD   curves
-     for   a   set   of   simulated   transmission   contexts.   Use   the   modules
-     <span class='ectt-1000'>stereo_MST_coding{_16|_32}.py</span>.  As  you  can  see,  they  differs  in
-     how  the  transform  has  been  implemented.  Notice  that  you  can  use
-     the <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>--minimal_quantization_step</span></span></span> parameter to generate the different
-     points  of  the  RD  curves  (it  is  not  necessary  to  use  a  bit-rate  control
-     algorithm neither <span class='ectt-1000'>tc</span>).
-     </p></li>
-<li class='enumerate' id='x1-24004x2'>
-     <!-- l. 1122 --><p class='noindent'><span class='ecbx-1000'>Determine the RD curves for the DWT</span>:
-     </p><!-- l. 1125 --><p class='noindent'>Rebuild  the  RD  curves  considering  also  the  removal  of  the  temporal
-     decorrelation. Use <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>temporal_no_overlapped_DWT_coding.py</span></span></span>. Note that
-     the  number  of  levels  \(l\)  of  the  DWT  (computed  using  <a href='https://pywavelets.readthedocs.io/en/latest/'>PyWavelets</a> <span class='cite'>[<a href='#Xlee2019pywavelets'>6</a>]</span>)
-     can  have  a  high  impact  on  the  amount  of  energy  concentration
-     achieved  by  the  DWT,  and  therefore  on  the  efficiency  of  the  coding
-     system.  Show  such  an  impact.  Experiment  also  with  the  wavelet
-     name  (try  to  optimize  –minimize–  the  RD  curve).  Again,  use  the
-     <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>--minimal_quantization_step</span></span></span> parameter  to  generate  the  different
-     points of the RD curves.
-     </p></li>
-<li class='enumerate' id='x1-24006x3'>
-     <!-- l. 1138 --><p class='noindent'><span class='ecbx-1000'>Determine the RD curves for the overlapped DWT</span>:
-     </p><!-- l. 1141 --><p class='noindent'>Finally,   redo   the   curves   considering   now   the   block   overlapping
-     (<span class='obeylines-h'><span class='verb'><span class='ectt-1000'>temporal_overlapped_DWT_coding.py</span></span></span>). It is a good idea to put all the
-     RD curves together (in the same graph), to compare easily.
-     </p></li>
-<li class='enumerate' id='x1-24008x4'>
-     <!-- l. 1147 --><p class='noindent'><span class='ecbx-1000'>Answer the questions</span>:
-     </p><!-- l. 1150 --><p class='noindent'>
+     <!-- l. 1110 --><p class='noindent'><span class='ecbx-1000'>Find the following RD curves</span>:
+     </p><!-- l. 1112 --><p class='noindent'>
+         </p><ol class='enumerate2'>
+<li class='enumerate' id='x1-24004x1'>
+         <!-- l. 1114 --><p class='noindent'><span class='ecbx-1000'>Determine the RD curves for the MST</span>:
+         </p><!-- l. 1117 --><p class='noindent'>As  we  did  in  the  previous  milestone,  generate  the  RD  curves
+         for  a  set  of  simulated  transmission  contexts.  Use  the  modules
+         <span class='ectt-1000'>stereo_MST_coding{_16|_32}.py</span>. As you can see, they differs in
+         how the transform has been implemented. Notice that you can use the
+         <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>--minimal_quantization_step</span></span></span> parameter to generate the different
+         points of the RD curves (it is not necessary to use a bit-rate control
+         algorithm neither <span class='ectt-1000'>tc</span>).
+         </p></li>
+<li class='enumerate' id='x1-24006x2'>
+         <!-- l. 1127 --><p class='noindent'><span class='ecbx-1000'>Determine the RD curves for the DWT</span>:
+         </p><!-- l. 1130 --><p class='noindent'>Rebuild the RD curves considering also the removal of the temporal
+         decorrelation. Use <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>temporal_no_overlapped_DWT_coding.py</span></span></span>. Note
+         that   the   number   of   levels   \(l\)   of   the   DWT   (computed   using
+         <a href='https://pywavelets.readthedocs.io/en/latest/'>PyWavelets</a> <span class='cite'>[<a href='#Xlee2019pywavelets'>6</a>]</span>) can have a high impact on the amount of energy
+         concentration achieved by the DWT, and therefore on the efficiency
+         of the coding system. Show such an impact. Experiment also with
+         the wavelet name (try to optimize –minimize– the RD curve). Again,
+         use the <span class='obeylines-h'><span class='verb'><span class='ectt-1000'>--minimal_quantization_step</span></span></span> parameter to generate the
+         different points of the RD curves.
+         </p></li>
+<li class='enumerate' id='x1-24008x3'>
+         <!-- l. 1143 --><p class='noindent'><span class='ecbx-1000'>Determine the RD curves for the overlapped DWT</span>:
+         </p><!-- l. 1146 --><p class='noindent'>Finally,  redo  the  curves  considering  now  the  block  overlapping
+         (<span class='obeylines-h'><span class='verb'><span class='ectt-1000'>temporal_overlapped_DWT_coding.py</span></span></span>). It is a good idea to put all
+         the RD curves together (in the same graph), to compare easily.
+</p>
+         </li></ol>
                                                                   
 
                                                                   
+     <!-- l. 1154 --><p class='noindent'>Mark: <span class='ecbx-1000'>2 points</span>.
+     </p></li>
+<li class='enumerate' id='x1-24010x2'>
+     <!-- l. 1156 --><p class='noindent'><span class='ecbx-1000'>Answer the questions</span>:
+     </p><!-- l. 1159 --><p class='noindent'>
          </p><ol class='enumerate2'>
-<li class='enumerate' id='x1-24010x1'>Does the computation of the DWT using chunk overlapping increase
+<li class='enumerate' id='x1-24012x1'>Does the computation of the DWT using chunk overlapping increase
          the latency of the whole system? And what about the jitter? In what
-         amount?
+         amount? Provide a reason.
          </li>
-<li class='enumerate' id='x1-24012x2'>Which other transform(s) are used in audio encoding systems (such
+<li class='enumerate' id='x1-24014x2'>Which other transform(s) are used in audio encoding systems (such
          as MP3) to exploit temporal redundancy? Enumerate the systems
          and the transform(s) used.
 </li></ol>
+     <!-- l. 1176 --><p class='noindent'>Mark: <span class='ecbx-1000'>1 point</span>.
+</p>
      </li></ol>
-<!-- l. 1169 --><p class='noindent'>Mark: <span class='ecbx-1000'>3 points</span>.
-</p><!-- l. 1187 --><p class='noindent'>
+<!-- l. 1198 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>6   </span> <a id='x1-250006'></a>Resources</h3>
     <div class='thebibliography'>
@@ -661,6 +669,9 @@ avoid the gliches at the borders of the chunks.
     <p class='bibitem'><span class='biblabel'>
   [2]<span class='bibsp'>   </span></span><a id='Xbosi2003intro'></a>M. Bosi and R.E. Goldberd. <a href='https://last.hit.bme.hu/download/vidtechlab/fcc/literature/audio/audio_coding_standards_book.pdf'><span class='ecti-1000'>Introduction to Digital Audio Coding and
     </span><span class='ecti-1000'>Standards</span></a>. Kluwer Academic Publishers, 2003.
+                                                                  
+
+                                                                  
     </p>
     <p class='bibitem'><span class='biblabel'>
   [3]<span class='bibsp'>   </span></span><a id='Xburrus2013wavelets'></a>C.S.  Burrus,  R. Gopinath,  and  H. Guo.     <a href='https://cnx.org/contents/EQurkhlI@6.9:ZcNjPhDo@15/Preface'><span class='ecti-1000'>Wavelets  and  Wavelet
@@ -669,9 +680,6 @@ avoid the gliches at the borders of the chunks.
     <p class='bibitem'><span class='biblabel'>
   [4]<span class='bibsp'>   </span></span><a id='Xthinkstats'></a>A.B. Downey. <a href='https://greenteapress.com/thinkstats/thinkstats.pdf'><span class='ecti-1000'>Think Stats Probability and Statistics for Programmers</span></a>.
     O’Reilly, 2011.
-                                                                  
-
-                                                                  
     </p>
     <p class='bibitem'><span class='biblabel'>
   [5]<span class='bibsp'>   </span></span><a id='Xharris2020array'></a>C. R.  Harris,  K. J.  Millman,  S. J.  van der  Walt,  R. Gommers,
@@ -702,6 +710,9 @@ avoid the gliches at the borders of the chunks.
     <p class='bibitem'><span class='biblabel'>
  [11]<span class='bibsp'>   </span></span><a id='Xvetterli2014foundations'></a>M. Vetterli, J. Kovačević, and V.K. Goyal.  <a href='http://www.fourierandwavelets.org/FSP_v1.1_2014.pdf'><span class='ecti-1000'>Foundations of Signal
     </span><span class='ecti-1000'>Processing</span></a>. Cambridge University Press, 2014.
+                                                                  
+
+                                                                  
 </p>
     </div>
                                                                   
