@@ -18,8 +18,8 @@
                                                                   
 
 <h2 class='titleHead'>Meeting  <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py'>minimal</a> InterCom</h2>
- <div class='author'> <a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp;  </span><a href='https://hpca.ual.es/~savins/'><span class='ecrm-1200'>Savins Puertas Martín</span></a> <span class='ecrm-1200'>&amp;  </span><a href='https://www.marcoslupion.com/'><span class='ecrm-1200'>Marcos Lupión Lorente</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>March 23, 2025</span></div>
+ <div class='author'> <a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp;  </span><a href='https://hpca.ual.es/~savins/'><span class='ecrm-1200'>Savins Puertas Martín</span></a> <span class='ecrm-1200'>&amp;  </span><a href='https://www.ual.es/persona/555355505557525189'><span class='ecrm-1200'>Juan José Moreno Riado</span></a></div><br />
+<div class='date'><span class='ecrm-1200'>August 10, 2025</span></div>
    </div>
    <h3 class='likesectionHead' id='contents'><a id='x1-1000'></a>Contents</h3>
    <div class='tableofcontents'>
@@ -29,8 +29,7 @@
 <br />   <span class='sectionToc'>2 <a href='#deliverables' id='QQ2-1-5'>Deliverables</a></span>
 <br />   <span class='sectionToc'>3 <a href='#resources' id='QQ2-1-6'>Resources</a></span>
    </div>
-<!-- l. 8 --><p class='noindent'>
-</p>
+   
    <h3 class='sectionHead' id='description'><span class='titlemark'>1   </span> <a id='x1-20001'></a>Description</h3>
 <!-- l. 10 --><p class='noindent'>InterCom is an application that captures and plays audio, and therefore, in Linux,
 runs on the top of one of the following audio services:
@@ -50,7 +49,7 @@ runs on the top of one of the following audio services:
 <a href='http://www.portaudio.com/'>PortAudio</a> <span class='cite'>[<a href='#Xportaudio'>1</a>]</span> (through  <a href='https://vicente-gonzalez-ruiz.github.io/intro_to_sounddevice/'>sounddevice</a>) to capture and play the audio. Using
 sounddevice, we have two alternatives for implementing InterCom (and in general, for
 any real-time audio-processing application):
-</p><!-- l. 30 --><p class='noindent'>
+   
 </p>
    <h4 class='subsectionHead' id='loopbased-algorithm'><span class='titlemark'>1.1   </span> <a id='x1-30001.1'></a>Loop-based algorithm</h4>
 <!-- l. 32 --><p class='noindent'>Roughtly, InterCom can be divided into 6 steps:
@@ -109,11 +108,10 @@ any real-time audio-processing application):
      in InterCom), the playing of the chunk should return immediately because
      the time that the <span class='obeylines-h'><code class='verb'>play()</code></span> method needs to complete would match exactly
      the time that the <span class='obeylines-h'><code class='verb'>record()</code></span> method requires (see  <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/test/sounddevice/wire4b.py'>wire4b.py</a>).</li></ol>
+   
                                                                   
 
                                                                   
-<!-- l. 142 --><p class='noindent'>
-</p>
    <h4 class='subsectionHead' id='timerbased-algorithm'><span class='titlemark'>1.2   </span> <a id='x1-40001.2'></a>Timer-based algorithm</h4>
 <!-- l. 144 --><p class='noindent'>The to-be-called-in-a-loop implementation depicted in the previous section works
 fine, but finally InterCom uses a to-be-called-by-an-interruption implementation
@@ -126,7 +124,7 @@ time in which the <span class='obeylines-h'><code class='verb'>record()</code></
 blocking.
 </p><!-- l. 187 --><p class='indent'>   The  <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L111'>current implementation</a> of InterCom uses the Timer-based (interruption-based)
 algorithm.
-</p><!-- l. 192 --><p class='noindent'>
+   
 </p>
    <h3 class='sectionHead' id='deliverables'><span class='titlemark'>2   </span> <a id='x1-50002'></a>Deliverables</h3>
 <!-- l. 194 --><p class='noindent'><span class='ecbx-1000'>None</span>. However, you should understand the meaning, purpose and use of each of the
@@ -147,9 +145,6 @@ parameters of <span class='ectt-1000'>minimal.py</span>. For this, try the follo
      using the command line, modify the parameter <span class='obeylines-h'><code class='verb'>--frames_per_chunk</code></span>. Do
      you notice any changes in latency or audio quality?
      </li>
-                                                                  
-
-                                                                  
 <li class='enumerate' id='x1-5006x3'>Modify the parameter <span class='obeylines-h'><code class='verb'>--frames_per_second</code></span>. Again, do you notice any
      changes in latency or audio quality? You should.
      </li>
@@ -166,7 +161,7 @@ parameters of <span class='ectt-1000'>minimal.py</span>. For this, try the follo
      different LAN than you (for example, when two InterCom instances are
      running in different home networks)?</li></ol>
 <!-- l. 229 --><p class='indent'>   Mark: <span class='ecbx-1000'>0 points</span>.
-</p><!-- l. 260 --><p class='noindent'>
+   
 </p>
    <h3 class='sectionHead' id='resources'><span class='titlemark'>3   </span> <a id='x1-60003'></a>Resources</h3>
    <div class='thebibliography'>
