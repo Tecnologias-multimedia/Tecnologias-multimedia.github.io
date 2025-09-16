@@ -19,7 +19,7 @@
 
 <h2 class='titleHead'>Increasing the Number of Subbands</h2>
  <div class='author'><span class='ecrm-1200'>Vicente González Ruiz</span></div><br />
-<div class='date'><span class='ecrm-1200'>March 23, 2025</span></div>
+<div class='date'><span class='ecrm-1200'>August 10, 2025</span></div>
    </div>
    <h3 class='likesectionHead' id='contents'><a id='x1-1000'></a>Contents</h3>
    <div class='tableofcontents'>
@@ -29,8 +29,7 @@
 <br />   <span class='sectionToc'>4 <a href='#deliverables' id='QQ2-1-5'>Deliverables</a></span>
 <br />   <span class='sectionToc'>5 <a href='#resources' id='QQ2-1-6'>Resources</a></span>
    </div>
-<!-- l. 8 --><p class='noindent'>
-</p>
+   
    <h3 class='sectionHead' id='the-dyadic-frequency-partition-is-not-enough'><span class='titlemark'>1   </span> <a id='x1-20001'></a>The dyadic frequency partition is not enough</h3>
 <!-- l. 10 --><p class='noindent'>In general, the number of subbands provided by the dyadic wavelet domain <span class='cite'>[<a href='#Xsayood2017introduction'>2</a>, <a href='#Xvetterli1995wavelets'>3</a>]</span>
 (remember, if <span class='mathjax-inline'>\(l\)</span> is the number of levels of the DWT, we obtain <span class='mathjax-inline'>\(l+1\)</span> subbands) is
@@ -42,11 +41,11 @@ that we already have in smaller subbands.
 </p><!-- l. 21 --><p class='indent'>   Obviously, once we have created the frequency subbands, it would be a matter of
 determining the corresponding quantization step sizes (QSS) based on the ToH curve.
 We need one QSS per subband.
+   
+</p>
                                                                   
 
                                                                   
-</p><!-- l. 25 --><p class='noindent'>
-</p>
    <h3 class='sectionHead' id='linear-decomposition-using-wavelet-packet-transform'><span class='titlemark'>2   </span> <a id='x1-30002'></a>Linear decomposition using Wavelet Packet Transform</h3>
 <!-- l. 27 --><p class='noindent'>As an alternative to the Discrete Wavelet Transform (DWT), the Wavelet Packet
 Transform (WPT) allows for a linear decomposition of the signal’s frequency range.
@@ -66,8 +65,7 @@ whereas the WPT produces <span class='mathjax-inline'>\(64\)</span> subbands.
 <li class='enumerate' id='x1-3006x3'>As  we  did  with  the  DWT  in  <span class='obeylines-h'><code class='verb'>Temporal_Overlapped_DWT</code></span>,  extract  the
      central parts of each subband to obtain a total number of frame-coefficients
      that matches to the number of frames in the chunk.</li></ol>
-<!-- l. 51 --><p class='noindent'>
-</p>
+   
    <h3 class='sectionHead' id='linear-decomposition-of-the-dyadic-subbands'><span class='titlemark'>3   </span> <a id='x1-40003'></a>Linear decomposition of the dyadic subbands</h3>
 <!-- l. 53 --><p class='noindent'>Another solution (more close to the  <a href='https://en.wikipedia.org/wiki/Bark_scale'>Bark scale</a>) is to divide each one of the dyadic
 subbands into a number of subbands. Thus, if we have <span class='mathjax-inline'>\(l+1\)</span> dyadic subbands and now we
@@ -78,6 +76,9 @@ by the DWT of the extended chunk. The idea here is to:
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-4002x1'>Extend    the    chunk    (this    can    be    inherited    from    the    class
      <span class='obeylines-h'><code class='verb'>Temporal_Overlapped_DWT</code></span>).
+                                                                  
+
+                                                                  
      </li>
 <li class='enumerate' id='x1-4004x2'>Compute the dyadic DWT transform of the extended chunk (this can
      be also reused from the class <span class='obeylines-h'><code class='verb'>Temporal_Overlapped_DWT</code></span>). Let <span class='mathjax-inline'>\(l_{\text {DWT}}\)</span> be the
@@ -92,7 +93,7 @@ by the DWT of the extended chunk. The idea here is to:
 sampling frequency is <span class='mathjax-inline'>\(48000\)</span> Hz, <span class='mathjax-inline'>\(l_{\text {DWT}}=3\)</span> and <span class='mathjax-inline'>\(l_{\text {WPT}}=1\)</span> the lowest frequency dyadic subband goes from <span class='mathjax-inline'>\(0\)</span> Hz
 to <span class='mathjax-inline'>\(3000=\frac {24000}{2^3}\)</span> Hz, and it will de divided into two subbands with a size (bandwidth) of <span class='mathjax-inline'>\(1500\)</span>
 Hz.
-</p><!-- l. 82 --><p class='noindent'>
+   
 </p>
    <h3 class='sectionHead' id='deliverables'><span class='titlemark'>4   </span> <a id='x1-50004'></a>Deliverables</h3>
 <!-- l. 84 --><p class='noindent'>
@@ -105,15 +106,14 @@ Hz.
 <li class='enumerate' id='x1-5004x2'>Implement a Python module called <span class='obeylines-h'><code class='verb'>dyadic_linear_ToH.py</code></span> where the
      functionality  described  in  Section <a href='#linear-decomposition-of-the-dyadic-subbands'>3<!-- tex4ht:ref: sec:dyadic-linear  --></a>  has  been  implemented.  Mark:  <span class='ecbx-1000'>10
      points</span>.</li></ol>
+   
                                                                   
 
                                                                   
-<!-- l. 95 --><p class='noindent'>
-</p>
    <h3 class='sectionHead' id='resources'><span class='titlemark'>5   </span> <a id='x1-60005'></a>Resources</h3>
    <div class='thebibliography'>
    <p class='bibitem'><span class='biblabel'>
- [1]<span class='bibsp'>   </span></span><a id='Xbosi2003intro'></a>M. Bosi and R.E. Goldberd.  <a href='https://last.hit.bme.hu/download/vidtechlab/fcc/literature/audio/audio_coding_standards_book.pdf'><span class='ecti-1000'>Introduction to Digital Audio Coding and
+ [1]<span class='bibsp'>   </span></span><a id='Xbosi2003intro'></a>M. Bosi and R.E. Goldberd.  <a href='http://www.pce-fet.com/common/library/books/34/1314_[Marina_Bosi,__Richard_E._Goldberg__(auth.)]_Intro(b-ok.org).pdf'><span class='ecti-1000'>Introduction to Digital Audio Coding and
    Standards</span></a>. Kluwer Academic Publishers, 2003.
    </p>
    <p class='bibitem'><span class='biblabel'>

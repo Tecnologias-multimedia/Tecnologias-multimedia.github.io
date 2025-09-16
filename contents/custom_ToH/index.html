@@ -19,7 +19,7 @@
 
 <h2 class='titleHead'>Custom ToH (Threshold of Hearing) Curves</h2>
  <div class='author'><span class='ecrm-1200'>Vicente González Ruiz</span></div><br />
-<div class='date'><span class='ecrm-1200'>March 23, 2025</span></div>
+<div class='date'><span class='ecrm-1200'>August 10, 2025</span></div>
    </div>
    <h3 class='likesectionHead' id='contents'><a id='x1-1000'></a>Contents</h3>
    <div class='tableofcontents'>
@@ -29,8 +29,7 @@
 <br />   <span class='sectionToc'>4 <a href='#deliverables' id='QQ2-1-5'>Deliverables</a></span>
 <br />   <span class='sectionToc'>5 <a href='#resources' id='QQ2-1-6'>Resources</a></span>
    </div>
-<!-- l. 8 --><p class='noindent'>
-</p>
+   
    <h3 class='sectionHead' id='not-everyone-hears-the-same'><span class='titlemark'>1   </span> <a id='x1-20001'></a>Not everyone hears the same</h3>
 <!-- l. 10 --><p class='noindent'>The ToH curve <span class='cite'>[<a href='#Xbosi2003intro'>1</a>]</span> varies between individuals:
      </p><ol class='enumerate1'>
@@ -47,7 +46,7 @@
 infraestructure.<span class='footnote-mark'><a href='#fn1x0' id='fn1x0-bk'><sup class='textsuperscript'>1</sup></a></span><a id='x1-2009f1'></a>
 </p><!-- l. 28 --><p class='indent'>   Therefore, it is quite improbable that, at least in practice, you have a ToH
 identical to the theoretical curve shown in the previous milestone.
-</p><!-- l. 32 --><p class='noindent'>
+   
 </p>
    <h3 class='sectionHead' id='why-to-use-custom-toh-curves'><span class='titlemark'>2   </span> <a id='x1-30002'></a>Why to use custom ToH curves?</h3>
 <!-- l. 34 --><p class='noindent'>If you are talking to a semi-deaf interlocutor, why would you send them auditory
@@ -55,7 +54,7 @@ information that they will not be able to perceive? For this reason, this step p
 the calculation of your own ToH curve, information that must be transmitted to your
 interlocutor so that they can use the quantization steps adapted to your
 perception.
-</p><!-- l. 40 --><p class='noindent'>
+   
 </p>
    <h3 class='sectionHead' id='a-procedure-to-determine-your-yoh-curve'><span class='titlemark'>3   </span> <a id='x1-40003'></a>A procedure to determine your YoH curve</h3>
 <!-- l. 42 --><p class='noindent'>An optimal-user-specific ToH should take into consideration your noticeable
@@ -82,7 +81,7 @@ such set, the following algorithm can be used:
      the previously processed ones.</li></ol>
 <!-- l. 70 --><p class='indent'>   It’s a good idea to have the option of determining the ToH of a given subband,
 without reconsidering the rest of them.
-</p><!-- l. 73 --><p class='noindent'>
+   
 </p>
    <h3 class='sectionHead' id='deliverables'><span class='titlemark'>4   </span> <a id='x1-50004'></a>Deliverables</h3>
 <!-- l. 75 --><p class='noindent'>Implement the previous procedure in a Python module named <span class='obeylines-h'><code class='verb'>create_ToH.py</code></span>. The
@@ -106,12 +105,12 @@ columns (example):
 </p><!-- l. 89 --><p class='indent'>   Modify the modules <span class='obeylines-h'><code class='verb'>*_ToH.py</code></span> to use the file <span class='obeylines-h'><code class='verb'>custom_ToH.txt</code></span>, when
 available.
 </p><!-- l. 92 --><p class='indent'>   Mark: <span class='ecbx-1000'>8 points</span>.
-</p><!-- l. 94 --><p class='noindent'>
+   
 </p>
    <h3 class='sectionHead' id='resources'><span class='titlemark'>5   </span> <a id='x1-60005'></a>Resources</h3>
    <div class='thebibliography'>
    <p class='bibitem'><span class='biblabel'>
- [1]<span class='bibsp'>   </span></span><a id='Xbosi2003intro'></a>M. Bosi and R.E. Goldberd.  <a href='https://last.hit.bme.hu/download/vidtechlab/fcc/literature/audio/audio_coding_standards_book.pdf'><span class='ecti-1000'>Introduction to Digital Audio Coding and
+ [1]<span class='bibsp'>   </span></span><a id='Xbosi2003intro'></a>M. Bosi and R.E. Goldberd.  <a href='http://www.pce-fet.com/common/library/books/34/1314_[Marina_Bosi,__Richard_E._Goldberg__(auth.)]_Intro(b-ok.org).pdf'><span class='ecti-1000'>Introduction to Digital Audio Coding and
    Standards</span></a>. Kluwer Academic Publishers, 2003.
 </p>
    </div>
