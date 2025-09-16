@@ -61,8 +61,8 @@ where:
 \item The \verb|record(chunk_size)| method captures a chunk (a
   fragment) of frames\footnote{A stereo sample, usually 16 + 16
     bits.}. In \verb|sounddevice|, this operation is carried on by the
-  \href{https://python-sounddevice.readthedocs.io/en/0.4.0/api/streams.html#sounddevice.Stream.read}{\texttt{read()}
-    method}. As can be seen in
+  \href{https://python-sounddevice.readthedocs.io/en/0.4.0/api/streams.html#sounddevice.Stream.read}{\texttt{read()}}
+    method. As can be seen in
   \href{https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire4.py}{wire4.py}\footnote{
     \texttt{curl
       https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire4.py
@@ -70,7 +70,7 @@ where:
   \verb|sounddevice| if we read only the frames that are available in
   the soundcard's buffer, this generates a non-blocking operation and
   the chunk size depends on the instant of time in which this method
-  is called. Otherwise, if we specify a number of frames different to
+  is called. Otherwise, if we specify a number of frames bigger than
   the number of frames available, the operation can\footnote{The
     reading will be blocking if the number of requested frames is
     larger than the number of available frames.} be
