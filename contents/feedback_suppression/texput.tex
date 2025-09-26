@@ -59,7 +59,7 @@ Decrease the gain of the amplifier of your speaker to do (the energy
 of) $s(t)$ as small as possible. Unfortunately this also decreases the
 volume of the far-end signal (the voice of our interlocutor) :-/
 
-\section{The ``simplest'' subtract solution}
+\section{The ``simplest'' solution}
 Lets ${\mathbf m}$ the digital version of $m(t)$, and ${\mathbf m}[t]$
 it's $t$-th sample\footnote{Or frame if we work in stereo}. In this
 solution, we send
@@ -83,12 +83,22 @@ as the estimated\footnote{We use the word ``estimated'' because in
   frequency responses, etc.  that modify the version of $\mathbf{s}$
   that is received by the microphone.} feedback signal.
 
-Notice that we have used the notation $\tilde{\cdot}$ to highlight
+Notice that it have been used the notation $\tilde{\cdot}$ to highlight
 that $\tilde{\mathbf n}$ is an approximation of ${\mathbf n}$ (our
 sampled true-voice signal), and the notation $\hat{\cdot}$ to
 emphasize that $\hat{\mathbf s}$ is registered\footnote{That matches
   in time. That are synchronized.} prediction for $s$
 reaching the microphone.
+
+Notice also that, if ${\mathbf s}[0]$ is the first sample of a chunk
+($c$-th chunk), the sample ${\mathbf s}[-d]$ could belong to a
+previous chunk (e.g., the $c-1$-th chunk).
+
+Finally, $a$ should be choosen considering that under ausence of voice
+in each end, $s(t)\approx 0$. For example, Skype finds $d$ and $a$
+using a ``call-signal'' (a sequence of more-or-less tonal sounds). $d$
+is determined measuring the propagation time of the call-signal
+between our speaker and our mic.
 
 \section{Considering the frequency response of the near-end to estimate feedback signal}
 We can improve the performance of the previous feedback cancellation
@@ -134,11 +144,21 @@ where ${\mathbf S}$ is the (digital) Fourier transform\footnote{The
   $s=\sigma+j\omega$ frequencies. This simplification can be used for
   the characterization of our near-end audioset because it can be
   considered as a FIR (Finite Impulse Response) system (in ausence of
-  an audio signal, the echo signal always decays with the time).} of
-${\mathbf s}$, ${\mathbf H}$ is the Fourier transform of
-${\mathbf h}$, and ${\mathcal F}^{-1}$ represents the inverse Fourier
-transform. Notice that all these transforms are applied to digital
-signals, and there exist fast algorithms (with complexity $O\log_2O$).
+  an audio signal, the echo signal always decays with the
+  time). Finally, notice that ${\mathbf S}[\omega]$ (the $\omega$-th
+  frequency component of ${\mathbf S}$) is a complex number (the
+  Fourier coefficients are complex numbers).} of ${\mathbf s}$,
+${\mathbf H}$ is the Fourier transform\footnote{For computing the
+  Fourier transform of digital signals use a library such as
+  \href{https://numpy.org/doc/2.1/reference/routines.fft.html}{\text{numpy.fft}}.}
+of ${\mathbf h}$, and ${\mathcal F}^{-1}$ represents the inverse
+Fourier transform. Notice that all these transforms are applied to
+digital signals, and there exist fast algorithms (with complexity
+$O\log_2O$).
+
+Finally, see that this feedback supression technique could ease the
+calculation of $d$ because if \href{https://en.wikipedia.org/wiki/Correlation}{correlation} is used to estimate it, the
+maximun should be clearly identified.
 
 \section{Adaptive filtering}
 Unfortunately, none of the previous solutions is ``static'', in the
@@ -147,7 +167,7 @@ in real-time:
 \begin{enumerate}
 \item In Equations \eqref{eq:simplest} and
   \eqref{eq:using_convolution}, the parameter $d$ which expresses (in
-  samples-time) the time that $s$ need to travel from the speaker to
+  sample-times) the time that $s$ need to travel from the speaker to
   the microphone, depends on the orientation of the screen of the
   laptop.
 \item Equations~\eqref{eq:faster} and (obviously) Eq~\eqref{eq:faster}
@@ -163,24 +183,99 @@ is small.\footnote{Take in mind that convolution is a $O^2$ operation,
   and therefore, we can only handle in real-time with our computers
   small filter.}
 
-Eq.~\ref{eq:eq:minimal_filter} represents the minimal expression for a
+Eq.~\eqref{eq:minimal_filter} represents the minimal expression for a
 \href{https://en.wikipedia.org/wiki/Finite_impulse_response}{FIR
   filter} (whose spectral shape is completely flat because it only has
 a single coefficient and therefore, it attenuates equally all the
-frequencies). In general, the expression of a FIR filtering in the
+frequencies). In general, the expression of a FIR filter in the
 time-domain (applied to a signal that previously has been delayed $d$
 samples) is
 \begin{equation}
   \hat{\mathbf s}[t] = \sum_{k=0}^{N-1}{\mathbf h}_k{\mathbf s}[t-k-d],
   \label{eq:FIR_filter}
 \end{equation}
-where $N$ is the number of coefficients of the filter ${\mathbf
-  h}$. When the (coefficients of the) filter are updated for each
-input sample, Eq.~\ref{eq:FIR_filter} can be rewritten as
+where $N$ is the number of coefficients of the filter ${\mathbf h}$,
+and ${\mathbf h}_k$ is the $k$-th coefficient. When the (coefficients
+of the) filter are updated for each input sample,
+Eq.~\eqref{eq:FIR_filter} can be rewritten as
 \begin{equation}
   \hat{\mathbf s}[t] = \sum_{k=0}^{N-1}{\mathbf h}_k^{(t)}{\mathbf s}[t-k-d].
   \label{eq:adaptive_FIR_filter}
 \end{equation}
+
+Notice also that, in practice, the filter should not be updated so
+often (e.g., every second could be fast enough). In this case
+Eq.~\eqref{eq:adaptive_FIR_filter} should be
+\begin{equation}
+  \hat{\mathbf s}[t] = \sum_{k=0}^{N-1}{\mathbf h}_k^{(i)}{\mathbf s}[t-k-d].
+  \label{eq:adaptive_FIR_filter_second}
+\end{equation}
+where $i$ represents the update iteration.
+
+\section{Filter update using \href{https://en.wikipedia.org/wiki/Least_mean_squares_filter}{LMS (Least Mean Squares)}}
+
+The LMS algorithm~\cite{haykin1995adaptive,boyd2004convex} was
+invented by professor Bernard Widrow and his first Ph.D. student, Ted
+Hoff, to train the
+\href{https://en.wikipedia.org/wiki/ADALINE}{ADALINE} artificial
+neural network.\footnote{See
+  \url{https://www.youtube.com/watch?v=hc2Zj55j1zU}} Using LMS,
+ADALINE is able to distinguish between patterns, even using only a
+part of a single neuron.\footnote{If we do not consider the
+  \href{https://en.wikipedia.org/wiki/Activation_function}{activation
+    function}, an artificial neuron and a FIR filter perform the same
+  computation.}
+
+LMS defines that
+\begin{equation}
+  {\mathbf h}^{(i+1)}_k = {\mathbf h}^{(i)}_k + 2\mu\tilde{\mathbf n}[i]{\mathbf s}[i-k] \label{eq:update}
+\end{equation}
+where
+\begin{equation}
+  \tilde{\mathbf n}[i] = {\mathbf m}[i] - \hat{\mathbf s}[i],
+\end{equation}
+where $i$ represents the iteration number, and $\mu$ is the learning
+rate\footnote{High $\mu$ values spped-up the adaption process, but can
+  generate worse $\mathbf{h}$ coefficients.}.  These equations can be
+found\footnote{Again, see
+  \url{https://www.youtube.com/watch?v=hc2Zj55j1zU}!} using the
+(steepest)
+\href{https://en.wikipedia.org/wiki/Gradient_descent}{gradient descend
+  algorithm}.
+
+\section{Filter update using a train of impulses}
+If we decide to work with impulses, ${\mathbf h}^{(i)}$ is determined
+by the samples recorded by our soundcard after $d$ sample-times of the
+generation of each impulse when the impulses are the only source of
+sound. If there were other sources of sound (such as for example, our
+voice) the updates should be discarded or averaged using some
+\href{https://en.wikipedia.org/wiki/Moving_average}{moving-average}
+technique.
+
+\section{The substract solution in the frequency domain}
+Ultimately, feedback in InterCom occurs because the audio signal we
+are generating is reproduced through the speakers (with a certain time
+lag). In this feedback situation, the spectrum of a newly received
+chunk coincides with the spectrum of a newly sent chunk. Therefore, if
+the chunk we want to send is pre-filtered (before being sent) using
+the opposite filter to that described by the spectrum of the received
+chunk, we should cancel the feedback.
+
+Let ${\mathbf M} = {\mathcal F}({\mathbf m})$ the Fourier transform of
+the $i$-th chunk captured by the soundcard, and let
+${\mathbf S} = {\mathcal F}({\mathbf s})$ the Fourier transform of the
+$i$-th played chunk. Considering the reasoning followed in the
+previous paragraph, and considering also the Eq.~\eqref{eq:simplest}, it can be concluded that
+\begin{equation}
+  \tilde{\mathbf N} = {\mathbf M} - a{\mathbf S},
+  \label{eq:simplest_fourier}
+\end{equation}
+where $\tilde{\mathbf N} = {\mathcal F}({\mathbf n})$, the Fourier
+transform of the chunk that should be sent in the $i$-th iteration.
+
+\begin{comment}
+Notice that if you prefer to estimate ${\mathbf h}$ using a ``train''
+(a sequence) of impulses, the temporal distance between them would 
 
   For estimating the feedback signal at the
   sample-time $t$, ${\mathbf f}[t]$, the length of a
@@ -211,35 +306,13 @@ techniques for computing the coefficients of a FIR filter is the
 reasons because the filter (coefficients) can be adapted to variations
 in the signal to filter (the filter can learn).
 
-LMS was invented by professor Bernard Widrow and his first
-Ph.D. student, Ted Hoff, to train the
-\href{https://en.wikipedia.org/wiki/ADALINE}{ADALINE} artificial
-neural network.\footnote{See
-  \url{https://www.youtube.com/watch?v=hc2Zj55j1zU}} Using LMS,
-ADALINE is able to distinguish between patterns, even
-using a part of a single neuron.\footnote{If we do not consider the
-  \href{https://en.wikipedia.org/wiki/Activation_function}{activation
-    function}, an artificial neuron and a FIR filter perform the same
-  computation.}
-
 LMS can be used to compute the coefficients of a filter to provide a
 desired output for a given input. In our
 context, the input signal is ${\mathbf m}$ (the digital signal
 recorded by our soundcard) and the desired output signal is
 ${\mathbf n}$ (the digital version of our voice). LMS, iteratively
 computes
-\begin{align}
-  {\mathbf h}^{(i+1)}_k & = & {\mathbf h}^{(i)}_k + 2\mu\tilde{\mathbf n}[i]{\mathbf s}[i-k] \label{eq:update} \\
-  \tilde{\mathbf n}[i] & = & {\mathbf m}[i] - \hat{\mathbf e}[i],
-\end{align}
-where $i$ represents the iteration number, and $\mu$ is the learning
-rate\footnote{High $\mu$ values spped-up the adaption process, but can
-  generate worse $\mathbf{h}$ coefficients.}. These equations can be
-found\footnote{Again, see
-  \url{https://www.youtube.com/watch?v=hc2Zj55j1zU}!} using the
-(steepest)
-\href{https://en.wikipedia.org/wiki/Gradient_descent}{gradient descend
-  algorithm}. Notice that we process the signals sample-by-sample (at
+ Notice that we process the signals sample-by-sample (at
 iteration $i$ we compute the $i$-th sample of $\tilde{\mathbf n}$ (the
 signal without the feedback, supposely containing \emph{only} our
 voice), and this is the signal that we will send to the far-end in the
@@ -296,7 +369,9 @@ The signal to send (without the feedback) is:
 \begin{equation}
   \mathbf{n} = \mathcal{F}^{-1}(\mathbf{N})
 \end{equation}
-    
+
+\end{comment}
+
 \section{Deliverables}
 
 \begin{enumerate}
@@ -304,18 +379,18 @@ The signal to send (without the feedback) is:
 \textbf{Write a Python module} called \texttt{feedback\_cancellation.py} that inherits
 from \texttt{buffer.py} and that implements at least\footnote{More
   working implementations, higher grade.} one of the previously
-described solutions. More concretely:
+described solutions.
+\textbf{Evaluate it} comparing with other feedback supression solutions such as the provided by Google Meet.
+\end{enumerate}
+
+\begin{comment}
+More concretely:
 
 \begin{enumerate}
 
 \item If you implement the ``$s(t)$ delay and subtract solution'',
   you must estimate $a$, $d$ and perform the signals subtraction to
-  remove the feedback signal ($s(t)$). For example, Skype finds
-  $d$ and $a$ using a ``call-signal'' (a sequence of more-or-less
-  tonal sounds). $d$ is determined measuring the propagation time of
-  the call-signal between our speaker and our mic, and $a$ measuring
-  the ratio between the energy of the call-signal played and the
-  energy of the call-signal recorded.
+  remove the feedback signal ($s(t)$). 
 
 \item In a ``$s(t)$ delay and subtract solution'', if you also
   consider the frequency response of the near-end audioset to estimate
@@ -325,9 +400,7 @@ described solutions. More concretely:
   ${\mathbf \delta}$, and in absence of any other sound signal, record
   the echo and compute its Fourier transform (it is a good idea to
   repeat this process several times to obtain a better estimation of
-  ${\mathbf H}$). Finally, notice that ${\mathbf H}[\omega]$ (the
-  $\omega$-th frequency component of ${\mathbf H}$) is a complex
-  number (the Fourier coefficients are complex numbers).
+  ${\mathbf H}$). Finally, .
 
   Notice that the frequency characterization of the far-end audioset
   can be also used in a ``$n(t)$ delay and subtract
@@ -343,9 +416,7 @@ described solutions. More concretely:
   (Equation~\eqref{eq:LMS_feedback}) for every chunk. Notice that for
   doing that, we will require the first $k$ samples of the next chunk.
 
-\item For computing the Fourier transform of digital signals use a
-  library such as
-  \href{https://numpy.org/doc/2.1/reference/routines.fft.html}{\text{numpy.fft}}.
+\item 
 \end{enumerate}
 
 Optionally, but interesting for your mark, use any other technique
@@ -361,7 +432,6 @@ be dynamic (for example, the inclination of the screen of our laptop
 can be modified at any moment).
 
 Finally, notice that
-\href{https://en.wikipedia.org/wiki/Correlation}{correlation}
 operation can help to fine-tune $d$.
 
 % Mark: \textbf{10 points}.
@@ -379,6 +449,7 @@ operation can help to fine-tune $d$.
     documented (in the own module)?
   \end{enumerate}
 \end{enumerate}
+\end{comment}
 
 \section{Resources}
 
