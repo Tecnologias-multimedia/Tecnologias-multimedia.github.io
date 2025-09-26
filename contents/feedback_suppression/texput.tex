@@ -140,7 +140,7 @@ ${\mathbf h}$, and ${\mathcal F}^{-1}$ represents the inverse Fourier
 transform. Notice that all these transforms are applied to digital
 signals, and there exist fast algorithms (with complexity $O\log_2O$).
 
-\section{Adaptive filtering in the time-domain}
+\section{Adaptive filtering}
 Unfortunately, none of the previous solutions is ``static'', in the
 sense that if we modify the audioset, some parameters must be modified
 in real-time:
@@ -157,7 +157,7 @@ in real-time:
 
 Filters can be implemented in the frequency domain (such as happens in
 Eq.~\eqref{eq:faster}) or in the signal (time in our case)
-domain. Signal domain (digital) convolutions are efficient when the
+domain. Signal domain (digital) convolutions are affordable if the
 length\footnote{The number of coefficients.} of the (digital) filters
 is small.\footnote{Take in mind that convolution is a $O^2$ operation,
   and therefore, we can only handle in real-time with our computers
@@ -165,13 +165,21 @@ is small.\footnote{Take in mind that convolution is a $O^2$ operation,
 
 Eq.~\ref{eq:eq:minimal_filter} represents the minimal expression for a
 \href{https://en.wikipedia.org/wiki/Finite_impulse_response}{FIR
-  filter} (whose spectral shape is completely flat because it
-attenuates equally all the frequencies). In general, the expression of
-a FIR filter operation in the time-domain (applied to a signal
-previously delayed $d$ samples) is
+  filter} (whose spectral shape is completely flat because it only has
+a single coefficient and therefore, it attenuates equally all the
+frequencies). In general, the expression of a FIR filtering in the
+time-domain (applied to a signal that previously has been delayed $d$
+samples) is
 \begin{equation}
   \hat{\mathbf s}[t] = \sum_{k=0}^{N-1}{\mathbf h}_k{\mathbf s}[t-k-d],
   \label{eq:FIR_filter}
+\end{equation}
+where $N$ is the number of coefficients of the filter ${\mathbf
+  h}$. When the (coefficients of the) filter are updated for each
+input sample, Eq.~\ref{eq:FIR_filter} can be rewritten as
+\begin{equation}
+  \hat{\mathbf s}[t] = \sum_{k=0}^{N-1}{\mathbf h}_k^{(t)}{\mathbf s}[t-k-d].
+  \label{eq:adaptive_FIR_filter}
 \end{equation}
 
   For estimating the feedback signal at the
