@@ -14,21 +14,25 @@ computational requirements.
 One of the first problems we encounter with the use of the
 \texttt{buffer.py} module\footnote{And obviously, any other parent
   version of \texttt{buffer.py}.} is that, if we don't use headphones,
-the sound that comes out of our PC's speaker reaches our mic(rophone)
-some time later, and more some time later, that sound reaches our
+the sound that comes out of our PC's speaker some time later reaches
+our mic(rophone), and more some time later, that sound reaches our
 interlocutor (the ``far-end'' ... in the system we are the
 ``near-end'') in the form of an echo (signal) of its own voice, which
 is reproduced by his/her speaker, which can be captured again (some
 time later) by his/her mic and sent it back to us ... and so on,
-generating a rather unpleasant signal.
+generating a rather unpleasant feedback signal.
 
-In other words, if
-$s$ is the (analog) signal played by our (loud)speaker and
-that reaches our mic, $n$ is the signal emited by the
-near-end person (that's me) that reaches our mic\footnote{I.e., the same
-  signal that would be captured by our mic if I were using a
-  headset.}, and $m$ is the (mixed) signal recorded by our
-microphone, we have that
+In other words, let:
+\begin{enumerate}
+\item $s$ the (analog) signal played by our
+  (loud)speaker and that reaches our mic,
+\item $n$ the signal emited by
+  the near-end person (that's me) that reaches our mic\footnote{I.e.,
+  the same signal that would be captured by our mic if I were using a
+  headset.}, and
+\item $m$ the (mixed) signal recorded by our microphone,
+\end{enumerate}
+we have that
 \begin{equation}
   m(t) = n(t) + s(t),
   \label{eq:echo_problem}
@@ -79,20 +83,22 @@ to our mic. We define
   \label{eq:minimal_filter}
 \end{equation}
 as the estimated\footnote{We use the word ``estimated'' because in
-  this model we are ignoring several factors, such as echoes, unflat
-  frequency responses, etc.  that modify the version of $\mathbf{s}$
-  that is received by the microphone.} feedback signal.
+this model we are ignoring several factors, such as echoes, unflat
+frequency responses, etc.  that modify the version of $\mathbf{s}$
+that is received by the microphone.} feedback signal that reaches our
+microphone at the same instant of time that the sample ${\mathbf
+  n}[t]$ would have been captured in the ausence of the feedback.
 
 Notice that it have been used the notation $\tilde{\cdot}$ to highlight
 that $\tilde{\mathbf n}$ is an approximation of ${\mathbf n}$ (our
 sampled true-voice signal), and the notation $\hat{\cdot}$ to
-emphasize that $\hat{\mathbf s}$ is registered\footnote{That matches
+emphasize that $\hat{\mathbf s}$ is a registered\footnote{That matches
   in time. That are synchronized.} prediction for $s$
-reaching the microphone.
+reaching our microphone.
 
 Notice also that, if ${\mathbf s}[0]$ is the first sample of a chunk
 ($c$-th chunk), the sample ${\mathbf s}[-d]$ could belong to a
-previous chunk (e.g., the $c-1$-th chunk).
+previous chunk (e.g., the $(c-1)$-th chunk).
 
 Finally, $a$ should be choosen considering that under ausence of voice
 in each end, $s(t)\approx 0$. For example, Skype finds $d$ and $a$
@@ -100,7 +106,7 @@ using a ``call-signal'' (a sequence of more-or-less tonal sounds). $d$
 is determined measuring the propagation time of the call-signal
 between our speaker and our mic.
 
-\section{Considering the frequency response of the near-end to estimate feedback signal}
+\section{Considering the frequency response of the near-end to estimate the feedback signal}
 We can improve the performance of the previous feedback cancellation
 solution if we take also into consideration that the feedback signal
 that finally reaches our microphone is the
@@ -170,9 +176,9 @@ in real-time:
   sample-times) the time that $s$ need to travel from the speaker to
   the microphone, depends on the orientation of the screen of the
   laptop.
-\item Equations~\eqref{eq:faster} and (obviously) Eq~\eqref{eq:faster}
-  are also affected by $h$, which depends on current audioset
-  configuration.
+\item Eq.~\eqref{eq:using_convolution} and (obviously)
+  Eq~\eqref{eq:faster} are also affected by $h$, which depends on
+  current audioset configuration.
 \end{enumerate}
 
 Filters can be implemented in the frequency domain (such as happens in
@@ -203,8 +209,8 @@ Eq.~\eqref{eq:FIR_filter} can be rewritten as
   \label{eq:adaptive_FIR_filter}
 \end{equation}
 
-Notice also that, in practice, the filter should not be updated so
-often (e.g., every second could be fast enough). In this case
+In general, the filter should not be updated so often (e.g., every
+second could be fast enough). In this case
 Eq.~\eqref{eq:adaptive_FIR_filter} should be
 \begin{equation}
   \hat{\mathbf s}[t] = \sum_{k=0}^{N-1}{\mathbf h}_k^{(i)}{\mathbf s}[t-k-d].
@@ -254,9 +260,9 @@ technique.
 
 \section{The substract solution in the frequency domain}
 Ultimately, feedback in InterCom occurs because the audio signal we
-are generating is reproduced through the speakers (with a certain time
+are generating is reproduced through our speakers (with a certain time
 lag). In this feedback situation, the spectrum of a newly received
-chunk coincides with the spectrum of a newly sent chunk. Therefore, if
+chunk is similar to the spectrum of a newly sent chunk. Therefore, if
 the chunk we want to send is pre-filtered (before being sent) using
 the opposite filter to that described by the spectrum of the received
 chunk, we should cancel the feedback.
@@ -271,7 +277,8 @@ previous paragraph, and considering also the Eq.~\eqref{eq:simplest}, it can be 
   \label{eq:simplest_fourier}
 \end{equation}
 where $\tilde{\mathbf N} = {\mathcal F}({\mathbf n})$, the Fourier
-transform of the chunk that should be sent in the $i$-th iteration.
+transform of the chunk that should be sent in the $i$-th iteration
+(chunk).
 
 \begin{comment}
 Notice that if you prefer to estimate ${\mathbf h}$ using a ``train''
