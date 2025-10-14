@@ -132,12 +132,13 @@ volumen levels that a human being can recognize</a> <span class='cite'>[<a href
 will profit from such fact to decrease the transmission bit-rate by reducing
 quality. In most <a href='https://en.wikipedia.org/wiki/Lossy_compression'>lossy compression</a> schemes, quantization is the main source of
 <a href='https://en.wikipedia.org/wiki/Distortion'>distortion</a> <span class='cite'>[<a href='#Xtaubman2002jpeg2000'>7</a>]</span>.
-</p><!-- l. 161 --><p class='indent'>   <a href='https://en.wikipedia.org/wiki/Quantization_(signal_processing)'>Scalar Quantization</a> (SQ) is the process of decreasing the number of discrete levels
-that a signal can take <span class='cite'>[<a href='#Xsayood2017introduction'>5</a>]</span>. <a href='https://en.wikipedia.org/wiki/Vector_quantization'>Vector Quantization</a> (VQ) is similar, but it is applied to
-tuples of samples at the same time <span class='cite'>[<a href='#Xvetterli2014foundations'>8</a>]</span>. SQ is used when the samples are decorrelated
-or, although correlated, decorrelation will be exploited in a posterior <a href='https://en.wikipedia.org/wiki/Entropy_encoding'>entropy coding</a>
-stage (which in our case is DEFLATE), because the <a href='https://en.wikipedia.org/wiki/Quantization_(signal_processing)#Rate%E2%80%93distortion_optimization'>coding efficiency</a> provided by VQ
-is marginal in this context <span class='cite'>[<a href='#Xvetterli2014foundations'>8</a>]</span>, and generally requires higher computational
+</p><!-- l. 161 --><p class='indent'>   <a href='https://en.wikipedia.org/wiki/Quantization_(signal_processing)'>Scalar Quantization</a> (SQ) is the process of decreasing the number of discrete
+levels that a signal can take <span class='cite'>[<a href='#Xsayood2017introduction'>5</a>]</span>. <a href='https://en.wikipedia.org/wiki/Vector_quantization'>Vector Quantization</a> (VQ) is similar, but
+it is applied to tuples of samples at the same time <span class='cite'>[<a href='#Xvetterli2014foundations'>8</a>]</span>. SQ is used when
+the samples are decorrelated or, although correlated, decorrelation will be
+exploited in a posterior signal transform or <a href='https://en.wikipedia.org/wiki/Entropy_encoding'>entropy coding</a> stage (which in
+our case is DEFLATE), because the <a href='https://en.wikipedia.org/wiki/Quantization_(signal_processing)#Rate%E2%80%93distortion_optimization'>coding efficiency</a> provided by VQ is
+marginal in this context <span class='cite'>[<a href='#Xvetterli2014foundations'>8</a>]</span>, and generally requires higher computational
 resources.
 </p><!-- l. 175 --><p class='indent'>   Quantizers can also be classified into <a href='https://en.wikipedia.org/wiki/Quantization_(signal_processing)#Mid-riser_and_mid-tread_uniform_quantizers'>uniform</a> and <a href='https://nptel.ac.in/content/storage2/courses/117104069/chapter_5/5_5.html'>non-uniform</a> <span class='cite'>[<a href='#Xsayood2017introduction'>5</a>, <a href='#Xvetterli2014foundations'>8</a>]</span>. An uniform
 quantizer distributes the available representation levels uniformely over the range of input
@@ -164,10 +165,10 @@ digital scalar quantizers</a> document). Finally, although this is a feature tha
 we are not going to exploit for now, dead-zone quantizers are equivalent
 to encode the signal by bit-planes when the quantization steps sizes are
 powers of two, allowing the design of progressive entropy encoding schemes, if
-required.
                                                                   
 
                                                                   
+required.
 </p><!-- l. 224 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead'><span class='titlemark'>1.4   </span> <a id='x1-60001.4'></a>(Bit-)Rate control and distortion</h4>
@@ -211,6 +212,9 @@ already “DEFLATE-encoded and -decoded”):
 <!-- l. 281 --><p class='indent'>   Notice that, regarding the bit-rate control, you will find four implementations
 related to this milestone:
      </p><ol class='enumerate1'>
+                                                                  
+
+                                                                  
 <li class='enumerate' id='x1-7010x1'><span class='obeylines-h'><span class='verb'><span class='ectt-1000'>BR_control_no.py</span></span></span>: Uses a constant \(\Delta &gt;0\).<span class='footnote-mark'><a href='#fn9x0' id='fn9x0-bk'><sup class='textsuperscript'>9</sup></a></span><a id='x1-7011f9'></a>
      There is not BR control.
      </li>
