@@ -13,6 +13,7 @@
 %{{{
 
 \subsection{Analysis transform}
+\label{sec:analysis_transform}
 %{{{ 
 InterCom transmits a
 \href{https://en.wikipedia.org/wiki/Stereophonic_sound}{stereo} (two
@@ -51,7 +52,7 @@ where ${\mathbf x}\in\mathbb{Z}^2$ is a stereo frame, ${\mathbf K}$ is
 the forward (or analysis) transform matrix, and
 ${\mathbf w}=\begin{bmatrix} {\mathbf w}_0 & {\mathbf
     w}_1\end{bmatrix}^{\text T}$ (where for this transform,
-$\mathbb{w}\in\mathbb{Z}^2}$) is the corresponding
+$\mathbf{w}\in\mathbb{Z}^2$) is the corresponding
 \href{https://en.wikipedia.org/wiki/Discrete_wavelet_transform}{decomposition}. In
 this particular transform, the decomposition has two
 \href{https://en.wikipedia.org/wiki/Sub-band_coding}{subbands}
@@ -275,16 +276,17 @@ subband ${\mathbf w}_i$ must operate in the RD curve $f_i$ with the
 same slope as the rest of the
 subbands~\cite{vetterli2014foundations,sayood2017introduction} (this
 is the same as saying that we must satisfy $f'_0(x)=f'_1(x)$, where
-$f'$ denotes the derivative of $f$). The main drawback of this
-approach is that the finding of $f_i$ is computationally intensive (we
-must analyze, quantize, compress, decompress, dequantize, synthesize,
-and compute the distortion of the data for a sufficiently high number
-of quantization steps), and usually we cannot do that in real
+$f'$ denotes the derivative of $f$, the RD curve). The main drawback
+of this approach is that the finding of $f_i$ is computationally
+intensive (we must analyze, quantize, compress, decompress,
+dequantize, synthesize, and compute the distortion of the data for a
+sufficiently high number of quantization steps, in order to determine
+a good bit-rate $x$), and usually we cannot do that in real
 time.\footnote{This would solve the problem of controlling the
   bit-rate because using the RD curves we know how many bits will
   require each subband.} Notice that we can use this optimal
 quantization scheme because the subbands are indepent one of the
-other, and this is true because the transforms are orthogonal.
+other, and this is true because the MST is orthogonal.
 
 \begin{comment}
   An approximation to this could be to suppose that the RD curves of
@@ -292,7 +294,7 @@ other, and this is true because the transforms are orthogonal.
   piece\footnote{Remember, two samples of a stereo frame in our case
     because we are removing the spatial redundancy.} of data are
   similar to some the curves of previous pieces, that has already been
-  compressed and transmitted, and therefore, we can compute also the
+  compressed and transmitted and therefore, we can compute also the
   distortion. Using this information, we can estimate a RD curve for
   the current piece and estimate the ``optimal'' QSSs. This procedure
   is much faster than the procedure described in the previous paragraph, but it
@@ -436,21 +438,20 @@ can be found inside of each subband\footnote{Here it is supposed that
 seen in the notebook
 \href{https://github.com/Tecnologias-multimedia/intercom/blob/master/tools/audio_viewer.ipynb}{Audio
   Viewer}, most audio signals show ``patterns'' of samples that tend
-to repeat, especially locally. Another clear source of temporal
-redundancy is that neighboring audio samples usually show similar
-amplitude values.
+to repeat themselves, especially locally. Another clear source of
+temporal redundancy is that neighboring audio samples usually show
+similar amplitude values.
 
 % A decorrelating technique: DPCM
 There are several techniques that can be used to remove the
-temporal redundancy of a sequence of audio. One of the most
-straightforward is
+temporal redundancy of a sequence of audio. A
+straightforward one is
 \href{https://en.wikipedia.org/wiki/Differential_pulse-code_modulation}{Differential
   Pulse Code Modulation
   (DPCM)~\cite{sayood2017introduction}}. However, there are more
 efficient decorrelation algorithms based on
 \href{https://en.wikipedia.org/wiki/Transform_coding}{Transform
-  Coding}, such as the one described in the previous and in this
-section.
+  Coding}, such as the one previously described.
 
 % Another decorrelating technique: transform coding
 As it has been explained before, Transform Coding is based on the idea
@@ -484,9 +485,10 @@ samples.\footnote{Notice that is we dead-zone quantize a decomposition
 of the transform matrix are the coefficients\footnote{In theory, such
   rows could be any mathematical operation, not necessarily a filter.}
 of digital filters that are used without splitting the signal into
-blocks. In this context, our analysis transform matrix ${\mathbf K}$
-(see the previous section) represents the coefficients of a 2-channels
-analysis \href{https://en.wikipedia.org/wiki/Filter_bank}{Filter Bank
+blocks of samples. In this context, our analysis transform matrix
+${\mathbf K}$ (see the Section~\ref{sec:analysis_transform})
+represents the coefficients of a 2-channels analysis
+\href{https://en.wikipedia.org/wiki/Filter_bank}{Filter Bank
   (FB)}~\cite{vetterli1995wavelets}, and the forward transform is in
 fact ``descomposing'' ${\mathbf x}$ into two subbands ${\mathbf w}_0$
 and ${\mathbf w}_1$ (see the Figure~\ref{fig:PRFB}, and the notebook
@@ -523,14 +525,14 @@ high-pass filter, and that the
     impulse}.} of both filters
 \href{https://en.wikipedia.org/wiki/Filter_bank#Perfect_reconstruction_filter_banks}{are
   one the inverse of the other}. Under these assumptions, the complete
-(analysis/synthesis) transform is called a (2-channels)
+(analysis/synthesis) transform is named a (2-channels)
 \href{https://en.wikipedia.org/wiki/Filter_bank#Perfect_reconstruction_filter_banks}{Perfect
   Reconstruction Filter Bank (PRFB)}, and ${\mathbf x}$ can be
 recovered (perfectly) from a subsampled version (in this case
 \href{https://en.wikipedia.org/wiki/Downsampling_(signal_processing)}{decimating}
 by 2 because we have two channels in the FB) of ${\mathbf w}_0$ and
 ${\mathbf w}_1$ (see the notebook
-\href{https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/PRFB.ipynb}{A
+\href{https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/contents/transform_coding/PRFB.ipynb}{A
   Perfect Reconstruction Filter Bank (PRFB)}).\footnote{Notice that
   this subsampling is possible because the
   \href{https://en.wikipedia.org/wiki/Aliasing}{aliasing} generated in
