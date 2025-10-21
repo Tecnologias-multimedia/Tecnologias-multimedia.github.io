@@ -698,7 +698,7 @@ DWT using the MST filters and lifting.
   ${\mathbf h}^1$ computed by Eq.~\eqref{eq:1dwt} are the same than
   the decimated subbands computed by the corresponding 1-level PRFB,
   and we say, therefore, that Eq.~\eqref{eq:1dwt} computes the
-  1-level DWT.
+  1-level (critically sampled) DWT.
 
   Based on the 1-level DWT, we define the 2-levels DWT as
   \begin{equation}
@@ -720,7 +720,7 @@ DWT using the MST filters and lifting.
   \end{equation}
 
   The $l$-levels DWT splits the signal spectrum into $l+1$ subbands. If
-  $l=n$, where $N=2^n$, we have the spectrum partition
+  $l=n$, where $N=2^n$, we have the spectrum partition (decomposition)
   \begin{equation*}
         | \mathbf{l}^l_0 | \mathbf{h}^l_0 | \mathbf{h}^{l-1}_0 \mathbf{h}^{l-1}_1 | \mathbf{h}^{l-2}_0 \mathbf{h}^{l-2}_1 \mathbf{h}^{l-2}_2 \mathbf{h}^{l-2}_3 | \cdots | \mathbf{h}^1_0 \mathbf{h}^1_1 \cdots \mathbf{h}^1_{2^{n-1}-1} |,
   \end{equation*}
@@ -736,10 +736,11 @@ DWT using the MST filters and lifting.
   2 (sub)steps:
   \begin{enumerate}
   \item A \textbf{predict step}, which computes the ${\mathbf h}$
-    subbands as a prediction error (that in general should be
-    minimized) between the even samples (usually, the values used to
-    predict) and the odd samples (usually, the values predicted). For
-    the MST filters, we have that (see Eq.~\eqref{eq:ldwt})
+    subbands as a prediction error (that should be minimized if we
+    want to obtain a good transform coding gain) between the even
+    samples (usually, the values used to predict) and the odd samples
+    (usually, the values predicted). For the MST filters, we have
+    (see Eq.~\eqref{eq:ldwt}) that
     \begin{equation}
       {\mathbf h}^l_i = {\mathbf l}^{l-1}_{2i+1} - {\mathbf l}^{l-1}_{2i}.
     \end{equation}
@@ -756,9 +757,10 @@ DWT using the MST filters and lifting.
   \begin{equation}
     \begin{array}{rcl}
       {\mathbf l}^{l-1}_{2i} & = & \frac{1}{2}({\mathbf l}^l_i - {\mathbf h}^l_i)\\
-      {\mathbf l}^{l-1}_{2i+1} & = & {\mathbf l}^{l-1}_{2i} + {\mathbf h}^l_i.
+      {\mathbf l}^{l-1}_{2i+1} & = & {\mathbf l}^{l-1}_{2i} + {\mathbf h}^l_i,
     \end{array}
   \end{equation}
+  i.e., we can recover the signal samples from the coefficients.
 
 \end{enumerate}
 
@@ -781,13 +783,14 @@ the low-pass filter synthesis (${\mathbf K}^{-1}_0$) is indicated by
 $\phi$ and the synthesis high-pass filter (${\mathbf K}^{-1}_1$) is
 represented by $\psi$, which are the dual scaling and wavelet functions.
 
-For the MST it holds that $\tilde\phi\bot\tilde\psi$, the frequency
-response of $\tilde\phi$ is equal to the mirror\footnote{In the
-  $Z$-domain, it holds that
-  ${\mathcal Z}\{\tilde\phi\}(z)={\mathcal Z}\{\phi\}(-z)$.} of $\phi$
-and $\tilde\psi$ is equal to the mirror of $\psi$, and this is also
-true for all orthogonal DWTs. Another important characteristic of
-orthogonal DWTs is that the filters cannot be
+For all the orthogonal DWTs, it holds that $\tilde\phi\bot\tilde\psi$,
+the frequency response of $\tilde\phi$ is equal to the
+mirror\footnote{In the $Z$-domain, it holds that
+  ${\mathcal Z}\{\tilde\phi\}(z)={\mathcal Z}\{\phi\}(-z)$.} of
+frequency response of $\phi$, and the frequency response of
+$\tilde\psi$ is equal to the mirror of the frequency of of
+$\psi$. Another important characteristic of orthogonal DWTs is that
+the filters cannot be
 \href{https://en.wikipedia.org/wiki/Symmetry}{symmetric}.\footnote{The
   symmetry of the filters is important to produce the same type of
   artifacts in the boundaries of the signal and also to avoid the
@@ -803,9 +806,9 @@ orthogonal DWTs is that the filters cannot be
 
 The previous MST-based DWT is similar to other transforms such as the
 \href{https://en.wikipedia.org/wiki/Haar_wavelet}{Haar transform}, in
-which we use a 1-order predictor to remove temporal
-redundancy. Let us extend the idea of lifting to a prediction of order
-two. For that, we define the predict step as
+which we use a 1-order predictor to remove redundancy. Let us extend
+the idea of lifting to a prediction of order two. For that, we define
+the predict step as
 \begin{equation}
   {\mathbf h}^l_i = {\mathbf l}^{l-1}_{2i+1} - \frac{1}{2}({\mathbf l}^{l-1}_{2i} + {\mathbf l}^{l-1}_{2i+2})
   \label{eq:linear_prediction}
@@ -826,8 +829,8 @@ energy~\cite{sweldens1997building}. This transform is known as the
   said biorthogonal.~\cite{vetterli2014foundations}} filters can be
 \href{http://wavelets.pybytes.com/}{easely recognized} because they
 are always symmetric.\footnote{If Eq.~\eqref{eq:linear_prediction} is used in Eq.\eqref{eq:linear_update}, we can obtain the coefficients of the low-pass filter that computes the low-frequency subband: ${\mathbf l}^l_i=-1/8{\mathbf l}^{l-1}_{2i-2}+1/4{\mathbf l}^{l-1}_{2i-1}+3/4{\mathbf l}^{l-1}_{2i}+1/4{\mathbf l}^{l-1}_{2i+1}-1/8{\mathbf l}^{l-1}_{2i+2}$.} When the PRFB filters are biorthogonal,
-they also satisfy $\psi\bot\tilde\phi$ and
-$\phi\bot\tilde\psi$.
+they only satisfy $\psi\bot\tilde\phi$ and
+$\phi\bot\tilde\psi$, but the filters can be symmetric.
 
 This linear transform is also invertible by simply reversing the steps:
 \begin{equation}
@@ -842,11 +845,11 @@ This linear transform is also invertible by simply reversing the steps:
 \subsection{Quantization of the DWT subbands}
 
 The same theory developed for the quantization of the MST subbands
-(see Section~\href{sec:quantization_subbands_spatial} is applicable
+(see Section~\ref{sec:quantization_subbands_spatial} is applicable
 here: we should select the different quantization step sizes depending
-on the slope generated in the rate/distortion curve (see this
+on the slope generated in the rate/distortion curve (see
 \href{https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/contents/transform_coding/DWT_RD.ipynb}{A
-  RD-comparison of DWTs}. In the practice, when the dynamic range of
+  RD-comparison of DWTs}). In the practice, when the dynamic range of
 the DWT coefficients depends on the gain of the synthesis filters (as
 occurs with PyWavelets), a constant QSS strategy, where
 \begin{equation}
