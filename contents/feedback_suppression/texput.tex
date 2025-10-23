@@ -119,7 +119,7 @@ to a \href{https://en.wikipedia.org/wiki/Impulse_response}{impulse
   echo-location, or by bats to fly in the darkness.} In other words,
 we can modify Eq.~\eqref{eq:simplest} to compute
 \begin{equation}
- \tilde{\mathbf n}[t] = {\mathbf m}[t] - ({\mathbf s}\ast{\mathbf h})[t-d],
+ \tilde{\mathbf{n}}[t] = \mathbf{m}[t] - (\mathbf{h}\ast\mathbf{s}[t-d]) = \mathbf{m}[t] - (\mathbf{h}\ast\mathbf{s})[t-d],
   \label{eq:using_convolution}
 \end{equation}
 where $\ast$ represents the (digital) convolution between (in our case
@@ -166,7 +166,7 @@ calculation of $d$ because if
 \href{https://en.wikipedia.org/wiki/Correlation}{correlation} is used
 to estimate it, the maximun should be clearly identified.
 
-\section{Adaptive filtering}
+\section{Adaptive filtering using impulses}
 Unfortunately, none of the previous solutions is ``dynamic'', in the
 sense that if we modify the audioset, some parameters must be modified
 in real-time:
@@ -197,15 +197,15 @@ frequencies). In general, the expression of a FIR filter in the
 time-domain (applied to a signal that previously has been delayed $d$
 samples) is
 \begin{equation}
-  \hat{\mathbf s}[t] = \sum_{k=0}^{N-1}{\mathbf h}_k{\mathbf s}[t-k-d],
+  \hat{\mathbf s}[t] = \sum_{k=0}^{K-1}{\mathbf h}_k{\mathbf s}[t-k-d],
   \label{eq:FIR_filter}
 \end{equation}
-where $N$ is the number of coefficients of the filter ${\mathbf h}$,
+where $K$ is the number of coefficients of the filter ${\mathbf h}$,
 and ${\mathbf h}_k$ is its $k$-th coefficient. When the (coefficients
 of the) filter are updated for each input sample,
 Eq.~\eqref{eq:FIR_filter} can be rewritten as
 \begin{equation}
-  \hat{\mathbf s}[t] = \sum_{k=0}^{N-1}{\mathbf h}_k^{(t)}{\mathbf s}[t-k-d].
+  \hat{\mathbf s}[t] = \sum_{k=0}^{K-1}{\mathbf h}_k^{(t)}{\mathbf s}[t-k-d].
   \label{eq:adaptive_FIR_filter}
 \end{equation}
 
@@ -213,58 +213,127 @@ In general, the filter should not be updated so often (e.g., every
 second could be fast enough). In this case
 Eq.~\eqref{eq:adaptive_FIR_filter} should be
 \begin{equation}
-  \hat{\mathbf s}[t] = \sum_{k=0}^{N-1}{\mathbf h}_k^{(i)}{\mathbf s}[t-k-d].
+  \hat{\mathbf s}[t] = \sum_{k=0}^{K-1}{\mathbf h}_k^{(i)}{\mathbf s}[t-k-d].
   \label{eq:adaptive_FIR_filter_second}
 \end{equation}
 where $i$ represents the update iteration.
+If we decide to work with impulses, ${\mathbf h}^{(i)}$ is determined
+by the samples recorded by our soundcard after $d$ sample-times of the
+generation of each impulse when the impulses should be the only source
+of sound. If there were other sources of sound (such as for example,
+our voice) the updates should be discarded or averaged using some
+\href{https://en.wikipedia.org/wiki/Moving_average}{moving-average}
+technique.
 
-\section{Filter update using \href{https://en.wikipedia.org/wiki/Least_mean_squares_filter}{LMS (Least Mean Squares)}}
+Finally, notice that we must send
+\begin{equation}
+  \tilde{\mathbf n}[t] = \mathbf{m}[t] - \hat{\mathbf s}[t].
+  \label{eq:finally}
+\end{equation}
+
+\section{Adaptive filtering using  \href{https://en.wikipedia.org/wiki/Least_mean_squares_filter}{LMS (Least Mean Squares)}}
 
 The LMS algorithm~\cite{haykin1995adaptive,boyd2004convex} was
 invented by professor Bernard Widrow and his first Ph.D. student, Ted
 Hoff, to train the
 \href{https://en.wikipedia.org/wiki/ADALINE}{ADALINE} artificial
-neural network.\footnote{See
+neural ``network''.\footnote{See
   \url{https://www.youtube.com/watch?v=hc2Zj55j1zU}} Using LMS,
-ADALINE is able to distinguish between patterns, even using only a
-part of a single neuron.\footnote{If we do not consider the
+ADALINE is able to distinguish two (different) patterns, even using
+(\emph{only} a part of\footnote{If we do not consider the
   \href{https://en.wikipedia.org/wiki/Activation_function}{activation
     function}, an artificial neuron and a FIR filter perform the same
-  computation.}
+  computation.}) a single neuron.
 
-LMS defines that
+The LMS algorithm adapts the coefficients of $\mathbf{h}$ to minimize
+the error signal defined by
 \begin{equation}
-  {\mathbf h}^{(i+1)}_k = {\mathbf h}^{(i)}_k + 2\mu\tilde{\mathbf n}[i]{\mathbf s}[i-k] \label{eq:update}
+  \mathbf{e} = \tilde{\mathbf{n}} - \mathbf{n}.
 \end{equation}
-where
+Unfortunately, we don't know $\mathbf{n}$ except when we are in
+silence, where $\mathbf{n}[t]=0;\forall t$. When we are silence,
+the error is
 \begin{equation}
-  \tilde{\mathbf n}[i] = {\mathbf m}[i] - \hat{\mathbf s}[i],
+  \mathbf{e} = \tilde{\mathbf{n}}.
 \end{equation}
-where $i$ represents the iteration number, and $\mu$ is the learning
+
+Said that, LMS defines the update rule at the $(i+1)$-th iteration as
+\begin{equation}
+  \mathbf{h}^{(i+1)}_k = \mathbf{h}^{(i)}_k + 2\mu\mathbf{e}[k]\mathbf{s}[k-d],
+  \label{eq:update}
+\end{equation}
+where $\mu$ is the learning
 rate\footnote{High $\mu$ values spped-up the adaption process, but can
-  generate worse $\mathbf{h}$ coefficients.}.  These equations can be
-found\footnote{Again, see
-  \url{https://www.youtube.com/watch?v=hc2Zj55j1zU}!} using the
+generate worse $\mathbf{h}$ coefficients.}.  These equations can be
+found\footnote{Again, please, watch
+\url{https://www.youtube.com/watch?v=hc2Zj55j1zU}!} using the
 (steepest)
 \href{https://en.wikipedia.org/wiki/Gradient_descent}{gradient descend
   algorithm}.
 
-\section{Filter update using a train of impulses}
-If we decide to work with impulses, ${\mathbf h}^{(i)}$ is determined
-by the samples recorded by our soundcard after $d$ sample-times of the
-generation of each impulse when the impulses are the only source of
-sound. If there were other sources of sound (such as for example, our
-voice) the updates should be discarded or averaged using some
-\href{https://en.wikipedia.org/wiki/Moving_average}{moving-average}
-technique.
+Obviously, the filter only should be updated when we are silence :-/
 
-\section{The substract solution in the frequency domain}
+Finally, notice that to use LMS, the number of coefficients of the
+filter $K$ must be the same that the number of input samples
+considered in the adaption. Therefore, if we are working with chunks,
+at the moment of time we decide to update the filter, we could
+consider, for example, only the $K$ samples of the current played
+chunk with indexes in $[d, d+K-1]$, if $d+K$ is smaller than the
+chunk size. Otherwise (if $d+K > \text{chunk~size}$), at least two
+chunks should be concatenated.
+
+\begin{comment}
+\section{Echo cancellation}
+In Intercom, the echo (signal) is a delayed copy of our voice,
+$\mathbf{n}^{(\text{echo~delay})}$. With this idea in mind, ideally,
+the echo could be removed using
+\begin{equation}
+  \tilde{\mathbf{n}}^{(i)} = \mathbf{m}^{(i)} - a\mathbf{n}^{(i-j)},
+\end{equation}
+where $i$ represents the $i$-th chunk, and $j$ the number of chunks
+that are stored in the dejittering buffer.
+
+Unfortunately, $\mathbf{n}$ is unknown, and the best approximation we
+have for the echo at the $i$-th iteration, is
+$\mathbf{m}^{(i-j)}$. For this reason, lets finally define the echo
+cancellation algorithm (the signal that we should send after
+cancelling the echo) as
+\begin{equation}
+  \tilde{\mathbf{n}}^{(i)} = \mathbf{m}^{(i)} - a\mathbf{m}^{(i-j)},
+\end{equation}
+
+\section{Modeling the echo signal}
+Similar to how feedback suppression can be improved by using a filter
+that models the listening environment, echo cancellation can be
+improved by using a filter. Therefore, the signal that is finally sent
+should be calculated as
+\begin{equation}
+  \tilde{n}^{(i)} = \mathbf{m}^{(i)} - (\mathbf{h}*\mathbf{m}^{(i-j)},
+\end{equation}
+where $\mathbf{h}$ represents the filter that models the listening
+environment.
+
+\section{Filter update using impulses}
+If we consider that the listening environment can change, $\mathbf{h}$ should
+adapt to these changes. At this point, again, we can use a sequence of
+impulses to estimate $\mathbf{h}$, but considering that the effects of
+the impulses will only be perceived after $j$ chunk-times. In this
+case, we have that
+\begin{equation}
+  \tilde{n}^{(i)} = \mathbf{m}^{(i)} - (\mathbf{h}^{(i)}*\mathbf{m}^{(i-j)}.
+\end{equation}
+
+\end{comment}
+
+%\section{Filter update using a train of impulses}
+
+\section{Subtraction in the frequency domain}
 Ultimately, feedback in InterCom occurs because the audio signal we
 are generating is reproduced through our speakers (with a certain time
 lag). In this feedback situation, the spectrum of a newly received
 chunk is similar to the spectrum of a newly sent chunk. Therefore, if
 the chunk we want to send is pre-filtered (before being sent) using
-the opposite filter to that described by the spectrum of the received
+the opposite filter to that described by the spectrum of the played
 chunk, we should cancel the feedback.
 
 Let ${\mathbf M} = {\mathcal F}({\mathbf m})$ the Fourier transform of
@@ -276,7 +345,7 @@ previous paragraph, and considering also the Eq.~\eqref{eq:simplest}, it can be 
   \tilde{\mathbf N} = {\mathbf M} - a{\mathbf S},
   \label{eq:simplest_fourier}
 \end{equation}
-where $\tilde{\mathbf N} = {\mathcal F}({\mathbf n})$, the Fourier
+where $\hat{\mathbf{N}} = \mathcal{F}(\hat{\mathbf{n}})$, the Fourier
 transform of the chunk that should be sent in the $i$-th iteration
 (chunk).
 
