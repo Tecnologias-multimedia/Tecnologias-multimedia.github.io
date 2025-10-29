@@ -458,7 +458,7 @@ As it has been explained before, Transform Coding is based on the idea
 that we can decompose the input signal into a set of subbands, and if
 the filters used are appropriate to remove the (in this case,
 temporal) redundancy, we can achieve a high Transform Coding
-Gain~\cite{sayood2017introduction}, accumulating the most of the
+Gain~\cite{sayood2017introduction}, accumulating most of the
 signal energy (and presumably most of the information) in a small
 number of subbands. When this happens, the quantization of the
 subbands will basically remove the least significant information
@@ -514,8 +514,8 @@ Let us suppose now that the analysis filters (represented by the
 coefficients of) ${\mathbf K}_0$ and ${\mathbf K}_1$ are applied to
 the input signal ${\mathbf x}$ (now a sequence of $N$ samples) using a
 \href{https://en.wikipedia.org/wiki/Kernel_(image_processing)}{convolution}
-(without splitting $\mathbf{x}$ into blocks as happens in Transform
-Coding). Let us also suppose (as happens in the MST) that
+(without splitting $\mathbf{x}$ into blocks as happens in ``pure''
+Transform Coding). Let us also suppose (as happens in the MST) that
 ${\mathbf K}_0$ is a low-pass filter and ${\mathbf K}_1$ is a
 high-pass filter, and that the
 \href{https://en.wikipedia.org/wiki/Filter_(signal_processing)}{frequency
@@ -529,12 +529,12 @@ high-pass filter, and that the
 \href{https://en.wikipedia.org/wiki/Filter_bank#Perfect_reconstruction_filter_banks}{Perfect
   Reconstruction Filter Bank (PRFB)}, and ${\mathbf x}$ can be
 recovered (perfectly) from a subsampled version (in this case
-\href{https://en.wikipedia.org/wiki/Downsampling_(signal_processing)}{decimating}
+\href{https://en.wikipedia.org/wiki/Downsampling_(signal_processing)}{downsampling}
 by 2 because we have two channels in the FB) of ${\mathbf w}_0$ and
 ${\mathbf w}_1$ (see the notebook
 \href{https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/contents/transform_coding/PRFB.ipynb}{A
   Perfect Reconstruction Filter Bank (PRFB)}).\footnote{Notice that
-  this subsampling is possible because the
+  this downsampling is possible because the
   \href{https://en.wikipedia.org/wiki/Aliasing}{aliasing} generated in
   the low-pass subband is attenuated by the aliasing generated in the
   high-pass subband. Notice also that the filters are not ideal, the
@@ -552,7 +552,7 @@ same
 this situation, in which ${\mathbf K}_0$ and ${\mathbf K}_1$ are
 mirror filters, we say that they form a
 \href{https://en.wikipedia.org/wiki/Quadrature_mirror_filter}{Quadrature
-  Mirror Filters (QMF) Bank}.
+  Mirror Filters (QMF) Bank}. Notice that the downsamplers ($\downarrow 2$) expand the spectrum of the input in a factor of two, but do not modify their shape, and the upsamplers ($\uparrow 2$) compress the spectrum of the input in a factor of two, generating a mirrored version of the half low-frequencies in the half high-frequencies.
 
 %}}}
 
@@ -696,9 +696,9 @@ DWT using the MST filters and lifting.
   definition, ${\mathbf l}^0={\mathbf x}$, is the original resolution
   level of the signal. The subbands ${\mathbf l}^1$ and
   ${\mathbf h}^1$ computed by Eq.~\eqref{eq:1dwt} are the same than
-  the decimated subbands computed by the corresponding 1-level PRFB,
-  and we say, therefore, that Eq.~\eqref{eq:1dwt} computes the
-  1-level (critically sampled) DWT.
+  the downsampled (also refered as decimated) subbands computed by the
+  corresponding 1-level PRFB, and we say, therefore, that
+  Eq.~\eqref{eq:1dwt} computes the 1-level (critically sampled) DWT.
 
   Based on the 1-level DWT, we define the 2-levels DWT as
   \begin{equation}
