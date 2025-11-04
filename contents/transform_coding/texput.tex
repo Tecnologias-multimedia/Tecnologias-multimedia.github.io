@@ -770,18 +770,21 @@ DWT using the MST filters and lifting.
 %{{{
 
 In the context of wavelet theory~\cite{burrus2013wavelets}, the
-response of the low-pass analysis filter (${\mathbf K}_0$ in MST)
-to the
+response of the low-pass analysis filter (${\mathbf K}_0$ in MST) to
+the
 \href{https://en.wikipedia.org/?title=Unit_impulse&redirect=no}{unit
   impulse}\footnote{The response of a filter to the unit impulse
-characterize the filter because the output of the filter is the set of
-coefficients of the filter.} is known as \emph{scaling function} and is
-usually denoted by $\tilde\phi$, the response of the analysis
+  characterize the filter because the output of the filter is the set
+  of coefficients of the filter.} is known as \emph{scaling function}
+and is usually denoted by $\tilde\phi$, the response of the analysis
 high-pass filter (${\mathbf K}_1$) is known as the \emph{wavelet
-function} and it is usually denoted by $\tilde\psi$, the response of
+  function} and it is usually denoted by $\tilde\psi$, the response of
 the low-pass filter synthesis (${\mathbf K}^{-1}_0$) is indicated by
 $\phi$ and the synthesis high-pass filter (${\mathbf K}^{-1}_1$) is
-represented by $\psi$, which are the dual scaling and wavelet functions.
+represented by $\psi$, which are the dual scaling and wavelet
+functions (see the notebook
+\href{https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/contents/transform_coding/show_wavelets.ipynb}{Show
+  Wavelets}).
 
 For all the orthogonal DWTs, it holds that $\tilde\phi\bot\tilde\psi$,
 the frequency response of $\tilde\phi$ is equal to the
