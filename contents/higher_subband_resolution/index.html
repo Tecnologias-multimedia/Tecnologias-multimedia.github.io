@@ -19,7 +19,7 @@
 
 <h2 class='titleHead'>Increasing the Number of Subbands</h2>
  <div class='author'><span class='ecrm-1200'>Vicente González Ruiz</span></div><br />
-<div class='date'><span class='ecrm-1200'>October 28, 2025</span></div>
+<div class='date'><span class='ecrm-1200'>November 11, 2025</span></div>
    </div>
    <h3 class='likesectionHead' id='contents'><a id='x1-1000'></a>Contents</h3>
    <div class='tableofcontents'>
@@ -35,9 +35,9 @@
 (remember, if <span class='mathjax-inline'>\(l\)</span> is the number of levels of the DWT, we obtain <span class='mathjax-inline'>\(l+1\)</span> subbands) is
 insufficient to accurately represent the diverse auditory thresholds present in a
 typical hearing threshold curve <span class='cite'>[<a href='#Xbosi2003intro'>1</a>]</span>.
-</p><!-- l. 17 --><p class='indent'>   To address this issue two different algorithms can be used: (1) change the dyadic
-decomposition by a linear decomposition, and (2) decompose the dyadic subbands
-that we already have in smaller subbands.
+</p><!-- l. 17 --><p class='indent'>   To address this drawback two different algorithms can be used: (1) change the
+dyadic decomposition by a linear decomposition, or (2) decompose the dyadic
+subbands that we already have into smaller subbands.
 </p><!-- l. 21 --><p class='indent'>   Obviously, once we have created the frequency subbands, it would be a matter of
 determining the corresponding quantization step sizes (QSS) based on the ToH curve.
 We need one QSS per subband.
@@ -67,7 +67,7 @@ whereas the WPT produces <span class='mathjax-inline'>\(64\)</span> subbands.
      that matches to the number of frames in the chunk.</li></ol>
    
    <h3 class='sectionHead' id='linear-decomposition-of-the-dyadic-subbands'><span class='titlemark'>3   </span> <a id='x1-40003'></a>Linear decomposition of the dyadic subbands</h3>
-<!-- l. 53 --><p class='noindent'>Another solution (more close to the  <a href='https://en.wikipedia.org/wiki/Bark_scale'>Bark scale</a>) is to divide each one of the dyadic
+<!-- l. 53 --><p class='noindent'>Another solution (closer to the  <a href='https://en.wikipedia.org/wiki/Bark_scale'>Bark scale</a>) is to divide each one of the dyadic
 subbands into a number of subbands. Thus, if we have <span class='mathjax-inline'>\(l+1\)</span> dyadic subbands and now we
 decompose each subband into <span class='mathjax-inline'>\(n\)</span> (sub)subbands, we get a total number of <span class='mathjax-inline'>\(n(l+1)\)</span>
 subbands.
@@ -101,11 +101,10 @@ Hz.
 <li class='enumerate' id='x1-5002x1'>Implement   a   Python   module   called   <span class='obeylines-h'><code class='verb'>linear_ToH.py</code></span>  where   the
      functionality described in Section <a href='#linear-decomposition-using-wavelet-packet-transform'>2<!-- tex4ht:ref: sec:linear  --></a> has been implemented. Notice that
      the current implementation (<span class='ectt-1000'>linear_ToH_no_overlapped.py</span>) does not
-     overlap de chunks. Mark: <span class='ecbx-1000'>10 points</span>.
+     overlap de chunks.
      </li>
 <li class='enumerate' id='x1-5004x2'>Implement a Python module called <span class='obeylines-h'><code class='verb'>dyadic_linear_ToH.py</code></span> where the
-     functionality  described  in  Section <a href='#linear-decomposition-of-the-dyadic-subbands'>3<!-- tex4ht:ref: sec:dyadic-linear  --></a>  has  been  implemented.  Mark:  <span class='ecbx-1000'>10
-     points</span>.</li></ol>
+     functionality described in Section <a href='#linear-decomposition-of-the-dyadic-subbands'>3<!-- tex4ht:ref: sec:dyadic-linear  --></a> has been implemented.</li></ol>
    
                                                                   
 
