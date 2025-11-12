@@ -20,7 +20,7 @@
 <h2 class='titleHead'>Perceptual Coding Considering the Threshold of
 Hearing</h2>
  <div class='author'> <a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp;  </span><a href='https://hpca.ual.es/~savins/'><span class='ecrm-1200'>Savins Puertas Martín</span></a> <span class='ecrm-1200'>&amp;  </span><a href='https://www.ual.es/persona/555355505557525189'><span class='ecrm-1200'>Juan José Moreno Riado</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>November 11, 2025</span></div>
+<div class='date'><span class='ecrm-1200'>November 12, 2025</span></div>
    </div>
    <h3 class='likesectionHead' id='contents'><a id='x1-1000'></a>Contents</h3>
    <div class='tableofcontents'>
@@ -28,6 +28,7 @@ Hearing</h2>
 <br />   <span class='sectionToc'>2 <a href='#dyadic-dwt-subbands-and-quantization-steps' id='QQ2-1-4'>Dyadic DWT subbands and quantization steps</a></span>
 <br />   <span class='sectionToc'>3 <a href='#deliverables' id='QQ2-1-5'>Deliverables</a></span>
 <br />   <span class='sectionToc'>4 <a href='#resources' id='QQ2-1-6'>Resources</a></span>
+<br />   <span class='sectionToc'><a href='#references'>References</a></span>
    </div>
    
    <h3 class='sectionHead' id='a-model-of-the-threshold-of-human-hearing'><span class='titlemark'>1   </span> <a id='x1-20001'></a>A model of the Threshold of (Human) Hearing</h3>
@@ -62,7 +63,7 @@ This equation has been plotted in Fig. <a href='#a-model-for-the-threshold-of-h
 DWT <span class='cite'>[<a href='#Xvetterli1995wavelets'>3</a>]</span>. Except for the <span class='mathjax-inline'>\({\mathbf l}^{N_{\text {levels}}}\)</span> subband (the lowest-pass frequency of the decomposition),
 it holds that </p><div class='mathjax-env mathjax-equation'>\begin{equation} W({\mathbf w}_s) = \frac {1}{2}W({\mathbf w}_{s-1}), \end{equation}</div><p><a id='x1-3002r3'></a> being <span class='mathjax-inline'>\(W(\cdot )\)</span> the bandwidth of the corresponding subband. Therefore,
 considering that (by default, in InterCom) the bandwidth of the audio signal is <span class='mathjax-inline'>\(22050\)</span> Hz,
-the bandwidth <span class='mathjax-inline'>\(W({\mathbf w}_1)=11025/2\)</span> Hz, <span class='mathjax-inline'>\(W({\mathbf w}_2)=22050/4\)</span>, etc. It is also true that </p><div class='mathjax-env mathjax-equation'>\begin{equation} W({\mathbf l}^{N_{\text {levels}}}) = W({\mathbf w}^{N_{\text {levels}}}). \end{equation}</div><p><a id='x1-3003r4'></a>
+the bandwidth <span class='mathjax-inline'>\(W({\mathbf w}_1)=22050/2\)</span> Hz, <span class='mathjax-inline'>\(W({\mathbf w}_2)=22050/4\)</span>, etc. It is also true that </p><div class='mathjax-env mathjax-equation'>\begin{equation} W({\mathbf l}^{N_{\text {levels}}}) = W({\mathbf w}^{N_{\text {levels}}}). \end{equation}</div><p><a id='x1-3003r4'></a>
 <!-- l. 61 --></p><p class='indent'>   The idea is to decide, knowing the frequencies represented in each DWT subband
 and the ToH curve (see  <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/docs/2-hours_seminar.ipynb'>InterCom: a Real-Time Digital Audio Full-Duplex
 Transmitter/Receiver</a>), the QSS (Quantization Step Size) that should be applied to
@@ -95,6 +96,7 @@ which implementation sounds better.
    Prentice-hall, 1995.
 </p>
    </div>
+<p id='references'><a id='Q1-1-7'></a>
     
-</body> 
+</p></body> 
 </html>
