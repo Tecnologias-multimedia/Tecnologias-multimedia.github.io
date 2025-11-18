@@ -19,7 +19,7 @@
 
 <h2 class='titleHead'>Increasing the Number of Subbands</h2>
  <div class='author'><span class='ecrm-1200'>Vicente González Ruiz</span></div><br />
-<div class='date'><span class='ecrm-1200'>November 11, 2025</span></div>
+<div class='date'><span class='ecrm-1200'>November 18, 2025</span></div>
    </div>
    <h3 class='likesectionHead' id='contents'><a id='x1-1000'></a>Contents</h3>
    <div class='tableofcontents'>
@@ -28,6 +28,7 @@
 <br />   <span class='sectionToc'>3 <a href='#linear-decomposition-of-the-dyadic-subbands' id='QQ2-1-4'>Linear decomposition of the dyadic subbands</a></span>
 <br />   <span class='sectionToc'>4 <a href='#deliverables' id='QQ2-1-5'>Deliverables</a></span>
 <br />   <span class='sectionToc'>5 <a href='#resources' id='QQ2-1-6'>Resources</a></span>
+<br />   <span class='sectionToc'><a href='#references'>References</a></span>
    </div>
    
    <h3 class='sectionHead' id='the-dyadic-frequency-partition-is-not-enough'><span class='titlemark'>1   </span> <a id='x1-20001'></a>The dyadic frequency partition is not enough</h3>
@@ -42,18 +43,19 @@ subbands that we already have into smaller subbands.
 determining the corresponding quantization step sizes (QSS) based on the ToH curve.
 We need one QSS per subband.
    
-</p>
                                                                   
 
                                                                   
+</p>
    <h3 class='sectionHead' id='linear-decomposition-using-wavelet-packet-transform'><span class='titlemark'>2   </span> <a id='x1-30002'></a>Linear decomposition using Wavelet Packet Transform</h3>
-<!-- l. 27 --><p class='noindent'>As an alternative to the Discrete Wavelet Transform (DWT), the Wavelet Packet
-Transform (WPT) allows for a linear decomposition of the signal’s frequency range.
-This is essentially achieved by recursively applying wavelet filters to both the
-low-frequency and high-frequency subbands (see Milestone  <a href='https://tecnologias-multimedia.github.io/contents/transform_coding/'><span class='ecti-1000'>Transform Coding for
-Redundancy Removal</span></a>). Consequently, if <span class='mathjax-inline'>\(l\)</span> represents the number of levels, then a total
-of <span class='mathjax-inline'>\(2^l\)</span> subbands are generated. For instance, with <span class='mathjax-inline'>\(l=6\)</span>, the DWT yields only <span class='mathjax-inline'>\(7\)</span> subbands,
-whereas the WPT produces <span class='mathjax-inline'>\(64\)</span> subbands.
+<!-- l. 27 --><p class='noindent'>As an alternative to the Discrete Wavelet Transform (DWT), the Wavelet
+Packet Transform (WPT) allows for a linear decomposition of the signal’s
+frequency range. This is essentially achieved by recursively applying the
+wavelet filters to both the low-frequency and high-frequency subbands (see
+Milestone  <a href='https://tecnologias-multimedia.github.io/contents/transform_coding/'><span class='ecti-1000'>Transform Coding for Redundancy Removal</span></a>). Consequently, if <span class='mathjax-inline'>\(l\)</span>
+represents the number of levels, then a total of <span class='mathjax-inline'>\(2^l\)</span> subbands are generated. For
+instance, with <span class='mathjax-inline'>\(l=6\)</span>, the DWT yields only <span class='mathjax-inline'>\(7\)</span> subbands, whereas the WPT produces <span class='mathjax-inline'>\(64\)</span>
+subbands.
 </p><!-- l. 38 --><p class='indent'>   In more detail, this is what would need to be implemented:
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-3002x1'>Extend    the    chunk    (this    can    be    inherited    from    the    class
@@ -76,9 +78,6 @@ by the DWT of the extended chunk. The idea here is to:
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-4002x1'>Extend    the    chunk    (this    can    be    inherited    from    the    class
      <span class='obeylines-h'><code class='verb'>Temporal_Overlapped_DWT</code></span>).
-                                                                  
-
-                                                                  
      </li>
 <li class='enumerate' id='x1-4004x2'>Compute the dyadic DWT transform of the extended chunk (this can
      be also reused from the class <span class='obeylines-h'><code class='verb'>Temporal_Overlapped_DWT</code></span>). Let <span class='mathjax-inline'>\(l_{\text {DWT}}\)</span> be the
@@ -99,9 +98,9 @@ Hz.
 <!-- l. 84 --><p class='noindent'>
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-5002x1'>Implement   a   Python   module   called   <span class='obeylines-h'><code class='verb'>linear_ToH.py</code></span>  where   the
-     functionality described in Section <a href='#linear-decomposition-using-wavelet-packet-transform'>2<!-- tex4ht:ref: sec:linear  --></a> has been implemented. Notice that
-     the current implementation (<span class='ectt-1000'>linear_ToH_no_overlapped.py</span>) does not
-     overlap de chunks.
+     functionality described in Section <a href='#linear-decomposition-using-wavelet-packet-transform'>2<!-- tex4ht:ref: sec:linear  --></a> has been implemented. Remember
+     that the current implementation (<span class='ectt-1000'>linear_ToH_no_overlapped.py</span>) does
+     not overlap de chunks.
      </li>
 <li class='enumerate' id='x1-5004x2'>Implement a Python module called <span class='obeylines-h'><code class='verb'>dyadic_linear_ToH.py</code></span> where the
      functionality described in Section <a href='#linear-decomposition-of-the-dyadic-subbands'>3<!-- tex4ht:ref: sec:dyadic-linear  --></a> has been implemented.</li></ol>
@@ -124,6 +123,7 @@ Hz.
    Prentice-hall, 1995.
 </p>
    </div>
+<p id='references'><a id='Q1-1-7'></a>
     
-</body> 
+</p></body> 
 </html>
