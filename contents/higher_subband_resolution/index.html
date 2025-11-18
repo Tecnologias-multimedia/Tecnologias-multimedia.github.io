@@ -62,20 +62,24 @@ subbands.
      <span class='obeylines-h'><code class='verb'>Temporal_Overlapped_DWT</code></span>).
      </li>
 <li class='enumerate' id='x1-3004x2'>Compute the WPT of the extended chunk (an example of this (but notice
-     that for a non-extended chunk) can be found in the class <span class='obeylines-h'><code class='verb'>Linear_ToH_NO</code></span>).
+     that for a non-extended chunk) can be found in the class <span class='obeylines-h'><code class='verb'>Linear_ToH_NO</code></span>),
+     in the file <span class='obeylines-h'><code class='verb'>linear_ToH_no_overlapped.py</code></span>.
      </li>
 <li class='enumerate' id='x1-3006x3'>As  we  did  with  the  DWT  in  <span class='obeylines-h'><code class='verb'>Temporal_Overlapped_DWT</code></span>,  extract  the
      central parts of each subband to obtain a total number of frame-coefficients
      that matches to the number of frames in the chunk.</li></ol>
    
    <h3 class='sectionHead' id='linear-decomposition-of-the-dyadic-subbands'><span class='titlemark'>3   </span> <a id='x1-40003'></a>Linear decomposition of the dyadic subbands</h3>
-<!-- l. 53 --><p class='noindent'>Another solution (closer to the  <a href='https://en.wikipedia.org/wiki/Bark_scale'>Bark scale</a>) is to divide each one of the dyadic
+<!-- l. 54 --><p class='noindent'>Another solution (closer to the  <a href='https://en.wikipedia.org/wiki/Bark_scale'>Bark scale</a>) is to divide each one of the dyadic
 subbands into a number of subbands. Thus, if we have <span class='mathjax-inline'>\(l+1\)</span> dyadic subbands and now we
 decompose each subband into <span class='mathjax-inline'>\(n\)</span> (sub)subbands, we get a total number of <span class='mathjax-inline'>\(n(l+1)\)</span>
 subbands.
-</p><!-- l. 60 --><p class='indent'>   For this, we can use (again) the WPT applied to each dyadic subband generated
+</p><!-- l. 61 --><p class='indent'>   For this, we can use (again) the WPT applied to each dyadic subband generated
 by the DWT of the extended chunk. The idea here is to:
      </p><ol class='enumerate1'>
+                                                                  
+
+                                                                  
 <li class='enumerate' id='x1-4002x1'>Extend    the    chunk    (this    can    be    inherited    from    the    class
      <span class='obeylines-h'><code class='verb'>Temporal_Overlapped_DWT</code></span>).
      </li>
@@ -88,14 +92,14 @@ by the DWT of the extended chunk. The idea here is to:
      </li>
 <li class='enumerate' id='x1-4008x4'>Extract the central parts of each packet-subband to obtain a total number
      of frame-coefficients that matches to the number of frames in the chunk.</li></ol>
-<!-- l. 76 --><p class='indent'>   Notice that WPT performs a lineal decomposition. Therefore, for example, if the
+<!-- l. 77 --><p class='indent'>   Notice that WPT performs a lineal decomposition. Therefore, for example, if the
 sampling frequency is <span class='mathjax-inline'>\(48000\)</span> Hz, <span class='mathjax-inline'>\(l_{\text {DWT}}=3\)</span> and <span class='mathjax-inline'>\(l_{\text {WPT}}=1\)</span> the lowest frequency dyadic subband goes from <span class='mathjax-inline'>\(0\)</span> Hz
 to <span class='mathjax-inline'>\(3000=\frac {24000}{2^3}\)</span> Hz, and it will de divided into two subbands with a size (bandwidth) of <span class='mathjax-inline'>\(1500\)</span>
 Hz.
    
 </p>
    <h3 class='sectionHead' id='deliverables'><span class='titlemark'>4   </span> <a id='x1-50004'></a>Deliverables</h3>
-<!-- l. 84 --><p class='noindent'>
+<!-- l. 85 --><p class='noindent'>
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-5002x1'>Implement   a   Python   module   called   <span class='obeylines-h'><code class='verb'>linear_ToH.py</code></span>  where   the
      functionality described in Section <a href='#linear-decomposition-using-wavelet-packet-transform'>2<!-- tex4ht:ref: sec:linear  --></a> has been implemented. Remember
@@ -105,9 +109,6 @@ Hz.
 <li class='enumerate' id='x1-5004x2'>Implement a Python module called <span class='obeylines-h'><code class='verb'>dyadic_linear_ToH.py</code></span> where the
      functionality described in Section <a href='#linear-decomposition-of-the-dyadic-subbands'>3<!-- tex4ht:ref: sec:dyadic-linear  --></a> has been implemented.</li></ol>
    
-                                                                  
-
-                                                                  
    <h3 class='sectionHead' id='resources'><span class='titlemark'>5   </span> <a id='x1-60005'></a>Resources</h3>
    <div class='thebibliography'>
    <p class='bibitem'><span class='biblabel'>
