@@ -11,10 +11,10 @@ The ToH curve~\cite{bosi2003intro} varies between individuals:
 \begin{enumerate}
 \item In general, women hear better than men.
 \item With age, we lose sensitivity to high frequencies.
-\item Exposure to loud noises over time can elevate the ToH,
+\item Exposure to loud noises over time can \emph{elevate} the ToH,
   especially in individuals exposed to loud sound.
-\item Auditory training can help detect sounds at lower intensities or
-  distinguish subtle nuances in tone.
+\item Auditory training can help to detect sounds at lower intensities
+  or distinguish subtle nuances in tone.
   % \item Short-duration sounds may require higher intensities to be
   %   perceived compared to longer-duration ones. -> a un nuevo
   %   hito. https://en.wikipedia.org/wiki/Critical_band
@@ -34,10 +34,10 @@ milestone.
 If you are talking to a semi-deaf interlocutor, why would you send
 them auditory information that they will not be able to perceive? For
 this reason, this step proposes the calculation of your own ToH curve,
-information that must be transmitted to your interlocutor so that they
+information that must be transmitted to your interlocutor so that he
 can use the quantization steps adapted to your perception.
 
-\section{A procedure to determine your YoH curve}
+\section{A procedure to determine your ToH curve}
 
 An optimal-user-specific ToH
 should take into consideration your noticeable
@@ -52,7 +52,7 @@ find such set, the following algorithm can be used:
   %wavelet representation of a
   %chunk. %, being ${\mathbf l}^{N_{\text{levels}}}$ the lowest frequency subband.
   Starting with the lowest frequency subband (at the first
-  iteration the rest of subbands are zero). While the noise
+  iteration the rest of subbands are zero), and while the noise
   (suppose that the quantization noise follows an
   \href{https://en.wikipedia.org/wiki/Continuous_uniform_distribution}{uniform
     distribution}) is imperceptible:
@@ -87,9 +87,7 @@ named \verb|custom_ToH.txt|, with three columns (example):
 \end{verbatim}
 
 Modify the modules \verb|*_ToH.py| to use the file
-\verb|custom_ToH.txt|, when available.
-
-Mark: \textbf{8 points}.
+\verb|custom_ToH.txt|, when available. Use the frequencies corresponding to those defined in \verb|linear_ToH.py| and \verb|dyadic_linear_ToH.py|.
 
 \section{Resources}
 
