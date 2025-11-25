@@ -13,6 +13,7 @@
 %{{{
 
 \subsection{Analysis transform}
+\label{sec:analysis_transform}
 %{{{ 
 InterCom transmits a
 \href{https://en.wikipedia.org/wiki/Stereophonic_sound}{stereo} (two
@@ -50,23 +51,25 @@ that can also be written as
 where ${\mathbf x}\in\mathbb{Z}^2$ is a stereo frame, ${\mathbf K}$ is
 the forward (or analysis) transform matrix, and
 ${\mathbf w}=\begin{bmatrix} {\mathbf w}_0 & {\mathbf
-    w}_1\end{bmatrix}^{\text T}$ is the corresponding
+    w}_1\end{bmatrix}^{\text T}$ (where for this transform,
+$\mathbf{w}\in\mathbb{Z}^2$) is the corresponding
 \href{https://en.wikipedia.org/wiki/Discrete_wavelet_transform}{decomposition}. In
 this particular transform, the decomposition has two
 \href{https://en.wikipedia.org/wiki/Sub-band_coding}{subbands}
 ${\mathbf w}_0$ and ${\mathbf w}_1$, and each subband has only one
-\href{https://web.stanford.edu/class/ee398a/handouts/lectures/07-TransformCoding.pdf}{coefficient} per frame. Notice
-that ${\mathbf x}\in\mathbb{Z}^2$ is a vector space\footnote{Adding
-  two vectors in the plane produces a third one also in the plane;
-  multiplying a vector by a real scalar produces a second vector also
-  in the plane. These two ingrained facts make the integer/real plane be a
-  vector space.~\cite{vetterli2014foundations}} if we consider also
-the required operations.
+\href{https://web.stanford.edu/class/ee398a/handouts/lectures/07-TransformCoding.pdf}{coefficient}
+per frame. Notice that ${\mathbf x}\in\mathbb{Z}^2$ is a vector
+space\footnote{Adding two vectors in the plane produces a third one
+  also in the plane; multiplying a vector by a real scalar produces a
+  second vector also in the plane. These two ingrained facts make the
+  integer/real plane be a vector
+  space.~\cite{vetterli2014foundations}} if we consider also the
+required operations.
 
 The proposed matrix ${\mathbf K}$ corresponds to the transform used in
 \href{https://en.wikipedia.org/wiki/Joint_encoding#M/S_stereo_coding}{Mid/Side
   (M/S) stereo coding}~\cite{bosi2003intro} that we will call MST
-(Mid/Side Transform). This is similar to the $2\times 2$ KLT
+(Mid/Side Transform). The MST is similar to the $2\times 2$ KLT
 \href{https://en.wikipedia.org/wiki/Kosambi%E2%80%93Karhunen%E2%80%93Lo%C3%A8ve_theorem}{(Karhunen-Lo\`eve
   Transform)}, the
 \href{http://wavelets.pybytes.com/wavelet/haar/}{Haar Transform} and
@@ -232,7 +235,7 @@ can help you with this key idea.
 
 Orthogonality is important in compression applications because the
 \href{https://en.wikipedia.org/wiki/Correlation_and_dependence}{statistical
-  correlation} between the subbands is 0, and therefore the
+  correlation} between the subbands is minimal, and the
 contributions of the subbands to the reconstruction of the original
 signal ${\mathbf x}$ are independent\footnote{The total
   \href{https://en.wikipedia.org/wiki/Distortion}{distortion} is the
@@ -273,16 +276,17 @@ subband ${\mathbf w}_i$ must operate in the RD curve $f_i$ with the
 same slope as the rest of the
 subbands~\cite{vetterli2014foundations,sayood2017introduction} (this
 is the same as saying that we must satisfy $f'_0(x)=f'_1(x)$, where
-$f'$ denotes the derivative of $f$). The main drawback of this
-approach is that the finding of $f_i$ is computationally intensive (we
-must analyze, quantize, compress, decompress, dequantize, synthesize,
-and compute the distortion of the data for a sufficiently high number
-of quantization steps), and usually we cannot do that in real
+$f'$ denotes the derivative of $f$, the RD curve). The main drawback
+of this approach is that the finding of $f_i$ is computationally
+intensive (we must analyze, quantize, compress, decompress,
+dequantize, synthesize, and compute the distortion of the data for a
+sufficiently high number of quantization steps, in order to determine
+a good bit-rate $x$), and usually we cannot do that in real
 time.\footnote{This would solve the problem of controlling the
   bit-rate because using the RD curves we know how many bits will
   require each subband.} Notice that we can use this optimal
 quantization scheme because the subbands are indepent one of the
-other, and this is true because the transforms are orthogonal.
+other, and this is true because the MST is orthogonal.
 
 \begin{comment}
   An approximation to this could be to suppose that the RD curves of
@@ -290,7 +294,7 @@ other, and this is true because the transforms are orthogonal.
   piece\footnote{Remember, two samples of a stereo frame in our case
     because we are removing the spatial redundancy.} of data are
   similar to some the curves of previous pieces, that has already been
-  compressed and transmitted, and therefore, we can compute also the
+  compressed and transmitted and therefore, we can compute also the
   distortion. Using this information, we can estimate a RD curve for
   the current piece and estimate the ``optimal'' QSSs. This procedure
   is much faster than the procedure described in the previous paragraph, but it
@@ -434,28 +438,27 @@ can be found inside of each subband\footnote{Here it is supposed that
 seen in the notebook
 \href{https://github.com/Tecnologias-multimedia/intercom/blob/master/tools/audio_viewer.ipynb}{Audio
   Viewer}, most audio signals show ``patterns'' of samples that tend
-to repeat, especially locally. Another clear source of temporal
-redundancy is that neighboring audio samples usually show similar
-amplitude values.
+to repeat themselves, especially locally. Another clear source of
+temporal redundancy is that neighboring audio samples usually show
+similar amplitude values.
 
 % A decorrelating technique: DPCM
 There are several techniques that can be used to remove the
-temporal redundancy of a sequence of audio. One of the most
-straightforward is
+temporal redundancy of a sequence of audio. A
+straightforward one is
 \href{https://en.wikipedia.org/wiki/Differential_pulse-code_modulation}{Differential
   Pulse Code Modulation
   (DPCM)~\cite{sayood2017introduction}}. However, there are more
 efficient decorrelation algorithms based on
 \href{https://en.wikipedia.org/wiki/Transform_coding}{Transform
-  Coding}, such as the one described in the previous and in this
-section.
+  Coding}, such as the one previously described.
 
 % Another decorrelating technique: transform coding
 As it has been explained before, Transform Coding is based on the idea
 that we can decompose the input signal into a set of subbands, and if
 the filters used are appropriate to remove the (in this case,
 temporal) redundancy, we can achieve a high Transform Coding
-Gain~\cite{sayood2017introduction}, accumulating the most of the
+Gain~\cite{sayood2017introduction}, accumulating most of the
 signal energy (and presumably most of the information) in a small
 number of subbands. When this happens, the quantization of the
 subbands will basically remove the least significant information
@@ -482,9 +485,10 @@ samples.\footnote{Notice that is we dead-zone quantize a decomposition
 of the transform matrix are the coefficients\footnote{In theory, such
   rows could be any mathematical operation, not necessarily a filter.}
 of digital filters that are used without splitting the signal into
-blocks. In this context, our analysis transform matrix ${\mathbf K}$
-(see the previous section) represents the coefficients of a 2-channels
-analysis \href{https://en.wikipedia.org/wiki/Filter_bank}{Filter Bank
+blocks of samples. In this context, our analysis transform matrix
+${\mathbf K}$ (see the Section~\ref{sec:analysis_transform})
+represents the coefficients of a 2-channels analysis
+\href{https://en.wikipedia.org/wiki/Filter_bank}{Filter Bank
   (FB)}~\cite{vetterli1995wavelets}, and the forward transform is in
 fact ``descomposing'' ${\mathbf x}$ into two subbands ${\mathbf w}_0$
 and ${\mathbf w}_1$ (see the Figure~\ref{fig:PRFB}, and the notebook
@@ -510,8 +514,8 @@ Let us suppose now that the analysis filters (represented by the
 coefficients of) ${\mathbf K}_0$ and ${\mathbf K}_1$ are applied to
 the input signal ${\mathbf x}$ (now a sequence of $N$ samples) using a
 \href{https://en.wikipedia.org/wiki/Kernel_(image_processing)}{convolution}
-(without splitting $\mathbf{x}$ into blocks as happens in Transform
-Coding). Let us also suppose (as happens in the MST) that
+(without splitting $\mathbf{x}$ into blocks as happens in ``pure''
+Transform Coding). Let us also suppose (as happens in the MST) that
 ${\mathbf K}_0$ is a low-pass filter and ${\mathbf K}_1$ is a
 high-pass filter, and that the
 \href{https://en.wikipedia.org/wiki/Filter_(signal_processing)}{frequency
@@ -521,16 +525,16 @@ high-pass filter, and that the
     impulse}.} of both filters
 \href{https://en.wikipedia.org/wiki/Filter_bank#Perfect_reconstruction_filter_banks}{are
   one the inverse of the other}. Under these assumptions, the complete
-(analysis/synthesis) transform is called a (2-channels)
+(analysis/synthesis) transform is named a (2-channels)
 \href{https://en.wikipedia.org/wiki/Filter_bank#Perfect_reconstruction_filter_banks}{Perfect
   Reconstruction Filter Bank (PRFB)}, and ${\mathbf x}$ can be
 recovered (perfectly) from a subsampled version (in this case
-\href{https://en.wikipedia.org/wiki/Downsampling_(signal_processing)}{decimating}
+\href{https://en.wikipedia.org/wiki/Downsampling_(signal_processing)}{downsampling}
 by 2 because we have two channels in the FB) of ${\mathbf w}_0$ and
 ${\mathbf w}_1$ (see the notebook
-\href{https://github.com/Tecnologias-multimedia/intercom/blob/master/docs/PRFB.ipynb}{A
+\href{https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/contents/transform_coding/PRFB.ipynb}{A
   Perfect Reconstruction Filter Bank (PRFB)}).\footnote{Notice that
-  this subsampling is possible because the
+  this downsampling is possible because the
   \href{https://en.wikipedia.org/wiki/Aliasing}{aliasing} generated in
   the low-pass subband is attenuated by the aliasing generated in the
   high-pass subband. Notice also that the filters are not ideal, the
@@ -548,7 +552,7 @@ same
 this situation, in which ${\mathbf K}_0$ and ${\mathbf K}_1$ are
 mirror filters, we say that they form a
 \href{https://en.wikipedia.org/wiki/Quadrature_mirror_filter}{Quadrature
-  Mirror Filters (QMF) Bank}.
+  Mirror Filters (QMF) Bank}. Notice that the downsamplers ($\downarrow 2$) expand the spectrum of the input in a factor of two, but do not modify their shape, and the upsamplers ($\uparrow 2$) compress the spectrum of the input in a factor of two, generating a mirrored version of the half low-frequencies in the half high-frequencies.
 
 %}}}
 
@@ -692,9 +696,9 @@ DWT using the MST filters and lifting.
   definition, ${\mathbf l}^0={\mathbf x}$, is the original resolution
   level of the signal. The subbands ${\mathbf l}^1$ and
   ${\mathbf h}^1$ computed by Eq.~\eqref{eq:1dwt} are the same than
-  the decimated subbands computed by the corresponding 1-level PRFB,
-  and we say, therefore, that Eq.~\eqref{eq:1dwt} computes the
-  1-level DWT.
+  the downsampled (also refered as decimated) subbands computed by the
+  corresponding 1-level PRFB, and we say, therefore, that
+  Eq.~\eqref{eq:1dwt} computes the 1-level (critically sampled) DWT.
 
   Based on the 1-level DWT, we define the 2-levels DWT as
   \begin{equation}
@@ -716,7 +720,7 @@ DWT using the MST filters and lifting.
   \end{equation}
 
   The $l$-levels DWT splits the signal spectrum into $l+1$ subbands. If
-  $l=n$, where $N=2^n$, we have the spectrum partition
+  $l=n$, where $N=2^n$, we have the spectrum partition (decomposition)
   \begin{equation*}
         | \mathbf{l}^l_0 | \mathbf{h}^l_0 | \mathbf{h}^{l-1}_0 \mathbf{h}^{l-1}_1 | \mathbf{h}^{l-2}_0 \mathbf{h}^{l-2}_1 \mathbf{h}^{l-2}_2 \mathbf{h}^{l-2}_3 | \cdots | \mathbf{h}^1_0 \mathbf{h}^1_1 \cdots \mathbf{h}^1_{2^{n-1}-1} |,
   \end{equation*}
@@ -732,10 +736,11 @@ DWT using the MST filters and lifting.
   2 (sub)steps:
   \begin{enumerate}
   \item A \textbf{predict step}, which computes the ${\mathbf h}$
-    subbands as a prediction error (that in general should be
-    minimized) between the even samples (usually, the values used to
-    predict) and the odd samples (usually, the values predicted). For
-    the MST filters, we have that (see Eq.~\eqref{eq:ldwt})
+    subbands as a prediction error (that should be minimized if we
+    want to obtain a good transform coding gain) between the even
+    samples (usually, the values used to predict) and the odd samples
+    (usually, the values predicted). For the MST filters, we have
+    (see Eq.~\eqref{eq:ldwt}) that
     \begin{equation}
       {\mathbf h}^l_i = {\mathbf l}^{l-1}_{2i+1} - {\mathbf l}^{l-1}_{2i}.
     \end{equation}
@@ -752,9 +757,10 @@ DWT using the MST filters and lifting.
   \begin{equation}
     \begin{array}{rcl}
       {\mathbf l}^{l-1}_{2i} & = & \frac{1}{2}({\mathbf l}^l_i - {\mathbf h}^l_i)\\
-      {\mathbf l}^{l-1}_{2i+1} & = & {\mathbf l}^{l-1}_{2i} + {\mathbf h}^l_i.
+      {\mathbf l}^{l-1}_{2i+1} & = & {\mathbf l}^{l-1}_{2i} + {\mathbf h}^l_i,
     \end{array}
   \end{equation}
+  i.e., we can recover the signal samples from the coefficients.
 
 \end{enumerate}
 
@@ -764,26 +770,30 @@ DWT using the MST filters and lifting.
 %{{{
 
 In the context of wavelet theory~\cite{burrus2013wavelets}, the
-response of the low-pass analysis filter (${\mathbf K}_0$ in MST)
-to the
+response of the low-pass analysis filter (${\mathbf K}_0$ in MST) to
+the
 \href{https://en.wikipedia.org/?title=Unit_impulse&redirect=no}{unit
   impulse}\footnote{The response of a filter to the unit impulse
-characterize the filter because the output of the filter is the set of
-coefficients of the filter.} is known as \emph{scaling function} and is
-usually denoted by $\tilde\phi$, the response of the analysis
+  characterize the filter because the output of the filter is the set
+  of coefficients of the filter.} is known as \emph{scaling function}
+and is usually denoted by $\tilde\phi$, the response of the analysis
 high-pass filter (${\mathbf K}_1$) is known as the \emph{wavelet
-function} and it is usually denoted by $\tilde\psi$, the response of
+  function} and it is usually denoted by $\tilde\psi$, the response of
 the low-pass filter synthesis (${\mathbf K}^{-1}_0$) is indicated by
 $\phi$ and the synthesis high-pass filter (${\mathbf K}^{-1}_1$) is
-represented by $\psi$, which are the dual scaling and wavelet functions.
+represented by $\psi$, which are the dual scaling and wavelet
+functions (see the notebook
+\href{https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/contents/transform_coding/explore_wavelet_filters.ipynb}{Explore
+  wavelet filters}).
 
-For the MST it holds that $\tilde\phi\bot\tilde\psi$, the frequency
-response of $\tilde\phi$ is equal to the mirror\footnote{In the
-  $Z$-domain, it holds that
-  ${\mathcal Z}\{\tilde\phi\}(z)={\mathcal Z}\{\phi\}(-z)$.} of $\phi$
-and $\tilde\psi$ is equal to the mirror of $\psi$, and this is also
-true for all orthogonal DWTs. Another important characteristic of
-orthogonal DWTs is that the filters cannot be
+For all the orthogonal DWTs, it holds that $\tilde\phi\bot\tilde\psi$,
+the frequency response of $\tilde\phi$ is equal to the
+mirror\footnote{In the $Z$-domain, it holds that
+  ${\mathcal Z}\{\tilde\phi\}(z)={\mathcal Z}\{\phi\}(-z)$.} of
+frequency response of $\phi$, and the frequency response of
+$\tilde\psi$ is equal to the mirror of the frequency of of
+$\psi$. Another important characteristic of orthogonal DWTs is that
+the filters cannot be
 \href{https://en.wikipedia.org/wiki/Symmetry}{symmetric}.\footnote{The
   symmetry of the filters is important to produce the same type of
   artifacts in the boundaries of the signal and also to avoid the
@@ -799,9 +809,9 @@ orthogonal DWTs is that the filters cannot be
 
 The previous MST-based DWT is similar to other transforms such as the
 \href{https://en.wikipedia.org/wiki/Haar_wavelet}{Haar transform}, in
-which we use a 1-order predictor to remove temporal
-redundancy. Let us extend the idea of lifting to a prediction of order
-two. For that, we define the predict step as
+which we use a 1-order predictor to remove redundancy. Let us extend
+the idea of lifting to a prediction of order two. For that, we define
+the predict step as
 \begin{equation}
   {\mathbf h}^l_i = {\mathbf l}^{l-1}_{2i+1} - \frac{1}{2}({\mathbf l}^{l-1}_{2i} + {\mathbf l}^{l-1}_{2i+2})
   \label{eq:linear_prediction}
@@ -822,8 +832,8 @@ energy~\cite{sweldens1997building}. This transform is known as the
   said biorthogonal.~\cite{vetterli2014foundations}} filters can be
 \href{http://wavelets.pybytes.com/}{easely recognized} because they
 are always symmetric.\footnote{If Eq.~\eqref{eq:linear_prediction} is used in Eq.\eqref{eq:linear_update}, we can obtain the coefficients of the low-pass filter that computes the low-frequency subband: ${\mathbf l}^l_i=-1/8{\mathbf l}^{l-1}_{2i-2}+1/4{\mathbf l}^{l-1}_{2i-1}+3/4{\mathbf l}^{l-1}_{2i}+1/4{\mathbf l}^{l-1}_{2i+1}-1/8{\mathbf l}^{l-1}_{2i+2}$.} When the PRFB filters are biorthogonal,
-they also satisfy $\psi\bot\tilde\phi$ and
-$\phi\bot\tilde\psi$.
+they only satisfy $\psi\bot\tilde\phi$ and
+$\phi\bot\tilde\psi$, but the filters can be symmetric.
 
 This linear transform is also invertible by simply reversing the steps:
 \begin{equation}
@@ -838,11 +848,11 @@ This linear transform is also invertible by simply reversing the steps:
 \subsection{Quantization of the DWT subbands}
 
 The same theory developed for the quantization of the MST subbands
-(see Section~\href{sec:quantization_subbands_spatial} is applicable
+(see Section~\ref{sec:quantization_subbands_spatial} is applicable
 here: we should select the different quantization step sizes depending
-on the slope generated in the rate/distortion curve (see this
+on the slope generated in the rate/distortion curve (see
 \href{https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/contents/transform_coding/DWT_RD.ipynb}{A
-  RD-comparison of DWTs}. In the practice, when the dynamic range of
+  RD-comparison of DWTs}). In the practice, when the dynamic range of
 the DWT coefficients depends on the gain of the synthesis filters (as
 occurs with PyWavelets), a constant QSS strategy, where
 \begin{equation}
@@ -1151,7 +1161,7 @@ all the RD curves together (in the same graph), to compare easily.
 
 \end{enumerate}
 
-Mark: \textbf{2 points}.
+%Mark: \textbf{2 points}.
 
 \item \textbf{Answer the questions}:
 %{{{
@@ -1173,7 +1183,7 @@ Mark: \textbf{2 points}.
 
 \end{enumerate}
 
-Mark: \textbf{1 point}.
+%Mark: \textbf{1 point}.
 
 %}}}
 

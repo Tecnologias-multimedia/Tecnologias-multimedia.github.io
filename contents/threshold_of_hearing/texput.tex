@@ -13,8 +13,8 @@ Psychoacoustics (see
   human auditory system}, and
 \href{https://vicente-gonzalez-ruiz.github.io/human_sound_perception/}{the
   human sound perception}) has determined that the HAS (Human Auditory
-System) has a sensitivity that depends on the frequency of the sound,
-the so called ToH
+System) has a sensitivity that depends on the frequency of the
+sound. Such behaviour is described by the so called ToH
 (\href{https://en.wikipedia.org/wiki/Absolute_threshold_of_hearing}{Threshold
   of (Human) Hearing}). This basically means that some subbands
 (intervals of frequencies) can be quantized with a larger quantization
@@ -40,7 +40,7 @@ This equation has been plotted in Fig.~\ref{fig:ToHH}.
 \section{Dyadic DWT subbands and quantization steps}
 The number of dyadic DWT subbands
 \begin{equation}
-  N_{\text{sb}} = N_{\text{levels}} + 1
+  N_{\text{sb}} = N_{\text{levels}} + 1,
 \end{equation}
 where $N_{\text{levels}}$ is the number of levels of the
 dyadic DWT~\cite{vetterli1995wavelets}. Except for the
@@ -51,9 +51,9 @@ of the decomposition), it holds that
 \end{equation}
 being $W(\cdot)$ the bandwidth of the corresponding
 subband. Therefore, considering that (by default, in InterCom) the
-bandwidth of the audio signal is $22050$ Hz, the bandwidth
-$W({\mathbf w}_1)=11025$ Hz, $W({\mathbf w}_2)=22025/4$, etc. It also
-holds that
+bandwidth of the audio signal is $22050$ Hz, the bandwidth $W({\mathbf
+  w}_1)=22050/2$ Hz, $W({\mathbf w}_2)=22050/4$, etc. It is also true
+that
 \begin{equation}
   W({\mathbf l}^{N_{\text{levels}}}) = W({\mathbf w}^{N_{\text{levels}}}).
 \end{equation}
@@ -71,11 +71,11 @@ This idea is already implemented in a module named \verb|dyadic_ToH.py|.
 
 Subjectively compare the audio quality obtained by
 \verb|dyadic_ToH.py| and its predecessor,
-\verb|temporal_overlapped_DWT_coding.py|. Subjectively means that, in
+\verb|temporal_overlapped_DWT_coding.py|. ``Subjectively'' means that, in
 groups, you must determine, for the same bit-rate and audio-content
 configuration, which implementation sounds better.
 
-Mark: \textbf{1 point}.
+%Mark: \textbf{1 point}.
 
 \section{Resources}
 

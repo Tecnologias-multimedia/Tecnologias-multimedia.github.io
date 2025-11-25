@@ -14,9 +14,9 @@ is insufficient to accurately represent the diverse auditory
 thresholds present in a typical hearing threshold curve
 \cite{bosi2003intro}.
 
-To address this issue two different algorithms can be used: (1) change
-the dyadic decomposition by a linear decomposition, and (2) decompose
-the dyadic subbands that we already have in smaller subbands.
+To address this drawback two different algorithms can be used: (1) change
+the dyadic decomposition by a linear decomposition, or (2) decompose
+the dyadic subbands that we already have into smaller subbands.
 
 Obviously, once we have created the frequency subbands, it would be a
 matter of determining the corresponding quantization step sizes (QSS)
@@ -27,7 +27,7 @@ based on the ToH curve. We need one QSS per subband.
 As an alternative to the Discrete Wavelet Transform (DWT), the Wavelet
 Packet Transform (WPT) allows for a linear decomposition of the
 signal's frequency range. This is essentially achieved by recursively
-applying wavelet filters to both the low-frequency and high-frequency
+applying the wavelet filters to both the low-frequency and high-frequency
 subbands (see Milestone
 \href{https://tecnologias-multimedia.github.io/contents/transform_coding/}{\emph{Transform
     Coding for Redundancy Removal}}). Consequently, if $l$ represents
@@ -41,7 +41,8 @@ In more detail, this is what would need to be implemented:
   \verb|Temporal_Overlapped_DWT|).
 \item Compute the WPT of the extended chunk (an example of this (but
   notice that for a non-extended chunk) can be found in the class
-  \verb|Linear_ToH_NO|).
+  \verb|Linear_ToH_NO|), in the file
+  \verb|linear_ToH_no_overlapped.py|.
 \item As we did with the DWT in \verb|Temporal_Overlapped_DWT|,
   extract the central parts of each subband to obtain a total number
   of frame-coefficients that matches to the number of frames in the
@@ -50,7 +51,7 @@ In more detail, this is what would need to be implemented:
 
 \section{Linear decomposition of the dyadic subbands}
 \label{sec:dyadic-linear}
-Another solution (more close to the
+Another solution (closer to the
 \href{https://en.wikipedia.org/wiki/Bark_scale}{Bark scale}) is to
 divide each one of the dyadic subbands into a number of
 subbands. Thus, if we have $l+1$ dyadic subbands and now we decompose
@@ -84,12 +85,12 @@ subbands with a size (bandwidth) of $1500$ Hz.
 \begin{enumerate}
 \item Implement a Python module called \verb|linear_ToH.py| where the
   functionality described in Section~\ref{sec:linear} has been
-  implemented. Notice that the current implementation
+  implemented. Remember that the current implementation
   (\texttt{linear\_ToH\_no\_overlapped.py}) does not overlap de
-  chunks. Mark: \textbf{10 points}.
+  chunks. %Mark: \textbf{10 points}.
 \item Implement a Python module called \verb|dyadic_linear_ToH.py|
   where the functionality described in Section~\ref{sec:dyadic-linear}
-  has been implemented. Mark: \textbf{10 points}.
+  has been implemented. %Mark: \textbf{10 points}.
 \end{enumerate}
 
 \section{Resources}

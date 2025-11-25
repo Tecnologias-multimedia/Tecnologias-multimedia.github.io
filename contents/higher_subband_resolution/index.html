@@ -19,7 +19,7 @@
 
 <h2 class='titleHead'>Increasing the Number of Subbands</h2>
  <div class='author'><span class='ecrm-1200'>Vicente González Ruiz</span></div><br />
-<div class='date'><span class='ecrm-1200'>August 10, 2025</span></div>
+<div class='date'><span class='ecrm-1200'>November 18, 2025</span></div>
    </div>
    <h3 class='likesectionHead' id='contents'><a id='x1-1000'></a>Contents</h3>
    <div class='tableofcontents'>
@@ -28,6 +28,7 @@
 <br />   <span class='sectionToc'>3 <a href='#linear-decomposition-of-the-dyadic-subbands' id='QQ2-1-4'>Linear decomposition of the dyadic subbands</a></span>
 <br />   <span class='sectionToc'>4 <a href='#deliverables' id='QQ2-1-5'>Deliverables</a></span>
 <br />   <span class='sectionToc'>5 <a href='#resources' id='QQ2-1-6'>Resources</a></span>
+<br />   <span class='sectionToc'><a href='#references'>References</a></span>
    </div>
    
    <h3 class='sectionHead' id='the-dyadic-frequency-partition-is-not-enough'><span class='titlemark'>1   </span> <a id='x1-20001'></a>The dyadic frequency partition is not enough</h3>
@@ -35,50 +36,52 @@
 (remember, if <span class='mathjax-inline'>\(l\)</span> is the number of levels of the DWT, we obtain <span class='mathjax-inline'>\(l+1\)</span> subbands) is
 insufficient to accurately represent the diverse auditory thresholds present in a
 typical hearing threshold curve <span class='cite'>[<a href='#Xbosi2003intro'>1</a>]</span>.
-</p><!-- l. 17 --><p class='indent'>   To address this issue two different algorithms can be used: (1) change the dyadic
-decomposition by a linear decomposition, and (2) decompose the dyadic subbands
-that we already have in smaller subbands.
+</p><!-- l. 17 --><p class='indent'>   To address this drawback two different algorithms can be used: (1) change the
+dyadic decomposition by a linear decomposition, or (2) decompose the dyadic
+subbands that we already have into smaller subbands.
 </p><!-- l. 21 --><p class='indent'>   Obviously, once we have created the frequency subbands, it would be a matter of
 determining the corresponding quantization step sizes (QSS) based on the ToH curve.
 We need one QSS per subband.
    
-</p>
                                                                   
 
                                                                   
+</p>
    <h3 class='sectionHead' id='linear-decomposition-using-wavelet-packet-transform'><span class='titlemark'>2   </span> <a id='x1-30002'></a>Linear decomposition using Wavelet Packet Transform</h3>
-<!-- l. 27 --><p class='noindent'>As an alternative to the Discrete Wavelet Transform (DWT), the Wavelet Packet
-Transform (WPT) allows for a linear decomposition of the signal’s frequency range.
-This is essentially achieved by recursively applying wavelet filters to both the
-low-frequency and high-frequency subbands (see Milestone  <a href='https://tecnologias-multimedia.github.io/contents/transform_coding/'><span class='ecti-1000'>Transform Coding for
-Redundancy Removal</span></a>). Consequently, if <span class='mathjax-inline'>\(l\)</span> represents the number of levels, then a total
-of <span class='mathjax-inline'>\(2^l\)</span> subbands are generated. For instance, with <span class='mathjax-inline'>\(l=6\)</span>, the DWT yields only <span class='mathjax-inline'>\(7\)</span> subbands,
-whereas the WPT produces <span class='mathjax-inline'>\(64\)</span> subbands.
+<!-- l. 27 --><p class='noindent'>As an alternative to the Discrete Wavelet Transform (DWT), the Wavelet
+Packet Transform (WPT) allows for a linear decomposition of the signal’s
+frequency range. This is essentially achieved by recursively applying the
+wavelet filters to both the low-frequency and high-frequency subbands (see
+Milestone  <a href='https://tecnologias-multimedia.github.io/contents/transform_coding/'><span class='ecti-1000'>Transform Coding for Redundancy Removal</span></a>). Consequently, if <span class='mathjax-inline'>\(l\)</span>
+represents the number of levels, then a total of <span class='mathjax-inline'>\(2^l\)</span> subbands are generated. For
+instance, with <span class='mathjax-inline'>\(l=6\)</span>, the DWT yields only <span class='mathjax-inline'>\(7\)</span> subbands, whereas the WPT produces <span class='mathjax-inline'>\(64\)</span>
+subbands.
 </p><!-- l. 38 --><p class='indent'>   In more detail, this is what would need to be implemented:
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-3002x1'>Extend    the    chunk    (this    can    be    inherited    from    the    class
      <span class='obeylines-h'><code class='verb'>Temporal_Overlapped_DWT</code></span>).
      </li>
 <li class='enumerate' id='x1-3004x2'>Compute the WPT of the extended chunk (an example of this (but notice
-     that for a non-extended chunk) can be found in the class <span class='obeylines-h'><code class='verb'>Linear_ToH_NO</code></span>).
+     that for a non-extended chunk) can be found in the class <span class='obeylines-h'><code class='verb'>Linear_ToH_NO</code></span>),
+     in the file <span class='obeylines-h'><code class='verb'>linear_ToH_no_overlapped.py</code></span>.
      </li>
 <li class='enumerate' id='x1-3006x3'>As  we  did  with  the  DWT  in  <span class='obeylines-h'><code class='verb'>Temporal_Overlapped_DWT</code></span>,  extract  the
      central parts of each subband to obtain a total number of frame-coefficients
      that matches to the number of frames in the chunk.</li></ol>
    
    <h3 class='sectionHead' id='linear-decomposition-of-the-dyadic-subbands'><span class='titlemark'>3   </span> <a id='x1-40003'></a>Linear decomposition of the dyadic subbands</h3>
-<!-- l. 53 --><p class='noindent'>Another solution (more close to the  <a href='https://en.wikipedia.org/wiki/Bark_scale'>Bark scale</a>) is to divide each one of the dyadic
+<!-- l. 54 --><p class='noindent'>Another solution (closer to the  <a href='https://en.wikipedia.org/wiki/Bark_scale'>Bark scale</a>) is to divide each one of the dyadic
 subbands into a number of subbands. Thus, if we have <span class='mathjax-inline'>\(l+1\)</span> dyadic subbands and now we
 decompose each subband into <span class='mathjax-inline'>\(n\)</span> (sub)subbands, we get a total number of <span class='mathjax-inline'>\(n(l+1)\)</span>
 subbands.
-</p><!-- l. 60 --><p class='indent'>   For this, we can use (again) the WPT applied to each dyadic subband generated
+</p><!-- l. 61 --><p class='indent'>   For this, we can use (again) the WPT applied to each dyadic subband generated
 by the DWT of the extended chunk. The idea here is to:
      </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-4002x1'>Extend    the    chunk    (this    can    be    inherited    from    the    class
-     <span class='obeylines-h'><code class='verb'>Temporal_Overlapped_DWT</code></span>).
                                                                   
 
                                                                   
+<li class='enumerate' id='x1-4002x1'>Extend    the    chunk    (this    can    be    inherited    from    the    class
+     <span class='obeylines-h'><code class='verb'>Temporal_Overlapped_DWT</code></span>).
      </li>
 <li class='enumerate' id='x1-4004x2'>Compute the dyadic DWT transform of the extended chunk (this can
      be also reused from the class <span class='obeylines-h'><code class='verb'>Temporal_Overlapped_DWT</code></span>). Let <span class='mathjax-inline'>\(l_{\text {DWT}}\)</span> be the
@@ -89,27 +92,23 @@ by the DWT of the extended chunk. The idea here is to:
      </li>
 <li class='enumerate' id='x1-4008x4'>Extract the central parts of each packet-subband to obtain a total number
      of frame-coefficients that matches to the number of frames in the chunk.</li></ol>
-<!-- l. 76 --><p class='indent'>   Notice that WPT performs a lineal decomposition. Therefore, for example, if the
+<!-- l. 77 --><p class='indent'>   Notice that WPT performs a lineal decomposition. Therefore, for example, if the
 sampling frequency is <span class='mathjax-inline'>\(48000\)</span> Hz, <span class='mathjax-inline'>\(l_{\text {DWT}}=3\)</span> and <span class='mathjax-inline'>\(l_{\text {WPT}}=1\)</span> the lowest frequency dyadic subband goes from <span class='mathjax-inline'>\(0\)</span> Hz
 to <span class='mathjax-inline'>\(3000=\frac {24000}{2^3}\)</span> Hz, and it will de divided into two subbands with a size (bandwidth) of <span class='mathjax-inline'>\(1500\)</span>
 Hz.
    
 </p>
    <h3 class='sectionHead' id='deliverables'><span class='titlemark'>4   </span> <a id='x1-50004'></a>Deliverables</h3>
-<!-- l. 84 --><p class='noindent'>
+<!-- l. 85 --><p class='noindent'>
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-5002x1'>Implement   a   Python   module   called   <span class='obeylines-h'><code class='verb'>linear_ToH.py</code></span>  where   the
-     functionality described in Section <a href='#linear-decomposition-using-wavelet-packet-transform'>2<!-- tex4ht:ref: sec:linear  --></a> has been implemented. Notice that
-     the current implementation (<span class='ectt-1000'>linear_ToH_no_overlapped.py</span>) does not
-     overlap de chunks. Mark: <span class='ecbx-1000'>10 points</span>.
+     functionality described in Section <a href='#linear-decomposition-using-wavelet-packet-transform'>2<!-- tex4ht:ref: sec:linear  --></a> has been implemented. Remember
+     that the current implementation (<span class='ectt-1000'>linear_ToH_no_overlapped.py</span>) does
+     not overlap de chunks.
      </li>
 <li class='enumerate' id='x1-5004x2'>Implement a Python module called <span class='obeylines-h'><code class='verb'>dyadic_linear_ToH.py</code></span> where the
-     functionality  described  in  Section <a href='#linear-decomposition-of-the-dyadic-subbands'>3<!-- tex4ht:ref: sec:dyadic-linear  --></a>  has  been  implemented.  Mark:  <span class='ecbx-1000'>10
-     points</span>.</li></ol>
+     functionality described in Section <a href='#linear-decomposition-of-the-dyadic-subbands'>3<!-- tex4ht:ref: sec:dyadic-linear  --></a> has been implemented.</li></ol>
    
-                                                                  
-
-                                                                  
    <h3 class='sectionHead' id='resources'><span class='titlemark'>5   </span> <a id='x1-60005'></a>Resources</h3>
    <div class='thebibliography'>
    <p class='bibitem'><span class='biblabel'>
@@ -125,6 +124,7 @@ Hz.
    Prentice-hall, 1995.
 </p>
    </div>
+<p id='references'><a id='Q1-1-7'></a>
     
-</body> 
+</p></body> 
 </html>
