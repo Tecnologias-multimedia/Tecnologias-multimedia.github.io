@@ -19,7 +19,7 @@
 
 <h2 class='titleHead'>Increasing the Number of Subbands</h2>
  <div class='author'><span class='ecrm-1200'>Vicente González Ruiz</span></div><br />
-<div class='date'><span class='ecrm-1200'>November 18, 2025</span></div>
+<div class='date'><span class='ecrm-1200'>November 25, 2025</span></div>
    </div>
    <h3 class='likesectionHead' id='contents'><a id='x1-1000'></a>Contents</h3>
    <div class='tableofcontents'>
@@ -28,7 +28,6 @@
 <br />   <span class='sectionToc'>3 <a href='#linear-decomposition-of-the-dyadic-subbands' id='QQ2-1-4'>Linear decomposition of the dyadic subbands</a></span>
 <br />   <span class='sectionToc'>4 <a href='#deliverables' id='QQ2-1-5'>Deliverables</a></span>
 <br />   <span class='sectionToc'>5 <a href='#resources' id='QQ2-1-6'>Resources</a></span>
-<br />   <span class='sectionToc'><a href='#references'>References</a></span>
    </div>
    
    <h3 class='sectionHead' id='the-dyadic-frequency-partition-is-not-enough'><span class='titlemark'>1   </span> <a id='x1-20001'></a>The dyadic frequency partition is not enough</h3>
@@ -43,10 +42,10 @@ subbands that we already have into smaller subbands.
 determining the corresponding quantization step sizes (QSS) based on the ToH curve.
 We need one QSS per subband.
    
+</p>
                                                                   
 
                                                                   
-</p>
    <h3 class='sectionHead' id='linear-decomposition-using-wavelet-packet-transform'><span class='titlemark'>2   </span> <a id='x1-30002'></a>Linear decomposition using Wavelet Packet Transform</h3>
 <!-- l. 27 --><p class='noindent'>As an alternative to the Discrete Wavelet Transform (DWT), the Wavelet
 Packet Transform (WPT) allows for a linear decomposition of the signal’s
@@ -77,11 +76,11 @@ subbands.
 </p><!-- l. 61 --><p class='indent'>   For this, we can use (again) the WPT applied to each dyadic subband generated
 by the DWT of the extended chunk. The idea here is to:
      </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-4002x1'>Extend    the    chunk    (this    can    be    inherited    from    the    class
+     <span class='obeylines-h'><code class='verb'>Temporal_Overlapped_DWT</code></span>).
                                                                   
 
                                                                   
-<li class='enumerate' id='x1-4002x1'>Extend    the    chunk    (this    can    be    inherited    from    the    class
-     <span class='obeylines-h'><code class='verb'>Temporal_Overlapped_DWT</code></span>).
      </li>
 <li class='enumerate' id='x1-4004x2'>Compute the dyadic DWT transform of the extended chunk (this can
      be also reused from the class <span class='obeylines-h'><code class='verb'>Temporal_Overlapped_DWT</code></span>). Let <span class='mathjax-inline'>\(l_{\text {DWT}}\)</span> be the
@@ -109,6 +108,9 @@ Hz.
 <li class='enumerate' id='x1-5004x2'>Implement a Python module called <span class='obeylines-h'><code class='verb'>dyadic_linear_ToH.py</code></span> where the
      functionality described in Section <a href='#linear-decomposition-of-the-dyadic-subbands'>3<!-- tex4ht:ref: sec:dyadic-linear  --></a> has been implemented.</li></ol>
    
+                                                                  
+
+                                                                  
    <h3 class='sectionHead' id='resources'><span class='titlemark'>5   </span> <a id='x1-60005'></a>Resources</h3>
    <div class='thebibliography'>
    <p class='bibitem'><span class='biblabel'>
@@ -124,7 +126,6 @@ Hz.
    Prentice-hall, 1995.
 </p>
    </div>
-<p id='references'><a id='Q1-1-7'></a>
     
-</p></body> 
+</body> 
 </html>
