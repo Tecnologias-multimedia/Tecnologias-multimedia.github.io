@@ -32,15 +32,17 @@ milestone.
 \section{Why to use custom ToH curves?}
 
 If you are talking to a semi-deaf interlocutor, why would you send
-them auditory information that they will not be able to perceive? For
-this reason, this step proposes the calculation of your own ToH curve,
-information that must be transmitted to your interlocutor so that he
-can use the quantization steps adapted to your perception.
+them auditory information that they will not be able to perceive? A
+similar question arises when our audio equipments are not the
+best. For this reason, this milestone proposes the calculation of your
+own ToH curve, information that must be transmitted to your
+interlocutor so that he can use the quantization steps adapted to your
+perception.
 
 \section{A procedure to determine your ToH curve}
 
 An optimal-user-specific ToH
-should take into consideration your noticeable
+should take into consideration your \textbf{noticeable}
 \href{https://en.wikipedia.org/wiki/Quantization_(signal_processing)}{quantization
   noise} in each subband, defining a set of QSSs (one per subband). To
 find such set, the following algorithm can be used:
@@ -52,7 +54,7 @@ find such set, the following algorithm can be used:
   %wavelet representation of a
   %chunk. %, being ${\mathbf l}^{N_{\text{levels}}}$ the lowest frequency subband.
   Starting with the lowest frequency subband (at the first
-  iteration the rest of subbands are zero), and while the noise
+  iteration the rest of subbands are set to zero), and while the noise
   (suppose that the quantization noise follows an
   \href{https://en.wikipedia.org/wiki/Continuous_uniform_distribution}{uniform
     distribution}) is imperceptible:
@@ -67,12 +69,12 @@ find such set, the following algorithm can be used:
   ones.
 \end{enumerate}
 
-It's a good idea to have the option of determining the ToH of a given
+It's a good idea to have also the option of determining the ToH of a given
 subband, without reconsidering the rest of them.
 
 \section{Deliverables}
 
-Implement the previous procedure in a Python module named
+Implement the previous procedures in a Python module named
 \verb|create_ToH.py|. The output of such module should be a text file,
 named \verb|custom_ToH.txt|, with three columns (example):
 \begin{verbatim}
@@ -87,7 +89,9 @@ named \verb|custom_ToH.txt|, with three columns (example):
 \end{verbatim}
 
 Modify the modules \verb|*_ToH.py| to use the file
-\verb|custom_ToH.txt|, when available. Use the frequencies corresponding to those defined in \verb|linear_ToH.py| and \verb|dyadic_linear_ToH.py|.
+\verb|custom_ToH.txt|, when available. Use the frequencies
+corresponding to those defined in \verb|linear_ToH.py| and
+in \verb|dyadic_linear_ToH.py|.
 
 \section{Resources}
 
