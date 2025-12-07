@@ -457,8 +457,9 @@ efficient decorrelation algorithms based on
 As it has been explained before, Transform Coding is based on the idea
 that we can decompose the input signal into a set of subbands, and if
 the filters used are appropriate to remove the (in this case,
-temporal) redundancy, we can achieve a high Transform Coding
-Gain~\cite{sayood2017introduction}, accumulating most of the
+temporal) redundancy, we can achieve a high
+\href{https://web.stanford.edu/class/ee398a/handouts/lectures/07-TransformCoding.pdf}{Transform
+  Coding Gain}~\cite{sayood2017introduction}, accumulating most of the
 signal energy (and presumably most of the information) in a small
 number of subbands. When this happens, the quantization of the
 subbands will basically remove the least significant information
@@ -467,8 +468,8 @@ subbands will basically remove the least significant information
   noise}), allowing better compression ratios than those in which we
 apply the same quantization process to the original
 samples.\footnote{Notice that is we dead-zone quantize a decomposition
-  and most of the coefficients are close to zero, the information
-  removed from the signal will be those with a smaller energy.}
+and most of the coefficients are close to zero, the information
+removed from the signal will be those with a smaller energy.}
 
 %}}}
 
