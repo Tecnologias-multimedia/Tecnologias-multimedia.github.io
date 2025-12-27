@@ -40,7 +40,7 @@ Figure~\ref{fig:SM}).
 \section{A dynamic computation of the Quantization Step Sizes}
 \label{sec:algo}
 \begin{enumerate}
-\item Given a decomposition of a chunk
+\item For each chunk, given a decomposition of the chunk
   ${\mathbf W}=\{{\mathbf w}_s\}$, determine the
   \href{https://en.wikipedia.org/wiki/Energy_(signal_processing)}{energy}
   $\{E({\mathbf w}_s)\}$ of each subband. For this is a good idea to
@@ -54,6 +54,14 @@ Figure~\ref{fig:SM}).
     perceptual perspective.} QSSs as
   \begin{equation}
     {\mathbf \Delta}^* := \{\cdots,3{\mathbf \Delta}_{m-2},2{\mathbf \Delta}_{m-1},{\mathbf \Delta}_m,2{\mathbf \Delta}_{m+1},3{\mathbf \Delta}_{m+2}, \cdots\}.
+  \end{equation}
+\item Being $m$ the subband index with the maximum power, set
+  \begin{equation}
+    \mathbf{\Delta}_{m-1} = 2\mathbf{\Delta}_{m-1}
+  \end{equation}
+  and
+  \begin{equation}
+    \mathbf{\Delta}_{m+1} = 2\mathbf{\Delta}_{m+1}.
   \end{equation}
 \end{enumerate}
 
