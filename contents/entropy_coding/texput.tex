@@ -3,7 +3,32 @@
 \input{../../definitions}
 \title{Zero-Tree Coding (in progress)}
 
+% ahora mismo, un chunk es la concatenación de 2048 (chunk_size)
+% enteros de 24 bits. Los primeros 1024 bytes del plano de bytes más
+% significativo son, generalmente aunque dependiendo del número de
+% niveles de la DWT y del volumen del audio, los bits de signo de los
+% coeficientes de la subbanda "mid" y los siguientes 1024 bytes son el
+% bit de signo de los coeficientes de la subbanda side (que suelen ser
+% más pequeños). En principio no debería existir correlación entre los
+% coeficientes de la subbanda mid y los coeficientes de la subbanda
+% side. Podría crearse un modelo probabilístico o un diccionaro
+% independiente para cada subbanda, mid o side. Tampoco es esperable
+% correlación temporal entre los enteros (signos) en este plano de
+% bytes (tampoco entre los coeficientes). Por tanto, una codificación
+% binaria de un sólo bit generaría 2048/8 = 256 bytes. DEFLATE
+% actualmente está generando unos 180 bytes para q=256 y unos 350
+% bytes para q=1. Con q=256 podría aplicarse un RLE en la parte signo
+% del stereo, que se pierde (todos los coeficientes son 0).
+
+% El plano de bytes intermedio
+
 % Usando bytes, y tras quantizar, usar ZTC para acortar la longitud de la sequencia de bytes que finalmente codificamos con DEFLATE. Recordemos que si un coeficiente en la subbanda h^i es cero, entonces es basatante probable que todos sus descendientes sean cero también. Hay que tener en cuenta que tendremos que usar filtros DWT que no generen desplazamiento en la fase (filtros simétricos).
+
+% Algoritmo: Input: enteros de 24 bits.
+
+% 1. Sumar 32768. Todos los coeficientes ahora son positivos (mayores o iguales que 0). El 0 sólo se va a generar si 
+
+% 2. 
 
 \maketitle
 

@@ -1,6 +1,6 @@
 <!DOCTYPE html> 
 <html lang='en-US' xml:lang='en-US'> 
-<head> <title>Perceptual Coding Considering the Threshold of Hearing</title> 
+<head> <title>Perceptual Quantization</title> 
 <meta charset='utf-8' /> 
 <meta content='TeX4ht (https://tug.org/tex4ht/)' name='generator' /> 
 <meta content='width=device-width,initial-scale=1' name='viewport' /> 
@@ -17,27 +17,39 @@
 
                                                                   
 
-<h2 class='titleHead'>Perceptual Coding Considering the Threshold of
-Hearing</h2>
+<h2 class='titleHead'>Perceptual Quantization</h2>
  <div class='author'> <a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp;  </span><a href='https://hpca.ual.es/~savins/'><span class='ecrm-1200'>Savins Puertas Martín</span></a> <span class='ecrm-1200'>&amp;  </span><a href='https://www.ual.es/persona/555355505557525189'><span class='ecrm-1200'>Juan José Moreno Riado</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>November 26, 2025</span></div>
+<div class='date'><span class='ecrm-1200'>February 6, 2026</span></div>
    </div>
    <h3 class='likesectionHead' id='contents'><a id='x1-1000'></a>Contents</h3>
    <div class='tableofcontents'>
    <span class='sectionToc'>1 <a href='#a-model-of-the-threshold-of-human-hearing' id='QQ2-1-2'>A model of the Threshold of (Human) Hearing</a></span>
-<br />   <span class='sectionToc'>2 <a href='#dyadic-dwt-subbands-and-quantization-steps' id='QQ2-1-4'>Dyadic DWT subbands and quantization steps</a></span>
-<br />   <span class='sectionToc'>3 <a href='#deliverables' id='QQ2-1-5'>Deliverables</a></span>
-<br />   <span class='sectionToc'>4 <a href='#resources' id='QQ2-1-6'>Resources</a></span>
+<br />   <span class='sectionToc'>2 <a href='#bark-scale-bs' id='QQ2-1-4'>Bark Scale (BS)</a></span>
+<br />   <span class='sectionToc'>3 <a href='#dwts-dyadic-decomposition' id='QQ2-1-5'>DWT’s dyadic decomposition</a></span>
+<br />   <span class='sectionToc'>4 <a href='#wavelet-packet-transform-wpt' id='QQ2-1-6'>Wavelet Packet Transform (WPT)</a></span>
+<br />   <span class='sectionToc'>5 <a href='#hybrid-dyadiclinear-decomposition' id='QQ2-1-7'>Hybrid dyadic-linear decomposition</a></span>
+<br />   <span class='sectionToc'>6 <a href='#not-everyone-hears-the-same' id='QQ2-1-8'>Not everyone hears the same</a></span>
+<br />   <span class='sectionToc'>7 <a href='#custom-toh-curves' id='QQ2-1-9'>Custom ToH curves</a></span>
+<br />   <span class='sectionToc'>8 <a href='#quantization-noise' id='QQ2-1-10'>Quantization noise</a></span>
+<br />   <span class='sectionToc'>9 <a href='#deliverables' id='QQ2-1-11'>Deliverables</a></span>
+<br />   <span class='sectionToc'>10 <a href='#dyadic-dwt-subbands-and-quantization-steps' id='QQ2-1-12'>Dyadic DWT subbands and quantization steps</a></span>
+<br />   <span class='sectionToc'>11 <a href='#deliverables1' id='QQ2-1-13'>Deliverables</a></span>
+<br />   <span class='sectionToc'>12 <a href='#resources' id='QQ2-1-14'>Resources</a></span>
    </div>
    
    <h3 class='sectionHead' id='a-model-of-the-threshold-of-human-hearing'><span class='titlemark'>1   </span> <a id='x1-20001'></a>A model of the Threshold of (Human) Hearing</h3>
-<!-- l. 10 --><p class='noindent'>Psychoacoustics (see  <a href='https://vicente-gonzalez-ruiz.github.io/the_sound/'>the sound</a>,  <a href='https://vicente-gonzalez-ruiz.github.io/human_auditory_system/'>the human auditory system</a>, and  <a href='https://vicente-gonzalez-ruiz.github.io/human_sound_perception/'>the human sound
-perception</a>) has determined that the HAS (Human Auditory System) has a
+<!-- l. 11 --><p class='noindent'>The threshold of hearing tells you how much noise you can hide in each
+subband.
+</p><!-- l. 13 --><p class='indent'>   Psychoacoustics (see  <a href='https://vicente-gonzalez-ruiz.github.io/the_sound/'>the sound</a>,  <a href='https://vicente-gonzalez-ruiz.github.io/human_auditory_system/'>the human auditory system</a>, and  <a href='https://vicente-gonzalez-ruiz.github.io/human_sound_perception/'>the human
+sound perception</a>) has determined that the HAS (Human Auditory System) has a
 sensitivity that depends on the frequency of the sound. Such behaviour is described
 by the so called ToH ( <a href='https://en.wikipedia.org/wiki/Absolute_threshold_of_hearing'>Threshold of (Human) Hearing</a>). This basically means that
 some subbands (intervals of frequencies) can be quantized with a larger quantization
 step than others without a noticeable increase (from a perceptual perspective) of the
 quantization noise <span class='cite'>[<a href='#Xsayood2017introduction'>2</a>]</span>.
+                                                                  
+
+                                                                  
 </p>
    <figure class='figure'> 
 
@@ -47,54 +59,206 @@ quantization noise <span class='cite'>[<a href='#Xsayood2017introduction'>2</a>
                                                                   
 
                                                                   
-<!-- l. 27 --><p class='noindent' id='a-model-for-the-threshold-of-human-hearing'><div style='text-align:center;'> <img src='graphics/ToHH.svg' /> </div>  <a id='x1-2001r1'></a>
+<!-- l. 30 --><p class='noindent' id='a-model-for-the-threshold-of-human-hearing'><div style='text-align:center;'> <img src='graphics/ToHH.svg' /> </div>  <a id='x1-2001r1'></a>
 </p>
 <figcaption class='caption'><span class='id'>Figure 1: </span><span class='content'>A model for the threshold of human hearing.                    </span></figcaption><!-- tex4ht:label?: x1-2001r1  -->
                                                                   
 
                                                                   
    </figure>
-<!-- l. 32 --><p class='indent'>   A good approximation of ToH for a 20-year-old person can be obtained with <span class='cite'>[<a href='#Xbosi2003intro'>1</a>]</span> </p><div class='mathjax-env mathjax-equation'>\begin{equation} T(f)\text {[dB]} = 3.64(f\text {[kHz]})^{-0.8} - 6.5e^{f\text {[kHz]}-3.3)^2} + 10^{-3}(f\text {[kHz]})^4. \label {eq:ToHH} \end{equation}</div><p><a id='x1-2002r1'></a>
+<!-- l. 35 --><p class='indent'>   A good approximation of ToH for a 20-year-old person can be obtained with <span class='cite'>[<a href='#Xbosi2003intro'>1</a>]</span> </p><div class='mathjax-env mathjax-equation'>\begin{equation} T(f)\text {[dB]} = 3.64(f\text {[kHz]})^{-0.8} - 6.5e^{f\text {[kHz]}-3.3)^2} + 10^{-3}(f\text {[kHz]})^4. \label {eq:ToHH} \end{equation}</div><p><a id='x1-2002r1'></a>
 This equation has been plotted in Fig. <a href='#a-model-for-the-threshold-of-human-hearing'>1<!-- tex4ht:ref: fig:ToHH  --></a>.
    
-   </p><h3 class='sectionHead' id='dyadic-dwt-subbands-and-quantization-steps'><span class='titlemark'>2   </span> <a id='x1-30002'></a>Dyadic DWT subbands and quantization steps</h3>
-<!-- l. 41 --><p class='noindent'>The number of dyadic DWT subbands </p><div class='mathjax-env mathjax-equation'>\begin{equation} N_{\text {sb}} = N_{\text {levels}} + 1, \end{equation}</div><p><a id='x1-3001r2'></a> where <span class='mathjax-inline'>\(N_{\text {levels}}\)</span> is the number of levels of the dyadic
+   </p><h3 class='sectionHead' id='bark-scale-bs'><span class='titlemark'>2   </span> <a id='x1-30002'></a>Bark Scale (BS)</h3>
+<!-- l. 45 --><p class='noindent'>The frequency resolution of the HAS is finite. This basically means that two tonal
+sounds almost sound the same when they have similar frequencies. Moreover, the
+minimal distance in frequency to confuse both depends on their frequencies: if the
+frequency is low, the distance must be smaller. Such behaviour can be described by
+the  <a href='https://en.wikipedia.org/wiki/Bark_scale'>Bark scale</a> (see also  <a href='https://ccrma.stanford.edu/~jos/bbt/Bark_Frequency_Scale.html'>this</a>), were as it can be seen, the size of the “critical” bands
+increases with the frequency.
+</p><!-- l. 57 --><p class='indent'>   Considering both concepts, the ToH and the BS, we can improve (subjectively)
+the quality of the sound for a given bit-rate. The idea is to use a different QSS
+for each critical band. The QSSs should resemble the ToH curve, and the
+bandwidth of the subbands should follow the tendence of the size of the critical
+bands.
+   
+</p>
+   <h3 class='sectionHead' id='dwts-dyadic-decomposition'><span class='titlemark'>3   </span> <a id='x1-40003'></a>DWT’s dyadic decomposition</h3>
+<!-- l. 65 --><p class='noindent'>The number of subbands generated by the DWT is </p><div class='mathjax-env mathjax-equation'>\begin{equation} N_{\text {DWT}} = L_{\text {DWT}}+1, \end{equation}</div><p><a id='x1-4001r2'></a> where <span class='mathjax-inline'>\(L_\text {DWT}\)</span> is the number of levels of
+the DWT <span class='cite'>[<a href='#Xvetterli1995wavelets'>3</a>]</span>. Notice that, except for the <span class='mathjax-inline'>\({\mathbf l}^{N_{\text {levels}}}\)</span> subband (the lowest-pass frequency of the
+decomposition), it holds that </p><div class='mathjax-env mathjax-equation'>\begin{equation} W({\mathbf w}_s) = \frac {1}{2}W({\mathbf w}_{s-1}), \end{equation}</div><p><a id='x1-4002r3'></a> being <span class='mathjax-inline'>\(W(\cdot )\)</span> the bandwidth of the corresponding
+subband. Therefore, considering that (by default, in InterCom) the bandwidth of
+the audio signal is <span class='mathjax-inline'>\(22050\)</span> Hz, the bandwidth <span class='mathjax-inline'>\(W({\mathbf w}_1)=22050/2\)</span> Hz, <span class='mathjax-inline'>\(W({\mathbf w}_2)=22050/4\)</span>, etc. It is also true that (see
+<a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/docs/2-hours_seminar.ipynb'>InterCom: a Real-Time Digital Audio Full-Duplex Transmitter/Receiver</a>)
+</p><div class='mathjax-env mathjax-equation'>\begin{equation} W({\mathbf l}^{L_{\text {DWT}}}) = W({\mathbf w}^{L_{\text {DWT}}}). \end{equation}</div><p><a id='x1-4003r4'></a>
+<!-- l. 88 --></p><p class='indent'>   Unfortunately, as it can be seen, the DWT does not provide a good decomposition
+if we want to use a different QSS for each critical band (<span class='mathjax-inline'>\(N_{\text {DWT}}\)</span> is generally too
+small<span class='footnote-mark'><a href='#fn1x0' id='fn1x0-bk'><sup class='textsuperscript'>1</sup></a></span><a id='x1-4004f1'></a>
+and the size of the subbandas does not resemble the BS critical bands).
+   
+</p>
+   <h3 class='sectionHead' id='wavelet-packet-transform-wpt'><span class='titlemark'>4   </span> <a id='x1-50004'></a>Wavelet Packet Transform (WPT)</h3>
+<!-- l. 97 --><p class='noindent'>The WPT is an extensión of the DWT where the 2-channels PRFB is applied also
+recursively to the high frequencies (see Milestone  <a href='https://tecnologias-multimedia.github.io/contents/transform_coding/'><span class='ecti-1000'>Transform Coding for Redundancy
+Removal</span></a>). Now, the number of subbands genearted by the WPT is </p><div class='mathjax-env mathjax-equation'>\begin{equation} N_{\text {WPT}} = 2^{L_{\text {WPT}}}, \end{equation}</div><p><a id='x1-5001r5'></a> where <span class='mathjax-inline'>\(L_\text {DWT}\)</span> is the
+number of levels of the DWT <span class='cite'>[<a href='#Xvetterli1995wavelets'>3</a>]</span>.
+                                                                  
+
+                                                                  
+<!-- l. 108 --></p><p class='indent'>   Unfortunately (again), although in this case, <span class='mathjax-inline'>\(N_{\text {WPT}}\)</span> can be much larger than <span class='mathjax-inline'>\(N_{\text {DWT}}\)</span>, </p><div class='mathjax-env mathjax-equation'>\begin{equation} W({\mathbf w}_s) = W({\mathbf w}_{s-1})\quad \forall s, \end{equation}</div><p><a id='x1-5002r6'></a> i.e., all
+the WPT subbands have the same bandwidth which neither it is the most suitable to
+mimic the BS critical bands.
+   
+   </p><h3 class='sectionHead' id='hybrid-dyadiclinear-decomposition'><span class='titlemark'>5   </span> <a id='x1-60005'></a>Hybrid dyadic-linear decomposition</h3>
+<!-- l. 118 --><p class='noindent'>A better frequency partition can be found computing first the DWT (dyadic
+decomposition) and then the WPT (linear decomposition) of each dyadic
+subband:
+     </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-6002x1'>
+     <!-- l. 122 --><p class='noindent'>For each input chunk <span class='mathjax-inline'>\(c\)</span>:
+         </p><ol class='enumerate2'>
+<li class='enumerate' id='x1-6004x1'>Compute the DWT of each channel of <span class='mathjax-inline'>\(c\)</span>, generating the decomposition
+         <span class='mathjax-inline'>\(\{l^{N_{\text {DWT}}}, h^{N_{\text {DWT}}}, h^{N_{\text {DWT}}-1},\cdots ,h^{1}\}\)</span>.
+         </li>
+<li class='enumerate' id='x1-6006x2'>
+         <!-- l. 125 --><p class='noindent'>for each dyadic subband <span class='mathjax-inline'>\(\mathbf {w}\)</span> in <span class='mathjax-inline'>\(\{l^{N_{\text {DWT}}}, h^{N_{\text {DWT}}}, h^{N_{\text {DWT}}-1},\cdots ,h^{1}\}\)</span>:
+             </p><ol class='enumerate3'>
+<li class='enumerate' id='x1-6008x1'>Compute the WPT of <span class='mathjax-inline'>\(\mathbf {w}\)</span></li></ol>
+         </li></ol>
+     </li></ol>
+<!-- l. 131 --><p class='noindent'>Notice that the number of resulting subbands generated by the hybrid DWT+WPT
+transform is </p><div class='mathjax-env mathjax-equation'>\begin{equation} N_{\text {DWT+WPT}} = 2^{L_{\text {WPT}}}(L_{\text {DWT}}+1). \end{equation}</div><p><a id='x1-6009r7'></a>
+<!-- l. 137 --></p><p class='indent'>   This algorithm has been implemented in <span class='ectt-1000'>perceptual_quantization.py </span>which
+inputs two new parameters: <span class='ectt-1000'>–levels_DWT </span>and <span class='ectt-1000'>–levels_WPT</span>. Notice that to avoid
+distortion at the chunk boundaries we apply the hybrid transform DWT+WPT on
+extended chunks that obviously overlap.
+   
+</p>
+   <h3 class='sectionHead' id='not-everyone-hears-the-same'><span class='titlemark'>6   </span> <a id='x1-70006'></a>Not everyone hears the same</h3>
+<!-- l. 145 --><p class='noindent'>The ToH curve <span class='cite'>[<a href='#Xbosi2003intro'>1</a>]</span> varies between individuals:
+                                                                  
+
+                                                                  
+     </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-7002x1'>In general, women hear better than men.
+     </li>
+<li class='enumerate' id='x1-7004x2'>With age, we lose sensitivity to high frequencies.
+     </li>
+<li class='enumerate' id='x1-7006x3'>Exposure  to  loud  noises  over  time  can  <span class='ecti-1000'>elevate  </span>the  ToH,  especially  in
+     individuals exposed to loud sound.
+     </li>
+<li class='enumerate' id='x1-7008x4'>Auditory  training  can  help  to  detect  sounds  at  lower  intensities  or
+     distinguish subtle nuances in tone.</li></ol>
+<!-- l. 158 --><p class='indent'>   And this can be said without considering your local audio
+infraestructure.<span class='footnote-mark'><a href='#fn2x0' id='fn2x0-bk'><sup class='textsuperscript'>2</sup></a></span><a id='x1-7009f2'></a>
+</p><!-- l. 163 --><p class='indent'>   Therefore, it is quite improbable that, at least in practice, you have a ToH
+identical to the theoretical curve shown in the previous milestone.
+   
+</p>
+   <h3 class='sectionHead' id='custom-toh-curves'><span class='titlemark'>7   </span> <a id='x1-80007'></a>Custom ToH curves</h3>
+<!-- l. 169 --><p class='noindent'>If you are talking to a semi-deaf interlocutor, why would you send them auditory
+information that they will not be able to perceive? A similar question arises when our
+audio equipments are not very good. Therefore, a suitable user-specific ToH curve should
+take into consideration the user’s <span class='ecbx-1000'>noticeable  </span><a href='https://en.wikipedia.org/wiki/Quantization_(signal_processing)'>quantization noise</a> in each DWT+WPT
+subband.<span class='footnote-mark'><a href='#fn3x0' id='fn3x0-bk'><sup class='textsuperscript'>3</sup></a></span><a id='x1-8001f3'></a>
+Thus, we can estimate the energy of the noticeable quantizaiton noise by generating,
+subband-by-subband, random uniform numbers of increasing amplitude as the
+coefficients of the subband, and playing the resulting inverse transform. The
+minimum noticeable “energy value” of each subband is written in a file named
+<span class='ectt-1000'>custom_ToH_curve.txt</span>. Notice that this file should be used by your interlocutor,
+and viceversa.
+   
+                                                                  
+
+                                                                  
+</p>
+   <h3 class='sectionHead' id='quantization-noise'><span class='titlemark'>8   </span> <a id='x1-90008'></a>Quantization noise</h3>
+<!-- l. 189 --><p class='noindent'>Uniform quantization introduces quantization noise, whose power (for a step size <span class='mathjax-inline'>\(\Delta _k\)</span>) for
+the <span class='mathjax-inline'>\(k\)</span>-th subband is (see Milestone Bit-rate control) </p><div class='mathjax-env mathjax-equation'>\begin{equation} \sigma _k^2 = \frac {\Delta _k^2}{12}. \end{equation}</div><p><a id='x1-9001r8'></a> To be inaudible, quantization
+noise in each subband should be below the ToH for that subband. Obviously, if the
+compression ratio requirement cannot meet this, the noise should be equally
+distributed among all the subbands.
+<!-- l. 195 --></p><p class='indent'>   The variance of a signal (in this case, of a linear transformation of a signal) can
+be a good estimator of the signal power, <span class='mathjax-inline'>\(P(\mathbf {s})=\sigma _{\mathbf {s}}^2\)</span>, i.e., for the subband <span class='mathjax-inline'>\(k\)</span>, we have that </p><div class='mathjax-env mathjax-equation'>\begin{equation} P_k = \frac {\Delta _k^2}{12}, \end{equation}</div><p><a id='x1-9002r9'></a> or
+equivalently, that </p><div class='mathjax-env mathjax-equation'>\begin{equation} \Delta _k = \sqrt {12P_k}. \label {eq:find_delta} \end{equation}</div><p><a id='x1-9003r10'></a> This expression (Eq. \eqref{eq:find_delta}) establishes
+a relationship between the ToH curve and the QSS in each subband: if <span class='mathjax-inline'>\(P_k\)</span>
+(the power of the signal to be audible in the <span class='mathjax-inline'>\(k\)</span>-th subband) increases, then
+the QSS for that subband can be higher, and viceversa. Basically, we have
+to:
+     </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-9005x1'>
+     <!-- l. 206 --><p class='noindent'>Linearize the ToH curve using </p><div class='mathjax-env mathjax-equation'>\begin{equation} \text {linear-ToH}(f) = 10^{\text {ToH}(f)/10}. \end{equation}</div><a id='x1-9006r11'></a> Notice that the ToH curve is originally
+     expressed in decibels.
+     </li>
+<li class='enumerate' id='x1-9008x2'>Compute <span class='mathjax-inline'>\(P_k\)</span> as the average value of the linear-ToH curve in the subband
+     <span class='mathjax-inline'>\(k\)</span>.
+     </li>
+<li class='enumerate' id='x1-9010x3'>Apply the Eq. \eqref{eq:find_delta} for each subband.</li></ol>
+<!-- l. 215 --><p class='indent'>   Therefore, the QSS for the <span class='mathjax-inline'>\(k\)</span>-th subband depens on the w
+</p>
+   <h3 class='sectionHead' id='deliverables'><span class='titlemark'>9   </span> <a id='x1-100009'></a>Deliverables</h3>
+<!-- l. 218 --><p class='noindent'>
+     </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-10002x1'>Find your own ToH curve using <span class='ectt-1000'>create_ToH_curve.py</span>. In this case we
+     are going to transmit the sound file through <span class='ectt-1000'>localhost</span>, and therefore, we
+     don’t have to send the file.
+                                                                  
+
+                                                                  
+     </li>
+<li class='enumerate' id='x1-10004x2'>For the same bit-rate (approximately<span class='footnote-mark'><a href='#fn4x0' id='fn4x0-bk'><sup class='textsuperscript'>4</sup></a></span><a id='x1-10005f4'></a>),
+     compare<span class='footnote-mark'><a href='#fn5x0' id='fn5x0-bk'><sup class='textsuperscript'>5</sup></a></span><a id='x1-10007f5'></a>
+     the quality of the reproduction of an audio file when you use <span class='ectt-1000'>static_ToH.py</span>
+     and its predecessor, <span class='ectt-1000'>temporal_DWT.py</span>.</li></ol>
+   
+   <h3 class='sectionHead' id='dyadic-dwt-subbands-and-quantization-steps'><span class='titlemark'>10   </span> <a id='x1-1100010'></a>Dyadic DWT subbands and quantization steps</h3>
+<!-- l. 233 --><p class='noindent'>The number of dyadic DWT subbands </p><div class='mathjax-env mathjax-equation'>\begin{equation} N_{\text {sb}} = N_{\text {levels}} + 1, \end{equation}</div><p><a id='x1-11001r12'></a> where <span class='mathjax-inline'>\(N_{\text {levels}}\)</span> is the number of levels of the dyadic
 DWT <span class='cite'>[<a href='#Xvetterli1995wavelets'>3</a>]</span>. Except for the <span class='mathjax-inline'>\({\mathbf l}^{N_{\text {levels}}}\)</span> subband (the lowest-pass frequency of the decomposition),
-it holds that </p><div class='mathjax-env mathjax-equation'>\begin{equation} W({\mathbf w}_s) = \frac {1}{2}W({\mathbf w}_{s-1}), \end{equation}</div><p><a id='x1-3002r3'></a> being <span class='mathjax-inline'>\(W(\cdot )\)</span> the bandwidth of the corresponding subband. Therefore,
+it holds that </p><div class='mathjax-env mathjax-equation'>\begin{equation} W({\mathbf w}_s) = \frac {1}{2}W({\mathbf w}_{s-1}), \end{equation}</div><p><a id='x1-11002r13'></a> being <span class='mathjax-inline'>\(W(\cdot )\)</span> the bandwidth of the corresponding subband. Therefore,
 considering that (by default, in InterCom) the bandwidth of the audio signal is <span class='mathjax-inline'>\(22050\)</span> Hz,
-the bandwidth <span class='mathjax-inline'>\(W({\mathbf w}_1)=22050/2\)</span> Hz, <span class='mathjax-inline'>\(W({\mathbf w}_2)=22050/4\)</span>, etc. It is also true that </p><div class='mathjax-env mathjax-equation'>\begin{equation} W({\mathbf l}^{N_{\text {levels}}}) = W({\mathbf w}^{N_{\text {levels}}}). \end{equation}</div><p><a id='x1-3003r4'></a>
-<!-- l. 61 --></p><p class='indent'>   The idea is to decide, knowing the frequencies represented in each DWT subband
+the bandwidth <span class='mathjax-inline'>\(W({\mathbf w}_1)=22050/2\)</span> Hz, <span class='mathjax-inline'>\(W({\mathbf w}_2)=22050/4\)</span>, etc. It is also true that </p><div class='mathjax-env mathjax-equation'>\begin{equation} W({\mathbf l}^{N_{\text {levels}}}) = W({\mathbf w}^{N_{\text {levels}}}). \end{equation}</div><p><a id='x1-11003r14'></a>
+<!-- l. 253 --></p><p class='indent'>   The idea is to decide, knowing the frequencies represented in each DWT subband
 and the ToH curve (see  <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/docs/2-hours_seminar.ipynb'>InterCom: a Real-Time Digital Audio Full-Duplex
 Transmitter/Receiver</a>), the QSS (Quantization Step Size) that should be applied to
 each subband.
-</p><!-- l. 68 --><p class='indent'>   This idea is already implemented in a module named <span class='obeylines-h'><code class='verb'>dyadic_ToH.py</code></span>.
+</p><!-- l. 260 --><p class='indent'>   This idea is already implemented in a module named <span class='obeylines-h'><code class='verb'>dyadic_ToH.py</code></span>.
    
 </p>
-   <h3 class='sectionHead' id='deliverables'><span class='titlemark'>3   </span> <a id='x1-40003'></a>Deliverables</h3>
-<!-- l. 72 --><p class='noindent'>Subjectively compare the audio quality obtained by <span class='obeylines-h'><code class='verb'>dyadic_ToH.py</code></span> and its
+   <h3 class='sectionHead' id='deliverables1'><span class='titlemark'>11   </span> <a id='x1-1200011'></a>Deliverables</h3>
+<!-- l. 264 --><p class='noindent'>Subjectively compare the audio quality obtained by <span class='obeylines-h'><code class='verb'>dyadic_ToH.py</code></span> and its
 predecessor, <span class='obeylines-h'><code class='verb'>temporal_overlapped_DWT_coding.py</code></span>. “Subjectively” means that, in
 groups, you must determine, for the same bit-rate and audio-content configuration,
 which implementation sounds better.
    
 </p>
-   <h3 class='sectionHead' id='resources'><span class='titlemark'>4   </span> <a id='x1-50004'></a>Resources</h3>
+   <h3 class='sectionHead' id='resources'><span class='titlemark'>12   </span> <a id='x1-1300012'></a>Resources</h3>
    <div class='thebibliography'>
    <p class='bibitem'><span class='biblabel'>
  [1]<span class='bibsp'>   </span></span><a id='Xbosi2003intro'></a>M. Bosi and R.E. Goldberd.  <a href='http://www.pce-fet.com/common/library/books/34/1314_[Marina_Bosi,__Richard_E._Goldberg__(auth.)]_Intro(b-ok.org).pdf'><span class='ecti-1000'>Introduction to Digital Audio Coding and
    Standards</span></a>. Kluwer Academic Publishers, 2003.
+                                                                  
+
+                                                                  
    </p>
    <p class='bibitem'><span class='biblabel'>
  [2]<span class='bibsp'>   </span></span><a id='Xsayood2017introduction'></a>K. Sayood.     <a href='http://rahilshaikh.weebly.com/uploads/1/1/6/3/11635894/data_compression.pdf'><span class='ecti-1000'>Introduction  to  Data  Compression</span></a>   <a href='https://people.cs.nctu.edu.tw/~cmliu/Courses/Compression/'><span class='ecti-1000'>(Slides)</span></a>.   Morgan
    Kaufmann, 2017.
-                                                                  
-
-                                                                  
    </p>
    <p class='bibitem'><span class='biblabel'>
  [3]<span class='bibsp'>   </span></span><a id='Xvetterli1995wavelets'></a>M. Vetterli  and  J. Kovačević.        <a href='http://waveletsandsubbandcoding.org/Repository/VetterliKovacevic95_Manuscript.pdf'><span class='ecti-1000'>Wavelets  and  Subband  Coding</span></a>.
    Prentice-hall, 1995.
 </p>
    </div>
-    
+   <div class='footnotes'><a id='x1-4005x3'></a>
+<!-- l. 92 --><p class='indent'>     <span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='mathjax-inline'>\(N_{\text {DWT}}\) </span><span class='ecrm-0800'>depends also on the chunk-size, a value that should be small enough to minimize the
+latency.</span></p><a id='x1-7010x6'></a>
+<!-- l. 161 --><p class='indent'>     <span class='footnote-mark'><a href='#fn2x0-bk' id='fn2x0'><sup class='textsuperscript'>2</sup></a></span><span class='ecrm-0800'>For example, your speakers could not have a flat frequency response, or your room could
+attenuate some frequencies.</span></p><a id='x1-8002x7'></a>
+<!-- l. 179 --><p class='indent'>     <span class='footnote-mark'><a href='#fn3x0-bk' id='fn3x0'><sup class='textsuperscript'>3</sup></a></span><span class='ecrm-0800'>Remember that when we quantize the coefficients of a subband we are basically generating
+quantization noise that can be modeles as random  </span><a href='https://en.wikipedia.org/wiki/Continuous_uniform_distribution'><span class='ecrm-0800'>uniform (uniformely distributed)</span></a>
+<span class='ecrm-0800'>noise.</span></p><a id='x1-10006x4'></a>
+<!-- l. 223 --><p class='noindent'><span class='footnote-mark'><a href='#fn4x0-bk' id='fn4x0'><sup class='textsuperscript'>4</sup></a></span><span class='ecrm-0800'>It is quite difficult to use exacly the same bit-rate.</span></p><a id='x1-10008x5'></a>
+<!-- l. 225 --><p class='noindent'><span class='footnote-mark'><a href='#fn5x0-bk' id='fn5x0'><sup class='textsuperscript'>5</sup></a></span><span class='ecrm-0800'>Since we are doing a subjective comparison we cannot use a standard R/D curve.</span></p>         </div>
+ 
 </body> 
 </html>
