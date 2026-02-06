@@ -219,6 +219,50 @@ quantizers are equivalent to encode the signal by bit-planes when the
 quantization steps sizes are powers of two, allowing the design of
 progressive entropy encoding schemes, if required.
 
+\subsection{Relationship between the QSS ($\Delta$) and the quantization error}
+
+The quantization error signal is
+\begin{equation}
+  \mathbf{e}=\mathbf{x}-\mathbf{\hat{x}},
+\end{equation}
+where $\mathbf{x}$ is the original signal and $\mathbf{\hat{x}}$ is
+the quantized signal. This discussion only onsiders uniform scalar
+quantization with step size $\Delta$, where the quantization error can
+be modeled as a random variable uniformly distributed over every
+quantization cell, i.e.,
+\begin{equation}
+  \mathbf{e}_i \sim U(\frac{\Delta}{2},\frac{\Delta}{2}). 
+\end{equation}
+
+The Probability Density Function (PDF) of such uniform random variable is
+\begin{equation}
+  p(\mathbf{e})=\left\{ \begin{array}{cl}
+\frac{1}{\Delta} & \text{if} \ |\mathbf{e}| \leq \frac{\Delta}{2} \\
+0 & \text{otherwise,}
+  \end{array} \right.
+\end{equation}
+and its mean is
+\begin{equation}
+  \mathbb{E}[e] = \int_{\frac{-\Delta}{2}}^{\frac{\Delta}{2}}\mathbf{e}p(\mathbf{e})d\mathbf{e} = \frac{1}{\Delta}\int_{\frac{-\Delta}{2}}^{\frac{\Delta}{2}}\mathbf{e}d\mathbf{e}=\mathbf{0},
+\end{equation}
+so the error is zero-mean.
+
+The variance (an ``statistical'' estimation of the power $P$ of a zero-mean signal\footnote{$\sigma^2_{\mathbf{x}}=\mathbb{E}[(\mathbf{x}-\mu_{\mathbf{x}})]^2$ where $\mu_{\mathbf{x}}=\mathbb{E}[\mathbf{x}]$. Therefore, if $\mu_{\mathbf{x}}=0$, then $\sigma^2_{\mathbf{x}}=\mathbb{E}[\mathbf{x}^2]$, that by definition, is the energy $E$ of a signal in a given interval of time ($P=E/t$).}) is
+\begin{equation}
+  \sigma^2 = \mathbb{E}[\mathbf{e}^2] = \int_{\frac{-\Delta}{2}}^{\frac{\Delta}{2}}\mathbf{e}^2p(\mathbf{e})d\mathbf{e}.
+\end{equation}
+Substituting the PDF,
+\begin{equation}
+  \sigma^2 = \frac{1}{\Delta}\int_{\frac{-\Delta}{2}}^{\frac{\Delta}{2}}\mathbf{e}^2d\mathbf{e}.
+\end{equation}
+Doing the integral ($\int x^2dx = x^3/3$)
+\begin{equation}
+  \sigma^2 = \frac{1}{\Delta}\left[\frac{\mathbf{e}^3}{3}\right]_{\frac{-\Delta}{2}}^{\frac{\Delta}{2}} = \frac{1}{\Delta}\left(\frac{(\Delta/2)^3-(-\Delta/2)^3}{3}\right).
+\end{equation}
+Solving ($(\Delta/2)^3-(-\Delta/2)^3) = 2(\Delta/2)^3$),
+\begin{equation}
+  \sigma^2 = \frac{2}{3\Delta}\left(\frac{\Delta}{2}\right)^3 = \frac{2}{3\Delta} \frac{\Delta^3}{8} = \frac{\Delta^2}{12}.
+\end{equation}
 %}}}
 
 \subsection{(Bit-)Rate control and distortion}

@@ -19,7 +19,7 @@
 
 <h2 class='titleHead'>Bit-Rate Control</h2>
  <div class='author'> <a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp;  </span><a href='https://hpca.ual.es/~savins/'><span class='ecrm-1200'>Savins Puertas Martín</span></a> <span class='ecrm-1200'>&amp;  </span><a href='https://www.ual.es/persona/555355505557525189'><span class='ecrm-1200'>Juan José Moreno Riado</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>November 26, 2025</span></div>
+<div class='date'><span class='ecrm-1200'>February 5, 2026</span></div>
    </div>
    
    <h3 class='likesectionHead' id='contents'><a id='x1-1000'></a>Contents</h3>
@@ -28,10 +28,11 @@
 <br />   <span class='subsectionToc'>1.1 <a href='#impact-of-the-network-throughput' id='QQ2-1-3'>Impact of the network throughput</a></span>
 <br />   <span class='subsectionToc'>1.2 <a href='#compressing-the-audio-data-with-httpszlibnetzlib' id='QQ2-1-4'>Compressing the audio data with  zlib</a></span>
 <br />   <span class='subsectionToc'>1.3 <a href='#quantization' id='QQ2-1-6'>Quantization</a></span>
-<br />   <span class='subsectionToc'>1.4 <a href='#bitrate-control-and-distortion' id='QQ2-1-7'>(Bit-)Rate control and distortion</a></span>
-<br />   <span class='subsectionToc'>1.5 <a href='#the-current-implementations-for-the-control-of-the-bitrate' id='QQ2-1-8'>The current implementation(s) for the control of the bit-rate</a></span>
-<br />   <span class='sectionToc'>2 <a href='#deliverables' id='QQ2-1-9'>Deliverables</a></span>
-<br />   <span class='sectionToc'>3 <a href='#resources' id='QQ2-1-10'>Resources</a></span>
+<br />   <span class='subsectionToc'>1.4 <a href='#relationship-between-the-qss-and-the-quantization-error' id='QQ2-1-7'>Relationship between the QSS (<span class='mathjax-inline'>\(\Delta \)</span>) and the quantization error</a></span>
+<br />   <span class='subsectionToc'>1.5 <a href='#bitrate-control-and-distortion' id='QQ2-1-8'>(Bit-)Rate control and distortion</a></span>
+<br />   <span class='subsectionToc'>1.6 <a href='#the-current-implementations-for-the-control-of-the-bitrate' id='QQ2-1-9'>The current implementation(s) for the control of the bit-rate</a></span>
+<br />   <span class='sectionToc'>2 <a href='#deliverables' id='QQ2-1-10'>Deliverables</a></span>
+<br />   <span class='sectionToc'>3 <a href='#resources' id='QQ2-1-11'>Resources</a></span>
    </div>
    
    <h3 class='sectionHead' id='description'><span class='titlemark'>1   </span> <a id='x1-20001'></a>Description</h3>
@@ -43,10 +44,10 @@ throughput</a><span class='footnote-mark'><a href='#fn1x0' id='fn1x0-bk'><sup cl
 (or bit-rate) that it can provide <span class='cite'>[<a href='#XForouzan'>2</a>, <a href='#XTanenbaum'>6</a>]</span>. This bit-rate depends on the maximum
 <a href='https://en.wikipedia.org/wiki/Channel_capacity'>capacity</a> (a characteristic closely related with the available  <a href='https://en.wikipedia.org/wiki/Bandwidth_(signal_processing)'>bandwidth</a>) and the
 <a href='https://en.wikipedia.org/wiki/Network_congestion'>congestion level</a> (that basically depends on the load) of the link. In general, we can
-suppose that the capacity is constant over time (the bandwidth provided by the link
                                                                   
 
                                                                   
+suppose that the capacity is constant over time (the bandwidth provided by the link
 does not vary). On the contrary, the throughput is time-varying and quite
 unpredictable, because it depends on the congestion level that, in turn, depends on
 the behavior of the network users.
@@ -170,101 +171,115 @@ powers of two, allowing the design of progressive entropy encoding schemes, if
 required.
    
 </p>
-   <h4 class='subsectionHead' id='bitrate-control-and-distortion'><span class='titlemark'>1.4   </span> <a id='x1-60001.4'></a>(Bit-)Rate control and distortion</h4>
-<!-- l. 226 --><p class='noindent'>The number of representation levels used by a quantizer depends on the quantization
+   <h4 class='subsectionHead' id='relationship-between-the-qss-and-the-quantization-error'><span class='titlemark'>1.4   </span> <a id='x1-60001.4'></a>Relationship between the QSS (<span class='mathjax-inline'>\(\Delta \)</span>) and the quantization error</h4>
+<!-- l. 224 --><p class='noindent'>The quantization error signal is </p><div class='mathjax-env mathjax-equation'>\begin{equation} \mathbf {e}=\mathbf {x}-\mathbf {\hat {x}}, \end{equation}</div><p><a id='x1-6001r1'></a> where <span class='mathjax-inline'>\(\mathbf {x}\)</span> is the original signal and <span class='mathjax-inline'>\(\mathbf {\hat {x}}\)</span> is the quantized
+signal. This discussion only onsiders uniform scalar quantization with step size <span class='mathjax-inline'>\(\Delta \)</span>,
+where the quantization error can be modeled as a random variable uniformly
+distributed over every quantization cell, i.e., </p><div class='mathjax-env mathjax-equation'>\begin{equation} \mathbf {e}_i \sim U(\frac {\Delta }{2},\frac {\Delta }{2}). \end{equation}</div><p><a id='x1-6002r2'></a>
+<!-- l. 237 --></p><p class='indent'>   The Probability Density Function (PDF) of such uniform random variable is </p><div class='mathjax-env mathjax-equation'>\begin{equation} p(\mathbf {e})=\left \{ \begin {array}{cl} \frac {1}{\Delta } &amp; \text {if} \ |\mathbf {e}| \leq \frac {\Delta }{2} \\ 0 &amp; \text {otherwise,} \end {array} \right . \end{equation}</div><p><a id='x1-6003r3'></a> and
+its mean is </p><div class='mathjax-env mathjax-equation'>\begin{equation} \mathbb {E}[e] = \int _{\frac {-\Delta }{2}}^{\frac {\Delta }{2}}\mathbf {e}p(\mathbf {e})d\mathbf {e} = \frac {1}{\Delta }\int _{\frac {-\Delta }{2}}^{\frac {\Delta }{2}}\mathbf {e}d\mathbf {e}=\mathbf {0}, \end{equation}</div><p><a id='x1-6004r4'></a> so the error is zero-mean.
+<!-- l. 250 --></p><p class='indent'>   The variance (an “statistical” estimation of the power <span class='mathjax-inline'>\(P\)</span> of a zero-mean
+signal<span class='footnote-mark'><a href='#fn8x0' id='fn8x0-bk'><sup class='textsuperscript'>8</sup></a></span><a id='x1-6005f8'></a> is </p><div class='mathjax-env mathjax-equation'>\begin{equation} \sigma ^2 = \mathbb {E}[\mathbf {e}^2] = \int _{\frac {-\Delta }{2}}^{\frac {\Delta }{2}}\mathbf {e}^2p(\mathbf {e})d\mathbf {e}. \end{equation}</div><p><a id='x1-6007r5'></a>
+Substituting the PDF, </p><div class='mathjax-env mathjax-equation'>\begin{equation} \sigma ^2 = \frac {1}{\Delta }\int _{\frac {-\Delta }{2}}^{\frac {\Delta }{2}}\mathbf {e}^2d\mathbf {e}. \end{equation}</div><p><a id='x1-6008r6'></a> Doing the integral (<span class='mathjax-inline'>\(\int x^2dx = x^3/3\)</span>) </p><div class='mathjax-env mathjax-equation'>\begin{equation} \sigma ^2 = \frac {1}{\Delta }\left [\frac {\mathbf {e}^3}{3}\right ]_{\frac {-\Delta }{2}}^{\frac {\Delta }{2}} = \frac {1}{\Delta }\left (\frac {(\Delta /2)^3-(-\Delta /2)^3}{3}\right ). \end{equation}</div><p><a id='x1-6009r7'></a> Solving (<span class='mathjax-inline'>\((\Delta /2)^3-(-\Delta /2)^3) = 2(\Delta /2)^3\)</span>), </p><div class='mathjax-env mathjax-equation'>\begin{equation} \sigma ^2 = \frac {2}{3\Delta }\left (\frac {\Delta }{2}\right )^3 = \frac {2}{3\Delta } \frac {\Delta ^3}{8} = \frac {\Delta ^2}{12}. \end{equation}</div><p><a id='x1-6010r8'></a>
+   
+   </p><h4 class='subsectionHead' id='bitrate-control-and-distortion'><span class='titlemark'>1.5   </span> <a id='x1-70001.5'></a>(Bit-)Rate control and distortion</h4>
+<!-- l. 270 --><p class='noindent'>The number of representation levels used by a quantizer depends on the quantization
 step (size), typically denoted by <span class='mathjax-inline'>\(\Delta \)</span>. The higher the <span class='mathjax-inline'>\(\Delta \)</span>, the smaller the number of
 representation levels, and therefore the higher the distortion generated by the
 quantization error, and the smaller the output bit-rate! This generates a
 <a href='https://en.wikipedia.org/wiki/Rate%E2%80%93distortion_theory'>rate/distortion</a> trade-off that is descriptive of all lossy compressors (more bits, less
 distortion, and viceversa).
-</p><!-- l. 235 --><p class='indent'>   In order to minimize the lost of data, the rate can be controlled in real-time
+</p><!-- l. 279 --><p class='indent'>   In order to minimize the lost of data, the rate can be controlled in real-time
 transmission systems by modifiying <span class='mathjax-inline'>\(\Delta \)</span> when  <a href='https://en.wikipedia.org/wiki/Network_congestion'>congestion</a> occurs. However, notice that
 depending of the  <a href='https://en.wikipedia.org/wiki/Entropy_(information_theory)'>entropy</a> coding stage and the characteristics of the signal (
 <a href='https://en.wikipedia.org/wiki/Variance'>variance</a>, entropy, etc.) may not exist a clear relationship between <span class='mathjax-inline'>\(\Delta \)</span> and the output
 bit-rate. This happens using DEFLATE.
-</p><!-- l. 245 --><p class='indent'>   Notice also that any rate control algorithm based on quantization has a characteristic
+</p><!-- l. 289 --><p class='indent'>   Notice also that any rate control algorithm based on quantization has a characteristic
 RD (Rate/Distortion) curve, in which the X axis represents the (in the case of
 InterCom, received) (bit-)rate, and the Y axis the distortion in the reconstruction
 (in the case of InterCom, the played audio sequence) obtained after the
-“de-quantization”<span class='footnote-mark'><a href='#fn8x0' id='fn8x0-bk'><sup class='textsuperscript'>8</sup></a></span><a id='x1-6001f8'></a>.
+“de-quantization”<span class='footnote-mark'><a href='#fn9x0' id='fn9x0-bk'><sup class='textsuperscript'>9</sup></a></span><a id='x1-7001f9'></a>.
 Some examples can be found in  <a href='https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/contents/BR_control/audio_quantization.ipynb'>this notebook</a>.
    
 </p>
-   <h4 class='subsectionHead' id='the-current-implementations-for-the-control-of-the-bitrate'><span class='titlemark'>1.5   </span> <a id='x1-70001.5'></a>The current implementation(s) for the control of the bit-rate</h4>
-<!-- l. 261 --><p class='noindent'>Bit-Rate (BR) control through quantization has been implemented in the class
+   <h4 class='subsectionHead' id='the-current-implementations-for-the-control-of-the-bitrate'><span class='titlemark'>1.6   </span> <a id='x1-80001.6'></a>The current implementation(s) for the control of the bit-rate</h4>
+<!-- l. 305 --><p class='noindent'>Bit-Rate (BR) control through quantization has been implemented in the class
 <span class='obeylines-h'><code class='verb'>BR_Control*</code></span> of the modules <span class='ectt-1000'>BR_control*.py</span>. This class overrides the inherited
 methods <span class='obeylines-h'><code class='verb'>pack()</code></span> and <span class='obeylines-h'><code class='verb'>unpack()</code></span>, performing now (remember that the chunks are
 already “DEFLATE-encoded and -decoded”):
-</p>
-   <!-- l. 267 -->
-   <pre class='lstlisting' id='listing-1'><span class='label'><a id='x1-7001r1'></a></span><span class='ectt-1000'>  </span><span style='color:#000000'><span class='ectt-1000'>def</span></span><span style='color:#000000'> <span class='ectt-1000'>pack(chunk_number, chunk):</span> 
-</span><span class='label'><a id='x1-7002r2'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>quantized_chunk</span></span><span style='color:#000000'> <span class='ectt-1000'>= quantize(chunk)</span> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(1)</span> 
-</span><span class='label'><a id='x1-7003r3'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>packed_chunk</span></span><span style='color:#000000'> <span class='ectt-1000'>= Buffering.pack(chunk_number, quantized_chunk)</span> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(2)</span> 
-</span><span class='label'><a id='x1-7004r4'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>return</span></span><span style='color:#000000'> <span class='ectt-1000'>packed_chunk</span> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(3)</span></span></pre>
-   
-   <!-- l. 274 -->
-   <pre class='lstlisting' id='listing-2'><span class='label'><a id='x1-7005r1'></a></span><span class='ectt-1000'>  </span><span style='color:#000000'><span class='ectt-1000'>def</span></span><span style='color:#000000'> <span class='ectt-1000'>unpack(packed_chunk):</span> 
-</span><span class='label'><a id='x1-7006r2'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>(</span></span><span style='color:#000000'><span class='ectt-1000'>chunk_number</span></span><span style='color:#000000'><span class='ectt-1000'>,</span></span><span style='color:#000000'> <span class='ectt-1000'>quantized_chunk) = Buffering.unpack(packed_chunk)</span> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(1)</span> 
-</span><span class='label'><a id='x1-7007r3'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>chunk</span></span><span style='color:#000000'> <span class='ectt-1000'>= dequantize(quantized_chunk)</span> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(2)</span> 
-</span><span class='label'><a id='x1-7008r4'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>return</span></span><span style='color:#000000'> <span class='ectt-1000'>(chunk_number, chunk)</span> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(3)</span></span></pre>
-   
-<!-- l. 281 --><p class='indent'>   Notice that, regarding the bit-rate control, you will find four implementations
-related to this milestone:
-     </p><ol class='enumerate1'>
                                                                   
 
                                                                   
-<li class='enumerate' id='x1-7010x1'><span class='obeylines-h'><code class='verb'>BR_control_no.py</code></span>: Uses a constant <span class='mathjax-inline'>\(\Delta &gt;0\)</span>.<span class='footnote-mark'><a href='#fn9x0' id='fn9x0-bk'><sup class='textsuperscript'>9</sup></a></span><a id='x1-7011f9'></a>
+</p>
+   <!-- l. 311 -->
+   <pre class='lstlisting' id='listing-1'><span class='label'><a id='x1-8001r1'></a></span><span class='ectt-1000'>  </span><span style='color:#000000'><span class='ectt-1000'>def</span></span><span style='color:#000000'> <span class='ectt-1000'>pack(chunk_number, chunk):</span> 
+</span><span class='label'><a id='x1-8002r2'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>quantized_chunk</span></span><span style='color:#000000'> <span class='ectt-1000'>= quantize(chunk)</span> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(1)</span> 
+</span><span class='label'><a id='x1-8003r3'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>packed_chunk</span></span><span style='color:#000000'> <span class='ectt-1000'>= Buffering.pack(chunk_number, quantized_chunk)</span> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(2)</span> 
+</span><span class='label'><a id='x1-8004r4'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>return</span></span><span style='color:#000000'> <span class='ectt-1000'>packed_chunk</span> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(3)</span></span></pre>
+   
+   <!-- l. 318 -->
+   <pre class='lstlisting' id='listing-2'><span class='label'><a id='x1-8005r1'></a></span><span class='ectt-1000'>  </span><span style='color:#000000'><span class='ectt-1000'>def</span></span><span style='color:#000000'> <span class='ectt-1000'>unpack(packed_chunk):</span> 
+</span><span class='label'><a id='x1-8006r2'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>(</span></span><span style='color:#000000'><span class='ectt-1000'>chunk_number</span></span><span style='color:#000000'><span class='ectt-1000'>,</span></span><span style='color:#000000'> <span class='ectt-1000'>quantized_chunk) = Buffering.unpack(packed_chunk)</span> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(1)</span> 
+</span><span class='label'><a id='x1-8007r3'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>chunk</span></span><span style='color:#000000'> <span class='ectt-1000'>= dequantize(quantized_chunk)</span> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(2)</span> 
+</span><span class='label'><a id='x1-8008r4'></a></span><span class='ectt-1000'>   </span><span style='color:#000000'><span class='ectt-1000'>return</span></span><span style='color:#000000'> <span class='ectt-1000'>(chunk_number, chunk)</span> </span><span class='ecit-1000'> </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>(3)</span></span></pre>
+   
+<!-- l. 325 --><p class='indent'>   Notice that, regarding the bit-rate control, you will find four implementations
+related to this milestone:
+     </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-8010x1'><span class='obeylines-h'><code class='verb'>BR_control_no.py</code></span>: Uses a constant <span class='mathjax-inline'>\(\Delta &gt;0\)</span>.<span class='footnote-mark'><a href='#fn10x0' id='fn10x0-bk'><sup class='textsuperscript'>10</sup></a></span><a id='x1-8011f10'></a>
      There is not BR control.
      </li>
-<li class='enumerate' id='x1-7014x2'>
-     <!-- l. 288 --><p class='noindent'><span class='obeylines-h'><code class='verb'>BR_control_add_lost.py</code></span>: Every second runs: </p><div class='mathjax-env mathjax-equation'>\begin{equation} \left \{ \begin {array}{ll} \Delta = \Delta + L - 1 &amp; \quad \text {always}, \\ \Delta = \Delta _{\text {min}} &amp; \quad \text {if}~\Delta &lt; \Delta _{\text {min}}. \end {array} \right . \end{equation}</div><a id='x1-7015r1'></a> where <span class='mathjax-inline'>\(L\)</span> is the number of lost
+<li class='enumerate' id='x1-8014x2'>
+     <!-- l. 332 --><p class='noindent'><span class='obeylines-h'><code class='verb'>BR_control_add_lost.py</code></span>: Every second runs: </p><div class='mathjax-env mathjax-equation'>\begin{equation} \left \{ \begin {array}{ll} \Delta = \Delta + L - 1 &amp; \quad \text {always}, \\ \Delta = \Delta _{\text {min}} &amp; \quad \text {if}~\Delta &lt; \Delta _{\text {min}}. \end {array} \right . \end{equation}</div><a id='x1-8015r9'></a> where <span class='mathjax-inline'>\(L\)</span> is the number of lost
      (received) chunks in the previous second. Notice that this heuristic (and the
      following ones) supposes that our interlocutor is losing (on average) the same
      number of chunks that we are losing.
      </li>
-<li class='enumerate' id='x1-7017x3'>
-     <!-- l. 304 --><p class='noindent'><span class='obeylines-h'><code class='verb'>BR_control_lost.py</code></span>: Every second runs: </p><div class='mathjax-env mathjax-equation'>\begin{equation} \left \{ \begin {array}{ll} \Delta = L - 1 &amp; \quad \text {always}, \\ \Delta = \Delta _{\text {min}} &amp; \quad \text {if}~\Delta &lt; \Delta _{\text {min}}. \end {array} \right . \end{equation}</div><a id='x1-7018r2'></a>
+<li class='enumerate' id='x1-8017x3'>
+     <!-- l. 348 --><p class='noindent'><span class='obeylines-h'><code class='verb'>BR_control_lost.py</code></span>: Every second runs: </p><div class='mathjax-env mathjax-equation'>\begin{equation} \left \{ \begin {array}{ll} \Delta = L - 1 &amp; \quad \text {always}, \\ \Delta = \Delta _{\text {min}} &amp; \quad \text {if}~\Delta &lt; \Delta _{\text {min}}. \end {array} \right . \end{equation}</div><a id='x1-8018r10'></a>
      </li>
-<li class='enumerate' id='x1-7020x4'>
-     <!-- l. 316 --><p class='noindent'><span class='obeylines-h'><code class='verb'>BR_control_conservative.py</code></span>: Every second runs: </p><div class='mathjax-env mathjax-equation'>\begin{equation} \left \{ \begin {array}{ll} \Delta = 2\Delta &amp; \quad \text {if}~L&gt;2, \\ \Delta = \frac {10}{11}\Delta &amp; \quad \text {always}, \\ \Delta = \Delta _{\text {min}} &amp; \quad \text {if}~\Delta &lt; \Delta _{\text {min}}. \end {array} \right . \end{equation}</div><a id='x1-7021r3'></a></li></ol>
+<li class='enumerate' id='x1-8020x4'>
+     <!-- l. 360 --><p class='noindent'><span class='obeylines-h'><code class='verb'>BR_control_conservative.py</code></span>: Every second runs: </p><div class='mathjax-env mathjax-equation'>\begin{equation} \left \{ \begin {array}{ll} \Delta = 2\Delta &amp; \quad \text {if}~L&gt;2, \\ \Delta = \frac {10}{11}\Delta &amp; \quad \text {always}, \\ \Delta = \Delta _{\text {min}} &amp; \quad \text {if}~\Delta &lt; \Delta _{\text {min}}. \end {array} \right . \end{equation}</div><a id='x1-8021r11'></a></li></ol>
    
-   <h3 class='sectionHead' id='deliverables'><span class='titlemark'>2   </span> <a id='x1-80002'></a>Deliverables</h3>
-<!-- l. 333 --><p class='noindent'>Remember to report both, the experiments and the results. Notebooks are
+   <h3 class='sectionHead' id='deliverables'><span class='titlemark'>2   </span> <a id='x1-90002'></a>Deliverables</h3>
+<!-- l. 377 --><p class='noindent'>Remember to report both, the experiments and the results. Notebooks are
 appreciated.
      </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-8002x1'>
-     <!-- l. 335 --><p class='noindent'><span class='ecbx-1000'>Which data-ordering performs better?</span>:
-     </p><!-- l. 338 --><p class='noindent'>Determine empirically which ordering of the chunk data is the most efficient
-     from a lossless data compression point of view (the smaller the bit-rates,
-     the higher the compression). Use the audio sequence you want.<span class='footnote-mark'><a href='#fn10x0' id='fn10x0-bk'><sup class='textsuperscript'>10</sup></a></span><a id='x1-8003f10'></a>
-     Notice that using different audio files you could obtain different results.
-     </p></li>
-<li class='enumerate' id='x1-8006x2'>
-     <!-- l. 349 --><p class='noindent'><span class='ecbx-1000'>Which    BR    control    algorithm    shows    the    best    RD
-     (Rate/Distortion) curve?</span>:
+<li class='enumerate' id='x1-9002x1'>
                                                                   
 
                                                                   
-     </p><!-- l. 352 --><p class='noindent'>Considering the <a href='https://en.wikipedia.org/wiki/Root-mean-square_deviation'>RMSE (Root Mean Square Error)</a> as a distortion measure
+     <!-- l. 379 --><p class='noindent'><span class='ecbx-1000'>Which data-ordering performs better?</span>:
+     </p><!-- l. 382 --><p class='noindent'>Determine empirically which ordering of the chunk data is the most efficient
+     from a lossless data compression point of view (the smaller the bit-rates,
+     the higher the compression). Use the audio sequence you want.<span class='footnote-mark'><a href='#fn11x0' id='fn11x0-bk'><sup class='textsuperscript'>11</sup></a></span><a id='x1-9003f11'></a>
+     Notice that using different audio files you could obtain different results.
+     </p></li>
+<li class='enumerate' id='x1-9006x2'>
+     <!-- l. 393 --><p class='noindent'><span class='ecbx-1000'>Which    BR    control    algorithm    shows    the    best    RD
+     (Rate/Distortion) curve?</span>:
+     </p><!-- l. 396 --><p class='noindent'>Considering the <a href='https://en.wikipedia.org/wiki/Root-mean-square_deviation'>RMSE (Root Mean Square Error)</a> as a distortion measure
      between  the  sent  and  the  received  audio  signal,  for  a  concrete  audio
      sequence, generate the RD curve considering a set of different simulated
      transmission environments (use  <a href='https://vicente-gonzalez-ruiz.github.io/about_tc/'>tc</a> or a any other similar tool). Remember
      that the X-axis must express bit-rate and the Y-axis, distortion.
      </p></li>
-<li class='enumerate' id='x1-8008x3'>
-     <!-- l. 362 --><p class='noindent'><span class='ecbx-1000'>Autoevaluation</span>:
-     </p><!-- l. 364 --><p class='noindent'>With a ratio out of 10, consider:
-     </p><!-- l. 366 --><p class='noindent'>
+<li class='enumerate' id='x1-9008x3'>
+     <!-- l. 406 --><p class='noindent'><span class='ecbx-1000'>Autoevaluation</span>:
+     </p><!-- l. 408 --><p class='noindent'>With a ratio out of 10, consider:
+     </p><!-- l. 410 --><p class='noindent'>
          </p><ol class='enumerate2'>
-<li class='enumerate' id='x1-8010x1'>Have you answered correctly all the previous questions? Say why do
+<li class='enumerate' id='x1-9010x1'>Have you answered correctly all the previous questions? Say why do
          you think that.
          </li>
-<li class='enumerate' id='x1-8012x2'>Using only the documentation you have provided to be evaluated, it
+<li class='enumerate' id='x1-9012x2'>Using only the documentation you have provided to be evaluated, it
          is possible to replicate automatically the results?</li></ol>
      </li></ol>
    
-   <h3 class='sectionHead' id='resources'><span class='titlemark'>3   </span> <a id='x1-90003'></a>Resources</h3>
+   <h3 class='sectionHead' id='resources'><span class='titlemark'>3   </span> <a id='x1-100003'></a>Resources</h3>
+                                                                  
+
+                                                                  
    <div class='thebibliography'>
    <p class='bibitem'><span class='biblabel'>
  [1]<span class='bibsp'>   </span></span><a id='Xbosi2003intro'></a>M. Bosi and R.E. Goldberd.  <a href='http://www.pce-fet.com/common/library/books/34/1314_[Marina_Bosi,__Richard_E._Goldberg__(auth.)]_Intro(b-ok.org).pdf'><span class='ecti-1000'>Introduction to Digital Audio Coding and
@@ -274,9 +289,6 @@ appreciated.
  [2]<span class='bibsp'>   </span></span><a id='XForouzan'></a>Behrouz  Forouzan.       <a href='https://github.com/aboelkassem/References_Books/blob/master/Data%20Communications%20and%20Networking%20By%20Behrouz%20A.Forouzan.pdf'><span class='ecti-1000'>Introduction  to  Data  Communications  and
    Networking</span></a>. McGraw-Hill, 2007.
    </p>
-                                                                  
-
-                                                                  
    <p class='bibitem'><span class='biblabel'>
  [3]<span class='bibsp'>   </span></span><a id='Xbert2012lartc'></a>Bert Hubert, Thomas Graf, Greg Maxwell, Remco van Mook, Martijn
    van  Oosterhout,  Paul B.  Schroeder,  Jasper  Spaans,  and  Pedro  Larroy.
@@ -321,13 +333,15 @@ obtain the points of the RD curve.</span></p><a id='x1-4013x4'></a>
 <!-- l. 186 --><p class='indent'>     <span class='footnote-mark'><a href='#fn6x0-bk' id='fn6x0'><sup class='textsuperscript'>6</sup></a></span><span class='ecrm-0800'>The decision intervals and the representation levels in each interval can be also optimized
 using other criteria, such as, minimizing the rate/distortion at a given point of the RD
 curve.</span></p><a id='x1-5004x1.3'></a>
-<!-- l. 212 --><p class='indent'>     <span class='footnote-mark'><a href='#fn7x0-bk' id='fn7x0'><sup class='textsuperscript'>7</sup></a></span><span class='ecrm-0800'>The error generated by the quantization stage.</span></p><a id='x1-6002x1.4'></a>
-<!-- l. 254 --><p class='indent'>     <span class='footnote-mark'><a href='#fn8x0-bk' id='fn8x0'><sup class='textsuperscript'>8</sup></a></span><span class='ecrm-0800'>From a signal processing point of view, the term “de-quantization” refers to restore the
+<!-- l. 212 --><p class='indent'>     <span class='footnote-mark'><a href='#fn7x0-bk' id='fn7x0'><sup class='textsuperscript'>7</sup></a></span><span class='ecrm-0800'>The error generated by the quantization stage.</span></p><a id='x1-6006x1.4'></a>
+<!-- l. 250 --><p class='indent'>     <span class='footnote-mark'><a href='#fn8x0-bk' id='fn8x0'><sup class='textsuperscript'>8</sup></a></span><span class='mathjax-inline'>\(\sigma ^2_{\mathbf {x}}=\mathbb {E}[(\mathbf {x}-\mu _{\mathbf {x}})]^2\) </span><span class='ecrm-0800'>where </span><span class='mathjax-inline'>\(\mu _{\mathbf {x}}=\mathbb {E}[\mathbf {x}]\)</span><span class='ecrm-0800'>. Therefore, if </span><span class='mathjax-inline'>\(\mu _{\mathbf {x}}=0\)</span><span class='ecrm-0800'>, then </span><span class='mathjax-inline'>\(\sigma ^2_{\mathbf {x}}=\mathbb {E}[\mathbf {x}^2]\)</span><span class='ecrm-0800'>, that by definition, is the energy </span><span class='mathjax-inline'>\(E\) </span><span class='ecrm-0800'>of a signal in a given interval
+of time (</span><span class='mathjax-inline'>\(P=E/t\)</span><span class='ecrm-0800'>).</span></p><a id='x1-7002x1.5'></a>
+<!-- l. 298 --><p class='indent'>     <span class='footnote-mark'><a href='#fn9x0-bk' id='fn9x0'><sup class='textsuperscript'>9</sup></a></span><span class='ecrm-0800'>From a signal processing point of view, the term “de-quantization” refers to restore the
 original dynamic range of the signal, but notice that this does not imply that the original signal will
-be restored. This only happens when </span><span class='mathjax-inline'>\(\Delta =1\)</span><span class='ecrm-0800'>.</span></p><a id='x1-7012x9'></a>
-<!-- l. 286 --><p class='noindent'><span class='footnote-mark'><a href='#fn9x0-bk' id='fn9x0'><sup class='textsuperscript'>9</sup></a></span><span class='mathjax-inline'>\(\Delta \) </span><span class='ecrm-0800'>must be always bigger than </span><span class='mathjax-inline'>\(0\)</span><span class='ecrm-0800'>, by definition, and this does not depend on the bit-rate
-control.</span></p><a id='x1-8004x10'></a>
-<!-- l. 342 --><p class='noindent'><span class='footnote-mark'><a href='#fn10x0-bk' id='fn10x0'><sup class='textsuperscript'>10</sup></a></span><span class='ecrm-0800'>Some samples are stored in the </span><span class='ectt-0800'>data </span><span class='ecrm-0800'>directory of InterCom.</span></p>                                      </div>
+be restored. This only happens when </span><span class='mathjax-inline'>\(\Delta =1\)</span><span class='ecrm-0800'>.</span></p><a id='x1-8012x10'></a>
+<!-- l. 330 --><p class='noindent'><span class='footnote-mark'><a href='#fn10x0-bk' id='fn10x0'><sup class='textsuperscript'>10</sup></a></span><span class='mathjax-inline'>\(\Delta \) </span><span class='ecrm-0800'>must be always bigger than </span><span class='mathjax-inline'>\(0\)</span><span class='ecrm-0800'>, by definition, and this does not depend on the bit-rate
+control.</span></p><a id='x1-9004x11'></a>
+<!-- l. 386 --><p class='noindent'><span class='footnote-mark'><a href='#fn11x0-bk' id='fn11x0'><sup class='textsuperscript'>11</sup></a></span><span class='ecrm-0800'>Some samples are stored in the </span><span class='ectt-0800'>data </span><span class='ecrm-0800'>directory of InterCom.</span></p>                                      </div>
  
 </body> 
 </html>
