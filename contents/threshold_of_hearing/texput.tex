@@ -192,7 +192,7 @@ Uniform quantization introduces quantization noise, whose power (for a step size
 \end{equation}
 To be inaudible, quantization noise in each subband should be below the ToH for that subband. Obviously, if the compression ratio requirement cannot meet this, the noise should be equally distributed among all the subbands.
 
-The variance of a signal (in this case, of a linear transformation of a signal) can be a good estimator of the signal power, $P(\mathbf{s})=\sigma_{\mathbf{s}}^2$, i.e., for the subband $k$, we have that
+The variance of a signal (or a linear transformation of a signal) can be a good estimator of the signal power, $P(\mathbf{s})=\sigma_{\mathbf{s}}^2$, i.e., for the subband $k$, we have that
 \begin{equation}
   P_k = \frac{\Delta_k^2}{12},
 \end{equation}

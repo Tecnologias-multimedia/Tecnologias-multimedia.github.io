@@ -19,7 +19,7 @@
 
 <h2 class='titleHead'>Perceptual Quantization</h2>
  <div class='author'> <a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp;  </span><a href='https://hpca.ual.es/~savins/'><span class='ecrm-1200'>Savins Puertas Martín</span></a> <span class='ecrm-1200'>&amp;  </span><a href='https://www.ual.es/persona/555355505557525189'><span class='ecrm-1200'>Juan José Moreno Riado</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>February 6, 2026</span></div>
+<div class='date'><span class='ecrm-1200'>February 15, 2026</span></div>
    </div>
    <h3 class='likesectionHead' id='contents'><a id='x1-1000'></a>Contents</h3>
    <div class='tableofcontents'>
@@ -194,10 +194,9 @@ to:
      <span class='mathjax-inline'>\(k\)</span>.
      </li>
 <li class='enumerate' id='x1-9010x3'>Apply the Eq. \eqref{eq:find_delta} for each subband.</li></ol>
-<!-- l. 215 --><p class='indent'>   Therefore, the QSS for the <span class='mathjax-inline'>\(k\)</span>-th subband depens on the w
-</p>
+   
    <h3 class='sectionHead' id='deliverables'><span class='titlemark'>9   </span> <a id='x1-100009'></a>Deliverables</h3>
-<!-- l. 218 --><p class='noindent'>
+<!-- l. 216 --><p class='noindent'>
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-10002x1'>Find your own ToH curve using <span class='ectt-1000'>create_ToH_curve.py</span>. In this case we
      are going to transmit the sound file through <span class='ectt-1000'>localhost</span>, and therefore, we
@@ -212,20 +211,20 @@ to:
      and its predecessor, <span class='ectt-1000'>temporal_DWT.py</span>.</li></ol>
    
    <h3 class='sectionHead' id='dyadic-dwt-subbands-and-quantization-steps'><span class='titlemark'>10   </span> <a id='x1-1100010'></a>Dyadic DWT subbands and quantization steps</h3>
-<!-- l. 233 --><p class='noindent'>The number of dyadic DWT subbands </p><div class='mathjax-env mathjax-equation'>\begin{equation} N_{\text {sb}} = N_{\text {levels}} + 1, \end{equation}</div><p><a id='x1-11001r12'></a> where <span class='mathjax-inline'>\(N_{\text {levels}}\)</span> is the number of levels of the dyadic
+<!-- l. 231 --><p class='noindent'>The number of dyadic DWT subbands </p><div class='mathjax-env mathjax-equation'>\begin{equation} N_{\text {sb}} = N_{\text {levels}} + 1, \end{equation}</div><p><a id='x1-11001r12'></a> where <span class='mathjax-inline'>\(N_{\text {levels}}\)</span> is the number of levels of the dyadic
 DWT <span class='cite'>[<a href='#Xvetterli1995wavelets'>3</a>]</span>. Except for the <span class='mathjax-inline'>\({\mathbf l}^{N_{\text {levels}}}\)</span> subband (the lowest-pass frequency of the decomposition),
 it holds that </p><div class='mathjax-env mathjax-equation'>\begin{equation} W({\mathbf w}_s) = \frac {1}{2}W({\mathbf w}_{s-1}), \end{equation}</div><p><a id='x1-11002r13'></a> being <span class='mathjax-inline'>\(W(\cdot )\)</span> the bandwidth of the corresponding subband. Therefore,
 considering that (by default, in InterCom) the bandwidth of the audio signal is <span class='mathjax-inline'>\(22050\)</span> Hz,
 the bandwidth <span class='mathjax-inline'>\(W({\mathbf w}_1)=22050/2\)</span> Hz, <span class='mathjax-inline'>\(W({\mathbf w}_2)=22050/4\)</span>, etc. It is also true that </p><div class='mathjax-env mathjax-equation'>\begin{equation} W({\mathbf l}^{N_{\text {levels}}}) = W({\mathbf w}^{N_{\text {levels}}}). \end{equation}</div><p><a id='x1-11003r14'></a>
-<!-- l. 253 --></p><p class='indent'>   The idea is to decide, knowing the frequencies represented in each DWT subband
+<!-- l. 251 --></p><p class='indent'>   The idea is to decide, knowing the frequencies represented in each DWT subband
 and the ToH curve (see  <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/docs/2-hours_seminar.ipynb'>InterCom: a Real-Time Digital Audio Full-Duplex
 Transmitter/Receiver</a>), the QSS (Quantization Step Size) that should be applied to
 each subband.
-</p><!-- l. 260 --><p class='indent'>   This idea is already implemented in a module named <span class='obeylines-h'><code class='verb'>dyadic_ToH.py</code></span>.
+</p><!-- l. 258 --><p class='indent'>   This idea is already implemented in a module named <span class='obeylines-h'><code class='verb'>dyadic_ToH.py</code></span>.
    
 </p>
    <h3 class='sectionHead' id='deliverables1'><span class='titlemark'>11   </span> <a id='x1-1200011'></a>Deliverables</h3>
-<!-- l. 264 --><p class='noindent'>Subjectively compare the audio quality obtained by <span class='obeylines-h'><code class='verb'>dyadic_ToH.py</code></span> and its
+<!-- l. 262 --><p class='noindent'>Subjectively compare the audio quality obtained by <span class='obeylines-h'><code class='verb'>dyadic_ToH.py</code></span> and its
 predecessor, <span class='obeylines-h'><code class='verb'>temporal_overlapped_DWT_coding.py</code></span>. “Subjectively” means that, in
 groups, you must determine, for the same bit-rate and audio-content configuration,
 which implementation sounds better.
@@ -257,8 +256,8 @@ attenuate some frequencies.</span></p><a id='x1-8002x7'></a>
 <!-- l. 179 --><p class='indent'>     <span class='footnote-mark'><a href='#fn3x0-bk' id='fn3x0'><sup class='textsuperscript'>3</sup></a></span><span class='ecrm-0800'>Remember that when we quantize the coefficients of a subband we are basically generating
 quantization noise that can be modeles as random  </span><a href='https://en.wikipedia.org/wiki/Continuous_uniform_distribution'><span class='ecrm-0800'>uniform (uniformely distributed)</span></a>
 <span class='ecrm-0800'>noise.</span></p><a id='x1-10006x4'></a>
-<!-- l. 223 --><p class='noindent'><span class='footnote-mark'><a href='#fn4x0-bk' id='fn4x0'><sup class='textsuperscript'>4</sup></a></span><span class='ecrm-0800'>It is quite difficult to use exacly the same bit-rate.</span></p><a id='x1-10008x5'></a>
-<!-- l. 225 --><p class='noindent'><span class='footnote-mark'><a href='#fn5x0-bk' id='fn5x0'><sup class='textsuperscript'>5</sup></a></span><span class='ecrm-0800'>Since we are doing a subjective comparison we cannot use a standard R/D curve.</span></p>         </div>
+<!-- l. 221 --><p class='noindent'><span class='footnote-mark'><a href='#fn4x0-bk' id='fn4x0'><sup class='textsuperscript'>4</sup></a></span><span class='ecrm-0800'>It is quite difficult to use exacly the same bit-rate.</span></p><a id='x1-10008x5'></a>
+<!-- l. 223 --><p class='noindent'><span class='footnote-mark'><a href='#fn5x0-bk' id='fn5x0'><sup class='textsuperscript'>5</sup></a></span><span class='ecrm-0800'>Since we are doing a subjective comparison we cannot use a standard R/D curve.</span></p>         </div>
  
 </body> 
 </html>
