@@ -120,7 +120,7 @@ This algorithm is ineffective because:
 \section{Considering the frequency response of the near-end to estimate the feedback signal}
 We can improve the performance of the previous feedback cancellation
 solution if we take also into consideration that the feedback signal
-that finally reaches our microphone is the
+that finally reaches our microphone is (at least in part) the
 \href{https://en.wikipedia.org/wiki/Convolution}{convolution} of
 $s(t)$ and a signal $h(t)$ that represents the echo response of our
 local audioset (speaker, mic, walls, monitor, keyboard, our body, ...)
@@ -178,29 +178,31 @@ calculation of $d$ because if
 to estimate it, the maximun should be clearly identified.
 
 \section*{Why doesn't this algorithm work either?}
-Although this algorithm performs better than the previous one, it's clear that:
+Although this algorithm performs better than the previous one, it's
+clear that because the audioset configuration can be
+dynamic. Therefore:
 \begin{enumerate}
-\item The filter weights and $d$ must be recalculated as quickly as
-  possible.
+\item The filter weights ${\mathbf h}$ and $d$ must be recalculated as
+  quickly as possible.
 \item Calculating the weights requires emitting a pulse train that can
   be heard and therefore impact the user experience.
 \item The echo problem remains unresolved.
 \end{enumerate}
 
-\section{Adaptive filtering using impulses}
-Unfortunately, none of the previous solutions is ``dynamic'', in the
-sense that if we modify the audioset, some parameters must be modified
-in real-time:
-\begin{enumerate}
-\item In Equations \eqref{eq:simplest} and
-  \eqref{eq:using_convolution}, the parameter $d$ which expresses (in
-  sample-times) the time that $s$ need to travel from the speaker to
-  the microphone, depends, for example, on the orientation of the
-  screen of the laptop.
-\item Eq.~\eqref{eq:using_convolution} and (obviously)
-  Eq~\eqref{eq:faster} are also affected by $h$, which depends on
-  current audioset configuration.
-\end{enumerate}
+%\section{Adaptive filtering using impulses}
+%Unfortunately, none of the previous solutions is ``dynamic'', in the
+%sense that if we modify the audioset, some parameters must be modified
+%in real-time:
+%\begin{enumerate}
+%\item In Equations \eqref{eq:simplest} and
+%  \eqref{eq:using_convolution}, the parameter $d$ which expresses (in
+%  sample-times) the time that $s$ need to travel from the speaker to
+%  the microphone, depends, for example, on the orientation of the
+%  screen of the laptop.
+%\item Eq.~\eqref{eq:using_convolution} and (obviously)
+%  Eq~\eqref{eq:faster} are also affected by $h$, which depends on
+%  current audioset configuration.
+%\end{enumerate}
 
 Filters can be implemented in the frequency domain (such as happens in
 Eq.~\eqref{eq:faster}) or in the signal (time in our case)
