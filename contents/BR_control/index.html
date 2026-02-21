@@ -19,7 +19,7 @@
 
 <h2 class='titleHead'>Bit-Rate Control</h2>
  <div class='author'> <a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp;  </span><a href='https://hpca.ual.es/~savins/'><span class='ecrm-1200'>Savins Puertas Martín</span></a> <span class='ecrm-1200'>&amp;  </span><a href='https://www.ual.es/persona/555355505557525189'><span class='ecrm-1200'>Juan José Moreno Riado</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>February 5, 2026</span></div>
+<div class='date'><span class='ecrm-1200'>February 21, 2026</span></div>
    </div>
    
    <h3 class='likesectionHead' id='contents'><a id='x1-1000'></a>Contents</h3>
@@ -179,8 +179,8 @@ distributed over every quantization cell, i.e., </p><div class='mathjax-env math
 <!-- l. 237 --></p><p class='indent'>   The Probability Density Function (PDF) of such uniform random variable is </p><div class='mathjax-env mathjax-equation'>\begin{equation} p(\mathbf {e})=\left \{ \begin {array}{cl} \frac {1}{\Delta } &amp; \text {if} \ |\mathbf {e}| \leq \frac {\Delta }{2} \\ 0 &amp; \text {otherwise,} \end {array} \right . \end{equation}</div><p><a id='x1-6003r3'></a> and
 its mean is </p><div class='mathjax-env mathjax-equation'>\begin{equation} \mathbb {E}[e] = \int _{\frac {-\Delta }{2}}^{\frac {\Delta }{2}}\mathbf {e}p(\mathbf {e})d\mathbf {e} = \frac {1}{\Delta }\int _{\frac {-\Delta }{2}}^{\frac {\Delta }{2}}\mathbf {e}d\mathbf {e}=\mathbf {0}, \end{equation}</div><p><a id='x1-6004r4'></a> so the error is zero-mean.
 <!-- l. 250 --></p><p class='indent'>   The variance (an “statistical” estimation of the power <span class='mathjax-inline'>\(P\)</span> of a zero-mean
-signal<span class='footnote-mark'><a href='#fn8x0' id='fn8x0-bk'><sup class='textsuperscript'>8</sup></a></span><a id='x1-6005f8'></a> is </p><div class='mathjax-env mathjax-equation'>\begin{equation} \sigma ^2 = \mathbb {E}[\mathbf {e}^2] = \int _{\frac {-\Delta }{2}}^{\frac {\Delta }{2}}\mathbf {e}^2p(\mathbf {e})d\mathbf {e}. \end{equation}</div><p><a id='x1-6007r5'></a>
-Substituting the PDF, </p><div class='mathjax-env mathjax-equation'>\begin{equation} \sigma ^2 = \frac {1}{\Delta }\int _{\frac {-\Delta }{2}}^{\frac {\Delta }{2}}\mathbf {e}^2d\mathbf {e}. \end{equation}</div><p><a id='x1-6008r6'></a> Doing the integral (<span class='mathjax-inline'>\(\int x^2dx = x^3/3\)</span>) </p><div class='mathjax-env mathjax-equation'>\begin{equation} \sigma ^2 = \frac {1}{\Delta }\left [\frac {\mathbf {e}^3}{3}\right ]_{\frac {-\Delta }{2}}^{\frac {\Delta }{2}} = \frac {1}{\Delta }\left (\frac {(\Delta /2)^3-(-\Delta /2)^3}{3}\right ). \end{equation}</div><p><a id='x1-6009r7'></a> Solving (<span class='mathjax-inline'>\((\Delta /2)^3-(-\Delta /2)^3) = 2(\Delta /2)^3\)</span>), </p><div class='mathjax-env mathjax-equation'>\begin{equation} \sigma ^2 = \frac {2}{3\Delta }\left (\frac {\Delta }{2}\right )^3 = \frac {2}{3\Delta } \frac {\Delta ^3}{8} = \frac {\Delta ^2}{12}. \end{equation}</div><p><a id='x1-6010r8'></a>
+signal<span class='footnote-mark'><a href='#fn8x0' id='fn8x0-bk'><sup class='textsuperscript'>8</sup></a></span><a id='x1-6005f8'></a>)
+is </p><div class='mathjax-env mathjax-equation'>\begin{equation} \sigma ^2 = \mathbb {E}[\mathbf {e}^2] = \int _{\frac {-\Delta }{2}}^{\frac {\Delta }{2}}\mathbf {e}^2p(\mathbf {e})d\mathbf {e}. \end{equation}</div><p><a id='x1-6007r5'></a> Substituting the PDF, </p><div class='mathjax-env mathjax-equation'>\begin{equation} \sigma ^2 = \frac {1}{\Delta }\int _{\frac {-\Delta }{2}}^{\frac {\Delta }{2}}\mathbf {e}^2d\mathbf {e}. \end{equation}</div><p><a id='x1-6008r6'></a> Doing the integral (<span class='mathjax-inline'>\(\int x^2dx = x^3/3\)</span>) </p><div class='mathjax-env mathjax-equation'>\begin{equation} \sigma ^2 = \frac {1}{\Delta }\left [\frac {\mathbf {e}^3}{3}\right ]_{\frac {-\Delta }{2}}^{\frac {\Delta }{2}} = \frac {1}{\Delta }\left (\frac {(\Delta /2)^3-(-\Delta /2)^3}{3}\right ). \end{equation}</div><p><a id='x1-6009r7'></a> Solving (<span class='mathjax-inline'>\((\Delta /2)^3-(-\Delta /2)^3) = 2(\Delta /2)^3\)</span>), </p><div class='mathjax-env mathjax-equation'>\begin{equation} \sigma ^2 = \frac {2}{3\Delta }\left (\frac {\Delta }{2}\right )^3 = \frac {2}{3\Delta } \frac {\Delta ^3}{8} = \frac {\Delta ^2}{12}. \end{equation}</div><p><a id='x1-6010r8'></a>
    
    </p><h4 class='subsectionHead' id='bitrate-control-and-distortion'><span class='titlemark'>1.5   </span> <a id='x1-70001.5'></a>(Bit-)Rate control and distortion</h4>
 <!-- l. 270 --><p class='noindent'>The number of representation levels used by a quantizer depends on the quantization
@@ -242,14 +242,13 @@ related to this milestone:
      <!-- l. 360 --><p class='noindent'><span class='obeylines-h'><code class='verb'>BR_control_conservative.py</code></span>: Every second runs: </p><div class='mathjax-env mathjax-equation'>\begin{equation} \left \{ \begin {array}{ll} \Delta = 2\Delta &amp; \quad \text {if}~L&gt;2, \\ \Delta = \frac {10}{11}\Delta &amp; \quad \text {always}, \\ \Delta = \Delta _{\text {min}} &amp; \quad \text {if}~\Delta &lt; \Delta _{\text {min}}. \end {array} \right . \end{equation}</div><a id='x1-8021r11'></a></li></ol>
    
    <h3 class='sectionHead' id='deliverables'><span class='titlemark'>2   </span> <a id='x1-90002'></a>Deliverables</h3>
-<!-- l. 377 --><p class='noindent'>Remember to report both, the experiments and the results. Notebooks are
-appreciated.
+<!-- l. 377 --><p class='noindent'>In a Jupyter notebook, report:
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-9002x1'>
+     <!-- l. 379 --><p class='noindent'><span class='ecbx-1000'>Which data-ordering performs better?</span>:
                                                                   
 
                                                                   
-     <!-- l. 379 --><p class='noindent'><span class='ecbx-1000'>Which data-ordering performs better?</span>:
      </p><!-- l. 382 --><p class='noindent'>Determine empirically which ordering of the chunk data is the most efficient
      from a lossless data compression point of view (the smaller the bit-rates,
      the higher the compression). Use the audio sequence you want.<span class='footnote-mark'><a href='#fn11x0' id='fn11x0-bk'><sup class='textsuperscript'>11</sup></a></span><a id='x1-9003f11'></a>
@@ -263,23 +262,10 @@ appreciated.
      sequence, generate the RD curve considering a set of different simulated
      transmission environments (use  <a href='https://vicente-gonzalez-ruiz.github.io/about_tc/'>tc</a> or a any other similar tool). Remember
      that the X-axis must express bit-rate and the Y-axis, distortion.
-     </p></li>
-<li class='enumerate' id='x1-9008x3'>
-     <!-- l. 406 --><p class='noindent'><span class='ecbx-1000'>Autoevaluation</span>:
-     </p><!-- l. 408 --><p class='noindent'>With a ratio out of 10, consider:
-     </p><!-- l. 410 --><p class='noindent'>
-         </p><ol class='enumerate2'>
-<li class='enumerate' id='x1-9010x1'>Have you answered correctly all the previous questions? Say why do
-         you think that.
-         </li>
-<li class='enumerate' id='x1-9012x2'>Using only the documentation you have provided to be evaluated, it
-         is possible to replicate automatically the results?</li></ol>
+</p>
      </li></ol>
    
    <h3 class='sectionHead' id='resources'><span class='titlemark'>3   </span> <a id='x1-100003'></a>Resources</h3>
-                                                                  
-
-                                                                  
    <div class='thebibliography'>
    <p class='bibitem'><span class='biblabel'>
  [1]<span class='bibsp'>   </span></span><a id='Xbosi2003intro'></a>M. Bosi and R.E. Goldberd.  <a href='http://www.pce-fet.com/common/library/books/34/1314_[Marina_Bosi,__Richard_E._Goldberg__(auth.)]_Intro(b-ok.org).pdf'><span class='ecti-1000'>Introduction to Digital Audio Coding and
@@ -298,6 +284,9 @@ appreciated.
    <p class='bibitem'><span class='biblabel'>
  [4]<span class='bibsp'>   </span></span><a id='Xnelson96datacompression'></a>Nelson M. and Gailly J.   <a href='https://theswissbay.ch/pdf/Gentoomen%20Library/Information%20Theory/Compression/The%20Data%20Compression%20Book%202nd%20Ed%20-%20Mark%20Nelson.pdf'><span class='ecti-1000'>The Data Compression Book</span></a>.  M&amp;T Books,
    1996.
+                                                                  
+
+                                                                  
    </p>
    <p class='bibitem'><span class='biblabel'>
  [5]<span class='bibsp'>   </span></span><a id='Xsayood2017introduction'></a>K. Sayood.     <a href='http://rahilshaikh.weebly.com/uploads/1/1/6/3/11635894/data_compression.pdf'><span class='ecti-1000'>Introduction  to  Data  Compression</span></a>   <a href='https://people.cs.nctu.edu.tw/~cmliu/Courses/Compression/'><span class='ecti-1000'>(Slides)</span></a>.   Morgan
@@ -315,9 +304,6 @@ appreciated.
    Processing</span></a>. Cambridge University Press, 2014.
 </p>
    </div>
-                                                                  
-
-                                                                  
    <div class='footnotes'><a id='x1-3002x1.1'></a>
 <!-- l. 22 --><p class='indent'>     <span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='ecrm-0800'>Measured in bits per second or a </span><span class='mathjax-inline'>\(10\)</span><span class='ecrm-0800'>-multiple of this transmission  </span><a href='https://en.wikipedia.org/wiki/Bandwidth_(computing)'><span class='ecrm-0800'>capacity</span></a><span class='ecrm-0800'>.</span></p><a id='x1-3004x1.1'></a>
 <!-- l. 50 --><p class='indent'>     <span class='footnote-mark'><a href='#fn2x0-bk' id='fn2x0'><sup class='textsuperscript'>2</sup></a></span><span class='ecrm-0800'>Notice that this upper bound in the bit-rate will also affect to the loss of chunks because if

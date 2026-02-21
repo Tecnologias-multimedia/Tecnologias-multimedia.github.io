@@ -189,7 +189,7 @@ every new received chunk.
 \section{Deliverables}
 \label{sec:homework}
 
-\begin{enumerate}
+%\begin{enumerate}
 % \item \textbf{Show the performance of Minimal in congested links}:
 %   Determine the quality of the sound when \texttt{minimal.py} is used
 %   in a congested tranmission environment. You can quantify the
@@ -206,9 +206,10 @@ every new received chunk.
 % \item \textbf{No way}: when most of the time only silence is heard.
 % \end{itemize}
 
-\item \textbf{Find your minimum buffering time}:
+%\item \textbf{Find your minimum buffering time}:
 
-  Determine, experimentally:
+  Reporting everything in a \href{https://jupyter.org/}{Jupyter
+    notebook}, determine, experimentally:
   \begin{enumerate}
   \item The minimum artificial latency that you must configure in your
     InterCom instance to communicate with your groupmate without lossing
@@ -216,36 +217,38 @@ every new received chunk.
       network in which you are using InterCom.} local
     network. \href{https://vicente-gonzalez-ruiz.github.io/about_ping/}{Ping}
     can help to estimate the latency.
-  \item Repeat the previous experiment using only localhost (transmiting
-    the chunk between the loopback network adapter), but adding some
-    jitter with the tool
+  \item Repeat the previous experiment using only localhost
+    (transmiting the chunk between the loopback network adapter), but
+    adding some jitter with the tool
     \href{https://vicente-gonzalez-ruiz.github.io/about_tc/}{\texttt{tc}}. If
     \texttt{tc} is not avaiable in your OS, you can use any other
-    similar tool, or use the Linux system at the laboratory.
+    similar tool, or use the Linux at the laboratory. But remember,
+    you only must play with jitter, not with packet loss or
+    transmission bit-rate.
   \end{enumerate}
   
-  \subsection*{Example}
-  An example of a notebook related to this milestone can be found
-  \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/docs/Hidding_the_Network_Jitter__example.ipynb}{here}. Notice
-  that not all the content of the notebook could be requested in this
-  milestone.
+%  \subsection*{Example}
+%  An example of a notebook related to this milestone can be found
+%  \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/docs/Hidding_the_Network_Jitter__example.ipynb}{here}. Notice
+%  that not all the content of the notebook could be requested in this
+%  milestone.
   
-\item To the report describing the previously requested
-  experimentation, \textbf{add a section evaluating it} (with a ratio out of
-  10), considering that each of the following rubrics has the same
-  weight in the evaluation score:
-  \begin{enumerate}
-  \item Has this latency been determined in both cases (without
-    simulating the latency or by simulating the latency (and its
-    variation))?
-  \item Is the experiment perfectly described? In other words, can it be
-    replicated with the information in the report?
-  \item Is there a coherent relationship between the jitter simulated
-    with \texttt{tc} and the buffer time that must be used to avoid
-    losing chunks?
-  \end{enumerate}
+%\item To the report describing the previously requested
+%  experimentation, \textbf{add a section evaluating it} (with a ratio out of
+%  10), considering that each of the following rubrics has the same
+%  weight in the evaluation score:
+%  \begin{enumerate}
+%  \item Has this latency been determined in both cases (without
+%    simulating the latency or by simulating the latency (and its
+%    variation))?
+%  \item Is the experiment perfectly described? In other words, can it be
+%    replicated with the information in the report?
+%  \item Is there a coherent relationship between the jitter simulated
+%    with \texttt{tc} and the buffer time that must be used to avoid
+%    losing chunks?
+%  \end{enumerate}
   % Mark: \textbf{1 point}.
   
-\end{enumerate}
+%\end{enumerate}
 
 \bibliography{networking,nat}
