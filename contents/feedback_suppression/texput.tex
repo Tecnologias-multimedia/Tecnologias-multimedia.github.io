@@ -111,7 +111,10 @@ between our speaker and our mic.
 This algorithm is ineffective because:
 \begin{enumerate}
 \item $d$ can change over time (for example, if we're using a laptop
-  and move the screen, $d$ will vary).
+  and move the screen, $d$ will vary). This can be costly, because
+  using \href{https://en.wikipedia.org/wiki/Correlation}{correlation}
+  in the Fourier domain, this is a heavy operation to be performed in
+  real-time.
 \item Assuming that the signal captured by the microphone is
   $a{\mathbf s}[t-d]$ is an oversimplification. This signal is only
   similar (it's filtered and likely contains echoes).
@@ -124,8 +127,8 @@ that finally reaches our microphone is (at least in part) the
 \href{https://en.wikipedia.org/wiki/Convolution}{convolution} of
 $s(t)$ and a signal $h(t)$ that represents the echo response of our
 local audioset (speaker, mic, walls, monitor, keyboard, our body, ...)
-to a \href{https://en.wikipedia.org/wiki/Impulse_response}{impulse
-  signal} $\delta(t)$.\footnote{This technique is similar to the
+to an \href{https://en.wikipedia.org/wiki/Impulse_response}{impulse
+  signal $\delta(t)$}.\footnote{This technique is similar to the
   carried out by submarines when they user the sonar to perform
   echo-location, or by bats to fly in the darkness.} In other words,
 we can modify Eq.~\eqref{eq:simplest} to compute
@@ -134,9 +137,8 @@ we can modify Eq.~\eqref{eq:simplest} to compute
   \label{eq:using_convolution}
 \end{equation}
 where $\ast$ represents the (digital) convolution between (in our case
-of) digital signals, and ${\mathbf h}$ is the digitalized (sampled +
-quantized) version of $h(t)$, the response (echo signal) of the near-end
-(our) audioset to the impact of $\delta(t)$.
+of) digital signals, and ${\mathbf h}$ is the digitalized version of
+$h(t)$.
 
 The convolution of digital signals in the time domain can be expensive
 (with
@@ -170,24 +172,13 @@ signals use a library such as
 of ${\mathbf h}$, and ${\mathcal F}^{-1}$ represents the inverse
 (digital) Fourier transform. Notice that all these transforms are
 applied to digital signals, and there exist fast algorithms (with
-complexity $O\log_2O$).
+complexity $O\log_2O$). 
 
-Finally, see that this feedback supression technique could ease the
-calculation of $d$ because if
-\href{https://en.wikipedia.org/wiki/Correlation}{correlation} is used
-to estimate it, the maximun should be clearly identified.
-
-\section*{Why doesn't this algorithm work either?}
-Although this algorithm performs better than the previous one, it's
-clear that because the audioset configuration can be
-dynamic. Therefore:
-\begin{enumerate}
-\item The filter weights ${\mathbf h}$ and $d$ must be recalculated as
-  quickly as possible.
-\item Calculating the weights requires emitting a pulse train that can
-  be heard and therefore impact the user experience.
-\item The echo problem remains unresolved.
-\end{enumerate}
+\section{Practical issues}
+Unfortunately, even when we expect that this improved feedback
+supression algorithm is going to perform better than the previous one,
+the computation of the filter weights ${\mathbf h}$ requires emitting
+impulses that can be heard by the user.
 
 %\section{Adaptive filtering using impulses}
 %Unfortunately, none of the previous solutions is ``dynamic'', in the
@@ -204,6 +195,7 @@ dynamic. Therefore:
 %  current audioset configuration.
 %\end{enumerate}
 
+\begin{comment}
 Filters can be implemented in the frequency domain (such as happens in
 Eq.~\eqref{eq:faster}) or in the signal (time in our case)
 domain. Signal domain (digital) convolutions are affordable if the
@@ -253,6 +245,7 @@ Finally, notice that we must send
   \tilde{\mathbf n}[t] = \mathbf{m}[t] - \hat{\mathbf s}[t].
   \label{eq:finally}
 \end{equation}
+\end{comment}
 
 \section{Adaptive filtering using  \href{https://en.wikipedia.org/wiki/Least_mean_squares_filter}{LMS (Least Mean Squares)}}
 
@@ -267,6 +260,41 @@ ADALINE is able to distinguish two (different) patterns, even using
   \href{https://en.wikipedia.org/wiki/Activation_function}{activation
     function}, an artificial neuron and a FIR filter perform the same
   computation.}) a single neuron.
+
+LMS finds $\mathbf{h}$ without using impulses. Considering that the
+signal that we should send to the far-end is
+\begin{equation}
+  \tilde{\mathbf{n}}[t] = \mathbf{m}[t] - \sum_{k=0}^{K-1}{\mathbf h}_k{\mathbf s}[t-k-d],
+  \label{eq:FIR_filter}
+\end{equation}
+LMS minimizes
+\begin{equation}
+  \mathbf{e}[t] = \tilde{\mathbf{n}}[t] - \mathbf{n}[t]
+\end{equation}
+using the update rule
+\begin{equation}
+  \mathbf{h}^{(i+1)}_k = \mathbf{h}^{(i)}_k + 2\mu\mathbf{e}[k]\hat{\mathbf{s}}[k],
+  \label{eq:update}
+\end{equation}
+where $\mu$ is the learning
+rate\footnote{High $\mu$ values speed-up the adaption process, but can
+generate worse $\mathbf{h}$ coefficients.} and $i$ represents the $i$-th update iteration. These equations can be
+found\footnote{Again, please, watch
+\url{https://www.youtube.com/watch?v=hc2Zj55j1zU}!} using the
+(steepest)
+\href{https://en.wikipedia.org/wiki/Gradient_descent}{gradient descend
+  algorithm}.
+
+\section*{Unfortunately}
+Yes, unfortunately we only can compute $\mathbf{h}$ if we have
+$\hat{\mathbf{s}}$ (the signal played by the speaker that is recorded
+by our mic), i.e., me must be silent when updating. Therefore, the
+performance of this algorithm depends on the performance of other
+auxiliar technique which should determine whether in the near-end
+there is some source of sound.
+
+\begin{comment}
+If $\mathbf{n}$ and $\tilde{\mathbf{n}}$ represent the digital version of the audio signals generated by the local-end user and the sent signal, respectively, LMS minimizes
 
 The LMS algorithm adapts the coefficients of $\mathbf{h}$ to minimize
 the error signal defined by
@@ -304,6 +332,7 @@ consider, for example, only the $K$ samples of the current played
 chunk with indexes in $[d, d+K-1]$, if $d+K$ is smaller than the
 chunk size. Otherwise (if $d+K > \text{chunk~size}$), at least two
 chunks should be concatenated.
+\end{comment}
 
 \begin{comment}
 \section{Echo cancellation}
@@ -348,8 +377,32 @@ case, we have that
 
 \end{comment}
 
+\section{Taking turns speaking is the smartest thing to do}
+Lets recap. Our problem is that, without a headset, we have that the
+signal that we send is
+\begin{equation}
+    \mathbf{m}[t] = \mathbf{n}[t] + \hat{\mathbf{s}}[t]
+\end{equation}
+where $\hat{\mathbf{s}}$ is a aproximated-and-delayed version of
+$\mathbf{s}$, the signal played by our speaker(s). And if we were able
+to make $\hat{\mathbf{s}}=\mathbf{0}$, our feedback problem would
+vanish, ... at least, theoretically.
+
+But wait ..., as a polite person, if I don't speak when I am listening
+to my interlocutor, I could set $\hat{\mathbf{s}}=\mathbf{0}$ when I
+am speaking because my interlocutor should do the same (be silent when
+I speak)!
+
+Therefore, this solution (like the previous one) does need some
+technique to detect when I'm speaking. The advantage here is that we
+only need to switch off (or at least decrease enough the) volume of
+our speaker, something that does not consume computational resources.
+Notice that the ``voice detector'' algorithm can run in a separate
+thread/process.
+
 %\section{Filter update using a train of impulses}
 
+\begin{comment}
 \section{Subtraction in the frequency domain}
 Ultimately, feedback in InterCom occurs because the audio signal we
 are generating is reproduced through our speakers (with a certain time
@@ -371,6 +424,7 @@ previous paragraph, and considering also the Eq.~\eqref{eq:simplest}, it can be 
 where $\hat{\mathbf{N}} = \mathcal{F}(\hat{\mathbf{n}})$, the Fourier
 transform of the chunk that should be sent in the $i$-th iteration
 (chunk).
+\end{comment}
 
 \begin{comment}
 Notice that if you prefer to estimate ${\mathbf h}$ using a ``train''
@@ -473,14 +527,11 @@ The signal to send (without the feedback) is:
 
 \section{Deliverables}
 
-\begin{enumerate}
-\item
-\textbf{Write a Python module} called \texttt{feedback\_supression.py} that inherits
-from \texttt{buffer.py} and that implements at least\footnote{More
-  working implementations, higher grade.} one of the previously
-described solutions.
-\textbf{Evaluate it} comparing with other feedback supression solutions such as the provided by Google Meet.
-\end{enumerate}
+Write a Python module, called \texttt{feedback\_supression.py}, that
+inherits from \texttt{buffer.py} and that implements the last proposed
+solution (decrease $s(t)$ when we are speaking). Define a new
+command-line parameter to switch on this functionality, that by
+default should be disabled (off).
 
 \begin{comment}
 More concretely:
