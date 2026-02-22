@@ -652,7 +652,7 @@ The DWT can be implemented in different ways:
 \begin{figure}
   \centering
   \myfig{graphics/cascade}{8cm}{800}
-  \caption{A dyadic 2-levels cascade of PRFBs.}
+  \caption{A dyadic 2-levels cascade of PRFBs (DWT).}
   \label{fig:cascade}
 \end{figure}
 
@@ -889,7 +889,21 @@ can be used in the quantization process.
 
 %{{{
 
-\section{\href{https://en.wikipedia.org/wiki/Lapped_transform}{Overlapped block transforms} to minimize distortion}
+\section{Wavelet Packets Transform (WPT)}
+
+The WPT (see Fig.~\ref{fig:WPT}) is an extension of the DWT where the
+PRFB are applied also to the high frequency subbands, generating a
+linear partitioning of the spectrum. If $l$ is the number of levels,
+the number of subband is $2^l$.
+
+\begin{figure}
+  \centering
+  \myfig{graphics/WPT}{8cm}{800}
+  \caption{A 2-levels WPT.}
+  \label{fig:WPT}
+\end{figure}
+
+\section{\href{https://en.wikipedia.org/wiki/Lapped_transform}{Overlapped block transforms}}
 %{{{
 
 Transform Coding implies splitting the signal into blocks of data
