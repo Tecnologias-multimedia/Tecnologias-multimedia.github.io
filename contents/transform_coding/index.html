@@ -641,31 +641,23 @@ avoid the gliches at the borders of the chunks.
          algorithm neither <span class='ectt-1000'>tc</span>).
          </p></li>
 <li class='enumerate' id='x1-25006x2'>
-         <!-- l. 1152 --><p class='noindent'><span class='ecbx-1000'>Determine the RD curves for the DWT</span>:
+         <!-- l. 1152 --><p class='noindent'><span class='ecbx-1000'>Determine the RD curves for a DWT </span><span class='cite'><span class='ecbx-1000'>[</span><a href='#Xlee2019pywavelets'><span class='ecbx-1000'>6</span></a><span class='ecbx-1000'>]</span></span>:
          </p><!-- l. 1155 --><p class='noindent'>Rebuild the RD curves considering also the removal of the temporal
-         decorrelation. Use <span class='obeylines-h'><code class='verb'>temporal_no_overlapped_DWT_coding.py</code></span>. Note
-         that   the   number   of   levels   <span class='mathjax-inline'>\(l\)</span>   of   the   DWT   (computed   using
-         <a href='https://pywavelets.readthedocs.io/en/latest/'>PyWavelets</a> <span class='cite'>[<a href='#Xlee2019pywavelets'>6</a>]</span>) can have a high impact on the amount of energy
-         concentration achieved by the DWT, and therefore on the efficiency
-         of the coding system. Show such an impact. Experiment also with
-         the wavelet name (try to optimize –minimize– the RD curve). Again,
-         use the <span class='obeylines-h'><code class='verb'>--minimal_quantization_step</code></span> parameter to generate the
-         different points of the RD curves.
+         decorrelation. Use <span class='obeylines-h'><code class='verb'>temporal_overlapped_DWT_coding.py</code></span> and the
+         <span class='obeylines-h'><code class='verb'>--minimal_quantization_step</code></span> parameter to generate the different
+         points of the RD curves. Try to minimize the RD curve playing with
+         the number of levels and the wavelet name.
          </p></li>
 <li class='enumerate' id='x1-25008x3'>
-         <!-- l. 1168 --><p class='noindent'><span class='ecbx-1000'>Determine the RD curves for the overlapped DWT</span>:
-         </p><!-- l. 1171 --><p class='noindent'>Finally,  redo  the  curves  considering  now  the  block  overlapping
-         (<span class='obeylines-h'><code class='verb'>temporal_overlapped_DWT_coding.py</code></span>). It is a good idea to put all
-         the RD curves together (in the same graph), to compare easily.
+         <!-- l. 1163 --><p class='noindent'><span class='ecbx-1000'>Determine the RD curves for the corresponding WPT </span><span class='cite'><span class='ecbx-1000'>[</span><a href='#Xlee2019pywavelets'><span class='ecbx-1000'>6</span></a><span class='ecbx-1000'>]</span></span>:
+         </p><!-- l. 1166 --><p class='noindent'>Compare with <span class='obeylines-h'><code class='verb'>temporal_overlapped_WPT_coding.py</code></span>. Use always
+         the same graph.
 </p>
          </li></ol>
      </li>
 <li class='enumerate' id='x1-25010x2'>
-     <!-- l. 1181 --><p class='noindent'><span class='ecbx-1000'>Answer the questions</span>:
-                                                                  
-
-                                                                  
-     </p><!-- l. 1184 --><p class='noindent'>
+     <!-- l. 1174 --><p class='noindent'><span class='ecbx-1000'>Answer the questions</span>:
+     </p><!-- l. 1177 --><p class='noindent'>
          </p><ol class='enumerate2'>
 <li class='enumerate' id='x1-25012x1'>Does the computation of the DWT using chunk overlapping increase
          the latency of the whole system? And what about the jitter? In what
@@ -693,14 +685,14 @@ avoid the gliches at the borders of the chunks.
     <p class='bibitem'><span class='biblabel'>
   [4]<span class='bibsp'>   </span></span><a id='Xthinkstats'></a>A.B. Downey.  <a href='https://greenteapress.com/thinkstats/thinkstats.pdf'><span class='ecti-1000'>Think Stats Probability and Statistics for Programmers</span></a>.
     O’Reilly, 2011.
-                                                                  
-
-                                                                  
     </p>
     <p class='bibitem'><span class='biblabel'>
   [5]<span class='bibsp'>   </span></span><a id='Xharris2020array'></a>C. R.  Harris,  K. J.  Millman,  S. J.  van der  Walt,  R. Gommers,
     P. Virtanen, D. Cournapeau, E. Wieser, J. Taylor, S. Berg, N. J. Smith,
     et al.  <a href='https://www.nature.com/articles/s41586-020-2649-2'>Array programming with NumPy</a>. <span class='ecti-1000'>Nature</span>, 585(7825):357–362, 2020.
+                                                                  
+
+                                                                  
     </p>
     <p class='bibitem'><span class='biblabel'>
   [6]<span class='bibsp'>   </span></span><a id='Xlee2019pywavelets'></a>G. Lee, R. Gommers, F. Waselewski, K. Wohlfahrt, and A. O’Leary.
