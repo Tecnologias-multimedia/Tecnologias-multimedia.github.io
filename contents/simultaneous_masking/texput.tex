@@ -47,11 +47,16 @@ change drastically between chunks. Therefore, it's possible to run the
 task of recalculating $\Delta_b$ in a new thread/process, at a
 frequency that your machine allows.
 
+Take into consideration also that the simultaneous masking effect can
+be computed considering a sliding window of adjacent chunks. This
+should provide a smoother transition between chunks.
+
 \section{Requirements of the implementation}
 Your implementation should take the following aspects into account:
 \begin{enumerate}
 \item It should not cause interruptions in audio playback.
-\iten It should maximize the Perceptual Quality Index (PQI).
+\item It should maximize, for a given bit-rate, the PSNR of the
+  reconstructions.
 \end{enumerate}
 
 %\label{sec:algo}
@@ -84,8 +89,9 @@ Your implementation should take the following aspects into account:
 \section{Deliverables}
 
 A new InterCom layer written in a Python module named
-\verb|simultaneous_masking.py|. Your implementation will be evaluated
-considering the PQI.
+\verb|simultaneous_masking.py|. This file should be generated,
+explained and evaluated in a notebook named
+\verb|simultaneous_masking.ipynb|.
 
 \section{Resources}
 
