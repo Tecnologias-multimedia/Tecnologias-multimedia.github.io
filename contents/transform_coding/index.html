@@ -41,15 +41,18 @@
 <br />   <span class='sectionToc'>3 <a href='#wavelet-packets-transform-wpt' id='QQ2-1-19'>Wavelet Packets Transform (WPT)</a></span>
 <br />   <span class='sectionToc'>4 <a href='#httpsenwikipediaorgwikilappedtransformoverlapped-block-transforms' id='QQ2-1-21'> Overlapped block transforms</a></span>
 <br />   <span class='sectionToc'>5 <a href='#reducing-the-data-overhead' id='QQ2-1-26'>Reducing the data overhead</a></span>
-<br />   <span class='sectionToc'>6 <a href='#deliverables' id='QQ2-1-31'>Deliverables</a></span>
-<br />   <span class='sectionToc'>7 <a href='#resources' id='QQ2-1-32'>Resources</a></span>
+<br />   <span class='sectionToc'>6 <a href='#modified-discrete-cosine-transform-mdct' id='QQ2-1-31'>Modified Discrete Cosine Transform (MDCT)</a></span>
+<br />   <span class='subsectionToc'>6.1 <a href='#overlapping' id='QQ2-1-32'>Overlapping</a></span>
+<br />   <span class='subsectionToc'>6.2 <a href='#windowing-functions' id='QQ2-1-33'>Windowing functions</a></span>
+<br />   <span class='sectionToc'>7 <a href='#deliverables' id='QQ2-1-34'>Deliverables</a></span>
+<br />   <span class='sectionToc'>8 <a href='#resources' id='QQ2-1-35'>Resources</a></span>
    </div>
-   
-   <h3 class='sectionHead' id='spatial-stereo-decorrelation-with-the-mst-midside-transform'><span class='titlemark'>1   </span> <a id='x1-20001'></a>Spatial (stereo) decorrelation with the MST (Mid/Side Transform)</h3>
    
                                                                   
 
                                                                   
+   <h3 class='sectionHead' id='spatial-stereo-decorrelation-with-the-mst-midside-transform'><span class='titlemark'>1   </span> <a id='x1-20001'></a>Spatial (stereo) decorrelation with the MST (Mid/Side Transform)</h3>
+   
    <h4 class='subsectionHead' id='analysis-transform'><span class='titlemark'>1.1   </span> <a id='x1-30001.1'></a>Analysis transform</h4>
 <!-- l. 18 --><p class='noindent'>InterCom transmits a  <a href='https://en.wikipedia.org/wiki/Stereophonic_sound'>stereo</a> (two channels)  <a href='https://en.wikipedia.org/wiki/Pulse-code_modulation'>PCM signal</a>. In most cases, the channels are  <a href='https://en.wikipedia.org/wiki/Binaural_recording'>highly
 correlated</a><span class='footnote-mark'><a href='#fn1x0' id='fn1x0-bk'><sup class='textsuperscript'>1</sup></a></span><a id='x1-3001f1'></a>,
@@ -85,13 +88,13 @@ Eq. \eqref{eq:forward_transform_matrix_form}, where we have that </p><div class
 becomes </p><div class='mathjax-env mathjax-equation'>\begin{equation} \begin {bmatrix} {\mathbf x}_0 \\ {\mathbf x}_1 \end {bmatrix} = \frac {1}{2} \begin {bmatrix} 1 &amp; 1 \\ 1 &amp; -1 \end {bmatrix} \begin {bmatrix} {\mathbf w}_0 \\ {\mathbf w}_1 \end {bmatrix}. \end{equation}</div><p><a id='x1-4004r7'></a> Therefore, </p><div class='mathjax-env mathjax-equation'>\begin{equation} {\mathbf x} = {\mathbf K}^{-1}{\mathbf w} = \frac {1}{2}{\mathbf K}^{\text T}{\mathbf w} = \frac {1}{2}{\mathbf K}{\mathbf w} = \frac {1}{2}\begin {bmatrix} 1 &amp; 1 \\ 1 &amp; -1 \end {bmatrix}{\mathbf w} = \begin {bmatrix} \frac {1}{2} &amp; \frac {1}{2} \\ \frac {1}{2} &amp; -\frac {1}{2} \end {bmatrix}{\mathbf w}. \label {eq:inverse_transform_matrix_form} \end{equation}</div><p><a id='x1-4005r8'></a>
    
    </p><h4 class='subsectionHead' id='orthogonality-of-the-transform'><span class='titlemark'>1.3   </span> <a id='x1-50001.3'></a>Orthogonality of the transform</h4>
+                                                                  
+
+                                                                  
 <!-- l. 153 --><p class='noindent'>As can be seen (if we ignore the <span class='mathjax-inline'>\(\frac {1}{2}\)</span> scale factor), the inverse transform is the
 transpose of the forward transform (<span class='mathjax-inline'>\({\mathbf K}^{-1}={\mathbf K}^{\text T}\)</span>). This is a characteristic of all  <a href='https://en.wikipedia.org/wiki/Orthogonal_transformation'>orthogonal
 transforms</a> <span class='cite'>[<a href='#Xsayood2017introduction'>7</a>]</span>. For the MST, specifically, it also holds that <span class='mathjax-inline'>\({\mathbf K}^{\text T}={\mathbf K}\)</span> because <span class='mathjax-inline'>\(\mathbf K\)</span> is
 <a href='https://en.wikipedia.org/wiki/Symmetric_matrix'>symmetric</a>.
-                                                                  
-
-                                                                  
 </p><!-- l. 163 --><p class='indent'>   In addition to verify that <span class='mathjax-inline'>\({\mathbf K}^{-1}={\mathbf K}^{\text T}\)</span>, <span class='mathjax-inline'>\(\mathbf K\)</span> is orthogonal if the  <a href='https://en.wikipedia.org/wiki/Inner_product_space'>inner
 product</a><span class='footnote-mark'><a href='#fn3x0' id='fn3x0-bk'><sup class='textsuperscript'>3</sup></a></span><a id='x1-5001f3'></a> of
 the filters<span class='footnote-mark'><a href='#fn4x0' id='fn4x0-bk'><sup class='textsuperscript'>4</sup></a></span><a id='x1-5003f4'></a>
@@ -131,13 +134,13 @@ a different solution based on the idea that the contribution (in terms of energy
 subbands to the reconstruction of the signal <span class='mathjax-inline'>\(\mathbf x\)</span> should be proportional to the  <a href='https://en.wikipedia.org/wiki/Filter_(signal_processing)'>gain</a> of each
 synthesis<span class='footnote-mark'><a href='#fn10x0' id='fn10x0-bk'><sup class='textsuperscript'>10</sup></a></span><a id='x1-6003f10'></a>
 filter of <span class='mathjax-inline'>\({\mathbf K}^{-1}\)</span> (recall that we work with orthogonal transforms and, therefore, the
+                                                                  
+
+                                                                  
 contributions of the subbands are independent). Thus, if the filters had different
 gains, the QSSs should consider this fact using a smaller QSS where the gain is
 higher.<span class='footnote-mark'><a href='#fn11x0' id='fn11x0-bk'><sup class='textsuperscript'>11</sup></a></span><a id='x1-6005f11'></a>
 </p><!-- l. 324 --><p class='indent'>   By definition, the contribution of the subband <span class='mathjax-inline'>\({\mathbf w}_i\)</span> to the reconstruction of the frame is proportional
-                                                                  
-
-                                                                  
 to the  <a href='https://en.wikipedia.org/wiki/Lp_space'>L<span class='mathjax-inline'>\(^2\)</span> norm</a><span class='footnote-mark'><a href='#fn12x0' id='fn12x0-bk'><sup class='textsuperscript'>12</sup></a></span><a id='x1-6007f12'></a>
 (or the “squared” norm) of the (synthesis) filter <span class='mathjax-inline'>\({\mathbf K}_i^{-1}\)</span>. Thus </p><div class='mathjax-env mathjax-equation'>\begin{equation} \begin {array}{l} \left \| {\mathbf K}_0^{-1} \right \|_2 := \sqrt {\langle \begin {bmatrix} \frac {1}{2} &amp; \frac {1}{2} \end {bmatrix}, \begin {bmatrix} \frac {1}{2} &amp; \frac {1}{2} \end {bmatrix} \rangle } = \sqrt {\begin {bmatrix}\frac {1}{2} &amp; \frac {1}{2} \end {bmatrix} \cdot \begin {bmatrix} \frac {1}{2} &amp; \frac {1}{2} \end {bmatrix}} = \frac {1}{\sqrt {2}},\\ \left \| {\mathbf K}_1^{-1} \right \|_2 := \sqrt {\langle \begin {bmatrix} \frac {1}{2} &amp; -\frac {1}{2} \end {bmatrix}, \begin {bmatrix} \frac {1}{2} &amp; -\frac {1}{2} \end {bmatrix} \rangle } = \sqrt {\begin {bmatrix} \frac {1}{2} &amp; -\frac {1}{2} \end {bmatrix}\cdot \begin {bmatrix} \frac {1}{2} &amp; -\frac {1}{2} \end {bmatrix}} = \frac {1}{\sqrt {2}}, \end {array} \end{equation}</div><p><a id='x1-6009r12'></a> resulting in the
 fact that both subbands <span class='mathjax-inline'>\({\mathbf w}_1\)</span> and <span class='mathjax-inline'>\({\mathbf w}_2\)</span> have the same gain (<span class='mathjax-inline'>\(1/\sqrt {2}\)</span>). This result tells us
@@ -174,13 +177,13 @@ of a sequence of audio. A straightforward one is  <a href='https://en.wikipedia.
 (DPCM) <span class='cite'>[<a href='#Xsayood2017introduction'>7</a>]</span></a>. However, there are more efficient decorrelation algorithms based on
 <a href='https://en.wikipedia.org/wiki/Transform_coding'>Transform Coding</a>, such as the one previously described.
 </p><!-- l. 457 --><p class='indent'>   As it has been explained before, Transform Coding is based on the idea that we
+                                                                  
+
+                                                                  
 can decompose the input signal into a set of subbands, and if the filters used are
 appropriate to remove the (in this case, temporal) redundancy, we can achieve a high
 <a href='https://web.stanford.edu/class/ee398a/handouts/lectures/07-TransformCoding.pdf'>Transform Coding Gain</a> <span class='cite'>[<a href='#Xsayood2017introduction'>7</a>]</span>, accumulating most of the signal energy (and presumably
 most of the information) in a small number of subbands. When this happens,
-                                                                  
-
-                                                                  
 the quantization of the subbands will basically remove the least significant
 information (usually  <a href='https://en.wikipedia.org/wiki/Noise_(electronics)'>electronic noise</a>), allowing better compression ratios
 than those in which we apply the same quantization process to the original
@@ -620,56 +623,75 @@ avoid the gliches at the borders of the chunks.
 <li class='enumerate' id='x1-24018x6'><span class='mathjax-inline'>\({\mathbf D}_i \leftarrow {\mathbf D}_{i+1}\)</span>.</li></ol>
      </li></ol>
    
-   <h3 class='sectionHead' id='deliverables'><span class='titlemark'>6   </span> <a id='x1-250006'></a>Deliverables</h3>
-<!-- l. 1133 --><p class='noindent'>
+   <h3 class='sectionHead' id='modified-discrete-cosine-transform-mdct'><span class='titlemark'>6   </span> <a id='x1-250006'></a>Modified Discrete Cosine Transform (MDCT)</h3>
+<!-- l. 1133 --><p class='noindent'>The MDCT is an overlapped transform where the basis functions (the filters of the
+analysis matrix) are cosine function samplings of different frequencies. These
+functions are defined by </p><div class='mathjax-env mathjax-equation'>\begin{equation} \mathbf {w}_k = \sum _{n=0}^{2N-1}\cos \left [\frac {\pi }{N} \left (n + \frac {1}{2} + \frac {N}{2}\right ) \left (k + \frac {1}{2}\right ) \right ], \end{equation}</div><p><a id='x1-25001r25'></a> where <span class='mathjax-inline'>\(N\)</span> is the number of samples to transform.
                                                                   
 
                                                                   
-     </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-25002x1'>
-     <!-- l. 1135 --><p class='noindent'><span class='ecbx-1000'>Find the following RD curves</span>:
-     </p><!-- l. 1137 --><p class='noindent'>
-         </p><ol class='enumerate2'>
-<li class='enumerate' id='x1-25004x1'>
-         <!-- l. 1139 --><p class='noindent'><span class='ecbx-1000'>Determine the RD curves for the MST</span>:
-         </p><!-- l. 1142 --><p class='noindent'>As  we  did  in  the  previous  milestone,  generate  the  RD  curves
-         for  a  set  of  simulated  transmission  contexts.  Use  the  modules
-         <span class='ectt-1000'>stereo_MST_coding{_16|_32}.py</span>. As you can see, they differs in
-         how the transform has been implemented. Notice that you can use the
-         <span class='obeylines-h'><code class='verb'>--minimal_quantization_step</code></span> parameter to generate the different
-         points of the RD curves (it is not necessary to use a bit-rate control
-         algorithm neither <span class='ectt-1000'>tc</span>).
-         </p></li>
-<li class='enumerate' id='x1-25006x2'>
-         <!-- l. 1152 --><p class='noindent'><span class='ecbx-1000'>Determine the RD curves for a DWT </span><span class='cite'><span class='ecbx-1000'>[</span><a href='#Xlee2019pywavelets'><span class='ecbx-1000'>6</span></a><span class='ecbx-1000'>]</span></span>:
-         </p><!-- l. 1155 --><p class='noindent'>Rebuild the RD curves considering also the removal of the temporal
-         decorrelation. Use <span class='obeylines-h'><code class='verb'>temporal_overlapped_DWT_coding.py</code></span> and the
-         <span class='obeylines-h'><code class='verb'>--minimal_quantization_step</code></span> parameter to generate the different
-         points of the RD curves. Try to minimize the RD curve playing with
-         the number of levels and the wavelet name.
-         </p></li>
-<li class='enumerate' id='x1-25008x3'>
-         <!-- l. 1163 --><p class='noindent'><span class='ecbx-1000'>Determine the RD curves for the corresponding WPT </span><span class='cite'><span class='ecbx-1000'>[</span><a href='#Xlee2019pywavelets'><span class='ecbx-1000'>6</span></a><span class='ecbx-1000'>]</span></span>:
-         </p><!-- l. 1166 --><p class='noindent'>Compare with <span class='obeylines-h'><code class='verb'>temporal_overlapped_WPT_coding.py</code></span>. Use always
-         the same graph.
-</p>
-         </li></ol>
-     </li>
-<li class='enumerate' id='x1-25010x2'>
-     <!-- l. 1174 --><p class='noindent'><span class='ecbx-1000'>Answer the questions</span>:
-     </p><!-- l. 1177 --><p class='noindent'>
-         </p><ol class='enumerate2'>
-<li class='enumerate' id='x1-25012x1'>Does the computation of the DWT using chunk overlapping increase
-         the latency of the whole system? And what about the jitter? In what
-         amount? Provide a reason.
-         </li>
-<li class='enumerate' id='x1-25014x2'>Which other transform(s) are used in audio encoding systems (such
-         as MP3) to exploit temporal redundancy? Enumerate the systems
-         and the transform(s) used.
-</li></ol>
-     </li></ol>
+<!-- l. 1141 --></p><p class='indent'>   The MDCT is orthogonal and therefore, the inverse transform only differs from
+the forward one in a normalization coefficient of value <span class='mathjax-inline'>\(1/N\)</span>.
    
-   <h3 class='sectionHead' id='resources'><span class='titlemark'>7   </span> <a id='x1-260007'></a>Resources</h3>
+</p>
+   <h4 class='subsectionHead' id='overlapping'><span class='titlemark'>6.1   </span> <a id='x1-260006.1'></a>Overlapping</h4>
+<!-- l. 1146 --><p class='noindent'>The MDCT is overlapped using a technique called Time-Domain Aliasing
+Cancellation (TDAC). If the MDCT block length (chunk) is <span class='mathjax-inline'>\(N\)</span>, the transform actually
+operates on <span class='mathjax-inline'>\(2N\)</span> input samples and produces <span class='mathjax-inline'>\(N\)</span> output coefficients. Example for 2048
+samples:
+                                                                  
+
+                                                                  
+</p>
+   <pre class='verbatim' id='verbatim-1'>
+Block 1: [ 0 ---------------- 2047 ]
+Block 2:         [ 1024 --------------- 3071 ]
+</pre>
+<!-- l. 1154 --><p class='nopar'>
+</p><!-- l. 1156 --><p class='indent'>   The inverse transform input <span class='mathjax-inline'>\(N\)</span> coefficients and output <span class='mathjax-inline'>\(2N\)</span> samples. The reconstructed
+blocks are added overlapping <span class='mathjax-inline'>\(50\%\)</span> (<span class='mathjax-inline'>\(N\)</span> samples).
+   
+</p>
+   <h4 class='subsectionHead' id='windowing-functions'><span class='titlemark'>6.2   </span> <a id='x1-270006.2'></a>Windowing functions</h4>
+<!-- l. 1161 --><p class='noindent'>To minimize the spectral leakage<span class='footnote-mark'><a href='#fn30x0' id='fn30x0-bk'><sup class='textsuperscript'>30</sup></a></span><a id='x1-27001f30'></a>,
+the blocks are multiplied by a window function.
+   
+</p>
+   <h3 class='sectionHead' id='deliverables'><span class='titlemark'>7   </span> <a id='x1-280007'></a>Deliverables</h3>
+<!-- l. 1176 --><p class='noindent'>Find the following RD curves:
+</p><!-- l. 1178 --><p class='indent'>
+     </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-28002x1'><span class='ecbx-1000'>Determine the RD curves for the MST</span>: As we did in the previous
+     milestone, generate the RD curves for a set of simulated transmission
+     contexts. Use the modules <span class='ectt-1000'>stereo_MST_coding{_16|_32}.py</span>. As you can
+     see, they differs in how the transform has been implemented. Notice that
+     you can use the <span class='obeylines-h'><code class='verb'>--minimal_quantization_step</code></span> parameter to generate
+     the different points of the RD curves (it is not necessary to use a bit-rate
+     control algorithm neither <span class='ectt-1000'>tc</span>).
+     </li>
+<li class='enumerate' id='x1-28004x2'><span class='ecbx-1000'>Determine            the            RD            curves            for
+     a DWT </span><span class='cite'><span class='ecbx-1000'>[</span><a href='#Xlee2019pywavelets'><span class='ecbx-1000'>6</span></a><span class='ecbx-1000'>]</span></span>: Rebuild the RD curves considering also the removal of the
+     temporal decorrelation. Use <span class='obeylines-h'><code class='verb'>temporal_overlapped_DWT_coding.py</code></span> and
+     the <span class='obeylines-h'><code class='verb'>--minimal_quantization_step</code></span> parameter to generate the different
+     points of the RD curves. Try to minimize the RD curve playing with the
+     number of levels and the wavelet name.
+                                                                  
+
+                                                                  
+     </li>
+<li class='enumerate' id='x1-28006x3'><span class='ecbx-1000'>Determine  the  RD  curves  for  the  corresponding  WPT </span><span class='cite'><span class='ecbx-1000'>[</span><a href='#Xlee2019pywavelets'><span class='ecbx-1000'>6</span></a><span class='ecbx-1000'>]</span></span>:
+     Compare  with  <span class='obeylines-h'><code class='verb'>temporal_overlapped_WPT_coding.py</code></span>.  Use  always  the
+     same graph.
+     </li>
+<li class='enumerate' id='x1-28008x4'><span class='ecbx-1000'>Determine  the  RD  curves  for  the  MDCT</span>:  Create  a  new
+     module  <span class='obeylines-h'><code class='verb'>temporal_MDCT_coding.py</code></span> written  from  a  notebook  called
+     <span class='obeylines-h'><code class='verb'>temporal_MDCT_coding.ipynb</code></span>. Include in this module, as an option, at
+     least one window function different to the rectangular window. Compare
+     the MDCT in the R/D domain with the rest of transforms (MST, DWT,
+     and WPT) over the same graph, considering different window functions.
+</li></ol>
+   
+   <h3 class='sectionHead' id='resources'><span class='titlemark'>8   </span> <a id='x1-290008'></a>Resources</h3>
     <div class='thebibliography'>
     <p class='bibitem'><span class='biblabel'>
   [1]<span class='bibsp'>   </span></span><a id='Xnumpy'></a>S. Berg et al.  <a href='https://numpy.org/'>The NumPy project</a>.
@@ -685,14 +707,14 @@ avoid the gliches at the borders of the chunks.
     <p class='bibitem'><span class='biblabel'>
   [4]<span class='bibsp'>   </span></span><a id='Xthinkstats'></a>A.B. Downey.  <a href='https://greenteapress.com/thinkstats/thinkstats.pdf'><span class='ecti-1000'>Think Stats Probability and Statistics for Programmers</span></a>.
     O’Reilly, 2011.
+                                                                  
+
+                                                                  
     </p>
     <p class='bibitem'><span class='biblabel'>
   [5]<span class='bibsp'>   </span></span><a id='Xharris2020array'></a>C. R.  Harris,  K. J.  Millman,  S. J.  van der  Walt,  R. Gommers,
     P. Virtanen, D. Cournapeau, E. Wieser, J. Taylor, S. Berg, N. J. Smith,
     et al.  <a href='https://www.nature.com/articles/s41586-020-2649-2'>Array programming with NumPy</a>. <span class='ecti-1000'>Nature</span>, 585(7825):357–362, 2020.
-                                                                  
-
-                                                                  
     </p>
     <p class='bibitem'><span class='biblabel'>
   [6]<span class='bibsp'>   </span></span><a id='Xlee2019pywavelets'></a>G. Lee, R. Gommers, F. Waselewski, K. Wohlfahrt, and A. O’Leary.
@@ -803,7 +825,14 @@ filters are orthogonal to their corresponding “</span><span class='ecti-0800'>
 biorthogonal. </span><span class='cite'><span class='ecrm-0800'>[</span><a href='#Xvetterli2014foundations'><span class='ecrm-0800'>11</span></a><span class='ecrm-0800'>]</span></span></p><a id='x1-15006x2.8'></a>
 <!-- l. 835 --><p class='indent'>     <span class='footnote-mark'><a href='#fn29x0-bk' id='fn29x0'><sup class='textsuperscript'>29</sup></a></span><span class='ecrm-0800'>If Eq. </span>\eqref{eq:linear_prediction} <span class='ecrm-0800'>is used in Eq.</span>\eqref{eq:linear_update}<span class='ecrm-0800'>, we can
 obtain the coefficients of the low-pass filter that computes the low-frequency subband:
-</span><span class='mathjax-inline'>\({\mathbf l}^l_i=-1/8{\mathbf l}^{l-1}_{2i-2}+1/4{\mathbf l}^{l-1}_{2i-1}+3/4{\mathbf l}^{l-1}_{2i}+1/4{\mathbf l}^{l-1}_{2i+1}-1/8{\mathbf l}^{l-1}_{2i+2}\)</span><span class='ecrm-0800'>.</span></p>                                                                                                                         </div>
+</span><span class='mathjax-inline'>\({\mathbf l}^l_i=-1/8{\mathbf l}^{l-1}_{2i-2}+1/4{\mathbf l}^{l-1}_{2i-1}+3/4{\mathbf l}^{l-1}_{2i}+1/4{\mathbf l}^{l-1}_{2i+1}-1/8{\mathbf l}^{l-1}_{2i+2}\)</span><span class='ecrm-0800'>.</span></p><a id='x1-27002x6.2'></a>
+<!-- l. 1170 --><p class='indent'>     <span class='footnote-mark'><a href='#fn30x0-bk' id='fn30x0'><sup class='textsuperscript'>30</sup></a></span><span class='ecrm-0800'>Spectral leakage is a phenomenon that occurs when a finite-length signal is analyzed using
+infinite support functions (such as the used by the Fourier Transform, or the Cosine Transform).
+Basically is caused because to generate a finite-length signal (a block) is we must multiply the
+original (supposely) infinite-length signal by a rectangular window whose Fourier Transform is a Sinc
+function. Because this function is less compact than other functions, the leakage can be
+minimized if we use windows whose frequency response are more similar to the inpulse
+function.</span></p>                                                                                                              </div>
                                                                   
 
                                                                   
