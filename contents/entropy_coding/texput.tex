@@ -50,12 +50,85 @@ certain point onward, all the remaining bytes in that plane are
 zero. To do this:
 
 \begin{enumerate}
-\item Make all coefficients positive by adding an offset (which must
+\item Make all coefficients positive by adding a (positive) offset (which must
   then be subtracted during decoding).
-
+\item Using the byte \texttt{FF} as a zero-escape marker, implement this
+  ``byte stuffing'' tecnique:
+\begin{verbatim}
+Example	             Original Data	Stuffed/Encoded Data
+-------------------- ------------------ --------------------
+Normal data	     [05, 12, 08]       [05, 12, 08]
+Data has the marker  [05, FF, 08]       [05, FF, 01, 08]
+End with zeros       [05, 00, 00, 00]   [05, FF, 00]
+Stuffed data         [05, FF, 01, 08]   [05, FF, 01, 01, 08]
+\end{verbatim}
+Here, the stuffing byte is \texttt{01}. Obviously, the decoded data
+exactly matches the original data.
+\item Encode each byte-plane using DEFLATE.
 \end{enumerate}
 
 \section{Deliverables}
+
+A new InterCom layer named \verb|zero_coding.py|. Write the code in a
+notebook, along with an evaluation of this encoding technique.
+
+\begin{comment}
+  ESCAPE_BYTE = b'\xFF'
+LITERAL_MARKER = b'\xFF\x01'
+ZERO_PAD_MARKER = b'\xFF\x00'
+
+def encode_zero_escape(data: bytes) -> bytes:
+    """
+    Encodes a byte array, escaping 0xFF and marking trailing zeros.
+    """
+    # 1. Strip all trailing zeros from the end of the data
+    stripped_data = data.rstrip(b'\x00')
+    
+    # 2. Escape any naturally occurring 0xFF bytes in the remaining payload
+    # This turns every 0xFF into 0xFF01
+    encoded = stripped_data.replace(ESCAPE_BYTE, LITERAL_MARKER)
+    
+    # 3. If we stripped any zeros, append the "End with Zeros" marker
+    if len(stripped_data) < len(data):
+        encoded += ZERO_PAD_MARKER
+        
+    return encoded
+
+def decode_zero_escape(encoded_data: bytes, target_length: int) -> bytes:
+    """
+    Decodes the byte array, restoring 0xFF and padding zeros if marked.
+    Note: The decoder needs to know the original/target length to pad correctly.
+    """
+    # 1. Check if the payload ends with the "Pad with Zeros" marker
+    if encoded_data.endswith(ZERO_PAD_MARKER):
+        # Remove the marker from the end
+        payload = encoded_data[:-2]
+        
+        # Unescape the literal 0xFFs, then pad the rest with zeros
+        decoded = payload.replace(LITERAL_MARKER, ESCAPE_BYTE)
+        return decoded.ljust(target_length, b'\x00')
+        
+    else:
+        # No trailing zeros to pad, just unescape the literals
+    return encoded_data.replace(LITERAL_MARKER, ESCAPE_BYTE)
+
+# A 10-byte array with a natural 0xFF and trailing zeros
+original_data = b'\x05\xFF\x10\x00\x00\x00\x00\x00\x00\x00'
+
+# Encode it
+encoded = encode_zero_escape(original_data)
+
+print(f"Original Length: {len(original_data)}")
+print(f"Original Data:   {original_data.hex(' ')}")
+print(f"Encoded Length:  {len(encoded)}")
+print(f"Encoded Data:    {encoded.hex(' ')}") 
+
+# Decode it
+decoded = decode_zero_escape(encoded, target_length=10)
+print(f"\nDecoded Matches Original? {decoded == original_data}")
+    
+\end{comment}
+
 
 \section{Resources}
 
