@@ -1,7 +1,7 @@
 % Emacs, this is -*-latex-*-
 
 \input{../../definitions}
-\title{Entropy Coding}
+\title{Entropy Coding in the Subband Domain}
 
 % ahora mismo, un chunk es la concatenación de 2048 (chunk_size)
 % enteros de 24 bits. Los primeros 1024 bytes del plano de bytes más
@@ -50,8 +50,11 @@ certain point onward, all the remaining bytes in that plane are
 zero. To do this:
 
 \begin{enumerate}
-\item Make all coefficients positive by adding a (positive) offset (which must
-  then be subtracted during decoding).
+\item Make all coefficients positive by adding a (positive) offset
+  (which must then be subtracted during decoding). The
+  \texttt{00}-bytes of the binary representation of the positive
+  coefficients should continue being \texttt{00}-bytes after this
+  addition.
 \item Using the byte \texttt{FF} as a zero-escape marker, implement this
   ``byte stuffing'' tecnique:
 \begin{verbatim}

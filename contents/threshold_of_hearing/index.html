@@ -19,7 +19,7 @@
 
 <h2 class='titleHead'>Perceptual Quantization</h2>
  <div class='author'> <a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp;  </span><a href='https://hpca.ual.es/~savins/'><span class='ecrm-1200'>Savins Puertas Martín</span></a> <span class='ecrm-1200'>&amp;  </span><a href='https://www.ual.es/persona/555355505557525189'><span class='ecrm-1200'>Juan José Moreno Riado</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>February 22, 2026</span></div>
+<div class='date'><span class='ecrm-1200'>February 23, 2026</span></div>
    </div>
    <h3 class='likesectionHead' id='contents'><a id='x1-1000'></a>Contents</h3>
    <div class='tableofcontents'>
@@ -137,58 +137,6 @@ the <span class='mathjax-inline'>\(k\)</span>-th subband is (see Milestone Bit-r
 noise in each subband should be below the ToH for that subband. Obviously, if the
 compression ratio requirement cannot meet this, the noise should be equally
 distributed among all the subbands.
-<<<<<<< HEAD
-<!-- l. 195 --></p><p class='indent'>   The variance of a signal (in this case, of a linear transformation of a signal) can
-be a good estimator of the signal power, <span class='mathjax-inline'>\(P(\mathbf {s})=\sigma _{\mathbf {s}}^2\)</span>, i.e., for the subband <span class='mathjax-inline'>\(k\)</span>, we have that </p><div class='mathjax-env mathjax-equation'>\begin{equation} P_k = \frac {\Delta _k^2}{12}, \end{equation}</div><p><a id='x1-9002r9'></a> or
-equivalently, that </p><div class='mathjax-env mathjax-equation'>\begin{equation} \Delta _k = \sqrt {12P_k}. \label {eq:find_delta} \end{equation}</div><p><a id='x1-9003r10'></a> This expression (Eq. \eqref{eq:find_delta}) establishes
-a relationship between the ToH curve and the QSS in each subband: if <span class='mathjax-inline'>\(P_k\)</span>
-(the power of the signal to be audible in the <span class='mathjax-inline'>\(k\)</span>-th subband) increases, then
-the QSS for that subband can be higher, and viceversa. Basically, we have
-to:
-     </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-9005x1'>
-     <!-- l. 206 --><p class='noindent'>Linearize the ToH curve using </p><div class='mathjax-env mathjax-equation'>\begin{equation} \text {linear-ToH}(f) = 10^{\text {ToH}(f)/10}. \end{equation}</div><a id='x1-9006r11'></a> Notice that the ToH curve is originally
-     expressed in decibels.
-     </li>
-<li class='enumerate' id='x1-9008x2'>Compute <span class='mathjax-inline'>\(P_k\)</span> as the average value of the linear-ToH curve in the subband
-     <span class='mathjax-inline'>\(k\)</span>.
-     </li>
-<li class='enumerate' id='x1-9010x3'>Apply the Eq. \eqref{eq:find_delta} for each subband.</li></ol>
-   
-   <h3 class='sectionHead' id='deliverables'><span class='titlemark'>9   </span> <a id='x1-100009'></a>Deliverables</h3>
-<!-- l. 216 --><p class='noindent'>
-     </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-10002x1'>Find your own ToH curve using <span class='ectt-1000'>create_ToH_curve.py</span>. In this case we
-     are going to transmit the sound file through <span class='ectt-1000'>localhost</span>, and therefore, we
-     don’t have to send the file.
-                                                                  
-
-                                                                  
-     </li>
-<li class='enumerate' id='x1-10004x2'>For the same bit-rate (approximately<span class='footnote-mark'><a href='#fn4x0' id='fn4x0-bk'><sup class='textsuperscript'>4</sup></a></span><a id='x1-10005f4'></a>),
-     compare<span class='footnote-mark'><a href='#fn5x0' id='fn5x0-bk'><sup class='textsuperscript'>5</sup></a></span><a id='x1-10007f5'></a>
-     the quality of the reproduction of an audio file when you use <span class='ectt-1000'>static_ToH.py</span>
-     and its predecessor, <span class='ectt-1000'>temporal_DWT.py</span>.</li></ol>
-   
-   <h3 class='sectionHead' id='dyadic-dwt-subbands-and-quantization-steps'><span class='titlemark'>10   </span> <a id='x1-1100010'></a>Dyadic DWT subbands and quantization steps</h3>
-<!-- l. 231 --><p class='noindent'>The number of dyadic DWT subbands </p><div class='mathjax-env mathjax-equation'>\begin{equation} N_{\text {sb}} = N_{\text {levels}} + 1, \end{equation}</div><p><a id='x1-11001r12'></a> where <span class='mathjax-inline'>\(N_{\text {levels}}\)</span> is the number of levels of the dyadic
-DWT <span class='cite'>[<a href='#Xvetterli1995wavelets'>3</a>]</span>. Except for the <span class='mathjax-inline'>\({\mathbf l}^{N_{\text {levels}}}\)</span> subband (the lowest-pass frequency of the decomposition),
-it holds that </p><div class='mathjax-env mathjax-equation'>\begin{equation} W({\mathbf w}_s) = \frac {1}{2}W({\mathbf w}_{s-1}), \end{equation}</div><p><a id='x1-11002r13'></a> being <span class='mathjax-inline'>\(W(\cdot )\)</span> the bandwidth of the corresponding subband. Therefore,
-considering that (by default, in InterCom) the bandwidth of the audio signal is <span class='mathjax-inline'>\(22050\)</span> Hz,
-the bandwidth <span class='mathjax-inline'>\(W({\mathbf w}_1)=22050/2\)</span> Hz, <span class='mathjax-inline'>\(W({\mathbf w}_2)=22050/4\)</span>, etc. It is also true that </p><div class='mathjax-env mathjax-equation'>\begin{equation} W({\mathbf l}^{N_{\text {levels}}}) = W({\mathbf w}^{N_{\text {levels}}}). \end{equation}</div><p><a id='x1-11003r14'></a>
-<!-- l. 251 --></p><p class='indent'>   The idea is to decide, knowing the frequencies represented in each DWT subband
-and the ToH curve (see  <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/docs/2-hours_seminar.ipynb'>InterCom: a Real-Time Digital Audio Full-Duplex
-Transmitter/Receiver</a>), the QSS (Quantization Step Size) that should be applied to
-each subband.
-</p><!-- l. 258 --><p class='indent'>   This idea is already implemented in a module named <span class='obeylines-h'><code class='verb'>dyadic_ToH.py</code></span>.
-   
-</p>
-   <h3 class='sectionHead' id='deliverables1'><span class='titlemark'>11   </span> <a id='x1-1200011'></a>Deliverables</h3>
-<!-- l. 262 --><p class='noindent'>Subjectively compare the audio quality obtained by <span class='obeylines-h'><code class='verb'>dyadic_ToH.py</code></span> and its
-predecessor, <span class='obeylines-h'><code class='verb'>temporal_overlapped_DWT_coding.py</code></span>. “Subjectively” means that, in
-groups, you must determine, for the same bit-rate and audio-content configuration,
-which implementation sounds better.
-=======
 <!-- l. 207 --></p><p class='indent'>   The variance of a signal (or a linear transformation of a signal) can be a good
 estimator of the signal power, <span class='mathjax-inline'>\(P(\mathbf {s})=\sigma _{\mathbf {s}}^2\)</span>, i.e., for the subband <span class='mathjax-inline'>\(k\)</span>, we have that </p><div class='mathjax-env mathjax-equation'>\begin{equation} P_k = \frac {\Delta _k^2}{12}, \end{equation}</div><p><a id='x1-8002r8'></a> or equivalently,
 that </p><div class='mathjax-env mathjax-equation'>\begin{equation} \Delta _k = \sqrt {12P_k}. \label {eq:find_delta} \end{equation}</div><p><a id='x1-8003r9'></a> This expression (Eq. \eqref{eq:find_delta}) establishes a relationship between
@@ -205,7 +153,6 @@ algorithm.
    
 </p>
    <h3 class='sectionHead' id='deliverables1'><span class='titlemark'>9   </span> <a id='x1-100009'></a>Deliverables</h3>
->>>>>>> f32163f3457f4b5d8a41252aa1b48bb9f1a21185
    
    <h3 class='sectionHead' id='resources'><span class='titlemark'>10   </span> <a id='x1-1100010'></a>Resources</h3>
    <div class='thebibliography'>
@@ -228,18 +175,8 @@ algorithm.
    <div class='footnotes'><a id='x1-4005x3'></a>
 <!-- l. 92 --><p class='indent'>     <span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='mathjax-inline'>\(N_{\text {DWT}}\) </span><span class='ecrm-0800'>depends also on the chunk-size, a value that should be small enough to minimize the
 latency.</span></p><a id='x1-7010x6'></a>
-<<<<<<< HEAD
-<!-- l. 161 --><p class='indent'>     <span class='footnote-mark'><a href='#fn2x0-bk' id='fn2x0'><sup class='textsuperscript'>2</sup></a></span><span class='ecrm-0800'>For example, your speakers could not have a flat frequency response, or your room could
-attenuate some frequencies.</span></p><a id='x1-8002x7'></a>
-<!-- l. 179 --><p class='indent'>     <span class='footnote-mark'><a href='#fn3x0-bk' id='fn3x0'><sup class='textsuperscript'>3</sup></a></span><span class='ecrm-0800'>Remember that when we quantize the coefficients of a subband we are basically generating
-quantization noise that can be modeles as random  </span><a href='https://en.wikipedia.org/wiki/Continuous_uniform_distribution'><span class='ecrm-0800'>uniform (uniformely distributed)</span></a>
-<span class='ecrm-0800'>noise.</span></p><a id='x1-10006x4'></a>
-<!-- l. 221 --><p class='noindent'><span class='footnote-mark'><a href='#fn4x0-bk' id='fn4x0'><sup class='textsuperscript'>4</sup></a></span><span class='ecrm-0800'>It is quite difficult to use exacly the same bit-rate.</span></p><a id='x1-10008x5'></a>
-<!-- l. 223 --><p class='noindent'><span class='footnote-mark'><a href='#fn5x0-bk' id='fn5x0'><sup class='textsuperscript'>5</sup></a></span><span class='ecrm-0800'>Since we are doing a subjective comparison we cannot use a standard R/D curve.</span></p>         </div>
-=======
 <!-- l. 168 --><p class='indent'>     <span class='footnote-mark'><a href='#fn2x0-bk' id='fn2x0'><sup class='textsuperscript'>2</sup></a></span><span class='ecrm-0800'>For example, your speakers could not have a flat frequency response, or your room could
 attenuate some frequencies.</span></p>                                                                                      </div>
->>>>>>> f32163f3457f4b5d8a41252aa1b48bb9f1a21185
  
 </body> 
 </html>

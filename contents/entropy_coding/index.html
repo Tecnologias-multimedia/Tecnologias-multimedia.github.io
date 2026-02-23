@@ -1,6 +1,6 @@
 <!DOCTYPE html> 
 <html lang='en-US' xml:lang='en-US'> 
-<head> <title>Entropy Coding</title> 
+<head> <title>Entropy Coding in the Subband Domain</title> 
 <meta charset='utf-8' /> 
 <meta content='TeX4ht (https://tug.org/tex4ht/)' name='generator' /> 
 <meta content='width=device-width,initial-scale=1' name='viewport' /> 
@@ -17,21 +17,57 @@
 
                                                                   
 
-<h2 class='titleHead'>Entropy Coding</h2>
+<h2 class='titleHead'>Entropy Coding in the Subband Domain</h2>
  <div class='author'> <a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp;  </span><a href='https://hpca.ual.es/~savins/'><span class='ecrm-1200'>Savins Puertas Martín</span></a> <span class='ecrm-1200'>&amp;  </span><a href='https://www.ual.es/persona/555355505557525189'><span class='ecrm-1200'>Juan José Moreno Riado</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>February 22, 2026</span></div>
+<div class='date'><span class='ecrm-1200'>February 23, 2026</span></div>
    </div>
    
    <h3 class='sectionHead' id='description'><span class='titlemark'>1   </span> <a id='x1-10001'></a>Description</h3>
+<!-- l. 37 --><p class='noindent'>The entropic compressor used so far only takes into account that the samples (or
+coefficients, depending on the number of layers used) that, when compressed by byte
+planes, may contain a significant number of zeros, thus increasing the compression
+rate. Furthermore, we know that the coefficients tend towards zero as their frequency
+increases, even without perceptual quantization.
    
+</p>
    <h3 class='sectionHead' id='what-you-have-to-do'><span class='titlemark'>2   </span> <a id='x1-20002'></a>What you have to do?</h3>
-<!-- l. 39 --><p class='noindent'>
+<!-- l. 46 --><p class='noindent'>Implement an entropic coding algorithm that exploits the fact that, starting from a
+certain coefficient (always beginning with the lowest frequencies), and processing the
+coefficients by byte planes, from a certain point onward, all the remaining bytes in
+that plane are zero. To do this:
+</p><!-- l. 52 --><p class='indent'>
      </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-2002x1'></li></ol>
+<li class='enumerate' id='x1-2002x1'>Make all coefficients positive by adding a (positive) offset (which must then
+     be subtracted during decoding). The <span class='ectt-1000'>00</span>-bytes of the binary representation
+     of  the  positive  coefficients  should  continue  being  <span class='ectt-1000'>00</span>-bytes  after  this
+     addition.
+     </li>
+<li class='enumerate' id='x1-2004x2'>
+                                                                  
+
+                                                                  
+     <!-- l. 58 --><p class='noindent'>Using the byte <span class='ectt-1000'>FF </span>as a zero-escape marker, implement this “byte stuffing”
+     tecnique:
+                                                                  
+
+                                                                  
+</p>
+     <pre class='verbatim' id='verbatim-1'>
+     Example              Original Data Stuffed/Encoded Data
+     -------------------- ------------------ --------------------
+     Normal data      [05, 12, 08]       [05, 12, 08]
+     Data has the marker  [05, FF, 08]       [05, FF, 01, 08]
+     End with zeros       [05, 00, 00, 00]   [05, FF, 00]
+     Stuffed data         [05, FF, 01, 08]   [05, FF, 01, 01, 08]
+</pre>
+     <!-- l. 67 --><p class='nopar'> Here, the stuffing byte is <span class='ectt-1000'>01</span>. Obviously, the decoded data exactly matches the
+     original data.
+     </p></li>
+<li class='enumerate' id='x1-2006x3'>Encode each byte-plane using DEFLATE.</li></ol>
    
    <h3 class='sectionHead' id='deliverables'><span class='titlemark'>3   </span> <a id='x1-30003'></a>Deliverables</h3>
-<!-- l. 45 --><p class='noindent'>The module <span class='obeylines-h'><code class='verb'>simultaneous_masking.py</code></span> (inherited from <span class='obeylines-h'><code class='verb'>threshold.py</code></span>). Store it at
-the  <a href='https://github.com/Tecnologias-multimedia/intercom'>root directory</a> of your InterCom repo.
+<!-- l. 75 --><p class='noindent'>A new InterCom layer named <span class='obeylines-h'><code class='verb'>zero_coding.py</code></span>. Write the code in a notebook, along
+with an evaluation of this encoding technique.
    
 </p>
    <h3 class='sectionHead' id='resources'><span class='titlemark'>4   </span> <a id='x1-40004'></a>Resources</h3>
