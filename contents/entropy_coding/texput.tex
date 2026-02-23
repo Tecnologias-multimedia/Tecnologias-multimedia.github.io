@@ -34,18 +34,28 @@
 
 \section{Description}
 
+The entropic compressor used so far only takes into account that the
+samples (or coefficients, depending on the number of layers used)
+that, when compressed by byte planes, may contain a significant number
+of zeros, thus increasing the compression rate. Furthermore, we know
+that the coefficients tend towards zero as their frequency increases,
+even without perceptual quantization.
+
 \section{What you have to do?}
 
+Implement an entropic coding algorithm that exploits the fact that,
+starting from a certain coefficient (always beginning with the lowest
+frequencies), and processing the coefficients by byte planes, from a
+certain point onward, all the remaining bytes in that plane are
+zero. To do this:
+
 \begin{enumerate}
-\item 
+\item Make all coefficients positive by adding an offset (which must
+  then be subtracted during decoding).
+
 \end{enumerate}
 
 \section{Deliverables}
-
-The module \verb|simultaneous_masking.py| (inherited from
-\verb|threshold.py|). Store it at the
-\href{https://github.com/Tecnologias-multimedia/intercom}{root
-  directory} of your InterCom repo.
 
 \section{Resources}
 
