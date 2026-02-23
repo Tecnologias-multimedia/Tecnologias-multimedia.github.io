@@ -19,7 +19,7 @@
 
 <h2 class='titleHead'>Hidding the Jitter</h2>
  <div class='author'> <a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp;  </span><a href='https://hpca.ual.es/~savins/'><span class='ecrm-1200'>Savins Puertas Martín</span></a> <span class='ecrm-1200'>&amp;  </span><a href='https://www.ual.es/persona/555355505557525189'><span class='ecrm-1200'>Juan José Moreno Riado</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>November 26, 2025</span></div>
+<div class='date'><span class='ecrm-1200'>February 21, 2026</span></div>
    </div>
    <h3 class='likesectionHead' id='contents'><a id='x1-1000'></a>Contents</h3>
    <div class='tableofcontents'>
@@ -169,48 +169,24 @@ return with every new received chunk.
    
 </p>
    <h3 class='sectionHead' id='deliverables'><span class='titlemark'>3   </span> <a id='x1-40003'></a>Deliverables</h3>
-<!-- l. 192 --><p class='noindent'>
+<!-- l. 211 --><p class='noindent'>Reporting everything in a  <a href='https://jupyter.org/'>Jupyter notebook</a>, determine, experimentally:
      </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-4002x1'>
-     <!-- l. 209 --><p class='noindent'><span class='ecbx-1000'>Find your minimum buffering time</span>:
-     </p><!-- l. 211 --><p class='noindent'>Determine, experimentally:
-         </p><ol class='enumerate2'>
-<li class='enumerate' id='x1-4004x1'>The minimum artificial latency that you must configure in your InterCom
-         instance to communicate with your groupmate without lossing chunks,
-         when he/she is in a different<span class='footnote-mark'><a href='#fn6x0' id='fn6x0-bk'><sup class='textsuperscript'>6</sup></a></span><a id='x1-4005f6'></a>
-         local network.  <a href='https://vicente-gonzalez-ruiz.github.io/about_ping/'>Ping</a> can help to estimate the latency.
-         </li>
-<li class='enumerate' id='x1-4008x2'>Repeat the previous experiment using only localhost (transmiting
-         the chunk between the loopback network adapter), but adding some
-         jitter with the tool  <a href='https://vicente-gonzalez-ruiz.github.io/about_tc/'><span class='ectt-1000'>tc</span></a>. If <span class='ectt-1000'>tc </span>is not avaiable in your OS, you can use
-         any other similar tool, or use the Linux system at the laboratory.</li></ol>
-     
-     <h4 class='likesubsectionHead' id='example'><a id='x1-5000'></a>Example</h4>
-     <!-- l. 228 --><p class='noindent'>An example of a notebook related to this milestone can be found  <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/docs/Hidding_the_Network_Jitter__example.ipynb'>here</a>. Notice
-     that not all the content of the notebook could be requested in this
-     milestone.
-     </p></li>
-<li class='enumerate' id='x1-5002x2'>
-     <!-- l. 233 --><p class='noindent'>To the report describing the previously requested experimentation, <span class='ecbx-1000'>add
-     a section evaluating it </span>(with a ratio out of 10), considering that
-     each of the following rubrics has the same weight in the evaluation
-     score:
-         </p><ol class='enumerate2'>
-<li class='enumerate' id='x1-5004x1'>Has this latency been determined in both cases (without simulating
-         the latency or by simulating the latency (and its variation))?
-         </li>
-<li class='enumerate' id='x1-5006x2'>Is  the  experiment  perfectly  described?  In  other  words,  can  it  be
-         replicated with the information in the report?
-         </li>
-<li class='enumerate' id='x1-5008x3'>Is there a coherent relationship between the jitter simulated with <span class='ectt-1000'>tc</span>
-         and the buffer time that must be used to avoid losing chunks?</li></ol>
-     </li></ol>
-   <div class='thebibliography'>
-   <p class='bibitem'><span class='biblabel'>
- [1]<span class='bibsp'>   </span></span><a id='Xdordal2020intro'></a>Peter L. Dordal.  <a href='http://intronetworks.cs.luc.edu/current/ComputerNetworks.pdf'><span class='ecti-1000'>An Introduction to Computer Networks</span></a>. 2020.
+<li class='enumerate' id='x1-4002x1'>The minimum artificial latency that you must configure in your InterCom
+     instance to communicate with your groupmate without lossing chunks,
+     when he/she is in a different<span class='footnote-mark'><a href='#fn6x0' id='fn6x0-bk'><sup class='textsuperscript'>6</sup></a></span><a id='x1-4003f6'></a>
+     local network.  <a href='https://vicente-gonzalez-ruiz.github.io/about_ping/'>Ping</a> can help to estimate the latency.
+     </li>
+<li class='enumerate' id='x1-4006x2'>Repeat  the  previous  experiment  using  only  localhost  (transmiting  the
+     chunk between the loopback network adapter), but adding some jitter with
+     the tool  <a href='https://vicente-gonzalez-ruiz.github.io/about_tc/'><span class='ectt-1000'>tc</span></a>. If <span class='ectt-1000'>tc </span>is not avaiable in your OS, you can use any other similar
+     tool, or use the Linux at the laboratory. But remember, you only must
+     play with jitter, not with packet loss or transmission bit-rate.</li></ol>
                                                                   
 
                                                                   
+   <div class='thebibliography'>
+   <p class='bibitem'><span class='biblabel'>
+ [1]<span class='bibsp'>   </span></span><a id='Xdordal2020intro'></a>Peter L. Dordal.  <a href='http://intronetworks.cs.luc.edu/current/ComputerNetworks.pdf'><span class='ecti-1000'>An Introduction to Computer Networks</span></a>. 2020.
    </p>
    <p class='bibitem'><span class='biblabel'>
  [2]<span class='bibsp'>   </span></span><a id='XKurose-Ross'></a>James F.  Kurose  and  Keith W.  Ross.      <a href='https://docs.google.com/viewer?a=v&amp;pid=sites&amp;srcid=Z2FyZGl2aWR5YXBpdGguYWMuaW58aXQyMDE0LTIwMTh8Z3g6OTY5ZDcxZjRmZDBkYzI3'><span class='ecti-1000'>Computer  Networking:  A
@@ -233,8 +209,8 @@ DAC and then, after the delay, start sending the received chunk of audio, in the
 order.</span></p><a id='x1-3020x4'></a>
 <!-- l. 127 --><p class='noindent'><span class='footnote-mark'><a href='#fn4x0-bk' id='fn4x0'><sup class='textsuperscript'>4</sup></a></span><span class='ecrm-0800'>Those chunks that have not been received on time or never have been received.</span></p><a id='x1-3037x2'></a>
 <!-- l. 165 --><p class='indent'>     <span class='footnote-mark'><a href='#fn5x0-bk' id='fn5x0'><sup class='textsuperscript'>5</sup></a></span><span class='ecrm-0800'>Chunks will be compressed in a posterior milestone, and uncompressing is performed in this
-step.</span></p><a id='x1-4006x6'></a>
-<!-- l. 216 --><p class='noindent'><span class='footnote-mark'><a href='#fn6x0-bk' id='fn6x0'><sup class='textsuperscript'>6</sup></a></span><span class='ecrm-0800'>Different to the network in which you are using InterCom.</span></p>                                        </div>
+step.</span></p><a id='x1-4004x6'></a>
+<!-- l. 217 --><p class='noindent'><span class='footnote-mark'><a href='#fn6x0-bk' id='fn6x0'><sup class='textsuperscript'>6</sup></a></span><span class='ecrm-0800'>Different to the network in which you are using InterCom.</span></p>                                        </div>
  
 </body> 
 </html>

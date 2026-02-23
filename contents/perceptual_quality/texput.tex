@@ -1,0 +1,35 @@
+% Emacs, this is -*-latex-*-
+
+\input{../../definitions}
+\title{Perceptual Quality Measurement}
+
+When evaluating audio compressed with a perceptual (lossy) codec, you
+typically want objective metrics that correlate well with human
+hearing, not just signal difference.
+
+\maketitle
+
+\section{PEAQ — ITU-R BS.1387}
+
+ITU-R BS.1387 is an international audio quality assessment standard
+established by the International Telecommunication Union
+Radiocommunication Sector. Commonly known as PEAQ (Perceptual
+Evaluation of Audio Quality), it defines objective methods to predict
+perceived sound quality of audio codecs and broadcast systems. It is
+widely used for testing perceptual audio coders such as MP3, AAC, and
+others.
+
+\section{Deliverables}
+
+Implement a Python module named \verb|PQI.py| that using a neural
+network that input two sequences of audio samples $A$ and $B$ and
+output a floating point number between 0 and 1 which, as a Perceptual
+Quality Index (PQI), which represents with 1 a perfect (numerical)
+match between $A$ and $B$, and with 0 when $A$ and $B$ are different
+random sequences. The PQI should take into consideration the
+perceptive features of the human beings.
+
+\section{Resources}
+
+\bibliography{maths,data_compression,DWT,audio_coding}
+

@@ -19,17 +19,17 @@
 
 <h2 class='titleHead'>Simultaneous Masking in the Frequency Domain</h2>
  <div class='author'> <a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp;  </span><a href='https://hpca.ual.es/~savins/'><span class='ecrm-1200'>Savins Puertas Martín</span></a> <span class='ecrm-1200'>&amp;  </span><a href='https://www.ual.es/persona/555355505557525189'><span class='ecrm-1200'>Juan José Moreno Riado</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>December 29, 2025</span></div>
+<div class='date'><span class='ecrm-1200'>February 22, 2026</span></div>
    </div>
    
    <h3 class='sectionHead' id='frequencial-masking'><span class='titlemark'>1   </span> <a id='x1-10001'></a>Frequencial Masking</h3>
 <!-- l. 11 --><p class='noindent'>The HAS (Human Auditory System) has a finite frequency resolution, which
-basically means that weaker audio signal (maskee) becomes inaudible in the presence
-of (is masked by) a louder audio signal (masker), when they are close enough <span class='cite'>[<a href='#Xbosi2003intro'>1</a>]</span>, in
-the frequency domain (and obviously in time, i.e., in the same chunk). When this
-happens, the subband <span class='cite'>[<a href='#Xvetterli1995wavelets'>2</a>]</span> in which the maskee signal is placed can be quantized more
-severely without perceiving the quantization noise in the maskee subband (see
-Figure <a href='#an-example-of-simultaneous-masking-generated-by-a-tonal-sound-of-khz-in-the-vecinity-of-the-tone-the-toh-has-been-increased'>1<!-- tex4ht:ref: fig:SM  --></a>).
+basically means that a weaker audio signal (maskee) becomes inaudible in the
+presence of (is masked by) a louder audio signal (masker), when they are close
+enough <span class='cite'>[<a href='#Xbosi2003intro'>1</a>]</span>, in the frequency domain (and obviously in time, i.e., in the same chunk).
+When this happens, the subband <span class='cite'>[<a href='#Xvetterli1995wavelets'>2</a>]</span> in which the maskee signal is placed can be
+quantized more severely without perceiving the quantization noise in the maskee
+subband (see Figure <a href='#an-example-of-simultaneous-masking-generated-by-a-tonal-sound-of-khz-in-the-vecinity-of-the-tone-the-toh-has-been-increased'>1<!-- tex4ht:ref: fig:SM  --></a>).
 </p>
    <figure class='figure'> 
 
@@ -48,33 +48,40 @@ Figure <a href='#an-example-of-simultaneous-masking-generated-by-a-tonal-sound-
                                                                   
    </figure>
    
-   <h3 class='sectionHead' id='a-dynamic-computation-of-the-quantization-step-sizes'><span class='titlemark'>2   </span> <a id='x1-20002'></a>A dynamic computation of the Quantization Step Sizes</h3>
-<!-- l. 42 --><p class='noindent'>
-     </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-2002x1'>For each chunk, given a decomposition of the chunk <span class='mathjax-inline'>\({\mathbf W}=\{{\mathbf w}_s\}\)</span>, determine the <a href='https://en.wikipedia.org/wiki/Energy_(signal_processing)'>energy</a>
-     <span class='mathjax-inline'>\(\{E({\mathbf w}_s)\}\)</span> of each subband. For this is a good idea to have the same bandwidth in
-     all the subbands.
-     </li>
-<li class='enumerate' id='x1-2004x2'>
-     <!-- l. 48 --><p class='noindent'>Find the subband with the highest energy: </p><div class='mathjax-env mathjax-equation'>\begin{equation} {\mathbf w}_m = \underset {{\mathbf w}_i \in {\mathbf W}}{\operatorname {arg\,max}}~E({\mathbf w}_m) := \{{\mathbf w}_* \in {\mathbf W} ~:~ E({\mathbf w}_i) \leq E({\mathbf w}_m) \text { for all } {\mathbf w}_i \in {\mathbf W} \}. \end{equation}</div><a id='x1-2005r1'></a>
-     </li>
-<li class='enumerate' id='x1-2007x3'>
-     <!-- l. 58 --><p class='noindent'>Being <span class='mathjax-inline'>\(m\)</span> the subband index with the maximum power, set </p><div class='mathjax-env mathjax-equation'>\begin{equation} \mathbf {\Delta }_{m-1} = 2\mathbf {\Delta }_{m-1} \end{equation}</div><a id='x1-2008r2'></a> and <div class='mathjax-env mathjax-equation'>\begin{equation} \mathbf {\Delta }_{m+1} = 2\mathbf {\Delta }_{m+1}. \end{equation}</div><a id='x1-2009r3'></a></li></ol>
-   
-   <h3 class='sectionHead' id='deliverables'><span class='titlemark'>3   </span> <a id='x1-30003'></a>Deliverables</h3>
-<!-- l. 70 --><p class='noindent'>Implement the algorithm described in Section <a href='#a-dynamic-computation-of-the-quantization-step-sizes'>2<!-- tex4ht:ref: sec:algo  --></a> in a module named
-<span class='obeylines-h'><code class='verb'>simultaneous_masking.py</code></span> to be used in the InterCom.
-</p><!-- l. 74 --><p class='indent'>   Mark: <span class='ecbx-1000'>10 points</span>.
+   <h3 class='sectionHead' id='dynamic-computation-of-the-quantization-step-sizes'><span class='titlemark'>2   </span> <a id='x1-20002'></a>Dynamic computation of the quantization step sizes</h3>
+<!-- l. 41 --><p class='noindent'>Taking advantage of simultaneous masking involves adapting the quantizer step size <span class='mathjax-inline'>\(\Delta _b\)</span>
+(which is different in each subband <span class='mathjax-inline'>\(b\)</span>) to the energies of the subbands, and this can be
+difficult to do in real-time. Fortunately, modern computers can run multiple
+processes in parallel, and the relative energy between subbands doesn’t usually
+change drastically between chunks. Therefore, it’s possible to run the task of
+recalculating <span class='mathjax-inline'>\(\Delta _b\)</span> in a new thread/process, at a frequency that your machine
+allows.
+</p><!-- l. 50 --><p class='indent'>   Take into consideration also that the simultaneous masking effect can be
+computed considering a sliding window of adjacent chunks. This should provide a
+smoother transition between chunks.
    
 </p>
-   <h3 class='sectionHead' id='resources'><span class='titlemark'>4   </span> <a id='x1-40004'></a>Resources</h3>
+   <h3 class='sectionHead' id='requirements-of-the-implementation'><span class='titlemark'>3   </span> <a id='x1-30003'></a>Requirements of the implementation</h3>
+<!-- l. 55 --><p class='noindent'>Your implementation should take the following aspects into account:
+     </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-3002x1'>It should not cause interruptions in audio playback.
+     </li>
+<li class='enumerate' id='x1-3004x2'>It should maximize, for a given bit-rate, the PSNR of the reconstructions.</li></ol>
+   
+   <h3 class='sectionHead' id='deliverables'><span class='titlemark'>4   </span> <a id='x1-40004'></a>Deliverables</h3>
+<!-- l. 91 --><p class='noindent'>A new InterCom layer written in a Python module named <span class='obeylines-h'><code class='verb'>simultaneous_masking.py</code></span>.
+This file should be generated, explained and evaluated in a notebook named
+<span class='obeylines-h'><code class='verb'>simultaneous_masking.ipynb</code></span>. Consider only the MDCT case.
+   
+                                                                  
+
+                                                                  
+</p>
+   <h3 class='sectionHead' id='resources'><span class='titlemark'>5   </span> <a id='x1-50005'></a>Resources</h3>
    <div class='thebibliography'>
    <p class='bibitem'><span class='biblabel'>
  [1]<span class='bibsp'>   </span></span><a id='Xbosi2003intro'></a>M. Bosi and R.E. Goldberd.  <a href='http://www.pce-fet.com/common/library/books/34/1314_[Marina_Bosi,__Richard_E._Goldberg__(auth.)]_Intro(b-ok.org).pdf'><span class='ecti-1000'>Introduction to Digital Audio Coding and
    Standards</span></a>. Kluwer Academic Publishers, 2003.
-                                                                  
-
-                                                                  
    </p>
    <p class='bibitem'><span class='biblabel'>
  [2]<span class='bibsp'>   </span></span><a id='Xvetterli1995wavelets'></a>M. Vetterli  and  J. Kovačević.        <a href='http://waveletsandsubbandcoding.org/Repository/VetterliKovacevic95_Manuscript.pdf'><span class='ecti-1000'>Wavelets  and  Subband  Coding</span></a>.

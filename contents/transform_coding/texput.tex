@@ -652,7 +652,7 @@ The DWT can be implemented in different ways:
 \begin{figure}
   \centering
   \myfig{graphics/cascade}{8cm}{800}
-  \caption{A dyadic 2-levels cascade of PRFBs.}
+  \caption{A dyadic 2-levels cascade of PRFBs (DWT).}
   \label{fig:cascade}
 \end{figure}
 
@@ -889,7 +889,21 @@ can be used in the quantization process.
 
 %{{{
 
-\section{\href{https://en.wikipedia.org/wiki/Lapped_transform}{Overlapped block transforms} to minimize distortion}
+\section{Wavelet Packets Transform (WPT)}
+
+The WPT (see Fig.~\ref{fig:WPT}) is an extension of the DWT where the
+PRFB are applied also to the high frequency subbands, generating a
+linear partitioning of the spectrum. If $l$ is the number of levels,
+the number of subband is $2^l$.
+
+\begin{figure}
+  \centering
+  \myfig{graphics/WPT}{8cm}{800}
+  \caption{A 2-levels WPT.}
+  \label{fig:WPT}
+\end{figure}
+
+\section{\href{https://en.wikipedia.org/wiki/Lapped_transform}{Overlapped block transforms}}
 %{{{
 
 Transform Coding implies splitting the signal into blocks of data
@@ -1114,81 +1128,114 @@ chunks.
 
 %}}}
 
+\section{Modified Discrete Cosine Transform (MDCT)}
+
+The MDCT is an overlapped transform where the basis functions (the
+filters of the analysis matrix) are cosine function samplings of
+different frequencies. These functions are defined by
+\begin{equation}
+  \mathbf{w}_k = \sum_{n=0}^{2N-1}\cos\left[\frac{\pi}{N} \left(n + \frac{1}{2} + \frac{N}{2}\right) \left(k + \frac{1}{2}\right) \right],
+\end{equation}
+where $N$ is the number of samples to transform.
+
+The MDCT is orthogonal and therefore, the inverse transform only
+differs from the forward one in a normalization coefficient of value
+$1/N$.
+
+\subsection{Overlapping}
+The MDCT is overlapped using a technique called Time-Domain Aliasing
+Cancellation (TDAC). If the MDCT block length (chunk) is $N$, the transform
+actually operates on $2N$ input samples and produces $N$ output
+coefficients. Example for 2048 samples:
+
+\begin{verbatim}
+Block 1: [ 0 ---------------- 2047 ]
+Block 2:         [ 1024 --------------- 3071 ]
+\end{verbatim}
+
+The inverse transform input $N$ coefficients and output $2N$
+samples. The reconstructed blocks are added overlapping $50\%$ ($N$
+samples).
+
+\subsection{Windowing functions}
+To minimize the spectral leakage\footnote{Spectral leakage is a
+phenomenon that occurs when a finite-length signal is analyzed using
+infinite support functions (such as the used by the Fourier Transform,
+or the Cosine Transform). Basically is caused because to generate a
+finite-length signal (a block) is we must multiply the original
+(supposely) infinite-length signal by a rectangular window whose
+Fourier Transform is a Sinc function. Because this function is less
+compact than other functions, the leakage can be minimized if we use
+windows whose frequency response are more similar to the inpulse
+function.}, the blocks are multiplied by a window function.
+
 \section{Deliverables}
 
+%\begin{enumerate}
+
+Find the following RD curves:
+
 \begin{enumerate}
 
-\item \textbf{Find the following RD curves}:
+\item \textbf{Determine the RD curves for the MST}: As we did in the
+  previous milestone, generate the RD curves for a set of simulated
+  transmission contexts. Use the modules
+  \texttt{stereo\_MST\_coding\{\_16|\_32\}.py}. As you can see, they
+  differs in how the transform has been implemented.  Notice that you
+  can use the \verb|--minimal_quantization_step| parameter to generate
+  the different points of the RD curves (it is not necessary to use a
+  bit-rate control algorithm neither \texttt{tc}).
 
-\begin{enumerate}
-
-\item \textbf{Determine the RD curves for the MST}:
-  
-%{{{
-As we did in the previous milestone, generate the RD curves for a set
-of simulated transmission contexts. Use the modules
-\texttt{stereo\_MST\_coding\{\_16|\_32\}.py}. As you can see, they
-differs in how the transform has been implemented.  Notice that you
-can use the \verb|--minimal_quantization_step| parameter to generate
-the different points of the RD curves (it is not necessary to use a
-bit-rate control algorithm neither \texttt{tc}).
-
-%}}}
-
-\item \textbf{Determine the RD curves for the DWT}:
-%{{{
-
-  Rebuild the RD curves considering also the removal of the temporal
-  decorrelation. Use \verb|temporal_no_overlapped_DWT_coding.py|. Note
-  that the number of levels $l$ of the DWT (computed using
-  \href{https://pywavelets.readthedocs.io/en/latest/}{PyWavelets}~\cite{lee2019pywavelets})
-  can have a high impact on the amount of energy concentration
-  achieved by the DWT, and therefore on the efficiency of the coding
-  system. Show such an impact. Experiment also with the wavelet name
-  (try to optimize --minimize-- the RD curve). Again, use the
+\item \textbf{Determine the RD curves for a
+  DWT~\cite{lee2019pywavelets}}: Rebuild the RD curves considering
+  also the removal of the temporal decorrelation. Use
+  \verb|temporal_overlapped_DWT_coding.py| and the
   \verb|--minimal_quantization_step| parameter to generate the
-  different points of the RD curves.
+  different points of the RD curves. Try to minimize the RD curve
+  playing with the number of levels and the wavelet name.
 
-%}}}
 
-\item \textbf{Determine the RD curves for the overlapped DWT}:
-%{{{
+\item \textbf{Determine the RD curves for the corresponding
+  WPT~\cite{lee2019pywavelets}}: Compare with
+  \verb|temporal_overlapped_WPT_coding.py|. Use always the same graph.
 
-Finally, redo the curves considering now the block overlapping
-(\verb|temporal_overlapped_DWT_coding.py|). It is a good idea to put
-all the RD curves together (in the same graph), to compare easily.
-
-%}}}
-
+\item \textbf{Determine the RD curves for the MDCT}: Create a new
+  module \verb|temporal_MDCT_coding.py| written from a notebook called
+  \verb|temporal_MDCT_coding.ipynb|. Include in this module, as an
+  option, at least one window function different to the rectangular
+  window. Compare the MDCT in the R/D domain with the rest of
+  transforms (MST, DWT, and WPT) over the same graph, considering
+  different window functions.
+  
 \end{enumerate}
 
 %Mark: \textbf{2 points}.
 
-\item \textbf{Answer the questions}:
+%\item \textbf{Answer the questions}:
 %{{{
 
-\begin{enumerate}
+%\begin{enumerate}
   
 %\item Which has been the gain of the filters used in your experiments?
 %  You can plot the gains (as it is shown in
 %  \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/docs/2-hours_seminar.ipynb}{this
 %    notebook}), but give some written explanation.
 
-\item Does the computation of the DWT using chunk overlapping increase
-  the latency of the whole system? And what about the jitter? In what
-  amount? Provide a reason.
+%\item Does the computation of the DWT using chunk overlapping increase
+%  the latency of the whole system? And what about the jitter? In what
+%  amount? Provide a reason.
 
-\item Which other transform(s) are used in audio encoding systems
-  (such as MP3) to exploit temporal redundancy? Enumerate the
-  systems and the transform(s) used.
+%\item Which other transform(s) are used in audio encoding systems
+%  (such as MP3) to exploit temporal redundancy? Enumerate the
+%  systems and the transform(s) used.
 
-\end{enumerate}
+%\end{enumerate}
 
 %Mark: \textbf{1 point}.
 
 %}}}
 
-\end{enumerate}
+%\end{enumerate}
 
 \begin{comment}
 \subsection{Visualize}
