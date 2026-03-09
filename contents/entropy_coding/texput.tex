@@ -34,8 +34,8 @@
 
 \section{Description}
 
-The entropic compressor used so far only takes into account that the
-samples (or coefficients, depending on the number of layers used)
+The data (entropy) compressor used so far only takes into account that
+the samples (or coefficients, depending on the number of layers used)
 that, when compressed by byte planes, may contain a significant number
 of zeros, thus increasing the compression rate. Furthermore, we know
 that the coefficients tend towards zero as their frequency increases,
@@ -43,10 +43,10 @@ even without perceptual quantization.
 
 \section{What you have to do?}
 
-Implement an entropic coding algorithm that exploits the fact that,
+Implement an entropy coding algorithm that exploits the fact that,
 starting from a certain coefficient (always beginning with the lowest
 frequencies), and processing the coefficients by byte planes, from a
-certain point onward, all the remaining bytes in that plane are
+certain point onward, all the remaining bytes in that bytes-plane are
 zero. To do this:
 
 \begin{enumerate}
@@ -60,7 +60,7 @@ zero. To do this:
 \begin{verbatim}
 Example	             Original Data	Stuffed/Encoded Data
 -------------------- ------------------ --------------------
-Normal data	     [05, 12, 08]       [05, 12, 08]
+Normal data          [05, 12, 08]       [05, 12, 08]
 Data has the marker  [05, FF, 08]       [05, FF, 01, 08]
 End with zeros       [05, 00, 00, 00]   [05, FF, 00]
 Stuffed data         [05, FF, 01, 08]   [05, FF, 01, 01, 08]
@@ -69,6 +69,11 @@ Here, the stuffing byte is \texttt{01}. Obviously, the decoded data
 exactly matches the original data.
 \item Encode each byte-plane using DEFLATE.
 \end{enumerate}
+
+Test also other dictionary-based data compressors instead of
+\href{https://docs.python.org/3/library/zlib.html}{\texttt{zlib}}, and
+  compare in speed and compression ratio. Do not modify
+  \verb|DEFLATE_raw.py|.
 
 \section{Deliverables}
 
@@ -132,8 +137,13 @@ print(f"\nDecoded Matches Original? {decoded == original_data}")
     
 \end{comment}
 
-
 \section{Resources}
+
+\begin{enumerate}
+\item \href{https://docs.python.org/3/library/zlib.html}{\texttt{zlib} — Compression compatible with \texttt{gzip}}.
+\item \href{https://docs.python.org/3/library/lzma.html}{Compression using the LZMA algorithm}.
+\item \href{https://pypi.org/project/zstandard/}{Python bindings for interfacing with the Zstandard compression library}.
+\end{enumerate}
 
 \bibliography{maths,data_compression,DWT,audio_coding}
 
