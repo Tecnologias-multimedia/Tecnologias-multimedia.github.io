@@ -1,6 +1,6 @@
 <!DOCTYPE html> 
 <html lang='en-US' xml:lang='en-US'> 
-<head> <title>Perceptual Quality Measurement</title> 
+<head> <title>Perceptual Quality Index</title> 
 <meta charset='utf-8' /> 
 <meta content='TeX4ht (https://tug.org/tex4ht/)' name='generator' /> 
 <meta content='width=device-width,initial-scale=1' name='viewport' /> 
@@ -17,9 +17,9 @@
 
                                                                   
 
-<h2 class='titleHead'>Perceptual Quality Measurement</h2>
+<h2 class='titleHead'>Perceptual Quality Index</h2>
  <div class='author'> <a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp;  </span><a href='https://hpca.ual.es/~savins/'><span class='ecrm-1200'>Savins Puertas Martín</span></a> <span class='ecrm-1200'>&amp;  </span><a href='https://www.ual.es/persona/555355505557525189'><span class='ecrm-1200'>Juan José Moreno Riado</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>March 6, 2026</span></div>
+<div class='date'><span class='ecrm-1200'>March 9, 2026</span></div>
    </div>
 <!-- l. 8 --><p class='indent'>   When evaluating audio compressed with a perceptual (lossy) codec, you typically
 want objective metrics that correlate well with human hearing, not just signal
@@ -36,18 +36,27 @@ others.
    
 </p>
    <h3 class='sectionHead' id='deliverables'><span class='titlemark'>2   </span> <a id='x1-20002'></a>Deliverables</h3>
-<!-- l. 24 --><p class='noindent'>Implement a Python module named <span class='obeylines-h'><code class='verb'>PQI.py</code></span> that using a neural network that input
-two sequences of audio samples <span class='mathjax-inline'>\(A\)</span> and <span class='mathjax-inline'>\(B\)</span> and output a floating point number between 0
-and 1 which, as a Perceptual Quality Index (PQI), which represents with 1 a perfect
-(numerical) match between <span class='mathjax-inline'>\(A\)</span> and <span class='mathjax-inline'>\(B\)</span>, and with 0 when <span class='mathjax-inline'>\(A\)</span> and <span class='mathjax-inline'>\(B\)</span> are different random
-sequences. The PQI should take into consideration the perceptive features of the
-human beings.
+<!-- l. 24 --><p class='noindent'>Implement a Python module named <span class='obeylines-h'><code class='verb'>PQI.py</code></span> that input two sequences of audio
+samples <span class='mathjax-inline'>\(A\)</span> and <span class='mathjax-inline'>\(B\)</span> and output a floating point number between 0 and 1 indicating a
+Perceptual Quality Index (PQI). 1 should indicate a perfect (numerical) match
+between <span class='mathjax-inline'>\(A\)</span> and <span class='mathjax-inline'>\(B\)</span>, and with 0 that <span class='mathjax-inline'>\(A\)</span> and <span class='mathjax-inline'>\(B\)</span> are different random sequences. The
+PQI should take into consideration the perceptive features of the human
+beings.
    
 </p>
    <h3 class='sectionHead' id='resources'><span class='titlemark'>3   </span> <a id='x1-30003'></a>Resources</h3>
                                                                   
 
                                                                   
+<!-- l. 33 --><p class='noindent'>
+     </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-3002x1'> <a href='https://pypi.org/project/peaq-py/'><span class='ectt-1000'>peak-py</span></a>.
+     </li>
+<li class='enumerate' id='x1-3004x2'> <a href='https://github.com/google/visqol'><span class='ectt-1000'>visqol</span></a>.
+     </li>
+<li class='enumerate' id='x1-3006x3'> <a href='https://pypi.org/project/pesq/'>PESQ (Perceptual Evaluation of Speech Quality)</a>.
+     </li>
+<li class='enumerate' id='x1-3008x4'> <a href='https://librosa.org/'><span class='ectt-1000'>librosa</span></a>.</li></ol>
     
 </body> 
 </html>

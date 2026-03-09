@@ -1,7 +1,7 @@
 % Emacs, this is -*-latex-*-
 
 \input{../../definitions}
-\title{Perceptual Quality Measurement}
+\title{Perceptual Quality Index}
 
 \maketitle
 
@@ -21,15 +21,21 @@ others.
 
 \section{Deliverables}
 
-Implement a Python module named \verb|PQI.py| that using a neural
-network that input two sequences of audio samples $A$ and $B$ and
-output a floating point number between 0 and 1 which, as a Perceptual
-Quality Index (PQI), which represents with 1 a perfect (numerical)
-match between $A$ and $B$, and with 0 when $A$ and $B$ are different
-random sequences. The PQI should take into consideration the
-perceptive features of the human beings.
+Implement a Python module named \verb|PQI.py| that input two sequences
+of audio samples $A$ and $B$ and output a floating point number
+between 0 and 1 indicating a Perceptual Quality Index (PQI). 1 should
+indicate a perfect (numerical) match between $A$ and $B$, and with 0
+that $A$ and $B$ are different random sequences. The PQI should take
+into consideration the perceptive features of the human beings.
 
 \section{Resources}
+
+\begin{enumerate}
+\item \href{https://pypi.org/project/peaq-py/}{\texttt{peak-py}}.
+\item \href{https://github.com/google/visqol}{\texttt{visqol}}.
+\item \href{https://pypi.org/project/pesq/}{PESQ (Perceptual Evaluation of Speech Quality)}.
+\item \href{https://librosa.org/}{\texttt{librosa}}.
+\end{enumerate}
 
 \bibliography{maths,data_compression,DWT,audio_coding}
 
