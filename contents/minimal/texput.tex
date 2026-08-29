@@ -7,27 +7,35 @@
 
 \section{Description}
 
-InterCom is an application that captures and plays audio, and
-therefore, in Linux, runs on the top of one of the following audio
-services:
+InterCom is a desktop application that captures, sends, receives, and
+plays audio (and video). It can be used to communicate with other
+person(s), in real time.
+
+\section{Supported platforms}
+
+InterCom runs on Linux, Windows, and macOS. To abstract InterCom from
+the audio driver, InterCom uses
+\href{http://www.portaudio.com/}{PortAudio}~\cite{portaudio} (through
+\href{https://vicente-gonzalez-ruiz.github.io/intro_to_sounddevice/}{sounddevice},
+a Python wrapper) to capture and play the audio. For example, in Linux, \texttt{sounddevice}, runs on the top of one of the following drivers:
 \begin{enumerate}
 \item \href{https://vicente-gonzalez-ruiz.github.io/ALSA/}{ALSA}.
 \item
   \href{https://vicente-gonzalez-ruiz.github.io/PulseAudio/}{PulseAudio}
-  (in the case of Xubuntu, this is the audio server that comes with
-  \href{https://www.xfce.org/}{Xfce}).
+  \footnote{In the case of Xubuntu, one of the recommended operating
+    systems for running InterCom), this is the audio server that comes
+    with \href{https://www.xfce.org/}{Xfce})}.
 \item \href{https://vicente-gonzalez-ruiz.github.io/JACK/}{JACK}.
 \item \href{https://pipewire.org/}{Pipewire}.
 \end{enumerate}
 
-To abstract InterCom from the available audio resources, InterCom uses
-\href{http://www.portaudio.com/}{PortAudio}~\cite{portaudio} (through
-\href{https://vicente-gonzalez-ruiz.github.io/intro_to_sounddevice/}{sounddevice})
-to capture and play the audio. Using sounddevice, we have two
-alternatives for implementing InterCom (and in general, for any
-real-time audio-processing application):
+\section{Real-time audio processing alternatives}
 
-\subsection{Loop-based algorithm}
+Using sounddevice (and in general, for any real-time audio-processing
+application), we have two alternatives for implementing an application
+such as InterCom:
+
+\subsection{Loop-based implementation}
 
 Roughtly, InterCom can be divided into 6 steps:
 
@@ -89,11 +97,16 @@ where:
   compressed in order to minimize the transmission
   \href{https://en.wikipedia.org/wiki/Bit_rate}{bit-rate}.
 
-\item \verb|send(packed_chunk)| sends the packet to our
-  interlocutor. When datagrams are used, this step is not blocking nor
-  CPU-bounding (the CPU usage is very low), as long as the number of
-  packets/second is small and the sizes of the payloads are also
-  small, as it is expected in InterCom.
+\item \verb|send(packed_chunk)| sends the packet to our interlocutor
+  (see
+  \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L92}{minimal}). When
+  \href{https://en.wikipedia.org/wiki/Datagram}{datagrams} are used
+  (which is
+  \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L92}{our
+    case}), this step is not blocking nor CPU-bounding (the CPU usage
+  is very low), as long as the number of packets/second is small and
+  the sizes of the payloads are also small, as it is expected in
+  InterCom.
 
 \item \verb|receive()|, waits (blocking the calling process) for an
   incoming packet, and therefore, this operation is IO-bound. However,
