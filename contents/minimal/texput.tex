@@ -8,25 +8,26 @@
 \section{Description}
 
 InterCom is a desktop application that captures, sends, receives, and
-plays audio (and video). It can be used to communicate with other
-person(s), in real time.
+plays audio (and video), in real time.
 
 \section{Supported platforms}
 
-InterCom runs on Linux, Windows, and macOS. To abstract InterCom from
-the audio driver, InterCom uses
-\href{http://www.portaudio.com/}{PortAudio}~\cite{portaudio} (through
-\href{https://vicente-gonzalez-ruiz.github.io/intro_to_sounddevice/}{sounddevice},
-a Python wrapper) to capture and play the audio. For example, in Linux, \texttt{sounddevice}, runs on the top of one of the following drivers:
-\begin{enumerate}
-\item \href{https://vicente-gonzalez-ruiz.github.io/ALSA/}{ALSA}.
-\item
-  \href{https://vicente-gonzalez-ruiz.github.io/PulseAudio/}{PulseAudio}
+InterCom should run on any platform, such as Linux, Windows, and
+macOS, where \href{https://www.python.org/}{Python} and
+\href{https://vicente-gonzalez-ruiz.github.io/intro_to_sounddevice/}{sounddevice}
+are available. \texttt{sounddevice} is a wrapper for
+\href{http://www.portaudio.com/}{PortAudio}~\cite{portaudio}, which is
+ultimately responsible for communicating with the audio driver (in
+Linux: \href{https://vicente-gonzalez-ruiz.github.io/ALSA/}{ALSA},
+\href{https://vicente-gonzalez-ruiz.github.io/PulseAudio/}{PulseAudio},
+\href{https://vicente-gonzalez-ruiz.github.io/JACK/}{JACK} or
+\href{https://pipewire.org/}{Pipewire}, in Windows: \href{https://en.wikipedia.org/wiki/Windows_legacy_audio_components#Multimedia_Extensions_(MME)}{MME}, \href}https://en.wikipedia.org/wiki/DirectSound}{DirectSound}, \href{https://en.wikipedia.org/wiki/Technical_features_new_to_Windows_Vista#Audio_stack_architecture}{WASAPI}, or \href{https://en.wikipedia.org/wiki/Windows_Driver_Model}{WDM-KS}, in macOS:  ).
+
+  
   \footnote{In the case of Xubuntu, one of the recommended operating
     systems for running InterCom), this is the audio server that comes
     with \href{https://www.xfce.org/}{Xfce})}.
-\item \href{https://vicente-gonzalez-ruiz.github.io/JACK/}{JACK}.
-\item \href{https://pipewire.org/}{Pipewire}.
+\item .
 \end{enumerate}
 
 \section{Real-time audio processing alternatives}
