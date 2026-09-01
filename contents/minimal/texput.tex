@@ -1,14 +1,15 @@
 % Emacs, this is -*-latex-*-
 
-\title{Meeting \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py}{\texttt{minimal}} InterCom}
+\title{\href{https://tecnologias-multimedia.github.io/contents/minimal/}{Meeting \texttt{minimal} InterCom}}
 
 \maketitle
 \tableofcontents
 
 \section{Description}
 
-InterCom is a desktop application that captures, sends, receives, and
-plays audio (and video), in real time.
+\href{https://github.com/Tecnologias-multimedia/InterCom}{InterCom} is
+a desktop application that captures, sends, receives, and plays audio
+(and video), in real time.
 
 \section{Supported platforms}
 
@@ -21,7 +22,7 @@ ultimately responsible for communicating with the audio driver (in
 Linux: \href{https://vicente-gonzalez-ruiz.github.io/ALSA/}{ALSA},
 \href{https://vicente-gonzalez-ruiz.github.io/PulseAudio/}{PulseAudio},
 \href{https://vicente-gonzalez-ruiz.github.io/JACK/}{JACK} or
-\href{https://pipewire.org/}{Pipewire}, in Windows: \href{https://en.wikipedia.org/wiki/Windows_legacy_audio_components#Multimedia_Extensions_(MME)}{MME}, \href}https://en.wikipedia.org/wiki/DirectSound}{DirectSound}, \href{https://en.wikipedia.org/wiki/Technical_features_new_to_Windows_Vista#Audio_stack_architecture}{WASAPI}, or \href{https://en.wikipedia.org/wiki/Windows_Driver_Model}{WDM-KS}, in macOS: \href{https://en.wikipedia.org/wiki/Core_Audio}{Core Audio}).
+\href{https://pipewire.org/}{Pipewire}, in Windows: \href{https://en.wikipedia.org/wiki/Windows_legacy_audio_components#Multimedia_Extensions_(MME)}{MME}, \href{https://en.wikipedia.org/wiki/DirectSound}{DirectSound}, \href{https://en.wikipedia.org/wiki/Technical_features_new_to_Windows_Vista#Audio_stack_architecture}{WASAPI}, or \href{https://en.wikipedia.org/wiki/Windows_Driver_Model}{WDM-KS}, in macOS: \href{https://en.wikipedia.org/wiki/Core_Audio}{Core Audio}).
 
 \section{Real-time audio processing alternatives}
 
@@ -60,8 +61,7 @@ Roughtly, InterCom can be divided into 6 steps:
 where:
 
 \begin{enumerate}
-\item The
-  \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L146}{\verb|record(chunk_size)|}
+\item The \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L146}{\texttt{record(chunk\_size)}}
   method captures a chunk (a fragment) of frames\footnote{A stereo
     sample, usually 16 + 16 bits.}. In \verb|sounddevice|, this
   operation can be\footnote{There is another alternative, as we will
@@ -83,8 +83,7 @@ where:
   and \href{https://en.wikipedia.org/wiki/I/O_bound}{I/O-bound} (the
   calling process sleeps until the required chunk size is returned).
 
-\item
-  \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L76}{\verb|pack(chunk)|}
+\item \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L76}{\texttt{pack(chunk)}}
   process the chunk to create a
   \href{https://en.wikipedia.org/wiki/Network_packet}{packet} (or a
   sequence of packets), a structure that can be transmitted through
@@ -96,8 +95,7 @@ where:
   compressed in order to minimize the transmission
   \href{https://en.wikipedia.org/wiki/Bit_rate}{bit-rate}.
 
-\item
-  \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L89}{\verb|send(packed_chunk)|}
+\item \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L89}{\texttt{send(packed\_chunk)}}
   sends the packet to our interlocutor. When
   \href{https://en.wikipedia.org/wiki/Datagram}{datagrams} are used
   (which is
@@ -107,8 +105,7 @@ where:
   and the sizes of the payloads are also small, as it is expected in
   InterCom (audio).
 
-\item
-  \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L96}{\verb|receive()|},
+\item \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L96}{\texttt{receive()}},
   waits (blocking the calling process) for an incoming packet, and
   therefore, this operation is IO-bound. However, most
   \href{https://docs.python.org/3/library/socket.html}{socket
@@ -124,11 +121,11 @@ where:
   \href{https://en.wikipedia.org/wiki/Digital_audio#Overview}{zeros}
   that will not produce any sound when it is played).
 
-\item \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L80}{\verb|unpack(packed_chunk)|} is (like the method
+\item \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L80}{\texttt{unpack(packed\_chunk)}} is (like the method
   \texttt{pack(chunk)}) a CPU-intensive step that transforms a
   possibly compressed chunk into a chunk of ``playable'' audio.
 
-\item \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L161}{\verb|play(chunk)|} renders the chunk. In general, this is an
+\item \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L161}{\texttt{play(chunk)}} renders the chunk. In general, this is an
   I/O-bound blocking action. However, if \verb|play()| is called at
   the same pace as \verb|record()|, and the record and play parameters
   are exactly the same (as usually happens in InterCom), the playing of
@@ -202,13 +199,18 @@ is basically the previous one, except that the chunk size is fixed.
 The
 \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L111}{current
   implementation} of InterCom uses the timer-based
-(interruption-based) algorithm.
+(interruption-based) algorithm. Therefore, you are not going to find
+the methods \texttt{sounddevice.read()} and
+\texttt{sounddevice.write()} in the
+\href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py}{\texttt{minimal.py}}
+module.
 
 \section{Deliverables}
 
-\textbf{None}. However, you should understand the meaning, purpose and
-use of each of the parameters of \texttt{minimal.py}. For this, try
-the following:
+You should understand the meaning, purpose and usage of all of the
+parameters of \texttt{minimal.py}. Do the following
+experiments. Report every thing in a document, and in the laboratory,
+show to your teacher the results (and the document):
 
 \begin{enumerate}
 \item Run \texttt{minimial.py} using \texttt{localhost} as the
@@ -221,25 +223,29 @@ the following:
   this with your teacher. Remember that the parameters
   \verb|--show_stats|, \verb|--show_samples|, and
   \verb|--show_spectrum|, can provide some information about what is
-  happening. Can you determine the delay?
+  happening. \textbf{Determine the delay}.
 \item Always using the command line (do not modify the source code for
-  this), change the value for the parameter \verb|--frames_per_chunk|,
-  which by default is 1024. Do you notice any variation in the
-  latency? And in the quality of the audio?
-\item Modify the parameter \verb|--frames_per_second|. Again, do
-  you notice any changes in latency or audio quality? You should.
+  this), change the default value of the parameter
+  \verb|--frames_per_chunk|, which is 1024. \textbf{Do you notice any
+    variation in the latency? Determine it. And in the quality of the
+    audio?}
+\item Modify the parameter \verb|--frames_per_second|. \textbf{Again,
+    do you notice any changes in latency or audio quality? Determine
+    the new latency. Determine also the maximum frequency that you
+    will capture (depending on \texttt{--frames\_per\_second}).}
 \item With one of your group mates, try to communicate using the same
   \href{https://en.wikipedia.org/wiki/Local_area_network}{LAN} (you
   will need to modify the parameter
   \verb|--destination_address|). Notice that some LANs, such as the
   provided by the UAL could filter your InterCom traffic. Good
-  alternative options are you LAN at home or an ad-hoc LAN created
-  with a mobile device.
-\item Repeat the last experiment when two (or more) group mates send
-  you their chunks. What do you think that is happening?
+  alternative options are you home LAN or an ad-hoc LAN created
+  with a mobile (telephone). \textbf{Determine the new latency}.
+\item Repeat the last experiment when two (or more) group mates
+  transmit to you their chunks. \textbf{What is happening?}
 \item Finally, are you able to communicate with an interlocutor that
   is in a different LAN than you (for example, when two InterCom
-  instances are running in different home networks)?
+  instances are running in different home networks)? \textbf{Describe
+    the experiment, even if it does not work.}
 \end{enumerate}
 
 %Mark: \textbf{0 points}.

@@ -17,9 +17,9 @@
 
                                                                   
 
-<h1 class='titleHead'>Meeting <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py'>minimal</a> InterCom</h1>
+<h1 class='titleHead'><a href='https://tecnologias-multimedia.github.io/contents/minimal/'>Meeting minimal InterCom</a></h1>
  <div class='author'><a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp; </span><a href='https://hpca.ual.es/~savins/'><span class='ecrm-1200'>Savins Puertas Martín</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>August 29, 2026</span></div>
+<div class='date'><span class='ecrm-1200'>September 1, 2026</span></div>
    </div>
    <h3 class='likesectionHead' id='contents'> <a id='x1-1000'></a>Contents</h3>
    <div class='tableofcontents'>
@@ -33,37 +33,30 @@
    </div>
    
    <h3 class='sectionHead' id='description'><span class='titlemark'>1   </span>   <a id='x1-20001'></a>Description</h3>
-<!-- l. 10 --><p class='noindent'>InterCom is a desktop application that captures, sends, receives, and plays audio
-(and video). It can be used to communicate with other person(s), in real
-time.
+<!-- l. 10 --><p class='noindent'><a href='https://github.com/Tecnologias-multimedia/InterCom'>InterCom</a> is a desktop application that captures, sends, receives, and plays audio
+(and video), in real time.
    
 </p>
    <h3 class='sectionHead' id='supported-platforms'><span class='titlemark'>2   </span>   <a id='x1-30002'></a>Supported platforms</h3>
-<!-- l. 16 --><p class='noindent'>InterCom runs on Linux, Windows, and macOS. To abstract InterCom from the
-audio driver, InterCom uses <a href='http://www.portaudio.com/'>PortAudio</a> <span class='cite'>[<a href='#Xportaudio'>1</a>]</span> (through <a href='https://vicente-gonzalez-ruiz.github.io/intro_to_sounddevice/'>sounddevice</a>, a Python wrapper)
-to capture and play the audio. For example, in Linux, <span class='ectt-1000'>sounddevice</span>, runs on the top
-of one of the following drivers:
+<!-- l. 16 --><p class='noindent'>InterCom should run on any platform, such as Linux, Windows, and macOS, where
+<a href='https://www.python.org/'>Python</a> and <a href='https://vicente-gonzalez-ruiz.github.io/intro_to_sounddevice/'>sounddevice</a> are available. <span class='ectt-1000'>sounddevice </span>is a wrapper for <a href='http://www.portaudio.com/'>PortAudio</a> <span class='cite'>[<a href='#Xportaudio'>1</a>]</span>,
+which is ultimately responsible for communicating with the audio driver (in Linux:
+<a href='https://vicente-gonzalez-ruiz.github.io/ALSA/'>ALSA</a>, <a href='https://vicente-gonzalez-ruiz.github.io/PulseAudio/'>PulseAudio</a>, <a href='https://vicente-gonzalez-ruiz.github.io/JACK/'>JACK</a> or <a href='https://pipewire.org/'>Pipewire</a>, in Windows: <a href='https://en.wikipedia.org/wiki/Windows_legacy_audio_components#Multimedia_Extensions_(MME)'>MME</a>, <a href='https://en.wikipedia.org/wiki/DirectSound'>DirectSound</a>, <a href='https://en.wikipedia.org/wiki/Technical_features_new_to_Windows_Vista#Audio_stack_architecture'>WASAPI</a>,
+or <a href='https://en.wikipedia.org/wiki/Windows_Driver_Model'>WDM-KS</a>, in macOS: <a href='https://en.wikipedia.org/wiki/Core_Audio'>Core Audio</a>).
+   
                                                                   
 
                                                                   
-     </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-3002x1'><a href='https://vicente-gonzalez-ruiz.github.io/ALSA/'>ALSA</a>.
-     </li>
-<li class='enumerate' id='x1-3004x2'><a href='https://vicente-gonzalez-ruiz.github.io/PulseAudio/'>PulseAudio</a> <span class='footnote-mark'><a href='#fn1x0' id='fn1x0-bk'><sup class='textsuperscript'>1</sup></a></span><a id='x1-3005f1'></a>.
-     </li>
-<li class='enumerate' id='x1-3008x3'><a href='https://vicente-gonzalez-ruiz.github.io/JACK/'>JACK</a>.
-     </li>
-<li class='enumerate' id='x1-3010x4'><a href='https://pipewire.org/'>Pipewire</a>.</li></ol>
-   
+</p>
    <h3 class='sectionHead' id='realtime-audio-processing-alternatives'><span class='titlemark'>3   </span>   <a id='x1-40003'></a>Real-time audio processing alternatives</h3>
-<!-- l. 34 --><p class='noindent'>Using sounddevice (and in general, for any real-time audio-processing application),
-we have two alternatives for implementing an application such as InterCom:
+<!-- l. 29 --><p class='noindent'>Using sounddevice (and in general, in all real-time audio-processing applications), we
+have two alternatives for implementing an application such as InterCom:
    
 </p>
    <h4 class='subsectionHead' id='loopbased-implementation'><span class='titlemark'>3.1   </span>   <a id='x1-50003.1'></a>Loop-based implementation</h4>
-<!-- l. 40 --><p class='noindent'>Roughtly, InterCom can be divided into 6 steps:
+<!-- l. 35 --><p class='noindent'>Roughtly, InterCom can be divided into 6 steps:
 </p>
-   <!-- l. 42 -->
+   <!-- l. 37 -->
    <pre class='lstlisting' id='listing-1'><span class='label'><a id='x1-5001r1'></a>1</span><span class='ecit-1000'>  </span><span style='color:#000000'><span class='ecit-1000'>#</span></span><span style='color:#000000'> <span class='ecit-1000'>Loop-based algorithm (to be called in a loop)</span> 
 </span><span class='label'><a id='x1-5002r2'></a>2</span><span class='ectt-1000'>  </span><span style='color:#000000'><span class='ectt-1000'>def</span></span><span style='color:#000000'> <span class='ectt-1000'>record_IO_and_play(chunk_size):</span> 
 </span><span class='label'><a id='x1-5003r3'></a>3</span><span class='ectt-1000'>    </span><span style='color:#000000'><span class='ectt-1000'>chunk</span></span><span style='color:#000000'> <span class='ectt-1000'>= record(chunk_size) </span><span class='ecit-1000'># (1)</span> 
@@ -73,127 +66,128 @@ we have two alternatives for implementing an application such as InterCom:
 </span><span class='label'><a id='x1-5007r7'></a>7</span><span class='ectt-1000'>    </span><span style='color:#000000'><span class='ectt-1000'>chunk</span></span><span style='color:#000000'> <span class='ectt-1000'>= unpack(packed_chunk) </span><span class='ecit-1000'># (5)</span> 
 </span><span class='label'><a id='x1-5008r8'></a>8</span><span class='ectt-1000'>    </span><span style='color:#000000'><span class='ectt-1000'>play</span></span><span style='color:#000000'><span class='ectt-1000'>(</span></span><span style='color:#000000'><span class='ectt-1000'>chunk</span></span><span style='color:#000000'><span class='ectt-1000'>)</span></span><span style='color:#000000'> <span class='ecit-1000'># (6)</span></span></pre>
    
-<!-- l. 66 --><p class='indent'>   where:
-</p><!-- l. 68 --><p class='indent'>
+<!-- l. 61 --><p class='indent'>   where:
+</p><!-- l. 63 --><p class='indent'>
      </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-5010x1'>The <span class='obeylines-h'><code class='verb'>record(chunk_size)</code></span> method captures a chunk (a fragment) of frames<span class='footnote-mark'><a href='#fn2x0' id='fn2x0-bk'><sup class='textsuperscript'>2</sup></a></span><a id='x1-5011f2'></a>.
-     In <span class='obeylines-h'><code class='verb'>sounddevice</code></span>, this operation is carried on by the <a href='https://python-sounddevice.readthedocs.io/en/0.4.0/api/streams.html#sounddevice.Stream.read'><span class='ectt-1000'>read()</span></a> method. As can
-     be seen in <a href='https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire4.py'>wire4.py</a><span class='footnote-mark'><a href='#fn3x0' id='fn3x0-bk'><sup class='textsuperscript'>3</sup></a></span><a id='x1-5013f3'></a>
+<li class='enumerate' id='x1-5010x1'>The <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L146'><span class='ectt-1000'>record(chunk_size)</span></a> method captures a chunk (a fragment) of frames<span class='footnote-mark'><a href='#fn1x0' id='fn1x0-bk'><sup class='textsuperscript'>1</sup></a></span><a id='x1-5011f1'></a>.
+     In <span class='obeylines-h'><code class='verb'>sounddevice</code></span>, this operation can be<span class='footnote-mark'><a href='#fn2x0' id='fn2x0-bk'><sup class='textsuperscript'>2</sup></a></span><a id='x1-5013f2'></a>
+     carried on by the <a href='https://python-sounddevice.readthedocs.io/en/0.4.0/api/streams.html#sounddevice.Stream.read'><span class='ectt-1000'>read()</span></a> method. As can be find out in <a href='https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire4.py'>wire4.py</a><span class='footnote-mark'><a href='#fn3x0' id='fn3x0-bk'><sup class='textsuperscript'>3</sup></a></span><a id='x1-5015f3'></a>
      and also in the documentation of <span class='obeylines-h'><code class='verb'>sounddevice</code></span> if we read only the frames
      that are available in the soundcard’s buffer, this generates a non-blocking
      operation and the chunk size depends on the instant of time in which this
      method is called. Otherwise, if we specify a number of frames bigger than
-     the number of frames available, the operation can<span class='footnote-mark'><a href='#fn4x0' id='fn4x0-bk'><sup class='textsuperscript'>4</sup></a></span><a id='x1-5015f4'></a>
+     the number of frames available, the operation will<span class='footnote-mark'><a href='#fn4x0' id='fn4x0-bk'><sup class='textsuperscript'>4</sup></a></span><a id='x1-5017f4'></a>
      be <a href='https://python-sounddevice.readthedocs.io/en/0.4.0/api/streams.html#sounddevice.Stream.write'>blocking</a> and <a href='https://en.wikipedia.org/wiki/I/O_bound'>I/O-bound</a> (the calling process sleeps until the required
      chunk size is returned).
      </li>
-<li class='enumerate' id='x1-5018x2'><span class='obeylines-h'><code class='verb'>pack(chunk)</code></span> process  the  chunk  to  create  a  <a href='https://en.wikipedia.org/wiki/Network_packet'>packet</a>  (or  a  sequence  of
+<li class='enumerate' id='x1-5020x2'><a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L76'><span class='ectt-1000'>pack(chunk)</span></a> process  the  chunk  to  create  a  <a href='https://en.wikipedia.org/wiki/Network_packet'>packet</a>  (or  a  sequence  of
      packets), a structure that can be transmitted through the <a href='https://en.wikipedia.org/wiki/Internet'>Internet</a> using
      the <a href='https://en.wikipedia.org/wiki/Datagram'>Datagram</a> Model. In general, this is a <a href='https://en.wikipedia.org/wiki/CPU-bound'>CPU-bounded</a> (CPU-intensive)
      operation because the payload of the packet can be compressed in order
      to minimize the transmission <a href='https://en.wikipedia.org/wiki/Bit_rate'>bit-rate</a>.
      </li>
-<li class='enumerate' id='x1-5020x3'><span class='obeylines-h'><code class='verb'>send(packed_chunk)</code></span> sends the packet to our interlocutor (see <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L92'>minimal</a>).
-     When <a href='https://en.wikipedia.org/wiki/Datagram'>datagrams</a> are used (which is <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L92'>our case</a>), this step is not blocking
-     nor CPU-bounding (the CPU usage is very low), as long as the number of
+<li class='enumerate' id='x1-5022x3'><a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L89'><span class='ectt-1000'>send(packed_chunk)</span></a>  sends  the  packet  to  our  interlocutor.  When
+     <a href='https://en.wikipedia.org/wiki/Datagram'>datagrams</a> are used (which is <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L92'>our case</a>), this step is neither non-blocking
+     nor CPU-bound (the CPU usage is very low), as long as the number of
      packets/second is small and the sizes of the payloads are also small, as it
-     is expected in InterCom.
+     is expected in InterCom (audio).
      </li>
-<li class='enumerate' id='x1-5022x4'><span class='obeylines-h'><code class='verb'>receive()</code></span>, waits (blocking the calling process) for an incoming packet,
+<li class='enumerate' id='x1-5024x4'><a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L96'><span class='ectt-1000'>receive()</span></a>, waits (blocking the calling process) for an incoming packet,
      and therefore, this operation is IO-bound. However, most <a href='https://docs.python.org/3/library/socket.html'>socket API</a>s <span class='cite'>[<a href='#Xpython'>2</a>]</span>
      offeer  a  <a href='https://docs.python.org/3.8/library/socket.html#socket.socket.setblocking'>non-blocking  option</a>  where  when  a  packet  is  not  available  in
      the  kernel’s  buffer  associated  with  the  corresponding  socket  after  a
      predetermined  amount  of  time,  some  kind  of  exception  is  generated,
-     and, in this case, it is resposabability of the programmer to generate an
-     “alternative”  chunk (in our case, for example, a chunk filled with <a href='https://en.wikipedia.org/wiki/Digital_audio#Overview'>zeros</a>
+     and, in this case, it is resposabability of the programmer to <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L104'>generate an
+     “alternative”  chunk</a> (in our case, for example, a chunk filled with <a href='https://en.wikipedia.org/wiki/Digital_audio#Overview'>zeros</a>
      that will not produce any sound when it is played).
      </li>
-<li class='enumerate' id='x1-5024x5'><span class='obeylines-h'><code class='verb'>unpack(packed_chunk)</code></span>       is           (like           the           method
-     <span class='ectt-1000'>pack(chunk)</span>) a CPU-intensive step that transforms a packed chunk into
-     a chunk of audio.
-                                                                  
-
-                                                                  
+<li class='enumerate' id='x1-5026x5'><a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L80'><span class='ectt-1000'>unpack(packed_chunk)</span></a>   is     (like     the     method     <span class='ectt-1000'>pack(chunk)</span>)
+     a CPU-intensive step that transforms a possibly compressed chunk into a
+     chunk of “playable” audio.
      </li>
-<li class='enumerate' id='x1-5026x6'><span class='obeylines-h'><code class='verb'>play(chunk)</code></span> renders the chunk. In general, this is an I/O-bound blocking
+<li class='enumerate' id='x1-5028x6'><a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L161'><span class='ectt-1000'>play(chunk)</span></a> renders the chunk. In general, this is an I/O-bound blocking
      action. However, if <span class='obeylines-h'><code class='verb'>play()</code></span> is called at the same pace as <span class='obeylines-h'><code class='verb'>record()</code></span>, and
      the record and play parameters are exactly the same (as usually happens
      in InterCom), the playing of the chunk should return immediately because
-     the time that the <span class='obeylines-h'><code class='verb'>play()</code></span> method needs to complete would match exactly
-     the time that the <span class='obeylines-h'><code class='verb'>record()</code></span> method requires (see <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/test/sounddevice/wire4b.py'>wire4b.py</a>).</li></ol>
+     the time that <span class='obeylines-h'><code class='verb'>play()</code></span> needs to complete would match exactly the time
+     that the <span class='obeylines-h'><code class='verb'>record()</code></span> method requires (see <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/test/sounddevice/wire4b.py'>wire4b.py</a>).</li></ol>
    
    <h4 class='subsectionHead' id='timerbased-algorithm'><span class='titlemark'>3.2   </span>   <a id='x1-60003.2'></a>Timer-based algorithm</h4>
-<!-- l. 157 --><p class='noindent'>The to-be-called-in-a-loop implementation depicted in the previous section works
+<!-- l. 156 --><p class='noindent'>The to-be-called-in-a-loop implementation depicted in the previous section works
 fine, but finally InterCom uses a to-be-called-by-an-interruption implementation
-because it is allows to have running another task for free.
-</p><!-- l. 162 --><p class='indent'>   In this algorithm, the task dedicated to record and play the chunks of audio is
-called periodically (probably, using some <a href='https://en.wikipedia.org/wiki/Timer'>timer</a> provided by the sound hardware).
-This procedure guarantees a <a href='https://en.wikipedia.org/wiki/Glitch'>gliches</a>-free audio-IO when constant chunk sizes are
-used, because the timer interruption coincides exactly with the instant of
-time in which the <span class='obeylines-h'><code class='verb'>record()</code></span> and the <span class='obeylines-h'><code class='verb'>play()</code></span> methods can be used without
-blocking.
-</p><!-- l. 200 --><p class='indent'>   The <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L111'>current implementation</a> of InterCom uses the Timer-based (interruption-based)
-algorithm.
+because it is allows to run another task in parallel for free.
+</p><!-- l. 161 --><p class='indent'>   In this algorithm, the task dedicated to record and play the chunks of audio is
+called periodically (probably, using some <a href='https://en.wikipedia.org/wiki/Timer'>timer</a> usually provided by the sound
+hardware). This procedure guarantees a <a href='https://en.wikipedia.org/wiki/Glitch'>gliches</a>-free audio-IO when constant
+chunk-sizes are used, because the timer interruption coincides exactly with the
+                                                                  
+
+                                                                  
+instant of time in which the <span class='obeylines-h'><code class='verb'>record()</code></span> and the <span class='obeylines-h'><code class='verb'>play()</code></span> methods could be used
+without blocking.
+</p><!-- l. 199 --><p class='indent'>   The <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L111'>current implementation</a> of InterCom uses the timer-based (interruption-based)
+algorithm. Therefore, you are not going to find the methods <span class='ectt-1000'>sounddevice.read()</span>
+and <span class='ectt-1000'>sounddevice.write() </span>in the <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py'><span class='ectt-1000'>minimal.py</span></a> module.
    
 </p>
    <h3 class='sectionHead' id='deliverables'><span class='titlemark'>4   </span>   <a id='x1-70004'></a>Deliverables</h3>
-<!-- l. 207 --><p class='noindent'><span class='ecbx-1000'>None</span>. However, you should understand the meaning, purpose and use of each of the
-parameters of <span class='ectt-1000'>minimal.py</span>. For this, try the following:
-</p><!-- l. 211 --><p class='indent'>
+<!-- l. 210 --><p class='noindent'>You should understand the meaning, purpose and usage of all of the parameters of
+<span class='ectt-1000'>minimal.py</span>. Do the following experiments. Report every thing in a document, and in
+the laboratory, show to your teacher the results (and the document):
+</p><!-- l. 215 --><p class='indent'>
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-7002x1'>Run <span class='ectt-1000'>minimial.py </span>using <span class='ectt-1000'>localhost </span>as the destination for your chunks
      of audio (notice that this is the default configuration for the parameters
      <span class='obeylines-h'><code class='verb'>--destination_address</code></span> and <span class='obeylines-h'><code class='verb'>--destination_port</code></span>). Check that you can
      listen to yourself after some delay, and that the quality of the sound is
      good (it is recommended to used a headset). If you think that the quality
-     is not high enough, comment this with your teacher. Remember that the
-     parameters <span class='obeylines-h'><code class='verb'>--show_stats</code></span>, <span class='obeylines-h'><code class='verb'>--show_samples</code></span>, and <span class='obeylines-h'><code class='verb'>--show_spectrum</code></span>, can
-     provide some information about what is happening. Can you determine
+     is  not  high  enough,  comment  this  with  your  teacher.  Remember  that
+     the parameters <span class='obeylines-h'><code class='verb'>--show_stats</code></span>, <span class='obeylines-h'><code class='verb'>--show_samples</code></span>, and <span class='obeylines-h'><code class='verb'>--show_spectrum</code></span>,
+     can provide some information about what is happening. <span class='ecbx-1000'>Determine the
+     delay</span>.
+     </li>
+<li class='enumerate' id='x1-7004x2'>Always using the command line (do not modify the source code for this),
+     change the default value of the parameter <span class='obeylines-h'><code class='verb'>--frames_per_chunk</code></span>, which is
+     1024. <span class='ecbx-1000'>Do you notice any variation in the latency? Determine it.
+     And in the quality of the audio?</span>
+     </li>
+<li class='enumerate' id='x1-7006x3'>Modify the parameter <span class='obeylines-h'><code class='verb'>--frames_per_second</code></span>. <span class='ecbx-1000'>Again, do you notice
+     any changes in latency or audio quality? Determine the new
+     latency. Determine also the maximum frequency that you will
+     capture (depending on </span><span class='ectt-1000'>–frames_per_second</span><span class='ecbx-1000'>).</span>
+     </li>
                                                                   
 
                                                                   
-     the delay?
-     </li>
-<li class='enumerate' id='x1-7004x2'>Always
-     using the command line, modify the parameter <span class='obeylines-h'><code class='verb'>--frames_per_chunk</code></span>. Do
-     you notice any changes in latency or audio quality?
-     </li>
-<li class='enumerate' id='x1-7006x3'>Modify the parameter <span class='obeylines-h'><code class='verb'>--frames_per_second</code></span>. Again, do you notice any
-     changes in latency or audio quality? You should.
-     </li>
 <li class='enumerate' id='x1-7008x4'>With one of your group mates, try to communicate using the same <a href='https://en.wikipedia.org/wiki/Local_area_network'>LAN</a>
      (you will need to modify the parameter <span class='obeylines-h'><code class='verb'>--destination_address</code></span>). Notice
      that  some  LANs,  such  as  the  provided  by  the  UAL  could  filter  your
-     InterCom traffic. Good alternative options are you LAN at home or an
-     ad-hoc LAN created with a mobile device.
+     InterCom traffic. Good alternative options are you home LAN or an ad-hoc
+     LAN created with a mobile (telephone). <span class='ecbx-1000'>Determine the new latency</span>.
      </li>
-<li class='enumerate' id='x1-7010x5'>Repeat the last experiment when two (or more) group mates send you
-     their chunks. What do you think that is happening?
+<li class='enumerate' id='x1-7010x5'>Repeat the last experiment when two (or more) group mates transmit to
+     you their chunks. <span class='ecbx-1000'>What is happening?</span>
      </li>
 <li class='enumerate' id='x1-7012x6'>Finally, are you able to communicate with an interlocutor that is in a
      different LAN than you (for example, when two InterCom instances are
-     running in different home networks)?</li></ol>
+     running in different home networks)? <span class='ecbx-1000'>Describe the experiment, even
+     if it does not work.</span></li></ol>
    
    <h3 class='sectionHead' id='resources'><span class='titlemark'>5   </span>   <a id='x1-80005'></a>Resources</h3>
    <section class='thebibliography' role='doc-bibliography'><dl><dt>
  [1]</dt><dd><a id='Xportaudio'></a><a href='http://www.portaudio.com/'>PortAudio</a>.
-                                                                  
-
-                                                                  
    </dd><dt>
  [2]</dt><dd><a id='Xpython'></a>The Python Foundation. <a href='https://www.python.org/'>The Python Website</a>.
    </dd></dl></section>
    <div class='footnotes'><aside class='footnotetext' role='doc-footnote'>
-<!-- l. 27 --><p class='noindent'><a id='x1-3006x1'></a><span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='ecrm-0800'>In the case of Xubuntu, one of the recommended operating systems for running InterCom),
-this is the audio server that comes with </span><a href='https://www.xfce.org/'><span class='ecrm-0800'>Xfce</span></a><span class='ecrm-0800'>)</span></p></aside> 
-
+<!-- l. 66 --><p class='noindent'><a id='x1-5012x1'></a><span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='ecrm-0800'>A stereo sample, usually 16 + 16 bits.</span></p></aside> 
 <aside class='footnotetext' role='doc-footnote'>
-<!-- l. 71 --><p class='noindent'><a id='x1-5012x2'></a><span class='footnote-mark'><a href='#fn2x0-bk' id='fn2x0'><sup class='textsuperscript'>2</sup></a></span><span class='ecrm-0800'>A stereo sample, usually 16 + 16 bits.</span></p></aside> 
+<!-- l. 68 --><p class='noindent'><a id='x1-5014x2'></a><span class='footnote-mark'><a href='#fn2x0-bk' id='fn2x0'><sup class='textsuperscript'>2</sup></a></span><span class='ecrm-0800'>There is another alternative, as we will see soon.</span></p></aside> 
 <aside class='footnotetext' role='doc-footnote'>
-<!-- l. 77 --><p class='noindent'><a id='x1-5014x3'></a><span class='footnote-mark'><a href='#fn3x0-bk' id='fn3x0'><sup class='textsuperscript'>3</sup></a></span><span class='ectt-0800'>curl https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire4.py
+<!-- l. 74 --><p class='noindent'><a id='x1-5016x3'></a><span class='footnote-mark'><a href='#fn3x0-bk' id='fn3x0'><sup class='textsuperscript'>3</sup></a></span><span class='ectt-0800'>curl https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire4.py
 &gt; wire4.py</span></p></aside> 
 <aside class='footnotetext' role='doc-footnote'>
-<!-- l. 84 --><p class='noindent'><a id='x1-5016x4'></a><span class='footnote-mark'><a href='#fn4x0-bk' id='fn4x0'><sup class='textsuperscript'>4</sup></a></span><span class='ecrm-0800'>The reading will be blocking if the number of requested frames is larger than the number
+<!-- l. 81 --><p class='noindent'><a id='x1-5018x4'></a><span class='footnote-mark'><a href='#fn4x0-bk' id='fn4x0'><sup class='textsuperscript'>4</sup></a></span><span class='ecrm-0800'>The reading will be blocking if the number of requested frames is larger than the number
 of available frames.</span></p></aside> 
                                                                                                  </div>
  
