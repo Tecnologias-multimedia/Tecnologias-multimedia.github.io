@@ -219,13 +219,17 @@ Reporting everything in a \href{https://jupyter.org/}{Jupyter
   this milestone!).} the experiment configuration and the results of
 the experiment):
   \begin{enumerate}
-  \item The minimum artificial latency that you must configure in your
-    InterCom instance to communicate with your groupmate without lossing
-    chunks, when he/she is in a different\footnote{Different to the
-      network in which you are using InterCom.} local
+  \item The \textbf{minimum artificial\footnote{Use the parameter
+        \texttt{--buffering\_time}.} latency} that you must configure
+    in your InterCom instance to communicate with your groupmate
+    without lossing chunks, when he/she is in a
+    different\footnote{Different to the network in which you are using
+      InterCom.} local
     network. \href{https://vicente-gonzalez-ruiz.github.io/about_ping/}{Ping}
-    can help to estimate the latency.
-  \item Repeat the previous experiment using only localhost
+    can help to estimate the latency. However, notice that you must
+    use InterCom (buffer, in this case) to check how many chunks are
+    lost as a function of the buffer size.
+  \item \textbf{Repeat the previous experiment using only localhost}
     (transmiting the chunk between the loopback network adapter), but
     adding some jitter with the tool
     \href{https://vicente-gonzalez-ruiz.github.io/about_tc/}{\texttt{tc}}. If

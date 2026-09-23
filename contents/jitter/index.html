@@ -173,16 +173,18 @@ return only when a new chunk is received.
 (showing<span class='footnote-mark'><a href='#fn6x0' id='fn6x0-bk'><sup class='textsuperscript'>6</sup></a></span><a id='x1-4001f6'></a>
 the experiment configuration and the results of the experiment):
      </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-4004x1'>The minimum artificial latency that you must configure in your InterCom
-     instance to communicate with your groupmate without lossing chunks,
-     when he/she is in a different<span class='footnote-mark'><a href='#fn7x0' id='fn7x0-bk'><sup class='textsuperscript'>7</sup></a></span><a id='x1-4005f7'></a>
-     local network.  <a href='https://vicente-gonzalez-ruiz.github.io/about_ping/'>Ping</a> can help to estimate the latency.
+<li class='enumerate' id='x1-4004x1'>The <span class='ecbx-1000'>minimum artificial</span><span class='footnote-mark'><a href='#fn7x0' id='fn7x0-bk'><sup class='textsuperscript'>7</sup></a></span><a id='x1-4005f7'></a>
+     <span class='ecbx-1000'>latency </span>that you must configure in your InterCom instance to communicate
+     with your groupmate without lossing chunks, when he/she is in a different<span class='footnote-mark'><a href='#fn8x0' id='fn8x0-bk'><sup class='textsuperscript'>8</sup></a></span><a id='x1-4007f8'></a>
+     local network.  <a href='https://vicente-gonzalez-ruiz.github.io/about_ping/'>Ping</a> can help to estimate the latency. However, notice that
+     you must use InterCom (buffer, in this case) to check how many chunks
+     are lost as a function of the buffer size.
      </li>
-<li class='enumerate' id='x1-4008x2'>Repeat  the  previous  experiment  using  only  localhost  (transmiting  the
-     chunk between the loopback network adapter), but adding some jitter with
-     the tool  <a href='https://vicente-gonzalez-ruiz.github.io/about_tc/'><span class='ectt-1000'>tc</span></a>. If <span class='ectt-1000'>tc </span>is not avaiable in your OS, you can use any other similar
-     tool, or use the Linux at the laboratory. But remember, you only must
-     play with jitter, not with packet loss or transmission bit-rate.</li></ol>
+<li class='enumerate' id='x1-4010x2'><span class='ecbx-1000'>Repeat the previous experiment using only localhost </span>(transmiting
+     the chunk between the loopback network adapter), but adding some jitter
+     with the tool  <a href='https://vicente-gonzalez-ruiz.github.io/about_tc/'><span class='ectt-1000'>tc</span></a>. If <span class='ectt-1000'>tc </span>is not avaiable in your OS, you can use any other
+     similar tool, or use the Linux at the laboratory. But remember, you only
+     must play with jitter, not with packet loss or transmission bit-rate.</li></ol>
                                                                   
 
                                                                   
@@ -215,7 +217,8 @@ order.</span></p><a id='x1-3020x4'></a>
 step.</span></p><a id='x1-4002x3'></a>
 <!-- l. 219 --><p class='indent'>     <span class='footnote-mark'><a href='#fn6x0-bk' id='fn6x0'><sup class='textsuperscript'>6</sup></a></span> <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/docs/Hidding_the_Network_Jitter__example.ipynb'><span class='ecrm-0800'>Here</span></a> <span class='ecrm-0800'>you can find an example of a notebook showing some experiments (which do not
 necessarily have to coincide with those requested in this milestone!).</span></p><a id='x1-4006x7'></a>
-<!-- l. 225 --><p class='noindent'><span class='footnote-mark'><a href='#fn7x0-bk' id='fn7x0'><sup class='textsuperscript'>7</sup></a></span><span class='ecrm-0800'>Different to the network in which you are using InterCom.</span></p>                                        </div>
+<!-- l. 223 --><p class='noindent'><span class='footnote-mark'><a href='#fn7x0-bk' id='fn7x0'><sup class='textsuperscript'>7</sup></a></span><span class='ecrm-0800'>Use the parameter </span><span class='ectt-0800'>–buffering_time</span><span class='ecrm-0800'>.</span></p><a id='x1-4008x8'></a>
+<!-- l. 227 --><p class='noindent'><span class='footnote-mark'><a href='#fn8x0-bk' id='fn8x0'><sup class='textsuperscript'>8</sup></a></span><span class='ecrm-0800'>Different to the network in which you are using InterCom.</span></p>                                        </div>
  
 </body> 
 </html>
