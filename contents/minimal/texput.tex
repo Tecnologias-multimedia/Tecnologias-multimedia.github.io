@@ -61,39 +61,43 @@ Roughtly, InterCom can be divided into 6 steps:
 where:
 
 \begin{enumerate}
-\item The \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L146}{\texttt{record(chunk\_size)}}
+\item The
+  \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L146}{\texttt{record(chunk\_size)}}
   method captures a chunk (a fragment) of frames\footnote{A stereo
-    sample, usually 16 + 16 bits.}. In \verb|sounddevice|, this
+  sample, usually 16 + 16 bits.}. In \verb|sounddevice|, this
   operation can be\footnote{There is another alternative, as we will
-    see soon.}  carried on by the
+  see soon.}  carried on by the
   \href{https://python-sounddevice.readthedocs.io/en/0.4.0/api/streams.html#sounddevice.Stream.read}{\texttt{read()}}
   method. As can be find out in
   \href{https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire4.py}{wire4.py}\footnote{
-    \texttt{curl
-      https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire4.py
-      > wire4.py}} and also in the documentation of \verb|sounddevice|
-  if we read only the frames that are available in the soundcard's
-  buffer, this generates a non-blocking operation and the chunk size
-  depends on the instant of time in which this method is
-  called. Otherwise, if we specify a number of frames bigger than the
-  number of frames available, the operation will\footnote{The reading
-    will be blocking if the number of requested frames is larger than
-    the number of available frames.} be
+  \texttt{curl
+    https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire4.py
+    > wire4.py}} and also in the
+  \href{https://python-sounddevice.readthedocs.io/en/0.5.3/api/streams.html#sounddevice.Stream.read}{documentation
+    of \texttt{sounddevice}} if we read only the frames that are
+  available in the soundcard's buffer, this generates a non-blocking
+  operation and the chunk size depends on the instant of time in which
+  this method is called. Otherwise, if we specify a number of frames
+  bigger than the number of frames available, the operation
+  will\footnote{The reading will be blocking if the number of
+  requested frames is larger than the number of available frames.} be
   \href{https://python-sounddevice.readthedocs.io/en/0.4.0/api/streams.html#sounddevice.Stream.write}{blocking}
   and \href{https://en.wikipedia.org/wiki/I/O_bound}{I/O-bound} (the
   calling process sleeps until the required chunk size is returned).
 
-\item \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L76}{\texttt{pack(chunk)}}
+\item
+  \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L76}{\texttt{pack(chunk)}}
   process the chunk to create a
   \href{https://en.wikipedia.org/wiki/Network_packet}{packet} (or a
-  sequence of packets), a structure that can be transmitted through
-  the \href{https://en.wikipedia.org/wiki/Internet}{Internet} using
-  the \href{https://en.wikipedia.org/wiki/Datagram}{Datagram}
+  sequence of packets), a structure that can (and will) be transmitted
+  through the \href{https://en.wikipedia.org/wiki/Internet}{Internet}
+  using the \href{https://en.wikipedia.org/wiki/Datagram}{Datagram}
   Model. In general, this is a
   \href{https://en.wikipedia.org/wiki/CPU-bound}{CPU-bounded}
   (CPU-intensive) operation because the payload of the packet can be
-  compressed in order to minimize the transmission
-  \href{https://en.wikipedia.org/wiki/Bit_rate}{bit-rate}.
+  processed (for example, compressed in order to minimize the
+  transmission
+  \href{https://en.wikipedia.org/wiki/Bit_rate}{bit-rate}).
 
 \item \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L89}{\texttt{send(packed\_chunk)}}
   sends the packet to our interlocutor. When
@@ -209,7 +213,8 @@ module.
 
 You should understand the meaning, purpose and usage of all of the
 parameters of \texttt{minimal.py}. Do the following
-experiments. Report every thing in a document, and in the laboratory,
+experiments. Report every thing in a document (preferably in a
+\href{https://jupyter.org/}{Jupyter notebook}), and in the laboratory,
 show to your teacher the results (and the document):
 
 \begin{enumerate}
@@ -230,9 +235,9 @@ show to your teacher the results (and the document):
     variation in the latency? Determine it. And in the quality of the
     audio?}
 \item Modify the parameter \verb|--frames_per_second|. \textbf{Again,
-    do you notice any changes in latency or audio quality? Determine
-    the new latency. Determine also the maximum frequency that you
-    will capture (depending on \texttt{--frames\_per\_second}).}
+  do you notice any changes in latency or audio quality? Determine the
+  new latency. Determine also the maximum frequency that you will
+  capture (depending on the \texttt{frames\_per\_second} parameter).}
 \item With one of your group mates, try to communicate using the same
   \href{https://en.wikipedia.org/wiki/Local_area_network}{LAN} (you
   will need to modify the parameter
