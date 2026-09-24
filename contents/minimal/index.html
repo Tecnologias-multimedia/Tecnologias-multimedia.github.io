@@ -75,7 +75,7 @@ have two alternatives for implementing an application such as InterCom:
      frames<span class='footnote-mark'><a href='#fn1x0' id='fn1x0-bk'><sup class='textsuperscript'>1</sup></a></span><a id='x1-5011f1'></a>.
      In <span class='obeylines-h'><code class='verb'>sounddevice</code></span>, this operation can be<span class='footnote-mark'><a href='#fn2x0' id='fn2x0-bk'><sup class='textsuperscript'>2</sup></a></span><a id='x1-5013f2'></a>
      carried on by the <a href='https://python-sounddevice.readthedocs.io/en/0.4.0/api/streams.html#sounddevice.Stream.read'><span class='ectt-1000'>read()</span></a> method. As can be find out in <a href='https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire4.py'>wire4.py</a><span class='footnote-mark'><a href='#fn3x0' id='fn3x0-bk'><sup class='textsuperscript'>3</sup></a></span><a id='x1-5015f3'></a>
-     and also in the documentation of <span class='obeylines-h'><code class='verb'>sounddevice</code></span> if we read only the frames
+     and also in the  <a href='https://python-sounddevice.readthedocs.io/en/0.5.3/api/streams.html#sounddevice.Stream.read'>documentation of <span class='ectt-1000'>sounddevice</span></a> if we read only the frames
      that are available in the soundcard’s buffer, this generates a non-blocking
      operation and the chunk size depends on the instant of time in which this
      method is called. Otherwise, if we specify a number of frames bigger than
@@ -84,10 +84,11 @@ have two alternatives for implementing an application such as InterCom:
      chunk size is returned).
      </li>
 <li class='enumerate' id='x1-5020x2'> <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L89'><span class='ectt-1000'>pack(chunk)</span></a> process the chunk to create a   <a href='https://en.wikipedia.org/wiki/Network_packet'>packet</a> (or a sequence of
-     packets), a structure that can be transmitted through the  <a href='https://en.wikipedia.org/wiki/Internet'>Internet</a> using
-     the  <a href='https://en.wikipedia.org/wiki/Datagram'>Datagram</a> Model. In general, this is a  <a href='https://en.wikipedia.org/wiki/CPU-bound'>CPU-bounded</a> (CPU-intensive)
-     operation because the payload of the packet can be compressed in order
-     to minimize the transmission  <a href='https://en.wikipedia.org/wiki/Bit_rate'>bit-rate</a>.
+     packets),  a  structure  that  can  (and  will)  be  transmitted  through  the
+     <a href='https://en.wikipedia.org/wiki/Internet'>Internet</a> using the  <a href='https://en.wikipedia.org/wiki/Datagram'>Datagram</a> Model. In general, this is a  <a href='https://en.wikipedia.org/wiki/CPU-bound'>CPU-bounded</a>
+     (CPU-intensive)  operation  because  the  payload  of  the  packet  can  be
+     processed (for example, compressed in order to minimize the transmission
+     <a href='https://en.wikipedia.org/wiki/Bit_rate'>bit-rate</a>).
                                                                   
 
                                                                   
@@ -117,31 +118,32 @@ have two alternatives for implementing an application such as InterCom:
      in InterCom), the playing of the chunk should return immediately because
      the time that <span class='obeylines-h'><code class='verb'>play()</code></span> needs to complete would match exactly the time
      that the <span class='obeylines-h'><code class='verb'>record()</code></span> method requires (see  <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/test/sounddevice/wire4b.py'>wire4b.py</a>).</li></ol>
-<!-- l. 154 --><p class='noindent'>
+<!-- l. 156 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead'><span class='titlemark'>3.2   </span> <a id='x1-60003.2'></a>Timer-based algorithm</h4>
-<!-- l. 156 --><p class='noindent'>The to-be-called-in-a-loop implementation depicted in the previous section works
+<!-- l. 158 --><p class='noindent'>The to-be-called-in-a-loop implementation depicted in the previous section works
 fine, but finally InterCom uses a to-be-called-by-an-interruption implementation
 because it is allows to run another task in parallel for free.
                                                                   
 
                                                                   
-</p><!-- l. 161 --><p class='indent'>   In this algorithm, the task dedicated to record and play the chunks of audio is
+</p><!-- l. 163 --><p class='indent'>   In this algorithm, the task dedicated to record and play the chunks of audio is
 called periodically (probably, using some  <a href='https://en.wikipedia.org/wiki/Timer'>timer</a> usually provided by the sound
 hardware). This procedure guarantees a  <a href='https://en.wikipedia.org/wiki/Glitch'>gliches</a>-free audio-IO when constant
 chunk-sizes are used, because the timer interruption coincides exactly with the
 instant of time in which the <span class='obeylines-h'><code class='verb'>record()</code></span> and the <span class='obeylines-h'><code class='verb'>play()</code></span> methods could be used
 without blocking.
-</p><!-- l. 199 --><p class='indent'>   The  <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L111'>current implementation</a> of InterCom uses the timer-based (interruption-based)
+</p><!-- l. 201 --><p class='indent'>   The  <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L111'>current implementation</a> of InterCom uses the timer-based (interruption-based)
 algorithm. Therefore, you are not going to find the methods <span class='ectt-1000'>sounddevice.read()</span>
 and <span class='ectt-1000'>sounddevice.write() </span>in the  <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py'><span class='ectt-1000'>minimal.py</span></a> module.
-</p><!-- l. 208 --><p class='noindent'>
+</p><!-- l. 210 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>4   </span> <a id='x1-70004'></a>Deliverables</h3>
-<!-- l. 210 --><p class='noindent'>You should understand the meaning, purpose and usage of all of the parameters of
-<span class='ectt-1000'>minimal.py</span>. Do the following experiments. Report every thing in a document, and in
-the laboratory, show to your teacher the results (and the document):
-</p><!-- l. 215 --><p class='indent'>
+<!-- l. 212 --><p class='noindent'>You should understand the meaning, purpose and usage of all of the parameters of
+<span class='ectt-1000'>minimal.py</span>. Do the following experiments. Report every thing in a document
+(preferably in a  <a href='https://jupyter.org/'>Jupyter notebook</a>), and in the laboratory, show to your teacher the
+results (and the document):
+</p><!-- l. 218 --><p class='indent'>
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-7002x1'>Run <span class='ectt-1000'>minimial.py </span>using <span class='ectt-1000'>localhost </span>as the destination for your chunks
      of audio (notice that this is the default configuration for the parameters
@@ -160,11 +162,8 @@ the laboratory, show to your teacher the results (and the document):
      </li>
 <li class='enumerate' id='x1-7006x3'>Modify the parameter <span class='obeylines-h'><code class='verb'>--frames_per_second</code></span>. <span class='ecbx-1000'>Again, do you notice
      any changes in latency or audio quality? Determine the new
-                                                                  
-
-                                                                  
      latency. Determine also the maximum frequency that you will
-     capture (depending on </span><span class='ectt-1000'>–frames_per_second</span><span class='ecbx-1000'>).</span>
+     capture (depending on the </span><span class='ectt-1000'>frames_per_second </span><span class='ecbx-1000'>parameter).</span>
      </li>
 <li class='enumerate' id='x1-7008x4'>With one of your group mates, try to communicate using the same  <a href='https://en.wikipedia.org/wiki/Local_area_network'>LAN</a>
      (you will need to modify the parameter <span class='obeylines-h'><code class='verb'>--destination_address</code></span>). Notice
@@ -179,7 +178,7 @@ the laboratory, show to your teacher the results (and the document):
      different LAN than you (for example, when two InterCom instances are
      running in different home networks)? <span class='ecbx-1000'>Describe the experiment, even
      if it does not work.</span></li></ol>
-<!-- l. 282 --><p class='noindent'>
+<!-- l. 285 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>5   </span> <a id='x1-80005'></a>Resources</h3>
    <div class='thebibliography'>
@@ -198,7 +197,7 @@ the laboratory, show to your teacher the results (and the document):
 <!-- l. 68 --><p class='noindent'><span class='footnote-mark'><a href='#fn2x0-bk' id='fn2x0'><sup class='textsuperscript'>2</sup></a></span><span class='ecrm-0800'>There is another alternative, as we will see soon.</span></p><a id='x1-5016x3'></a>
 <!-- l. 74 --><p class='noindent'><span class='footnote-mark'><a href='#fn3x0-bk' id='fn3x0'><sup class='textsuperscript'>3</sup></a></span><span class='ectt-0800'>curl https://raw.githubusercontent.com/Tecnologias-multimedia/intercom/master/test/sounddevice/wire4.py
 &gt; wire4.py</span></p><a id='x1-5018x4'></a>
-<!-- l. 81 --><p class='noindent'><span class='footnote-mark'><a href='#fn4x0-bk' id='fn4x0'><sup class='textsuperscript'>4</sup></a></span><span class='ecrm-0800'>The reading will be blocking if the number of requested frames is larger than the number
+<!-- l. 82 --><p class='noindent'><span class='footnote-mark'><a href='#fn4x0-bk' id='fn4x0'><sup class='textsuperscript'>4</sup></a></span><span class='ecrm-0800'>The reading will be blocking if the number of requested frames is larger than the number
 of available frames.</span></p>                                                                                                 </div>
  
 </body> 
