@@ -61,7 +61,7 @@ Roughtly, InterCom can be divided into 6 steps:
 where:
 
 \begin{enumerate}
-\item The \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L146}{\texttt{record(chunk\_size)}}
+\item The \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L156}{\texttt{record(chunk\_size)}}
   method captures a chunk (a fragment) of frames\footnote{A stereo
     sample, usually 16 + 16 bits.}. In \verb|sounddevice|, this
   operation can be\footnote{There is another alternative, as we will
@@ -83,7 +83,7 @@ where:
   and \href{https://en.wikipedia.org/wiki/I/O_bound}{I/O-bound} (the
   calling process sleeps until the required chunk size is returned).
 
-\item \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L76}{\texttt{pack(chunk)}}
+\item \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L89}{\texttt{pack(chunk)}}
   process the chunk to create a
   \href{https://en.wikipedia.org/wiki/Network_packet}{packet} (or a
   sequence of packets), a structure that can be transmitted through
@@ -95,7 +95,7 @@ where:
   compressed in order to minimize the transmission
   \href{https://en.wikipedia.org/wiki/Bit_rate}{bit-rate}.
 
-\item \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L89}{\texttt{send(packed\_chunk)}}
+\item \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L102}{\texttt{send(packed\_chunk)}}
   sends the packet to our interlocutor. When
   \href{https://en.wikipedia.org/wiki/Datagram}{datagrams} are used
   (which is
@@ -105,7 +105,7 @@ where:
   and the sizes of the payloads are also small, as it is expected in
   InterCom (audio).
 
-\item \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L96}{\texttt{receive()}},
+\item \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L109}{\texttt{receive()}},
   waits (blocking the calling process) for an incoming packet, and
   therefore, this operation is IO-bound. However, most
   \href{https://docs.python.org/3/library/socket.html}{socket
@@ -121,11 +121,11 @@ where:
   \href{https://en.wikipedia.org/wiki/Digital_audio#Overview}{zeros}
   that will not produce any sound when it is played).
 
-\item \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L80}{\texttt{unpack(packed\_chunk)}} is (like the method
+\item \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L93}{\texttt{unpack(packed\_chunk)}} is (like the method
   \texttt{pack(chunk)}) a CPU-intensive step that transforms a
   possibly compressed chunk into a chunk of ``playable'' audio.
 
-\item \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L161}{\texttt{play(chunk)}} renders the chunk. In general, this is an
+\item \href{https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L174}{\texttt{play(chunk)}} renders the chunk. In general, this is an
   I/O-bound blocking action. However, if \verb|play()| is called at
   the same pace as \verb|record()|, and the record and play parameters
   are exactly the same (as usually happens in InterCom), the playing of
