@@ -128,18 +128,18 @@ because it is allows to run another task in parallel for free.
 
                                                                   
 </p><!-- l. 163 --><p class='indent'>   In this algorithm, the task dedicated to record and play the chunks of audio is
-called periodically (probably, using some  <a href='https://en.wikipedia.org/wiki/Timer'>timer</a> usually provided by the sound
-hardware). This procedure guarantees a  <a href='https://en.wikipedia.org/wiki/Glitch'>gliches</a>-free audio-IO when constant
-chunk-sizes are used, because the timer interruption coincides exactly with the
-instant of time in which the <span class='obeylines-h'><code class='verb'>record()</code></span> and the <span class='obeylines-h'><code class='verb'>play()</code></span> methods could be used
-without blocking.
-</p><!-- l. 201 --><p class='indent'>   The  <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L111'>current implementation</a> of InterCom uses the timer-based (interruption-based)
+called periodically (probably, using some  <a href='https://en.wikipedia.org/wiki/Timer'>timer</a> provided by the sound hardware).
+This procedure guarantees a  <a href='https://en.wikipedia.org/wiki/Glitch'>gliches</a>-free audio-IO when constant chunk-sizes are
+used, because the timer interruption coincides exactly with the instant of
+time in which the <span class='obeylines-h'><code class='verb'>record()</code></span> and the <span class='obeylines-h'><code class='verb'>play()</code></span> methods could be used without
+blocking.
+</p><!-- l. 201 --><p class='indent'>   The  <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L124'>current implementation</a> of InterCom uses the timer-based (interruption-based)
 algorithm. Therefore, you are not going to find the methods <span class='ectt-1000'>sounddevice.read()</span>
 and <span class='ectt-1000'>sounddevice.write() </span>in the  <a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py'><span class='ectt-1000'>minimal.py</span></a> module.
 </p><!-- l. 210 --><p class='noindent'>
 </p>
    <h3 class='sectionHead'><span class='titlemark'>4   </span> <a id='x1-70004'></a>Deliverables</h3>
-<!-- l. 212 --><p class='noindent'>You should understand the meaning, purpose and usage of all of the parameters of
+<!-- l. 212 --><p class='noindent'>You should understand the meaning, purpose, and usage of all of the parameters of
 <span class='ectt-1000'>minimal.py</span>. Do the following experiments. Report every thing in a document
 (preferably in a  <a href='https://jupyter.org/'>Jupyter notebook</a>), and in the laboratory, show to your teacher the
 results (and the document):
