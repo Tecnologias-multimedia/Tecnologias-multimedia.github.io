@@ -36,9 +36,9 @@ To formalize the problem, let's define:
   the near-end person (that's me) that reaches my mic\footnote{I.e.,
   the same signal that would be captured by our mic if I were using a
   headset.}, and
-\item $m$ the (mixed) signal recorded by my microphone.
+\item $m$ the (mixed) signal recorded by my microphone,
 \end{enumerate}
-In this situation, we have that
+where
 \begin{equation}
   m(t) = n(t) + s(t),
   \label{eq:echo_problem}
@@ -63,7 +63,7 @@ this case,
 \end{equation}
 because $s(t)\approx 0$.
 
-\section{The trivial (but unpractical) solution}
+\section{A trivial (but unpractical) solution}
 
 Decrease the gain of the amplifier of your speaker to do (the energy
 of) $s(t)$ as small as possible. Unfortunately, this also decreases the
@@ -656,7 +656,7 @@ an attenuation\footnote{Usually, $a<1$ because in general the amount
   of signal that our micro captures from our speaker is smaller (in
   \href{https://en.wikipedia.org/wiki/Energy_(signal_processing)}{energy}~\cite{vetterli2014foundations})
   than the signal ${\mathbf s}$.}, and $d$ is an integer number that
-indicates the delay (in sample-times\footnote{A sample-time is the
+indicates a delay (in sample-times\footnote{A sample-time is the
   interval of time that separates two consecutive samples (or frames)
   and depends on the sampling frequency.}) that exists between when
 the received signal ${\mathbf s}$ is reproduced by our speaker until
