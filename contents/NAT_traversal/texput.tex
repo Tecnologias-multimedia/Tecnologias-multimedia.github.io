@@ -13,8 +13,8 @@
 | Internal +--------+ NAT    +--------+ External |
 | Network  |        | Device |        | Network  |
 +----------+        +--------+        +----------+
-(usually)                             (rest of the
- your home)                            Internet)
+ (usually)                            (rest of the
+ your home)                             Internet)
 \end{verbatim}
 \caption{NAT framework.}
 \label{fig:NAT_framework}
@@ -23,28 +23,33 @@
 
 NAT stands for
 \href{https://en.wikipedia.org/wiki/Network_address_translation}{Network
-  Address Translation}, and it is a method to remap an IP (Internet
-Protocol) address space into another by modifying network address
-information (in the IP header) of packets while they are in transit
-across a traffic routing device (see the
+  Address Translation}, and it is a method to remap an IP
+(\href{https://en.wikipedia.org/wiki/Internet_Protocol}{Internet
+  Protocol}) address space into another (space) by modifying network
+address information (in the IP header) of packets while they are in
+transit across a traffic routing device (see the
 Fig~\ref{fig:NAT_framework})~\cite{srisuresh1999nat,Srisuresh2001}. When
 a network device\footnote{Installed for example in a host.} in an
 internal (usually private) network sends a packet $P$ to the Internet,
 the NAT device translates the internal IP address to an external
 (usually public) IP address. When a packet from the Internet arrives
-to the NAT device, it translates the external IP address to the
-internal IP address of the device receiver of the packet $P$.
+to the destination NAT device, it translates the external IP address
+to the internal (usually also private) IP address of the receiver
+device of the packet $P$.
 
-Most NAT boxes are implemented as a part of home routers.
+Notice that most NAT boxes that we use locally are implemented as a
+part of home routers.
 
 \section{Pros and cons of NATting}
 
-NAT was designed because it provides the following advantages:
+NAT was designed to provide the following advantages:
 \begin{enumerate}
 \item It allows multiple devices on a private network to share a
-  single public IP address and access the Internet. Therefore, a NAT
-  device conserves public IP addresses, which are in short supply.
-\item It can improve security by hiding the internal IP addresses of
+  single public IP address and access the Internet. Therefore, NAT
+  devices conserve public IPv4 addresses, which are in short
+  supply\footnote{Their number is quite limited and the number of
+  users keeps growing.}.
+\item It can improve security by hiding the internal IP addresses used by the
   devices in the internal networks.
 \end{enumerate}
 
@@ -64,13 +69,13 @@ However, NAT also has (mainly) one disadvantage:
 An \textbf{IP address} is an unique label that identifies a device on a
 network. It is an integer number (32 bits in the case of IPv4 and 128
 bits in IPv6) assigned to devices that use the Internet to
-communicate. All IP packets have an IP address in their header. IPv4
+communicate. All IP packets have IP addresses in their headers. IPv4
 addresses are usually written using the dotted-decimal notation, such
 as for example, \texttt{10.20.30.40}. On the other hand, IPv6
 addresses are expresed in colon-hexadecimal notation, such for
 example, \texttt{2001:0db8:85a3:0000:0000:8a2e:0370:7334}.
 
-A \textbf{port} in the context of networking is an integer number
+A \textbf{port}, in the context of networking, is an integer number
 (usually 16 bits long), deployed by a transport protocol (TCP or UDP,
 usually) and associated with a application protocol, that receives or
 transmits data for a specific service (for example, the port
@@ -79,37 +84,40 @@ is employed to transfer Web pages). In general, ports are used to
 identify a running process on a computer (host). When a host receives
 a packet of data, the operating system looks at the port number in the
 packet header to determine which service is the destination of the
-data.
+data. Notice that the concept of port is only applicable at the
+transport (TCP/UDP) layer.
 
 An \textbf{end-point} is the combination of an IP address and a
 port. End-points identify networked actors (usually computer
-processes) that interchange IP packets. For example, the end-point
-\texttt{8.8.8.8:53} identify a name-server provided by Google Inc. In
-general, we will represent an end-point as $A:b$, where $A$ is an
-IP address and $b$ is a port.
+processes) that interchange (in the case of InterCom, UDP)
+packets. For example, the end-point \texttt{8.8.8.8:53} identify a
+name-server provided by Google Inc. In general, we will represent an
+end-point as $A:b$, where $A$ is an IP address and $b$ is a port.
 
 In the context of UDP, a ``\textbf{conection}''\footnote{The term
-  connection is mainly used in the context of TCT, which is not our
-  case. However, we will use this word to refeer that there is a
-  communication between two processes that use the UDP.} is the action
+connection is mainly used in the context of TCP, which is not our
+case. However, we will use this word to refeer that there is a
+communication between two processes that use the UDP.} is the action
 of transmitting at least one packet from one end-point to
 another. Notice that connections are determined by a pair of
-end-points. But it should be clear that, by definition, connections
-are only generated when applications use the TCP.
+end-points (``source'' and ``destination''). But it should be clear
+that, by definition, connections are only generated when applications
+use the TCP\footnote{UDP is considered a connection-less transport
+protocol.}.
 
 Networked actors (usually processes\footnote{But it could be a piece
-  of hardware or any other computational entity.}) can be classified
-in severs, clients, and peers. \textbf{Servers} wait for requests from
-\textbf{clients} (clients always initiate the connections). When the
-actors can act as servers and clients at the same time, they are
-called \textbf{peers}.
+of hardware or any other computational entity.}) can be classified as
+``severs'', ``clients'', and ``peers''. \textbf{Servers} wait for
+requests from \textbf{clients} (which \emph{always} initiate the
+connections). When the actors can act as servers and clients at the
+same time, they are called \textbf{peers}.
 
-\section{The Translation Table (TT)}
+\section{The translation table}
 
-A NAT device uses a TT to track the connections that are established
-between ``internal'' and ``external'' peers (see the
-Fig.~\ref{fig:NAT_framework}). When an outgoing packet (generated in
-the internal network) is sent to another peer through a NAT device,
+A NAT device uses a Translation Table (TT) to track the connections
+that are established between ``internal'' and ``external'' peers (see
+the Fig.~\ref{fig:NAT_framework}). When an outgoing packet (generated
+in the internal network) is sent to another peer through a NAT device,
 the TT\footnote{Managed by the NAT box.} is used to take note of the
 internal end-point of the peer that has sent this packet. Thus, when
 an incoming packet (generated in the external network) arrives, the TT
@@ -117,10 +125,10 @@ indicates the internal end-point of a peer. How the NAT box find the
 internal end-point depends on the type of NAT (see below).
 
 Notice that the entries in the TT are only generated for outgoing
-traffic (generated in the internal network). If happens that an
-external IP packet arrives to the NAT device and there is not any
-entry in the TT (with a working TT-record) associated to the
-connection, the packet is discarded.
+traffic (generated in the internal network). If an external IP packet
+arrives to the NAT device and there is not any entry in the TT (with a
+working TT-record) associated to the connection, the packet is
+discarded.
 
 \section{Types of NAT}
 
@@ -136,9 +144,9 @@ Depending on the number of available IP external addresses:
   devices are used in most home networks.
 \item A dynamic NAT device maps multiple internal IP addresses to a
   pool of external IP addresses. This is the most common type of NAT
-  device and is used in corporative networks, because dynamic NAT can
-  accomodate more than $2^{16}$ internal concurrent peers using the
-  Internet.
+  device used in corporative networks, because dynamic NAT can
+  accomodate more than $2^{16}$ internal concurrent\footnote{Using the
+  Internet at the same time.} peers.
 \end{enumerate}
 
 \subsection{Types of ports mapping}
@@ -153,7 +161,7 @@ Depending on how the external ports are assigned:
   \begin{equation}
     P(X:y)=y, \forall X~\mathrm{private},
   \end{equation}
-  if $y$ is free (in the TT). If the external port $y$ is not
+  if $y$ is free to be used (in the TT). If the external port $y$ is not
   available (because there is another host in the internal network
   that is using the same port $y$), then the NAT device usually
   selects the ``next'' (counting from $y$) free port. This algorithm
@@ -172,23 +180,23 @@ Depending on how the external ports are assigned:
   These algorithms are used in \textbf{Symmetric NAT devices}. Notice
   that, even if our device is fixed-$\Delta$, it could behave as a
   Random-$\Delta$ one due to the outgoing traffic generated by
-  neighbor peers or other network actors.
+  neighbor peers or other network actors behind the NAT.
 \end{enumerate}
 
-Remember that none of these techniques have been
+Finally, you must know that none of these techniques have been
 standarized. Therefore, your NAT box can implement one of them, a
-mixure of them, or even any other algorithm.
+mixure of them, or even any other algorithm(s).
 
 \subsection{Types of packet filtering}
 
-Depending on how the incoming traffic is accepted (or not), NAT are
+Depending on whether the incoming traffic is accepted (or not), NAT are
 classified as:
 
 \begin{enumerate}
-\item \textbf{EIF (End-point Independent Filtering)} when the incoming packets
-  are forwarded without any extra restriction\footnote{Apart from the
-    existence of a working TT-record for the corresponding public port
-    used by the incoming packets.}. This is usually used in
+\item \textbf{EIF (End-point Independent Filtering)} when the incoming
+  packets are forwarded without any extra restriction\footnote{Apart
+  from the existence of a working TT-record for the corresponding
+  public port used by the incoming packets.}. This is usually used in
   \textbf{Full Cone NAT} devices.
 \item \textbf{ARF (Address Restricted Filtering)} when only those incoming
   packets having the same external IP address as the one in the
@@ -197,12 +205,12 @@ classified as:
     indexed by the external IP addresses of the incoming
     packets.}. This policy is generally used by \textbf{(Address)
     Restricted Cone NAT} devices.
-\item \textbf{ERF (End-point Restricted Filtering)} when only external incoming
-  packets having the same external end-point like the one in the
-  TT-record is forwarded to the internal end-point\footnote{Now, the
-    TT-records are indexed by the external port and the external
-    end-point.}. This policy is commonly used in \textbf{Port
-    Restricted Cone NAT} (PRCN) and \textbf{Symmetric NAT} devices.
+\item \textbf{ERF (End-point Restricted Filtering)} when only external
+  incoming packets having the same external end-point like the one in
+  the TT-record is forwarded to the internal end-point\footnote{Now,
+  the TT-records are indexed by the external port and the external
+  end-point.}. This policy is commonly used in \textbf{Port Restricted
+    Cone NAT} (PRCN) and \textbf{Symmetric NAT} devices.
 \end{enumerate}
 
 Again, remember that your NAT box can use any other algorithm :-/
@@ -211,13 +219,13 @@ Again, remember that your NAT box can use any other algorithm :-/
 
 UDP hole punching~\cite{srisuresh2008state} is a technique for
 transmitting UDP packets between peers that are behind different NAT
-devices, ... in some cases.\footnote{It is not always reliable, and it
-  may not work in all situations, ... because the NAT devices behavior
-  has not been standarized.} UDP hole punching works by having the two
-peers first send messages to each other, sometimes\footnote{Depending
-  on the application.} with the help of a third-party server. After
-that, the peers try to ``punch a hole'' in theirs NAT devices through
-which the incoming traffic can cross the NAT device.
+devices, ... in some cases.\footnote{UDP hole punching is not always
+reliable, and it may not work in all situations.} UDP hole punching
+works by having the two peers first send messages to each other,
+sometimes\footnote{Depending on the application.} with the help of a
+third-party server. After that, the peers try to ``punch a hole'' in
+theirs NAT devices through which the incoming traffic can cross the
+NAT device.
 
 \begin{figure}
   \includegraphics{graphics/UDP_Hole_Punching_RCN}
