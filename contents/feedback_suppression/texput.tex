@@ -23,14 +23,14 @@ One of the first problems we encounter with the use of the
 the sound that comes out of our PC's (loud)speaker some time later reaches
 our mic(rophone), and more some time later, that sound reaches our
 interlocutor (the ``far-end'' ... in the system we are the
-``near-end'') in the form of an echo (signal) of its own voice, which
+``near-end'') in the form of an echo (signal) of our own voice, which
 is reproduced by his/her speaker, which can be captured again (some
 time later) by his/her mic and sent it back to us ... and so on,
-generating a rather unpleasant feedback signal.
+generating a rather unpleasant feedback ``noise''.
 
 To formalize the problem, let's define:
 \begin{enumerate}
-\item $s$ the (analog) signal played by our
+\item $s$ as the (analog) signal played by our
   speaker and that reaches our mic,
 \item $n$ the signal emited by
   the near-end person (that's me) that reaches my mic\footnote{I.e.,
@@ -40,11 +40,11 @@ To formalize the problem, let's define:
 \end{enumerate}
 where
 \begin{equation}
-  m(t) = n(t) + s(t),
+  m(t) = n(t) + s(t).
   \label{eq:echo_problem}
 \end{equation}
-where $m(t)$ is the analog audio signal that makes the membrane of our
-microphone oscillate.
+Notice that $m(t)$ is the analog audio signal that makes the membrane of our
+microphone oscillate, and therefore, the signal that our sound card records.
 
 Our problem here is to minimize the
 \href{https://en.wikipedia.org/wiki/Energy_(signal_processing)}{energy}
@@ -61,7 +61,7 @@ this case,
   m(t) \approx n(t)
   \label{eq:headset_solution}
 \end{equation}
-because $s(t)\approx 0$.
+because in this case, $s(t)\approx 0$.
 
 \section{A trivial (but unpractical) solution}
 
@@ -72,7 +72,7 @@ volume of the far-end signal (the voice of our interlocutor) :-/
 \section{The ``simplest'' (but ineffective) solution}
 Lets ${\mathbf m}$ the digital version of $m(t)$, and ${\mathbf m}[t]$
 it's $t$-th sample\footnote{Or frame if we work in stereo}. In this
-solution, we send
+``simplest'' solution, we send
 \begin{equation}
   \tilde{\mathbf n}[t] = {\mathbf m}[t] - a{\mathbf s}[t-d],
   \label{eq:simplest}
@@ -98,11 +98,13 @@ microphone at the same instant of time that the sample ${\mathbf
 Notice that it have been used the notation $\tilde{\cdot}$ to
 highlight that $\tilde{\mathbf n}$ is an approximation of ${\mathbf
   n}$ (our sampled true-voice signal), and the notation $\hat{\cdot}$
-to emphasize that $\hat{\mathbf s}$ is a registered\footnote{That
+to emphasize that $\hat{\mathbf s}$ is a
+\href{https://en.wikipedia.org/wiki/Image_registration}{``registered''}\footnote{That
 matches in time. That are synchronized.} prediction for $s$ reaching
 our microphone. Notice also that, if ${\mathbf s}[0]$ is the first
-sample of a chunk ($c$-th chunk), the sample ${\mathbf s}[-d]$ could
-belong to a previous chunk (the $(c-1)$-th chunk).
+sample of a chunk (for example, the $c$-th chunk), the sample
+${\mathbf s}[-d]$ could belong to a previous chunk (the $(c-1)$-th
+chunk).
 
 Finally, $a$ should be choosen considering that under ausence of voice
 in each end, $s(t)\approx 0$. For example, Skype estimates $d$ and $a$
@@ -111,17 +113,18 @@ using a ``call-signal'' (a sequence of more-or-less
 is determined measuring the propagation time of the call-signal
 between our speaker and our mic.
 
-\section*{Why it's difficult to make it work?}
+\subsection*{Why it's difficult to make it work?}
 This algorithm is ineffective because:
 \begin{enumerate}
 \item $d$ can change over time (for example, if we're using a laptop
   and move the screen, $d$ will vary). This can be costly, because
-  using \href{https://en.wikipedia.org/wiki/Correlation}{correlation}
+  even using \href{https://en.wikipedia.org/wiki/Correlation}{correlation}
   in the Fourier domain, this is a heavy operation to be performed in
   real-time.
 \item Assuming that the signal captured by the microphone is
   $a{\mathbf s}[t-d]$ is an oversimplification. This signal is only
-  similar (it's filtered and likely contains echoes).
+  similar (usually it's filtered by the environment and likely
+  contains echoes).
 \end{enumerate}
 
 \section{Considering the frequency response of the near-end to estimate the feedback signal}
@@ -176,9 +179,10 @@ signals use a library such as
 of ${\mathbf h}$, and ${\mathcal F}^{-1}$ represents the inverse
 (digital) Fourier transform. Notice that all these transforms are
 applied to digital signals, and there exist fast algorithms (with
-complexity $O\log_2O$). 
+complexity $O\log_2O$) to ``travel'' from the signal domain to the
+frecuency domain, and viceversa.
 
-\section{Practical issues}
+\subsection*{Practical issues}
 Unfortunately, even when we expect that this improved feedback
 supression algorithm is going to perform better than the previous one,
 the computation of the filter weights ${\mathbf h}$ requires emitting
@@ -263,7 +267,7 @@ ADALINE is able to distinguish two (different) patterns, even using
 (\emph{only} a part of\footnote{If we do not consider the
   \href{https://en.wikipedia.org/wiki/Activation_function}{activation
     function}, an artificial neuron and a FIR filter perform the same
-  computation.}) a single neuron.
+  computation.}) a single artificial neuron.
 
 LMS finds $\mathbf{h}$ without using impulses. Considering that the
 signal that we should send to the far-end is
@@ -289,7 +293,7 @@ found\footnote{Again, please, watch
 \href{https://en.wikipedia.org/wiki/Gradient_descent}{gradient descend
   algorithm}.
 
-\section*{Unfortunately}
+\subsection*{Unfortunately}
 Yes, unfortunately we only can compute $\mathbf{h}$ if we have
 $\hat{\mathbf{s}}$ (the signal played by the speaker that is recorded
 by our mic), i.e., me must be silent when updating. Therefore, the
@@ -397,12 +401,12 @@ to my interlocutor, I could set $\hat{\mathbf{s}}=\mathbf{0}$ when I
 am speaking because my interlocutor should do the same (be silent when
 I speak)!
 
-Therefore, this solution (like the previous one) does need some
-technique to detect when I'm speaking. The advantage here is that we
-only need to switch off (or at least decrease enough the) volume of
-our speaker, something that does not consume computational resources.
-Notice that the ``voice detector'' algorithm can run in a separate
-thread/process.
+Therefore, this solution (decrease $s(t)$ when we are speaking, like
+the previous one) does need some technique to detect when I'm
+speaking. The advantage here is that we only need to switch off (or at
+least cut down enough the) volume of our speaker when I speak,
+something that does not consume computational resources. Notice that
+the ``voice detector'' algorithm can run in a separate thread/process.
 
 %\section{Filter update using a train of impulses}
 
@@ -533,10 +537,9 @@ The signal to send (without the feedback) is:
 
 \begin{enumerate}
 \item Write a Python module, called \texttt{feedback\_supression.py},
-  that inherits from \texttt{buffer.py} and that implements the last
-  proposed solution (decrease $s(t)$ when we are speaking). Define a
-  new command-line parameter to switch on this functionality, that by
-  default should be disabled (off).
+  that inherits from \texttt{buffer.py} and that implements one of the
+  proposed solutions. Define a new command-line parameter to switch on
+  this functionality, that by default should be disabled (off).
 \item Insert the code of \texttt{feedback\_supression.py} in a Jupyter
   notebook cell and generate the archive
   \texttt{feedback\_supression.py} using \texttt{\%\%writefile
