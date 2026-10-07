@@ -31,26 +31,30 @@ generating a rather unpleasant feedback ``noise''.
 To formalize the problem, let's define:
 \begin{enumerate}
 \item $s$ as the (analog) signal played by our
-  speaker and that reaches our mic,
+  speaker, % and that reaches our mic
 \item $n$ the signal emited by
-  the near-end person (that's me) that reaches my mic\footnote{I.e.,
+  the near-end person (that's me)\footnote{I.e.,
   the same signal that would be captured by our mic if I were using a
-  headset.}, and
-\item $m$ the (mixed) signal recorded by my microphone,
+  headset.}, and % that reaches my mic
+\item $m$ the (mixed) signal recorded by my microphone\footnote{Notice
+that $m(t)$ is the analog audio signal that makes the membrane of our
+microphone oscillate, and therefore, the signal that our sound card
+records.}  ,
 \end{enumerate}
 where
 \begin{equation}
-  m(t) = n(t) + s(t).
+  m(t) = \tilde{n}(t) + \tilde{s}(t),
   \label{eq:echo_problem}
 \end{equation}
-Notice that $m(t)$ is the analog audio signal that makes the membrane of our
-microphone oscillate, and therefore, the signal that our sound card records.
+where $\tilde{\cdot}$ represents an approximation of $\cdot$. We have
+here approximations because the signals are modified when they travel
+throught the air.
 
 Our problem here is to minimize the
 \href{https://en.wikipedia.org/wiki/Energy_(signal_processing)}{energy}
-of $s(t)$, i.e., to make
+of $\tilde{s}$, i.e., to make
 \begin{equation}
-  s(t) = 0.
+  \tilde{s}(t) = 0.
 \end{equation}
 
 \section{The trivial (and most efective) solution}
@@ -61,7 +65,7 @@ this case,
   m(t) \approx n(t)
   \label{eq:headset_solution}
 \end{equation}
-because in this case, $s(t)\approx 0$.
+because in this case, $s(t)\approx\tilde{s}(t)\approx 0$.
 
 \section{A trivial (but unpractical) solution}
 
@@ -95,12 +99,10 @@ that is received by the microphone.} feedback signal that reaches our
 microphone at the same instant of time that the sample ${\mathbf
   n}[t]$ would have been captured in the ausence of the feedback.
 
-Notice that it have been used the notation $\tilde{\cdot}$ to
-highlight that $\tilde{\mathbf n}$ is an approximation of ${\mathbf
-  n}$ (our sampled true-voice signal), and the notation $\hat{\cdot}$
-to emphasize that $\hat{\mathbf s}$ is a
-\href{https://en.wikipedia.org/wiki/Image_registration}{``registered''}\footnote{That
-matches in time. That are synchronized.} prediction for $s$ reaching
+Notice that it have been used the notation $\hat{\cdot}$ to emphasize
+that $\hat{\mathbf s}$ is a
+(\href{https://en.wikipedia.org/wiki/Image_registration}{``registered''}\footnote{That
+matches in time. That are synchronized.}) prediction for $s$ reaching
 our microphone. Notice also that, if ${\mathbf s}[0]$ is the first
 sample of a chunk (for example, the $c$-th chunk), the sample
 ${\mathbf s}[-d]$ could belong to a previous chunk (the $(c-1)$-th
@@ -127,7 +129,7 @@ This algorithm is ineffective because:
   contains echoes).
 \end{enumerate}
 
-\section{Considering the frequency response of the near-end to estimate the feedback signal}
+\section{Filtering}
 We can improve the performance of the previous feedback cancellation
 solution if we take also into consideration that the feedback signal
 that finally reaches our microphone is (at least in part) the
@@ -147,6 +149,7 @@ where $\ast$ represents the (digital) convolution between (in our case
 of) digital signals, and ${\mathbf h}$ is the digitalized version of
 $h(t)$.
 
+\subsection{Considering the frequency response of the near-end to estimate the feedback signal}
 The convolution of digital signals in the time domain can be expensive
 (with
 \href{https://en.wikipedia.org/wiki/Computational_complexity_theory}{computational
@@ -255,7 +258,7 @@ Finally, notice that we must send
 \end{equation}
 \end{comment}
 
-\section{Adaptive filtering using  \href{https://en.wikipedia.org/wiki/Least_mean_squares_filter}{LMS (Least Mean Squares)}}
+\subsection{Adaptive filtering using  \href{https://en.wikipedia.org/wiki/Least_mean_squares_filter}{LMS (Least Mean Squares)}}
 
 The LMS algorithm~\cite{haykin1995adaptive,boyd2004convex} was
 invented by professor Bernard Widrow and his first Ph.D. student, Ted
@@ -277,7 +280,7 @@ signal that we should send to the far-end is
 \end{equation}
 LMS minimizes
 \begin{equation}
-  \mathbf{e}[t] = \tilde{\mathbf{n}}[t] - \mathbf{n}[t]
+  \mathbf{e}[t] = \mathbf{n}[t] - \tilde{\mathbf{n}}[t]
 \end{equation}
 using the update rule
 \begin{equation}
