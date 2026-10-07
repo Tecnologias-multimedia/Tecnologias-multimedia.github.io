@@ -20,15 +20,15 @@ and computational requirements.
 One of the first problems we encounter with the use of the
 \texttt{buffer.py} module\footnote{And obviously, any other parent
   version of \texttt{buffer.py}.} is that, if we don't use headphones,
-the sound that comes out of our PC's (loud)speaker some time later reaches
-our mic(rophone), and more some time later, that sound reaches our
-interlocutor (the ``far-end'' ... in the system we are the
-``near-end'') in the form of an echo (signal) of our own voice, which
-is reproduced by his/her speaker, which can be captured again (some
-time later) by his/her mic and sent it back to us ... and so on,
-generating a rather unpleasant feedback ``noise''.
+the sound that comes out of our PC's (loud)speaker some time
+(miliseconds) later reaches our mic(rophone), and more some time
+later, that sound reaches our interlocutor (the ``far-end'' ... in the
+system we are the ``near-end'') in the form of an echo (signal) of its
+own voice, which is reproduced by his/her speaker, which can be
+captured again (some time later) by his/her mic and sent it back to us
+... and so on, generating a rather unpleasant feedback ``noise''.
 
-To formalize the problem, let's define:
+To formalize this problem, let's define:
 \begin{enumerate}
 \item $s$ as the (analog) signal played by our
   speaker, % and that reaches our mic
@@ -48,7 +48,7 @@ where
 \end{equation}
 where $\tilde{\cdot}$ represents an approximation of $\cdot$. We have
 here approximations because the signals are modified when they travel
-throught the air.
+through the air.
 
 Our problem here is to minimize the
 \href{https://en.wikipedia.org/wiki/Energy_(signal_processing)}{energy}
@@ -62,7 +62,7 @@ of $\tilde{s}$, i.e., to make
 Use a \href{https://en.wikipedia.org/wiki/Audio_headset}{headset}. In
 this case,
 \begin{equation}
-  m(t) \approx n(t)
+  m \approx n
   \label{eq:headset_solution}
 \end{equation}
 because in this case, $s(t)\approx\tilde{s}(t)\approx 0$.
@@ -70,11 +70,12 @@ because in this case, $s(t)\approx\tilde{s}(t)\approx 0$.
 \section{A trivial (but unpractical) solution}
 
 Decrease the gain of the amplifier of your speaker to do (the energy
-of) $s(t)$ as small as possible. Unfortunately, this also decreases the
-volume of the far-end signal (the voice of our interlocutor) :-/
+of) $\tilde{s}$ as small as possible. Unfortunately, this also
+decreases the volume of the far-end signal $s$ (the voice of our
+interlocutor) :-/
 
-\section{The ``simplest'' (but ineffective) solution}
-Lets ${\mathbf m}$ the digital version of $m(t)$, and ${\mathbf m}[t]$
+\section{The ``simplest'' (but in general, ineffective) solution}
+Lets ${\mathbf m}$ the digital version of $m$, and ${\mathbf m}[t]$
 it's $t$-th sample\footnote{Or frame if we work in stereo}. In this
 ``simplest'' solution, we send
 \begin{equation}
@@ -89,7 +90,7 @@ delay\footnote{In a digital signal the sample index indicates the
 sample-times) required to propagate the sound waves from our speaker
 to our mic. We define
 \begin{equation}
-  \hat{\mathbf s}[t] = a{\mathbf s}[t-d]
+  \hat{\mathbf s}[t] \triangleq a{\mathbf s}[t-d]
   \label{eq:minimal_filter}
 \end{equation}
 as the estimated\footnote{We use the word ``estimated'' because in
@@ -115,7 +116,7 @@ using a ``call-signal'' (a sequence of more-or-less
 is determined measuring the propagation time of the call-signal
 between our speaker and our mic.
 
-\subsection*{Why it's difficult to make it work?}
+\subsubsection*{Why it's difficult to make it work?}
 This algorithm is ineffective because:
 \begin{enumerate}
 \item $d$ can change over time (for example, if we're using a laptop
@@ -129,12 +130,13 @@ This algorithm is ineffective because:
   contains echoes).
 \end{enumerate}
 
-\section{Filtering}
+\section{Improving the performance through filtering}
 We can improve the performance of the previous feedback cancellation
-solution if we take also into consideration that the feedback signal
-that finally reaches our microphone is (at least in part) the
+solution if we take also into consideration that the \textbf{feedback}
+signal $\tilde{s}$ that finally reaches our microphone is (at least in
+part) the
 \href{https://en.wikipedia.org/wiki/Convolution}{convolution} of
-$s(t)$ and a signal $h(t)$ that represents the echo response of our
+$s$ and a signal $h$ that represents the echo response of our
 local audioset (speaker, mic, walls, monitor, keyboard, our body, ...)
 to an \href{https://en.wikipedia.org/wiki/Impulse_response}{impulse
   signal $\delta(t)$}.\footnote{This technique is similar to the
@@ -149,7 +151,7 @@ where $\ast$ represents the (digital) convolution between (in our case
 of) digital signals, and ${\mathbf h}$ is the digitalized version of
 $h(t)$.
 
-\subsection{Considering the frequency response of the near-end to estimate the feedback signal}
+\subsection{Filtering in the frequency domain}
 The convolution of digital signals in the time domain can be expensive
 (with
 \href{https://en.wikipedia.org/wiki/Computational_complexity_theory}{computational
@@ -185,7 +187,7 @@ applied to digital signals, and there exist fast algorithms (with
 complexity $O\log_2O$) to ``travel'' from the signal domain to the
 frecuency domain, and viceversa.
 
-\subsection*{Practical issues}
+\subsubsection*{Practical issues}
 Unfortunately, even when we expect that this improved feedback
 supression algorithm is going to perform better than the previous one,
 the computation of the filter weights ${\mathbf h}$ requires emitting
@@ -258,6 +260,7 @@ Finally, notice that we must send
 \end{equation}
 \end{comment}
 
+\begin{comment}
 \subsection{Adaptive filtering using  \href{https://en.wikipedia.org/wiki/Least_mean_squares_filter}{LMS (Least Mean Squares)}}
 
 The LMS algorithm~\cite{haykin1995adaptive,boyd2004convex} was
@@ -303,6 +306,7 @@ by our mic), i.e., me must be silent when updating. Therefore, the
 performance of this algorithm depends on the performance of other
 auxiliar technique which should determine whether in the near-end
 there is some source of sound.
+\end{comment}
 
 \begin{comment}
 If $\mathbf{n}$ and $\tilde{\mathbf{n}}$ represent the digital version of the audio signals generated by the local-end user and the sent signal, respectively, LMS minimizes
@@ -388,28 +392,38 @@ case, we have that
 
 \end{comment}
 
-\section{Taking turns speaking is the smartest thing to do}
+%\section{Taking turns speaking is the smartest thing to do}
+\section{Taking turns speaking?}
 Lets recap. Our problem is that, without a headset, we have that the
 signal that we send is
 \begin{equation}
-    \mathbf{m}[t] = \mathbf{n}[t] + \hat{\mathbf{s}}[t]
+    \mathbf{m} = \tilde{\mathbf{n}} + \hat{\mathbf{s}}
 \end{equation}
-where $\hat{\mathbf{s}}$ is a aproximated-and-delayed version of
+where $\tilde{\mathbf{n}}$ is the version of our voice captured by our
+mic, and $\hat{\mathbf{s}}$ is a aproximated-and-delayed version of
 $\mathbf{s}$, the signal played by our speaker(s). And if we were able
 to make $\hat{\mathbf{s}}=\mathbf{0}$, our feedback problem would
 vanish, ... at least, theoretically.
 
 But wait ..., as a polite person, if I don't speak when I am listening
-to my interlocutor, I could set $\hat{\mathbf{s}}=\mathbf{0}$ when I
-am speaking because my interlocutor should do the same (be silent when
-I speak)!
+to (my interlocutor), I could assume that
+$\hat{\mathbf{s}}=\mathbf{0}$ when I am speaking because my
+interlocutor should do the same (be silent when I speak)! But, if this
+is not true? A solution is: if I am speaking, attenuate enough $s$. 
 
+Summarizing: you should be able to control the volume of $s$ (the
+signal played by your speaker) and cut it down (or even off, if
+necessary) when you are speaking or your mic is recording (a signal
+$m$ with enought energy).
+
+\begin{comment}
 Therefore, this solution (decrease $s(t)$ when we are speaking, like
 the previous one) does need some technique to detect when I'm
 speaking. The advantage here is that we only need to switch off (or at
 least cut down enough the) volume of our speaker when I speak,
 something that does not consume computational resources. Notice that
 the ``voice detector'' algorithm can run in a separate thread/process.
+\end{comment}
 
 %\section{Filter update using a train of impulses}
 
