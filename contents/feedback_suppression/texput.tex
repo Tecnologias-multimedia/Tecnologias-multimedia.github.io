@@ -191,7 +191,10 @@ frecuency domain, and viceversa.
 Unfortunately, even when we expect that this improved feedback
 supression algorithm is going to perform better than the previous one,
 the computation of the filter weights ${\mathbf h}$ requires emitting
-impulses that can be heard by the user.
+impulses that can be heard by the user. Furthermore, while the
+acoustic response of the environment is being analyzed, the near-end
+should remain silent; otherwise, its own voice would be treated as an
+echo and attenuated by the filter.
 
 %\section{Adaptive filtering using impulses}
 %Unfortunately, none of the previous solutions is ``dynamic'', in the
@@ -400,7 +403,7 @@ signal that we send is
     \mathbf{m} = \tilde{\mathbf{n}} + \hat{\mathbf{s}}
 \end{equation}
 where $\tilde{\mathbf{n}}$ is the version of our voice captured by our
-mic, and $\hat{\mathbf{s}}$ is a aproximated-and-delayed version of
+mic, and $\hat{\mathbf{s}}$ is a aproximated-and-multy-echo version of
 $\mathbf{s}$, the signal played by our speaker(s). And if we were able
 to make $\hat{\mathbf{s}}=\mathbf{0}$, our feedback problem would
 vanish, ... at least, theoretically.
@@ -409,12 +412,13 @@ But wait ..., as a polite person, if I don't speak when I am listening
 to (my interlocutor), I could assume that
 $\hat{\mathbf{s}}=\mathbf{0}$ when I am speaking because my
 interlocutor should do the same (be silent when I speak)! But, if this
-is not true? A solution is: if I am speaking, attenuate enough $s$. 
+is not true? A solution is: if I am speaking, can attenuate $\mathbf{s}$
+(the signal played by my speaker).
 
 Summarizing: you should be able to control the volume of $s$ (the
-signal played by your speaker) and cut it down (or even off, if
-necessary) when you are speaking or your mic is recording (a signal
-$m$ with enought energy).
+analog signal that comes out from my speaker) and cut it down (or
+even off, if necessary) when you are speaking or your mic is recording
+a signal $m$ with enough energy.
 
 \begin{comment}
 Therefore, this solution (decrease $s(t)$ when we are speaking, like
@@ -555,8 +559,10 @@ The signal to send (without the feedback) is:
 \begin{enumerate}
 \item Write a Python module, called \texttt{feedback\_supression.py},
   that inherits from \texttt{buffer.py} and that implements one of the
-  proposed solutions. Define a new command-line parameter to switch on
-  this functionality, that by default should be disabled (off).
+  proposed solutions (or any other you prefer). Define a new
+  command-line parameter to switch on this functionality, that by
+  default should be disabled (off). If necessary, use extra parameters
+  that can be controlled in real time.
 \item Insert the code of \texttt{feedback\_supression.py} in a Jupyter
   notebook cell and generate the archive
   \texttt{feedback\_supression.py} using \texttt{\%\%writefile
