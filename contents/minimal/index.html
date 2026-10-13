@@ -19,7 +19,7 @@
 
 <h1 class='titleHead'><a href='https://tecnologias-multimedia.github.io/contents/minimal/'>Meeting minimal InterCom</a></h1>
  <div class='author'><a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp; </span><a href='https://hpca.ual.es/~savins/'><span class='ecrm-1200'>Savíns Puertas Martín</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>October 6, 2026</span></div>
+<div class='date'><span class='ecrm-1200'>October 13, 2026</span></div>
    </div>
    <h3 class='likesectionHead' id='contents'> <a id='x1-1000'></a>Contents</h3>
    <div class='tableofcontents'>
@@ -39,7 +39,7 @@
 </p>
    <h3 class='sectionHead' id='supported-platforms'><span class='titlemark'>2   </span>   <a id='x1-30002'></a>Supported platforms</h3>
 <!-- l. 16 --><p class='noindent'>InterCom should run on any platform, such as Linux, Windows, and macOS, where
-<a href='https://www.python.org/'>Python</a> and <a href='https://vicente-gonzalez-ruiz.github.io/intro_to_sounddevice/'>sounddevice</a> are available. <span class='ectt-1000'>sounddevice </span>is a wrapper for <a href='http://www.portaudio.com/'>PortAudio</a> <span class='cite'>[<span class='ecbx-1000'>?</span>]</span>,
+<a href='https://www.python.org/'>Python</a> and <a href='https://vicente-gonzalez-ruiz.github.io/intro_to_sounddevice/'>sounddevice</a> are available. <span class='ectt-1000'>sounddevice </span>is a wrapper for <a href='http://www.portaudio.com/'>PortAudio</a> <span class='cite'>[<a href='#Xportaudio'>1</a>]</span>,
 which is ultimately responsible for communicating with the audio driver (in Linux:
 <a href='https://vicente-gonzalez-ruiz.github.io/ALSA/'>ALSA</a>, <a href='https://vicente-gonzalez-ruiz.github.io/PulseAudio/'>PulseAudio</a>, <a href='https://vicente-gonzalez-ruiz.github.io/JACK/'>JACK</a> or <a href='https://pipewire.org/'>Pipewire</a>, in Windows: <a href='https://en.wikipedia.org/wiki/Windows_legacy_audio_components#Multimedia_Extensions_(MME)'>MME</a>, <a href='https://en.wikipedia.org/wiki/DirectSound'>DirectSound</a>, <a href='https://en.wikipedia.org/wiki/Technical_features_new_to_Windows_Vista#Audio_stack_architecture'>WASAPI</a>,
 or <a href='https://en.wikipedia.org/wiki/Windows_Driver_Model'>WDM-KS</a>, in macOS: <a href='https://en.wikipedia.org/wiki/Core_Audio'>Core Audio</a>).
@@ -94,7 +94,7 @@ have two alternatives for implementing an application such as InterCom:
      is expected in InterCom (audio).
      </li>
 <li class='enumerate' id='x1-5024x4'><a href='https://github.com/Tecnologias-multimedia/InterCom/blob/master/src/minimal.py#L109'><span class='ectt-1000'>receive()</span></a>, waits (blocking the calling process) for an incoming packet,
-     and therefore, this operation is IO-bound. However, most <a href='https://docs.python.org/3/library/socket.html'>socket API</a>s <span class='cite'>[<span class='ecbx-1000'>?</span>]</span>
+     and therefore, this operation is IO-bound. However, most <a href='https://docs.python.org/3/library/socket.html'>socket API</a>s <span class='cite'>[<a href='#Xpython'>2</a>]</span>
      offeer  a  <a href='https://docs.python.org/3.8/library/socket.html#socket.socket.setblocking'>non-blocking  option</a>  where  when  a  packet  is  not  available  in
      the  kernel’s  buffer  associated  with  the  corresponding  socket  after  a
      predetermined  amount  of  time,  some  kind  of  exception  is  generated,
@@ -178,6 +178,11 @@ results (and the document):
      Which is the latency now?</li></ol>
    
    <h3 class='sectionHead' id='resources'><span class='titlemark'>5   </span>   <a id='x1-80005'></a>Resources</h3>
+   <section class='thebibliography' role='doc-bibliography'><dl><dt>
+ [1]</dt><dd><a id='Xportaudio'></a><a href='http://www.portaudio.com/'>PortAudio</a>.
+   </dd><dt>
+ [2]</dt><dd><a id='Xpython'></a>The Python Foundation. <a href='https://www.python.org/'>The Python Website</a>.
+   </dd></dl></section>
    <div class='footnotes'><aside class='footnotetext' role='doc-footnote'>
 <!-- l. 66 --><p class='noindent'><a id='x1-5012x1'></a><span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='ecrm-0800'>A stereo sample, usually 16 + 16 bits.</span></p></aside> 
 <aside class='footnotetext' role='doc-footnote'>
@@ -191,6 +196,9 @@ of available frames.</span></p></aside>
 <aside class='footnotetext' role='doc-footnote'>
 <!-- l. 254 --><p class='noindent'><a id='x1-7014x5'></a><span class='footnote-mark'><a href='#fn5x0-bk' id='fn5x0'><sup class='textsuperscript'>5</sup></a></span><span class='ecrm-0800'>Take into consideration to create a VPN if you are not able to talk with your partner.</span></p></aside> 
    </div>
+                                                                  
+
+                                                                  
  
 </body> 
 </html>

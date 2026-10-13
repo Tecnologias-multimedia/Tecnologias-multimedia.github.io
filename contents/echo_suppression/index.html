@@ -1,6 +1,6 @@
 <!DOCTYPE html> 
 <html lang='en-US' xml:lang='en-US'> 
-<head> <title>Feedback suppression</title> 
+<head> <title>(Acoustic) Echo suppression</title> 
 <meta charset='utf-8' /> 
 <meta content='TeX4ht (https://tug.org/tex4ht/)' name='generator' /> 
 <meta content='width=device-width,initial-scale=1' name='viewport' /> 
@@ -17,9 +17,9 @@
 
                                                                   
 
-<h1 class='titleHead'>Feedback suppression</h1>
+<h1 class='titleHead'>(Acoustic) Echo suppression</h1>
  <div class='author'><a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp; </span><a href='https://hpca.ual.es/~savins/'><span class='ecrm-1200'>Savíns Puertas Martín</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>October 8, 2026</span></div>
+<div class='date'><span class='ecrm-1200'>October 13, 2026</span></div>
    </div>
    
    <h3 class='likesectionHead' id='contents'> <a id='x1-1000'></a>Contents</h3>
@@ -99,8 +99,8 @@ delay<span class='footnote-mark'><a href='#fn5x0' id='fn5x0-bk'><sup class='text
 to our mic. We define </p><div class='mathjax-env mathjax-equation'>\begin{equation} \hat {\mathbf s}[t] \triangleq a{\mathbf s}[t-d] \label {eq:minimal_filter} \end{equation}</div>
 <p><a id='x1-6006r5'></a>
 <!-- l. 96 --></p><p class='indent'>   as the estimated<span class='footnote-mark'><a href='#fn6x0' id='fn6x0-bk'><sup class='textsuperscript'>6</sup></a></span><a id='x1-6007f6'></a>
-feedback signal that reaches our microphone at the same instant of time that the
-sample <span class='mathjax-inline'>\({\mathbf n}[t]\)</span> would have been captured in the ausence of the feedback.
+feedback/echo signal that reaches our microphone at the same instant of time that
+the sample <span class='mathjax-inline'>\({\mathbf n}[t]\)</span> would have been captured in the ausence of the feedback.
 </p><!-- l. 103 --><p class='indent'>   Notice that it have been used the notation <span class='mathjax-inline'>\(\hat {\cdot }\)</span> to emphasize that <span class='mathjax-inline'>\(\hat {\mathbf s}\)</span> is a
 (<a href='https://en.wikipedia.org/wiki/Image_registration'>“registered”</a><span class='footnote-mark'><a href='#fn7x0' id='fn7x0-bk'><sup class='textsuperscript'>7</sup></a></span><a id='x1-6009f7'></a>)
 prediction for <span class='mathjax-inline'>\(s\)</span> reaching our microphone. Notice also that, if <span class='mathjax-inline'>\({\mathbf s}[0]\)</span> is the first sample of a
@@ -128,27 +128,28 @@ between our speaker and our mic.
    
    <h3 class='sectionHead' id='improving-the-performance-through-filtering'><span class='titlemark'>6   </span>   <a id='x1-80006'></a>Improving the performance through filtering</h3>
 <!-- l. 134 --><p class='noindent'>We can improve the performance of the previous feedback cancellation
-solution if we take also into consideration that the <span class='ecbx-1000'>feedback </span>signal <span class='mathjax-inline'>\(\tilde {s}\)</span>
-that finally reaches our microphone is (at least in part) the <a href='https://en.wikipedia.org/wiki/Convolution'>convolution</a>
-of <span class='mathjax-inline'>\(s\)</span> and a signal <span class='mathjax-inline'>\(h\)</span> that represents the echo response of our local audioset
+solution if we take also into consideration that the <span class='ecbx-1000'>feedback </span>signal <span class='mathjax-inline'>\(\tilde {s}\)</span> that
+finally reaches our microphone is (at least in part) the <a href='https://en.wikipedia.org/wiki/Convolution'>convolution</a> of
+<span class='mathjax-inline'>\(s\)</span> and a signal <span class='mathjax-inline'>\(h\)</span> that represents the impulse response of our local audioset
 (speaker, mic, walls, monitor, keyboard, our body, ...) to an <a href='https://en.wikipedia.org/wiki/Impulse_response'>impulse signal
 <span class='mathjax-inline'>\(\delta (t)\)</span></a>.<span class='footnote-mark'><a href='#fn8x0' id='fn8x0-bk'><sup class='textsuperscript'>8</sup></a></span><a id='x1-8001f8'></a> In
 other words, we can modify Eq. \eqref{eq:simplest} to compute </p><div class='mathjax-env mathjax-equation'>\begin{equation} \tilde {\mathbf {n}}[t] = \mathbf {m}[t] - (\mathbf {h}\ast \mathbf {s}[t-d]) = \mathbf {m}[t] - (\mathbf {h}\ast \mathbf {s})[t-d], \label {eq:using_convolution} \end{equation}</div>
 <p><a id='x1-8003r6'></a>
 <!-- l. 150 --></p><p class='indent'>   where <span class='mathjax-inline'>\(\ast \)</span> represents the (digital) convolution between (in our case of) digital signals,
 and <span class='mathjax-inline'>\(\mathbf h\)</span> is the digitalized version of <span class='mathjax-inline'>\(h(t)\)</span>.
+</p><!-- l. 154 --><p class='indent'>   Notice that in this solution, Eq. \eqref{eq:minimal_filter} becomes </p><div class='mathjax-env mathjax-equation'>\begin{equation} \hat {\mathbf s}[t] \triangleq (\mathbf {h}\ast \mathbf {s})[t-d]. \label {eq:echo_signal_modeled_by_FIR} \end{equation}</div>
+<p><a id='x1-8004r7'></a>
    
-</p>
-   <h4 class='subsectionHead' id='filtering-in-the-frequency-domain'><span class='titlemark'>6.1   </span>   <a id='x1-90006.1'></a>Filtering in the frequency domain</h4>
-<!-- l. 155 --><p class='noindent'>The convolution of digital signals in the time domain can be expensive (with
+   </p><h4 class='subsectionHead' id='filtering-in-the-frequency-domain'><span class='titlemark'>6.1   </span>   <a id='x1-90006.1'></a>Filtering in the frequency domain</h4>
+<!-- l. 161 --><p class='noindent'>The convolution of digital signals in the time domain can be expensive (with
 <a href='https://en.wikipedia.org/wiki/Computational_complexity_theory'>computational complexity</a> <span class='mathjax-inline'>\(O^2\)</span>, where <span class='mathjax-inline'>\(O\)</span> is the number of elements to process) if the
 number of samples or/and filter coefficientsis is high. Fortunately, thanks to the
 <a href='https://en.wikipedia.org/wiki/Convolution'>convolution theorem</a> <span class='cite'>[<a href='#Xkovacevic2013fourier'>1</a>, <a href='#XOppenheim2'>2</a>]</span>, the convolution can be replaced by the <a href='https://en.wikipedia.org/wiki/Dot_product'>dot product</a>
 (with complexity <span class='mathjax-inline'>\(O\)</span>), when we consider the signals in the frequency domain.
 Thanks to this, we can rewrite the Eq. \eqref{eq:using_convolution} as
 </p><div class='mathjax-env mathjax-equation'>\begin{equation} \tilde {\mathbf n}[t] = {\mathbf m}[t] - ({\mathcal F}^{-1}\{{\mathbf S}{\mathbf H}\})[t-d], \label {eq:faster} \end{equation}</div>
-<p><a id='x1-9001r7'></a>
-<!-- l. 171 --></p><p class='indent'>   where  <span class='mathjax-inline'>\(\mathbf S\)</span>  is  the  (digital)  Fourier
+<p><a id='x1-9001r8'></a>
+<!-- l. 177 --></p><p class='indent'>   where  <span class='mathjax-inline'>\(\mathbf S\)</span>  is  the  (digital)  Fourier
 transform<span class='footnote-mark'><a href='#fn9x0' id='fn9x0-bk'><sup class='textsuperscript'>9</sup></a></span><a id='x1-9002f9'></a> of <span class='mathjax-inline'>\(\mathbf s\)</span>, <span class='mathjax-inline'>\(\mathbf H\)</span> is the
 Fourier transform<span class='footnote-mark'><a href='#fn10x0' id='fn10x0-bk'><sup class='textsuperscript'>10</sup></a></span><a id='x1-9004f10'></a>
 of <span class='mathjax-inline'>\(\mathbf h\)</span>, and <span class='mathjax-inline'>\({\mathcal F}^{-1}\)</span> represents the inverse (digital) Fourier transform. Notice that all these
@@ -161,35 +162,35 @@ viceversa.
                                                                   
 </p>
    <h5 class='likesubsubsectionHead' id='practical-issues'>  <a id='x1-10000'></a>Practical issues</h5>
-<!-- l. 191 --><p class='noindent'>Unfortunately, even when we expect that this improved feedback supression
-algorithm is going to perform better than the previous one, the computation of the
-filter weights <span class='mathjax-inline'>\(\mathbf h\)</span> requires emitting impulses that can be heard by the user. Furthermore,
-while the acoustic response of the environment is being analyzed, the near-end should
-remain silent; otherwise, its own voice would be treated as an echo and attenuated by
-the filter.
+<!-- l. 197 --><p class='noindent'>Unfortunately, even when we expect that this improved echo supression algorithm is
+going to perform better than the previous one, the computation of the filter weights <span class='mathjax-inline'>\(\mathbf h\)</span>
+requires emitting impulses that can be heard by the user. Furthermore, while the
+acoustic response of the environment is being analyzed, the near-end should remain
+silent; otherwise, its own voice would be treated as an echo and attenuated by the
+filter.
    
 </p>
    <h3 class='sectionHead' id='taking-turns-speaking'><span class='titlemark'>7   </span>   <a id='x1-110007'></a>Taking turns speaking?</h3>
-<!-- l. 400 --><p class='noindent'>Lets recap. Our problem is that, without a headset, we have that the signal that we
+<!-- l. 406 --><p class='noindent'>Lets recap. Our problem is that, without a headset, we have that the signal that we
 send is </p><div class='mathjax-env mathjax-equation'>\begin{equation} \mathbf {m} = \tilde {\mathbf {n}} + \hat {\mathbf {s}} \end{equation}</div>
-<p><a id='x1-11001r8'></a>
-<!-- l. 405 --></p><p class='indent'>   where <span class='mathjax-inline'>\(\tilde {\mathbf {n}}\)</span> is the version of our voice captured by our mic, and <span class='mathjax-inline'>\(\hat {\mathbf {s}}\)</span> is a
+<p><a id='x1-11001r9'></a>
+<!-- l. 411 --></p><p class='indent'>   where <span class='mathjax-inline'>\(\tilde {\mathbf {n}}\)</span> is the version of our voice captured by our mic, and <span class='mathjax-inline'>\(\hat {\mathbf {s}}\)</span> is a
 aproximated-and-multy-echo version of <span class='mathjax-inline'>\(\mathbf {s}\)</span>, the signal played by our speaker(s). And
 if we were able to make <span class='mathjax-inline'>\(\hat {\mathbf {s}}=\mathbf {0}\)</span>, our feedback problem would vanish, ... at least,
 theoretically.
-</p><!-- l. 411 --><p class='indent'>   But wait ..., as a polite person, if I don’t speak when I am listening to
+</p><!-- l. 417 --><p class='indent'>   But wait ..., as a polite person, if I don’t speak when I am listening to
 (my interlocutor), I could assume that <span class='mathjax-inline'>\(\hat {\mathbf {s}}=\mathbf {0}\)</span> when I am speaking because my
 interlocutor should do the same (be silent when I speak)! But, if this is not true?
 A solution is: if I am speaking, can attenuate <span class='mathjax-inline'>\(\mathbf {s}\)</span> (the signal played by my
 speaker).
-</p><!-- l. 418 --><p class='indent'>   Summarizing: you should be able to control the volume of <span class='mathjax-inline'>\(s\)</span> (the analog
+</p><!-- l. 424 --><p class='indent'>   Summarizing: you should be able to control the volume of <span class='mathjax-inline'>\(s\)</span> (the analog
 signal that comes out from my speaker) and cut it down (or even off, if
 necessary) when you are speaking or your mic is recording a signal <span class='mathjax-inline'>\(m\)</span> with enough
 energy.
    
 </p>
    <h3 class='sectionHead' id='deliverables'><span class='titlemark'>8   </span>   <a id='x1-120008'></a>Deliverables</h3>
-<!-- l. 559 --><p class='noindent'>
+<!-- l. 565 --><p class='noindent'>
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-12002x1'>Write a Python module, called <span class='ectt-1000'>feedback_supression.py</span>, that inherits
      from <span class='ectt-1000'>buffer.py </span>and that implements one of the proposed solutions (or
@@ -244,14 +245,14 @@ microphone.</span></p></aside>
 <!-- l. 144 --><p class='noindent'><a id='x1-8002x6'></a><span class='footnote-mark'><a href='#fn8x0-bk' id='fn8x0'><sup class='textsuperscript'>8</sup></a></span><span class='ecrm-0800'>This technique is similar to the carried out by submarines when they user the sonar to perform
 echo-location, or by bats to fly in the darkness.</span></p></aside> 
  <aside class='footnotetext' role='doc-footnote'>
-<!-- l. 180 --><p class='noindent'><a id='x1-9003x6.1'></a><span class='footnote-mark'><a href='#fn9x0-bk' id='fn9x0'><sup class='textsuperscript'>9</sup></a></span><span class='ecrm-0800'>The Fourier transform is an special case of the Laplace transform where </span><span class='mathjax-inline'>\(\sigma =0\) </span><span class='ecrm-0800'>in the complex
+<!-- l. 186 --><p class='noindent'><a id='x1-9003x6.1'></a><span class='footnote-mark'><a href='#fn9x0-bk' id='fn9x0'><sup class='textsuperscript'>9</sup></a></span><span class='ecrm-0800'>The Fourier transform is an special case of the Laplace transform where </span><span class='mathjax-inline'>\(\sigma =0\) </span><span class='ecrm-0800'>in the complex
 (Laplace) domain represented by </span><span class='mathjax-inline'>\(s=\sigma +j\omega \) </span><span class='ecrm-0800'>frequencies. This simplification can be used for the
 characterization of our near-end audioset because it can be considered as a FIR (Finite Impulse
 Response) system (in ausence of an audio signal, the echo signal always decays with the time).
 Finally, notice that </span><span class='mathjax-inline'>\({\mathbf S}[\omega ]\) </span><span class='ecrm-0800'>(the </span><span class='mathjax-inline'>\(\omega \)</span><span class='ecrm-0800'>-th frequency component of </span><span class='mathjax-inline'>\(\mathbf S\)</span><span class='ecrm-0800'>) is a complex number (the Fourier coefficients
 are complex numbers).</span></p></aside> 
  <aside class='footnotetext' role='doc-footnote'>
-<!-- l. 183 --><p class='noindent'><a id='x1-9005x6.1'></a><span class='footnote-mark'><a href='#fn10x0-bk' id='fn10x0'><sup class='textsuperscript'>10</sup></a></span><span class='ecrm-0800'>For computing the Fourier transform of digital signals use a library such as </span><a href='https://numpy.org/doc/2.1/reference/routines.fft.html'><span class='ecrm-0800'>numpy.fft</span></a><span class='ecrm-0800'>.</span></p></aside> 
+<!-- l. 189 --><p class='noindent'><a id='x1-9005x6.1'></a><span class='footnote-mark'><a href='#fn10x0-bk' id='fn10x0'><sup class='textsuperscript'>10</sup></a></span><span class='ecrm-0800'>For computing the Fourier transform of digital signals use a library such as </span><a href='https://numpy.org/doc/2.1/reference/routines.fft.html'><span class='ecrm-0800'>numpy.fft</span></a><span class='ecrm-0800'>.</span></p></aside> 
    </div>
  
 </body> 

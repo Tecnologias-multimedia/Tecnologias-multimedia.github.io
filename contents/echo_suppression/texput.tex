@@ -96,7 +96,7 @@ to our mic. We define
 as the estimated\footnote{We use the word ``estimated'' because in
 this model we are ignoring several factors, such as echoes, unflat
 frequency responses, etc.  that modify the version of $\mathbf{s}$
-that is received by the microphone.} feedback signal that reaches our
+that is received by the microphone.} feedback/echo signal that reaches our
 microphone at the same instant of time that the sample ${\mathbf
   n}[t]$ would have been captured in the ausence of the feedback.
 
@@ -136,7 +136,7 @@ solution if we take also into consideration that the \textbf{feedback}
 signal $\tilde{s}$ that finally reaches our microphone is (at least in
 part) the
 \href{https://en.wikipedia.org/wiki/Convolution}{convolution} of
-$s$ and a signal $h$ that represents the echo response of our
+$s$ and a signal $h$ that represents the impulse response of our
 local audioset (speaker, mic, walls, monitor, keyboard, our body, ...)
 to an \href{https://en.wikipedia.org/wiki/Impulse_response}{impulse
   signal $\delta(t)$}.\footnote{This technique is similar to the
@@ -150,6 +150,13 @@ we can modify Eq.~\eqref{eq:simplest} to compute
 where $\ast$ represents the (digital) convolution between (in our case
 of) digital signals, and ${\mathbf h}$ is the digitalized version of
 $h(t)$.
+
+Notice that in this solution, Eq.~\eqref{eq:minimal_filter} (the
+estimation for the echo signal) becomes
+\begin{equation}
+  \hat{\mathbf s}[t] \triangleq (\mathbf{h}\ast\mathbf{s})[t-d].
+  \label{eq:echo_signal_modeled_by_FIR}
+\end{equation}
 
 \subsection{Filtering in the frequency domain}
 The convolution of digital signals in the time domain can be expensive
