@@ -1,0 +1,55 @@
+\section{The ``simplest'' (but in general, ineffective) solution}
+Lets ${\mathbf m}$ the digital version of $m$, and ${\mathbf m}[t]$
+it's $t$-th sample\footnote{Or frame if we work in stereo}. In this
+``simplest'' solution, we send
+\begin{equation}
+  \tilde{\mathbf n}[t] = {\mathbf m}[t] - a{\mathbf s}[t-d],
+  \label{eq:simplest}
+\end{equation}
+where $a$ is an attenuation (scalar) value, and $d$ represents the
+delay\footnote{In a digital signal the sample index indicates the
+  position of the sample in the sequence of samples. If we also know
+  the sample-time, i.e., the cadency of the sampler, we can also
+  compute at which time was taken a sample.} (measured in
+sample-times) required to propagate the sound waves from our speaker
+to our mic. We define
+\begin{equation}
+  \hat{\mathbf s}[t] \triangleq a{\mathbf s}[t-d]
+  \label{eq:minimal_filter}
+\end{equation}
+as the estimated\footnote{We use the word ``estimated'' because in
+this model we are ignoring several factors, such as echoes, unflat
+frequency responses, etc.  that modify the version of $\mathbf{s}$
+that is received by the microphone.} feedback/echo signal that reaches our
+microphone at the same instant of time that the sample ${\mathbf
+  n}[t]$ would have been captured in the ausence of the feedback.
+
+Notice that it have been used the notation $\hat{\cdot}$ to emphasize
+that $\hat{\mathbf s}$ is a
+(\href{https://en.wikipedia.org/wiki/Image_registration}{``registered''}\footnote{That
+matches in time. That are synchronized.}) prediction for $s$ reaching
+our microphone. Notice also that, if ${\mathbf s}[0]$ is the first
+sample of a chunk (for example, the $c$-th chunk), the sample
+${\mathbf s}[-d]$ could belong to a previous chunk (the $(c-1)$-th
+chunk).
+
+Finally, $a$ should be choosen considering that under ausence of voice
+in each end, $s(t)\approx 0$. For example, Skype estimates $d$ and $a$
+using a ``call-signal'' (a sequence of more-or-less
+\href{https://en.wikipedia.org/wiki/Musical_tone}{tonal sounds}). $d$
+is determined measuring the propagation time of the call-signal
+between our speaker and our mic.
+
+\subsubsection*{Why it's difficult to make it work?}
+This algorithm is ineffective because:
+\begin{enumerate}
+\item $d$ can change over time (for example, if we're using a laptop
+  and move the screen, $d$ will vary). This can be costly, because
+  even using \href{https://en.wikipedia.org/wiki/Correlation}{correlation}
+  in the Fourier domain, this is a heavy operation to be performed in
+  real-time.
+\item Assuming that the signal captured by the microphone is
+  $a{\mathbf s}[t-d]$ is an oversimplification. This signal is only
+  similar (usually it's filtered by the environment and likely
+  contains echoes).
+\end{enumerate}
