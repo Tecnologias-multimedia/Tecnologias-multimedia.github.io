@@ -1,0 +1,84 @@
+\section{The problem}
+
+One of the first problems we encounter with the use of the
+\texttt{buffer.py} module\footnote{And obviously, any other parent
+  version of \texttt{buffer.py}.} is that, if we don't use headphones,
+the sound that comes out of our PC's (loud)speaker some time
+(miliseconds) later reaches our mic(rophone), and more some time
+later, that sound reaches our interlocutor (the ``far-end'' ... in the
+system we are the ``near-end'') in the form of an echo (signal) of its
+own voice, which is reproduced by his/her speaker, which can be
+captured again (some time later) by his/her mic and sent it back to us
+... and so on, generating a rather unpleasant feedback ``noise''.
+
+To formalize this problem, let's define:
+\begin{enumerate}
+\item $s$ as the (analog) signal played by our
+  speaker, % and that reaches our mic
+\item $n$ the signal emited by
+  the near-end person (that's me)\footnote{I.e.,
+  the same signal that would be captured by our mic if I were using a
+  headset.}, and % that reaches my mic
+\item $m$ the (mixed) signal recorded by my microphone\footnote{Notice
+that $m(t)$ is the analog audio signal that makes the membrane of our
+microphone oscillate, and therefore, the signal that our sound card
+records.}  ,
+\end{enumerate}
+where
+\begin{equation}
+  m(t) = \tilde{n}(t) + \tilde{s}(t),
+  \label{eq:echo_problem}
+\end{equation}
+where $\tilde{\cdot}$ represents an approximation of $\cdot$. We have
+here approximations because the signals are modified when they travel
+through the air.
+
+Our problem here is to minimize the
+\href{https://en.wikipedia.org/wiki/Energy_(signal_processing)}{energy}
+of $\tilde{s}$, i.e., to make
+\begin{equation}
+  \tilde{s}(t) = 0.
+\end{equation}
+
+\begin{comment}
+\section{Echo cancellation}
+In Intercom, the echo (signal) is a delayed copy of our voice,
+$\mathbf{n}^{(\text{echo~delay})}$. With this idea in mind, ideally,
+the echo could be removed using
+\begin{equation}
+  \tilde{\mathbf{n}}^{(i)} = \mathbf{m}^{(i)} - a\mathbf{n}^{(i-j)},
+\end{equation}
+where $i$ represents the $i$-th chunk, and $j$ the number of chunks
+that are stored in the dejittering buffer.
+
+Unfortunately, $\mathbf{n}$ is unknown, and the best approximation we
+have for the echo at the $i$-th iteration, is
+$\mathbf{m}^{(i-j)}$. For this reason, lets finally define the echo
+cancellation algorithm (the signal that we should send after
+cancelling the echo) as
+\begin{equation}
+  \tilde{\mathbf{n}}^{(i)} = \mathbf{m}^{(i)} - a\mathbf{m}^{(i-j)},
+\end{equation}
+
+\section{Modeling the echo signal}
+Similar to how feedback suppression can be improved by using a filter
+that models the listening environment, echo cancellation can be
+improved by using a filter. Therefore, the signal that is finally sent
+should be calculated as
+\begin{equation}
+  \tilde{n}^{(i)} = \mathbf{m}^{(i)} - (\mathbf{h}*\mathbf{m}^{(i-j)},
+\end{equation}
+where $\mathbf{h}$ represents the filter that models the listening
+environment.
+
+\section{Filter update using impulses}
+If we consider that the listening environment can change, $\mathbf{h}$ should
+adapt to these changes. At this point, again, we can use a sequence of
+impulses to estimate $\mathbf{h}$, but considering that the effects of
+the impulses will only be perceived after $j$ chunk-times. In this
+case, we have that
+\begin{equation}
+  \tilde{n}^{(i)} = \mathbf{m}^{(i)} - (\mathbf{h}^{(i)}*\mathbf{m}^{(i-j)}.
+\end{equation}
+
+\end{comment}

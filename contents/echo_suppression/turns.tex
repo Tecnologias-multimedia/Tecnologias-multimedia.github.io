@@ -1,0 +1,33 @@
+%\section{Taking turns speaking is the smartest thing to do}
+\section{Taking turns speaking (be polite)}
+Lets recap. Our problem is that, without a headset, we have that the
+signal that we send is
+\begin{equation}
+    \mathbf{m} = \tilde{\mathbf{n}} + \hat{\mathbf{s}}
+\end{equation}
+where $\tilde{\mathbf{n}}$ is the version of our voice captured by our
+mic, and $\hat{\mathbf{s}}$ is a aproximated-and-multy-echo version of
+$\mathbf{s}$, the signal played by our speaker(s). And if we were able
+to make $\hat{\mathbf{s}}=\mathbf{0}$, our feedback problem would
+vanish, ... at least, theoretically.
+
+But wait ..., as a polite person, if I don't speak when I am listening
+to (my interlocutor), I could assume that
+$\hat{\mathbf{s}}=\mathbf{0}$ when I am speaking because my
+interlocutor should do the same (be silent when I speak)! But, if this
+is not true? A solution is: if I am speaking, can attenuate $\mathbf{s}$
+(the signal played by my speaker).
+
+Summarizing: you should be able to control the volume of $s$ (the
+analog signal that comes out from my speaker) and cut it down (or
+even off, if necessary) when you are speaking or your mic is recording
+a signal $m$ with enough energy.
+
+\begin{comment}
+Therefore, this solution (decrease $s(t)$ when we are speaking, like
+the previous one) does need some technique to detect when I'm
+speaking. The advantage here is that we only need to switch off (or at
+least cut down enough the) volume of our speaker when I speak,
+something that does not consume computational resources. Notice that
+the ``voice detector'' algorithm can run in a separate thread/process.
+\end{comment}

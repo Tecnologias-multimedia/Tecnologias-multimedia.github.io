@@ -1,8 +1,268 @@
-\section{LMS ()}
+\section{LMS (Least Mean Squares)}
 
 We can avoid having to generate the impulses if we are able to
 construct a mathematical model of our acoustic environment's response
-to those impulses—or to any other audio signal, such as the one output
-by our speakers. For the sake of simplicity, we will assume that this
+to those impulses (or to any other audio signal, such as the one output
+by our speakers). For the sake of simplicity, we will assume that this
 model is a FIR filter and attempt to estimate its coefficients.
 
+The LMS algorithm can find $\mathbf{h}$ adaptively. For this, we model
+\begin{equation}
+  \tilde{\mathbf{s}} \approx \hat{\mathbf{s}} \triangleq \mathbf{h} * \mathbf{s},
+\end{equation}and define that the error (what we should send through the network) is
+\begin{equation}
+  \mathbf{e}=\mathbf{m}-\hat{\mathbf{s}}.
+  \label{eq:LMS_error}
+\end{equation}
+So, for each input (audio) sample, we have
+\begin{equation}
+  \hat{\mathbf{s}} = \mathbf{s}^\top\mathbf{h} = \mathbf{h}^\top\mathbf{s}.
+\end{equation}
+After substituting this result in \eqref{eq:LMS_error}) we obtain that
+\begin{equation}
+  \mathbf{e}=\mathbf{m} - \mathbf{h}^\top\mathbf{s}.
+\end{equation}
+Now, we compute
+\begin{equation}
+  \mathbf{e}^2 = \mathbf{m}^2 - 2\mathbf{m}\mathbf{s}^\top\mathbf{h} + \mathbf{h}^\top\mathbf{s}\mathbf{s}^\top\mathbf{h}.
+\end{equation}
+Thus, the Mean Squared Error is
+\begin{equation}
+  \begin{split}
+  \text{MSE} = \xi = \mathbb{E}[\mathbf{e}^2] = \mathbb{E}[\mathbf{m}^2] - 2\mathbb{E}[\mathbf{m}\mathbf{s}^\top]\mathbf{h} + \mathbf{h}^\top\mathbb{E}[\mathbf{s}\mathbf{s}^\top]\mathbf{h} & = \mathbb{E}[\mathbf{e}^2] = \mathbb{E}[\mathbf{m}^2] - 2P\mathbf{h} + \mathbf{h}^\top R\mathbf{h}.
+    \end{split}
+\end{equation}
+As can be seen, the MSE is a cuadratic function of $\mathbf{h}$, i.e.,
+a (in general hyper-) paraboloid in which we can find the minimum (the
+optimal values for $\mathbf{h}$) using the
+\href{https://en.wikipedia.org/wiki/Method_of_steepest_descent}{Steepest
+  Decent Algorithm}. Ideally, we should compute (iteratively)
+\begin{equation}
+  \mathbf{h}\leftarrow\mathbf{h}+\mu(-\nabla),
+\end{equation}
+where $\mu>0$ is the learning rate, and the (ideal) gradient is
+\begin{equation}
+  \nabla = \frac{\partial\xi}{\partial\mathbf{h}} =
+  \begin{bmatrix}
+    \frac{\partial\xi}{\mathbf{h}_0} \\
+    \frac{\partial\xi}{\mathbf{h}_1} \\
+    \vdots \\
+    \frac{\partial\xi}{\mathbf{h}_{L-1}}
+  \end{bmatrix}.
+\end{equation}
+Unfortunatelly, we don't have $\xi$, but we can approximate it using
+the instanteneous error (see \eqref{eq:LMS_error}). Thus
+\begin{equation}
+  \hat{\nabla} = \frac{\partial\mathbf{e}^2}{\partial\mathbf{h}} = 2\mathbf{e}\frac{\partial\xi}{\partial\mathbf{h}} = 2\mathbf{e}(-\mathbf{s}),
+\end{equation}
+obtaining finally that
+\begin{eqnarray}
+  \mathbf{e} \leftarrow \mathbf{m} - \mathbf{s}^\top\mathbf{h} && \\
+  \mathbf{h} \leftarrow \mathbf{h} + 2\mu\mathbf{e}\mathbf{s}.&&
+\end{eqnarray}
+
+\subsection{Normalized LMS}
+Stability requires $0 < \mu < 2/(L · \sigma^2(s))$, so the step size
+depends on the input power. For speech, whose level varies enormously,
+this is a problem. So use NLMS, which normalizes by the input energy
+\begin{equation}
+  \mathbf{h} \leftarrow \mathbf{h} + \frac{2\mu\mathbf{e}\mathbf{s}}{\epsilon+\mathbf{s}^\top\mathbf{s}}.
+\end{equation}
+
+\subsection{Choosing $L$}
+$L$ must cover the echo path
+\begin{equation}
+  L \approx f_sT,
+\end{equation}
+where $T$ is the echo tail (the acoustic delay plus reverberation). At
+44.1 kHz and 50–100 ms of latency, that’s about 2000-4500 taps. Also,
+any system latency (audio buffers, chunk size) between playing
+$\mathbf{s}$ and recording it shows up as leading zeros in
+$\mathbf{h}$. Remember that you must update the filter coefficients for
+every input sample!
+
+\subsection{Python example}
+\begin{lstlisting}[language=Python]
+import numpy as np
+
+class NLMS:
+    def __init__(self, L=2048, mu=0.5, eps=1e-6):
+        self.L, self.mu, self.eps = L, mu, eps
+        self.w = np.zeros(L)
+        self.hist = np.zeros(L - 1)          # last L-1 reference samples
+
+    def process(self, x, d):
+        """x: reference chunk (played), d: microphone chunk. Float arrays, same length."""
+        buf = np.concatenate((self.hist, x))
+        e = np.empty_like(d)
+        for n in range(len(d)):
+            u = buf[n:n + self.L][::-1]      # [x(n), x(n-1), ..., x(n-L+1)]
+            e[n] = d[n] - self.w @ u
+            self.w += (self.mu * e[n] / (self.eps + u @ u)) * u
+        self.hist = buf[-(self.L - 1):]
+        return e
+\end{lstlisting}
+
+\subsection{Double-talk detection}
+When the local person speaks while the far end speaks, $\mathbf{n}$
+corrupts the adaptation (the filter “diverges”). So, it is necessary
+to use a double-talk detector and disable the learning while I'm
+speaking :-/
+
+\begin{comment}
+\subsection{Adaptive filtering using  \href{https://en.wikipedia.org/wiki/Least_mean_squares_filter}{LMS (Least Mean Squares)}}
+
+The LMS algorithm~\cite{haykin1995adaptive,boyd2004convex} was
+invented by professor Bernard Widrow and his first Ph.D. student, Ted
+Hoff, to train the
+\href{https://en.wikipedia.org/wiki/ADALINE}{ADALINE} artificial
+neural ``network''.\footnote{See
+  \url{https://www.youtube.com/watch?v=hc2Zj55j1zU}} Using LMS,
+ADALINE is able to distinguish two (different) patterns, even using
+(\emph{only} a part of\footnote{If we do not consider the
+  \href{https://en.wikipedia.org/wiki/Activation_function}{activation
+    function}, an artificial neuron and a FIR filter perform the same
+  computation.}) a single artificial neuron.
+
+LMS finds $\mathbf{h}$ without using impulses. Considering that the
+signal that we should send to the far-end is
+\begin{equation}
+  \tilde{\mathbf{n}}[t] = \mathbf{m}[t] - \sum_{k=0}^{K-1}{\mathbf h}_k{\mathbf s}[t-k-d],
+  \label{eq:FIR_filter}
+\end{equation}
+LMS minimizes
+\begin{equation}
+  \mathbf{e}[t] = \mathbf{n}[t] - \tilde{\mathbf{n}}[t]
+\end{equation}
+using the update rule
+\begin{equation}
+  \mathbf{h}^{(i+1)}_k = \mathbf{h}^{(i)}_k + 2\mu\mathbf{e}[k]\hat{\mathbf{s}}[k],
+  \label{eq:update}
+\end{equation}
+where $\mu$ is the learning
+rate\footnote{High $\mu$ values speed-up the adaption process, but can
+generate worse $\mathbf{h}$ coefficients.} and $i$ represents the $i$-th update iteration. These equations can be
+found\footnote{Again, please, watch
+\url{https://www.youtube.com/watch?v=hc2Zj55j1zU}!} using the
+(steepest)
+\href{https://en.wikipedia.org/wiki/Gradient_descent}{gradient descend
+  algorithm}.
+
+\subsection*{Unfortunately}
+Yes, unfortunately we only can compute $\mathbf{h}$ if we have
+$\hat{\mathbf{s}}$ (the signal played by the speaker that is recorded
+by our mic), i.e., me must be silent when updating. Therefore, the
+performance of this algorithm depends on the performance of other
+auxiliar technique which should determine whether in the near-end
+there is some source of sound.
+\end{comment}
+
+\begin{comment}
+If $\mathbf{n}$ and $\tilde{\mathbf{n}}$ represent the digital version of the audio signals generated by the local-end user and the sent signal, respectively, LMS minimizes
+
+The LMS algorithm adapts the coefficients of $\mathbf{h}$ to minimize
+the error signal defined by
+\begin{equation}
+  \mathbf{e} = \tilde{\mathbf{n}} - \mathbf{n}.
+\end{equation}
+Unfortunately, we don't know $\mathbf{n}$ except when we are in
+silence, where $\mathbf{n}[t]=0;\forall t$. When we are silence,
+the error is
+\begin{equation}
+  \mathbf{e} = \tilde{\mathbf{n}}.
+\end{equation}
+
+Said that, LMS defines the update rule at the $(i+1)$-th iteration as
+\begin{equation}
+  \mathbf{h}^{(i+1)}_k = \mathbf{h}^{(i)}_k + 2\mu\mathbf{e}[k]\mathbf{s}[k-d],
+  \label{eq:update}
+\end{equation}
+where $\mu$ is the learning
+rate\footnote{High $\mu$ values spped-up the adaption process, but can
+generate worse $\mathbf{h}$ coefficients.}.  These equations can be
+found\footnote{Again, please, watch
+\url{https://www.youtube.com/watch?v=hc2Zj55j1zU}!} using the
+(steepest)
+\href{https://en.wikipedia.org/wiki/Gradient_descent}{gradient descend
+  algorithm}.
+
+Obviously, the filter only should be updated when we are silence :-/
+
+Finally, notice that to use LMS, the number of coefficients of the
+filter $K$ must be the same that the number of input samples
+considered in the adaption. Therefore, if we are working with chunks,
+at the moment of time we decide to update the filter, we could
+consider, for example, only the $K$ samples of the current played
+chunk with indexes in $[d, d+K-1]$, if $d+K$ is smaller than the
+chunk size. Otherwise (if $d+K > \text{chunk~size}$), at least two
+chunks should be concatenated.
+\end{comment}
+
+\begin{comment}
+\section{Estimation of the feedback signal using LMS (Least Mean Squares)}
+We just have seen how it is possible to find better estimations of the
+feedback signal $\hat{\mathbf f}$ using convolutions. By definition,
+convolutions are performed by filters. 
+
+As we have seen, 
+
+Also, as we have seen in the previous section, it is possible to adapt
+the filter to the acoustic conditions, measuring the echo generated by
+the impulse signal. In the time domain, one of the most used
+techniques for computing the coefficients of a FIR filter is the
+\href{https://en.wikipedia.org/wiki/Least_mean_squares_filter}{LMS
+  (Least Mean Squares)
+  algorithm}~\cite{haykin1995adaptive,boyd2004convex}, among other
+reasons because the filter (coefficients) can be adapted to variations
+in the signal to filter (the filter can learn).
+
+LMS can be used to compute the coefficients of a filter to provide a
+desired output for a given input. In our
+context, the input signal is ${\mathbf m}$ (the digital signal
+recorded by our soundcard) and the desired output signal is
+${\mathbf n}$ (the digital version of our voice). LMS, iteratively
+computes
+ Notice that we process the signals sample-by-sample (at
+iteration $i$ we compute the $i$-th sample of $\tilde{\mathbf n}$ (the
+signal without the feedback, supposely containing \emph{only} our
+voice), and this is the signal that we will send to the far-end in the
+next chunk).
+\end{comment}
+
+\begin{comment}
+The LMS (Least Mean Squares) algorithm is an algorithm designed to
+minimize the mean square error of a target function.
+
+
+LMS is adaptive,
+which means that it suitable when there are near-end acoustic
+variations. In the previous section we have computed the near-end
+audioset impulse response using the frequency domain. In this case, we
+will use the time domain, i.e.,
+\begin{equation}
+  \hat{\mathbf e}[t] = \sum_{k=0}^{N-1}{\mathbf h}_k^{(t)}{\mathbf s}[t-k]
+\end{equation}
+where ${\mathbf h}$ is the near-end impulse response and $N$ is the
+length of the LMS filter.
+
+LMS minimizes the energy of the residue signal
+\begin{equation}
+  r[t] = {\mathbf m}[t] - {\mathbf n}[t-d]
+\end{equation}
+(the difference between the signal captured by the mic and the signal
+generated by the near-end user) that ideally, after a delay of $d$
+samples (an input parameter of this technique) should be the echo
+signal. More concretely, LMS minimizes $E\{|r|^2_2\}$ (the expectation
+of the square of $r$) using an interative algorithm where, in the
+iteration $i$ computes
+\begin{equation}
+  h^{(i+1)} = h^{(i)} + \mu r^{(i)}{\mathbf m}[i],
+\end{equation}
+where
+\begin{equation}
+  r^{(i)} = {\mathbf s}[i] - \hat{\mathbf e}[i],
+\end{equation}
+and $\mu$ is the ``learning rate'' of the LMS algorithm.
+
+
+\end{comment}

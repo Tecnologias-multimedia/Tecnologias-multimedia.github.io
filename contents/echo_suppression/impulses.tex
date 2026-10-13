@@ -1,0 +1,300 @@
+\section{Using impulses}
+We can improve the performance of the previous feedback cancellation
+solution if we take also into consideration that the \textbf{feedback}
+signal $\tilde{s}$ that finally reaches our microphone is (at least in
+part) the
+\href{https://en.wikipedia.org/wiki/Convolution}{convolution} of
+$s$ and a signal $h$ that represents the impulse response of our
+local audioset (speaker, mic, walls, monitor, keyboard, our body, ...)
+to an \href{https://en.wikipedia.org/wiki/Impulse_response}{impulse
+  signal $\delta(t)$}.\footnote{This technique is similar to the
+  carried out by submarines when they user the sonar to perform
+  echo-location, or by bats to fly in the darkness.} In other words,
+we can modify Eq.~\eqref{eq:simplest} to compute
+\begin{equation}
+ \tilde{\mathbf{n}}[t] = \mathbf{m}[t] - (\mathbf{h}\ast\mathbf{s}[t-d]) = \mathbf{m}[t] - (\mathbf{h}\ast\mathbf{s})[t-d],
+  \label{eq:using_convolution}
+\end{equation}
+where $\ast$ represents the (digital) convolution between (in our case
+of) digital signals, and ${\mathbf h}$ is the digitalized version of
+$h(t)$.
+
+Notice that in this solution, Eq.~\eqref{eq:minimal_filter} (the
+estimation for the echo signal) becomes
+\begin{equation}
+  \hat{\mathbf s}[t] \triangleq (\mathbf{h}\ast\mathbf{s})[t-d].
+  \label{eq:echo_signal_modeled_by_FIR}
+\end{equation}
+
+\subsection{Filtering in the frequency domain}
+The convolution of digital signals in the time domain can be expensive
+(with
+\href{https://en.wikipedia.org/wiki/Computational_complexity_theory}{computational
+  complexity} $O^2$, where $O$ is the number of elements to process)
+if the number of samples or/and filter coefficientsis is
+high. Fortunately, thanks to the
+\href{https://en.wikipedia.org/wiki/Convolution}{convolution theorem}
+\cite{kovacevic2013fourier,Oppenheim2}, the convolution can be
+replaced by the \href{https://en.wikipedia.org/wiki/Dot_product}{dot
+  product} (with complexity $O$), when we consider the signals in the
+frequency domain. Thanks to this, we can rewrite the
+Eq.~\eqref{eq:using_convolution} as
+\begin{equation}
+  \tilde{\mathbf n}[t] = {\mathbf m}[t] - ({\mathcal F}^{-1}\{{\mathbf S}{\mathbf H}\})[t-d],
+  \label{eq:faster}
+\end{equation}
+where ${\mathbf S}$ is the (digital) Fourier transform\footnote{The
+Fourier transform is an special case of the Laplace transform where
+$\sigma=0$ in the complex (Laplace) domain represented by
+$s=\sigma+j\omega$ frequencies. This simplification can be used for
+the characterization of our near-end audioset because it can be
+considered as a FIR (Finite Impulse Response) system (in ausence of an
+audio signal, the echo signal always decays with the time). Finally,
+notice that ${\mathbf S}[\omega]$ (the $\omega$-th frequency component
+of ${\mathbf S}$) is a complex number (the Fourier coefficients are
+complex numbers).} of ${\mathbf s}$, ${\mathbf H}$ is the Fourier
+transform\footnote{For computing the Fourier transform of digital
+signals use a library such as
+\href{https://numpy.org/doc/2.1/reference/routines.fft.html}{\text{numpy.fft}}.}
+of ${\mathbf h}$, and ${\mathcal F}^{-1}$ represents the inverse
+(digital) Fourier transform. Notice that all these transforms are
+applied to digital signals, and there exist fast algorithms (with
+complexity $O\log_2O$) to ``travel'' from the signal domain to the
+frecuency domain, and viceversa.
+
+\subsubsection*{Practical issues}
+Unfortunately, even when we expect that this improved echo
+supression algorithm is going to perform better than the previous one,
+the computation of the filter weights ${\mathbf h}$ requires emitting
+impulses that can be heard by the user. Furthermore, while the
+acoustic response of the environment is being analyzed, the near-end
+should remain silent; otherwise, its own voice would be treated as an
+echo and attenuated by the filter.
+
+%\section{Adaptive filtering using impulses}
+%Unfortunately, none of the previous solutions is ``dynamic'', in the
+%sense that if we modify the audioset, some parameters must be modified
+%in real-time:
+%\begin{enumerate}
+%\item In Equations \eqref{eq:simplest} and
+%  \eqref{eq:using_convolution}, the parameter $d$ which expresses (in
+%  sample-times) the time that $s$ need to travel from the speaker to
+%  the microphone, depends, for example, on the orientation of the
+%  screen of the laptop.
+%\item Eq.~\eqref{eq:using_convolution} and (obviously)
+%  Eq~\eqref{eq:faster} are also affected by $h$, which depends on
+%  current audioset configuration.
+%\end{enumerate}
+
+\begin{comment}
+Filters can be implemented in the frequency domain (such as happens in
+Eq.~\eqref{eq:faster}) or in the signal (time in our case)
+domain. Signal domain (digital) convolutions are affordable if the
+length\footnote{The number of coefficients.} of the (digital) filters
+is small.\footnote{Take in mind that convolution is a $O^2$ operation,
+  and therefore, we can only handle in real-time with our computers
+  small filter.}
+
+Eq.~\eqref{eq:minimal_filter} represents the minimal expression for a
+\href{https://en.wikipedia.org/wiki/Finite_impulse_response}{FIR
+  filter} (whose spectral shape is completely flat because it only has
+a single coefficient and therefore, it attenuates equally all the
+frequencies). In general, the expression of a FIR filter in the
+time-domain (applied to a signal that previously has been delayed $d$
+samples) is
+\begin{equation}
+  \hat{\mathbf s}[t] = \sum_{k=0}^{K-1}{\mathbf h}_k{\mathbf s}[t-k-d],
+  \label{eq:FIR_filter}
+\end{equation}
+where $K$ is the number of coefficients of the filter ${\mathbf h}$,
+and ${\mathbf h}_k$ is its $k$-th coefficient. When the (coefficients
+of the) filter are updated for each input sample,
+Eq.~\eqref{eq:FIR_filter} can be rewritten as
+\begin{equation}
+  \hat{\mathbf s}[t] = \sum_{k=0}^{K-1}{\mathbf h}_k^{(t)}{\mathbf s}[t-k-d].
+  \label{eq:adaptive_FIR_filter}
+\end{equation}
+
+In general, the filter should not be updated so often (e.g., every
+second could be fast enough). In this case
+Eq.~\eqref{eq:adaptive_FIR_filter} should be
+\begin{equation}
+  \hat{\mathbf s}[t] = \sum_{k=0}^{K-1}{\mathbf h}_k^{(i)}{\mathbf s}[t-k-d].
+  \label{eq:adaptive_FIR_filter_second}
+\end{equation}
+where $i$ represents the update iteration.
+If we decide to work with impulses, ${\mathbf h}^{(i)}$ is determined
+by the samples recorded by our soundcard after $d$ sample-times of the
+generation of each impulse when the impulses should be the only source
+of sound. If there were other sources of sound (such as for example,
+our voice) the updates should be discarded or averaged using some
+\href{https://en.wikipedia.org/wiki/Moving_average}{moving-average}
+technique.
+
+Finally, notice that we must send
+\begin{equation}
+  \tilde{\mathbf n}[t] = \mathbf{m}[t] - \hat{\mathbf s}[t].
+  \label{eq:finally}
+\end{equation}
+\end{comment}
+
+\begin{comment}
+\section{Subtraction in the frequency domain}
+Ultimately, feedback in InterCom occurs because the audio signal we
+are generating is reproduced through our speakers (with a certain time
+lag). In this feedback situation, the spectrum of a newly received
+chunk is similar to the spectrum of a newly sent chunk. Therefore, if
+the chunk we want to send is pre-filtered (before being sent) using
+the opposite filter to that described by the spectrum of the played
+chunk, we should cancel the feedback.
+
+Let ${\mathbf M} = {\mathcal F}({\mathbf m})$ the Fourier transform of
+the $i$-th chunk captured by the soundcard, and let
+${\mathbf S} = {\mathcal F}({\mathbf s})$ the Fourier transform of the
+$i$-th played chunk. Considering the reasoning followed in the
+previous paragraph, and considering also the Eq.~\eqref{eq:simplest}, it can be concluded that
+\begin{equation}
+  \tilde{\mathbf N} = {\mathbf M} - a{\mathbf S},
+  \label{eq:simplest_fourier}
+\end{equation}
+where $\hat{\mathbf{N}} = \mathcal{F}(\hat{\mathbf{n}})$, the Fourier
+transform of the chunk that should be sent in the $i$-th iteration
+(chunk).
+\end{comment}
+
+\begin{comment}
+Notice that if you prefer to estimate ${\mathbf h}$ using a ``train''
+(a sequence) of impulses, the temporal distance between them would 
+
+  For estimating the feedback signal at the
+  sample-time $t$, ${\mathbf f}[t]$, the length of a
+  \href{https://en.wikipedia.org/wiki/Finite_impulse_response}{FIR
+    filter} should be at least $d$, because at least we need $d$
+  samples to detect the feedback signal. Therefore, we have that
+\begin{equation}
+  \hat{\mathbf s}[t] = \sum_{k=0}^{d-1}{\mathbf h}_k^{(t)}{\mathbf s}[t-k],
+  \label{eq:LMS_feedback}
+\end{equation}
+where ${\mathbf h}$ is the near-end impulse response in the time
+domain.
+\end{comment}
+
+\begin{comment}
+\section{Filtering in the frequency domain}
+
+Assume that $s$ (the signal received by our microphone from our
+speaker) has essentially the same frequency spectrum as the audio
+signal being played (i.e., $h(t)=\delta(t)$, and therefore, the
+environment does not modify the spectrum of the reproduced signal). We
+denote the signal reproduced by our speaker as $f(t)$ ($f$ for
+far-end). In this case, we can propose a feedback reduction system by
+applying a filter $\mathbf{F}^{-1}$ to the captured signal
+$\mathbf{s}$, which is equal to the ``inverse'' of the spectrum of
+$\mathbf{f}$ (the signal we are reproducing). Specifically, this would
+involve:
+
+\begin{enumerate}
+\item \textbf{Calculating} $\mathbf{F}$, the Fourier transform of the
+  reproduced audio signal $\mathbf{f}$, chunk by chunk.
+\item \textbf{Calculating} $\mathbf{F}^{-1}$, the ``inverse'' of
+  $\mathbf{F}$. If $w_{\text{max}}$ is the frequency component of
+  $\mathbf{F}$ with the highest energy, $g_{\text{max}}$, i.e.,
+  $\mathbf{F}[w_{\text{max}}]=g_{\text{max}}$, and
+  $\mathbf{F}[w_{\text{min}}]=g_{\text{min}}$, normalize its spectrum
+  with:
+  \begin{equation}
+    \mathbf{F}_{\text{normalized}} = \frac{\mathbf{F} - g_{\text{min}}}{g_{\text{max}} - g_{\text{min}}},
+  \end{equation}
+  and finally calculate:
+  \begin{equation}
+    \mathbf{F}^{-1} = 1 - \mathbf{F}_{\text{normalized}}.
+  \end{equation}
+\item \textbf{Filtering the signal captured by the microphone} using
+  $\mathbf{F}^{-1}$, taking into account the attenuation factor $a$,
+  which relates how much of the reproduced signal is captured by the
+  microphone (how much of $\mathbf{f}$ is in $\mathbf{s}$), i.e.,
+  calculate:
+  \begin{equation}
+    \hat{\mathbf{N}} = a\mathbf{F}^{-1}\mathbf{S},
+  \end{equation}
+  where $\mathcal{F}(\mathbf{s})=\mathbf{N}$.
+\item \textbf{Estimating the attenuation factor} $a$ for the next
+  chunk. Initially, we assume that $a=1$ (and therefore, that there is
+  no attenuation). If it is an overestimation, then some frequency
+  components in the sent audio could disappear, and if we
+  underestimate, then some frequency components could be
+  amplified. Therefore, the attenuation factor should be high enough
+  so that the energy of $\mathbf{s}$ does not increase progressively,
+  but low enough so that some frequency components do not become 0.
+\end{enumerate}
+The signal to send (without the feedback) is:
+\begin{equation}
+  \mathbf{n} = \mathcal{F}^{-1}(\mathbf{N})
+\end{equation}
+
+\end{comment}
+
+\begin{comment}
+\subsection{Considering the frequency respose of the near-end audioset}
+In general, Eq.~\eqref{eq:echo_problem} is oversimplified because our
+local audioset (speaker, mic, walls, our body, etc.) does not have a
+flat response in the frequency domain. Therefore, a more realistic
+model of the echo effect is
+\begin{equation}
+   {\mathbf m}[i] = {\mathbf n}[i] + \{f({\mathbf s})\}[i-d],
+  \label{eq:more_realistic_echo_problem}
+\end{equation}
+where $f({\mathcal s})$ is a filtered version of the signal
+${\mathbf s}$, in which some frequencies are partially attenuated
+(notice that now there is a possiblely different $a$-value for each
+frequency of ${\mathbf s}$).
+
+Now the problem (apart from finding $d$, obviously) is how to
+determine $f(\cdot)$. Again, a simple way of doing this is to use a
+call signal to measure the frequency response of the near-end
+audioset. For this, a good call signal can be a sequence of
+impulses\footnote{A impulse generates a flat
+  \href{https://en.wikipedia.org/wiki/Spectral_density}{spectrum}~\cite{kovacevic2013fourier,Oppenheim2}
+  for a short period of time.} of a sequence of uniform random noise
+signals\footnote{Uniform random noise (or
+  \href{https://en.wikipedia.org/wiki/White_noise}{white noise}) has a
+  flat spectrum.}. Notice that the frequency response (the filter
+coefficients of $f(\cdot)$) can be found comparing the flat spectrum
+signal ${\mathbf s}$ generated by the speaker with the supposedly
+non-flat spectrum of the signal ${\mathbf m}$ captured by the
+microphone. To apply $f(\cdot)$ we can multiply
+${\mathcal F}({\mathbf s})$ by the filter coefficients of $f(\cdot)$
+in the Fourier domain, being ${\mathcal F}(\cdot)$ the Fourier
+Transform~\cite{kovacevic2013fourier,Oppenheim2}.
+
+
+Lets $H(s)$ the representation of $h(t)$ in the frequency (Laplace)
+domain, where $s=\sigma+j\omega$ is a complex number that denotes a
+frequency component.
+
+If we consider that $h(t)$ in the frequency domain is denoted by
+$H(s)$, (when $s=\sigma+j\omega$ we say that $H(s)$ is the Laplace
+Transform of $h(t)$), that $S(s)$ is the representation in the
+frequency domain of the signal $s(t)$, and that in our specific case,
+where our near-end audioset is a FIR (Finite Impulse Response)
+system\footnote{In ausence of an audio signal, the echo always decays
+  with the time.}, we can also characterize it using the Fourier
+Transform (where $sigma=0$), i.e., we can say that $H(j\omega)$ (the
+Fourier Transform of $h(t)$) describes our local audioset from a
+frequency perspective. Considering now the convolution theorem in the
+Fourier domain, we can rewrite the Eq.~\eqref{eq:simplest} as
+\begin{equation}
+  \tilde{\mathbf n}[i] = {\mathbf m}[i] - {\mathbf h}({\mathbf S}{\mathbf H})[i-d],
+  \label{eq:simplest2}
+\end{equation}
+where ${\mathbf S}$ is the Fast Discrete Fourier Transform of
+${\mathbf s}$ and ${\mathbf H}$ is the Fast Discrete Fourier Transform
+of ${\mathbf h}$, and ${\mathcal F}^{-1}$ represents the Fast Inverse
+Discrete Fourier Transform.
+
+Therefore, as it can be seen in Eq.~\eqref{eq:simplest2}, to find the
+echo signal we need to mulplity  ${\mathbf S}$ (the played signal in the Fourier
+domain) by ${\mathbf H}$ (the frequency response of the near-end
+audioset).
+
+\end{comment}

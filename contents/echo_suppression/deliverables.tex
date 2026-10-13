@@ -1,0 +1,88 @@
+\section{Deliverables}
+
+\begin{enumerate}
+\item Write a Python module, called \texttt{feedback\_supression.py},
+  that inherits from \texttt{buffer.py} and that implements one of the
+  proposed solutions (or any other you prefer). Define a new
+  command-line parameter to switch on this functionality, that by
+  default should be disabled (off). If necessary, use extra parameters
+  that can be controlled in real time.
+\item Insert the code of \texttt{feedback\_supression.py} in a Jupyter
+  notebook cell and generate the archive
+  \texttt{feedback\_supression.py} using \texttt{\%\%writefile
+    feedback\_supression.py}. The notebook should also include the
+  names of the members of the working group and I example of how to
+  use your implementation.
+\item Notice that for testing your implementation it is essential that
+  your operating system does not cancel the echo. If your OS cancel
+  the echo, you must perform the tests in Linux (see
+  \href{https://tecnologias-multimedia.github.io/contents/framework/}{Framework}).
+\end{enumerate}
+
+\begin{comment}
+More concretely:
+
+\begin{enumerate}
+
+\item If you implement the ``$s(t)$ delay and subtract solution'',
+  you must estimate $a$, $d$ and perform the signals subtraction to
+  remove the feedback signal ($s(t)$). 
+
+\item In a ``$s(t)$ delay and subtract solution'', if you also
+  consider the frequency response of the near-end audioset to estimate
+  a better feedback signal, first you will need to find ${\mathbf H}$ (the
+  discrete frequency response of your audioset). For this, the
+  near-end speaker should generate an impulse signal
+  ${\mathbf \delta}$, and in absence of any other sound signal, record
+  the echo and compute its Fourier transform (it is a good idea to
+  repeat this process several times to obtain a better estimation of
+  ${\mathbf H}$). Finally, .
+
+  Notice that the frequency characterization of the far-end audioset
+  can be also used in a ``$n(t)$ delay and subtract
+  solution''. Remember that filtering operations must be implemented
+  with convolutions in the temporal domain, but are dot products in
+  the frequency domain.
+  
+\item Use LMS to find a estimation of the echo signal and perform the
+  echo cancellation. In this case, consider the use of a thread to
+  compute the coefficients of the LMS filter
+  (Equation~\eqref{eq:update} can run with a cadence much higher than
+  a sample-time) and compute the estimated feedback signal
+  (Equation~\eqref{eq:LMS_feedback}) for every chunk. Notice that for
+  doing that, we will require the first $k$ samples of the next chunk.
+
+\item 
+\end{enumerate}
+
+Optionally, but interesting for your mark, use any other technique
+(for example, an artificial neural network\footnote{ADALINE is the
+  simplest
+  \href{https://en.wikipedia.org/wiki/Neural_network_(machine_learning)}{AAN}
+  ever developed!}) for estimating the echo, and use it for removing
+the echo (obviously, in real-time). Take also into consideration that
+the parameters that determine the estimation of the echo signal should
+be continously\footnote{A 1-seconds cadence should be enought.}
+monitored becase the physical composition of the audiosets can
+be dynamic (for example, the inclination of the screen of our laptop
+can be modified at any moment).
+
+Finally, notice that
+operation can help to fine-tune $d$.
+
+% Mark: \textbf{10 points}.
+
+\item To the report describing how your module works, \textbf{add a
+    section evaluating it} (with a ratio out of 10), considering that
+  each of the following rubrics has the same weight in the evaluation
+  score:
+  \begin{enumerate}
+  \item Compared, for example, with the feedback supression provided
+    by Google Meet, how of effective is your proposal? You must
+    describe how this comparison has been carried out.
+  \item  Is your implementation efficient in terms of CPU usage? Explain.
+  \item Is the code of the module properly explained and
+    documented (in the own module)?
+  \end{enumerate}
+\end{enumerate}
+\end{comment}
