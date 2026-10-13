@@ -25,6 +25,7 @@ After substituting this result in \eqref{eq:LMS_error}) we obtain that
 Now, we compute
 \begin{equation}
   \mathbf{e}^2 = \mathbf{m}^2 - 2\mathbf{m}\mathbf{s}^\top\mathbf{h} + \mathbf{h}^\top\mathbf{s}\mathbf{s}^\top\mathbf{h}.
+  \label{eq:e_squared}
 \end{equation}
 Thus, the Mean Squared Error is
 \begin{equation}
@@ -33,8 +34,9 @@ Thus, the Mean Squared Error is
     \end{split}
 \end{equation}
 As can be seen, the MSE is a cuadratic function of $\mathbf{h}$, i.e.,
-a (in general hyper-) paraboloid in which we can find the minimum (the
-optimal values for $\mathbf{h}$) using the
+a (in general hyper\footnote{In general, $\mathbf{h}$ is going to have
+more than 2 wights.}-) paraboloid in which we can find the minimum
+(the optimal values for $\mathbf{h}$) using the
 \href{https://en.wikipedia.org/wiki/Method_of_steepest_descent}{Steepest
   Decent Algorithm}. Ideally, we should compute (iteratively)
 \begin{equation}
@@ -51,7 +53,7 @@ where $\mu>0$ is the learning rate, and the (ideal) gradient is
   \end{bmatrix}.
 \end{equation}
 Unfortunatelly, we don't have $\xi$, but we can approximate it using
-the instanteneous error (see \eqref{eq:LMS_error}). Thus
+the instanteneous error (consider \eqref{eq:LMS_error} and the derivative of \eqref{eq:e_squared}). Thus
 \begin{equation}
   \hat{\nabla} = \frac{\partial\mathbf{e}^2}{\partial\mathbf{h}} = 2\mathbf{e}\frac{\partial\xi}{\partial\mathbf{h}} = 2\mathbf{e}(-\mathbf{s}),
 \end{equation}
