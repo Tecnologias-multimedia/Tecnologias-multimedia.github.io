@@ -35,7 +35,7 @@
 <br />   <span class='subsectionToc'>6.2 <a href='#choosing-l' id='QQ2-1-12'>Choosing <span class='mathjax-inline'>\(L\)</span></a></span>
 <br />   <span class='subsectionToc'>6.3 <a href='#python-example' id='QQ2-1-13'>Python example</a></span>
 <br />   <span class='subsectionToc'>6.4 <a href='#doubletalk-detection' id='QQ2-1-14'>Double-talk detection</a></span>
-<br />   <span class='sectionToc'>7 <a href='#taking-turns-speaking-be-polite' id='QQ2-1-15'>Taking turns speaking (be polite)</a></span>
+<br />   <span class='sectionToc'>7 <a href='#taking-turns-speaking-be-polite' id='QQ2-1-15'>Taking turns speaking (be polite!)</a></span>
 <br />   <span class='sectionToc'>8 <a href='#deliverables' id='QQ2-1-16'>Deliverables</a></span>
 <br />   <span class='sectionToc'>9 <a href='#resources' id='QQ2-1-17'>Resources</a></span>
    </div>
@@ -201,7 +201,7 @@ the <a href='https://en.wikipedia.org/wiki/Method_of_steepest_descent'>Steepest 
 <!-- l. 53 --></p><p class='indent'>   Unfortunatelly, we don’t have <span class='mathjax-inline'>\(\xi \)</span>, but we can approximate it using the instanteneous
 error (see \eqref{eq:LMS_error}). Thus </p><div class='mathjax-env mathjax-equation'>\begin{equation} \hat {\nabla } = \frac {\partial \mathbf {e}^2}{\partial \mathbf {h}} = 2\mathbf {e}\frac {\partial \xi }{\partial \mathbf {h}} = 2\mathbf {e}(-\mathbf {s}), \end{equation}</div>
 <p><a id='x1-10009r17'></a>
-<!-- l. 58 --></p><p class='indent'>   obtaining finally that </p><div class='eqnarray'><div class='mathjax-env mathjax-eqnarray'>\begin{eqnarray} \mathbf {e} \leftarrow \mathbf {m} - \mathbf {s}^\top \mathbf {h} &amp;&amp; \\ \mathbf {h} \leftarrow \mathbf {h} + 2\mu \mathbf {e}\mathbf {s}.&amp;&amp; \end{eqnarray}</div>
+<!-- l. 58 --></p><p class='indent'>   obtaining finally that </p><div class='eqnarray'><div class='mathjax-env mathjax-eqnarray'>\begin{eqnarray} \mathbf {e} \leftarrow \mathbf {m} - \mathbf {s}^\top \mathbf {h}, &amp;&amp; \\ \mathbf {h} \leftarrow \mathbf {h} + 2\mu \mathbf {e}\mathbf {s}. &amp;&amp; \end{eqnarray}</div>
    </div>
                                                                   
 
@@ -251,7 +251,7 @@ filter “diverges”). So, it is necessary to use a double-talk detector and di
 learning while I’m speaking :-/
    
 </p>
-   <h3 class='sectionHead' id='taking-turns-speaking-be-polite'><span class='titlemark'>7   </span>   <a id='x1-150007'></a>Taking turns speaking (be polite)</h3>
+   <h3 class='sectionHead' id='taking-turns-speaking-be-polite'><span class='titlemark'>7   </span>   <a id='x1-150007'></a>Taking turns speaking (be polite!)</h3>
 <!-- l. 3 --><p class='noindent'>Lets recap. Our problem is that, without a headset, we have that the signal that we
 send is </p><div class='mathjax-env mathjax-equation'>\begin{equation} \mathbf {m} = \tilde {\mathbf {n}} + \hat {\mathbf {s}} \end{equation}</div>
 <p><a id='x1-15001r20'></a>
