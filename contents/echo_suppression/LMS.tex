@@ -68,8 +68,81 @@ Stability requires $0 < \mu < 2/(L · \sigma^2(s))$, so the step size
 depends on the input power. For speech, whose level varies enormously,
 this is a problem. So use NLMS, which normalizes by the input energy
 \begin{equation}
-  \mathbf{h} \leftarrow \mathbf{h} + \frac{2\mu\mathbf{e}\mathbf{s}}{\epsilon+\mathbf{s}^\top\mathbf{s}}.
+  \mathbf{h} \leftarrow \mathbf{h} + \frac{2\mu\mathbf{e}\mathbf{s}}{\epsilon+\mathbf{s}^\top\mathbf{s}},
 \end{equation}
+where \section{LMS (Least Mean Squares)}
+
+We can avoid having to generate the impulses if we are able to
+construct a mathematical model of our acoustic environment's response
+to those impulses (or to any other audio signal, such as the one output
+by our speakers). For the sake of simplicity, we will assume that this
+model is a FIR filter and attempt to estimate its coefficients.
+
+The LMS algorithm can find $\mathbf{h}$ adaptively. For this, we model
+\begin{equation}
+  \tilde{\mathbf{s}} \approx \hat{\mathbf{s}} \triangleq \mathbf{h} * \mathbf{s},
+\end{equation}and define that the error (what we should send through the network) is
+\begin{equation}
+  \mathbf{e}=\mathbf{m}-\hat{\mathbf{s}}.
+  \label{eq:LMS_error}
+\end{equation}
+So, for each input (audio) sample, we have
+\begin{equation}
+  \hat{\mathbf{s}} = \mathbf{s}^\top\mathbf{h} = \mathbf{h}^\top\mathbf{s}.
+\end{equation}
+After substituting this result in \eqref{eq:LMS_error}) we obtain that
+\begin{equation}
+  \mathbf{e}=\mathbf{m} - \mathbf{h}^\top\mathbf{s}.
+\end{equation}
+Now, we compute
+\begin{equation}
+  \mathbf{e}^2 = \mathbf{m}^2 - 2\mathbf{m}\mathbf{s}^\top\mathbf{h} + \mathbf{h}^\top\mathbf{s}\mathbf{s}^\top\mathbf{h}.
+  \label{eq:e_squared}
+\end{equation}
+Thus, the Mean Squared Error is
+\begin{equation}
+  \begin{split}
+  \text{MSE} = \xi = \mathbb{E}[\mathbf{e}^2] = \mathbb{E}[\mathbf{m}^2] - 2\mathbb{E}[\mathbf{m}\mathbf{s}^\top]\mathbf{h} + \mathbf{h}^\top\mathbb{E}[\mathbf{s}\mathbf{s}^\top]\mathbf{h} & = \mathbb{E}[\mathbf{e}^2] = \mathbb{E}[\mathbf{m}^2] - 2P\mathbf{h} + \mathbf{h}^\top R\mathbf{h}.
+    \end{split}
+\end{equation}
+As can be seen, the MSE is a cuadratic function of $\mathbf{h}$, i.e.,
+a (in general hyper\footnote{In general, $\mathbf{h}$ is going to have
+more than 2 wights.}-) paraboloid in which we can find the minimum
+(the optimal values for $\mathbf{h}$) using the
+\href{https://en.wikipedia.org/wiki/Method_of_steepest_descent}{Steepest
+  Decent Algorithm}. Ideally, we should compute (iteratively)
+\begin{equation}
+  \mathbf{h}\leftarrow\mathbf{h}+\mu(-\nabla),
+\end{equation}
+where $\mu>0$ is the learning rate, and the (ideal) gradient is
+\begin{equation}
+  \nabla = \frac{\partial\xi}{\partial\mathbf{h}} =
+  \begin{bmatrix}
+    \frac{\partial\xi}{\mathbf{h}_0} \\
+    \frac{\partial\xi}{\mathbf{h}_1} \\
+    \vdots \\
+    \frac{\partial\xi}{\mathbf{h}_{L-1}}
+  \end{bmatrix}.
+\end{equation}
+Unfortunatelly, we don't have $\xi$, but we can approximate it using
+the instanteneous error (consider \eqref{eq:LMS_error} and the derivative of \eqref{eq:e_squared}). Thus
+\begin{equation}
+  \hat{\nabla} = \frac{\partial\mathbf{e}^2}{\partial\mathbf{h}} = 2\mathbf{e}\frac{\partial\xi}{\partial\mathbf{h}} = 2\mathbf{e}(-\mathbf{s}),
+\end{equation}
+obtaining finally that
+\begin{eqnarray}
+  \mathbf{e} \leftarrow \mathbf{m} - \mathbf{s}^\top\mathbf{h}, && \\
+  \mathbf{h} \leftarrow \mathbf{h} + 2\mu\mathbf{e}\mathbf{s}. &&
+\end{eqnarray}
+
+\subsection{Normalized LMS}
+Stability requires $0 < \mu < 2/(L · \sigma^2(s))$, so the step size
+depends on the input power. For speech, whose level varies enormously,
+this is a problem. So use NLMS, which normalizes by the input energy
+\begin{equation}
+  \mathbf{h} \leftarrow \mathbf{h} + \frac{2\mu\mathbf{e}\mathbf{s}}{\epsilon+\mathbf{s}^\top\mathbf{s}},
+\end{equation}
+where $\epsilon$ should be small and $\epsilon>0$ to avoid division by zero.
 
 \subsection{Choosing $L$}
 $L$ must cover the echo path
@@ -77,7 +150,7 @@ $L$ must cover the echo path
   L \approx f_sT,
 \end{equation}
 where $T$ is the echo tail (the acoustic delay plus reverberation). At
-44.1 kHz and 50–100 ms of latency, that’s about 2000-4500 taps. Also,
+$f_s=44.1$ kHz and 50–100 ms of latency, that’s about 2000-4500 taps. Also,
 any system latency (audio buffers, chunk size) between playing
 $\mathbf{s}$ and recording it shows up as leading zeros in
 $\mathbf{h}$. Remember that you must update the filter coefficients for
