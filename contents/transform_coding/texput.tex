@@ -437,10 +437,10 @@ can be found inside of each subband\footnote{Here it is supposed that
   samples, and then, remove the spatial redundancy.}. As it can be
 seen in the notebook
 \href{https://github.com/Tecnologias-multimedia/intercom/blob/master/tools/audio_viewer.ipynb}{Audio
-  Viewer}, most audio signals show ``patterns'' of samples that tend
-to repeat themselves, especially locally. Another clear source of
-temporal redundancy is that neighboring audio samples usually show
-similar amplitude values.
+  Viewer}, most audio signals show ``patterns'' of samples that
+neighboring audio samples usually show similar amplitude
+value. Another clear source of temporal redundancy is that, locally,
+tend to repeat themselves.
 
 % A decorrelating technique: DPCM
 There are several techniques that can be used to remove the
@@ -645,7 +645,7 @@ The DWT can be implemented in different ways:
   cascade is generally small (5, for example), this implementation is
   faster than the based on vector-matrix arithmetic. And most
   importantly, we do not need to store ${\mathbf K}$, but only the coefficients
-  of the different filters that are used.\footnote{Notice that in a
+  of the different filters that are required.\footnote{Notice that in a
     typical cascade, the filters are always the same. Therefore, we
     only need to store in memory only a copy of each different filter.}
 
