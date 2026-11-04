@@ -491,7 +491,7 @@ ${\mathbf K}$ (see the Section~\ref{sec:analysis_transform})
 represents the coefficients of a 2-channels analysis
 \href{https://en.wikipedia.org/wiki/Filter_bank}{Filter Bank
   (FB)}~\cite{vetterli1995wavelets}, and the forward transform is in
-fact ``descomposing'' ${\mathbf x}$ into two subbands ${\mathbf w}_0$
+fact ``decomposing'' ${\mathbf x}$ into two subbands ${\mathbf w}_0$
 and ${\mathbf w}_1$ (see the Figure~\ref{fig:PRFB}, and the notebook
 \href{https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/contents/transform_coding/PRFB.ipynb}{A
   Perfect Reconstruction Filter Bank (PRFB)}). On the other hand, the
@@ -501,7 +501,7 @@ from $\{{\mathbf w}_i\}$ (notice that in the figure,
 ${\mathbf x}={\mathbf l}^i$, ${\mathbf w}_0={\mathbf l}^{i+1}$,
 ${\mathbf w}_1={\mathbf h}^{i+1}$, $\tilde\phi={\mathbf K}_0$,
 $\tilde\psi={\mathbf K}_1$, $\phi={\mathbf K}^{-1}_0$, and
-$\psi={\mathbf K}^{-1}_1$) from ${\mathbf w}$.
+$\psi={\mathbf K}^{-1}_1$).
 
 \begin{figure}
   \centering
@@ -521,9 +521,9 @@ ${\mathbf K}_0$ is a low-pass filter and ${\mathbf K}_1$ is a
 high-pass filter, and that the
 \href{https://en.wikipedia.org/wiki/Filter_(signal_processing)}{frequency
   response}\footnote{The response (in the frequency domain) of the
-  filter to the
-  \href{https://en.wikipedia.org/?title=Unit_impulse&redirect=no}{unit
-    impulse}.} of both filters
+filter to the
+\href{https://en.wikipedia.org/?title=Unit_impulse&redirect=no}{unit
+  impulse}.} of both filters
 \href{https://en.wikipedia.org/wiki/Filter_bank#Perfect_reconstruction_filter_banks}{are
   one the inverse of the other}. Under these assumptions, the complete
 (analysis/synthesis) transform is named a (2-channels)
@@ -535,16 +535,16 @@ by 2 because we have two channels in the FB) of ${\mathbf w}_0$ and
 ${\mathbf w}_1$ (see the notebook
 \href{https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/contents/transform_coding/PRFB.ipynb}{A
   Perfect Reconstruction Filter Bank (PRFB)}).\footnote{Notice that
-  this downsampling is possible because the
-  \href{https://en.wikipedia.org/wiki/Aliasing}{aliasing} generated in
-  the low-pass subband is attenuated by the aliasing generated in the
-  high-pass subband. Notice also that the filters are not ideal, the
-  bandwidth of the filtered signals ${\mathbf w}_0$ and
-  ${\mathbf w}_1$ is bigger than half of the bandwidth of
-  ${\mathbf x}$. Therefore, subsampling at a ratio of one of each two
-  coefficients, we are generating aliasing. See the
-  \href{https://en.wikipedia.org/wiki/Nyquist-Shannon_sampling_theorem}{sampling
-    theorem}.} To achieve this, the
+this downsampling is possible because the
+\href{https://en.wikipedia.org/wiki/Aliasing}{aliasing} generated in
+the low-pass subband is attenuated by the aliasing generated in the
+high-pass subband. Notice also that the filters are not ideal, the
+bandwidth of the filtered signals ${\mathbf w}_0$ and ${\mathbf w}_1$
+is bigger than half of the bandwidth of ${\mathbf x}$. Therefore,
+subsampling at a ratio of one of each two coefficients, we are
+generating aliasing. See the
+\href{https://en.wikipedia.org/wiki/Nyquist-Shannon_sampling_theorem}{sampling
+  theorem}.} To achieve this, the
 \href{https://en.wikipedia.org/wiki/Filter_(signal_processing)}{frequency
   response} of ${\mathbf K}_0$ must be equal to the mirrored frequency
 response of ${\mathbf K}_1,$ and obviously both filters must have the
@@ -553,7 +553,10 @@ same
 this situation, in which ${\mathbf K}_0$ and ${\mathbf K}_1$ are
 mirror filters, we say that they form a
 \href{https://en.wikipedia.org/wiki/Quadrature_mirror_filter}{Quadrature
-  Mirror Filters (QMF) Bank}. Notice that the downsamplers ($\downarrow 2$) expand the spectrum of the input in a factor of two, but do not modify their shape, and the upsamplers ($\uparrow 2$) compress the spectrum of the input in a factor of two, generating a mirrored version of the half low-frequencies in the half high-frequencies.
+  Mirror Filters (QMF) Bank}. Notice that the downsamplers
+($\downarrow 2$) expand the spectrum of the input in a factor of two,
+but do not modify its shape, and the upsamplers ($\uparrow 2$)
+compress the spectrum of the input in a factor of two.
 
 %}}}
 
@@ -643,11 +646,12 @@ The DWT can be implemented in different ways:
   \href{https://en.wikipedia.org/wiki/Convolution_theorem}{implemented
     in the frequency domain}), and that the number of levels in the
   cascade is generally small (5, for example), this implementation is
-  faster than the based on vector-matrix arithmetic. And most
-  importantly, we do not need to store ${\mathbf K}$, but only the coefficients
-  of the different filters that are required.\footnote{Notice that in a
-    typical cascade, the filters are always the same. Therefore, we
-    only need to store in memory only a copy of each different filter.}
+  faster than the based on matrix-vector arithmetic. And most
+  importantly, we do not need to store ${\mathbf K}$, but only the
+  coefficients of the different filters that are required (which are
+  applied to different subbands of the signal).\footnote{Notice that
+  in a typical cascade, the filters are always the same. Therefore, we
+  only need to store in memory only a copy of each different filter.}
 
 \begin{figure}
   \centering
@@ -711,7 +715,7 @@ DWT using the MST filters and lifting.
   \end{equation}
   that, as we can see, uses as input the output of Eq.~\eqref{eq:1dwt}.
 
-  In general, for a $l$-levels DWT, we get
+  In general, for a $l$-levels DWT, we use
     \begin{equation}
     \begin{array}{rcl}
       {\mathbf l}^l_i & = & {\mathbf l}^{l-1}_{2i} + {\mathbf l}^{l-1}_{2i+1} \\
