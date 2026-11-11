@@ -774,18 +774,18 @@ DWT using the MST filters and lifting.
 \subsection{Wavelets and filter banks}
 %{{{
 
-In the context of wavelet theory~\cite{burrus2013wavelets}, the
+In the context of the wavelet theory~\cite{burrus2013wavelets}, the
 response of the low-pass analysis filter (${\mathbf K}_0$ in MST) to
 the
 \href{https://en.wikipedia.org/?title=Unit_impulse&redirect=no}{unit
   impulse}\footnote{The response of a filter to the unit impulse
-  characterize the filter because the output of the filter is the set
-  of coefficients of the filter.} is known as \emph{scaling function}
-and is usually denoted by $\tilde\phi$, the response of the analysis
+characterize the filter because the output of the filter is the set of
+coefficients of the filter.}, usually denoted by $\tilde\phi$, is
+known as \emph{scaling function}, and the response of the analysis
 high-pass filter (${\mathbf K}_1$) is known as the \emph{wavelet
-  function} and it is usually denoted by $\tilde\psi$, the response of
-the low-pass filter synthesis (${\mathbf K}^{-1}_0$) is indicated by
-$\phi$ and the synthesis high-pass filter (${\mathbf K}^{-1}_1$) is
+function} ($\tilde\psi$), the response of
+the low-pass filter synthesis (${\mathbf K}^{-1}_0$) is denoted by
+$\phi$, and the synthesis high-pass filter (${\mathbf K}^{-1}_1$) is
 represented by $\psi$, which are the dual scaling and wavelet
 functions (see the notebook
 \href{https://github.com/Tecnologias-multimedia/Tecnologias-multimedia.github.io/blob/master/contents/transform_coding/explore_wavelet_filters.ipynb}{Explore
@@ -898,7 +898,7 @@ can be used in the quantization process.
 The WPT (see Fig.~\ref{fig:WPT}) is an extension of the DWT where the
 PRFB are applied also to the high frequency subbands, generating a
 linear partitioning of the spectrum. If $l$ is the number of levels,
-the number of subband is $2^l$.
+the number of subbands is, in this case, $2^l$.
 
 \begin{figure}
   \centering
@@ -955,9 +955,9 @@ described in the following algorithm:
   \item Build the extended chunk ${\mathbf E}={\mathbf
     C}_{i-1}[-o:]|{\mathbf C}_i|{\mathbf C}_{i+1}[:o]$, where
     $\cdot|\cdot$ denotes the concatenation of chunks, $o$ is the
-    overlapped area size in frames, ${\mathbf C}_{i-1}[-o:]$ the last
-    $o$ frames of chunk ${\mathbf C}_{i-1}$, and ${\mathbf
-      C}_{i+1}[:o]$ are the first $o$ frames of the chunk ${\mathbf
+    overlapped area size in samples ${\mathbf C}_{i-1}[-o:]$ the last
+    $o$ samples of chunk ${\mathbf C}_{i-1}$, and ${\mathbf
+      C}_{i+1}[:o]$ are the first $o$ samples of the chunk ${\mathbf
       C}_{i+1}$.
   \item Compute the decomposition ${\mathbf D}_i \leftarrow
     \text{DWT}^l({\mathbf E})$, where $l$ is the number of levels of
@@ -1001,10 +1001,10 @@ notation.
   \svg{graphics/subbands}{550}
   \caption{Structure in the DWT domain of an extended chunk for $l=2$
     (upper subfigure, without chunk extension). $o$ is the number of
-    overlapped frames between adjacent chunks.
-    ${\mathbf C}_{i-1}[-o:]$ represents the last $o$ frames of chunk
+    overlapped samples between adjacent chunks.
+    ${\mathbf C}_{i-1}[-o:]$ represents the last $o$ samples of chunk
     ${\mathbf C}_{i-1}$, and ${\mathbf C}_{i+1}[:o]$ the first $o$
-    frames of the chunk ${\mathbf C}_{i+1}$.}
+    samples of the chunk ${\mathbf C}_{i+1}$.}
   \label{fig:subbands}
 \end{figure}
 
@@ -1027,7 +1027,7 @@ of the overlapped areas (in Fig.~\ref{fig:subbands}, $\{{\mathbf
   D}_i.{\mathbf h}^1[:o/2]\}$). To avoid this waste of bandwidth, we
 can reuse the received coefficients of the overlapped areas. This
 procedure has been described in Fig.~\ref{fig:overlapping}, and,
-as can be seen, the encoding algorithm is identical to the previous
+it as can be seen, the encoding algorithm is identical to the previous
 one except that only the central (stereo) coefficients are
 sent. The rest of the coefficients that are needed to compute the inverse
 transform are extracted from the neighboring chunks (represented in the
