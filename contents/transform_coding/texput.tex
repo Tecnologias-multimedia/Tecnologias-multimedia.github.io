@@ -553,10 +553,13 @@ same
 this situation, in which ${\mathbf K}_0$ and ${\mathbf K}_1$ are
 mirror filters, we say that they form a
 \href{https://en.wikipedia.org/wiki/Quadrature_mirror_filter}{Quadrature
-  Mirror Filters (QMF) Bank}. Notice that the downsamplers
-($\downarrow 2$) expand the spectrum of the input in a factor of two,
-but do not modify its shape, and the upsamplers ($\uparrow 2$)
-compress the spectrum of the input in a factor of two.
+  Mirror Filters (QMF) Bank}\footnote{The term ``quadrature'' comes
+out the fact that the filter's reponse reflected around the quadrature
+frequency ($\omega=\pi/2$, one-quarter of the sampling rate.}. Notice
+that the downsamplers ($\downarrow 2$) expand the spectrum of the
+input in a factor of two, but do not modify its shape, and the
+upsamplers ($\uparrow 2$) compress the spectrum of the input in a
+factor of two.
 
 %}}}
 
@@ -1211,10 +1214,10 @@ Find the following RD curves:
 
 \item \textbf{Determine the RD curves for the MDCT}: Create a new
   module \verb|temporal_MDCT_coding.py| written from a notebook called
-  \verb|temporal_MDCT_coding.ipynb|. Include in this module, as an
-  option, at least one window function different to the rectangular
+  \verb|temporal_MDCT_coding.ipynb|. Use in this module, as an option,
+  at least one window function different to the rectangular
   window. Compare the MDCT in the R/D domain with the rest of
-  transforms (MST, DWT, and WPT) over the same graph, considering
+  transforms (MST, DWT, and WPT) over the same graphic, considering
   different window functions.
   
 \end{enumerate}
