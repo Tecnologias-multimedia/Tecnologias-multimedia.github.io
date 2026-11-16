@@ -28,11 +28,10 @@
 <br />   <span class='sectionToc'>3 <a href='#considering-the-dwts-dyadic-decomposition' id='QQ2-1-5'>Considering the DWT’s dyadic decomposition</a></span>
 <br />   <span class='sectionToc'>4 <a href='#considering-the-wpt-linear-decomposition' id='QQ2-1-6'>Considering the WPT linear decomposition)</a></span>
 <br />   <span class='sectionToc'>5 <a href='#considering-the-mdct-highresolution-linear-decomposition' id='QQ2-1-7'>Considering the MDCT high-resolution linear decomposition</a></span>
-<br />   <span class='sectionToc'>6 <a href='#not-everyone-hears-the-same' id='QQ2-1-8'>Not everyone hears the same</a></span>
+<br />   <span class='sectionToc'>6 <a href='#not-everyone-hears-the-same-way' id='QQ2-1-8'>Not everyone hears the same way</a></span>
 <br />   <span class='sectionToc'>7 <a href='#quantization-noise' id='QQ2-1-9'>Quantization noise</a></span>
 <br />   <span class='sectionToc'>8 <a href='#deliverables' id='QQ2-1-10'>Deliverables</a></span>
-<br />   <span class='sectionToc'>9 <a href='#deliverables1' id='QQ2-1-11'>Deliverables</a></span>
-<br />   <span class='sectionToc'>10 <a href='#resources' id='QQ2-1-12'>Resources</a></span>
+<br />   <span class='sectionToc'>9 <a href='#resources' id='QQ2-1-11'>Resources</a></span>
    </div>
    
    <h3 class='sectionHead' id='a-model-of-the-threshold-of-human-hearing'><span class='titlemark'>1   </span>   <a id='x1-20001'></a>A model of the Threshold of (Human) Hearing</h3>
@@ -61,7 +60,7 @@ noise you can hide in each subband.
                                                                   
    </figure>
 <!-- l. 35 --><p class='indent'>   A good approximation of ToH for a 20-year-old person can be obtained with <span class='cite'>[<a href='#Xbosi2003intro'>1</a>]</span>
-</p><div class='mathjax-env mathjax-equation'>\begin{equation} T(f)\text {[dB]} = 3.64(f\text {[kHz]})^{-0.8} - 6.5e^{f\text {[kHz]}-3.3)^2} + 10^{-3}(f\text {[kHz]})^4. \label {eq:ToHH} \end{equation}</div>
+</p><div class='mathjax-env mathjax-equation'>\begin{equation} T(f),[\text {dB}] = 3.64(f[\text {kHz}])^{-0.8} - 6.5,e^{-0.6(f[\text {kHz}]-3.3)^2} + 10^{-3}(f[\text {kHz}])^4 . \label {eq:ToHH} \end{equation}</div>
 <p><a id='x1-2002r1'></a>
 <!-- l. 41 --></p><p class='indent'>   This equation has been plotted in Fig. <a href='#a-model-for-the-threshold-of-human-hearing'>1<!-- tex4ht:ref: fig:ToHH  --></a>.
    
@@ -71,12 +70,12 @@ noise you can hide in each subband.
 sounds almost sound the same when they have similar frequencies. Moreover, the
 minimal distance in frequency to confuse both depends on their frequencies: if the
 frequency is low, the distance must be smaller. Such behaviour can be described by
-the <a href='https://en.wikipedia.org/wiki/Bark_scale'>Bark scale</a> (see also <a href='https://ccrma.stanford.edu/~jos/bbt/Bark_Frequency_Scale.html'>this</a>), were as it can be seen, the size of the “critical” bands
+the <a href='https://en.wikipedia.org/wiki/Bark_scale'>Bark scale</a> (see also <a href='https://ccrma.stanford.edu/~jos/bbt/Bark_Frequency_Scale.html'>this</a>), where as it can be seen, the size of the “critical” bands
 increases with the frequency.
 </p><!-- l. 57 --><p class='indent'>   Considering both concepts, the ToH and the BS, we can improve (subjectively)
 the quality of the sound for a given bit-rate. The idea is to use a different QSS
 for each critical band. The QSSs should resemble the ToH curve, and the
-bandwidth of the subbands should follow the tendence of the size of the critical
+bandwidth of the subbands should follow the tendency of the size of the critical
 bands.
    
 </p>
@@ -95,36 +94,35 @@ Transmitter/Receiver</a>) </p><div class='mathjax-env mathjax-equation'>\begin{e
 <!-- l. 88 --></p><p class='indent'>   Unfortunately, as it can be seen, the DWT does not provide a good decomposition
 if we want to use a different QSS for each critical band (<span class='mathjax-inline'>\(N_{\text {DWT}}\)</span> is generally too
 small<span class='footnote-mark'><a href='#fn1x0' id='fn1x0-bk'><sup class='textsuperscript'>1</sup></a></span><a id='x1-4004f1'></a>
-and the size of the subbandas does not resemble the BS critical bands).
+and the size of the subbands does not resemble the BS critical bands).
    
                                                                   
 
                                                                   
 </p>
    <h3 class='sectionHead' id='considering-the-wpt-linear-decomposition'><span class='titlemark'>4   </span>   <a id='x1-50004'></a>Considering the WPT linear decomposition)</h3>
-<!-- l. 97 --><p class='noindent'>The WPT is an extensión of the DWT where the 2-channels PRFB is applied also
+<!-- l. 97 --><p class='noindent'>The WPT is an extension of the DWT where the 2-channels PRFB is applied also
 recursively to the high frequencies (see Milestone <a href='https://tecnologias-multimedia.github.io/contents/transform_coding/'><span class='ecti-1000'>Transform Coding for
-Redundancy Removal</span></a>). Now, the number of subbands genearted by the WPT is
+Redundancy Removal</span></a>). Now, the number of subbands generated by the WPT is
 </p><div class='mathjax-env mathjax-equation'>\begin{equation} N_{\text {WPT}} = 2^{L_{\text {WPT}}}, \end{equation}</div>
 <p><a id='x1-5001r5'></a>
-<!-- l. 105 --></p><p class='indent'>   where <span class='mathjax-inline'>\(L_\text {DWT}\)</span> is the number of levels of the DWT <span class='cite'>[<a href='#Xvetterli1995wavelets'>3</a>]</span>.
-</p><!-- l. 108 --><p class='indent'>   Unfortunately (again), although in this case, <span class='mathjax-inline'>\(N_{\text {WPT}}\)</span> can be much larger than <span class='mathjax-inline'>\(N_{\text {DWT}}\)</span>,
+<!-- l. 105 --></p><p class='indent'>   where <span class='mathjax-inline'>\(L_\text {WPT}\)</span> is the number of levels of the WPT <span class='cite'>[<a href='#Xvetterli1995wavelets'>3</a>]</span>.
+</p><!-- l. 108 --><p class='indent'>   Notice that, in this case, <span class='mathjax-inline'>\(N_{\text {WPT}}\)</span> can be much larger than <span class='mathjax-inline'>\(N_{\text {DWT}}\)</span>, and it is hold that
 </p><div class='mathjax-env mathjax-equation'>\begin{equation} W({\mathbf w}_s) = W({\mathbf w}_{s-1})\quad \forall s, \end{equation}</div>
 <p><a id='x1-5002r6'></a>
-<!-- l. 113 --></p><p class='indent'>   i.e., all the WPT subbands have the same bandwidth which neither it is the most
-suitable to mimic the BS critical bands.
+<!-- l. 113 --></p><p class='indent'>   i.e., all the WPT subbands have the same bandwidth.
    
 </p>
    <h3 class='sectionHead' id='considering-the-mdct-highresolution-linear-decomposition'><span class='titlemark'>5   </span>   <a id='x1-60005'></a>Considering the MDCT high-resolution linear decomposition</h3>
-<!-- l. 143 --><p class='noindent'>The MDCT generates a total of <span class='mathjax-inline'>\(N\)</span> subbands for <span class='mathjax-inline'>\(2N\)</span> samples, but because it is computed
+<!-- l. 142 --><p class='noindent'>The MDCT generates a total of <span class='mathjax-inline'>\(N\)</span> coefficients for <span class='mathjax-inline'>\(2N\)</span> samples, but because it is computed
 in an overlapping manner, in the end we have <span class='mathjax-inline'>\(N\)</span> subbands for each <span class='mathjax-inline'>\(N\)</span> input samples.
 Therefore, each MDCT coefficient represents a subband (for a chunk size of <span class='mathjax-inline'>\(N\)</span> samples)
-with a width of <span class='mathjax-inline'>\(f_s/2/N\)</span> Hz. Therefore, MDCT offers better spectral resolution than DWT
+with a width of <span class='mathjax-inline'>\(f_s/2/N\)</span> Hz. Therefore, MDCT offers a better spectral resolution than DWT
 and WPT.
    
 </p>
-   <h3 class='sectionHead' id='not-everyone-hears-the-same'><span class='titlemark'>6   </span>   <a id='x1-70006'></a>Not everyone hears the same</h3>
-<!-- l. 152 --><p class='noindent'>The ToH curve <span class='cite'>[<a href='#Xbosi2003intro'>1</a>]</span> varies between individuals:
+   <h3 class='sectionHead' id='not-everyone-hears-the-same-way'><span class='titlemark'>6   </span>   <a id='x1-70006'></a>Not everyone hears the same way</h3>
+<!-- l. 151 --><p class='noindent'>The ToH curve <span class='cite'>[<a href='#Xbosi2003intro'>1</a>]</span> varies between individuals:
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-7002x1'>In general, women hear better than men.
      </li>
@@ -132,47 +130,59 @@ and WPT.
      </li>
 <li class='enumerate' id='x1-7006x3'>Exposure  to  loud  noises  over  time  can  <span class='ecti-1000'>elevate  </span>the  ToH,  especially  in
      individuals exposed to loud sound.
+                                                                  
+
+                                                                  
      </li>
 <li class='enumerate' id='x1-7008x4'>Auditory  training  can  help  to  detect  sounds  at  lower  intensities  or
      distinguish subtle nuances in tone.</li></ol>
-<!-- l. 165 --><p class='indent'>   And this can be said without considering your local audio
-infraestructure.<span class='footnote-mark'><a href='#fn2x0' id='fn2x0-bk'><sup class='textsuperscript'>2</sup></a></span><a id='x1-7009f2'></a>
+<!-- l. 164 --><p class='indent'>   And this can be said without considering your local audio
+infrastructure.<span class='footnote-mark'><a href='#fn2x0' id='fn2x0-bk'><sup class='textsuperscript'>2</sup></a></span><a id='x1-7009f2'></a>
    
 </p>
    <h3 class='sectionHead' id='quantization-noise'><span class='titlemark'>7   </span>   <a id='x1-80007'></a>Quantization noise</h3>
-<!-- l. 196 --><p class='noindent'>Uniform quantization introduces quantization noise, whose power (for a step size <span class='mathjax-inline'>\(\Delta _k\)</span>) for
-the <span class='mathjax-inline'>\(k\)</span>-th subband is (see Milestone Bit-rate control) </p><div class='mathjax-env mathjax-equation'>\begin{equation} \sigma _k^2 = \frac {\Delta _k^2}{12}. \end{equation}</div>
-<p><a id='x1-8001r7'></a>
-<!-- l. 202 --></p><p class='indent'>   To be inaudible, quantization noise in each subband should be below
-the ToH for that subband. Obviously, if the compression ratio requirement
-cannot meet this, the noise should be equally distributed among all the
-subbands.
-</p><!-- l. 207 --><p class='indent'>   The variance of a signal (or a linear transformation of a signal) can be a
-good estimator of the signal power, <span class='mathjax-inline'>\(P(\mathbf {s})=\sigma _{\mathbf {s}}^2\)</span>, i.e., for the subband <span class='mathjax-inline'>\(k\)</span>, we have that
-</p><div class='mathjax-env mathjax-equation'>\begin{equation} P_k = \frac {\Delta _k^2}{12}, \end{equation}</div>
-<p><a id='x1-8002r8'></a>
-<!-- l. 214 --></p><p class='indent'>   or equivalently, that </p><div class='mathjax-env mathjax-equation'>\begin{equation} \Delta _k = \sqrt {12P_k}. \label {eq:find_delta} \end{equation}</div>
-<p><a id='x1-8003r9'></a>
-<!-- l. 219 --></p><p class='indent'>   This expression (Eq. \eqref{eq:find_delta}) establishes a relationship between
-the ToH curve and the QSS in each subband: if <span class='mathjax-inline'>\(P_k\)</span> (the power of the signal to be
-audible in the <span class='mathjax-inline'>\(k\)</span>-th subband) increases, then the QSS for that subband can be higher,
-and viceversa.
-   
-</p>
-   <h3 class='sectionHead' id='deliverables'><span class='titlemark'>8   </span>   <a id='x1-90008'></a>Deliverables</h3>
-<!-- l. 239 --><p class='noindent'>The module <span class='obeylines-h'><code class='verb'>ToH_WPT_coding.py</code></span> implements the idea of perceptual quantization
-after using WPT. Write a new module called <span class='obeylines-h'><code class='verb'>ToH_MDCT_coding.py</code></span> that performs the
-same task, but on an audio sequence processed with MDCT. Use a notebook to
-generate the module <span class='obeylines-h'><code class='verb'>ToH_MDCT_coding.py</code></span>, evaluate, and describe the implemented
-algorithm.
+<!-- l. 226 --><p class='noindent'>A uniform quantizer with step <span class='mathjax-inline'>\(\Delta _k\)</span> in the <span class='mathjax-inline'>\(k\)</span>-th subband introduces an error that, for a
+sufficiently fine quantization, is approximately uniformly distributed in <span class='mathjax-inline'>\([-\Delta _k/2, \Delta _k/2]\)</span>. Its power is
+therefore<span class='footnote-mark'><a href='#fn3x0' id='fn3x0-bk'><sup class='textsuperscript'>3</sup></a></span><a id='x1-8001f3'></a>
+(see Milestone <a href='https://tecnologias-multimedia.github.io/contents/BR_control/'>Bit-rate Control</a>) </p><div class='mathjax-env mathjax-equation'>\begin{equation} \sigma _k^2 = \frac {\Delta _k^2}{12}. \end{equation}</div>
+<p><a id='x1-8003r7'></a>
+<!-- l. 239 --></p><p class='indent'>   The quantization noise is inaudible if, in each subband, its power does not exceed
+the threshold of hearing for that subband. Let <span class='mathjax-inline'>\(P_k\)</span> be that maximum allowed power,
+obtained from the ToH model evaluated at the center frequency <span class='mathjax-inline'>\(f_k\)</span> of the subband and
+converted from dB to linear scale: </p><div class='mathjax-env mathjax-equation'>\begin{equation} P_k = 10^{T(f_k)/10}. \end{equation}</div>
+<p><a id='x1-8004r8'></a>
+<!-- l. 247 --></p><p class='indent'>   (If the subbands are narrower than the critical bands, the threshold should
+be applied to the total noise within each critical band.) Requiring <span class='mathjax-inline'>\(\sigma _k^2 \le P_k\)</span> gives
+</p><div class='mathjax-env mathjax-equation'>\begin{equation} \Delta _k \le \sqrt {12 T_k}. \label {eq:find_delta} \end{equation}</div>
+<p><a id='x1-8005r9'></a>
+<!-- l. 256 --></p><p class='indent'>   This expression relates the ToH curve to the quantization step size (QSS) of each
+subband: where the ear is less sensitive (larger <span class='mathjax-inline'>\(P_k\)</span>), a larger QSS can be used, and vice
+versa.
+</p><!-- l. 260 --><p class='indent'>   Notice that the ToH is the threshold in silence. In the presence of a signal,
+masking raises the audible threshold, so Eq. \eqref{eq:find_delta} is
+a conservative choice. If the target bit-rate does not allow <span class='mathjax-inline'>\(\Delta _k\)</span> to satisfy
+this condition (the inaudibility, Eq. \eqref{eq:find_delta}) in every
+subband, a reasonable strategy is to keep the same noise-to-threshold
+ratio<span class='footnote-mark'><a href='#fn4x0' id='fn4x0-bk'><sup class='textsuperscript'>4</sup></a></span><a id='x1-8006f4'></a>
+(noise power divided by the allowed (threshold) power in the subband):
+</p><div class='mathjax-env mathjax-equation'>\begin{equation} \text {NTR}_k = \frac {\sigma ^2}{P_k} = \frac {\Delta _k^2}{12P_k}, \end{equation}</div>
+<p><a id='x1-8008r10'></a>
+<!-- l. 271 --></p><p class='indent'>   in all subbands, that is, to scale all the <span class='mathjax-inline'>\(\Delta _k\)</span> by a common factor, rather than
+spreading the noise equally (using the same QSS in all subbands).
    
                                                                   
 
                                                                   
 </p>
-   <h3 class='sectionHead' id='deliverables1'><span class='titlemark'>9   </span>   <a id='x1-100009'></a>Deliverables</h3>
+   <h3 class='sectionHead' id='deliverables'><span class='titlemark'>8   </span>   <a id='x1-90008'></a>Deliverables</h3>
+<!-- l. 290 --><p class='noindent'>The module <span class='obeylines-h'><code class='verb'>ToH_WPT_coding.py</code></span> implements the idea of perceptual quantization
+after using WPT. Write a new module called <span class='obeylines-h'><code class='verb'>ToH_MDCT_coding.py</code></span> that performs the
+same task, but on an audio sequence processed with MDCT. Use a notebook to
+generate the module <span class='obeylines-h'><code class='verb'>ToH_MDCT_coding.py</code></span>, evaluate, and describe the implemented
+algorithm.
    
-   <h3 class='sectionHead' id='resources'><span class='titlemark'>10   </span>   <a id='x1-1100010'></a>Resources</h3>
+</p>
+   <h3 class='sectionHead' id='resources'><span class='titlemark'>9   </span>   <a id='x1-100009'></a>Resources</h3>
    <section class='thebibliography' role='doc-bibliography'><dl><dt>
  [1]</dt><dd><a id='Xbosi2003intro'></a>M. Bosi  and  R.E.  Goldberd.   <a href='http://www.pce-fet.com/common/library/books/34/1314_[Marina_Bosi,__Richard_E._Goldberg__(auth.)]_Intro(b-ok.org).pdf'><span class='ecti-1000'>Introduction to Digital Audio Coding and
    Standards</span></a>. Kluwer Academic Publishers, 2003.
@@ -187,9 +197,15 @@ algorithm.
 <!-- l. 92 --><p class='noindent'><a id='x1-4005x3'></a><span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='mathjax-inline'>\(N_{\text {DWT}}\) </span><span class='ecrm-0800'>depends also on the chunk-size, a value that should be small enough to minimize the
 latency.</span></p></aside> 
  <aside class='footnotetext' role='doc-footnote'>
-<!-- l. 168 --><p class='noindent'><a id='x1-7010x6'></a><span class='footnote-mark'><a href='#fn2x0-bk' id='fn2x0'><sup class='textsuperscript'>2</sup></a></span><span class='ecrm-0800'>For example, your speakers could not have a flat frequency response, or your room could
+<!-- l. 167 --><p class='noindent'><a id='x1-7010x6'></a><span class='footnote-mark'><a href='#fn2x0-bk' id='fn2x0'><sup class='textsuperscript'>2</sup></a></span><span class='ecrm-0800'>For example, your speakers could not have a flat frequency response, or your room could
 attenuate some frequencies.</span></p></aside> 
-                                                                                      </div>
+ <aside class='footnotetext' role='doc-footnote'>
+<!-- l. 232 --><p class='noindent'><a id='x1-8002x7'></a><span class='footnote-mark'><a href='#fn3x0-bk' id='fn3x0'><sup class='textsuperscript'>3</sup></a></span><span class='ecrm-0800'>This approximation degrades when </span><span class='mathjax-inline'>\(\Delta _k\) </span><span class='ecrm-0800'>is large compared with the spread of the coefficients,
+because many of them are then quantized to zero and the actual noise is smaller than
+</span><span class='mathjax-inline'>\(\Delta _k^2/12\)</span><span class='ecrm-0800'>.</span></p></aside> 
+    <aside class='footnotetext' role='doc-footnote'>
+<!-- l. 266 --><p class='noindent'><a id='x1-8007x7'></a><span class='footnote-mark'><a href='#fn4x0-bk' id='fn4x0'><sup class='textsuperscript'>4</sup></a></span><span class='ecrm-0800'>Also known as </span><span class='ecti-0800'>noise-to-mask ratio</span><span class='ecrm-0800'>.</span></p></aside> 
+                                                                      </div>
  
 </body> 
 </html>
