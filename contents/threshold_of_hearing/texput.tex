@@ -105,13 +105,12 @@ applied also recursively to the high frequencies (see Milestone
 where $L_\text{DWT}$ is the number of levels of the
 DWT~\cite{vetterli1995wavelets}.
 
-Unfortunately (again), although in this case, $N_{\text{WPT}}$ can be
-much larger than $N_{\text{DWT}}$,
+Notice that, in this case, $N_{\text{WPT}}$ can be
+much larger than $N_{\text{DWT}}$, and it is hold that
 \begin{equation}
   W({\mathbf w}_s) = W({\mathbf w}_{s-1})\quad \forall s,
 \end{equation}
-i.e., all the WPT subbands have the same bandwidth which neither it is
-the most suitable to mimic the BS critical bands.
+i.e., all the WPT subbands have the same bandwidth.
 
 \section{Considering the MDCT high-resolution linear decomposition}
 
@@ -140,11 +139,11 @@ the most suitable to mimic the BS critical bands.
 %distortion at the chunk boundaries we apply the hybrid transform
 %DWT+WPT on extended chunks that obviously overlap.
 
-The MDCT generates a total of $N$ subbands for $2N$ samples, but
+The MDCT generates a total of $N$ coefficients for $2N$ samples, but
 because it is computed in an overlapping manner, in the end we have
 $N$ subbands for each $N$ input samples. Therefore, each MDCT
 coefficient represents a subband (for a chunk size of $N$ samples)
-with a width of $f_s/2/N$ Hz. Therefore, MDCT offers better spectral
+with a width of $f_s/2/N$ Hz. Therefore, MDCT offers a better spectral
 resolution than DWT and WPT.
 
 \section{Not everyone hears the same}
