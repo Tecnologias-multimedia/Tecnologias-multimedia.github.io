@@ -19,7 +19,7 @@
 
 <h1 class='titleHead'>Hidding the Jitter</h1>
  <div class='author'><a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp; </span><a href='https://hpca.ual.es/~savins/'><span class='ecrm-1200'>Savíns Puertas Martín</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>November 15, 2026</span></div>
+<div class='date'><span class='ecrm-1200'>November 18, 2026</span></div>
    </div>
    <h3 class='likesectionHead' id='contents'> <a id='x1-1000'></a>Contents</h3>
    <div class='tableofcontents'>
@@ -178,8 +178,8 @@ the experiment configuration and the results of the experiment):
      <span class='ecbx-1000'>latency </span>that you must configure in your InterCom instance to communicate
      with your groupmate without lossing chunks, when he/she is in a different<span class='footnote-mark'><a href='#fn8x0' id='fn8x0-bk'><sup class='textsuperscript'>8</sup></a></span><a id='x1-4007f8'></a>
      local network. <a href='https://vicente-gonzalez-ruiz.github.io/about_ping/'>Ping</a> can help to estimate the latency. However, notice that
-     you must use InterCom (buffer, in this case) to check how many chunks
-     are lost as a function of the buffer size.
+     you must use InterCom (<span class='ectt-1000'>buffer.py</span>, in this case) to check how many
+     chunks are lost as a function of the buffer size.
      </li>
 <li class='enumerate' id='x1-4010x2'><span class='ecbx-1000'>Repeat the previous experiment using only localhost </span>(transmiting
      the chunk between the loopback network adapter), but adding some jitter
