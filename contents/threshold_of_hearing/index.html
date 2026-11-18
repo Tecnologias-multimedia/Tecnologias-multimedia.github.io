@@ -19,7 +19,7 @@
 
 <h1 class='titleHead'>Perceptual Quantization</h1>
  <div class='author'><a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp; </span><a href='https://hpca.ual.es/~savins/'><span class='ecrm-1200'>Savíns Puertas Martín</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>November 16, 2026</span></div>
+<div class='date'><span class='ecrm-1200'>November 18, 2026</span></div>
    </div>
    <h3 class='likesectionHead' id='contents'> <a id='x1-1000'></a>Contents</h3>
    <div class='tableofcontents'>
@@ -149,16 +149,15 @@ therefore<span class='footnote-mark'><a href='#fn3x0' id='fn3x0-bk'><sup class='
 <!-- l. 239 --></p><p class='indent'>   The quantization noise is inaudible if, in each subband, its power does not exceed
 the threshold of hearing for that subband. Let <span class='mathjax-inline'>\(P_k\)</span> be that maximum allowed power,
 obtained from the ToH model evaluated at the center frequency <span class='mathjax-inline'>\(f_k\)</span> of the subband and
-converted from dB to linear scale: </p><div class='mathjax-env mathjax-equation'>\begin{equation} P_k = 10^{T(f_k)/10}. \end{equation}</div>
+converted from dB to linear scale: </p><div class='mathjax-env mathjax-equation'>\begin{equation} P_k = 10^{T(f_k)/10}, \end{equation}</div>
 <p><a id='x1-8004r8'></a>
-<!-- l. 247 --></p><p class='indent'>   (If the subbands are narrower than the critical bands, the threshold should
-be applied to the total noise within each critical band.) Requiring <span class='mathjax-inline'>\(\sigma _k^2 \le P_k\)</span> gives
-</p><div class='mathjax-env mathjax-equation'>\begin{equation} \Delta _k \le \sqrt {12 T_k}. \label {eq:find_delta} \end{equation}</div>
+<!-- l. 247 --></p><p class='indent'>   where <span class='mathjax-inline'>\(T(f_k)\)</span> is the value of the ToH curve evaluated at <span class='mathjax-inline'>\(f_k\)</span>. Requiring <span class='mathjax-inline'>\(\sigma _k^2 \le P_k\)</span> gives
+</p><div class='mathjax-env mathjax-equation'>\begin{equation} \Delta _k \le \sqrt {12 P_k}. \label {eq:find_delta} \end{equation}</div>
 <p><a id='x1-8005r9'></a>
-<!-- l. 256 --></p><p class='indent'>   This expression relates the ToH curve to the quantization step size (QSS) of each
+<!-- l. 255 --></p><p class='indent'>   This expression relates the ToH curve to the quantization step size (QSS) of each
 subband: where the ear is less sensitive (larger <span class='mathjax-inline'>\(P_k\)</span>), a larger QSS can be used, and vice
 versa.
-</p><!-- l. 260 --><p class='indent'>   Notice that the ToH is the threshold in silence. In the presence of a signal,
+</p><!-- l. 259 --><p class='indent'>   Notice that the ToH is the threshold in silence. In the presence of a signal,
 masking raises the audible threshold, so Eq. \eqref{eq:find_delta} is
 a conservative choice. If the target bit-rate does not allow <span class='mathjax-inline'>\(\Delta _k\)</span> to satisfy
 this condition (the inaudibility, Eq. \eqref{eq:find_delta}) in every
@@ -167,15 +166,15 @@ ratio<span class='footnote-mark'><a href='#fn4x0' id='fn4x0-bk'><sup class='text
 (noise power divided by the allowed (threshold) power in the subband):
 </p><div class='mathjax-env mathjax-equation'>\begin{equation} \text {NTR}_k = \frac {\sigma ^2}{P_k} = \frac {\Delta _k^2}{12P_k}, \end{equation}</div>
 <p><a id='x1-8008r10'></a>
-<!-- l. 271 --></p><p class='indent'>   in all subbands, that is, to scale all the <span class='mathjax-inline'>\(\Delta _k\)</span> by a common factor, rather than
+<!-- l. 270 --></p><p class='indent'>   in all subbands, that is, to scale all the <span class='mathjax-inline'>\(\Delta _k\)</span> by a common factor, rather than
 spreading the noise equally (using the same QSS in all subbands).
    
+</p>
                                                                   
 
                                                                   
-</p>
    <h3 class='sectionHead' id='deliverables'><span class='titlemark'>8   </span>   <a id='x1-90008'></a>Deliverables</h3>
-<!-- l. 290 --><p class='noindent'>The module <span class='obeylines-h'><code class='verb'>ToH_WPT_coding.py</code></span> implements the idea of perceptual quantization
+<!-- l. 289 --><p class='noindent'>The module <span class='obeylines-h'><code class='verb'>ToH_WPT_coding.py</code></span> implements the idea of perceptual quantization
 after using WPT. Write a new module called <span class='obeylines-h'><code class='verb'>ToH_MDCT_coding.py</code></span> that performs the
 same task, but on an audio sequence processed with MDCT. Use a notebook to
 generate the module <span class='obeylines-h'><code class='verb'>ToH_MDCT_coding.py</code></span>, evaluate, and describe the implemented
@@ -204,7 +203,7 @@ attenuate some frequencies.</span></p></aside>
 because many of them are then quantized to zero and the actual noise is smaller than
 </span><span class='mathjax-inline'>\(\Delta _k^2/12\)</span><span class='ecrm-0800'>.</span></p></aside> 
     <aside class='footnotetext' role='doc-footnote'>
-<!-- l. 266 --><p class='noindent'><a id='x1-8007x7'></a><span class='footnote-mark'><a href='#fn4x0-bk' id='fn4x0'><sup class='textsuperscript'>4</sup></a></span><span class='ecrm-0800'>Also known as </span><span class='ecti-0800'>noise-to-mask ratio</span><span class='ecrm-0800'>.</span></p></aside> 
+<!-- l. 265 --><p class='noindent'><a id='x1-8007x7'></a><span class='footnote-mark'><a href='#fn4x0-bk' id='fn4x0'><sup class='textsuperscript'>4</sup></a></span><span class='ecrm-0800'>Also known as </span><span class='ecti-0800'>noise-to-mask ratio</span><span class='ecrm-0800'>.</span></p></aside> 
                                                                       </div>
  
 </body> 

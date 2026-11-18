@@ -242,14 +242,13 @@ be that maximum allowed power, obtained from the ToH model evaluated
 at the center frequency $f_k$ of the subband and converted from dB to
 linear scale:
 \begin{equation}
-  P_k = 10^{T(f_k)/10}.
+  P_k = 10^{T(f_k)/10},
 \end{equation}
-(If the subbands are narrower than the critical bands, the threshold
-should be applied to the total noise within each critical band.)
+where $T(f_k)$ is the value of the ToH curve evaluated at $f_k$.
 Requiring $\sigma _k^2 \le P_k$ gives
 \begin{equation}
-  %  \Delta_k \le \sqrt{12 P_k}.
-  \Delta_k \le \sqrt{12 T_k}.
+   \Delta_k \le \sqrt{12 P_k}.
+  %\Delta_k \le \sqrt{12 T_k}.
   \label{eq:find_delta}
 \end{equation}
 
@@ -284,6 +283,9 @@ all subbands).
 %  the subband $k$.
 %\item Apply the Eq.~\eqref{eq:find_delta} for each subband.
 %\end{enumerate}
+
+\section{Allowing near-lossless encoding}
+Eq.~\eqref{eq:find_delta} always will quantize (using a value larger than 1) the very low and high frequency subbands (even if the bit-rate control algorithm determines that the ``master`` QSS is 1.
 
 \section{Deliverables}
 
