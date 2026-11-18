@@ -30,8 +30,9 @@
 <br />   <span class='sectionToc'>5 <a href='#considering-the-mdct-highresolution-linear-decomposition' id='QQ2-1-7'>Considering the MDCT high-resolution linear decomposition</a></span>
 <br />   <span class='sectionToc'>6 <a href='#not-everyone-hears-the-same-way' id='QQ2-1-8'>Not everyone hears the same way</a></span>
 <br />   <span class='sectionToc'>7 <a href='#quantization-noise' id='QQ2-1-9'>Quantization noise</a></span>
-<br />   <span class='sectionToc'>8 <a href='#deliverables' id='QQ2-1-10'>Deliverables</a></span>
-<br />   <span class='sectionToc'>9 <a href='#resources' id='QQ2-1-11'>Resources</a></span>
+<br />   <span class='sectionToc'>8 <a href='#allowing-nearlossless-encoding' id='QQ2-1-10'>Allowing near-lossless encoding</a></span>
+<br />   <span class='sectionToc'>9 <a href='#deliverables' id='QQ2-1-11'>Deliverables</a></span>
+<br />   <span class='sectionToc'>10 <a href='#resources' id='QQ2-1-12'>Resources</a></span>
    </div>
    
    <h3 class='sectionHead' id='a-model-of-the-threshold-of-human-hearing'><span class='titlemark'>1   </span>   <a id='x1-20001'></a>A model of the Threshold of (Human) Hearing</h3>
@@ -173,15 +174,25 @@ spreading the noise equally (using the same QSS in all subbands).
                                                                   
 
                                                                   
-   <h3 class='sectionHead' id='deliverables'><span class='titlemark'>8   </span>   <a id='x1-90008'></a>Deliverables</h3>
-<!-- l. 289 --><p class='noindent'>The module <span class='obeylines-h'><code class='verb'>ToH_WPT_coding.py</code></span> implements the idea of perceptual quantization
-after using WPT. Write a new module called <span class='obeylines-h'><code class='verb'>ToH_MDCT_coding.py</code></span> that performs the
-same task, but on an audio sequence processed with MDCT. Use a notebook to
-generate the module <span class='obeylines-h'><code class='verb'>ToH_MDCT_coding.py</code></span>, evaluate, and describe the implemented
+   <h3 class='sectionHead' id='allowing-nearlossless-encoding'><span class='titlemark'>8   </span>   <a id='x1-90008'></a>Allowing near-lossless encoding</h3>
+<!-- l. 288 --><p class='noindent'>Eq. \eqref{eq:find_delta} always will quantize (using a value larger than
+1) the very low and high frequency subbands (even if the bit-rate control
+algorithm determines that the “master“ QSS can be 1, i.e., we don’t need to
+quantize).
+   
+</p>
+   <h3 class='sectionHead' id='deliverables'><span class='titlemark'>9   </span>   <a id='x1-100009'></a>Deliverables</h3>
+<!-- l. 295 --><p class='noindent'>The module <span class='obeylines-h'><code class='verb'>ToH_WPT_coding.py</code></span> implements the idea of perceptual quantization
+after using WPT. Write a new module called <span class='obeylines-h'><code class='verb'>ToH_MDCT_coding.py</code></span> that
+performs the same task, but on an audio sequence processed with MDCT.
+Make sure that if the master QSS=1, then <span class='mathjax-inline'>\(\Delta _k=1\forall k\)</span>, but if QSS=2 (or larger), the
+quantization error should be spread over all the subbands considering the
+“recommendation” provided by the ToH curve. Use a notebook to generate
+the module <span class='obeylines-h'><code class='verb'>ToH_MDCT_coding.py</code></span>, evaluate, and describe the implemented
 algorithm.
    
 </p>
-   <h3 class='sectionHead' id='resources'><span class='titlemark'>9   </span>   <a id='x1-100009'></a>Resources</h3>
+   <h3 class='sectionHead' id='resources'><span class='titlemark'>10   </span>   <a id='x1-1100010'></a>Resources</h3>
    <section class='thebibliography' role='doc-bibliography'><dl><dt>
  [1]</dt><dd><a id='Xbosi2003intro'></a>M. Bosi  and  R.E.  Goldberd.   <a href='http://www.pce-fet.com/common/library/books/34/1314_[Marina_Bosi,__Richard_E._Goldberg__(auth.)]_Intro(b-ok.org).pdf'><span class='ecti-1000'>Introduction to Digital Audio Coding and
    Standards</span></a>. Kluwer Academic Publishers, 2003.
