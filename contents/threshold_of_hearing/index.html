@@ -19,7 +19,7 @@
 
 <h1 class='titleHead'>Perceptual Quantization</h1>
  <div class='author'><a href='https://vicente-gonzalez-ruiz.github.io/'><span class='ecrm-1200'>Vicente González Ruiz</span></a> <span class='ecrm-1200'>&amp; </span><a href='https://hpca.ual.es/~savins/'><span class='ecrm-1200'>Savíns Puertas Martín</span></a></div><br />
-<div class='date'><span class='ecrm-1200'>November 18, 2026</span></div>
+<div class='date'><span class='ecrm-1200'>November 19, 2026</span></div>
    </div>
    <h3 class='likesectionHead' id='contents'> <a id='x1-1000'></a>Contents</h3>
    <div class='tableofcontents'>
@@ -30,7 +30,7 @@
 <br />   <span class='sectionToc'>5 <a href='#considering-the-mdct-highresolution-linear-decomposition' id='QQ2-1-7'>Considering the MDCT high-resolution linear decomposition</a></span>
 <br />   <span class='sectionToc'>6 <a href='#not-everyone-hears-the-same-way' id='QQ2-1-8'>Not everyone hears the same way</a></span>
 <br />   <span class='sectionToc'>7 <a href='#quantization-noise' id='QQ2-1-9'>Quantization noise</a></span>
-<br />   <span class='sectionToc'>8 <a href='#allowing-nearlossless-encoding' id='QQ2-1-10'>Allowing near-lossless encoding</a></span>
+<br />   <span class='sectionToc'>8 <a href='#lossy-and-nearlossless-encoding' id='QQ2-1-10'>Lossy and near-lossless encoding</a></span>
 <br />   <span class='sectionToc'>9 <a href='#deliverables' id='QQ2-1-11'>Deliverables</a></span>
 <br />   <span class='sectionToc'>10 <a href='#resources' id='QQ2-1-12'>Resources</a></span>
    </div>
@@ -174,20 +174,25 @@ spreading the noise equally (using the same QSS in all subbands).
                                                                   
 
                                                                   
-   <h3 class='sectionHead' id='allowing-nearlossless-encoding'><span class='titlemark'>8   </span>   <a id='x1-90008'></a>Allowing near-lossless encoding</h3>
-<!-- l. 288 --><p class='noindent'>Eq. \eqref{eq:find_delta} always will quantize (using a value larger than
-1) the very low and high frequency subbands (even if the bit-rate control
-algorithm determines that the “master“ QSS can be 1, i.e., we don’t need to
-quantize).
+   <h3 class='sectionHead' id='lossy-and-nearlossless-encoding'><span class='titlemark'>8   </span>   <a id='x1-90008'></a>Lossy and near-lossless encoding</h3>
+<!-- l. 288 --><p class='noindent'>Eq. \eqref{eq:find_delta} always will quantize (using a value larger than 1) the very
+low and high frequency subbands, even if the bit-rate control algorithm determines
+that the “master” QSS can be 1, i.e., we don’t need to quantize. For this reason, it
+is proposed—for each subband—to calculate the quantization step size as
+the maximum value between 1 (no quantization) and the value <span class='mathjax-inline'>\(\Delta _k\)</span> derived
+from Eq. \eqref{eq:find_delta}. However, the entire curve is first shifted
+downward such that when the "master" <span class='mathjax-inline'>\(\Delta \)</span> (determined by the bit-rate control
+algorithm) is 1, <span class='mathjax-inline'>\(\Delta _k\)</span> also equals 1 for all subbands. Consequently, as <span class='mathjax-inline'>\(\Delta \)</span> increases (if the
+bit-rate control algorithm so dictates), only those subbands most susceptible to
+quantization will begin to be quantized, while those less susceptible will remain at
+<span class='mathjax-inline'>\(\Delta _k = 1\)</span>.
    
 </p>
    <h3 class='sectionHead' id='deliverables'><span class='titlemark'>9   </span>   <a id='x1-100009'></a>Deliverables</h3>
-<!-- l. 295 --><p class='noindent'>The module <span class='obeylines-h'><code class='verb'>ToH_WPT_coding.py</code></span> implements the idea of perceptual quantization
-after using WPT. Write a new module called <span class='obeylines-h'><code class='verb'>ToH_MDCT_coding.py</code></span> that
-performs the same task, but on an audio sequence processed with MDCT.
-Make sure that if the master QSS=1, then <span class='mathjax-inline'>\(\Delta _k=1\forall k\)</span>, but if QSS=2 (or larger), the
-quantization error should be spread over all the subbands considering the
-“recommendation” provided by the ToH curve. Use a notebook to generate
+<!-- l. 304 --><p class='noindent'>The module <span class='obeylines-h'><code class='verb'>ToH_WPT_coding.py</code></span> implements the idea of perceptual quantization
+after using WPT. Write a new module called <span class='obeylines-h'><code class='verb'>ToH_MDCT_coding.py</code></span> that performs
+the same task, but on an audio sequence processed with the MDCT. Make
+sure to allow that if <span class='mathjax-inline'>\(\Delta =1\)</span>, then <span class='mathjax-inline'>\(\Delta _k=1~\forall k\)</span>. Use a notebook to generate (write to disk)
 the module <span class='obeylines-h'><code class='verb'>ToH_MDCT_coding.py</code></span>, evaluate, and describe the implemented
 algorithm.
    
@@ -203,6 +208,9 @@ algorithm.
  [3]</dt><dd><a id='Xvetterli1995wavelets'></a>M. Vetterli and J. Kovačević. <a href='http://waveletsandsubbandcoding.org/Repository/VetterliKovacevic95_Manuscript.pdf'><span class='ecti-1000'>Wavelets and Subband Coding</span></a>. Prentice-hall,
    1995.
    </dd></dl></section>
+                                                                  
+
+                                                                  
    <div class='footnotes'>     <aside class='footnotetext' role='doc-footnote'>
 <!-- l. 92 --><p class='noindent'><a id='x1-4005x3'></a><span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='mathjax-inline'>\(N_{\text {DWT}}\) </span><span class='ecrm-0800'>depends also on the chunk-size, a value that should be small enough to minimize the
 latency.</span></p></aside> 

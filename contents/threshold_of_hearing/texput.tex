@@ -284,23 +284,30 @@ all subbands).
 %\item Apply the Eq.~\eqref{eq:find_delta} for each subband.
 %\end{enumerate}
 
-\section{Allowing near-lossless encoding}
+\section{Lossy and near-lossless encoding}
 Eq.~\eqref{eq:find_delta} always will quantize (using a value larger
-than 1) the very low and high frequency subbands (even if the bit-rate
-control algorithm determines that the ``master`` QSS can be 1, i.e.,
-we don't need to quantize).
+than 1) the very low and high frequency subbands, even if the bit-rate
+control algorithm determines that the ``master'' QSS can be 1, i.e.,
+we don't need to quantize. For this reason, it is proposed—for each
+subband—to calculate the quantization step size as the maximum value
+between 1 (no quantization) and the value $\Delta_k$ derived from
+Eq.~\eqref{eq:find_delta}. However, the entire curve is first shifted
+downward such that when the "master" $\Delta$ (determined by the
+bit-rate control algorithm) is 1, $\Delta_k$ also equals 1 for all
+subbands. Consequently, as $\Delta$ increases (if the bit-rate control
+algorithm so dictates), only those subbands most susceptible to
+quantization will begin to be quantized, while those less susceptible
+will remain at $\Delta_k = 1$.
 
 \section{Deliverables}
 
 The module \verb|ToH_WPT_coding.py| implements the idea of perceptual
 quantization after using WPT. Write a new module called
 \verb|ToH_MDCT_coding.py| that performs the same task, but on an audio
-sequence processed with MDCT. Make sure that if the master QSS=1, then
-$\Delta_k=1\forall k$, but if QSS=2 (or larger), the quantization
-error should be spread over all the subbands considering the
-``recommendation'' provided by the ToH curve. Use a notebook to
-generate the module \verb|ToH_MDCT_coding.py|, evaluate, and describe
-the implemented algorithm.
+sequence processed with the MDCT. Make sure to allow that if $\Delta=1$,
+then $\Delta_k=1~\forall k$. Use a notebook to generate (write to
+disk) the module \verb|ToH_MDCT_coding.py|, evaluate, and describe the
+implemented algorithm.
 
 %\begin{enumerate}
 %\item Find your own ToH curve using \texttt{create\_ToH\_curve.py}. In
